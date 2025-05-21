@@ -1,0 +1,14 @@
+{
+  "@@locale": "uz",
+  "appTitle": "O'qit & O'rgan",
+  "settingsLanguage": "Til",
+  "languageEnglish": "Inglizcha",
+  "languageUzbek": "O'zbekcha",
+  "languageRussian": "Ruscha",
+  "selectLanguage": "Tilni tanlang",
+  "welcomeMessage": "Xush kelibsiz!",
+  "profileTabLabel": "Profil",
+  "homeTabLabel": "Bosh Sahifa",
+  "resourcesTabLabel": "Resurslar",
+  "communityTabLabel": "Jamiyat"
+}

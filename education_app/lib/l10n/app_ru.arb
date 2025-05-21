@@ -1,0 +1,14 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Учи и Учись",
+  "settingsLanguage": "Язык",
+  "languageEnglish": "Английский",
+  "languageUzbek": "Узбекский",
+  "languageRussian": "Русский",
+  "selectLanguage": "Выберите язык",
+  "welcomeMessage": "Добро пожаловать!",
+  "profileTabLabel": "Профиль",
+  "homeTabLabel": "Главная",
+  "resourcesTabLabel": "Ресурсы",
+  "communityTabLabel": "Сообщество"
+}

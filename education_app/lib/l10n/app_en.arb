@@ -1,0 +1,20 @@
+{
+  "@@locale": "en",
+  "appTitle": "Teach & Learn",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "settingsLanguage": "Language",
+  "@settingsLanguage": {
+    "description": "Label for language setting"
+  },
+  "languageEnglish": "English",
+  "languageUzbek": "Uzbek",
+  "languageRussian": "Russian",
+  "selectLanguage": "Select Language",
+  "welcomeMessage": "Welcome Back!",
+  "profileTabLabel": "Profile",
+  "homeTabLabel": "Home",
+  "resourcesTabLabel": "Resources",
+  "communityTabLabel": "Community"
+}
