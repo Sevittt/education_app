@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'placeholder_screen.dart'; // Import the placeholder screen
+import '../placeholder_screen.dart'; // Import the placeholder screen
 import 'language_selection_screen.dart'; // Import the new LanguageSelectionScreen
 // Import AppLocalizations to use translated strings
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

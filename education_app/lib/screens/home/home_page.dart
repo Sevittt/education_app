@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 // Import the screen files
-import 'community_screen.dart';
+import '../community/community_screen.dart';
 import 'home_dashboard_screen.dart';
-import 'profile_screen.dart';
-import 'resources_screen.dart';
+import '../profile/profile_screen.dart';
+import '../resource/resources_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

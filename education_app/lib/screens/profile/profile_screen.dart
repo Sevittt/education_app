@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase User
 
-import '../models/auth_notifier.dart'; // Import AuthNotifier
+import '../../models/auth_notifier.dart'; // Import AuthNotifier
 // import '../data/dummy_data.dart'; // No longer primarily using dummyUser for display
-import 'placeholder_screen.dart'; // For placeholder navigation
+import '../placeholder_screen.dart'; // For placeholder navigation
 import 'settings_screen.dart';
 import 'theme_options_screen.dart';
 // import 'profile_edit_screen.dart'; // Edit functionality will be adjusted
@@ -165,13 +165,13 @@ class ProfileScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                   // Role display will require fetching from Firestore later
-                  // Text(
-                  //   'Role: Member', // Placeholder
-                  //   style: textTheme.titleMedium?.copyWith(
-                  //     color: colorScheme.secondary,
-                  //   ),
-                  //   textAlign: TextAlign.center,
-                  // ),
+                  Text(
+                    'Role: Member', // Placeholder
+                    style: textTheme.titleMedium?.copyWith(
+                      color: colorScheme.secondary,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ],
               ),
             ),

@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Import Provider
-import '../models/discussion_topic.dart';
-import '../data/dummy_data.dart'; // Still used to add to the dummy list for now
-import '../models/auth_notifier.dart'; // Import AuthNotifier
+import '../../models/discussion_topic.dart';
+import '../../data/dummy_data.dart'; // Still used to add to the dummy list for now
+import '../../models/auth_notifier.dart'; // Import AuthNotifier
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();

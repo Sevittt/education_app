@@ -1,23 +1,21 @@
-// File: lib/screens/profile_edit_screen.dart
+// lib/screens/profile_edit_screen.dart
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// Ensure User and UserRole are imported from your reverted models file
-import '../models/users.dart';
-// Assuming your reverted AuthService is also in models/users.dart or a separate services file
-import '../services/auth_service.dart'; // Or '../models/users.dart' if AuthService is there
-import '../models/auth_notifier.dart'; // To update the user in the notifier
+import 'package:firebase_auth/firebase_auth.dart' as fb_auth; // Aliased
+
+// Ensure User and UserRole are imported from your models file
+import '../../models/users.dart'; // Your custom User model
+import '../../models/auth_notifier.dart'; // To get user data and update
 
 class ProfileEditScreen extends StatefulWidget {
-  final User currentUser; // Expecting the "old" User model
-
-  const ProfileEditScreen({Key? key, required this.currentUser})
-    : super(key: key);
+  // No longer taking currentUser in constructor
+  const ProfileEditScreen({super.key});
 
   static const routeName = '/profile-edit';
 
   @override
-  _ProfileEditScreenState createState() => _ProfileEditScreenState();
+  State<ProfileEditScreen> createState() => _ProfileEditScreenState();
 }
 
 class _ProfileEditScreenState extends State<ProfileEditScreen> {
@@ -25,20 +23,32 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   late TextEditingController _nameController;
   late TextEditingController _bioController;
   late TextEditingController _photoUrlController;
-  late UserRole _selectedRole; // Using the UserRole enum directly
+  late UserRole _selectedRole;
+  bool _isInitialized =
+      false; // To ensure initState logic runs once with context
+
   bool _isLoading = false;
 
   @override
-  void initState() {
-    super.initState();
-    _nameController = TextEditingController(
-      text: widget.currentUser.name,
-    ); // Use 'name'
-    _bioController = TextEditingController(text: widget.currentUser.bio ?? '');
-    _photoUrlController = TextEditingController(
-      text: widget.currentUser.profilePictureUrl ?? '',
-    ); // Use 'profilePictureUrl'
-    _selectedRole = widget.currentUser.role; // Role is already UserRole enum
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_isInitialized) {
+      final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+      final fb_auth.User? firebaseUser = authNotifier.currentUser;
+      final User? appUser = authNotifier.appUser;
+
+      _nameController = TextEditingController(
+        text: appUser?.name ?? firebaseUser?.displayName ?? '',
+      );
+      _bioController = TextEditingController(text: appUser?.bio ?? '');
+      _photoUrlController = TextEditingController(
+        text: appUser?.profilePictureUrl ?? firebaseUser?.photoURL ?? '',
+      );
+      _selectedRole =
+          appUser?.role ?? UserRole.student; // Default if no appUser
+
+      _isInitialized = true;
+    }
   }
 
   @override
@@ -57,12 +67,26 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       _isLoading = true;
     });
 
+    final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+    final fb_auth.User? firebaseUser = authNotifier.currentUser;
+    final User? currentAppUser = authNotifier.appUser;
+
+    if (firebaseUser == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No authenticated user found.')),
+      );
+      setState(() {
+        _isLoading = false;
+      });
+      return;
+    }
+
     try {
-      // Create an updated User object using the "old" model structure
-      final updatedUser = User(
-        id: widget.currentUser.id, // Keep the original ID
-        email: widget.currentUser.email,
-        name: _nameController.text.trim(), // Use 'name'
+      // Create an updated User object (your custom model)
+      final userToSave = User(
+        id: firebaseUser.uid, // Crucial: Use Firebase UID as the ID
+        email: firebaseUser.email, // Get email from firebaseUser
+        name: _nameController.text.trim(),
         bio:
             _bioController.text.trim().isNotEmpty
                 ? _bioController.text.trim()
@@ -70,42 +94,65 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         profilePictureUrl:
             _photoUrlController.text.trim().isNotEmpty
                 ? _photoUrlController.text.trim()
-                : null, // Use 'profilePictureUrl'
-        role: _selectedRole, // Role is UserRole enum
-        registrationDate: widget.currentUser.registrationDate,
-        lastLogin: widget.currentUser.lastLogin,
+                : null,
+        role: _selectedRole,
+        // Preserve existing registrationDate, or set if it's a new profile
+        registrationDate:
+            currentAppUser?.registrationDate ??
+            firebaseUser.metadata.creationTime ??
+            DateTime.now(),
+        lastLogin:
+            currentAppUser
+                ?.lastLogin, // This would typically be updated on login
       );
 
-      // Instead of Firestore, update the user via AuthNotifier or pass back
-      // For simplicity, let's assume AuthNotifier can update the current user
-      final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-      authNotifier.updateUserLocally(
-        updatedUser,
-      ); // You'd need to implement this in AuthNotifier
+      final success = await authNotifier.updateUserProfileData(userToSave);
 
-      // Or, if not using a global notifier for this, just pop with the updated user
-      // final authService = Provider.of<AuthService>(context, listen: false);
-      // await authService.updateUserProfile(updatedUser); // This would update it in AuthService's state
-
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Profile updated locally!')));
-      Navigator.of(context).pop(updatedUser); // Pass back the updated user
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Profile updated successfully!')),
+        );
+        if (mounted) {
+          Navigator.of(context).pop(userToSave); // Pass back the updated user
+        }
+      } else {
+        // Error message would be set in authNotifier if updateUserProfileData returns false due to an error
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              authNotifier.errorMessage ?? 'Failed to update profile.',
+            ),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
     } catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Failed to update profile: ${error.toString()}'),
+          content: Text('An error occurred: ${error.toString()}'),
+          backgroundColor: Theme.of(context).colorScheme.error,
         ),
       );
     } finally {
-      setState(() {
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    // If not initialized yet (e.g. first build after didChangeDependencies might not have run),
+    // show a loading indicator or an empty container.
+    if (!_isInitialized) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('Edit Profile')),
+        body: const Center(child: CircularProgressIndicator()),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Profile'),
@@ -134,7 +181,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 TextFormField(
                   controller: _nameController,
                   decoration: const InputDecoration(
-                    labelText: 'Name', // Changed from Display Name
+                    labelText: 'Name',
                     border: OutlineInputBorder(),
                     prefixIcon: Icon(Icons.person),
                   ),
@@ -170,7 +217,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                   ),
                   keyboardType: TextInputType.url,
                   validator: (value) {
-                    // Basic validation, can be more robust
                     if (value != null &&
                         value.isNotEmpty &&
                         !value.startsWith('assets/') &&
@@ -192,7 +238,10 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       UserRole.values.map((UserRole role) {
                         return DropdownMenuItem<UserRole>(
                           value: role,
-                          child: Text(role.toString().split('.').last),
+                          child: Text(
+                            role.toString().split('.').last[0].toUpperCase() +
+                                role.toString().split('.').last.substring(1),
+                          ), // Capitalize first letter
                         );
                       }).toList(),
                   onChanged: (UserRole? newValue) {
@@ -210,6 +259,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                   },
                 ),
                 const SizedBox(height: 24.0),
+                // Removed the direct call to _saveProfile via ElevatedButton here
+                // The save button is in the AppBar
               ],
             ),
           ),
@@ -217,8 +268,4 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       ),
     );
   }
-}
-
-extension on AuthNotifier {
-  void updateUserLocally(User updatedUser) {}
 }

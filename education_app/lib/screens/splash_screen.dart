@@ -2,7 +2,7 @@
 import 'dart:async'; // Required for Timer
 import 'package:flutter/material.dart';
 // import 'home_page.dart'; // No longer navigating directly to HomePage
-import '../widgets/auth_wrapper.dart'; // Import the AuthWrapper
+import '../../widgets/auth_wrapper.dart'; // Import the AuthWrapper
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

@@ -1,12 +1,12 @@
 // lib/screens/discussion_detail_screen.dart
 
 import 'package:flutter/material.dart';
-import '../data/dummy_data.dart'; // Import dummy data for comments and users
-import '../models/discussion_topic.dart'; // Import DiscussionTopic
-import '../models/comment.dart'; // Import Comment
-import '../models/users.dart'; // Import User model
+import '../../data/dummy_data.dart'; // Import dummy data for comments and users
+import '../../models/discussion_topic.dart'; // Import DiscussionTopic
+import '../../models/comment.dart'; // Import Comment
+import '../../models/users.dart'; // Import User model
 import 'package:provider/provider.dart'; // If using Provider for current user
-import '../models/auth_notifier.dart'; // Assuming AuthNotifier provides the User object
+import '../../models/auth_notifier.dart'; // Assuming AuthNotifier provides the User object
 
 // Import the uuid package for generating unique IDs
 import 'package:uuid/uuid.dart';

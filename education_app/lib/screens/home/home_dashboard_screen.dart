@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../data/dummy_data.dart'; // Import dummyUser and dummyNews
-import '../models/news.dart'; // News model is used by dummyNews
-import '../models/users.dart'; // User model is used by dummyUser
+import '../../data/dummy_data.dart'; // Import dummyUser and dummyNews
+import '../../models/news.dart'; // News model is used by dummyNews
+import '../../models/users.dart'; // User model is used by dummyUser
 
 // Define a typedef for the callback function
 typedef OnTabSelected = void Function(int index);

@@ -1,20 +1,90 @@
 {
-  "@@locale": "en",
-  "appTitle": "Teach & Learn",
-  "@appTitle": {
-    "description": "The title of the application"
-  },
-  "settingsLanguage": "Language",
-  "@settingsLanguage": {
-    "description": "Label for language setting"
-  },
-  "languageEnglish": "English",
-  "languageUzbek": "Uzbek",
-  "languageRussian": "Russian",
-  "selectLanguage": "Select Language",
-  "welcomeMessage": "Welcome Back!",
-  "profileTabLabel": "Profile",
-  "homeTabLabel": "Home",
-  "resourcesTabLabel": "Resources",
-  "communityTabLabel": "Community"
+    "appTitle": "Teach&Learn",
+    "@appTitle": {
+        "description": "The title of the application"
+    },
+    "languageEnglish": "English (US)",
+    "languageUzbek": "Uzbek (Uzbekistan)",
+    "languageRussian": "Russian (Russia)",
+    "languageSystemDefault": "System Default",
+    "settingsScreenTitle": "Settings",
+    "settingsLanguage": "Language",
+    "settingsReceiveNotifications": "Receive Notifications",
+    "settingsReceiveNotificationsSubtitle": "Get updates about new resources and discussions",
+    "settingsAllowLocation": "Allow Location Access",
+    "settingsAllowLocationSubtitle": "For features requiring your location (if any)",
+    "settingsChangePassword": "Change Password",
+    "settingsHelpCenter": "Help Center",
+    "settingsAboutApp": "About Teach & Learn",
+    "settingsAppLegalese": "© 2025 Teach & Learn Project",
+    "settingsAppDescription": "Bridging the IT skills gap through collaborative learning and resource sharing.",
+    "errorPrefix": "Error: ",
+    "resourcesNoResourcesFound": "No resources found.",
+    "loginButtonText": "Login",
+    "signUpButtonText": "Sign Up",
+    "logoutButtonText": "Logout",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "homeDashboardTitle": "Dashboard",
+    "communityScreenTitle": "Community",
+    "profileScreenTitle": "Profile",
+    "editProfileButtonText": "Edit Profile",
+
+    "resourcesTitle": "Resources",
+    "resourcesSearchHint": "Search resources...",
+    "resourcesFilterByType": "Filter by Type",
+    "resourcesAllTypes": "All Types",
+    "resourcesNoResourcesMatch": "No resources match your criteria.",
+    "resourcesTryAdjusting": "Try adjusting your search or filter.",
+    "resourcesCreateButton": "Create",
+    "resourceAddedSuccess": "Resource added successfully!",
+    "resourceAddedError": "Error adding resource: {error}",
+    "@resourceAddedError": {
+        "description": "Error message when adding a resource fails",
+        "placeholders": {
+            "error": {
+                "type": "String",
+                "example": "Network connection failed"
+            }
+        }
+    },
+    "createResourceScreenTitle": "Create New Resource",
+    "createResourceFormWillBeHere": "Resource creation form will be here.",
+    "saveButtonText": "Save",
+    "createResourceTitleLabel": "Title",
+    "createResourceDescriptionLabel": "Description",
+    "createResourceAuthorLabel": "Author",
+    "createResourceTypeLabel":"Resource Type",
+    "createResourceUrlLabel": "URL (Optional)",
+    "createResourceValidationEmpty": "Please enter a {fieldName}",
+    "createResourceValidationSelect": "Please select a {fieldName}",
+    "createResourceValidationInvalidUrl": "Please enter a valid URL",
+
+    "editButtonTooltip": "Edit Resource",
+    "editResourceScreenTitle": "Edit Resource",
+    "resourceTypeLabel": "Type",
+    "authorLabel": "Author",
+    "dateAddedLabel": "Added",
+    "launchingUrlMessage": "Launching URL",
+    "descriptionLabel": "Description",
+    "resourceUpdatedSuccess": "Resource updated successfully!",
+    "resourceUpdatedError": "Error updating resource: {error}",
+    "@resourceUpdatedError": {
+        "description": "Error message when updating a resource fails",
+        "placeholders": {
+            "error": {
+                "type": "String",
+                "example": "Database write failed"
+            }
+        }
+    },
+    "saveButtonText": "Save Changes",
+
+    "deleteResourceConfirmTitle": "Confirm Deletion",
+    "deleteResourceConfirmMessage": "Are you sure you want to delete this resource? This action cannot be undone.",
+    "cancelButtonText": "Cancel",
+    "deleteButtonText": "Delete",
+    "resourceDeletedSuccess": "Resource deleted successfully!",
+    "resourceDeletedError": "Error deleting resource: {error}",
+    "deleteButtonTooltip": "Delete Resource"
 }

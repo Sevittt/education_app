@@ -1,4 +1,4 @@
-// File: lib/models/users.dart
+// lib/models/users.dart
 // This file now contains a simplified User model and a basic AuthService
 // without Firebase dependencies.
 
@@ -31,15 +31,16 @@ String userRoleToString(UserRole? role) {
 }
 
 class User {
-  final String id; // Simple ID, not necessarily Firebase UID
+  final String id; // This should be Firebase UID
   String name;
-  String? email; // Optional
+  String? email;
   UserRole role;
-  String? profilePictureUrl; // Using the older field name
-  String? bio; // Optional
-  DateTime? registrationDate; // Optional
-  DateTime? lastLogin; // Optional
+  String? profilePictureUrl;
+  String? bio;
+  DateTime? registrationDate;
+  DateTime? lastLogin;
 
+  // Existing constructor
   User({
     required this.id,
     required this.name,
@@ -51,11 +52,49 @@ class User {
     this.lastLogin,
   });
 
-  get photoURL => null;
+  // Getters that were present in the profile_edit_screen.dart's version of User
+  // but might conflict if firebase_auth.User is also in scope with the same names.
+  // For clarity, if these are intended to be different from firebase_auth.User properties,
+  // ensure distinct naming or clear context.
+  // For now, assuming these are the fields of this custom User model.
+  String? get photoURL => profilePictureUrl; // Example mapping if needed
+  String? get displayName => name; // Example mapping if needed
 
-  get displayName => null;
+  // Convert User object to a Map for Firestore
+  Map<String, dynamic> toMap() {
+    return {
+      'id':
+          id, // Good to store it in the document too, though doc ID is the UID
+      'name': name,
+      'email': email,
+      'role': userRoleToString(role), // Store enum as string
+      'profilePictureUrl': profilePictureUrl,
+      'bio': bio,
+      'registrationDate': registrationDate?.toIso8601String(),
+      'lastLogin': lastLogin?.toIso8601String(),
+    };
+  }
 
-  // If you need to update user details locally, you might add a copyWith method:
+  // Create a User object from a Firestore map
+  factory User.fromMap(Map<String, dynamic> map, String documentId) {
+    return User(
+      id: documentId, // Use documentId as the User's id (which is Firebase UID)
+      name: map['name'] ?? '',
+      email: map['email'] as String?,
+      role: stringToUserRole(map['role'] as String?),
+      profilePictureUrl: map['profilePictureUrl'] as String?,
+      bio: map['bio'] as String?,
+      registrationDate:
+          map['registrationDate'] != null
+              ? DateTime.tryParse(map['registrationDate'] as String)
+              : null,
+      lastLogin:
+          map['lastLogin'] != null
+              ? DateTime.tryParse(map['lastLogin'] as String)
+              : null,
+    );
+  }
+
   User copyWith({
     String? id,
     String? name,
@@ -79,18 +118,15 @@ class User {
   }
 }
 
-// Basic AuthService without Firebase
-// This is a placeholder. You'll need to adapt it to your app's pre-Firestore auth logic.
-// For now, it will manage a single dummy user.
+// The AuthService below is the non-Firebase version.
+// We will primarily use the Firebase-based AuthService from 'lib/services/auth_service.dart'
+// for actual authentication, but this User model is what we'll adapt for Firestore profile data.
+
 class AuthService {
   User? _currentUser;
 
-  // Stream to notify about auth changes
   Stream<User?> get authStateChanges async* {
-    // In a real pre-Firebase app, this might check shared_preferences
-    await Future.delayed(
-      const Duration(milliseconds: 50),
-    ); // Simulate async check
+    await Future.delayed(const Duration(milliseconds: 50));
     yield _currentUser;
   }
 
@@ -100,12 +136,7 @@ class AuthService {
     String email,
     String password,
   ) async {
-    // Placeholder: In a real pre-Firebase app, you'd validate against local/dummy data
-    // For now, let's assume a successful login with a dummy user if email matches.
-    // IMPORTANT: This is NOT secure and only for reverting to a non-Firebase state.
     if (email == "test@example.com" && password == "password") {
-      // Find the dummy user from dummy_data.dart or create one
-      // This is a simplified example. You might need to fetch from your dummy_data.dart
       _currentUser = User(
         id: 'u2',
         name: 'Samadov Ubaydulla',
@@ -125,32 +156,24 @@ class AuthService {
     String password,
     String name,
   ) async {
-    // Placeholder for registration without Firebase
-    // You would typically add the user to your local list (e.g., in dummy_data or a local DB)
-    print("Dummy registration for $name with email $email");
     _currentUser = User(
-      id: DateTime.now().millisecondsSinceEpoch.toString(), // Simple unique ID
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
       name: name,
       email: email,
-      role: UserRole.student, // Default role
+      role: UserRole.student,
       registrationDate: DateTime.now(),
       lastLogin: DateTime.now(),
     );
-    // In a real scenario, you might add this newUser to a list in dummy_data.dart
     return _currentUser;
   }
 
   Future<void> signOut() async {
     _currentUser = null;
-    // In a real pre-Firebase app, you might clear shared_preferences here
   }
 
-  // This method would now update the user in a local state (e.g., AuthNotifier)
-  // or a local list, not Firestore.
   Future<void> updateUserProfile(User updatedUser) async {
     if (_currentUser != null && _currentUser!.id == updatedUser.id) {
       _currentUser = updatedUser;
-      // Notify listeners if using a state management solution like AuthNotifier
       print("User profile updated locally: ${updatedUser.name}");
     } else {
       throw Exception("User not found or ID mismatch for local update.");

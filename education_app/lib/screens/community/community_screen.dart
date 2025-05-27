@@ -1,9 +1,9 @@
 // lib/screens/community_screen.dart
 
 import 'package:flutter/material.dart';
-import '../data/dummy_data.dart'; // Import dummy data and helpers
-import '../models/discussion_topic.dart'; // Import DiscussionTopic
-import '../models/users.dart'; // Import User model for author details
+import '../../data/dummy_data.dart'; // Import dummy data and helpers
+import '../../models/discussion_topic.dart'; // Import DiscussionTopic
+import '../../models/users.dart'; // Import User model for author details
 import 'discussion_detail_screen.dart'; // Import the detail screen
 import 'create_topic_screen.dart'; // Import the create topic screen
 import 'edit_topic_screen.dart'; // Import the new EditTopicScreen

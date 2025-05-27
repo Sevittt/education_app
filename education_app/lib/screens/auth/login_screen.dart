@@ -1,33 +1,29 @@
-// lib/screens/auth/registration_screen.dart
+// lib/screens/auth/login_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../models/auth_notifier.dart';
-import 'login_screen.dart'; // For navigating back to login
+import '../../../models/auth_notifier.dart';
+import 'registration_screen.dart'; // We'll create this next
 // Import AppLocalizations to use translated strings
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<RegistrationScreen> createState() => _RegistrationScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
 
   bool _isPasswordVisible = false;
-  bool _isConfirmPasswordVisible = false;
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -35,24 +31,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     if (!_formKey.currentState!.validate()) {
       return; // If form is not valid, do not proceed
     }
-    // If form is valid, call the signUp method from AuthNotifier
+    // If form is valid, call the signIn method from AuthNotifier
+    // context.read<AuthNotifier>() is used to call methods on the provider
+    // without listening to changes (which is fine for one-off actions like this).
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    final success = await authNotifier.signUp(
+    final success = await authNotifier.signIn(
       _emailController.text.trim(),
-      _passwordController.text, // Passwords should match, already validated
+      _passwordController.text,
     );
 
     if (success) {
       // Navigation to HomePage will be handled by the AuthWrapper/AuthState listener
-      // after successful sign-up and automatic sign-in by Firebase.
+      // So, we don't need to explicitly navigate here if sign-in is successful.
+      // The AuthNotifier will update its state, and the wrapper will react.
       if (mounted) {
-        // Optionally show a success message or clear fields
+        // Optionally, show a success message or clear fields if needed,
+        // but usually, successful login leads to immediate navigation.
         // ScaffoldMessenger.of(context).showSnackBar(
-        //   const SnackBar(content: Text('Registration Successful! Redirecting...')),
+        //   const SnackBar(content: Text('Login Successful! Redirecting...')),
         // );
       }
     } else {
-      // If sign-up fails, AuthNotifier's errorMessage will be set.
+      // If sign-in fails, AuthNotifier's errorMessage will be set.
+      // We can show it in a SnackBar or directly in the UI.
+      // The Consumer/Selector below will handle displaying the error message.
+      // For immediate feedback, a SnackBar can also be used here.
       if (mounted && authNotifier.errorMessage != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -69,13 +72,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final TextTheme textTheme = theme.textTheme;
-    // final AppLocalizations? l10n = AppLocalizations.of(context);
+    // final AppLocalizations? l10n = AppLocalizations.of(context); // For localization
 
     return Scaffold(
-      // appBar: AppBar( // Optional: Add an AppBar if you want a back button by default
-      //   title: Text('Create Account'), // Localize
-      //   centerTitle: true,
-      // ),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
@@ -85,13 +84,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
+                // App Logo or Title
                 Image.asset(
                   'assets/images/Shared_Knowledge.png', // Your app logo
-                  height: 80, // Slightly smaller for registration
+                  height: 100,
+                  // width: 100, // Adjust as needed
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'Create Your Account', // Localize
+                  'Welcome Back!', // Replace with l10n?.welcomeMessage ?? 'Welcome Back!'
                   textAlign: TextAlign.center,
                   style: textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
@@ -99,7 +100,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                 ),
                 Text(
-                  'Join our learning community!', // Localize
+                  'Sign in to continue', // Replace with localized string
                   textAlign: TextAlign.center,
                   style: textTheme.titleMedium?.copyWith(
                     color: colorScheme.onSurfaceVariant,
@@ -111,7 +112,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 TextFormField(
                   controller: _emailController,
                   decoration: InputDecoration(
-                    labelText: 'Email', // Localize
+                    labelText:
+                        'Email', // Replace with l10n?.emailLabel ?? 'Email'
                     hintText: 'you@example.com',
                     prefixIcon: Icon(
                       Icons.email_outlined,
@@ -127,7 +129,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       return 'Please enter your email'; // Localize
                     }
                     if (!RegExp(
-                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+                      r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
                     ).hasMatch(value.trim())) {
                       return 'Please enter a valid email'; // Localize
                     }
@@ -140,7 +142,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 TextFormField(
                   controller: _passwordController,
                   decoration: InputDecoration(
-                    labelText: 'Password', // Localize
+                    labelText:
+                        'Password', // Replace with l10n?.passwordLabel ?? 'Password'
                     prefixIcon: Icon(
                       Icons.lock_outline,
                       color: colorScheme.primary,
@@ -165,7 +168,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   obscureText: !_isPasswordVisible,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter a password'; // Localize
+                      return 'Please enter your password'; // Localize
                     }
                     if (value.length < 6) {
                       return 'Password must be at least 6 characters'; // Localize
@@ -173,56 +176,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 16.0),
-
-                // Confirm Password Field
-                TextFormField(
-                  controller: _confirmPasswordController,
-                  decoration: InputDecoration(
-                    labelText: 'Confirm Password', // Localize
-                    prefixIcon: Icon(
-                      Icons.lock_reset_outlined,
-                      color: colorScheme.primary,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _isConfirmPasswordVisible
-                            ? Icons.visibility_off_outlined
-                            : Icons.visibility_outlined,
-                        color: colorScheme.onSurfaceVariant,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _isConfirmPasswordVisible =
-                              !_isConfirmPasswordVisible;
-                        });
-                      },
-                    ),
-                  ),
-                  obscureText: !_isConfirmPasswordVisible,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please confirm your password'; // Localize
-                    }
-                    if (value != _passwordController.text) {
-                      return 'Passwords do not match'; // Localize
-                    }
-                    return null;
-                  },
-                ),
                 const SizedBox(height: 24.0),
 
-                // Sign Up Button
+                // Login Button - listens to AuthNotifier for loading state
                 Consumer<AuthNotifier>(
                   builder: (context, authNotifier, child) {
                     return authNotifier.isLoading
                         ? const Center(child: CircularProgressIndicator())
                         : ElevatedButton.icon(
-                          icon: const Icon(Icons.person_add_alt_1_rounded),
-                          label: const Text('Sign Up'), // Localize
+                          icon: const Icon(Icons.login_rounded),
+                          label: const Text('Login'), // Localize
                           onPressed: _submitForm,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: colorScheme.primary,
@@ -240,19 +203,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ),
                 const SizedBox(height: 16.0),
 
-                // Option to navigate to Login Screen
+                // Option to navigate to Registration Screen
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Already have an account?", // Localize
+                      "Don't have an account?", // Localize
                       style: textTheme.bodyMedium?.copyWith(
                         color: colorScheme.onSurfaceVariant,
                       ),
                     ),
                     TextButton(
                       child: Text(
-                        'Sign In', // Localize
+                        'Sign Up', // Localize
                         style: textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: colorScheme.primary,
@@ -260,24 +223,44 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       ),
                       onPressed: () {
                         Navigator.pushReplacement(
-                          // Or use push
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const LoginScreen(),
+                            builder:
+                                (context) => RegistrationScreen(
+                                  onSwitchToLogin: () {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder:
+                                            (context) => const LoginScreen(),
+                                      ),
+                                    );
+                                  },
+                                ),
                           ),
                         );
                       },
                     ),
                   ],
                 ),
-                // Error display (similar to LoginScreen, primarily handled by SnackBar)
+                // Display error message from AuthNotifier if any
                 Consumer<AuthNotifier>(
                   builder: (context, authNotifier, child) {
                     if (authNotifier.errorMessage != null &&
                         !authNotifier.isLoading) {
-                      // SnackBar is preferred for transient errors from _submitForm
+                      // We show errors via SnackBar in _submitForm,
+                      // but this is another place to show persistent errors if needed.
+                      // For now, SnackBar is primary.
+                      // return Padding(
+                      //   padding: const EdgeInsets.only(top: 8.0),
+                      //   child: Text(
+                      //     authNotifier.errorMessage!,
+                      //     style: TextStyle(color: colorScheme.error),
+                      //     textAlign: TextAlign.center,
+                      //   ),
+                      // );
                     }
-                    return const SizedBox.shrink();
+                    return const SizedBox.shrink(); // No error or loading, show nothing
                   },
                 ),
               ],

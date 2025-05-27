@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/auth_notifier.dart'; // Your AuthNotifier
-import '../screens/home_page.dart'; // Your main app screen
-import '../auth/login_screen.dart'; // Your login screen
+import '../screens/home/home_page.dart'; // Your main app screen
+import '../screens/auth/login_screen.dart'; // Your login screen
 
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({super.key});

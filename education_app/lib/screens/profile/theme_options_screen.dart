@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Import provider
-import '../models/theme_notifier.dart'; // Import ThemeNotifier
+import '../../models/theme_notifier.dart'; // Import ThemeNotifier
 
 class ThemeOptionsScreen extends StatelessWidget {
   const ThemeOptionsScreen({super.key});

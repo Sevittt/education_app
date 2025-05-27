@@ -1,14 +1,91 @@
 {
-  "@@locale": "uz",
-  "appTitle": "O'qit & O'rgan",
-  "settingsLanguage": "Til",
-  "languageEnglish": "Inglizcha",
-  "languageUzbek": "O'zbekcha",
-  "languageRussian": "Ruscha",
-  "selectLanguage": "Tilni tanlang",
-  "welcomeMessage": "Xush kelibsiz!",
-  "profileTabLabel": "Profil",
-  "homeTabLabel": "Bosh Sahifa",
-  "resourcesTabLabel": "Resurslar",
-  "communityTabLabel": "Jamiyat"
+    "appTitle": "Teach&Learn",
+    "@appTitle": {
+        "description": "Dasturning sarlavhasi"
+    },
+    "languageEnglish": "Inglizcha (AQSh)",
+    "languageUzbek": "O'zbekcha (O'zbekiston)",
+    "languageRussian": "Ruscha (Rossiya)",
+    "languageSystemDefault": "Tizim tili",
+    "settingsScreenTitle": "Sozlamalar",
+    "settingsLanguage": "Til",
+    "settingsReceiveNotifications": "Bildirishnomalarni qabul qilish",
+    "settingsReceiveNotificationsSubtitle": "Yangi manbalar va muhokamalar haqida yangilanishlarni oling",
+    "settingsAllowLocation": "Joylashuvga ruxsat berish",
+    "settingsAllowLocationSubtitle": "Joylashuvingizni talab qiladigan funksiyalar uchun (agar mavjud bo'lsa)",
+    "settingsChangePassword": "Parolni o'zgartirish",
+    "settingsHelpCenter": "Yordam markazi",
+    "settingsAboutApp": "Teach & Learn haqida",
+    "settingsAppLegalese": "© 2025 Teach & Learn Loyihasi",
+    "settingsAppDescription": "Hamkorlikda o'rganish va manbalarni almashish orqali AT ko'nikmalari bo'shlig'ini to'ldirish.",
+    "errorPrefix": "Xatolik: ",
+    "resourcesNoResourcesFound": "Resurslar topilmadi.",
+    "loginButtonText": "Kirish",
+    "signUpButtonText": "Ro'yxatdan o'tish",
+    "logoutButtonText": "Chiqish",
+    "emailLabel": "Elektron pochta",
+    "passwordLabel": "Parol",
+    "homeDashboardTitle": "Boshqaruv paneli",
+    "communityScreenTitle": "Hamjamiyat",
+    "profileScreenTitle": "Profil",
+    "editProfileButtonText": "Profilni tahrirlash",
+
+    "resourcesTitle": "Resurslar",
+    "resourcesSearchHint": "Resurslarni qidirish...",
+    "resourcesFilterByType": "Tur bo'yicha filtrlash",
+    "resourcesAllTypes": "Barcha turlar",
+    "resourcesNoResourcesMatch": "Sizning mezonlaringizga mos resurslar topilmadi.",
+    "resourcesTryAdjusting": "Qidiruv yoki filtringizni o'zgartirib ko'ring.",
+    "resourcesCreateButton": "Yaratish",
+    "resourceAddedSuccess": "Resurs muvaffaqiyatli qo'shildi!",
+    "resourceAddedError": "Resurs qo'shishda xatolik: {error}",
+    "@resourceAddedError": {
+        "description": "Resurs qo'shishda xatolik yuz berganda ko'rsatiladigan xabar",
+        "placeholders": {
+            "error": {
+                "type": "String",
+                "example": "Tarmoqqa ulanishda xatolik"
+            }
+        }
+    },
+
+    "createResourceScreenTitle": "Yangi Resurs Yaratish",
+    "createResourceFormWillBeHere": "Resurs yaratish shakli shu yerda bo'ladi.",
+    "saveButtonText": "Saqlash",
+    "createResourceTitleLabel": "Sarlavha",
+    "createResourceDescriptionLabel": "Tavsifi",
+    "createResourceAuthorLabel": "Muallif",
+    "createResourceTypeLabel": "Resurs Turi",
+    "createResourceUrlLabel": "URL (Optional)",
+    "createResourceValidationEmpty": "Iltimos kiriting {fieldName}",
+    "createResourceValidationSelect": "Iltimos tanlang {fieldName}",
+    "createResourceValidationInvalidUrl": "Yaroqli URL manzilini kiriting",
+
+    "editButtonTooltip": "Resurs o'zgartirish",
+    "editResourceScreenTitle": "Resurs o'zgartirish",
+    "resourceTypeLabel": "Turi",
+    "authorLabel": "Muallif",
+    "dateAddedLabel": "Qo'shilgan",
+    "launchingUrlMessage": "URL ishga tushirilmoqda",
+    "descriptionLabel": "Tavsifi",
+    "resourceUpdatedSuccess": "Resurs muvaffaqiyatli yangilandi!",
+    "resourceUpdatedError": "Resursni yangilashda xatolik yuz berdi: {error}",
+    "@resourceUpdatedError": {
+        "description": "Resursni yangilashda xato xabari bajarilmadi",
+        "placeholders": {
+            "error": {
+                "type": "String",
+                "example": "Maʼlumotlar bazasini yozib boʻlmadi"
+            }
+        }
+    },
+    "saveButtonText": "O'zgarishlarni saqlash",
+
+    "deleteResourceConfirmTitle": "Oʻchirishni tasdiqlang",
+    "deleteResourceConfirmMessage": "Haqiqatan ham bu manbani oʻchirib tashlamoqchimisiz? Bu amalni ortga qaytarib bo‘lmaydi.",
+    "cancelButtonText": "Bekor qilish",
+    "deleteButtonText": "Oʻchirish",
+    "resourceDeletedSuccess": "Resurs muvaffaqiyatli o'chirildi!",
+    "resourceDeletedError": "Resursni o‘chirishda xatolik yuz berdi: {error}",
+    "deleteButtonTooltip": "Resursni o'chirish"
 }

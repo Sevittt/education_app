@@ -1,14 +1,90 @@
 {
-  "@@locale": "ru",
-  "appTitle": "Учи и Учись",
-  "settingsLanguage": "Язык",
-  "languageEnglish": "Английский",
-  "languageUzbek": "Узбекский",
-  "languageRussian": "Русский",
-  "selectLanguage": "Выберите язык",
-  "welcomeMessage": "Добро пожаловать!",
-  "profileTabLabel": "Профиль",
-  "homeTabLabel": "Главная",
-  "resourcesTabLabel": "Ресурсы",
-  "communityTabLabel": "Сообщество"
+    "appTitle": "Teach&Learn",
+    "@appTitle": {
+        "description": "Название приложения"
+    },
+    "languageEnglish": "Английский (США)",
+    "languageUzbek": "Узбекский (Узбекистан)",
+    "languageRussian": "Русский (Россия)",
+    "languageSystemDefault": "Системный язык",
+    "settingsScreenTitle": "Настройки",
+    "settingsLanguage": "Язык",
+    "settingsReceiveNotifications": "Получать уведомления",
+    "settingsReceiveNotificationsSubtitle": "Получайте обновления о новых ресурсах и обсуждениях",
+    "settingsAllowLocation": "Разрешить доступ к местоположению",
+    "settingsAllowLocationSubtitle": "Для функций, требующих вашего местоположения (если есть)",
+    "settingsChangePassword": "Изменить пароль",
+    "settingsHelpCenter": "Центр помощи",
+    "settingsAboutApp": "О Teach & Learn",
+    "settingsAppLegalese": "© 2025 Teach & Learn Проект",
+    "settingsAppDescription": "Преодоление разрыва в IT-навыках посредством совместного обучения и обмена ресурсами.",
+    "errorPrefix": "Ошибка: ",
+    "resourcesNoResourcesFound": "Ресурсы не найдены.",
+    "loginButtonText": "Войти",
+    "signUpButtonText": "Зарегистрироваться",
+    "logoutButtonText": "Выйти",
+    "emailLabel": "Электронная почта",
+    "passwordLabel": "Пароль",
+    "homeDashboardTitle": "Панель управления",
+    "communityScreenTitle": "Сообщество",
+    "profileScreenTitle": "Профиль",
+    "editProfileButtonText": "Редактировать профиль",
+
+    "resourcesTitle": "Ресурсы",
+    "resourcesSearchHint": "Поиск ресурсов...",
+    "resourcesFilterByType": "Фильтровать по типу",
+    "resourcesAllTypes": "Все типы",
+    "resourcesNoResourcesMatch": "Ресурсы, соответствующие вашим критериям, не найдены.",
+    "resourcesTryAdjusting": "Попробуйте изменить поиск или фильтр.",
+    "resourcesCreateButton": "Создать",
+    "resourceAddedSuccess": "Ресурс успешно добавлен!",
+    "resourceAddedError": "Ошибка при добавлении ресурса: {error}",
+    "@resourceAddedError": {
+        "description": "Сообщение об ошибке при неудачном добавлении ресурса",
+        "placeholders": {
+            "error": {
+                "type": "String",
+                "example": "Ошибка сетевого подключения"
+            }
+        }
+    },
+    "createResourceScreenTitle": "Создать Новый Ресурс",
+    "createResourceFormWillBeHere": "Форма создания ресурса будет здесь.",
+    "saveButtonText": "Сохранить",
+    "createResourceTitleLabel": "Название",
+    "createResourceDescriptionLabel": "Описание",
+    "createResourceAuthorLabel": "Автор",
+    "createResourceTypeLabel": "Тип ресурса",
+    "createResourceUrlLabel": "URL (Optional)",
+    "createResourceValidationEmpty": "Пожалуйста, введите {fieldName}",
+    "createResourceValidationSelect": "Пожалуйста, выберите {fieldName}",
+    "createResourceValidationInvalidUrl": "Введите действительный URL-адрес",
+
+    "editButtonTooltip": "Редактировать ресурс",
+    "editResourceScreenTitle": "Редактировать ресурс",
+    "resourceTypeLabel": "Тип",
+    "authorLabel": "Автор",
+    "dateAddedLabel": "Добавлен",
+    "launchingUrlMessage": "Запуск URL",
+    "descriptionLabel": "Описание",
+    "resourceUpdatedSuccess": "Ресурс успешно обновлен!",
+    "resourceUpdatedError": "Ошибка обновления ресурса: {error}",
+    "@resourceUpdatedError": {
+        "description": "Сообщение об ошибке при неудачном обновлении ресурса",
+        "placeholders": {
+            "error": {
+                "type": "String",
+                "example": "Запись в базу данных не удалась"
+            }
+        }
+    },
+    "saveButtonText": "Сохранить изменения",
+
+    "deleteResourceConfirmTitle": "Подтвердите удаление",
+    "deleteResourceConfirmMessage": "Вы уверены, что хотите удалить этот ресурс? Это действие не может быть отменено.               ",
+    "cancelButtonText": "Отмена",
+    "deleteButtonText": "Удалить",
+    "resourceDeletedSuccess": "Ресурс успешно удален!",
+    "resourceDeletedError": "Ошибка удаления ресурса: {error}",
+    "deleteButtonTooltip": "Удалить ресурс"
 }

@@ -1,7 +1,7 @@
 // lib/screens/edit_topic_screen.dart
 
 import 'package:flutter/material.dart';
-import '../models/discussion_topic.dart'; // Import DiscussionTopic model
+import '../../models/discussion_topic.dart'; // Import DiscussionTopic model
 
 class EditTopicScreen extends StatefulWidget {
   final DiscussionTopic topicToEdit;
