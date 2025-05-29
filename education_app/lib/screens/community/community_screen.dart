@@ -32,16 +32,6 @@ class _CommunityScreenState extends State<CommunityScreen> {
     });
   }
 
-  Future<void> _navigateToCreateTopicScreen() async {
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const CreateTopicScreen()),
-    );
-    if (result == true || result == null) {
-      _loadTopics();
-    }
-  }
-
   Future<void> _navigateToEditTopicScreen(DiscussionTopic topicToEdit) async {
     final updatedTopic = await Navigator.push<DiscussionTopic?>(
       // Expect DiscussionTopic?
@@ -251,13 +241,13 @@ class _CommunityScreenState extends State<CommunityScreen> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _navigateToCreateTopicScreen,
-        tooltip: 'Start a New Discussion',
-        backgroundColor: colorScheme.primary,
-        foregroundColor: colorScheme.onPrimary,
-        child: const Icon(Icons.add_comment_outlined),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _navigateToCreateTopicScreen,
+      //   tooltip: 'Start a New Discussion',
+      //   backgroundColor: colorScheme.primary,
+      //   foregroundColor: colorScheme.onPrimary,
+      //   child: const Icon(Icons.add_comment_outlined),
+      // ),
     );
   }
 }

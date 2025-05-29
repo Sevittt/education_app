@@ -177,18 +177,22 @@ final List<DiscussionTopic> dummyDiscussionTopics = [
     title: 'Best resources for learning Python in 2025?',
     content:
         'I\'m an educator looking for updated resources to teach Python basics to students. Any recommendations for interactive platforms or project-based learning materials?',
+    authorName: 'User 1',
     authorId: 'u1',
     createdAt: DateTime(2025, 5, 12, 9, 0),
     commentIds: ['c1', 'c2'],
+    commentCount: 2,
   ),
   DiscussionTopic(
     id: 't2',
     title: 'How to explain complex algorithms simply?',
     content:
         'Struggling to make algorithms like sorting and searching engaging for beginners. Any teaching strategies, real-world analogies, or visual tools that have worked well for you?',
+    authorName: dummyUser2.displayName ?? 'Anonymous', // <-- fix here
     authorId: dummyUser2.id,
     createdAt: DateTime(2025, 5, 11, 14, 30),
     commentIds: [],
+    commentCount: 0,
   ),
   // ... other topics
 ];

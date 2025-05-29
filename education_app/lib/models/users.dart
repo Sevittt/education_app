@@ -180,3 +180,33 @@ class AuthService {
     }
   }
 }
+
+// --- Additional UserModel for other use cases (e.g., simple user info) ---
+class UserModel {
+  final String uid;
+  final String email;
+  String firstName;
+  String lastName;
+
+  UserModel({
+    required this.uid,
+    required this.email,
+    this.firstName = '',
+    this.lastName = '',
+  });
+
+  // Factory constructor to create a UserModel from a map (e.g., from Firestore)
+  factory UserModel.fromMap(Map<String, dynamic> data, String uid) {
+    return UserModel(
+      uid: uid,
+      email: data['email'] ?? '',
+      firstName: data['firstName'] ?? '',
+      lastName: data['lastName'] ?? '',
+    );
+  }
+
+  // Method to convert a UserModel to a map (e.g., for writing to Firestore)
+  Map<String, dynamic> toMap() {
+    return {'email': email, 'firstName': firstName, 'lastName': lastName};
+  }
+}

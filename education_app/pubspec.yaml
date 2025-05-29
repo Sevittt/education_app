@@ -29,6 +29,7 @@ dependencies:
   equatable: ^2.0.3
   # Cloud Firestore (we'll use this later for user data)
   cloud_firestore: ^5.0.2 # Or latest
+  flutter_speed_dial: ^7.0.0 # Add this line
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,9 @@
 // lib/main.dart
 
+import 'package:education_app/services/community_service.dart';
+import 'package:education_app/services/profile_service.dart';
+import 'package:education_app/services/quiz_service.dart';
+import 'package:education_app/services/resource_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -36,6 +40,12 @@ void main() async {
         ChangeNotifierProvider<AuthNotifier>(
           create: (context) => AuthNotifier(AuthService()),
         ),
+        Provider<ResourceService>(create: (_) => ResourceService()),
+        Provider<ProfileService>(create: (_) => ProfileService()),
+
+        // Add this line
+        Provider<CommunityService>(create: (_) => CommunityService()),
+        Provider<QuizService>(create: (_) => QuizService()),
       ],
       child: const MyApp(),
     ),

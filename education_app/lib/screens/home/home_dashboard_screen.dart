@@ -161,11 +161,15 @@ class HomeDashboardScreen extends StatelessWidget {
                     width: 260, // Slightly adjusted width
                     child: Card(
                       // Using CardTheme from main.dart for elevation, shape, margin
-                      // elevation: 3.0,
-                      // shape: RoundedRectangleBorder(
-                      //   borderRadius: BorderRadius.circular(12.0),
-                      // ),
-                      // margin: const EdgeInsets.only(right: 16.0, bottom: 4.0, top: 4.0),
+                      elevation: 3.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      margin: const EdgeInsets.only(
+                        right: 16.0,
+                        bottom: 4.0,
+                        top: 4.0,
+                      ),
                       child: InkWell(
                         borderRadius: BorderRadius.circular(
                           12.0,

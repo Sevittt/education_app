@@ -1,4 +1,4 @@
-// lib/screens/resources_screen.dart
+// lib/screens/resource/resources_screen.dart
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,9 +6,6 @@ import 'package:provider/provider.dart';
 import '../../models/resource.dart';
 import '../../services/resource_service.dart';
 import 'resource_detail_screen.dart';
-import 'create_resource_screen.dart'; // For navigation
-import '../../models/auth_notifier.dart'; // To get the user role
-import '../../models/users.dart'; // To use UserRole enum
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ResourcesScreen extends StatefulWidget {
@@ -20,22 +17,15 @@ class ResourcesScreen extends StatefulWidget {
 
 class _ResourcesScreenState extends State<ResourcesScreen> {
   final TextEditingController _searchController = TextEditingController();
-  ResourceType? _selectedResourceType; // For the DropdownButtonFormField
+  ResourceType? _selectedResourceType;
 
-  // Instantiate your service (it's stateless, so direct instantiation is fine here)
-  final ResourceService _resourceService = ResourceService();
-
-  // Note: _applyFiltersAndSearch and _filteredResources will be handled by StreamBuilder
-  // based on snapshots from Firestore and the local filter/search states.
+  // Note: We get the service from Provider now, so direct instantiation is not needed.
 
   @override
   void initState() {
     super.initState();
-    // Listener for search text changes to re-trigger the StreamBuilder's filtering logic
     _searchController.addListener(() {
-      setState(
-        () {},
-      ); // This will cause build to run again, re-evaluating filters
+      setState(() {});
     });
   }
 
@@ -45,7 +35,6 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
     super.dispose();
   }
 
-  // Updated helper function to build a more styled resource type icon presentation
   Widget _buildResourceTypeIconWidget(ResourceType type, BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
@@ -96,65 +85,17 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
     final TextTheme textTheme = theme.textTheme;
     final l10n = AppLocalizations.of(context);
 
-    // Get the AuthNotifier to access the user's role
-    final authNotifier = Provider.of<AuthNotifier>(context);
-    // Get the actual role from the logged-in user's appUser profile
-    final UserRole? userRole = authNotifier.appUser?.role;
+    // Get the resource service from Provider
+    final resourceService = Provider.of<ResourceService>(context);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n?.resourcesTitle ?? 'Resources'),
-        centerTitle: true, // As per your other screens
+        centerTitle: true,
       ),
-      floatingActionButton:
-          (userRole == UserRole.teacher || userRole == UserRole.admin)
-              ? FloatingActionButton.extended(
-                onPressed: () async {
-                  // Navigate to CreateResourceScreen and wait for a result
-                  final newResource = await Navigator.of(
-                    context,
-                  ).push<Resource?>(
-                    MaterialPageRoute(
-                      builder: (context) => const CreateResourceScreen(),
-                    ),
-                  );
-                  // If a new resource was created and returned, add it
-                  if (newResource != null) {
-                    try {
-                      await _resourceService.addResource(newResource);
-                      if (mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              l10n?.resourceAddedSuccess ??
-                                  'Resource added successfully!',
-                            ),
-                          ),
-                        );
-                      }
-                      // No setState needed here, StreamBuilder will update the list
-                    } catch (e) {
-                      if (mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              l10n?.resourceAddedError != null
-                                  ? '${l10n!.resourceAddedError}: ${e.toString()}'
-                                  : 'Error adding resource: ${e.toString()}',
-                            ),
-                          ),
-                        );
-                      }
-                    }
-                  }
-                },
-                icon: const Icon(Icons.add),
-                label: Text(l10n?.resourcesCreateButton ?? 'Create'),
-              )
-              : null, // No FAB for students or other roles
+      // --- The FloatingActionButton has been removed from here ---
       body: Column(
         children: [
-          // --- Search Bar ---
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextField(
@@ -172,13 +113,8 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
               ),
             ),
           ),
-
-          // --- Filter Dropdown ---
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 0.0,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: DropdownButtonFormField<ResourceType?>(
               decoration: InputDecoration(
                 labelText: l10n?.resourcesFilterByType ?? 'Filter by Type',
@@ -187,24 +123,19 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                 ),
                 filled: true,
                 fillColor: colorScheme.surface,
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 12.0,
-                  vertical: 16.0,
-                ),
               ),
               value: _selectedResourceType,
               hint: Text(l10n?.resourcesAllTypes ?? 'All Types'),
               isExpanded: true,
               items: [
                 DropdownMenuItem<ResourceType?>(
-                  value: null, // Represents "All Types"
+                  value: null,
                   child: Text(l10n?.resourcesAllTypes ?? 'All Types'),
                 ),
                 ...ResourceType.values.map((ResourceType type) {
                   return DropdownMenuItem<ResourceType>(
                     value: type,
                     child: Text(
-                      // Simple capitalization for enum names
                       type.name[0].toUpperCase() + type.name.substring(1),
                     ),
                   );
@@ -213,17 +144,14 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
               onChanged: (ResourceType? newValue) {
                 setState(() {
                   _selectedResourceType = newValue;
-                  // The StreamBuilder's filtering logic will use this value
                 });
               },
             ),
           ),
           const SizedBox(height: 16.0),
-
-          // --- Resource List ---
           Expanded(
             child: StreamBuilder<List<Resource>>(
-              stream: _resourceService.getResources(), // Fetch live data
+              stream: resourceService.getResources(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
@@ -243,7 +171,6 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                   );
                 }
 
-                // Apply search and filter to the data from Firestore
                 final query = _searchController.text.toLowerCase();
                 List<Resource> resourcesToShow = snapshot.data!;
 
@@ -287,31 +214,13 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        if (_searchController.text.isNotEmpty ||
-                            _selectedResourceType != null)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: Text(
-                              l10n?.resourcesTryAdjusting ??
-                                  'Try adjusting your search or filter.',
-                              style: textTheme.bodyMedium?.copyWith(
-                                color: colorScheme.onSurface.withOpacity(0.5),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
                       ],
                     ),
                   );
                 }
 
                 return ListView.builder(
-                  padding: const EdgeInsets.fromLTRB(
-                    12.0,
-                    8.0,
-                    12.0,
-                    80.0,
-                  ), // Space for FAB
+                  padding: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 80.0),
                   itemCount: resourcesToShow.length,
                   itemBuilder: (context, index) {
                     final resource = resourcesToShow[index];
@@ -359,16 +268,6 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                                         color: colorScheme.onSurfaceVariant,
                                       ),
                                       maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 8.0),
-                                    Text(
-                                      resource.description,
-                                      style: textTheme.bodyMedium?.copyWith(
-                                        color: colorScheme.onSurface
-                                            .withOpacity(0.75),
-                                      ),
-                                      maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ],

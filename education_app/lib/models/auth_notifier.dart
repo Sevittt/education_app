@@ -218,4 +218,6 @@ class AuthNotifier with ChangeNotifier {
     _authStateSubscription?.cancel();
     super.dispose();
   }
+
+  register(String text, String text2) {}
 }
