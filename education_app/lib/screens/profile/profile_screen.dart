@@ -6,7 +6,6 @@ import 'package:intl/intl.dart'; // For date formatting
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // For localization
 
 import '../../models/auth_notifier.dart';
-import '../../models/users.dart'; // For UserRole enum
 import '../../models/quiz_attempt.dart';
 import '../../services/quiz_service.dart';
 import '../placeholder_screen.dart';

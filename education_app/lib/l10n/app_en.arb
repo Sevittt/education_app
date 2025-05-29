@@ -65,6 +65,7 @@
     "createResourceAuthorLabel": "Author",
     "createResourceTypeLabel":"Resource Type",
     "createResourceUrlLabel": "URL (Optional)",
+    "couldNotLaunchUrl": "Could not launch {urlString}",
     "createResourceValidationEmpty": "Please enter a {fieldName}",
     "createResourceValidationSelect": "Please select a {fieldName}",
     "createResourceValidationInvalidUrl": "Please enter a valid URL",

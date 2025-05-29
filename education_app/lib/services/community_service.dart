@@ -12,7 +12,6 @@ class CommunityService {
     try {
       await _topicsCollection.add(topic.toMap());
     } catch (e) {
-      print('Error creating topic: $e');
       rethrow; // Rethrow the error to be caught by the UI layer
     }
   }

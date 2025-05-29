@@ -25,12 +25,7 @@ class LocaleNotifier with ChangeNotifier {
       // _appLocale = Locale(languageCode, countryCode);
       _appLocale = Locale(languageCode);
       notifyListeners();
-      print('Loaded locale: $_appLocale');
-    } else {
-      print(
-        'No saved locale found, will use system default or supportedLocales[0].',
-      );
-    }
+    } else {}
   }
 
   Future<void> setLocale(Locale locale) async {
@@ -43,7 +38,6 @@ class LocaleNotifier with ChangeNotifier {
     // }
     _appLocale = locale;
     notifyListeners();
-    print('Set locale to: $_appLocale');
   }
 
   // Helper to clear locale preference (e.g., for "System Default" option)
@@ -54,6 +48,5 @@ class LocaleNotifier with ChangeNotifier {
     _appLocale =
         null; // Setting to null will make MaterialApp use system locale or first supported
     notifyListeners();
-    print('Cleared locale preference.');
   }
 }

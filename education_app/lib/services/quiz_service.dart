@@ -24,7 +24,6 @@ class QuizService {
         return Quiz.fromFirestore(doc, []);
       }).toList();
     } catch (e) {
-      print("Error fetching quizzes for resource: $e");
       return [];
     }
   }
@@ -54,7 +53,6 @@ class QuizService {
       }
       return null;
     } catch (e) {
-      print("Error fetching quiz with questions: $e");
       return null;
     }
   }
@@ -64,7 +62,6 @@ class QuizService {
     try {
       await _firestore.collection('quiz_attempts').add(attempt.toFirestore());
     } catch (e) {
-      print("Error saving quiz attempt: $e");
       // Rethrow the error so it can be handled in the UI if needed
       rethrow;
     }
@@ -79,7 +76,6 @@ class QuizService {
           .add(quiz.toFirestore());
       return docRef.id;
     } catch (e) {
-      print('Error creating quiz: $e');
       rethrow;
     }
   }
@@ -110,7 +106,6 @@ class QuizService {
           .collection('questions')
           .add(question.toFirestore());
     } catch (e) {
-      print('Error adding question to quiz: $e');
       rethrow;
     }
   }

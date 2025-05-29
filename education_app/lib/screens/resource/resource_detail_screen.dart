@@ -1,6 +1,7 @@
 // lib/screens/resource_detail_screen.dart
 
 import 'package:education_app/screens/resource/edit_resource_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/resource.dart';
@@ -164,16 +165,24 @@ class ResourceDetailScreen extends StatelessWidget {
             if (resource.url != null && resource.url!.isNotEmpty) ...[
               const SizedBox(height: 16.0),
               InkWell(
-                onTap: () {
-                  // TODO: Implement launching URL (e.g., using url_launcher package)
-                  print('Attempting to launch URL: ${resource.url}');
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        '${l10n?.launchingUrlMessage ?? 'Launching URL'}: ${resource.url}',
-                      ),
-                    ),
-                  );
+                onTap: () async {
+                  if (resource.url != null) {
+                    final Uri url = Uri.parse(resource.url!);
+                    if (await canLaunchUrl(url)) {
+                      await launchUrl(url, mode: LaunchMode.externalApplication);
+                    } else {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              l10n?.couldNotLaunchUrl(resource.url!) ?? 'Could not launch ${resource.url}',
+                            ),
+                            backgroundColor: Theme.of(context).colorScheme.error,
+                          ),
+                        );
+                      }
+                    }
+                  }
                 },
                 child: Text(
                   resource.url!,

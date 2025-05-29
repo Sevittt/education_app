@@ -61,9 +61,6 @@ class AuthNotifier with ChangeNotifier {
 
         if (_appUser != null) {
           await _firestore.collection('users').doc(uid).set(_appUser!.toMap());
-          print(
-            'New user profile created and saved to Firestore for UID: $uid',
-          );
         }
 
         // Clear pending details after use
@@ -72,7 +69,6 @@ class AuthNotifier with ChangeNotifier {
       }
     } catch (e) {
       _appUser = null;
-      print("Error loading or creating user profile: $e");
     }
     notifyListeners();
   }
@@ -219,5 +215,5 @@ class AuthNotifier with ChangeNotifier {
     super.dispose();
   }
 
-  register(String text, String text2) {}
+  // register(String text, String text2) {}
 }

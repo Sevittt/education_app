@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // If you need it for user ID for author
 import '../../models/resource.dart'; // Your Resource model
-import '../../models/users.dart'; // For UserRole if needed, and Author name
 import '../../models/auth_notifier.dart'; // To get current user for author field
 import '../../services/resource_service.dart'; // Your ResourceService
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

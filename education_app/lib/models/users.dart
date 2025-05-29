@@ -174,7 +174,6 @@ class AuthService {
   Future<void> updateUserProfile(User updatedUser) async {
     if (_currentUser != null && _currentUser!.id == updatedUser.id) {
       _currentUser = updatedUser;
-      print("User profile updated locally: ${updatedUser.name}");
     } else {
       throw Exception("User not found or ID mismatch for local update.");
     }

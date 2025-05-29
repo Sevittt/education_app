@@ -56,46 +56,24 @@ class QuizAttempt {
     }
 
     String userIdValue = data['userId'] ?? '';
-    if (userIdValue.isEmpty && kDebugMode) {
-      print("Warning: 'userId' is empty for QuizAttempt doc ID: ${doc.id}");
-    }
+    if (userIdValue.isEmpty && kDebugMode) {}
     String quizIdValue = data['quizId'] ?? '';
-    if (quizIdValue.isEmpty && kDebugMode) {
-      print("Warning: 'quizId' is empty for QuizAttempt doc ID: ${doc.id}");
-    }
+    if (quizIdValue.isEmpty && kDebugMode) {}
     String quizTitleValue = data['quizTitle'] ?? 'Unnamed Quiz';
     if ((data['quizTitle'] == null || data['quizTitle'].isEmpty) &&
-        kDebugMode) {
-      print(
-        "Warning: 'quizTitle' is null or empty for QuizAttempt doc ID: ${doc.id}. Defaulting to 'Unnamed Quiz'.",
-      );
-    }
+        kDebugMode) {}
 
     int scoreValue = 0;
     if (data['score'] is num) {
       scoreValue = data['score'].toInt();
     } else if (data['score'] != null && kDebugMode) {
-      print(
-        "Warning: 'score' is not a num for QuizAttempt doc ID: ${doc.id}. Type: ${data['score']?.runtimeType}, Value: ${data['score']}. Defaulting to 0.",
-      );
-    } else if (data['score'] == null && kDebugMode) {
-      print(
-        "Warning: 'score' is null for QuizAttempt doc ID: ${doc.id}. Defaulting to 0.",
-      );
-    }
+    } else if (data['score'] == null && kDebugMode) {}
 
     int totalQuestionsValue = 0;
     if (data['totalQuestions'] is num) {
       totalQuestionsValue = data['totalQuestions'].toInt();
     } else if (data['totalQuestions'] != null && kDebugMode) {
-      print(
-        "Warning: 'totalQuestions' is not a num for QuizAttempt doc ID: ${doc.id}. Type: ${data['totalQuestions']?.runtimeType}, Value: ${data['totalQuestions']}. Defaulting to 0.",
-      );
-    } else if (data['totalQuestions'] == null && kDebugMode) {
-      print(
-        "Warning: 'totalQuestions' is null for QuizAttempt doc ID: ${doc.id}. Defaulting to 0.",
-      );
-    }
+    } else if (data['totalQuestions'] == null && kDebugMode) {}
 
     return QuizAttempt(
       id: doc.id,

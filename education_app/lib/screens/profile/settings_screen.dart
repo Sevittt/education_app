@@ -50,9 +50,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       );
     }
-    print(
-      'Actual notification logic to be implemented for: $_receiveNotifications',
-    );
   }
 
   Future<void> _updateLocationSetting(bool newValue) async {
@@ -70,9 +67,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       );
     }
-    print(
-      'Actual location permission logic to be implemented for: $_allowLocationAccess',
-    );
   }
 
   Widget _buildSettingsItem({

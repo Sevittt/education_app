@@ -95,7 +95,6 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
           SnackBar(content: Text('Comment added with ID: $newCommentId')),
         );
       }
-      print('New Comment Added to Topic ${widget.topic.title}');
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

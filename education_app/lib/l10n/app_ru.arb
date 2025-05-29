@@ -65,6 +65,7 @@
     "createResourceAuthorLabel": "Автор",
     "createResourceTypeLabel": "Тип ресурса",
     "createResourceUrlLabel": "URL (Optional)",
+    "couldNotLaunchUrl": "Could not launch {urlString}",
     "createResourceValidationEmpty": "Пожалуйста, введите {fieldName}",
     "createResourceValidationSelect": "Пожалуйста, выберите {fieldName}",
     "createResourceValidationInvalidUrl": "Введите действительный URL-адрес",

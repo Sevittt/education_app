@@ -66,6 +66,7 @@
     "createResourceAuthorLabel": "Muallif",
     "createResourceTypeLabel": "Resurs Turi",
     "createResourceUrlLabel": "URL (Optional)",
+    "couldNotLaunchUrl": "Could not launch {urlString}",
     "createResourceValidationEmpty": "Iltimos kiriting {fieldName}",
     "createResourceValidationSelect": "Iltimos tanlang {fieldName}",
     "createResourceValidationInvalidUrl": "Yaroqli URL manzilini kiriting",
