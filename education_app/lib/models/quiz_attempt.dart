@@ -1,11 +1,13 @@
 // lib/models/quiz_attempt.dart
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart'; // For kDebugMode
 
 class QuizAttempt {
   final String id;
   final String userId;
   final String quizId;
+  final String quizTitle;
   final int score;
   final int totalQuestions;
   final Timestamp attemptedAt;
@@ -14,20 +16,95 @@ class QuizAttempt {
     required this.id,
     required this.userId,
     required this.quizId,
+    required this.quizTitle,
     required this.score,
     required this.totalQuestions,
     required this.attemptedAt,
   });
 
   factory QuizAttempt.fromFirestore(DocumentSnapshot doc) {
-    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
+
+    // If data is null, something is very wrong with the document itself.
+    if (data == null) {
+      if (kDebugMode) {
+        print("Error: Document data is null for QuizAttempt doc ID: ${doc.id}");
+      }
+      // Return a 'dummy' or throw an error, depending on how you want to handle this.
+      // For now, let's create a fallback to prevent immediate crash, but this indicates bad data.
+      return QuizAttempt(
+        id: doc.id,
+        userId: 'error_user_id',
+        quizId: 'error_quiz_id',
+        quizTitle: 'Error: Null Data',
+        score: 0,
+        totalQuestions: 0,
+        attemptedAt: Timestamp.now(),
+      );
+    }
+
+    Timestamp attemptedAtValue;
+    if (data['attemptedAt'] is Timestamp) {
+      attemptedAtValue = data['attemptedAt'];
+    } else {
+      if (kDebugMode) {
+        print(
+          "Warning: 'attemptedAt' field was not a Timestamp for doc ${doc.id}. Actual type: ${data['attemptedAt']?.runtimeType}, Value: ${data['attemptedAt']}. Defaulting to Timestamp.now().",
+        );
+      }
+      attemptedAtValue = Timestamp.now();
+    }
+
+    String userIdValue = data['userId'] ?? '';
+    if (userIdValue.isEmpty && kDebugMode) {
+      print("Warning: 'userId' is empty for QuizAttempt doc ID: ${doc.id}");
+    }
+    String quizIdValue = data['quizId'] ?? '';
+    if (quizIdValue.isEmpty && kDebugMode) {
+      print("Warning: 'quizId' is empty for QuizAttempt doc ID: ${doc.id}");
+    }
+    String quizTitleValue = data['quizTitle'] ?? 'Unnamed Quiz';
+    if ((data['quizTitle'] == null || data['quizTitle'].isEmpty) &&
+        kDebugMode) {
+      print(
+        "Warning: 'quizTitle' is null or empty for QuizAttempt doc ID: ${doc.id}. Defaulting to 'Unnamed Quiz'.",
+      );
+    }
+
+    int scoreValue = 0;
+    if (data['score'] is num) {
+      scoreValue = data['score'].toInt();
+    } else if (data['score'] != null && kDebugMode) {
+      print(
+        "Warning: 'score' is not a num for QuizAttempt doc ID: ${doc.id}. Type: ${data['score']?.runtimeType}, Value: ${data['score']}. Defaulting to 0.",
+      );
+    } else if (data['score'] == null && kDebugMode) {
+      print(
+        "Warning: 'score' is null for QuizAttempt doc ID: ${doc.id}. Defaulting to 0.",
+      );
+    }
+
+    int totalQuestionsValue = 0;
+    if (data['totalQuestions'] is num) {
+      totalQuestionsValue = data['totalQuestions'].toInt();
+    } else if (data['totalQuestions'] != null && kDebugMode) {
+      print(
+        "Warning: 'totalQuestions' is not a num for QuizAttempt doc ID: ${doc.id}. Type: ${data['totalQuestions']?.runtimeType}, Value: ${data['totalQuestions']}. Defaulting to 0.",
+      );
+    } else if (data['totalQuestions'] == null && kDebugMode) {
+      print(
+        "Warning: 'totalQuestions' is null for QuizAttempt doc ID: ${doc.id}. Defaulting to 0.",
+      );
+    }
+
     return QuizAttempt(
       id: doc.id,
-      userId: data['userId'] ?? '',
-      quizId: data['quizId'] ?? '',
-      score: data['score'] ?? 0,
-      totalQuestions: data['totalQuestions'] ?? 0,
-      attemptedAt: data['attemptedAt'] ?? Timestamp.now(),
+      userId: userIdValue,
+      quizId: quizIdValue,
+      quizTitle: quizTitleValue,
+      score: scoreValue,
+      totalQuestions: totalQuestionsValue,
+      attemptedAt: attemptedAtValue,
     );
   }
 
@@ -35,6 +112,7 @@ class QuizAttempt {
     return {
       'userId': userId,
       'quizId': quizId,
+      'quizTitle': quizTitle,
       'score': score,
       'totalQuestions': totalQuestions,
       'attemptedAt': attemptedAt,

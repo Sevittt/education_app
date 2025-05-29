@@ -1,21 +1,23 @@
-// lib/screens/profile_screen.dart
+// lib/screens/profile/profile_screen.dart
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase User
+import 'package:intl/intl.dart'; // For date formatting
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // For localization
 
-import '../../models/auth_notifier.dart'; // Import AuthNotifier
-// import '../data/dummy_data.dart'; // No longer primarily using dummyUser for display
-import '../placeholder_screen.dart'; // For placeholder navigation
+import '../../models/auth_notifier.dart';
+import '../../models/users.dart'; // For UserRole enum
+import '../../models/quiz_attempt.dart';
+import '../../services/quiz_service.dart';
+import '../placeholder_screen.dart';
 import 'settings_screen.dart';
 import 'theme_options_screen.dart';
-// import 'profile_edit_screen.dart'; // Edit functionality will be adjusted
+// Import your ProfileEditScreen if you have one, otherwise placeholder is fine
+// import 'profile_edit_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
-  // Can be StatelessWidget
   const ProfileScreen({super.key});
 
-  // Helper method to build consistent profile option cards
   Widget _buildProfileOptionCard({
     required BuildContext context,
     required IconData icon,
@@ -29,9 +31,7 @@ class ProfileScreen extends StatelessWidget {
     final TextTheme textTheme = theme.textTheme;
 
     return Card(
-      // Using CardTheme from main.dart for base styling
-      clipBehavior:
-          Clip.antiAlias, // Ensures InkWell splash respects card's rounded corners
+      clipBehavior: Clip.antiAlias,
       child: ListTile(
         leading: Icon(
           icon,
@@ -74,23 +74,79 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
+  // New widget to build the quiz history list
+  Widget _buildQuizHistoryList(
+    BuildContext context,
+    String userId,
+    AppLocalizations l10n,
+  ) {
+    // It's better to get QuizService here if it's only used by this widget
+    final quizService = Provider.of<QuizService>(context, listen: false);
+
+    return StreamBuilder<List<QuizAttempt>>(
+      stream: quizService.getAttemptsForUser(userId),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.hasError) {
+          return Center(child: Text('${l10n.errorPrefix}: ${snapshot.error}'));
+        }
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: Text(l10n.noQuizAttempts),
+            ),
+          );
+        }
+
+        final attempts = snapshot.data!;
+
+        return ListView.builder(
+          shrinkWrap:
+              true, // Important for ListView inside SingleChildScrollView
+          physics:
+              const NeverScrollableScrollPhysics(), // Disable scrolling for inner list
+          itemCount: attempts.length,
+          itemBuilder: (context, index) {
+            final attempt = attempts[index];
+            final formattedDate = DateFormat.yMMMd(
+              l10n.localeName,
+            ).add_jm().format(attempt.attemptedAt.toDate());
+
+            return Card(
+              margin: const EdgeInsets.symmetric(vertical: 6.0),
+              child: ListTile(
+                leading: CircleAvatar(child: Text('${attempt.score}')),
+                title: Text(attempt.quizTitle),
+                subtitle: Text(formattedDate),
+                trailing: Text('${attempt.score}/${attempt.totalQuestions}'),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final TextTheme textTheme = theme.textTheme;
+    final l10n = AppLocalizations.of(context)!;
 
-    // Get the AuthNotifier to access the current user and logout method
-    // Using watch here so the UI rebuilds if currentUser changes (e.g., after logout from another part of app)
     final authNotifier = context.watch<AuthNotifier>();
-    final User? currentUser = authNotifier.currentUser; // Get the Firebase User
+    final firebaseUser = authNotifier.currentUser; // Firebase Auth User
+    final appUser =
+        authNotifier.appUser; // Your custom User model from Firestore
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // --- Profile Header Section ---
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(
@@ -98,38 +154,30 @@ class ProfileScreen extends StatelessWidget {
                 horizontal: 16.0,
               ),
               decoration: BoxDecoration(
-                color:
-                    colorScheme
-                        .surfaceContainerHighest, // Using a more distinct M3 surface color
+                color: colorScheme.surfaceContainerHighest,
               ),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).padding.top + 8,
-                  ), // Respect status bar
+                  SizedBox(height: MediaQuery.of(context).padding.top + 8),
                   CircleAvatar(
-                    radius: 55, // Slightly larger avatar
+                    radius: 55,
                     backgroundColor: colorScheme.primaryContainer,
                     backgroundImage:
-                        currentUser?.photoURL != null &&
-                                currentUser!.photoURL!.isNotEmpty
-                            ? NetworkImage(
-                              currentUser.photoURL!,
-                            ) // Assumes photoURL is a network URL
-                            : (currentUser?.email != null &&
-                                        currentUser!
-                                            .email!
-                                            .isNotEmpty // Fallback to asset if no photoURL
-                                    ? const AssetImage(
+                        appUser?.profilePictureUrl != null &&
+                                appUser!.profilePictureUrl!.isNotEmpty
+                            ? NetworkImage(appUser.profilePictureUrl!)
+                            : (firebaseUser?.photoURL != null &&
+                                        firebaseUser!.photoURL!.isNotEmpty
+                                    ? NetworkImage(firebaseUser.photoURL!)
+                                    : const AssetImage(
                                       'assets/images/my_pic.jpg',
-                                    ) // Your default asset
-                                    : null)
+                                    ))
                                 as ImageProvider<Object>?,
                     child:
-                        (currentUser?.photoURL == null ||
-                                    currentUser!.photoURL!.isEmpty) &&
-                                (currentUser?.email == null ||
-                                    currentUser!.email!.isEmpty)
+                        (appUser?.profilePictureUrl == null ||
+                                    appUser!.profilePictureUrl!.isEmpty) &&
+                                (firebaseUser?.photoURL == null ||
+                                    firebaseUser!.photoURL!.isEmpty)
                             ? Icon(
                               Icons.person_rounded,
                               size: 60,
@@ -139,34 +187,28 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16.0),
                   Text(
-                    // Display email as name for now, or a placeholder
-                    currentUser?.displayName ??
-                        currentUser?.email ??
-                        'Guest User',
+                    appUser?.name ??
+                        firebaseUser?.displayName ??
+                        firebaseUser?.email ??
+                        l10n.guestUser,
                     style: textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color:
-                          colorScheme
-                              .onSurface, // Changed for better contrast on surfaceVariant
+                      color: colorScheme.onSurface,
                     ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 4.0),
-                  if (currentUser !=
-                      null) // Only show email if different from display name or if display name is null
-                    if (currentUser.displayName != null &&
-                        currentUser.email != null &&
-                        currentUser.displayName != currentUser.email)
-                      Text(
-                        currentUser.email!,
-                        style: textTheme.bodyMedium?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                        ),
-                        textAlign: TextAlign.center,
+                  if (firebaseUser?.email != null &&
+                      (appUser?.name != firebaseUser!.email))
+                    Text(
+                      firebaseUser.email!,
+                      style: textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
                       ),
-                  // Role display will require fetching from Firestore later
+                      textAlign: TextAlign.center,
+                    ),
                   Text(
-                    'Role: Member', // Placeholder
+                    '${l10n.role}: ${appUser?.role.name ?? l10n.loading}',
                     style: textTheme.titleMedium?.copyWith(
                       color: colorScheme.secondary,
                     ),
@@ -175,42 +217,40 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 20.0), // Space after header
-            // --- Profile Options List ---
+            const SizedBox(height: 20.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 children: [
                   _buildProfileOptionCard(
                     context: context,
-                    icon: Icons.manage_accounts_outlined, // Changed icon
-                    title: 'Edit Profile Details',
-                    enabled: currentUser != null, // Enable only if logged in
+                    icon: Icons.manage_accounts_outlined,
+                    title:
+                        l10n.editProfileButtonText, // Assuming you have this key
+                    enabled: appUser != null,
                     onTap: () {
-                      // TODO: Navigate to a ProfileEditScreen that works with Firebase data
-                      // This would involve fetching/saving profile data (name, role, etc.) from Firestore.
                       Navigator.push(
                         context,
                         MaterialPageRoute(
+                          // Replace with your actual ProfileEditScreen if available
                           builder:
                               (context) => const PlaceholderScreen(
                                 title: 'Edit Profile',
                                 message:
-                                    'Full profile editing (name, custom details) linked to your Firebase account will be available after Firestore integration.',
+                                    'Profile editing will be implemented here.',
                               ),
                         ),
                       );
                     },
                     subtitle:
-                        currentUser != null
-                            ? 'Update your information'
-                            : 'Login to edit profile',
+                        appUser != null
+                            ? l10n.updateYourInformation
+                            : l10n.loginToEditProfile,
                   ),
                   _buildProfileOptionCard(
                     context: context,
                     icon: Icons.settings_outlined,
-                    title: 'Account Settings',
-                    enabled: currentUser != null,
+                    title: l10n.settingsTitle, // Assuming you have this key
                     onTap: () {
                       Navigator.push(
                         context,
@@ -223,8 +263,7 @@ class ProfileScreen extends StatelessWidget {
                   _buildProfileOptionCard(
                     context: context,
                     icon: Icons.color_lens_outlined,
-                    title: 'Theme Options',
-                    // This option can be available even if not logged in
+                    title: l10n.themeOptionsTitle, // Assuming you have this key
                     onTap: () {
                       Navigator.push(
                         context,
@@ -235,10 +274,28 @@ class ProfileScreen extends StatelessWidget {
                     },
                   ),
 
-                  // --- Logout Button (only if user is logged in) ---
-                  if (currentUser != null) ...[
+                  // --- NEW: Quiz History Section ---
+                  if (appUser != null) ...[
                     const Divider(
-                      height: 20,
+                      height: 30,
+                      indent: 16,
+                      endIndent: 16,
+                      thickness: 0.5,
+                    ),
+                    Text(
+                      l10n.myQuizHistory,
+                      style: textTheme.titleLarge?.copyWith(
+                        color: colorScheme.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 8.0),
+                    _buildQuizHistoryList(context, appUser.id, l10n),
+                  ],
+
+                  // --- End of Quiz History Section ---
+                  if (appUser != null) ...[
+                    const Divider(
+                      height: 30,
                       indent: 16,
                       endIndent: 16,
                       thickness: 0.5,
@@ -246,41 +303,40 @@ class ProfileScreen extends StatelessWidget {
                     _buildProfileOptionCard(
                       context: context,
                       icon: Icons.logout_rounded,
-                      title: 'Logout',
+                      title:
+                          l10n.logoutButtonText, // Assuming you have this key
                       onTap: () async {
                         final confirmLogout = await showDialog<bool>(
                           context: context,
                           builder: (BuildContext dialogContext) {
                             return AlertDialog(
-                              title: const Text('Confirm Logout'),
-                              content: const Text(
-                                'Are you sure you want to sign out?',
-                              ),
+                              title: Text(l10n.logoutConfirmTitle), // Assuming
+                              content: Text(
+                                l10n.logoutConfirmMessage,
+                              ), // Assuming
                               actions: <Widget>[
                                 TextButton(
-                                  child: const Text('Cancel'),
-                                  onPressed: () {
-                                    Navigator.of(dialogContext).pop(false);
-                                  },
+                                  child: Text(l10n.cancelButton), // Assuming
+                                  onPressed:
+                                      () => Navigator.of(
+                                        dialogContext,
+                                      ).pop(false),
                                 ),
                                 TextButton(
                                   child: Text(
-                                    'Logout',
+                                    l10n.logoutButton,
                                     style: TextStyle(color: colorScheme.error),
                                   ),
-                                  onPressed: () {
-                                    Navigator.of(dialogContext).pop(true);
-                                  },
+                                  onPressed:
+                                      () =>
+                                          Navigator.of(dialogContext).pop(true),
                                 ),
                               ],
                             );
                           },
                         );
-
                         if (confirmLogout == true) {
-                          // Use context.read for one-off actions in callbacks
                           await context.read<AuthNotifier>().signOut();
-                          // AuthWrapper will handle navigation to LoginScreen
                         }
                       },
                     ),
@@ -288,7 +344,7 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 24.0), // Bottom padding
+            const SizedBox(height: 24.0),
           ],
         ),
       ),

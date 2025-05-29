@@ -1,15 +1,14 @@
-// lib/screens/resource/quiz/quiz_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../models/quiz.dart';
 import '../../../models/question.dart';
 import '../../../models/quiz_attempt.dart';
 import '../../../models/auth_notifier.dart';
 import '../../../services/quiz_service.dart';
-import 'quiz_results_screen.dart'; // We will create this next
+import 'quiz_results_screen.dart';
 
 class QuizScreen extends StatefulWidget {
   final String quizId;
@@ -24,7 +23,7 @@ class _QuizScreenState extends State<QuizScreen> {
   Quiz? _quiz;
   bool _isLoading = true;
   int _currentQuestionIndex = 0;
-  final Map<int, String> _selectedAnswers = {}; // Map to store selected answers
+  final Map<int, String> _selectedAnswers = {};
 
   @override
   void initState() {
@@ -44,12 +43,13 @@ class _QuizScreenState extends State<QuizScreen> {
       }
     } catch (e) {
       if (mounted) {
+        final l10n = AppLocalizations.of(context)!;
         setState(() {
           _isLoading = false;
         });
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Failed to load quiz: $e')));
+        ).showSnackBar(SnackBar(content: Text('${l10n.failedToLoadQuiz}: $e')));
       }
     }
   }
@@ -63,6 +63,7 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   Future<void> _submitQuiz() async {
+    final l10n = AppLocalizations.of(context)!;
     final user = Provider.of<AuthNotifier>(context, listen: false).appUser;
     if (user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -73,7 +74,6 @@ class _QuizScreenState extends State<QuizScreen> {
       return;
     }
 
-    // Calculate score
     int score = 0;
     for (int i = 0; i < _quiz!.questions.length; i++) {
       if (_selectedAnswers[i] == _quiz!.questions[i].correctAnswer) {
@@ -81,22 +81,20 @@ class _QuizScreenState extends State<QuizScreen> {
       }
     }
 
-    // Create a quiz attempt object
     final attempt = QuizAttempt(
-      id: '', // Firestore will generate
+      id: '',
       userId: user.id,
       quizId: widget.quizId,
+      quizTitle: _quiz!.title,
       score: score,
       totalQuestions: _quiz!.questions.length,
       attemptedAt: Timestamp.now(),
     );
 
-    // Save the attempt
     try {
       final quizService = Provider.of<QuizService>(context, listen: false);
       await quizService.saveQuizAttempt(attempt);
 
-      // Navigate to results screen
       if (mounted) {
         Navigator.pushReplacement(
           context,
@@ -112,7 +110,7 @@ class _QuizScreenState extends State<QuizScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to save your attempt: $e')),
+          SnackBar(content: Text('${l10n.failedToSaveAttempt}: $e')),
         );
       }
     }
@@ -120,6 +118,8 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     if (_isLoading) {
       return Scaffold(
         appBar: AppBar(),
@@ -130,7 +130,7 @@ class _QuizScreenState extends State<QuizScreen> {
     if (_quiz == null) {
       return Scaffold(
         appBar: AppBar(),
-        body: const Center(child: Text('Quiz not found.')),
+        body: Center(child: Text(l10n.quizNotFound)),
       );
     }
 
@@ -146,7 +146,7 @@ class _QuizScreenState extends State<QuizScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'Question ${_currentQuestionIndex + 1}/${_quiz!.questions.length}',
+              '${l10n.question('${_currentQuestionIndex + 1}')} ${l10n.totalQuestions('${_quiz!.questions.length}')}',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
@@ -173,7 +173,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   _selectedAnswers[_currentQuestionIndex] == null
                       ? null
                       : (isLastQuestion ? _submitQuiz : _nextQuestion),
-              child: Text(isLastQuestion ? 'Submit Quiz' : 'Next Question'),
+              child: Text(isLastQuestion ? l10n.submitQuiz : l10n.nextQuestion),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),

@@ -84,6 +84,22 @@ class QuizService {
     }
   }
   // Add these two functions inside the QuizService class in lib/services/quiz_service.dart
+  // Add this function inside the QuizService class
+
+  /// Retrieves a live stream of quiz attempts for a specific user.
+  Stream<List<QuizAttempt>> getAttemptsForUser(String userId) {
+    return _firestore
+        .collection('quiz_attempts')
+        .where('userId', isEqualTo: userId)
+        .orderBy('attemptedAt', descending: true)
+        .snapshots()
+        .map(
+          (snapshot) =>
+              snapshot.docs
+                  .map((doc) => QuizAttempt.fromFirestore(doc))
+                  .toList(),
+        );
+  }
 
   /// Adds a Question document to the sub-collection of a specific Quiz.
   Future<void> addQuestionToQuiz(String quizId, Question question) async {

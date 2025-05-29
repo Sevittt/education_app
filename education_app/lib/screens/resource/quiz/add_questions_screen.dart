@@ -1,8 +1,7 @@
-// lib/screens/resource/quiz/add_questions_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../models/question.dart';
 import '../../../services/quiz_service.dart';
@@ -23,7 +22,10 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
     (_) => TextEditingController(),
   );
   QuestionType _selectedQuestionType = QuestionType.multipleChoice;
-  String? _correctAnswer;
+
+  int? _correctAnswerIndex;
+  String? _trueFalseCorrectAnswer;
+
   bool _isLoading = false;
 
   @override
@@ -36,11 +38,15 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
   }
 
   Future<void> _addQuestion() async {
+    final l10n = AppLocalizations.of(context)!;
     if (_formKey.currentState!.validate()) {
-      if (_correctAnswer == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please select a correct answer.')),
-        );
+      if ((_selectedQuestionType == QuestionType.multipleChoice &&
+              _correctAnswerIndex == null) ||
+          (_selectedQuestionType == QuestionType.trueFalse &&
+              _trueFalseCorrectAnswer == null)) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.pleaseSelectCorrectAnswer)));
         return;
       }
 
@@ -48,57 +54,68 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
         _isLoading = true;
       });
 
+      String correctAnswer;
+      if (_selectedQuestionType == QuestionType.multipleChoice) {
+        correctAnswer = _optionControllers[_correctAnswerIndex!].text;
+      } else {
+        correctAnswer = _trueFalseCorrectAnswer!;
+      }
+
       final newQuestion = Question(
-        id: const Uuid().v4(), // Generate a unique ID for the question
+        id: const Uuid().v4(),
         questionText: _questionController.text,
         questionType: _selectedQuestionType,
         options:
             _selectedQuestionType == QuestionType.multipleChoice
                 ? _optionControllers.map((c) => c.text).toList()
                 : ['True', 'False'],
-        correctAnswer: _correctAnswer!,
+        correctAnswer: correctAnswer,
       );
 
       try {
         final quizService = Provider.of<QuizService>(context, listen: false);
         await quizService.addQuestionToQuiz(widget.quizId, newQuestion);
 
-        // Clear the form for the next question
         _formKey.currentState!.reset();
         _questionController.clear();
         for (var controller in _optionControllers) {
           controller.clear();
         }
         setState(() {
-          _correctAnswer = null;
+          _correctAnswerIndex = null;
+          _trueFalseCorrectAnswer = null;
         });
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Question added successfully!')),
-        );
-      } catch (e) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Failed to add question: $e')));
+        ).showSnackBar(SnackBar(content: Text(l10n.questionAddedSuccessfully)));
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('${l10n.failedToAddQuestion}: $e')),
+        );
       } finally {
-        setState(() {
-          _isLoading = false;
-        });
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+        }
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Questions'),
+        title: Text(l10n.addQuestions),
         actions: [
           TextButton(
             onPressed:
                 () => Navigator.of(context).popUntil((route) => route.isFirst),
             child: Text(
-              'FINISH',
+              l10n.finish,
               style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
             ),
           ),
@@ -106,31 +123,29 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
       ),
       body: Column(
         children: [
-          // Part 1: The form for adding a new question
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: _buildQuestionForm(),
+            child: _buildQuestionForm(l10n),
           ),
-          const Divider(height: 1),
-          // Part 2: The list of already added questions
-          Expanded(child: _buildQuestionsList()),
+          const Divider(height: 1, thickness: 1),
+          Expanded(child: _buildQuestionsList(l10n)),
         ],
       ),
     );
   }
 
-  // The form for creating a new question
-  Widget _buildQuestionForm() {
+  Widget _buildQuestionForm(AppLocalizations l10n) {
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             TextFormField(
               controller: _questionController,
-              decoration: const InputDecoration(labelText: 'Question Text'),
-              validator: (v) => v!.isEmpty ? 'Please enter a question' : null,
+              decoration: InputDecoration(labelText: l10n.questionText),
+              validator: (v) => v!.isEmpty ? l10n.pleaseEnterAQuestion : null,
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<QuestionType>(
@@ -142,8 +157,8 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
                           value: type,
                           child: Text(
                             type == QuestionType.multipleChoice
-                                ? 'Multiple Choice'
-                                : 'True/False',
+                                ? l10n.multipleChoice
+                                : l10n.trueFalse,
                           ),
                         ),
                       )
@@ -151,14 +166,15 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
               onChanged: (type) {
                 setState(() {
                   _selectedQuestionType = type!;
-                  _correctAnswer = null; // Reset correct answer on type change
+                  _correctAnswerIndex = null;
+                  _trueFalseCorrectAnswer = null;
                 });
               },
-              decoration: const InputDecoration(labelText: 'Question Type'),
+              decoration: InputDecoration(labelText: l10n.questionType),
             ),
             const SizedBox(height: 16),
             if (_selectedQuestionType == QuestionType.multipleChoice)
-              ..._buildMultipleChoiceOptions(),
+              ..._buildMultipleChoiceOptions(l10n),
             if (_selectedQuestionType == QuestionType.trueFalse)
               ..._buildTrueFalseOptions(),
             const SizedBox(height: 16),
@@ -166,7 +182,7 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
                 ? const Center(child: CircularProgressIndicator())
                 : ElevatedButton(
                   onPressed: _addQuestion,
-                  child: const Text('Add Question'),
+                  child: Text(l10n.addQuestion),
                 ),
           ],
         ),
@@ -174,29 +190,26 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
     );
   }
 
-  // Generates the fields for multiple choice answers
-  List<Widget> _buildMultipleChoiceOptions() {
+  List<Widget> _buildMultipleChoiceOptions(AppLocalizations l10n) {
     return List.generate(4, (index) {
       return Row(
         children: [
-          Radio<String>(
-            value: _optionControllers[index].text,
-            groupValue: _correctAnswer,
+          Radio<int>(
+            value: index,
+            groupValue: _correctAnswerIndex,
             onChanged: (value) {
               setState(() {
-                _correctAnswer = value;
+                _correctAnswerIndex = value;
               });
             },
           ),
           Expanded(
             child: TextFormField(
               controller: _optionControllers[index],
-              decoration: InputDecoration(labelText: 'Option ${index + 1}'),
-              validator: (v) => v!.isEmpty ? 'Please enter an option' : null,
-              onChanged: (text) {
-                // Update radio value if the text changes
-                setState(() {});
-              },
+              decoration: InputDecoration(
+                labelText: l10n.option('${index + 1}'),
+              ),
+              validator: (v) => v!.isEmpty ? l10n.pleaseEnterAnOption : null,
             ),
           ),
         ],
@@ -204,26 +217,24 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
     });
   }
 
-  // Generates the fields for true/false answers
   List<Widget> _buildTrueFalseOptions() {
     return [
       RadioListTile<String>(
         title: const Text('True'),
         value: 'True',
-        groupValue: _correctAnswer,
-        onChanged: (value) => setState(() => _correctAnswer = value),
+        groupValue: _trueFalseCorrectAnswer,
+        onChanged: (value) => setState(() => _trueFalseCorrectAnswer = value),
       ),
       RadioListTile<String>(
         title: const Text('False'),
         value: 'False',
-        groupValue: _correctAnswer,
-        onChanged: (value) => setState(() => _correctAnswer = value),
+        groupValue: _trueFalseCorrectAnswer,
+        onChanged: (value) => setState(() => _trueFalseCorrectAnswer = value),
       ),
     ];
   }
 
-  // Builds the list of questions already added to this quiz
-  Widget _buildQuestionsList() {
+  Widget _buildQuestionsList(AppLocalizations l10n) {
     final quizService = Provider.of<QuizService>(context, listen: false);
     return StreamBuilder<List<Question>>(
       stream: quizService.getQuestionsForQuiz(widget.quizId),
@@ -232,7 +243,7 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
           return const Center(child: CircularProgressIndicator());
         }
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No questions added yet.'));
+          return Center(child: Text(l10n.noQuestionsAddedYet));
         }
         final questions = snapshot.data!;
         return ListView.builder(
@@ -242,7 +253,9 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
             return ListTile(
               leading: CircleAvatar(child: Text('${index + 1}')),
               title: Text(question.questionText),
-              subtitle: Text(question.correctAnswer),
+              subtitle: Text(
+                "${l10n.correctAnswer}: ${question.correctAnswer}",
+              ),
             );
           },
         );

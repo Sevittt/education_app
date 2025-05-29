@@ -1,5 +1,0 @@
-arb-dir: lib/l10n # Directory where your .arb files will be
-template-arb-file: app_en.arb # The template file (usually English)
-output-localization-file: app_localizations.dart # Name of the generated Dart file
-# Optional: if you want the generated class to be nullable
-# nullable-getter: false
