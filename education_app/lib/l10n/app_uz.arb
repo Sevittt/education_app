@@ -136,5 +136,28 @@
     "noQuizAttempts": "Siz hali hech qanday viktorinada qatnashmadingiz.",
     "score": "Bal",
     "role": "Rol",
-    "loading": "Yuklanmoqda..."
+    "loading": "Yuklanmoqda...",
+
+    "relatedQuizzesTitle": "Tegishli testlar",
+    "noQuizzesAvailable": "Bu resurs uchun hozircha hech qanday test mavjud emas.",
+    "errorLoadingQuizzes": "Viktorinalarni yuklashda xatolik",
+    "invalidUrlFormat": "URL formati noto'g'ri: {url}",
+    "couldNotLaunchUrl": "{url}-ni ishga tushirib bo'lmadi",
+    "errorLaunchingUrl": "URLni ishga tushirishda xatolik yuz berdi: {error}",
+
+    "createResourceValidationMinLength": "{fieldName} kamida {length} belgidan iborat bo'lishi kerak",
+    "createResourceValidationMaxLength": "{fieldName} {length} belgidan oshmasligi kerak",
+    "titleMinLength": "Sarlavha kamida 5 ta belgidan iborat bo'lishi kerak",
+    "titleMaxLength": "Sarlavha 100 belgidan oshmasligi kerak",
+
+    "createTopicScreenTitle": "Yangi muhokamani boshlash",
+    "createTopicTitleLabel": "Mavzu nomi",
+    "createTopicContentLabel": "Muhokama mazmuni",
+    "createTopicButtonText": "Muhokama mavzusini yaratish",
+    "mustBeLoggedInToCreateTopic": "Mavzu yaratish uchun tizimga kirgan bo'lishingiz kerak.",
+    "topicCreatedSuccess": "Mavzu muvaffaqiyatli yaratildi!",
+    "failedToCreateTopic": "Mavzu yaratib bo'lmadi: {xato}",
+    "createTopicValidationEmpty": "{fieldName} bo'sh bo'lishi mumkin emas.",
+    "createTopicValidationMinLength": "{fieldName} kamida {length} belgidan iborat bo'lishi kerak.",
+    "createTopicValidationMaxLength": "{fieldName} {length} belgidan oshmasligi kerak."
 }

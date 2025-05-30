@@ -2,10 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'resource_detail_screen.dart';
 import '../../models/resource.dart';
 import '../../services/resource_service.dart';
-import 'resource_detail_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ResourcesScreen extends StatefulWidget {
@@ -66,6 +65,9 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
         iconData = Icons.help_outline;
         iconColor = Colors.grey.shade700;
         break;
+      // case ResourceType.book:
+      //   // TODO: Handle this case.
+      //   throw UnimplementedError();
     }
 
     return Container(

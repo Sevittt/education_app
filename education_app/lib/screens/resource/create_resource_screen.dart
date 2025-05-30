@@ -1,10 +1,10 @@
-// lib/screens/create_resource_screen.dart
+// lib/screens/resource/create_resource_screen.dart
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart'; // If you need it for user ID for author
-import '../../models/resource.dart'; // Your Resource model
-import '../../models/auth_notifier.dart'; // To get current user for author field
-import '../../services/resource_service.dart'; // Your ResourceService
+import 'package:provider/provider.dart';
+import '../../models/resource.dart';
+import '../../models/auth_notifier.dart';
+import '../../services/resource_service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateResourceScreen extends StatefulWidget {
@@ -19,21 +19,19 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _urlController = TextEditingController();
-  // Author will be pre-filled from the logged-in teacher
-  String _authorName = '';
+  String _authorName = ''; // This will be pre-filled
 
   ResourceType _selectedResourceType = ResourceType.article; // Default type
 
   bool _isLoading = false;
-  final ResourceService _resourceService = ResourceService();
+  // Use Provider for ResourceService if consistently used, or instantiate as needed
+  // final ResourceService _resourceService = ResourceService(); // Or Provider.of
 
   @override
   void initState() {
     super.initState();
-    // Get the current user's name to pre-fill the author field
-    // Ensure AuthNotifier is listened to if you want this to update dynamically,
-    // but for initState, listen: false is fine if it's already populated.
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+    // Use appUser's name if available, otherwise fallback to a default or previously set _authorName
     _authorName = authNotifier.appUser?.name ?? 'Unknown Teacher';
   }
 
@@ -47,7 +45,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
 
   Future<void> _saveResource() async {
     if (!_formKey.currentState!.validate()) {
-      return; // If form is not valid, do nothing
+      return;
     }
 
     setState(() {
@@ -55,13 +53,23 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
     });
 
     final l10n = AppLocalizations.of(context);
+    final resourceService = Provider.of<ResourceService>(
+      context,
+      listen: false,
+    ); // Get service via Provider
+    final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+    final String currentUserId =
+        authNotifier.currentUser?.uid ?? 'unknown_user_id';
+    final String currentUserName =
+        _authorName; // Already set in initState from appUser
 
     try {
       final newResource = Resource(
-        id: '', // Firestore will generate an ID when using .add()
+        id: '', // Firestore will generate an ID
         title: _titleController.text.trim(),
         description: _descriptionController.text.trim(),
-        author: _authorName, // Use the logged-in teacher's name
+        author: currentUserName,
+        authorId: currentUserId, // Make sure authorId is populated
         type: _selectedResourceType,
         url:
             _urlController.text.trim().isEmpty
@@ -70,8 +78,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
         createdAt: DateTime.now(),
       );
 
-      // Use the addResource method from your service
-      await _resourceService.addResource(newResource);
+      await resourceService.addResource(newResource);
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -82,9 +89,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
             backgroundColor: Colors.green,
           ),
         );
-        Navigator.of(
-          context,
-        ).pop(newResource); // Pop and return the new resource
+        Navigator.of(context).pop(newResource);
       }
     } catch (e) {
       if (mounted) {
@@ -137,9 +142,8 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
         child: Form(
           key: _formKey,
           child: ListView(
-            // Use ListView for scrollability if form gets long
             children: <Widget>[
-              // Title Field
+              // Title Field - Enhanced Validation
               TextFormField(
                 controller: _titleController,
                 decoration: InputDecoration(
@@ -148,18 +152,33 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
                   prefixIcon: const Icon(Icons.title),
                 ),
                 validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
+                  final trimmedValue = value?.trim();
+                  if (trimmedValue == null || trimmedValue.isEmpty) {
                     return l10n?.createResourceValidationEmpty(
                           l10n.createResourceTitleLabel,
                         ) ??
                         'Please enter a title';
+                  }
+                  if (trimmedValue.length < 5) {
+                    return l10n?.createResourceValidationMinLength(
+                          l10n.createResourceTitleLabel,
+                          5,
+                        ) ??
+                        'Title must be at least 5 characters long';
+                  }
+                  if (trimmedValue.length > 100) {
+                    return l10n?.createResourceValidationMaxLength(
+                          l10n.createResourceTitleLabel,
+                          100,
+                        ) ??
+                        'Title cannot exceed 100 characters';
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 16.0),
 
-              // Description Field
+              // Description Field - Enhanced Validation
               TextFormField(
                 controller: _descriptionController,
                 decoration: InputDecoration(
@@ -170,11 +189,27 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
                 ),
                 maxLines: 3,
                 validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
+                  final trimmedValue = value?.trim();
+                  if (trimmedValue == null || trimmedValue.isEmpty) {
                     return l10n?.createResourceValidationEmpty(
                           l10n.createResourceDescriptionLabel,
                         ) ??
                         'Please enter a description';
+                  }
+                  if (trimmedValue.length < 10) {
+                    return l10n?.createResourceValidationMinLength(
+                          l10n.createResourceDescriptionLabel,
+                          10,
+                        ) ??
+                        'Description must be at least 10 characters long';
+                  }
+                  if (trimmedValue.length > 500) {
+                    // Example max length
+                    return l10n?.createResourceValidationMaxLength(
+                          l10n.createResourceDescriptionLabel,
+                          500,
+                        ) ??
+                        'Description cannot exceed 500 characters';
                   }
                   return null;
                 },
@@ -206,7 +241,6 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
                       return DropdownMenuItem<ResourceType>(
                         value: type,
                         child: Text(
-                          // Capitalize first letter
                           type.name[0].toUpperCase() + type.name.substring(1),
                         ),
                       );
@@ -242,22 +276,36 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
                 keyboardType: TextInputType.url,
                 validator: (value) {
                   if (value != null && value.isNotEmpty) {
-                    final uri = Uri.tryParse(value);
+                    final trimmedValue = value.trim();
+                    final uri = Uri.tryParse(trimmedValue);
                     if (uri == null ||
-                        (!uri.isScheme('HTTPS') && !uri.isScheme('HTTP'))) {
+                        (!uri.isScheme('https') && !uri.isScheme('HTTP'))) {
                       return l10n?.createResourceValidationInvalidUrl ??
-                          'Please enter a valid URL';
+                          'Please enter a valid URL (starting with http or https)';
                     }
+                    // Optional: More robust URL validation if needed using a regex or a package
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 24.0),
-              // Save button is now in AppBar
             ],
           ),
         ),
       ),
     );
   }
+}
+
+// Add new localization keys to your AppLocalizations extension/ARB files
+// Example (add to your existing extension or create one)
+extension AppLocalizationsValidationMessages on AppLocalizations? {
+  String createResourceValidationMinLength(String fieldName, int length) =>
+      this?.createResourceValidationMinLength(fieldName, length) ??
+      '$fieldName must be at least $length characters long';
+  String createResourceValidationMaxLength(String fieldName, int length) =>
+      this?.createResourceValidationMaxLength(fieldName, length) ??
+      '$fieldName cannot exceed $length characters';
+  // Ensure createResourceValidationEmpty, createResourceValidationSelect, createResourceValidationInvalidUrl
+  // are also defined in your .arb files and the extension if you use them.
 }

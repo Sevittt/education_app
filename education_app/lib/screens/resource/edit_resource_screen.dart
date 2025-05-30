@@ -1,17 +1,21 @@
-// lib/screens/edit_resource_screen.dart
+// lib/screens/resource/edit_resource_screen.dart
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // Import provider
 import '../../models/resource.dart';
 import '../../services/resource_service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// Import AuthNotifier if needed for author details, though typically author doesn't change on edit
+// import '../../models/auth_notifier.dart';
 
 class EditResourceScreen extends StatefulWidget {
-  final Resource resourceToEdit; // The resource to be edited
+  final Resource resourceToEdit;
 
   const EditResourceScreen({
     super.key,
     required this.resourceToEdit,
-    required Resource resource,
+    // The 'resource' parameter was redundant as resourceToEdit serves the purpose.
+    // If it was intended for something else, clarify. For now, assuming it's not needed.
   });
 
   @override
@@ -23,17 +27,19 @@ class _EditResourceScreenState extends State<EditResourceScreen> {
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
   late TextEditingController _urlController;
-  late String _authorName; // Author might be editable by admin, or fixed
+  late String
+  _authorName; // Author is usually not changed during edit by the editor
+  late String _authorId; // Author ID also typically doesn't change
   late ResourceType _selectedResourceType;
+  late DateTime _createdAt; // Preserve original creation date
 
   bool _isLoading = false;
-  final ResourceService _resourceService = ResourceService();
+  // final ResourceService _resourceService = ResourceService(); // Use Provider
 
   @override
   void initState() {
     super.initState();
 
-    // Pre-fill the form fields with the existing resource data
     _titleController = TextEditingController(text: widget.resourceToEdit.title);
     _descriptionController = TextEditingController(
       text: widget.resourceToEdit.description,
@@ -42,16 +48,13 @@ class _EditResourceScreenState extends State<EditResourceScreen> {
       text: widget.resourceToEdit.url ?? '',
     );
     _selectedResourceType = widget.resourceToEdit.type;
-    _authorName =
+    _authorName = widget.resourceToEdit.author;
+    _authorId =
         widget
             .resourceToEdit
-            .author; // Or fetch current user if author can change
-
-    // Example: If you want the author to be the current editor if they are a teacher
-    // final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    // if (authNotifier.appUser?.role == UserRole.teacher || authNotifier.appUser?.role == UserRole.admin) {
-    //   _authorName = authNotifier.appUser?.name ?? widget.resourceToEdit.author;
-    // }
+            .authorId; // Ensure authorId is part of Resource model
+    _createdAt =
+        widget.resourceToEdit.createdAt; // Preserve original creation date
   }
 
   @override
@@ -72,25 +75,28 @@ class _EditResourceScreenState extends State<EditResourceScreen> {
     });
 
     final l10n = AppLocalizations.of(context);
+    final resourceService = Provider.of<ResourceService>(
+      context,
+      listen: false,
+    ); // Get service via Provider
 
     try {
-      // Create an updated Resource object
-      // Important: Keep the original ID and createdAt timestamp
       final updatedResource = Resource(
         id: widget.resourceToEdit.id, // Keep original ID
         title: _titleController.text.trim(),
         description: _descriptionController.text.trim(),
-        author: _authorName, // Decide if author should be updatable
+        author:
+            _authorName, // Author name usually doesn't change on edit by others
+        authorId: _authorId, // Author ID MUST remain the same for ownership
         type: _selectedResourceType,
         url:
             _urlController.text.trim().isEmpty
                 ? null
                 : _urlController.text.trim(),
-        createdAt:
-            widget.resourceToEdit.createdAt, // Keep original creation date
+        createdAt: _createdAt, // Keep original creation date
       );
 
-      await _resourceService.updateResource(updatedResource);
+      await resourceService.updateResource(updatedResource);
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -101,9 +107,7 @@ class _EditResourceScreenState extends State<EditResourceScreen> {
             backgroundColor: Colors.green,
           ),
         );
-        Navigator.of(
-          context,
-        ).pop(updatedResource); // Pop and return the updated resource
+        Navigator.of(context).pop(updatedResource);
       }
     } catch (e) {
       if (mounted) {
@@ -157,63 +161,101 @@ class _EditResourceScreenState extends State<EditResourceScreen> {
           key: _formKey,
           child: ListView(
             children: <Widget>[
+              // Title Field - Enhanced Validation
               TextFormField(
                 controller: _titleController,
                 decoration: InputDecoration(
-                  labelText: l10n?.createResourceTitleLabel ?? 'Title',
+                  labelText:
+                      l10n?.createResourceTitleLabel ??
+                      'Title', // Reusing create screen labels
                   border: const OutlineInputBorder(),
                   prefixIcon: const Icon(Icons.title),
                 ),
                 validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
+                  final trimmedValue = value?.trim();
+                  if (trimmedValue == null || trimmedValue.isEmpty) {
                     return l10n?.createResourceValidationEmpty(
                           l10n.createResourceTitleLabel,
                         ) ??
                         'Please enter a title';
                   }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16.0),
-
-              TextFormField(
-                controller: _descriptionController,
-                decoration: InputDecoration(
-                  labelText:
-                      l10n?.createResourceDescriptionLabel ?? 'Description',
-                  border: const OutlineInputBorder(),
-                  prefixIcon: const Icon(Icons.description),
-                ),
-                maxLines: 3,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return l10n?.createResourceValidationEmpty(
-                          l10n.createResourceDescriptionLabel,
+                  if (trimmedValue.length < 5) {
+                    return l10n?.createResourceValidationMinLength(
+                          l10n.createResourceTitleLabel,
+                          5,
                         ) ??
-                        'Please enter a description';
+                        'Title must be at least 5 characters long';
+                  }
+                  if (trimmedValue.length > 100) {
+                    return l10n?.createResourceValidationMaxLength(
+                          l10n.createResourceTitleLabel,
+                          100,
+                        ) ??
+                        'Title cannot exceed 100 characters';
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 16.0),
 
+              // Description Field - Enhanced Validation
               TextFormField(
-                // For simplicity, author is not directly editable here,
-                // but you could make it so, or update it based on the current editor.
-                initialValue: _authorName,
+                controller: _descriptionController,
                 decoration: InputDecoration(
-                  labelText: l10n?.createResourceAuthorLabel ?? 'Author',
+                  labelText:
+                      l10n?.createResourceDescriptionLabel ??
+                      'Description', // Reusing
                   border: const OutlineInputBorder(),
-                  prefixIcon: const Icon(Icons.person_outline),
+                  prefixIcon: const Icon(Icons.description),
                 ),
-                readOnly: true, // Or make it editable if needed
+                maxLines: 3,
+                validator: (value) {
+                  final trimmedValue = value?.trim();
+                  if (trimmedValue == null || trimmedValue.isEmpty) {
+                    return l10n?.createResourceValidationEmpty(
+                          l10n.createResourceDescriptionLabel,
+                        ) ??
+                        'Please enter a description';
+                  }
+                  if (trimmedValue.length < 10) {
+                    return l10n?.createResourceValidationMinLength(
+                          l10n.createResourceDescriptionLabel,
+                          10,
+                        ) ??
+                        'Description must be at least 10 characters long';
+                  }
+                  if (trimmedValue.length > 500) {
+                    return l10n?.createResourceValidationMaxLength(
+                          l10n.createResourceDescriptionLabel,
+                          500,
+                        ) ??
+                        'Description cannot exceed 500 characters';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 16.0),
 
+              // Author Field (Read-only, pre-filled from original resource)
+              TextFormField(
+                initialValue: _authorName,
+                decoration: InputDecoration(
+                  labelText:
+                      l10n?.createResourceAuthorLabel ?? 'Author', // Reusing
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.person_outline),
+                ),
+                readOnly: true,
+              ),
+              const SizedBox(height: 16.0),
+
+              // Resource Type Dropdown
               DropdownButtonFormField<ResourceType>(
                 value: _selectedResourceType,
                 decoration: InputDecoration(
-                  labelText: l10n?.createResourceTypeLabel ?? 'Resource Type',
+                  labelText:
+                      l10n?.createResourceTypeLabel ??
+                      'Resource Type', // Reusing
                   border: const OutlineInputBorder(),
                   prefixIcon: const Icon(Icons.category_outlined),
                 ),
@@ -234,6 +276,7 @@ class _EditResourceScreenState extends State<EditResourceScreen> {
                   }
                 },
                 validator: (value) {
+                  // Still important to validate, even if pre-filled
                   if (value == null) {
                     return l10n?.createResourceValidationSelect(
                           l10n.createResourceTypeLabel,
@@ -245,10 +288,13 @@ class _EditResourceScreenState extends State<EditResourceScreen> {
               ),
               const SizedBox(height: 16.0),
 
+              // URL Field (Optional) - Enhanced Validation
               TextFormField(
                 controller: _urlController,
                 decoration: InputDecoration(
-                  labelText: l10n?.createResourceUrlLabel ?? 'URL (Optional)',
+                  labelText:
+                      l10n?.createResourceUrlLabel ??
+                      'URL (Optional)', // Reusing
                   hintText: 'https://example.com/resource',
                   border: const OutlineInputBorder(),
                   prefixIcon: const Icon(Icons.link),
@@ -256,11 +302,12 @@ class _EditResourceScreenState extends State<EditResourceScreen> {
                 keyboardType: TextInputType.url,
                 validator: (value) {
                   if (value != null && value.isNotEmpty) {
-                    final uri = Uri.tryParse(value);
+                    final trimmedValue = value.trim();
+                    final uri = Uri.tryParse(trimmedValue);
                     if (uri == null ||
                         (!uri.isScheme('HTTPS') && !uri.isScheme('HTTP'))) {
                       return l10n?.createResourceValidationInvalidUrl ??
-                          'Please enter a valid URL';
+                          'Please enter a valid URL (starting with http or https)';
                     }
                   }
                   return null;
@@ -274,3 +321,13 @@ class _EditResourceScreenState extends State<EditResourceScreen> {
     );
   }
 }
+
+// Ensure your AppLocalizations extension (or however you manage them) has these keys
+// from CreateResourceScreen, as we are reusing them.
+// Example (add to your existing extension or create one if these are not globally available through l10n directly)
+// extension AppLocalizationsEditResourceMessages on AppLocalizations? {
+//   String get editResourceScreenTitle => this?.editResourceScreenTitle ?? 'Edit Resource';
+//   String get resourceUpdatedSuccess => this?.resourceUpdatedSuccess ?? 'Resource updated successfully!';
+//   String resourceUpdatedError(String error) => this?.resourceUpdatedError(error) ?? 'Error updating resource: $error';
+//   // Add other keys like saveButtonText if they are specific or not covered by CreateResourceScreen's l10n keys.
+// }

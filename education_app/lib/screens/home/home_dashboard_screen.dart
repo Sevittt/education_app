@@ -1,11 +1,12 @@
-// lib/screens/home_dashboard_screen.dart
+// lib/screens/home/home_dashboard_screen.dart
 
+// ... other imports ...
+import 'package:education_app/data/dummy_data.dart';
+// import 'package:education_app/screens/resource/resource_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../data/dummy_data.dart'; // Import dummyUser and dummyNews
-import '../../models/users.dart'; // User model is used by dummyUser
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // For localization
 
-// Define a typedef for the callback function
 typedef OnTabSelected = void Function(int index);
 
 class HomeDashboardScreen extends StatelessWidget {
@@ -13,12 +14,56 @@ class HomeDashboardScreen extends StatelessWidget {
 
   const HomeDashboardScreen({super.key, required this.onTabSelected});
 
-  Future<void> _launchUrl(String url, BuildContext context) async {
-    final Uri uri = Uri.parse(url);
-    if (!await launchUrl(uri)) {
+  // Updated _launchUrl method
+  Future<void> _launchUrl(BuildContext context, String urlString) async {
+    final l10n = AppLocalizations.of(context); // Get l10n instance
+
+    if (urlString.isEmpty) return;
+
+    Uri? uri = Uri.tryParse(urlString);
+
+    if (uri == null) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Could not open the link: $url')),
+          SnackBar(
+            // Use the extension method for safety, or ensure l10n is not null
+            content: Text(
+              l10n?.invalidUrlFormat(urlString) ??
+                  'Invalid URL format: $urlString',
+            ),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
+      return;
+    }
+
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                l10n?.couldNotLaunchUrl(urlString) ??
+                    'Could not launch $urlString',
+              ),
+              backgroundColor: Theme.of(context).colorScheme.error,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              l10n?.errorLaunchingUrl(e.toString()) ??
+                  'Error launching URL: $e',
+            ),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
         );
       }
     }
@@ -26,11 +71,23 @@ class HomeDashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ... (existing build method) ...
+
+    // Inside your ListView.builder for news items:
+    // final newsItem = dummyNews[index]; //
+    // onTap: () {
+    //   _launchUrl(context, newsItem.url); // Pass context here
+    // },
+    // ...
+    // Rest of the HomeDashboardScreen build method and _buildQuickAccessCard
+    // Make sure to adapt the onTap for news items:
+    // onTap: () {
+    //  _launchUrl(context, newsItem.url);
+    // },
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final TextTheme textTheme = theme.textTheme;
-    final User currentUser =
-        dummyUser2; // Using the dummyUser for personalization
+    // Using the dummyUser for personalization
 
     return SingleChildScrollView(
       child: Padding(
@@ -39,57 +96,7 @@ class HomeDashboardScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // --- Personalized Welcome Section ---
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 28,
-                  backgroundColor:
-                      colorScheme
-                          .surfaceContainerHighest, // A subtle background
-                  backgroundImage:
-                      currentUser.profilePictureUrl != null &&
-                              currentUser.profilePictureUrl!.startsWith(
-                                'assets/',
-                              )
-                          ? AssetImage(currentUser.profilePictureUrl!)
-                          : null, // NetworkImage can be added here if URL is not an asset
-                  child:
-                      currentUser.profilePictureUrl == null ||
-                              !currentUser.profilePictureUrl!.startsWith(
-                                'assets/',
-                              )
-                          ? Icon(
-                            Icons.person,
-                            size: 28,
-                            color: colorScheme.onSurfaceVariant,
-                          )
-                          : null,
-                ),
-                const SizedBox(width: 12.0),
-                Expanded(
-                  // Use Expanded to prevent overflow if name is long
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Welcome Back,',
-                        style: textTheme.titleMedium?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                      Text(
-                        currentUser.name, // Display user's name
-                        style: textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: colorScheme.primary,
-                        ),
-                        overflow: TextOverflow.ellipsis, // Handle long names
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            // ... (Welcome section code from your file) ...
             const SizedBox(height: 28.0),
 
             // --- Quick Access Section ---
@@ -101,12 +108,10 @@ class HomeDashboardScreen extends StatelessWidget {
             ),
             const SizedBox(height: 12.0),
             SizedBox(
-              height: 130, // Slightly adjusted height
+              height: 130,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 4.0,
-                ), // Add some vertical padding for card shadow
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
                 children: [
                   _buildQuickAccessCard(
                     context: context,
@@ -128,7 +133,7 @@ class HomeDashboardScreen extends StatelessWidget {
                   ),
                   _buildQuickAccessCard(
                     context: context,
-                    icon: Icons.home_outlined, // Consistent outlined icon
+                    icon: Icons.home_outlined,
                     title: 'Overview',
                     onTap: () => onTabSelected(0),
                   ),
@@ -146,19 +151,16 @@ class HomeDashboardScreen extends StatelessWidget {
             ),
             const SizedBox(height: 12.0),
             SizedBox(
-              height: 190, // Increased height for news cards
+              height: 190,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: dummyNews.length,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 4.0,
-                ), // Add some vertical padding for card shadow
+                itemCount: dummyNews.length, //
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
                 itemBuilder: (context, index) {
-                  final newsItem = dummyNews[index];
+                  final newsItem = dummyNews[index]; //
                   return SizedBox(
-                    width: 260, // Slightly adjusted width
+                    width: 260,
                     child: Card(
-                      // Using CardTheme from main.dart for elevation, shape, margin
                       elevation: 3.0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
@@ -169,11 +171,9 @@ class HomeDashboardScreen extends StatelessWidget {
                         top: 4.0,
                       ),
                       child: InkWell(
-                        borderRadius: BorderRadius.circular(
-                          12.0,
-                        ), // Match CardTheme shape
+                        borderRadius: BorderRadius.circular(12.0),
                         onTap: () {
-                          _launchUrl(newsItem.url, context);
+                          _launchUrl(context, newsItem.url); // MODIFIED HERE
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
@@ -181,7 +181,6 @@ class HomeDashboardScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                // Row for icon and title
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Icon(
@@ -195,8 +194,7 @@ class HomeDashboardScreen extends StatelessWidget {
                                       newsItem.title,
                                       style: textTheme.titleMedium?.copyWith(
                                         fontWeight: FontWeight.bold,
-                                        height:
-                                            1.3, // Line height for better readability
+                                        height: 1.3,
                                       ),
                                       maxLines: 3,
                                       overflow: TextOverflow.ellipsis,
@@ -204,7 +202,7 @@ class HomeDashboardScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              const Spacer(), // Pushes source to the bottom
+                              const Spacer(),
                               Text(
                                 'Source: ${newsItem.source}',
                                 style: textTheme.bodySmall?.copyWith(
@@ -240,37 +238,26 @@ class HomeDashboardScreen extends StatelessWidget {
     final TextTheme textTheme = theme.textTheme;
 
     return SizedBox(
-      width: 110, // Adjusted width
+      width: 110,
       child: Card(
-        // Using CardTheme from main.dart
-        // elevation: 2.0,
-        // shape: RoundedRectangleBorder(
-        //   borderRadius: BorderRadius.circular(12.0),
-        // ),
-        // margin: const EdgeInsets.only(right: 12.0, bottom: 4.0, top: 4.0),
         child: InkWell(
-          borderRadius: BorderRadius.circular(12.0), // Match CardTheme shape
+          borderRadius: BorderRadius.circular(12.0),
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.symmetric(
               vertical: 16.0,
               horizontal: 8.0,
-            ), // Adjusted padding
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(
-                  icon,
-                  size: 36,
-                  color: colorScheme.primary,
-                ), // Slightly smaller icon
+                Icon(icon, size: 36, color: colorScheme.primary),
                 const SizedBox(height: 10),
                 Text(
                   title,
                   textAlign: TextAlign.center,
                   style: textTheme.labelLarge?.copyWith(
-                    // Using labelLarge for a slightly bolder look
                     fontWeight: FontWeight.w500,
                   ),
                   maxLines: 2,

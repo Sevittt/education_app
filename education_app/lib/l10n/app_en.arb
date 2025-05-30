@@ -135,5 +135,28 @@
     "noQuizAttempts": "You haven't attempted any quizzes yet.",
     "score": "Score",
     "role": "Role",
-    "loading": "Loading..."
-}
+    "loading": "Loading...",
+
+    "relatedQuizzesTitle": "Related Quizzes",
+    "noQuizzesAvailable": "No quizzes available for this resource yet.",
+    "errorLoadingQuizzes": "Error loading quizzes",
+    "invalidUrlFormat": "Invalid URL format: {url}",
+    "couldNotLaunchUrl": "Could not launch {url}",
+    "errorLaunchingUrl": "Error launching URL: {error}",
+
+    "createResourceValidationMinLength": "{fieldName} must be at least {length} characters long",
+    "createResourceValidationMaxLength": "{fieldName} cannot exceed {length} characters",
+    "titleMinLength": "Title must be at least 5 characters long",
+    "titleMaxLength": "Title cannot exceed 100 characters",
+
+    "createTopicScreenTitle": "Start New Discussion",
+    "createTopicTitleLabel": "Topic Title",
+    "createTopicContentLabel": "Discussion Content",
+    "createTopicButtonText": "Create Discussion Topic",
+    "mustBeLoggedInToCreateTopic": "You must be logged in to create a topic.",
+    "topicCreatedSuccess": "Topic created successfully!",
+    "failedToCreateTopic": "Failed to create topic: {error}",
+    "createTopicValidationEmpty": "{fieldName} cannot be empty.",
+    "createTopicValidationMinLength": "{fieldName} must be at least {length} characters long.",
+    "createTopicValidationMaxLength": "{fieldName} cannot exceed {length} characters."
+    }

@@ -3,110 +3,110 @@
 // Import UserRole and User from where they are centrally defined (lib/models/users.dart)
 import '../models/users.dart'; // Imports User, UserRole, userRoleToString
 
-import '../models/resource.dart';
+// import '../models/resource.dart';
 import '../models/news.dart';
 import '../models/discussion_topic.dart';
 import '../models/comment.dart';
 
-// Create a list of dummy Resource objects
-final List<Resource> dummyResources = [
-  Resource(
-    id: 'r1',
-    title: 'Introduction to Programming with Dart',
-    description:
-        'A beginner-friendly guide covering Dart basics, variables, control flow, and functions. Essential for Flutter development.',
-    author: 'Teach&Learn Team',
-    type: ResourceType.article,
-    url: 'https://dart.dev/language',
-    createdAt: DateTime(2024, 10, 26, 10, 0),
-  ),
-  Resource(
-    id: 'r2',
-    title: 'Building Your First Flutter App: A Video Guide',
-    description:
-        'Step-by-step video tutorial on setting up Flutter, understanding widgets, and creating a simple mobile application from scratch.',
-    author: 'Flutter Educators',
-    type: ResourceType.video,
-    url:
-        'https://www.youtube.com/watch?v=x0uiO23_t9w', // Placeholder Youtube Link
-    createdAt: DateTime(2024, 10, 25, 14, 30),
-  ),
-  Resource(
-    id: 'r3',
-    title: 'Core Web Development Skills: HTML, CSS, JS',
-    description:
-        'An article outlining the fundamental skills needed for front-end web development, focusing on HTML structure, CSS styling, and JavaScript interactivity.',
-    author: 'WebSkills Hub',
-    type: ResourceType.article,
-    createdAt: DateTime(2024, 10, 24, 9, 15),
-    url:
-        'https://developer.mozilla.org/en-US/docs/Learn', // Placeholder MDN Link
-  ),
-  Resource(
-    id: 'r4',
-    title: 'Practical Git and GitHub for Beginners (Code Examples)',
-    description:
-        'A small repository and guide demonstrating common Git commands, branching strategies, and collaborative workflows using GitHub.',
-    author: 'CodeContrib',
-    type: ResourceType.code,
-    url:
-        'https://github.com/git-guides/install-git', // Placeholder GitHub Guide Link
-    createdAt: DateTime(2024, 10, 23, 16, 0),
-  ),
-  Resource(
-    id: 'r5',
-    title: 'Lesson Plan: Teaching Python to High Schoolers',
-    description:
-        'A downloadable lesson plan structure for educators, including activities and project ideas for introducing Python programming concepts to high school students.',
-    author: 'Educator Community',
-    type: ResourceType.lessonPlan,
-    createdAt: DateTime(2024, 10, 22, 11, 0),
-    url:
-        'https://www.example.com/lessonplans/python_highschool.pdf', // Placeholder PDF link
-  ),
-  Resource(
-    id: 'r6',
-    title: 'Understanding Data Structures (Tutorial Series)',
-    description:
-        'A series of tutorials explaining common data structures like arrays, linked lists, stacks, queues, and trees with practical examples.',
-    author: 'CS Fundamentals',
-    type: ResourceType.tutorial,
-    createdAt: DateTime(2024, 10, 21, 13, 0),
-    url:
-        'https://www.geeksforgeeks.org/data-structures/', // Placeholder GeeksForGeeks Link
-  ),
-  Resource(
-    id: 'r7',
-    title: 'Introduction to Object-Oriented Programming (OOP)',
-    description:
-        'A comprehensive article explaining the core concepts of OOP such as classes, objects, inheritance, polymorphism, and encapsulation.',
-    author: 'Programming Concepts Institute',
-    type: ResourceType.article,
-    url: 'https://www.example.com/oop-intro',
-    createdAt: DateTime(2024, 10, 20, 10, 0),
-  ),
-  Resource(
-    id: 'r8',
-    title: 'Flutter State Management: Provider Explained',
-    description:
-        'A video tutorial that dives deep into using the Provider package for state management in Flutter applications. Covers ChangeNotifier, Consumer, and more.',
-    author: 'Flutter Advanced',
-    type: ResourceType.video,
-    url:
-        'https://www.youtube.com/watch?v=d_m5csmrf7I', // Placeholder Youtube Link
-    createdAt: DateTime(2024, 10, 19, 15, 0),
-  ),
-  Resource(
-    id: 'r9',
-    title: 'Responsive UI Design in Flutter',
-    description:
-        'Tutorial on creating adaptive user interfaces in Flutter that look great on different screen sizes and orientations using LayoutBuilder, MediaQuery, and flexible widgets.',
-    author: 'Flutter UI Masters',
-    type: ResourceType.tutorial,
-    url: 'https://docs.flutter.dev/ui/layout/responsive',
-    createdAt: DateTime(2024, 10, 18, 11, 30),
-  ),
-];
+// // Create a list of dummy Resource objects
+// final List<Resource> dummyResources = [
+//   Resource(
+//     id: 'r1',
+//     title: 'Introduction to Programming with Dart',
+//     description:
+//         'A beginner-friendly guide covering Dart basics, variables, control flow, and functions. Essential for Flutter development.',
+//     author: 'Teach&Learn Team',
+//     type: ResourceType.article,
+//     url: 'https://dart.dev/language',
+//     createdAt: DateTime(2024, 10, 26, 10, 0),
+//   ),
+//   Resource(
+//     id: 'r2',
+//     title: 'Building Your First Flutter App: A Video Guide',
+//     description:
+//         'Step-by-step video tutorial on setting up Flutter, understanding widgets, and creating a simple mobile application from scratch.',
+//     author: 'Flutter Educators',
+//     type: ResourceType.video,
+//     url:
+//         'https://www.youtube.com/watch?v=x0uiO23_t9w', // Placeholder Youtube Link
+//     createdAt: DateTime(2024, 10, 25, 14, 30),
+//   ),
+//   Resource(
+//     id: 'r3',
+//     title: 'Core Web Development Skills: HTML, CSS, JS',
+//     description:
+//         'An article outlining the fundamental skills needed for front-end web development, focusing on HTML structure, CSS styling, and JavaScript interactivity.',
+//     author: 'WebSkills Hub',
+//     type: ResourceType.article,
+//     createdAt: DateTime(2024, 10, 24, 9, 15),
+//     url:
+//         'https://developer.mozilla.org/en-US/docs/Learn', // Placeholder MDN Link
+//   ),
+//   Resource(
+//     id: 'r4',
+//     title: 'Practical Git and GitHub for Beginners (Code Examples)',
+//     description:
+//         'A small repository and guide demonstrating common Git commands, branching strategies, and collaborative workflows using GitHub.',
+//     author: 'CodeContrib',
+//     type: ResourceType.code,
+//     url:
+//         'https://github.com/git-guides/install-git', // Placeholder GitHub Guide Link
+//     createdAt: DateTime(2024, 10, 23, 16, 0),
+//   ),
+//   Resource(
+//     id: 'r5',
+//     title: 'Lesson Plan: Teaching Python to High Schoolers',
+//     description:
+//         'A downloadable lesson plan structure for educators, including activities and project ideas for introducing Python programming concepts to high school students.',
+//     author: 'Educator Community',
+//     type: ResourceType.lessonPlan,
+//     createdAt: DateTime(2024, 10, 22, 11, 0),
+//     url:
+//         'https://www.example.com/lessonplans/python_highschool.pdf', // Placeholder PDF link
+//   ),
+//   Resource(
+//     id: 'r6',
+//     title: 'Understanding Data Structures (Tutorial Series)',
+//     description:
+//         'A series of tutorials explaining common data structures like arrays, linked lists, stacks, queues, and trees with practical examples.',
+//     author: 'CS Fundamentals',
+//     type: ResourceType.tutorial,
+//     createdAt: DateTime(2024, 10, 21, 13, 0),
+//     url:
+//         'https://www.geeksforgeeks.org/data-structures/', // Placeholder GeeksForGeeks Link
+//   ),
+//   Resource(
+//     id: 'r7',
+//     title: 'Introduction to Object-Oriented Programming (OOP)',
+//     description:
+//         'A comprehensive article explaining the core concepts of OOP such as classes, objects, inheritance, polymorphism, and encapsulation.',
+//     author: 'Programming Concepts Institute',
+//     type: ResourceType.article,
+//     url: 'https://www.example.com/oop-intro',
+//     createdAt: DateTime(2024, 10, 20, 10, 0),
+//   ),
+//   Resource(
+//     id: 'r8',
+//     title: 'Flutter State Management: Provider Explained',
+//     description:
+//         'A video tutorial that dives deep into using the Provider package for state management in Flutter applications. Covers ChangeNotifier, Consumer, and more.',
+//     author: 'Flutter Advanced',
+//     type: ResourceType.video,
+//     url:
+//         'https://www.youtube.com/watch?v=d_m5csmrf7I', // Placeholder Youtube Link
+//     createdAt: DateTime(2024, 10, 19, 15, 0),
+//   ),
+//   Resource(
+//     id: 'r9',
+//     title: 'Responsive UI Design in Flutter',
+//     description:
+//         'Tutorial on creating adaptive user interfaces in Flutter that look great on different screen sizes and orientations using LayoutBuilder, MediaQuery, and flexible widgets.',
+//     author: 'Flutter UI Masters',
+//     type: ResourceType.tutorial,
+//     url: 'https://docs.flutter.dev/ui/layout/responsive',
+//     createdAt: DateTime(2024, 10, 18, 11, 30),
+//   ),
+// ];
 
 final User dummyUser2 = User(
   id: 'u2',

@@ -135,5 +135,28 @@
     "noQuizAttempts": "Вы еще не проходили ни одной викторины.",
     "score": "Счет",
     "role": "Роль",
-    "loading": "Загрузка..."
+    "loading": "Загрузка...",
+
+    "relatedQuizzesTitle": "Похожие тесты",
+    "noQuizzesAvailable": "Пока нет доступных тестов для этого ресурса",
+    "errorLoadingQuizzes": "Ошибка загрузки тестов",
+    "invalidUrlFormat": "Неверный формат URL: {url}",
+    "couldNotLaunchUrl": "Не удалось запустить {url}",
+    "errorLaunchingUrl": "Ошибка запуска URL: {error}",
+
+    "createResourceValidationMinLength": "{fieldName} должно быть не менее {length} символов в длину",
+    "createResourceValidationMaxLength": "{fieldName} не может превышать {length} символов",
+    "titleMinLength": "Заголовок должен быть не менее 5 символов в длину",
+    "titleMaxLength": "Заголовок не может превышать 100 символов",
+    
+    "createTopicScreenTitle": "Начать новое обсуждение",
+    "createTopicTitleLabel": "Заголовок темы",
+    "createTopicContentLabel": "Содержимое обсуждения",
+    "createTopicButtonText": "Создать тему обсуждения",
+    "mustBeLoggedInToCreateTopic": "Чтобы создать тему, вам необходимо войти в систему.",
+    "topicCreatedSuccess": "Тема создана успешно!",
+    "failedToCreateTopic": "Не удалось создать тему: {error}",
+    "createTopicValidationEmpty": "{fieldName} не может быть пустым.",
+    "createTopicValidationMinLength": "{fieldName} должно быть не менее {length} символов в длину.",
+    "createTopicValidationMaxLength": "{fieldName} не может превышать {length} символов в длину."
 }
