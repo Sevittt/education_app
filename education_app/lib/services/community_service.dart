@@ -27,16 +27,24 @@ class CommunityService {
         .snapshots()
         .map((snapshot) {
           return snapshot.docs.map((doc) {
-            // Assuming your DiscussionTopic.fromMap can handle a Firestore doc
-            return DiscussionTopic.fromMap(
-              doc.id,
-              doc.data() as Map<String, dynamic>,
-            );
+            try {
+              final data = doc.data() as Map<String, dynamic>?;
+              if (data == null) {
+                print(
+                  "Warning: Document data is null for topic ID ${doc.id}. Skipping.",
+                );
+                throw Exception("Document data is null for topic ID ${doc.id}");
+              }
+              return DiscussionTopic.fromMap(doc.id, data);
+            } catch (e) {
+              print("Error mapping discussion topic with ID ${doc.id}: $e");
+              rethrow;
+            }
           }).toList();
         })
         .handleError((error) {
-          // It's good practice to handle potential errors in the stream mapping
-          return []; // Return an empty list or rethrow, depending on desired behavior
+          print("Error in getTopics stream pipeline: $error");
+          throw error;
         });
   }
 

@@ -8,8 +8,7 @@ import '../../models/users.dart'; // Import to use UserRole enum
 class RegistrationScreen extends StatefulWidget {
   final VoidCallback onSwitchToLogin;
 
-  const RegistrationScreen({Key? key, required this.onSwitchToLogin})
-    : super(key: key);
+  const RegistrationScreen({super.key, required this.onSwitchToLogin});
 
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();

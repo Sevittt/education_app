@@ -166,17 +166,17 @@ class _QuizScreenState extends State<QuizScreen> {
                   });
                 },
               );
-            }).toList(),
+            }),
             const Spacer(),
             ElevatedButton(
               onPressed:
                   _selectedAnswers[_currentQuestionIndex] == null
                       ? null
                       : (isLastQuestion ? _submitQuiz : _nextQuestion),
-              child: Text(isLastQuestion ? l10n.submitQuiz : l10n.nextQuestion),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
+              child: Text(isLastQuestion ? l10n.submitQuiz : l10n.nextQuestion),
             ),
           ],
         ),

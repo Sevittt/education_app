@@ -78,7 +78,7 @@ class _EditTopicScreenState extends State<EditTopicScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              l10n?.failedToUpdateTopic(e.toString()) ??
+              l10n?.failedToUpdateTopic(e.toString(), '') ??
                   'Failed to update topic: $e',
             ),
             backgroundColor: Theme.of(context).colorScheme.error,
@@ -252,7 +252,8 @@ extension AppLocalizationsEditTopicMessages on AppLocalizations? {
       this?.editTopicScreenTitle ?? 'Edit Discussion Topic';
   String get topicUpdatedSuccess =>
       this?.topicUpdatedSuccess ?? 'Topic updated successfully!';
-  String failedToUpdateTopic(String error) =>
-      this?.failedToUpdateTopic(error) ?? 'Failed to update topic: $error';
+  String failedToUpdateTopic(String error, String details) =>
+      this?.failedToUpdateTopic(error, details) ??
+      'Failed to update topic: $error';
   // Ensure saveButtonText and other common validation keys are available/reused from other extensions.
 }

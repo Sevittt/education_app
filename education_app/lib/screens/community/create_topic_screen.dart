@@ -200,14 +200,19 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
               const SizedBox(height: 24.0),
               _isLoading
                   ? const Center(child: CircularProgressIndicator())
-                  : ElevatedButton.icon(
-                    icon: const Icon(Icons.post_add),
-                    label: Text(
-                      l10n?.createTopicButtonText ?? 'Create Discussion Topic',
-                    ),
-                    onPressed: _createTopic,
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  : SizedBox(
+                    // Wrap button with SizedBox
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      icon: const Icon(Icons.post_add),
+                      label: Text(
+                        l10n?.createTopicButtonText ??
+                            'Create Discussion Topic',
+                      ),
+                      onPressed: _createTopic,
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      ),
                     ),
                   ),
             ],

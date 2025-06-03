@@ -159,5 +159,22 @@
     "failedToCreateTopic": "Mavzu yaratib bo'lmadi: {xato}",
     "createTopicValidationEmpty": "{fieldName} bo'sh bo'lishi mumkin emas.",
     "createTopicValidationMinLength": "{fieldName} kamida {length} belgidan iborat bo'lishi kerak.",
-    "createTopicValidationMaxLength": "{fieldName} {length} belgidan oshmasligi kerak."
+    "createTopicValidationMaxLength": "{fieldName} {length} belgidan oshmasligi kerak.",
+
+    "errorLoadingData": "Resurslarni yuklashda xatolik yuz berdi. Qayta urinib ko'ring.",
+
+    "failedToUpdateTopic": "Mavzuni yangilashda xatolik yuz berdi: {xato}",
+    "@failedToUpdateTopic": {
+        "description": "Mavzu yangilanmay qolganda xato xabari ko'rsatiladi",
+        "joy egalari": {
+            "xato": {
+                "type": "String",
+                "example": "Tarmoq xatosi"
+            }
+        }
+    },
+    "topicUpdatedSuccess": "Mavzu muvaffaqiyatli yangilandi!",
+
+    "noDiscussionsYet": "Hali muhokamalar yo'q.",
+    "beTheFirstToStartConversation": "Birinchi bo'lib suhbatni boshlang!"
 }

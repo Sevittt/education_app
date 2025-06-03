@@ -4,21 +4,14 @@
 // import 'package:education_app/screens/resource/create_resource_screen.dart';
 
 // Define the ResourceType enum
-enum ResourceType { 
-  article, 
-  video, 
-  code, 
-  lessonPlan, 
-  tutorial, 
-  other 
-}
+enum ResourceType { article, video, code, lessonPlan, tutorial, other }
 
 class Resource {
   final String id;
   final String title;
   final String description;
-  final String author; // Keep for display name
-  final String authorId; // Add this for UID
+  final String author;
+  final String authorId;
   final ResourceType type;
   final String? url;
   final DateTime createdAt;
@@ -28,24 +21,83 @@ class Resource {
     required this.title,
     required this.description,
     required this.author,
-    required this.authorId, // Add to constructor
+    required this.authorId,
     required this.type,
     this.url,
     required this.createdAt,
   });
 
   factory Resource.fromMap(String id, Map<String, dynamic> map) {
+    // Helper function for safe string extraction
+    String _getString(String key, String defaultValue) {
+      var value = map[key];
+      if (value == null) {
+        print(
+          "Warning: Field '$key' is null for resource ID $id. Using default: '$defaultValue'",
+        );
+        return defaultValue;
+      }
+      if (value is String) {
+        return value;
+      }
+      print(
+        "Warning: Field '$key' is not a String for resource ID $id. Converting to string.",
+      );
+      return value.toString();
+    }
+
+    // Validate authorId (required field)
+    final authorIdValue = map['authorId'] as String?;
+    if (authorIdValue == null) {
+      throw FormatException(
+        "Missing required field 'authorId' for resource ID $id",
+      );
+    }
+
+    // Handle resource type with fallback
+    final typeString = _getString('type', 'other');
+    ResourceType resourceType;
+    try {
+      resourceType = ResourceType.values.firstWhere(
+        (e) =>
+            e.toString().split('.').last.toLowerCase() ==
+            typeString.toLowerCase(),
+      );
+    } catch (e) {
+      print(
+        "Warning: Invalid resource type '$typeString' for ID $id. Using 'other'",
+      );
+      resourceType = ResourceType.other;
+    }
+
+    // Handle createdAt with validation
+    DateTime createdAtDate;
+    try {
+      final createdAtString = map['createdAt'] as String?;
+      if (createdAtString == null) {
+        print(
+          "Warning: Missing 'createdAt' for resource ID $id. Using current time.",
+        );
+        createdAtDate = DateTime.now();
+      } else {
+        createdAtDate = DateTime.parse(createdAtString);
+      }
+    } catch (e) {
+      print(
+        "Warning: Invalid date format for resource ID $id. Using current time.",
+      );
+      createdAtDate = DateTime.now();
+    }
+
     return Resource(
       id: id,
-      title: map['title'] as String,
-      description: map['description'] as String,
-      author: map['author'] as String,
-      authorId: map['authorId'] as String, // Read from map
-      type: ResourceType.values.firstWhere(
-        (e) => e.toString().split('.').last == map['type'],
-      ),
+      title: _getString('title', 'Untitled Resource'),
+      description: _getString('description', 'No description available.'),
+      author: _getString('author', 'Unknown Author'),
+      authorId: authorIdValue,
+      type: resourceType,
       url: map['url'] as String?,
-      createdAt: DateTime.parse(map['createdAt'] as String),
+      createdAt: createdAtDate,
     );
   }
 
@@ -54,7 +106,7 @@ class Resource {
       'title': title,
       'description': description,
       'author': author,
-      'authorId': authorId, // Save to map
+      'authorId': authorId,
       'type': type.toString().split('.').last,
       'url': url,
       'createdAt': createdAt.toIso8601String(),

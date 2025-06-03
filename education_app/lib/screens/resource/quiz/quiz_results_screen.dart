@@ -43,13 +43,13 @@ class QuizResultsScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },
-              child: Text(l10n.done),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 48,
                   vertical: 16,
                 ),
               ),
+              child: Text(l10n.done),
             ),
           ],
         ),

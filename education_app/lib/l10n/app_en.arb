@@ -158,5 +158,22 @@
     "failedToCreateTopic": "Failed to create topic: {error}",
     "createTopicValidationEmpty": "{fieldName} cannot be empty.",
     "createTopicValidationMinLength": "{fieldName} must be at least {length} characters long.",
-    "createTopicValidationMaxLength": "{fieldName} cannot exceed {length} characters."
-    }
+    "createTopicValidationMaxLength": "{fieldName} cannot exceed {length} characters.",
+
+    "errorLoadingData": "An error occurred while loading resources. Please try again.",
+
+    "failedToUpdateTopic": "Error updating topic: {error}",
+    "@failedToUpdateTopic": {
+        "description": "Error message shown when topic update fails",
+        "placeholders": {
+            "error": {
+                "type": "String",
+                "example": "Network error"
+            }
+        }
+    },
+    "topicUpdatedSuccess": "Topic updated successfully!",
+
+    "noDiscussionsYet": "No discussions yet.",
+    "beTheFirstToStartConversation": "Be the first to start a conversation!"
+}

@@ -158,5 +158,22 @@
     "failedToCreateTopic": "Не удалось создать тему: {error}",
     "createTopicValidationEmpty": "{fieldName} не может быть пустым.",
     "createTopicValidationMinLength": "{fieldName} должно быть не менее {length} символов в длину.",
-    "createTopicValidationMaxLength": "{fieldName} не может превышать {length} символов в длину."
+    "createTopicValidationMaxLength": "{fieldName} не может превышать {length} символов в длину.",
+
+    "errorLoadingData": "Произошла ошибка при загрузке ресурсов. Повторите попытку.",
+
+    "failedToUpdateTopic": "Ошибка обновления темы: {error}",
+    "@failedToUpdateTopic": {
+        "description": "Сообщение об ошибке отображается при сбое обновления темы",
+        "placeholders": {
+        "error": {
+            "type": "String",
+            "example": "Ошибка сети"
+            }
+        }
+    },
+    "topicUpdatedSuccess": "Тема успешно обновлена!",
+
+    "noDiscussionsYet": "Пока нет обсуждений.",
+    "beTheFirstToStartConversation": "Начните разговор первым!"
 }

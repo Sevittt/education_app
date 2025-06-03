@@ -111,12 +111,15 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
               const SizedBox(height: 24),
               _isLoading
                   ? const Center(child: CircularProgressIndicator())
-                  : ElevatedButton.icon(
-                    icon: const Icon(Icons.add_task),
-                    label: Text(l10n.saveAndAddQuestions), // Using localization
-                    onPressed: _saveAndAddQuestions,
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
+                  : SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      icon: const Icon(Icons.add_task),
+                      label: Text(l10n.saveAndAddQuestions),
+                      onPressed: _saveAndAddQuestions,
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                      ),
                     ),
                   ),
             ],

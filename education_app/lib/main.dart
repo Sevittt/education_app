@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: lightColorScheme,
         useMaterial3: true,
-        scaffoldBackgroundColor: lightColorScheme.background,
+        scaffoldBackgroundColor: lightColorScheme.surface,
         appBarTheme: AppBarTheme(
           backgroundColor: lightColorScheme.primary,
           foregroundColor: lightColorScheme.onPrimary,
@@ -108,7 +108,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(
         colorScheme: darkColorScheme,
         useMaterial3: true,
-        scaffoldBackgroundColor: darkColorScheme.background,
+        scaffoldBackgroundColor: darkColorScheme.surface,
         appBarTheme: AppBarTheme(
           backgroundColor: darkColorScheme.surface,
           foregroundColor: darkColorScheme.onSurface,
