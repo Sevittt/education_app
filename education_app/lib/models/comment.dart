@@ -1,39 +1,46 @@
 // lib/models/comment.dart
-
-// import 'package:flutter/material.dart'; // Import for @required if using
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Comment {
-  final String id;
-  final String topicId; // Link back to the discussion topic
+  final String id; // Firestore document ID
+  final String topicId;
   final String authorId;
-  final String content; // The content of the comment
-  final DateTime createdAt;
+  final String authorName; // Denormalized
+  final String? authorProfilePicUrl; // Denormalized, optional
+  final String content;
+  final Timestamp createdAt; // Use Firestore Timestamp
 
   Comment({
     required this.id,
     required this.topicId,
     required this.authorId,
+    required this.authorName,
+    this.authorProfilePicUrl,
     required this.content,
     required this.createdAt,
   });
 
-  // Optional: fromMap and toMap methods
-  factory Comment.fromMap(String id, Map<String, dynamic> map) {
+  factory Comment.fromFirestore(DocumentSnapshot doc) {
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
     return Comment(
-      id: id,
-      topicId: map['topicId'] as String,
-      authorId: map['authorId'] as String,
-      content: map['content'] as String,
-      createdAt: DateTime.parse(map['createdAt'] as String),
+      id: doc.id,
+      topicId: data['topicId'] ?? '',
+      authorId: data['authorId'] ?? '',
+      authorName: data['authorName'] ?? 'Unknown User',
+      authorProfilePicUrl: data['authorProfilePicUrl'] as String?,
+      content: data['content'] ?? '',
+      createdAt: data['createdAt'] as Timestamp? ?? Timestamp.now(),
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toFirestore() {
     return {
       'topicId': topicId,
       'authorId': authorId,
+      'authorName': authorName,
+      'authorProfilePicUrl': authorProfilePicUrl,
       'content': content,
-      'createdAt': createdAt.toIso8601String(),
+      'createdAt': createdAt, // Or FieldValue.serverTimestamp() on create
     };
   }
 }

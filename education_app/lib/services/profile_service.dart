@@ -2,15 +2,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/foundation.dart'; // For kDebugMode
-import '../models/users.dart';
+import '../models/users.dart'; // Your custom User model (not UserModel)
 
 class ProfileService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final firebase_auth.FirebaseAuth _auth = firebase_auth.FirebaseAuth.instance;
   final String _collectionPath = 'users';
 
-  // --- UserModel-based: Get the current user's profile ---
+  // --- Existing methods like getCurrentUserProfile, updateCurrentUserProfile, etc. ---
   Future<UserModel?> getCurrentUserProfile() async {
+    // This uses UserModel, ensure your app is consistent
     final firebase_auth.User? currentUser = _auth.currentUser;
     if (currentUser == null) return null;
 
@@ -21,6 +22,8 @@ class ProfileService {
               .doc(currentUser.uid)
               .get();
       if (docSnapshot.exists && docSnapshot.data() != null) {
+        // Assuming UserModel.fromMap exists and is what you want here.
+        // If you are using your main 'User' model throughout, adjust this.
         return UserModel.fromMap(docSnapshot.data()!, docSnapshot.id);
       }
     } catch (e) {
@@ -31,8 +34,9 @@ class ProfileService {
     return null;
   }
 
-  // --- UserModel-based: Update the current user's profile ---
-  Future<void> updateCurrentUserProfile(UserModel user) async {
+  // Assuming your main User model is 'User' from '../models/users.dart'
+  Future<void> updateCurrentUserProfile(User user) async {
+    // Changed UserModel to User
     final firebase_auth.User? currentUser = _auth.currentUser;
     if (currentUser == null) return;
 
@@ -40,7 +44,7 @@ class ProfileService {
       await _firestore
           .collection(_collectionPath)
           .doc(currentUser.uid)
-          .update(user.toMap());
+          .update(user.toMap()); // Assuming User model has toMap
     } catch (e) {
       if (kDebugMode) {
         print('Error updating user profile: $e');
@@ -49,48 +53,48 @@ class ProfileService {
     }
   }
 
-  // --- Generic: Save or update any user profile data (by userId) ---
-  Future<void> updateUserProfileById(
-    String userId,
-    Map<String, dynamic> data,
-  ) async {
-    try {
-      await _firestore
-          .collection(_collectionPath)
-          .doc(userId)
-          .set(data, SetOptions(merge: true));
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error updating user profile in Firestore: $e');
-      }
-      rethrow;
-    }
+  // --- NEW METHOD: Get all users for Admin ---
+  /// Fetches a stream of all user profiles. Intended for admin use.
+  Stream<List<User>> getAllUsersStream() {
+    // Returns List<User>
+    return _firestore
+        .collection(_collectionPath)
+        .orderBy('registrationDate', descending: true) // Example order
+        .snapshots()
+        .map((snapshot) {
+          return snapshot.docs
+              .map((doc) {
+                try {
+                  // Use your main 'User.fromMap' factory
+                  return User.fromMap(doc.data(), doc.id);
+                } catch (e) {
+                  if (kDebugMode) {
+                    print(
+                      "Error parsing user from Firestore doc ID ${doc.id}: $e. Skipping.",
+                    );
+                  }
+                  // Return a special error object or null and filter later, or rethrow.
+                  // For now, let's ensure it fails gracefully or filters out.
+                  // To allow filtering, map to nullable and then filter:
+                  return null;
+                }
+              })
+              .where((user) => user != null)
+              .cast<User>()
+              .toList(); // Filter out nulls and cast
+        })
+        .handleError((error) {
+          if (kDebugMode) {
+            print("Error in getAllUsersStream: $error");
+          }
+          throw error; // Propagate error to StreamBuilder
+        });
   }
 
-  // --- Generic: Fetch any user profile data (by userId) ---
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserProfileById(
-    String userId,
-  ) async {
-    try {
-      DocumentSnapshot<Map<String, dynamic>> profileDoc =
-          await _firestore.collection(_collectionPath).doc(userId).get();
-      return profileDoc;
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error fetching user profile from Firestore: $e');
-      }
-      rethrow;
-    }
-  }
-
-  // --- Optional: Stream for real-time profile updates (by userId) ---
-  Stream<DocumentSnapshot<Map<String, dynamic>>> getUserProfileStream(
-    String userId,
-  ) {
-    return _firestore.collection(_collectionPath).doc(userId).snapshots();
-  }
-
-  updateUserProfile(UserModel updatedUser) {}
-
-  getUserProfile() {}
+  // --- Keep your other existing methods from ProfileService ---
+  // Future<void> updateUserProfileById ...
+  // Future<DocumentSnapshot<Map<String, dynamic>>> getUserProfileById ...
+  // Stream<DocumentSnapshot<Map<String, dynamic>>> getUserProfileStream ...
+  // updateUserProfile(UserModel updatedUser) {} // This seems like a duplicate or should use User
+  // getUserProfile() {} // This seems like a placeholder or incomplete
 }

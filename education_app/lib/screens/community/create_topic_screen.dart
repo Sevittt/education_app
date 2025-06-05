@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../models/discussion_topic.dart';
 import '../../services/community_service.dart';
 import '../../models/auth_notifier.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import AppLocalizations
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateTopicScreen extends StatefulWidget {
   const CreateTopicScreen({super.key});
@@ -29,46 +29,77 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
 
   Future<void> _createTopic() async {
     if (!_formKey.currentState!.validate()) {
-      return; // If form is not valid, do nothing
+      return;
     }
-    setState(() {
-      _isLoading = true;
-    });
 
-    final l10n = AppLocalizations.of(context); // For SnackBar messages
+    final l10n = AppLocalizations.of(context);
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    final appUser = authNotifier.currentUser; // Firebase User
 
-    if (appUser == null) {
+    // --- ADDED/ENHANCED CHECKS FOR VALID USER DATA ---
+    final String? currentUserId =
+        authNotifier.currentUser?.uid; // FirebaseUser UID
+    final String? authorDisplayName =
+        authNotifier.appUser?.name; // Name from your custom User model
+
+    if (currentUserId == null || currentUserId.isEmpty) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              l10n?.mustBeLoggedInToCreateTopic ??
+              l10n?.mustBeLoggedInToCreateTopic ?? // Reusing existing localization
                   'You must be logged in to create a topic.',
             ),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
       }
-      setState(() {
-        _isLoading = false;
-      });
-      return;
+      // Ensure isLoading is reset if we return early
+      if (_isLoading) {
+        // Only set if it was true
+        setState(() {
+          _isLoading = false;
+        });
+      }
+      return; // Stop execution
     }
 
-    // Assuming your DiscussionTopic model takes authorName and authorId
+    if (authorDisplayName == null ||
+        authorDisplayName.isEmpty ||
+        authorDisplayName == 'Anonymous' || // Avoid placeholder names
+        authorDisplayName == 'New User') {
+      // Another common placeholder
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              l10n?.profileIncompleteToCreateTopic ?? // New localization key needed
+                  'Your profile name is not set. Please update your profile.',
+            ),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
+      if (_isLoading) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+      return; // Stop execution
+    }
+    // --- END OF ADDED/ENHANCED CHECKS ---
+
+    setState(() {
+      _isLoading = true;
+    });
+
     final newTopic = DiscussionTopic(
       id: '', // Firestore will generate
       title: _titleController.text.trim(),
       content: _contentController.text.trim(),
-      authorName:
-          authNotifier.appUser?.name ??
-          appUser.displayName ??
-          'Anonymous', // Use appUser's name if available
-      authorId: appUser.uid,
+      authorName: authorDisplayName, // Use the verified name
+      authorId: currentUserId, // Use the verified ID
       createdAt: DateTime.now(),
-      commentIds: [], // Initialize with empty list
+      commentIds: const [], // Initialize with empty list
       commentCount: 0, // Initialize comment count
     );
 
@@ -113,7 +144,7 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context); // For labels and validators
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -125,7 +156,7 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
           key: _formKey,
           child: ListView(
             children: [
-              // Topic Title Field - Enhanced Validation
+              // Topic Title Field
               TextFormField(
                 controller: _titleController,
                 decoration: InputDecoration(
@@ -160,7 +191,7 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
               ),
               const SizedBox(height: 16.0),
 
-              // Discussion Content Field - Enhanced Validation
+              // Discussion Content Field
               TextFormField(
                 controller: _contentController,
                 decoration: InputDecoration(
@@ -187,7 +218,6 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
                         'Content must be at least 20 characters long.';
                   }
                   if (trimmedValue.length > 2000) {
-                    // Example max length
                     return l10n?.createTopicValidationMaxLength(
                           l10n.createTopicContentLabel,
                           2000,
@@ -201,7 +231,6 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
               _isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : SizedBox(
-                    // Wrap button with SizedBox
                     width: double.infinity,
                     child: ElevatedButton.icon(
                       icon: const Icon(Icons.post_add),
@@ -224,33 +253,22 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
 }
 
 // Add new localization keys to your AppLocalizations extension/ARB files
-// This is just for placeholder error messages if l10n is null or keys are missing.
-// You should define these properly in your .arb files.
-extension AppLocalizationsTopicValidationMessages on AppLocalizations? {
-  String get createTopicScreenTitle =>
-      this?.createTopicScreenTitle ?? 'Start New Discussion';
-  String get createTopicTitleLabel =>
-      this?.createTopicTitleLabel ?? 'Topic Title';
-  String get createTopicContentLabel =>
-      this?.createTopicContentLabel ?? 'Discussion Content';
-  String get createTopicButtonText =>
-      this?.createTopicButtonText ?? 'Create Discussion Topic';
-  String get mustBeLoggedInToCreateTopic =>
-      this?.mustBeLoggedInToCreateTopic ??
-      'You must be logged in to create a topic.';
-  String get topicCreatedSuccess =>
-      this?.topicCreatedSuccess ?? 'Topic created successfully!';
-  String failedToCreateTopic(String title, String error) =>
-      this?.failedToCreateTopic(title, error) ??
-      'Failed to create topic: $title: $error';
+// (Some might be reusable from CreateResourceScreen)
+extension AppLocalizationsCreateTopicMessages on AppLocalizations? {
+  // String get createTopicScreenTitle => this?.createTopicScreenTitle ?? 'Start New Discussion'; // Already in your previous extension
+  // String get createTopicTitleLabel => this?.createTopicTitleLabel ?? 'Topic Title'; // Already in your previous extension
+  // String get createTopicContentLabel => this?.createTopicContentLabel ?? 'Discussion Content'; // Already in your previous extension
+  // String get createTopicButtonText => this?.createTopicButtonText ?? 'Create Discussion Topic'; // Already in your previous extension
+  // String get mustBeLoggedInToCreateTopic => this?.mustBeLoggedInToCreateTopic ?? 'You must be logged in to create a topic.'; // Already in your previous extension
+  // String get topicCreatedSuccess => this?.topicCreatedSuccess ?? 'Topic created successfully!'; // Already in your previous extension
+  // String failedToCreateTopic(String title, String error) => this?.failedToCreateTopic(title, error) ?? 'Failed to create topic: $title: $error'; // Already in your previous extension
 
-  String createTopicValidationEmpty(String fieldName) =>
-      this?.createTopicValidationEmpty(fieldName) ??
-      '$fieldName cannot be empty.';
-  String createTopicValidationMinLength(String fieldName, int length) =>
-      this?.createTopicValidationMinLength(fieldName, length) ??
-      '$fieldName must be at least $length characters long.';
-  String createTopicValidationMaxLength(String fieldName, int length) =>
-      this?.createTopicValidationMaxLength(fieldName, length) ??
-      '$fieldName cannot exceed $length characters.';
+  // String createTopicValidationEmpty(String fieldName) => this?.createTopicValidationEmpty(fieldName) ?? '$fieldName cannot be empty.'; // Already in your previous extension
+  // String createTopicValidationMinLength(String fieldName, int length) => this?.createTopicValidationMinLength(fieldName, length) ?? '$fieldName must be at least $length characters long.'; // Already in your previous extension
+  // String createTopicValidationMaxLength(String fieldName, int length) => this?.createTopicValidationMaxLength(fieldName, length) ?? '$fieldName cannot exceed $length characters.'; // Already in your previous extension
+
+  // NEW KEY:
+  String get profileIncompleteToCreateTopic =>
+      this?.profileIncompleteToCreateTopic ??
+      'Your profile name is not set. Please update your profile.';
 }

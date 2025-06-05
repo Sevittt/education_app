@@ -4,6 +4,7 @@ import 'package:education_app/services/community_service.dart';
 import 'package:education_app/services/profile_service.dart';
 import 'package:education_app/services/quiz_service.dart';
 import 'package:education_app/services/resource_service.dart';
+import 'package:education_app/services/news_service.dart'; // Add this import
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -46,6 +47,7 @@ void main() async {
         // Add this line
         Provider<CommunityService>(create: (_) => CommunityService()),
         Provider<QuizService>(create: (_) => QuizService()),
+        Provider<NewsService>(create: (_) => NewsService()), // Add this line
       ],
       child: const MyApp(),
     ),

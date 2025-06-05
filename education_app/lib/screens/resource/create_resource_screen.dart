@@ -24,15 +24,16 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
   ResourceType _selectedResourceType = ResourceType.article; // Default type
 
   bool _isLoading = false;
-  // Use Provider for ResourceService if consistently used, or instantiate as needed
-  // final ResourceService _resourceService = ResourceService(); // Or Provider.of
 
   @override
   void initState() {
     super.initState();
+    // It's important that AuthNotifier has had a chance to load the user profile
+    // by the time this screen is used.
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    // Use appUser's name if available, otherwise fallback to a default or previously set _authorName
     _authorName = authNotifier.appUser?.name ?? 'Unknown Teacher';
+    // If authNotifier.appUser is null, _authorName will be 'Unknown Teacher'.
+    // We'll check this before saving.
   }
 
   @override
@@ -48,28 +49,65 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
       return;
     }
 
+    final l10n = AppLocalizations.of(context);
+    final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+
+    // --- ADDED CHECKS FOR VALID USER DATA ---
+    final String? currentUserId = authNotifier.currentUser?.uid;
+    final String? currentUserNameFromAppUser = authNotifier.appUser?.name;
+
+    if (currentUserId == null || currentUserId.isEmpty) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              l10n?.mustBeLoggedInToCreateResource ??
+                  'You must be logged in to create a resource.',
+            ),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
+      return; // Stop execution
+    }
+
+    if (currentUserNameFromAppUser == null ||
+        currentUserNameFromAppUser.isEmpty ||
+        currentUserNameFromAppUser ==
+            'Unknown Teacher' || // Check against default/placeholder
+        _authorName == 'Unknown Teacher') {
+      // Also check the initialized _authorName
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              l10n?.profileIncompleteToCreateResource ??
+                  'Your profile information is incomplete. Please update your name in your profile.',
+            ),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
+      return; // Stop execution
+    }
+    // --- END OF ADDED CHECKS ---
+
     setState(() {
       _isLoading = true;
     });
 
-    final l10n = AppLocalizations.of(context);
     final resourceService = Provider.of<ResourceService>(
       context,
       listen: false,
-    ); // Get service via Provider
-    final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    final String currentUserId =
-        authNotifier.currentUser?.uid ?? 'unknown_user_id';
-    final String currentUserName =
-        _authorName; // Already set in initState from appUser
+    );
 
     try {
       final newResource = Resource(
         id: '', // Firestore will generate an ID
         title: _titleController.text.trim(),
         description: _descriptionController.text.trim(),
-        author: currentUserName,
-        authorId: currentUserId, // Make sure authorId is populated
+        author: currentUserNameFromAppUser, // Use the verified name
+        authorId: currentUserId, // Use the verified ID
         type: _selectedResourceType,
         url:
             _urlController.text.trim().isEmpty
@@ -115,6 +153,10 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    // Re-fetch authorName from AuthNotifier in build in case it has updated
+    // This ensures the read-only field reflects the latest profile name if possible
+    final authNotifier = Provider.of<AuthNotifier>(context);
+    _authorName = authNotifier.appUser?.name ?? 'Unknown Teacher';
 
     return Scaffold(
       appBar: AppBar(
@@ -143,7 +185,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
           key: _formKey,
           child: ListView(
             children: <Widget>[
-              // Title Field - Enhanced Validation
+              // Title Field
               TextFormField(
                 controller: _titleController,
                 decoration: InputDecoration(
@@ -178,7 +220,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
               ),
               const SizedBox(height: 16.0),
 
-              // Description Field - Enhanced Validation
+              // Description Field
               TextFormField(
                 controller: _descriptionController,
                 decoration: InputDecoration(
@@ -204,7 +246,6 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
                         'Description must be at least 10 characters long';
                   }
                   if (trimmedValue.length > 500) {
-                    // Example max length
                     return l10n?.createResourceValidationMaxLength(
                           l10n.createResourceDescriptionLabel,
                           500,
@@ -218,6 +259,8 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
 
               // Author Field (Read-only, pre-filled)
               TextFormField(
+                // Use a Key to ensure the initialValue updates if _authorName changes
+                key: ValueKey(_authorName),
                 initialValue: _authorName,
                 decoration: InputDecoration(
                   labelText: l10n?.createResourceAuthorLabel ?? 'Author',
@@ -279,11 +322,10 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
                     final trimmedValue = value.trim();
                     final uri = Uri.tryParse(trimmedValue);
                     if (uri == null ||
-                        (!uri.isScheme('https') && !uri.isScheme('HTTP'))) {
+                        (!uri.isScheme('HTTPS') && !uri.isScheme('HTTP'))) {
                       return l10n?.createResourceValidationInvalidUrl ??
                           'Please enter a valid URL (starting with http or https)';
                     }
-                    // Optional: More robust URL validation if needed using a regex or a package
                   }
                   return null;
                 },
@@ -297,15 +339,15 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
   }
 }
 
-// Add new localization keys to your AppLocalizations extension/ARB files
-// Example (add to your existing extension or create one)
-extension AppLocalizationsValidationMessages on AppLocalizations? {
-  String createResourceValidationMinLength(String fieldName, int length) =>
-      this?.createResourceValidationMinLength(fieldName, length) ??
-      '$fieldName must be at least $length characters long';
-  String createResourceValidationMaxLength(String fieldName, int length) =>
-      this?.createResourceValidationMaxLength(fieldName, length) ??
-      '$fieldName cannot exceed $length characters';
-  // Ensure createResourceValidationEmpty, createResourceValidationSelect, createResourceValidationInvalidUrl
-  // are also defined in your .arb files and the extension if you use them.
-}
+// You'll need to add these new localization keys to your .arb files
+// and your AppLocalizations extension:
+// Example for your AppLocalizations extension (if you have one):
+// extension AppLocalizationsCreateResourceMessages on AppLocalizations? {
+//   String get mustBeLoggedInToCreateResource =>
+//       this?.mustBeLoggedInToCreateResource ?? 'You must be logged in to create a resource.';
+//   String get profileIncompleteToCreateResource =>
+//       this?.profileIncompleteToCreateResource ?? 'Your profile information is incomplete. Please update your name in your profile.';
+// }
+// And in your intl_en.arb (and other language files):
+// "mustBeLoggedInToCreateResource": "You must be logged in to create a resource.",
+// "profileIncompleteToCreateResource": "Your profile information is incomplete. Please update your name in your profile."

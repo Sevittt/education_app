@@ -169,8 +169,9 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                l10n?.resourceDeletedSuccess ??
-                    'Resource deleted successfully!',
+                (l10n?.resourceDeletedSuccess ??
+                        'Resource deleted successfully!')
+                    .toString(),
               ),
               backgroundColor: Colors.green,
             ),
@@ -261,10 +262,12 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => EditResourceScreen(
-                      resourceToEdit: widget.resource, // This is the correct parameter
-                      // Remove the redundant 'resource' parameter
-                    ),
+                    builder:
+                        (context) => EditResourceScreen(
+                          resourceToEdit:
+                              widget.resource, // This is the correct parameter
+                          // Remove the redundant 'resource' parameter
+                        ),
                   ),
                 );
               },

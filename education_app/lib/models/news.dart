@@ -1,48 +1,45 @@
 // lib/models/news.dart
+import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore Timestamp
 
 class News {
-  // Unique identifier for the news item (optional, but good practice)
-  final String id;
-  // The title of the news article
+  final String id; // Firestore document ID
   final String title;
-  // The source of the news (e.g., a website name or organization)
   final String source;
-  // The URL to the full news article
   final String url;
-  // Optional: Publication date of the news
-  final DateTime? publicationDate;
+  final Timestamp? publicationDate; // Use Firestore Timestamp for dates
+  final String? imageUrl; // Optional: for displaying an image with the news
 
-  // Constructor for the News class
   News({
     required this.id,
     required this.title,
     required this.source,
     required this.url,
-    this.publicationDate, // Optional parameter
+    this.publicationDate,
+    this.imageUrl,
   });
 
-  // Optional: Add fromMap and toMap methods for serialization (useful later)
-  factory News.fromMap(String id, Map<String, dynamic> map) {
+  // Factory constructor to create a News object from a Firestore document
+  factory News.fromFirestore(DocumentSnapshot doc) {
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
     return News(
-      id: id,
-      title: map['title'] as String,
-      source: map['source'] as String,
-      url: map['url'] as String,
-      publicationDate:
-          map['publicationDate'] != null
-              ? DateTime.parse(map['publicationDate'] as String)
-              : null,
+      id: doc.id,
+      title: data['title'] ?? 'No Title',
+      source: data['source'] ?? 'Unknown Source',
+      url: data['url'] ?? '',
+      publicationDate: data['publicationDate'] as Timestamp?,
+      imageUrl: data['imageUrl'] as String?,
     );
   }
 
-  Map<String, dynamic> toMap() {
+  // Method to convert News object to a Map for Firestore
+  // Note: 'id' is usually the document ID and not stored as a field within the document itself
+  Map<String, dynamic> toFirestore() {
     return {
       'title': title,
       'source': source,
       'url': url,
-      'publicationDate':
-          publicationDate
-              ?.toIso8601String(), // Store date as string if not null
+      'publicationDate': publicationDate, // Store as Timestamp
+      'imageUrl': imageUrl,
     };
   }
 }

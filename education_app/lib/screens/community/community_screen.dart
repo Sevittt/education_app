@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// Ensure dummy_data is only used if still needed for findUserById, otherwise remove if topics come solely from Firestore
-// import '../../data/dummy_data.dart';
 import '../../models/discussion_topic.dart';
 import '../../models/users.dart';
 import '../../models/auth_notifier.dart';

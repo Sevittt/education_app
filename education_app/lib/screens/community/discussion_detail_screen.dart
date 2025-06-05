@@ -1,18 +1,15 @@
-// lib/screens/discussion_detail_screen.dart
-
+// lib/screens/community/discussion_detail_screen.dart
 import 'package:flutter/material.dart';
-import '../../data/dummy_data.dart'; // Import dummy data for comments and users
-import '../../models/discussion_topic.dart'; // Import DiscussionTopic
-import '../../models/comment.dart'; // Import Comment
-import '../../models/users.dart'; // Import User model
-import 'package:provider/provider.dart'; // If using Provider for current user
-import '../../models/auth_notifier.dart'; // Assuming AuthNotifier provides the User object
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // For Timestamp
 
-// Import the uuid package for generating unique IDs
-import 'package:uuid/uuid.dart';
+import '../../models/discussion_topic.dart';
+import '../../models/comment.dart';
+import '../../models/auth_notifier.dart'; // For current user details
+import '../../services/community_service.dart'; // To interact with Firebase
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // For localization
 
-// Create an instance of Uuid (can be global to the file or local if preferred)
-var uuid = const Uuid();
+// Removed uuid import as Firestore generates IDs for new documents
 
 class DiscussionDetailScreen extends StatefulWidget {
   final DiscussionTopic topic;
@@ -25,21 +22,10 @@ class DiscussionDetailScreen extends StatefulWidget {
 
 class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
   final TextEditingController _commentController = TextEditingController();
-  List<Comment> _topicComments = [];
+  bool _isPostingComment = false;
 
-  @override
-  void initState() {
-    super.initState();
-    // Initialize comments for the current topic
-    _loadComments();
-  }
-
-  void _loadComments() {
-    // In a real app, fetch from a service. For now, filter dummy data.
-    setState(() {
-      _topicComments = findCommentsByTopicId(widget.topic.id).toList();
-    });
-  }
+  // _topicComments list and _loadComments are no longer needed
+  // as StreamBuilder will manage the data.
 
   @override
   void dispose() {
@@ -47,59 +33,71 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
     super.dispose();
   }
 
-  void _addComment() {
+  Future<void> _addComment() async {
+    final l10n = AppLocalizations.of(context)!;
     final newCommentContent = _commentController.text.trim();
+    if (newCommentContent.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.commentCannotBeEmpty)));
+      return;
+    }
+
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    final currentUser = authNotifier.currentUser;
+    final currentUser = authNotifier.appUser; // Your custom User model
+    final firebaseUser = authNotifier.currentUser; // Firebase Auth User
 
-    if (newCommentContent.isNotEmpty) {
-      // Get the actual current user ID
-      final authorId =
-          currentUser?.uid ??
-          dummyUser2.id; // Fallback to dummy if no current user
+    if (currentUser == null || firebaseUser == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.mustBeLoggedInToComment)));
+      return;
+    }
 
-      // Generate a unique ID for the new comment using the uuid package.
-      final newCommentId = uuid.v4(); // Generates a v4 UUID
+    setState(() {
+      _isPostingComment = true;
+    });
 
-      final newComment = Comment(
-        id: newCommentId,
-        topicId: widget.topic.id,
-        authorId: authorId,
-        content: newCommentContent,
-        createdAt: DateTime.now(),
+    final newComment = Comment(
+      id: '', // Firestore will generate this
+      topicId: widget.topic.id,
+      authorId: firebaseUser.uid, // Use Firebase UID
+      authorName: currentUser.name, // Use name from your appUser model
+      authorProfilePicUrl:
+          currentUser.profilePictureUrl, // Use pic from appUser
+      content: newCommentContent,
+      createdAt: Timestamp.now(), // Use Firestore Timestamp for server time
+    );
+
+    try {
+      final communityService = Provider.of<CommunityService>(
+        context,
+        listen: false,
       );
-
-      // --- Add the new comment to the dummy data lists ---
-      // In a real app, this would be an API call to your backend.
-      dummyComments.add(newComment);
-
-      final topicIndex = dummyDiscussionTopics.indexWhere(
-        (t) => t.id == widget.topic.id,
-      );
-      if (topicIndex != -1) {
-        final updatedCommentIds = List<String>.from(
-          dummyDiscussionTopics[topicIndex].commentIds,
-        );
-        updatedCommentIds.add(newCommentId);
-        dummyDiscussionTopics[topicIndex] = dummyDiscussionTopics[topicIndex]
-            .copyWith(commentIds: updatedCommentIds);
-      }
-
-      setState(() {
-        _topicComments.add(newComment); // Update local UI list
-        _commentController.clear();
-      });
-
+      await communityService.addComment(widget.topic.id, newComment);
+      _commentController.clear();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Comment added with ID: $newCommentId')),
+          SnackBar(
+            content: Text(l10n.commentAddedSuccessfully),
+            backgroundColor: Colors.green,
+          ),
         );
       }
-    } else {
+    } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Comment cannot be empty.')),
+          SnackBar(
+            content: Text(l10n.failedToAddComment(e.toString(), '')),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
         );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isPostingComment = false;
+        });
       }
     }
   }
@@ -109,10 +107,14 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final TextTheme textTheme = theme.textTheme;
+    final l10n = AppLocalizations.of(context)!;
+    final communityService = Provider.of<CommunityService>(
+      context,
+      listen: false,
+    );
 
-    final User? topicAuthor = findUserById(widget.topic.authorId);
-    // Use displayName instead of name, with a fallback
-    final String topicAuthorName = topicAuthor?.displayName ?? 'Unknown User';
+    // Topic author name is already part of widget.topic.authorName
+    final String topicAuthorName = widget.topic.authorName;
 
     return Scaffold(
       appBar: AppBar(
@@ -145,7 +147,8 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Posted by $topicAuthorName on ${widget.topic.createdAt.toLocal().toString().split('.')[0]}',
+                            // Using MaterialLocalizations for date formatting
+                            '${l10n.postedBy(topicAuthorName)} ${l10n.onDate(MaterialLocalizations.of(context).formatMediumDate(widget.topic.createdAt))}',
                             style: textTheme.bodySmall?.copyWith(
                               color: colorScheme.onSurfaceVariant.withOpacity(
                                 0.8,
@@ -168,125 +171,143 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
                   Divider(color: colorScheme.outline.withOpacity(0.5)),
                   const SizedBox(height: 10),
 
-                  // --- Replies Section ---
+                  // --- Replies Section (Using StreamBuilder) ---
                   Text(
-                    'Replies (${_topicComments.length}):',
+                    l10n.repliesTitle, // Using l10n
                     style: textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 10.0),
-                  if (_topicComments.isEmpty)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      child: Center(
-                        child: Text(
-                          'No replies yet. Be the first to comment!',
-                          style: textTheme.bodyMedium?.copyWith(
-                            color: colorScheme.onSurface.withOpacity(0.6),
-                          ),
-                        ),
-                      ),
-                    )
-                  else
-                    ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: _topicComments.length,
-                      itemBuilder: (context, index) {
-                        final comment = _topicComments[index];
-                        final User? commentAuthor = findUserById(
-                          comment.authorId,
-                        );
-                        // Use displayName instead of name, with a fallback
-                        final String commentAuthorName =
-                            commentAuthor?.displayName ?? 'Unknown User';
-                        final String authorInitial =
-                            commentAuthorName.isNotEmpty
-                                ? commentAuthorName[0].toUpperCase()
-                                : '?';
-
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CircleAvatar(
-                                radius: 18,
-                                backgroundColor: colorScheme.secondaryContainer,
-                                // Use photoURL for CircleAvatar background if available
-                                backgroundImage:
-                                    commentAuthor?.photoURL != null &&
-                                            commentAuthor!.photoURL!.isNotEmpty
-                                        ? (commentAuthor.photoURL!.startsWith(
-                                              'http',
-                                            )
-                                            ? NetworkImage(
-                                              commentAuthor.photoURL!,
-                                            )
-                                            : AssetImage(
-                                                  commentAuthor.photoURL!,
-                                                )
-                                                as ImageProvider)
-                                        : null, // No background image if no photoURL
-                                child:
-                                    (commentAuthor?.photoURL == null ||
-                                            commentAuthor!.photoURL!.isEmpty)
-                                        ? Text(
-                                          // Show initial only if no image
-                                          authorInitial,
-                                          style: textTheme.labelMedium
-                                              ?.copyWith(
-                                                color:
-                                                    colorScheme
-                                                        .onSecondaryContainer,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                        )
-                                        : null, // No text if there's an image
-                              ),
-                              const SizedBox(width: 12.0),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          commentAuthorName,
-                                          style: textTheme.titleSmall?.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 8),
-                                        Text(
-                                          '• ${comment.createdAt.toLocal().toString().split('.')[0]}',
-                                          style: textTheme.bodySmall?.copyWith(
-                                            color: colorScheme.onSurfaceVariant,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 4.0),
-                                    Text(
-                                      comment.content,
-                                      style: textTheme.bodyMedium?.copyWith(
-                                        height: 1.3,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                      separatorBuilder:
-                          (context, index) => Divider(
-                            color: colorScheme.outline.withOpacity(0.3),
-                            height: 16,
-                          ),
+                  StreamBuilder<List<Comment>>(
+                    stream: communityService.getCommentsForTopic(
+                      widget.topic.id,
                     ),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text(
+                            l10n.errorLoadingComments(
+                              snapshot.error.toString(),
+                            ),
+                            style: TextStyle(color: colorScheme.error),
+                          ),
+                        );
+                      }
+                      if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20.0),
+                          child: Center(
+                            child: Text(
+                              l10n.noRepliesYet,
+                              style: textTheme.bodyMedium?.copyWith(
+                                color: colorScheme.onSurface.withOpacity(0.6),
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+
+                      final comments = snapshot.data!;
+                      return ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: comments.length,
+                        itemBuilder: (context, index) {
+                          final comment = comments[index];
+                          // Author name and pic URL are now in the comment object
+                          final String commentAuthorName = comment.authorName;
+                          final String? commentAuthorPic =
+                              comment.authorProfilePicUrl;
+                          final String authorInitial =
+                              commentAuthorName.isNotEmpty
+                                  ? commentAuthorName[0].toUpperCase()
+                                  : '?';
+
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CircleAvatar(
+                                  radius: 18,
+                                  backgroundColor:
+                                      colorScheme.secondaryContainer,
+                                  backgroundImage:
+                                      commentAuthorPic != null &&
+                                              commentAuthorPic.isNotEmpty
+                                          ? (commentAuthorPic.startsWith('http')
+                                              ? NetworkImage(commentAuthorPic)
+                                              : AssetImage(commentAuthorPic)
+                                                  as ImageProvider)
+                                          : null,
+                                  child:
+                                      (commentAuthorPic == null ||
+                                              commentAuthorPic.isEmpty)
+                                          ? Text(
+                                            authorInitial,
+                                            style: textTheme.labelMedium
+                                                ?.copyWith(
+                                                  color:
+                                                      colorScheme
+                                                          .onSecondaryContainer,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                          )
+                                          : null,
+                                ),
+                                const SizedBox(width: 12.0),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            commentAuthorName,
+                                            style: textTheme.titleSmall
+                                                ?.copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                          ),
+                                          const SizedBox(width: 8),
+                                          Text(
+                                            '• ${MaterialLocalizations.of(context).formatShortDate(comment.createdAt.toDate())}', // Format date
+                                            style: textTheme.bodySmall
+                                                ?.copyWith(
+                                                  color:
+                                                      colorScheme
+                                                          .onSurfaceVariant,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 4.0),
+                                      Text(
+                                        comment.content,
+                                        style: textTheme.bodyMedium?.copyWith(
+                                          height: 1.3,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        separatorBuilder:
+                            (context, index) => Divider(
+                              color: colorScheme.outline.withOpacity(0.3),
+                              height: 16,
+                            ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -296,7 +317,7 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
           Container(
             padding: const EdgeInsets.all(12.0),
             decoration: BoxDecoration(
-              color: theme.cardColor,
+              color: theme.cardColor, // Or theme.colorScheme.surface
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.05),
@@ -312,7 +333,7 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
                   child: TextField(
                     controller: _commentController,
                     decoration: InputDecoration(
-                      hintText: 'Write a reply...',
+                      hintText: l10n.writeAReplyHint,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(24.0),
                         borderSide: BorderSide(
@@ -346,11 +367,23 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
                   ),
                 ),
                 const SizedBox(width: 8.0),
-                IconButton(
-                  icon: Icon(Icons.send_rounded, color: colorScheme.primary),
-                  onPressed: _addComment,
-                  tooltip: 'Send Comment',
-                ),
+                _isPostingComment
+                    ? const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                    : IconButton(
+                      icon: Icon(
+                        Icons.send_rounded,
+                        color: colorScheme.primary,
+                      ),
+                      onPressed: _addComment,
+                      tooltip: l10n.sendCommentTooltip,
+                    ),
               ],
             ),
           ),
@@ -359,3 +392,16 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
     );
   }
 }
+
+// Add new localization keys to your .arb files and AppLocalizations extension:
+// "commentCannotBeEmpty": "Comment cannot be empty.",
+// "mustBeLoggedInToComment": "You must be logged in to comment.",
+// "commentAddedSuccessfully": "Comment added successfully!",
+// "failedToAddComment": "Failed to add comment: {error}",
+// "postedBy": "Posted by {authorName}",
+// "onDate": "on {date}",
+// "repliesTitle": "Replies",
+// "errorLoadingComments": "Error loading comments: {error}",
+// "noRepliesYet": "No replies yet. Be the first to comment!",
+// "writeAReplyHint": "Write a reply...",
+// "sendCommentTooltip": "Send Comment"
