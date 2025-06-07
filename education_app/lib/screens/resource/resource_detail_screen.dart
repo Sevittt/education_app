@@ -1,10 +1,9 @@
 // lib/screens/resource/resource_detail_screen.dart
 
+import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../models/resource.dart';
 import '../../models/auth_notifier.dart';
 import '../../models/users.dart';

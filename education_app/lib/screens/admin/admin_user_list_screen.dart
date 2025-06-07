@@ -1,7 +1,7 @@
 // lib/screens/admin/admin_user_list_screen.dart
+import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // For localization
 import 'package:intl/intl.dart'; // For date formatting
 
 import '../../models/users.dart'; // Your main User model

@@ -1,4 +1,5 @@
 // lib/screens/community/discussion_detail_screen.dart
+import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // For Timestamp
@@ -7,7 +8,6 @@ import '../../models/discussion_topic.dart';
 import '../../models/comment.dart';
 import '../../models/auth_notifier.dart'; // For current user details
 import '../../services/community_service.dart'; // To interact with Firebase
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // For localization
 
 // Removed uuid import as Firestore generates IDs for new documents
 

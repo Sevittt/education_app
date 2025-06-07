@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 // Import the generated localizations file
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:education_app/l10n/app_localizations.dart';
 
 // Firebase Core (ensure this is initialized)
 import 'package:firebase_core/firebase_core.dart';
@@ -98,7 +98,7 @@ class MyApp extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
           elevation: 5.0,
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           elevation: 1.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.0),
@@ -128,7 +128,7 @@ class MyApp extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
           elevation: 5.0,
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           elevation: 2.0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.0),

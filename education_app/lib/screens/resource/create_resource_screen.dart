@@ -1,11 +1,11 @@
 // lib/screens/resource/create_resource_screen.dart
 
+import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/resource.dart';
 import '../../models/auth_notifier.dart';
 import '../../services/resource_service.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateResourceScreen extends StatefulWidget {
   const CreateResourceScreen({super.key});

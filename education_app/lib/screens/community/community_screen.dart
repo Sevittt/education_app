@@ -8,7 +8,7 @@ import '../../models/auth_notifier.dart';
 import '../../services/community_service.dart';
 import 'discussion_detail_screen.dart';
 import 'edit_topic_screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // For localization
+import '../../l10n/app_localizations.dart';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({super.key});

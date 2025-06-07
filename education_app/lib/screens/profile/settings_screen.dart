@@ -1,11 +1,11 @@
 // lib/screens/settings_screen.dart
 
+import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../placeholder_screen.dart'; // Import the placeholder screen
 import 'language_selection_screen.dart'; // Import the new LanguageSelectionScreen
 // Import AppLocalizations to use translated strings
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});

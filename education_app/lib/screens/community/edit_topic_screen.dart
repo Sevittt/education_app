@@ -1,10 +1,10 @@
 // lib/screens/community/edit_topic_screen.dart
 
+import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Import Provider
 import '../../models/discussion_topic.dart';
 import '../../services/community_service.dart'; // Import CommunityService
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import AppLocalizations
 
 class EditTopicScreen extends StatefulWidget {
   final DiscussionTopic topicToEdit;

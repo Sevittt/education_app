@@ -1,9 +1,9 @@
 // lib/screens/profile/profile_screen.dart
 
+import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart'; // For date formatting
-import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // For localization
 
 import '../../models/auth_notifier.dart';
 import '../../models/quiz_attempt.dart';

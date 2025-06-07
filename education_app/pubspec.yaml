@@ -22,7 +22,7 @@ dependencies:
   firebase_core: ^3.13.1   # Or latest
   # Firebase Authentication
   firebase_auth: ^5.5.3   # Or latest
-  intl: 0.19.0
+  intl: 0.20.2
   path_provider: ^2.0.9
   # Cloud Firestore (we'll use this later for user data)
   cloud_firestore: ^5.6.8 # Or latest

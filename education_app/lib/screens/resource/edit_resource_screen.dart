@@ -1,10 +1,10 @@
 // lib/screens/resource/edit_resource_screen.dart
 
+import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Import provider
 import '../../models/resource.dart';
 import '../../services/resource_service.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // Import AuthNotifier if needed for author details, though typically author doesn't change on edit
 // import '../../models/auth_notifier.dart';
 
