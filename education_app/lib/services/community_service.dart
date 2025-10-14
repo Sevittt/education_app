@@ -9,9 +9,34 @@ class CommunityService {
       .collection('discussion_topics');
 
   // --- Existing Topic Methods ---
-  Future<void> createTopic(DiscussionTopic topic) async {
+  // Future<void> createTopic(DiscussionTopic topic) async {
+  //   try {
+  //     await _topicsCollection.add(topic.toMap());
+  //   } catch (e) {
+  //     if (kDebugMode) {
+  //       print("Error creating topic: $e");
+  //     }
+  //     rethrow;
+  //   }
+  // }
+
+  Future<void> createTopic(
+    String title,
+    String content,
+    String userId,
+    String userName,
+  ) async {
     try {
-      await _topicsCollection.add(topic.toMap());
+      final newTopic = {
+        'title': title,
+        'content': content,
+        'authorId': userId,
+        'authorName': userName,
+        'commentCount': 0,
+        'createdAt': FieldValue.serverTimestamp(),
+      };
+
+      await _topicsCollection.add(newTopic);
     } catch (e) {
       if (kDebugMode) {
         print("Error creating topic: $e");
@@ -68,7 +93,7 @@ class CommunityService {
       // This requires a Cloud Function or client-side batch delete.
     } catch (e) {
       if (kDebugMode) {
-        print("Error deleting topic ${topicId}: $e");
+        print("Error deleting topic $topicId: $e");
       }
       rethrow;
     }

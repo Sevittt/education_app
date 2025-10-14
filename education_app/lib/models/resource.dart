@@ -29,7 +29,7 @@ class Resource {
 
   factory Resource.fromMap(String id, Map<String, dynamic> map) {
     // Helper function for safe string extraction
-    String _getString(String key, String defaultValue) {
+    String getString(String key, String defaultValue) {
       var value = map[key];
       if (value == null) {
         print(
@@ -55,7 +55,7 @@ class Resource {
     }
 
     // Handle resource type with fallback
-    final typeString = _getString('type', 'other');
+    final typeString = getString('type', 'other');
     ResourceType resourceType;
     try {
       resourceType = ResourceType.values.firstWhere(
@@ -91,9 +91,9 @@ class Resource {
 
     return Resource(
       id: id,
-      title: _getString('title', 'Untitled Resource'),
-      description: _getString('description', 'No description available.'),
-      author: _getString('author', 'Unknown Author'),
+      title: getString('title', 'Untitled Resource'),
+      description: getString('description', 'No description available.'),
+      author: getString('author', 'Unknown Author'),
       authorId: authorIdValue,
       type: resourceType,
       url: map['url'] as String?,

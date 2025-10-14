@@ -1,6 +1,6 @@
 // lib/screens/profile/profile_screen.dart
 
-import 'package:education_app/l10n/app_localizations.dart';
+import '../../l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart'; // For date formatting
@@ -8,11 +8,9 @@ import 'package:intl/intl.dart'; // For date formatting
 import '../../models/auth_notifier.dart';
 import '../../models/quiz_attempt.dart';
 import '../../services/quiz_service.dart';
-import '../placeholder_screen.dart';
 import 'settings_screen.dart';
 import 'theme_options_screen.dart';
-// Import your ProfileEditScreen if you have one, otherwise placeholder is fine
-// import 'profile_edit_screen.dart';
+import 'profile_edit_screen.dart'; // Add this import
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -224,20 +222,13 @@ class ProfileScreen extends StatelessWidget {
                   _buildProfileOptionCard(
                     context: context,
                     icon: Icons.manage_accounts_outlined,
-                    title:
-                        l10n.editProfileButtonText, // Assuming you have this key
+                    title: l10n.editProfileButtonText,
                     enabled: appUser != null,
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          // Replace with your actual ProfileEditScreen if available
-                          builder:
-                              (context) => const PlaceholderScreen(
-                                title: 'Edit Profile',
-                                message:
-                                    'Profile editing will be implemented here.',
-                              ),
+                          builder: (context) => const ProfileEditScreen(),
                         ),
                       );
                     },

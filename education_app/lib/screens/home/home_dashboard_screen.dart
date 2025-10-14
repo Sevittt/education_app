@@ -250,9 +250,10 @@ class HomeDashboardScreen extends StatelessWidget {
                                           child,
                                           loadingProgress,
                                         ) {
-                                          if (loadingProgress == null)
+                                          if (loadingProgress == null) {
                                             return child;
-                                          return Container(
+                                          }
+                                          return SizedBox(
                                             height: 80,
                                             child: Center(
                                               child: CircularProgressIndicator(

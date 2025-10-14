@@ -155,7 +155,7 @@ class _AdminQuizManagementScreenState extends State<AdminQuizManagementScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: ButtonBar(
+                      child: OverflowBar(
                         alignment: MainAxisAlignment.end,
                         children: <Widget>[
                           TextButton.icon(

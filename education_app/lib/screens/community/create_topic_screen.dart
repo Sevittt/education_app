@@ -108,7 +108,12 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
         context,
         listen: false,
       );
-      await communityService.createTopic(newTopic);
+      await communityService.createTopic(
+        newTopic.title,
+        newTopic.content,
+        newTopic.authorName,
+        newTopic.authorId,
+      );
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
