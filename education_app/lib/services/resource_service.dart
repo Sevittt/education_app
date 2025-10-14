@@ -72,7 +72,7 @@ class ResourceService {
       await _resourcesCollection.doc(resourceId).delete();
     } catch (e) {
       if (kDebugMode) {
-        print("Error deleting resource $resourceId: $e");
+        print("Error deleting resource ${resourceId}: $e");
       } // Added print
       rethrow;
     }

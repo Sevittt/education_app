@@ -93,7 +93,7 @@ class CommunityService {
       // This requires a Cloud Function or client-side batch delete.
     } catch (e) {
       if (kDebugMode) {
-        print("Error deleting topic $topicId: $e");
+        print("Error deleting topic ${topicId}: $e");
       }
       rethrow;
     }
