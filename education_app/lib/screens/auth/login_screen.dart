@@ -1,6 +1,7 @@
 // lib/screens/auth/login_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../../models/auth_notifier.dart';
 import 'registration_screen.dart'; // We'll create this next
 // Import AppLocalizations to use translated strings
@@ -72,7 +73,9 @@ class _LoginScreenState extends State<LoginScreen> {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final TextTheme textTheme = theme.textTheme;
-    // final AppLocalizations? l10n = AppLocalizations.of(context); // For localization
+    final l10n = AppLocalizations.of(
+      context,
+    ); // O'ZGARISH: Lokalizatsiyani olish
 
     return Scaffold(
       body: Center(
@@ -86,13 +89,14 @@ class _LoginScreenState extends State<LoginScreen> {
               children: <Widget>[
                 // App Logo or Title
                 Image.asset(
-                  'assets/images/Shared_Knowledge.png', // Your app logo
+                  'assets/images/app_logo.png', // O'ZGARISH: Yangi logotip yo'li
                   height: 100,
                   // width: 100, // Adjust as needed
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'Welcome Back!', // Replace with l10n?.welcomeMessage ?? 'Welcome Back!'
+                  l10n?.welcomeMessage ??
+                      'Xush kelibsiz!', // O'ZGARISH: Lokalizatsiyadan olish
                   textAlign: TextAlign.center,
                   style: textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
@@ -100,7 +104,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Text(
-                  'Sign in to continue', // Replace with localized string
+                  l10n?.signInToContinue ??
+                      'Davom etish uchun kiring', // O'ZGARISH: Lokalizatsiyadan olish
                   textAlign: TextAlign.center,
                   style: textTheme.titleMedium?.copyWith(
                     color: colorScheme.onSurfaceVariant,
@@ -113,6 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _emailController,
                   decoration: InputDecoration(
                     labelText:
+                        l10n?.emailLabel ??
                         'Email', // Replace with l10n?.emailLabel ?? 'Email'
                     hintText: 'you@example.com',
                     prefixIcon: Icon(
@@ -143,6 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _passwordController,
                   decoration: InputDecoration(
                     labelText:
+                        l10n?.passwordLabel ??
                         'Password', // Replace with l10n?.passwordLabel ?? 'Password'
                     prefixIcon: Icon(
                       Icons.lock_outline,
@@ -185,7 +192,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ? const Center(child: CircularProgressIndicator())
                         : ElevatedButton.icon(
                           icon: const Icon(Icons.login_rounded),
-                          label: const Text('Login'), // Localize
+                          label: Text(
+                            l10n?.loginButtonText ?? 'Login',
+                          ), // Localize
                           onPressed: _submitForm,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: colorScheme.primary,
@@ -215,7 +224,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextButton(
                       child: Text(
-                        'Sign Up', // Localize
+                        l10n?.signUpButtonText ?? 'Sign Up', // Localize
                         style: textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: colorScheme.primary,

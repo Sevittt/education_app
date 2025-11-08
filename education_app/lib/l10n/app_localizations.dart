@@ -63,7 +63,8 @@ import 'app_localizations_uz.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,7 +72,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -83,25 +85,170 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('ru'),
-    Locale('uz')
+    Locale('uz'),
   ];
 
   /// The title of the application
   ///
   /// In en, this message translates to:
-  /// **'Teach&Learn'**
+  /// **'Court Handbook'**
   String get appTitle;
+
+  /// Title on the login screen
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome Back!'**
+  String get loginWelcomeTitle;
+
+  /// Subtitle on the login screen
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to continue'**
+  String get loginWelcomeSubtitle;
+
+  /// No description provided for @bottomNavHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get bottomNavHome;
+
+  /// No description provided for @bottomNavResources.
+  ///
+  /// In en, this message translates to:
+  /// **'Guides'**
+  String get bottomNavResources;
+
+  /// No description provided for @bottomNavCommunity.
+  ///
+  /// In en, this message translates to:
+  /// **'Forum'**
+  String get bottomNavCommunity;
+
+  /// No description provided for @bottomNavProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get bottomNavProfile;
+
+  /// Title for the resources/guides screen
+  ///
+  /// In en, this message translates to:
+  /// **'Guides & Manuals'**
+  String get resourcesScreenTitle;
+
+  /// User role for a regular staff member
+  ///
+  /// In en, this message translates to:
+  /// **'Staff'**
+  String get roleXodim;
+
+  /// User role for an expert who can create content
+  ///
+  /// In en, this message translates to:
+  /// **'Expert'**
+  String get roleEkspert;
+
+  /// User role for an administrator
+  ///
+  /// In en, this message translates to:
+  /// **'Administrator'**
+  String get roleAdmin;
+
+  /// No description provided for @registrationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Your Account'**
+  String get registrationTitle;
+
+  /// No description provided for @registrationSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Join the professional community!'**
+  String get registrationSubtitle;
+
+  /// Label for the full name field on registration screen
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name'**
+  String get registrationFullNameLabel;
+
+  /// Error message if full name is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your full name'**
+  String get registrationFullNameError;
+
+  /// Label for the role selection on registration screen
+  ///
+  /// In en, this message translates to:
+  /// **'Your Role'**
+  String get registrationRoleLabel;
+
+  /// Error message if no role is selected
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a role'**
+  String get registrationRoleError;
+
+  /// Option for 'xodim' (staff) role
+  ///
+  /// In en, this message translates to:
+  /// **'Regular Staff'**
+  String get registrationRoleXodim;
+
+  /// Option for 'ekspert' (expert) role
+  ///
+  /// In en, this message translates to:
+  /// **'Expert (Content Creator)'**
+  String get registrationRoleEkspert;
+
+  /// Label for the password field
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get registrationPasswordLabel;
+
+  /// Error message for short password
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters long'**
+  String get registrationPasswordError;
+
+  /// Label for the confirm password field
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get registrationConfirmPasswordLabel;
+
+  /// Error message if passwords don't match
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get registrationConfirmPasswordError;
+
+  /// Text for the sign up button
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get registrationSignUpButton;
+
+  /// Text to switch to login screen
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account? Sign In'**
+  String get registrationSwitchToLogin;
 
   /// No description provided for @languageEnglish.
   ///
@@ -178,13 +325,13 @@ abstract class AppLocalizations {
   /// No description provided for @settingsAboutApp.
   ///
   /// In en, this message translates to:
-  /// **'About Teach & Learn'**
+  /// **'About Court Handbook'**
   String get settingsAboutApp;
 
   /// No description provided for @settingsAppLegalese.
   ///
   /// In en, this message translates to:
-  /// **'© 2025 Teach & Learn Project'**
+  /// **'© 2025 Court Handbook Project'**
   String get settingsAppLegalese;
 
   /// No description provided for @settingsAppDescription.
@@ -250,7 +397,7 @@ abstract class AppLocalizations {
   /// No description provided for @communityScreenTitle.
   ///
   /// In en, this message translates to:
-  /// **'Community'**
+  /// **'Forum'**
   String get communityScreenTitle;
 
   /// No description provided for @profileScreenTitle.
@@ -316,13 +463,13 @@ abstract class AppLocalizations {
   /// No description provided for @resourcesTitle.
   ///
   /// In en, this message translates to:
-  /// **'Resources'**
+  /// **'Guides'**
   String get resourcesTitle;
 
   /// No description provided for @resourcesSearchHint.
   ///
   /// In en, this message translates to:
-  /// **'Search resources...'**
+  /// **'Search guides...'**
   String get resourcesSearchHint;
 
   /// No description provided for @resourcesFilterByType.
@@ -370,7 +517,7 @@ abstract class AppLocalizations {
   /// No description provided for @createResourceScreenTitle.
   ///
   /// In en, this message translates to:
-  /// **'Create New Resource'**
+  /// **'Create New Guide'**
   String get createResourceScreenTitle;
 
   /// No description provided for @createResourceFormWillBeHere.
@@ -406,7 +553,7 @@ abstract class AppLocalizations {
   /// No description provided for @createResourceTypeLabel.
   ///
   /// In en, this message translates to:
-  /// **'Resource Type'**
+  /// **'System Type'**
   String get createResourceTypeLabel;
 
   /// No description provided for @createResourceUrlLabel.
@@ -448,7 +595,7 @@ abstract class AppLocalizations {
   /// No description provided for @editResourceScreenTitle.
   ///
   /// In en, this message translates to:
-  /// **'Edit Resource'**
+  /// **'Edit Guide'**
   String get editResourceScreenTitle;
 
   /// No description provided for @resourceTypeLabel.
@@ -847,11 +994,11 @@ abstract class AppLocalizations {
   /// **'Topic created successfully!'**
   String get topicCreatedSuccess;
 
-  /// No description provided for @failedToCreateTopic.
+  /// Error message when creating a topic fails
   ///
   /// In en, this message translates to:
   /// **'Failed to create topic: {error}'**
-  String failedToCreateTopic(Object error, Object xato);
+  String failedToCreateTopic(String error, String xato);
 
   /// No description provided for @createTopicValidationEmpty.
   ///
@@ -881,7 +1028,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Error updating topic: {error}'**
-  String failedToUpdateTopic(String error, Object xato);
+  String failedToUpdateTopic(String error, String xato);
 
   /// No description provided for @topicUpdatedSuccess.
   ///
@@ -937,11 +1084,11 @@ abstract class AppLocalizations {
   /// **'Comment added successfully!'**
   String get commentAddedSuccessfully;
 
-  /// No description provided for @failedToAddComment.
+  /// Error message when adding a comment fails
   ///
   /// In en, this message translates to:
   /// **'Failed to add comment: {error}'**
-  String failedToAddComment(Object error, Object xato);
+  String failedToAddComment(String error, String xato);
 
   /// No description provided for @postedBy.
   ///
@@ -1006,7 +1153,7 @@ abstract class AppLocalizations {
   /// No description provided for @communityTitle.
   ///
   /// In en, this message translates to:
-  /// **'Community'**
+  /// **'Forum'**
   String get communityTitle;
 
   /// No description provided for @profileTitle.
@@ -1084,7 +1231,7 @@ abstract class AppLocalizations {
   /// No description provided for @manageResourcesTitle.
   ///
   /// In en, this message translates to:
-  /// **'Manage Resources'**
+  /// **'Manage Guides'**
   String get manageResourcesTitle;
 
   /// No description provided for @manageResourcesSubtitle.
@@ -1111,11 +1258,11 @@ abstract class AppLocalizations {
   /// **'\"{newsTitle}\" deleted successfully.'**
   String newsDeletedSuccess(Object newsTitle);
 
-  /// No description provided for @failedToDeleteNews.
+  /// Error message when deleting news fails
   ///
   /// In en, this message translates to:
   /// **'Failed to delete \"{newsTitle}\": {error}'**
-  String failedToDeleteNews(Object error, Object newsTitle, Object xato);
+  String failedToDeleteNews(String error, Object newsTitle, Object xato);
 
   /// No description provided for @addNewsTooltip.
   ///
@@ -1273,11 +1420,11 @@ abstract class AppLocalizations {
   /// **'\"{newsTitle}\" added successfully.'**
   String newsAddedSuccess(Object newsTitle);
 
-  /// No description provided for @failedToSaveNews.
+  /// Error message when saving news fails
   ///
   /// In en, this message translates to:
   /// **'Failed to save news: {error}'**
-  String failedToSaveNews(Object error, Object xato);
+  String failedToSaveNews(String error, Object xato);
 
   /// No description provided for @errorLoadingUsers.
   ///
@@ -1327,11 +1474,15 @@ abstract class AppLocalizations {
   /// **'Are you sure you want to delete resource \"{resourceTitle}\"?'**
   String confirmDeleteResourceMessage(Object resourceTitle);
 
-  /// No description provided for @failedToDeleteResource.
+  /// Error message when deleting resource fails
   ///
   /// In en, this message translates to:
   /// **'Failed to delete resource \"{resourceTitle}\": {error}'**
-  String failedToDeleteResource(Object error, Object resourceTitle, Object xato);
+  String failedToDeleteResource(
+    String error,
+    Object resourceTitle,
+    Object xato,
+  );
 
   /// No description provided for @errorLoadingResources.
   ///
@@ -1393,11 +1544,11 @@ abstract class AppLocalizations {
   /// **'Quiz \"{quizTitle}\" and its questions deleted successfully.'**
   String quizDeletedSuccess(Object quizTitle);
 
-  /// No description provided for @failedToDeleteQuiz.
+  /// Error message when deleting quiz fails
   ///
   /// In en, this message translates to:
   /// **'Failed to delete quiz \"{quizTitle}\": {error}'**
-  String failedToDeleteQuiz(Object error, Object quizTitle, Object xato);
+  String failedToDeleteQuiz(String error, Object quizTitle, Object xato);
 
   /// No description provided for @editDetailsButton.
   ///
@@ -1428,9 +1579,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Oversee all quizzes and their questions'**
   String get manageQuizzesSubtitle;
+
+  get welcomeMessage => null;
+
+  get signInToContinue => null;
+
+  get registrationNameLabel => null;
+
+  get registrationNameError => null;
+
+  get registrationEmailError => null;
+
+  String? get registrationRoleHint => null;
+
+  String? get roleExpert => null;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -1439,26 +1605,28 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'ru', 'uz'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['en', 'ru', 'uz'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en': return AppLocalizationsEn();
-    case 'ru': return AppLocalizationsRu();
-    case 'uz': return AppLocalizationsUz();
+    case 'en':
+      return AppLocalizationsEn();
+    case 'ru':
+      return AppLocalizationsRu();
+    case 'uz':
+      return AppLocalizationsUz();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
+    'that was used.',
   );
 }

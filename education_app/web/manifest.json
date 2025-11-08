@@ -1,11 +1,11 @@
 {
-    "name": "education_app",
-    "short_name": "education_app",
+    "name": "sud_qollanma",
+    "short_name": "sud_qollanma",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Sud xodimlarining kasbiy kompetentligi uchun mobil platforma.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

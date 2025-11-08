@@ -1,8 +1,9 @@
 // lib/screens/admin/admin_resource_management_screen.dart
-import 'package:education_app/l10n/app_localizations.dart';
+//import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart'; // For date formatting
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 
 import '../../models/resource.dart';
 import '../../services/resource_service.dart';
@@ -80,17 +81,17 @@ class _AdminResourceManagementScreenState
 
   IconData _getIconForResourceType(ResourceType type) {
     switch (type) {
-      case ResourceType.article:
-        return Icons.article_outlined;
-      case ResourceType.video:
-        return Icons.play_circle_outline;
-      case ResourceType.code:
-        return Icons.code;
-      case ResourceType.lessonPlan:
-        return Icons.assignment_outlined;
-      case ResourceType.tutorial:
-        return Icons.school_outlined;
+      case ResourceType.eSud:
+        return Icons.computer_outlined;
+      case ResourceType.adolat:
+        return Icons.gavel_outlined;
+      case ResourceType.jibSud:
+        return Icons.folder_copy_outlined;
+      case ResourceType.edoSud:
+        return Icons.cloud_upload_outlined;
       case ResourceType.other:
+        return Icons.help_outline;
+      default:
         return Icons.topic_outlined;
     }
   }

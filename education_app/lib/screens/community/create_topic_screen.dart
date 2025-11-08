@@ -1,8 +1,9 @@
 // lib/screens/community/create_topic_screen.dart
 
-import 'package:education_app/l10n/app_localizations.dart';
+// import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/discussion_topic.dart';
 import '../../services/community_service.dart';
 import '../../models/auth_notifier.dart';

@@ -1,8 +1,9 @@
 // lib/screens/resource/create_resource_screen.dart
 
-import 'package:education_app/l10n/app_localizations.dart';
+//import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/resource.dart';
 import '../../models/auth_notifier.dart';
 import '../../services/resource_service.dart';
@@ -21,19 +22,15 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
   final _urlController = TextEditingController();
   String _authorName = ''; // This will be pre-filled
 
-  ResourceType _selectedResourceType = ResourceType.article; // Default type
+  ResourceType _selectedResourceType = ResourceType.eSud; // Default type
 
   bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    // It's important that AuthNotifier has had a chance to load the user profile
-    // by the time this screen is used.
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
     _authorName = authNotifier.appUser?.name ?? 'Unknown Teacher';
-    // If authNotifier.appUser is null, _authorName will be 'Unknown Teacher'.
-    // We'll check this before saving.
   }
 
   @override
@@ -44,6 +41,23 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
     super.dispose();
   }
 
+  String _getResourceTypeText(ResourceType type, AppLocalizations l10n) {
+    switch (type) {
+      case ResourceType.eSud:
+        return 'E-SUD';
+      case ResourceType.adolat:
+        return 'Adolat AT';
+      case ResourceType.jibSud:
+        return 'JIB.SUD.UZ';
+      case ResourceType.edoSud:
+        return 'EDO.SUD.UZ';
+      case ResourceType.other:
+        return 'Boshqalar';
+      default:
+        return 'Noma\'lum';
+    }
+  }
+
   Future<void> _saveResource() async {
     if (!_formKey.currentState!.validate()) {
       return;
@@ -52,7 +66,6 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
     final l10n = AppLocalizations.of(context);
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
 
-    // --- ADDED CHECKS FOR VALID USER DATA ---
     final String? currentUserId = authNotifier.currentUser?.uid;
     final String? currentUserNameFromAppUser = authNotifier.appUser?.name;
 
@@ -68,15 +81,13 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
           ),
         );
       }
-      return; // Stop execution
+      return;
     }
 
     if (currentUserNameFromAppUser == null ||
         currentUserNameFromAppUser.isEmpty ||
-        currentUserNameFromAppUser ==
-            'Unknown Teacher' || // Check against default/placeholder
+        currentUserNameFromAppUser == 'Unknown Teacher' ||
         _authorName == 'Unknown Teacher') {
-      // Also check the initialized _authorName
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -88,9 +99,8 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
           ),
         );
       }
-      return; // Stop execution
+      return;
     }
-    // --- END OF ADDED CHECKS ---
 
     setState(() {
       _isLoading = true;
@@ -103,11 +113,11 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
 
     try {
       final newResource = Resource(
-        id: '', // Firestore will generate an ID
+        id: '',
         title: _titleController.text.trim(),
         description: _descriptionController.text.trim(),
-        author: currentUserNameFromAppUser, // Use the verified name
-        authorId: currentUserId, // Use the verified ID
+        author: currentUserNameFromAppUser,
+        authorId: currentUserId,
         type: _selectedResourceType,
         url:
             _urlController.text.trim().isEmpty
@@ -152,15 +162,13 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    // Re-fetch authorName from AuthNotifier in build in case it has updated
-    // This ensures the read-only field reflects the latest profile name if possible
+    final l10n = AppLocalizations.of(context)!;
     final authNotifier = Provider.of<AuthNotifier>(context);
     _authorName = authNotifier.appUser?.name ?? 'Unknown Teacher';
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n?.createResourceScreenTitle ?? 'Create New Resource'),
+        title: Text(l10n.createResourceScreenTitle),
         actions: [
           if (_isLoading)
             const Padding(
@@ -175,7 +183,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
             IconButton(
               icon: const Icon(Icons.save),
               onPressed: _saveResource,
-              tooltip: l10n?.saveButtonText ?? 'Save',
+              tooltip: l10n.saveButtonText,
             ),
         ],
       ),
@@ -189,31 +197,28 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
               TextFormField(
                 controller: _titleController,
                 decoration: InputDecoration(
-                  labelText: l10n?.createResourceTitleLabel ?? 'Title',
+                  labelText: l10n.createResourceTitleLabel,
                   border: const OutlineInputBorder(),
                   prefixIcon: const Icon(Icons.title),
                 ),
                 validator: (value) {
                   final trimmedValue = value?.trim();
                   if (trimmedValue == null || trimmedValue.isEmpty) {
-                    return l10n?.createResourceValidationEmpty(
-                          l10n.createResourceTitleLabel,
-                        ) ??
-                        'Please enter a title';
+                    return l10n.createResourceValidationEmpty(
+                      l10n.createResourceTitleLabel,
+                    );
                   }
                   if (trimmedValue.length < 5) {
-                    return l10n?.createResourceValidationMinLength(
-                          l10n.createResourceTitleLabel,
-                          5,
-                        ) ??
-                        'Title must be at least 5 characters long';
+                    return l10n.createResourceValidationMinLength(
+                      l10n.createResourceTitleLabel,
+                      5,
+                    );
                   }
                   if (trimmedValue.length > 100) {
-                    return l10n?.createResourceValidationMaxLength(
-                          l10n.createResourceTitleLabel,
-                          100,
-                        ) ??
-                        'Title cannot exceed 100 characters';
+                    return l10n.createResourceValidationMaxLength(
+                      l10n.createResourceTitleLabel,
+                      100,
+                    );
                   }
                   return null;
                 },
@@ -224,8 +229,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
               TextFormField(
                 controller: _descriptionController,
                 decoration: InputDecoration(
-                  labelText:
-                      l10n?.createResourceDescriptionLabel ?? 'Description',
+                  labelText: l10n.createResourceDescriptionLabel,
                   border: const OutlineInputBorder(),
                   prefixIcon: const Icon(Icons.description),
                 ),
@@ -233,24 +237,21 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
                 validator: (value) {
                   final trimmedValue = value?.trim();
                   if (trimmedValue == null || trimmedValue.isEmpty) {
-                    return l10n?.createResourceValidationEmpty(
-                          l10n.createResourceDescriptionLabel,
-                        ) ??
-                        'Please enter a description';
+                    return l10n.createResourceValidationEmpty(
+                      l10n.createResourceDescriptionLabel,
+                    );
                   }
                   if (trimmedValue.length < 10) {
-                    return l10n?.createResourceValidationMinLength(
-                          l10n.createResourceDescriptionLabel,
-                          10,
-                        ) ??
-                        'Description must be at least 10 characters long';
+                    return l10n.createResourceValidationMinLength(
+                      l10n.createResourceDescriptionLabel,
+                      10,
+                    );
                   }
                   if (trimmedValue.length > 500) {
-                    return l10n?.createResourceValidationMaxLength(
-                          l10n.createResourceDescriptionLabel,
-                          500,
-                        ) ??
-                        'Description cannot exceed 500 characters';
+                    return l10n.createResourceValidationMaxLength(
+                      l10n.createResourceDescriptionLabel,
+                      500,
+                    );
                   }
                   return null;
                 },
@@ -259,11 +260,10 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
 
               // Author Field (Read-only, pre-filled)
               TextFormField(
-                // Use a Key to ensure the initialValue updates if _authorName changes
                 key: ValueKey(_authorName),
                 initialValue: _authorName,
                 decoration: InputDecoration(
-                  labelText: l10n?.createResourceAuthorLabel ?? 'Author',
+                  labelText: l10n.createResourceAuthorLabel,
                   border: const OutlineInputBorder(),
                   prefixIcon: const Icon(Icons.person_outline),
                 ),
@@ -275,7 +275,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
               DropdownButtonFormField<ResourceType>(
                 value: _selectedResourceType,
                 decoration: InputDecoration(
-                  labelText: l10n?.createResourceTypeLabel ?? 'Resource Type',
+                  labelText: l10n.createResourceTypeLabel,
                   border: const OutlineInputBorder(),
                   prefixIcon: const Icon(Icons.category_outlined),
                 ),
@@ -283,9 +283,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
                     ResourceType.values.map((ResourceType type) {
                       return DropdownMenuItem<ResourceType>(
                         value: type,
-                        child: Text(
-                          type.name[0].toUpperCase() + type.name.substring(1),
-                        ),
+                        child: Text(_getResourceTypeText(type, l10n)),
                       );
                     }).toList(),
                 onChanged: (ResourceType? newValue) {
@@ -297,10 +295,9 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
                 },
                 validator: (value) {
                   if (value == null) {
-                    return l10n?.createResourceValidationSelect(
-                          l10n.createResourceTypeLabel,
-                        ) ??
-                        'Please select a type';
+                    return l10n.createResourceValidationSelect(
+                      l10n.createResourceTypeLabel,
+                    );
                   }
                   return null;
                 },
@@ -311,7 +308,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
               TextFormField(
                 controller: _urlController,
                 decoration: InputDecoration(
-                  labelText: l10n?.createResourceUrlLabel ?? 'URL (Optional)',
+                  labelText: l10n.createResourceUrlLabel,
                   hintText: 'https://example.com/resource',
                   border: const OutlineInputBorder(),
                   prefixIcon: const Icon(Icons.link),
@@ -323,8 +320,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
                     final uri = Uri.tryParse(trimmedValue);
                     if (uri == null ||
                         (!uri.isScheme('HTTPS') && !uri.isScheme('HTTP'))) {
-                      return l10n?.createResourceValidationInvalidUrl ??
-                          'Please enter a valid URL (starting with http or https)';
+                      return l10n.createResourceValidationInvalidUrl;
                     }
                   }
                   return null;
@@ -338,16 +334,3 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
     );
   }
 }
-
-// You'll need to add these new localization keys to your .arb files
-// and your AppLocalizations extension:
-// Example for your AppLocalizations extension (if you have one):
-// extension AppLocalizationsCreateResourceMessages on AppLocalizations? {
-//   String get mustBeLoggedInToCreateResource =>
-//       this?.mustBeLoggedInToCreateResource ?? 'You must be logged in to create a resource.';
-//   String get profileIncompleteToCreateResource =>
-//       this?.profileIncompleteToCreateResource ?? 'Your profile information is incomplete. Please update your name in your profile.';
-// }
-// And in your intl_en.arb (and other language files):
-// "mustBeLoggedInToCreateResource": "You must be logged in to create a resource.",
-// "profileIncompleteToCreateResource": "Your profile information is incomplete. Please update your name in your profile."

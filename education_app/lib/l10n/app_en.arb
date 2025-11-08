@@ -1,283 +1,401 @@
-{
-    "appTitle": "Teach&Learn",
-    "@appTitle": {
-        "description": "The title of the application"
-    },
-    "languageEnglish": "English (US)",
-    "languageUzbek": "Uzbek (Uzbekistan)",
-    "languageRussian": "Russian (Russia)",
-    "languageSystemDefault": "System Default",
-    "settingsScreenTitle": "Settings",
-    "settingsLanguage": "Language",
-    "settingsReceiveNotifications": "Receive Notifications",
-    "settingsReceiveNotificationsSubtitle": "Get updates about new resources and discussions",
-    "settingsAllowLocation": "Allow Location Access",
-    "settingsAllowLocationSubtitle": "For features requiring your location (if any)",
-    "settingsChangePassword": "Change Password",
-    "settingsHelpCenter": "Help Center",
-    "settingsAboutApp": "About Teach & Learn",
-    "settingsAppLegalese": "© 2025 Teach & Learn Project",
-    "settingsAppDescription": "Bridging the IT skills gap through collaborative learning and resource sharing.",
-    "errorPrefix": "Error: ",
-    "resourcesNoResourcesFound": "No resources found.",
-    "loginButtonText": "Login",
-    "signUpButtonText": "Sign Up",
-    "logoutButtonText": "Logout",
-    "logoutConfirmTitle": "Are you sure to logout",
-    "emailLabel": "Email",
-    "passwordLabel": "Password",
-    "homeDashboardTitle": "Dashboard",
-    "communityScreenTitle": "Community",
-    "profileScreenTitle": "Profile",
-    "editProfileButtonText": "Edit Profile",
-    "guestUser": "Guest User",
-    "updateYourInformation": "Update your information",
-    "loginToEditProfile": "Log in to edit your profile",
-    "settingsTitle": "Settings",
-    "themeOptionsTitle": "Theme Options", 
-    "logoutConfirmMessage": "Are you sure you want to log out?",
-    "cancelButton": "Cancel",
-    "logoutButton": "Log out",
+{"appTitle": "Court Handbook","@appTitle": {"description": "The title of the application"},"loginWelcomeTitle": "Welcome Back!","@loginWelcomeTitle": {"description": "Title on the login screen"},"loginWelcomeSubtitle": "Sign in to continue","@loginWelcomeSubtitle": {"description": "Subtitle on the login screen"},"bottomNavHome": "Home",
+"bottomNavResources": "Guides",
+"bottomNavCommunity": "Forum",
+"bottomNavProfile": "Profile",
 
-    "resourcesTitle": "Resources",
-    "resourcesSearchHint": "Search resources...",
-    "resourcesFilterByType": "Filter by Type",
-    "resourcesAllTypes": "All Types",
-    "resourcesNoResourcesMatch": "No resources match your criteria.",
-    "resourcesTryAdjusting": "Try adjusting your search or filter.",
-    "resourcesCreateButton": "Create",
-    "resourceAddedSuccess": "Resource added successfully!",
-    "resourceAddedError": "Error adding resource: {error}",
-    "@resourceAddedError": {
-        "description": "Error message when adding a resource fails",
-        "placeholders": {
-            "error": {
-                "type": "String",
-                "example": "Network connection failed"
-            }
+"resourcesScreenTitle": "Guides & Manuals",
+"@resourcesScreenTitle": {
+    "description": "Title for the resources/guides screen"
+},
+
+"roleXodim": "Staff",
+"@roleXodim": {
+    "description": "User role for a regular staff member"
+},
+"roleEkspert": "Expert",
+"@roleEkspert": {
+    "description": "User role for an expert who can create content"
+},
+"roleAdmin": "Administrator",
+"@roleAdmin": {
+    "description": "User role for an administrator"
+},
+
+"registrationTitle": "Create Your Account",
+"registrationSubtitle": "Join the professional community!",
+"registrationFullNameLabel": "Full Name",
+"@registrationFullNameLabel": {
+    "description": "Label for the full name field on registration screen"
+},
+"registrationFullNameError": "Please enter your full name",
+"@registrationFullNameError": {
+    "description": "Error message if full name is empty"
+},
+"registrationRoleLabel": "Your Role",
+"@registrationRoleLabel": {
+    "description": "Label for the role selection on registration screen"
+},
+"registrationRoleError": "Please select a role",
+"@registrationRoleError": {
+    "description": "Error message if no role is selected"
+},
+"registrationRoleXodim": "Regular Staff",
+"@registrationRoleXodim": {
+    "description": "Option for 'xodim' (staff) role"
+},
+"registrationRoleEkspert": "Expert (Content Creator)",
+"@registrationRoleEkspert": {
+    "description": "Option for 'ekspert' (expert) role"
+},
+"registrationPasswordLabel": "Password",
+"@registrationPasswordLabel": {
+    "description": "Label for the password field"
+},
+"registrationPasswordError": "Password must be at least 6 characters long",
+"@registrationPasswordError": {
+    "description": "Error message for short password"
+},
+"registrationConfirmPasswordLabel": "Confirm Password",
+"@registrationConfirmPasswordLabel": {
+    "description": "Label for the confirm password field"
+},
+"registrationConfirmPasswordError": "Passwords do not match",
+"@registrationConfirmPasswordError": {
+    "description": "Error message if passwords don't match"
+},
+"registrationSignUpButton": "Sign Up",
+"@registrationSignUpButton": {
+    "description": "Text for the sign up button"
+},
+"registrationSwitchToLogin": "Already have an account? Sign In",
+"@registrationSwitchToLogin": {
+    "description": "Text to switch to login screen"
+},
+
+"languageEnglish": "English (US)",
+"languageUzbek": "Uzbek (Uzbekistan)",
+"languageRussian": "Russian (Russia)",
+"languageSystemDefault": "System Default",
+"settingsScreenTitle": "Settings",
+"settingsLanguage": "Language",
+"settingsReceiveNotifications": "Receive Notifications",
+"settingsReceiveNotificationsSubtitle": "Get updates about new resources and discussions",
+"settingsAllowLocation": "Allow Location Access",
+"settingsAllowLocationSubtitle": "For features requiring your location (if any)",
+"settingsChangePassword": "Change Password",
+"settingsHelpCenter": "Help Center",
+"settingsAboutApp": "About Court Handbook",
+"settingsAppLegalese": "© 2025 Court Handbook Project",
+"settingsAppDescription": "Bridging the IT skills gap through collaborative learning and resource sharing.",
+"errorPrefix": "Error: ",
+"resourcesNoResourcesFound": "No resources found.",
+"loginButtonText": "Login",
+"signUpButtonText": "Sign Up",
+"logoutButtonText": "Logout",
+"logoutConfirmTitle": "Are you sure to logout",
+"emailLabel": "Email",
+"passwordLabel": "Password",
+"homeDashboardTitle": "Dashboard",
+"communityScreenTitle": "Forum",
+"profileScreenTitle": "Profile",
+"editProfileButtonText": "Edit Profile",
+"guestUser": "Guest",
+"updateYourInformation": "Update your information",
+"loginToEditProfile": "Log in to edit your profile",
+"settingsTitle": "Settings",
+"themeOptionsTitle": "Theme Options",
+"logoutConfirmMessage": "Are you sure you want to log out?",
+"cancelButton": "Cancel",
+"logoutButton": "Log out",
+"resourcesTitle": "Guides",
+"resourcesSearchHint": "Search guides...",
+"resourcesFilterByType": "Filter by Type",
+"resourcesAllTypes": "All Types",
+"resourcesNoResourcesMatch": "No resources match your criteria.",
+"resourcesTryAdjusting": "Try adjusting your search or filter.",
+"resourcesCreateButton": "Create",
+"resourceAddedSuccess": "Resource added successfully!",
+"resourceAddedError": "Error adding resource: {error}",
+"@resourceAddedError": {
+    "description": "Error message when adding a resource fails",
+    "placeholders": {
+        "error": {
+            "type": "String",
+            "example": "Network connection failed"
         }
-    },
-    "createResourceScreenTitle": "Create New Resource",
-    "createResourceFormWillBeHere": "Resource creation form will be here.",
-    "saveButtonText": "Save",
-    "createResourceTitleLabel": "Title",
-    "createResourceDescriptionLabel": "Description",
-    "createResourceAuthorLabel": "Author",
-    "createResourceTypeLabel":"Resource Type",
-    "createResourceUrlLabel": "URL (Optional)",
-    "couldNotLaunchUrl": "Could not launch {urlString}",
-    "createResourceValidationEmpty": "Please enter a {fieldName}",
-    "createResourceValidationSelect": "Please select a {fieldName}",
-    "createResourceValidationInvalidUrl": "Please enter a valid URL",
-
-    "editButtonTooltip": "Edit Resource",
-    "editResourceScreenTitle": "Edit Resource",
-    "resourceTypeLabel": "Type",
-    "authorLabel": "Author",
-    "dateAddedLabel": "Added",
-    "launchingUrlMessage": "Launching URL",
-    "descriptionLabel": "Description",
-    "resourceUpdatedSuccess": "Resource updated successfully!",
-    "resourceUpdatedError": "Error updating resource: {error}",
-    "@resourceUpdatedError": {
-        "description": "Error message when updating a resource fails",
-        "placeholders": {
-            "error": {
-                "type": "String",
-                "example": "Database write failed"
-            }
+    }
+},
+"createResourceScreenTitle": "Create New Guide",
+"createResourceFormWillBeHere": "Resource creation form will be here.",
+"saveButtonText": "Save Changes",
+"createResourceTitleLabel": "Title",
+"createResourceDescriptionLabel": "Description",
+"createResourceAuthorLabel": "Author",
+"createResourceTypeLabel": "System Type",
+"createResourceUrlLabel": "URL (Optional)",
+"couldNotLaunchUrl": "Could not launch {url}",
+"createResourceValidationEmpty": "Please enter a {fieldName}",
+"createResourceValidationSelect": "Please select a {fieldName}",
+"createResourceValidationInvalidUrl": "Please enter a valid URL",
+"editButtonTooltip": "Edit Resource",
+"editResourceScreenTitle": "Edit Guide",
+"resourceTypeLabel": "Type",
+"authorLabel": "Author",
+"dateAddedLabel": "Added",
+"launchingUrlMessage": "Launching URL",
+"descriptionLabel": "Description",
+"resourceUpdatedSuccess": "Resource updated successfully!",
+"resourceUpdatedError": "Error updating resource: {error}",
+"@resourceUpdatedError": {
+    "description": "Error message when updating a resource fails",
+    "placeholders": {
+        "error": {
+            "type": "String",
+            "example": "Database write failed"
         }
-    },
-    "saveButtonText": "Save Changes",
-
-    "deleteResourceConfirmTitle": "Confirm Deletion",
-    "deleteResourceConfirmMessage": "Are you sure you want to delete this resource? This action cannot be undone.",
-    "cancelButtonText": "Cancel",
-    "deleteButtonText": "Delete",
-    "resourceDeletedSuccess": "Resource deleted successfully!",
-    "resourceDeletedError": "Error deleting resource: {error}",
-    "deleteButtonTooltip": "Delete Resource",
-
-    "createANewQuiz": "Create a New Quiz",
-    "quizTitle": "Quiz Title",
-    "quizDescription": "Description",
-    "saveAndAddQuestions": "Save and Add Questions",
-    "failedToCreateQuiz": "Failed to create quiz",
-    "addQuestions": "Add Questions",
-    "finish": "FINISH",
-    "questionText": "Question Text",
-    "pleaseEnterAQuestion": "Please enter a question",
-    "questionType": "Question Type",
-    "multipleChoice": "Multiple Choice",
-    "trueFalse": "True/False",
-    "pleaseSelectCorrectAnswer": "Please select a correct answer.",
-    "option": "Option {number}",
-    "pleaseEnterAnOption": "Please enter an option",
-    "addQuestion": "Add Question",
-    "questionAddedSuccessfully": "Question added successfully!",
-    "failedToAddQuestion": "Failed to add question",
-    "noQuestionsAddedYet": "No questions added yet.",
-    "correctAnswer": "Correct",
-    "quiz": "Quiz",
-    "quizNotFound": "Quiz not found.",
-    "failedToLoadQuiz": "Failed to load quiz",
-    "question": "Question {number}",
-    "totalQuestions": "of {total}",
-    "submitQuiz": "Submit Quiz",
-    "nextQuestion": "Next Question",
-    "quizResults": "Quiz Results",
-    "quizCompletionMessage": "You have completed the quiz!",
-    "yourScore": "Your Score:",
-    "done": "Done",
-    "failedToSaveAttempt": "Failed to save your attempt",
-
-    "myQuizHistory": "My Quiz History",
-    "noQuizAttempts": "You haven't attempted any quizzes yet.",
-    "score": "Score",
-    "role": "Role",
-    "loading": "Loading...",
-
-    "relatedQuizzesTitle": "Related Quizzes",
-    "noQuizzesAvailable": "No quizzes available for this resource yet.",
-    "errorLoadingQuizzes": "Error loading quizzes",
-    "invalidUrlFormat": "Invalid URL format: {url}",
-    "couldNotLaunchUrl": "Could not launch {url}",
-    "errorLaunchingUrl": "Error launching URL: {error}",
-
-    "createResourceValidationMinLength": "{fieldName} must be at least {length} characters long",
-    "createResourceValidationMaxLength": "{fieldName} cannot exceed {length} characters",
-    "titleMinLength": "Title must be at least 5 characters long",
-    "titleMaxLength": "Title cannot exceed 100 characters",
-
-    "createTopicScreenTitle": "Start New Discussion",
-    "createTopicTitleLabel": "Topic Title",
-    "createTopicContentLabel": "Discussion Content",
-    "createTopicButtonText": "Create Discussion Topic",
-    "mustBeLoggedInToCreateTopic": "You must be logged in to create a topic.",
-    "topicCreatedSuccess": "Topic created successfully!",
-    "failedToCreateTopic": "Failed to create topic: {error}",
-    "createTopicValidationEmpty": "{fieldName} cannot be empty.",
-    "createTopicValidationMinLength": "{fieldName} must be at least {length} characters long.",
-    "createTopicValidationMaxLength": "{fieldName} cannot exceed {length} characters.",
-
-    "errorLoadingData": "An error occurred while loading resources. Please try again.",
-
-    "failedToUpdateTopic": "Error updating topic: {error}",
-    "@failedToUpdateTopic": {
-        "description": "Error message shown when topic update fails",
-        "placeholders": {
-            "error": {
-                "type": "String",
-                "example": "Network error"
-            }
+    }
+},
+"deleteResourceConfirmTitle": "Confirm Deletion",
+"deleteResourceConfirmMessage": "Are you sure you want to delete this resource? This action cannot be undone.",
+"cancelButtonText": "Cancel",
+"deleteButtonText": "Delete",
+"resourceDeletedSuccess": "Resource \"{resourceTitle}\" deleted successfully.",
+"resourceDeletedError": "Error deleting resource: {error}",
+"deleteButtonTooltip": "Delete Resource",
+"createANewQuiz": "Create a New Quiz",
+"quizTitle": "Quiz Title",
+"quizDescription": "Description",
+"saveAndAddQuestions": "Save and Add Questions",
+"failedToCreateQuiz": "Failed to create quiz",
+"addQuestions": "Add Questions",
+"finish": "FINISH",
+"questionText": "Question Text",
+"pleaseEnterAQuestion": "Please enter a question",
+"questionType": "Question Type",
+"multipleChoice": "Multiple Choice",
+"trueFalse": "True/False",
+"pleaseSelectCorrectAnswer": "Please select a correct answer.",
+"option": "Option {number}",
+"pleaseEnterAnOption": "Please enter an option",
+"addQuestion": "Add Question",
+"questionAddedSuccessfully": "Question added successfully!",
+"failedToAddQuestion": "Failed to add question",
+"noQuestionsAddedYet": "No questions added yet.",
+"correctAnswer": "Correct",
+"quiz": "Quiz",
+"quizNotFound": "Quiz not found.",
+"failedToLoadQuiz": "Failed to load quiz",
+"question": "Question {number}",
+"totalQuestions": "of {total}",
+"submitQuiz": "Submit Quiz",
+"nextQuestion": "Next Question",
+"quizResults": "Quiz Results",
+"quizCompletionMessage": "You have completed the quiz!",
+"yourScore": "Your Score:",
+"done": "Done",
+"failedToSaveAttempt": "Failed to save your attempt",
+"myQuizHistory": "My Quiz History",
+"noQuizAttempts": "You haven't attempted any quizzes yet.",
+"score": "Score",
+"role": "Role",
+"loading": "Loading...",
+"relatedQuizzesTitle": "Related Quizzes",
+"noQuizzesAvailable": "No quizzes available for this resource yet.",
+"errorLoadingQuizzes": "Error loading quizzes",
+"invalidUrlFormat": "Invalid URL format: {url}",
+"errorLaunchingUrl": "Error launching URL: {error}",
+"createResourceValidationMinLength": "{fieldName} must be at least {length} characters long",
+"createResourceValidationMaxLength": "{fieldName} cannot exceed {length} characters",
+"titleMinLength": "Title must be at least 5 characters long",
+"titleMaxLength": "Title cannot exceed 100 characters",
+"createTopicScreenTitle": "Start New Discussion",
+"createTopicTitleLabel": "Topic Title",
+"createTopicContentLabel": "Discussion Content",
+"createTopicButtonText": "Create Discussion Topic",
+"mustBeLoggedInToCreateTopic": "You must be logged in to create a topic.",
+"topicCreatedSuccess": "Topic created successfully!",
+"failedToCreateTopic": "Failed to create topic: {error}",
+"@failedToCreateTopic": {
+    "description": "Error message when creating a topic fails",
+    "placeholders": {
+        "error": {
+            "type": "String"
+        },
+        "xato": {
+            "type": "String"
         }
-    },
-    "topicUpdatedSuccess": "Topic updated successfully!",
-
-    "noDiscussionsYet": "No discussions yet.",
-    "beTheFirstToStartConversation": "Be the first to start a conversation!",
-
-    "mustBeLoggedInToCreateResource": "You must be logged in to create a resource.",
-    "profileIncompleteToCreateResource": "Your profile information is incomplete. Please update your name in your profile.",
-
-    "profileIncompleteToCreateTopic": "Your profile name is not set. Please update your profile.",
-
-    "commentCannotBeEmpty": "Comment cannot be empty.",
-    "mustBeLoggedInToComment": "You must be logged in to comment.",
-    "commentAddedSuccessfully": "Comment added successfully!",
-    "failedToAddComment": "Failed to add comment: {error}",
-    "postedBy": "Posted by {authorName}",
-    "onDate": "on {date}",
-    "repliesTitle": "Replies",
-    "errorLoadingComments": "Error loading comments: {error}",
-    "noRepliesYet": "No replies yet. Be the first to comment!",
-    "writeAReplyHint": "Write a reply...",
-    "sendCommentTooltip": "Send Comment",
-
-    "welcomeBack": "Welcome back, {userName}!",
-    "guestUser": "Guest",
-    "readyToLearnSomethingNew": "Ready to learn something new today?",
-    "quickAccessTitle": "Quick Access",
-    "resourcesTitle": "Resources", 
-    "communityTitle": "Community",
-    "profileTitle": "Profile",     
-    "latestNewsTitle": "Latest News",
-    "sourceLabel": "Source",
-    "quizzesTitle": "Quizzes",
-
-    
-    "urlCannotBeEmpty": "URL cannot be empty",
-    "errorLoadingNews": "Error loading news: {error}",
-    "noNewsAvailable": "No news available at the moment.",
-
-    "adminPanelTitle": "Admin Panel",
-    "manageNewsTitle": "Manage News",
-    "manageNewsSubtitle": "Add, edit, or delete news articles",
-    "manageUsersTitle": "Manage Users",
-    "manageUsersSubtitle": "View users and manage roles (future)",
-    "manageResourcesTitle": "Manage Resources",
-    "manageResourcesSubtitle": "Oversee all learning resources (future)",
-
-    "confirmDeleteTitle": "Confirm Deletion",
-    "confirmDeleteNewsMessage": "Are you sure you want to delete \"{newsTitle}\"?",
-    "newsDeletedSuccess": "\"{newsTitle}\" deleted successfully.",
-    "failedToDeleteNews": "Failed to delete \"{newsTitle}\": {error}",
-    "addNewsTooltip": "Add New News Article",
-    "editNewsTooltip": "Edit News",
-    "deleteNewsTooltip": "Delete News",
-    "addNewsButton": "Add News",
-    "noNewsAvailableManager": "No news articles found. Add one!",
-
-    "editNewsTitle": "Edit News",
-    "addNewsTitle": "Add News Article",
-    "saveNewsTooltip": "Save News",
-    "newsTitleLabel": "Title",
-    "pleaseEnterNewsTitle": "Please enter a news title.",
-    "newsTitleMinLength": "News title must be at least {length} characters.",
-    "newsSourceLabel": "Source (e.g., Blog Name)",
-    "pleaseEnterNewsSource": "Please enter the news source.",
-    "newsUrlLabel": "Article URL",
-    "pleaseEnterNewsUrl": "Please enter the article URL.",
-    "pleaseEnterValidNewsUrl": "Please enter a valid URL (starting with http or https).",
-    "newsImageUrlLabel": "Image URL (Optional)",
-    "pleaseEnterValidImageUrl": "Please enter a valid image URL (starting with http or https), or leave blank.",
-    "publicationDateLabel": "Publication Date",
-    "pleaseSelectPublicationDate": "Please select a publication date.",
-    "noDateSelected": "No date selected",
-    "selectDateTooltip": "Select Date",
-    "updateNewsButton": "Update News",
-    "addNewsButtonForm": "Add News Article",
-    "newsUpdatedSuccess": "\"{newsTitle}\" updated successfully.",
-    "newsAddedSuccess": "\"{newsTitle}\" added successfully.",
-    "failedToSaveNews": "Failed to save news: {error}",
-
-    "errorLoadingUsers": "Error loading users: {error}",
-    "noUsersFound": "No users found.",
-    "noEmailProvided": "No email provided",
-    "roleLabel": "Role",
-    "registeredOnLabel": "Registered",
-
-    "manageUsersSubtitleNow": "View and search registered users",
-    "manageResourcesSubtitleNow": "View, edit, or delete any learning resource",
-
-    "confirmDeleteResourceMessage": "Are you sure you want to delete resource \"{resourceTitle}\"?",
-    "resourceDeletedSuccess": "Resource \"{resourceTitle}\" deleted successfully.",
-    "failedToDeleteResource": "Failed to delete resource \"{resourceTitle}\": {error}",
-    "errorLoadingResources": "Error loading resources: {error}",
-    "noResourcesFoundManager": "No resources found in the system.",
-    "editResourceTooltip": "Edit Resource",
-    "deleteResourceTooltip": "Delete Resource",
-
-    "manageQuizzesTitle": "Manage Quizzes",
-    "addQuizTooltip": "Add New Quiz",
-    "errorLoadingQuizzesAdmin": "Error loading quizzes: {error}",
-    "noQuizzesFoundManager": "No quizzes found. Add one!",
-    "confirmDeleteQuizMessage": "Are you sure you want to delete quiz \"{quizTitle}\" and all its questions? This action cannot be undone.",
-    "quizDeletedSuccess": "Quiz \"{quizTitle}\" and its questions deleted successfully.",
-    "failedToDeleteQuiz": "Failed to delete quiz \"{quizTitle}\": {error}",
-    "editDetailsButton": "Edit Details",
-    "manageQuestionsButton": "Questions",
-    "deleteQuizTooltip": "Delete Quiz and Questions",
-    "addQuizButton": "Add Quiz",
-    "manageQuizzesSubtitle": "Oversee all quizzes and their questions"
+    }
+},
+"createTopicValidationEmpty": "{fieldName} cannot be empty.",
+"createTopicValidationMinLength": "{fieldName} must be at least {length} characters long.",
+"createTopicValidationMaxLength": "{fieldName} cannot exceed {length} characters.",
+"errorLoadingData": "An error occurred while loading resources. Please try again.",
+"failedToUpdateTopic": "Error updating topic: {error}",
+"@failedToUpdateTopic": {
+    "description": "Error message shown when topic update fails",
+    "placeholders": {
+        "error": {
+            "type": "String",
+            "example": "Network error"
+        },
+        "xato": {
+            "type": "String"
+        }
+    }
+},
+"topicUpdatedSuccess": "Topic updated successfully!",
+"noDiscussionsYet": "No discussions yet.",
+"beTheFirstToStartConversation": "Be the first to start a conversation!",
+"mustBeLoggedInToCreateResource": "You must be logged in to create a resource.",
+"profileIncompleteToCreateResource": "Your profile information is incomplete. Please update your name in your profile.",
+"profileIncompleteToCreateTopic": "Your profile name is not set. Please update your profile.",
+"commentCannotBeEmpty": "Comment cannot be empty.",
+"mustBeLoggedInToComment": "You must be logged in to comment.",
+"commentAddedSuccessfully": "Comment added successfully!",
+"failedToAddComment": "Failed to add comment: {error}",
+"@failedToAddComment": {
+    "description": "Error message when adding a comment fails",
+    "placeholders": {
+        "error": {
+            "type": "String"
+        },
+        "xato": {
+            "type": "String"
+        }
+    }
+},
+"postedBy": "Posted by {authorName}",
+"onDate": "on {date}",
+"repliesTitle": "Replies",
+"errorLoadingComments": "Error loading comments: {error}",
+"noRepliesYet": "No replies yet. Be the first to comment!",
+"writeAReplyHint": "Write a reply...",
+"sendCommentTooltip": "Send Comment",
+"welcomeBack": "Welcome back, {userName}!",
+"readyToLearnSomethingNew": "Ready to learn something new today?",
+"quickAccessTitle": "Quick Access",
+"communityTitle": "Forum",
+"profileTitle": "Profile",
+"latestNewsTitle": "Latest News",
+"sourceLabel": "Source",
+"quizzesTitle": "Quizzes",
+"urlCannotBeEmpty": "URL cannot be empty",
+"errorLoadingNews": "Error loading news: {error}",
+"noNewsAvailable": "No news available at the moment.",
+"adminPanelTitle": "Admin Panel",
+"manageNewsTitle": "Manage News",
+"manageNewsSubtitle": "Add, edit, or delete news articles",
+"manageUsersTitle": "Manage Users",
+"manageUsersSubtitle": "View users and manage roles (future)",
+"manageResourcesTitle": "Manage Guides",
+"manageResourcesSubtitle": "Oversee all learning resources (future)",
+"confirmDeleteTitle": "Confirm Deletion",
+"confirmDeleteNewsMessage": "Are you sure you want to delete \"{newsTitle}\"?",
+"newsDeletedSuccess": "\"{newsTitle}\" deleted successfully.",
+"failedToDeleteNews": "Failed to delete \"{newsTitle}\": {error}",
+"@failedToDeleteNews": {
+    "description": "Error message when deleting news fails",
+    "placeholders": {
+        "error": {
+            "type": "String"
+        },
+        "newsTitle": {
+            "type": "Object"
+        },
+        "xato": {
+            "type": "Object"
+        }
+    }
+},
+"addNewsTooltip": "Add New News Article",
+"editNewsTooltip": "Edit News",
+"deleteNewsTooltip": "Delete News",
+"addNewsButton": "Add News",
+"noNewsAvailableManager": "No news articles found. Add one!",
+"editNewsTitle": "Edit News",
+"addNewsTitle": "Add News Article",
+"saveNewsTooltip": "Save News",
+"newsTitleLabel": "Title",
+"pleaseEnterNewsTitle": "Please enter a news title.",
+"newsTitleMinLength": "News title must be at least {length} characters.",
+"newsSourceLabel": "Source (e.g., Blog Name)",
+"pleaseEnterNewsSource": "Please enter the news source.",
+"newsUrlLabel": "Article URL",
+"pleaseEnterNewsUrl": "Please enter the article URL.",
+"pleaseEnterValidNewsUrl": "Please enter a valid URL (starting with http or https).",
+"newsImageUrlLabel": "Image URL (Optional)",
+"pleaseEnterValidImageUrl": "Please enter a valid image URL (starting with http or https), or leave blank.",
+"publicationDateLabel": "Publication Date",
+"pleaseSelectPublicationDate": "Please select a publication date.",
+"noDateSelected": "No date selected",
+"selectDateTooltip": "Select Date",
+"updateNewsButton": "Update News",
+"addNewsButtonForm": "Add News Article",
+"newsUpdatedSuccess": "\"{newsTitle}\" updated successfully.",
+"newsAddedSuccess": "\"{newsTitle}\" added successfully.",
+"failedToSaveNews": "Failed to save news: {error}",
+"@failedToSaveNews": {
+    "description": "Error message when saving news fails",
+    "placeholders": {
+        "error": {
+            "type": "String"
+        },
+        "xato": {
+            "type": "Object"
+        }
+    }
+},
+"errorLoadingUsers": "Error loading users: {error}",
+"noUsersFound": "No users found.",
+"noEmailProvided": "No email provided",
+"roleLabel": "Role",
+"registeredOnLabel": "Registered",
+"manageUsersSubtitleNow": "View and search registered users",
+"manageResourcesSubtitleNow": "View, edit, or delete any learning resource",
+"confirmDeleteResourceMessage": "Are you sure you want to delete resource \"{resourceTitle}\"?",
+"failedToDeleteResource": "Failed to delete resource \"{resourceTitle}\": {error}",
+"@failedToDeleteResource": {
+    "description": "Error message when deleting resource fails",
+    "placeholders": {
+        "error": {
+            "type": "String"
+        },
+        "resourceTitle": {
+            "type": "Object"
+        },
+        "xato": {
+            "type": "Object"
+        }
+    }
+},
+"errorLoadingResources": "Error loading resources: {error}",
+"noResourcesFoundManager": "No resources found in the system.",
+"editResourceTooltip": "Edit Resource",
+"deleteResourceTooltip": "Delete Resource",
+"manageQuizzesTitle": "Manage Quizzes",
+"addQuizTooltip": "Add New Quiz",
+"errorLoadingQuizzesAdmin": "Error loading quizzes: {error}",
+"noQuizzesFoundManager": "No quizzes found. Add one!",
+"confirmDeleteQuizMessage": "Are you sure you want to delete quiz \"{quizTitle}\" and all its questions? This action cannot be undone.",
+"quizDeletedSuccess": "Quiz \"{quizTitle}\" and its questions deleted successfully.",
+"failedToDeleteQuiz": "Failed to delete quiz \"{quizTitle}\": {error}",
+"@failedToDeleteQuiz": {
+    "description": "Error message when deleting quiz fails",
+    "placeholders": {
+        "error": {
+            "type": "String"
+        },
+        "quizTitle": {
+            "type": "Object"
+        },
+        "xato": {
+            "type": "Object"
+        }
+    }
+},
+"editDetailsButton": "Edit Details",
+"manageQuestionsButton": "Questions",
+"deleteQuizTooltip": "Delete Quiz and Questions",
+"addQuizButton": "Add Quiz",
+"manageQuizzesSubtitle": "Oversee all quizzes and their questions"
 }

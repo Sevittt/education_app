@@ -9,7 +9,79 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
-  String get appTitle => 'Teach&Learn';
+  String get appTitle => 'Справочник Судьи';
+
+  @override
+  String get loginWelcomeTitle => 'Добро пожаловать!';
+
+  @override
+  String get loginWelcomeSubtitle => 'Войдите, чтобы продолжить';
+
+  @override
+  String get bottomNavHome => 'Главная';
+
+  @override
+  String get bottomNavResources => 'Руководства';
+
+  @override
+  String get bottomNavCommunity => 'Обсуждение';
+
+  @override
+  String get bottomNavProfile => 'Профиль';
+
+  @override
+  String get resourcesScreenTitle => 'Руководства и обучающие материалы';
+
+  @override
+  String get roleXodim => 'Staff';
+
+  @override
+  String get roleEkspert => 'Expert';
+
+  @override
+  String get roleAdmin => 'Администратор';
+
+  @override
+  String get registrationTitle => 'Создать учётную запись';
+
+  @override
+  String get registrationSubtitle => 'Присоединяйтесь к профессиональному сообществу!';
+
+  @override
+  String get registrationFullNameLabel => 'ФИО';
+
+  @override
+  String get registrationFullNameError => 'Пожалуйста, введите своё полное имя';
+
+  @override
+  String get registrationRoleLabel => 'Ваша роль';
+
+  @override
+  String get registrationRoleError => 'Выберите роль';
+
+  @override
+  String get registrationRoleXodim => 'Обычный сотрудник';
+
+  @override
+  String get registrationRoleEkspert => 'Эксперт (создатель руководства)';
+
+  @override
+  String get registrationPasswordLabel => 'Пароль';
+
+  @override
+  String get registrationPasswordError => 'Пароль должен быть не менее 6 символов';
+
+  @override
+  String get registrationConfirmPasswordLabel => 'Подтвердить пароль';
+
+  @override
+  String get registrationConfirmPasswordError => 'Пароли не совпали';
+
+  @override
+  String get registrationSignUpButton => 'Зарегистрироваться';
+
+  @override
+  String get registrationSwitchToLogin => 'У вас есть учётная запись? Войти';
 
   @override
   String get languageEnglish => 'Английский (США)';
@@ -48,13 +120,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsHelpCenter => 'Центр помощи';
 
   @override
-  String get settingsAboutApp => 'О Teach & Learn';
+  String get settingsAboutApp => 'О Справочнике Судьи';
 
   @override
-  String get settingsAppLegalese => '© 2025 Teach & Learn Проект';
+  String get settingsAppLegalese => '© 2025 Проект Справочник Судьи';
 
   @override
-  String get settingsAppDescription => 'Преодоление разрыва в IT-навыках посредством совместного обучения и обмена ресурсами.';
+  String get settingsAppDescription => 'Мобильная платформа для повышения профессиональной компетентности работников суда.';
 
   @override
   String get errorPrefix => 'Ошибка: ';
@@ -152,7 +224,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get createResourceFormWillBeHere => 'Форма создания ресурса будет здесь.';
 
   @override
-  String get saveButtonText => 'Сохранить изменения';
+  String get saveButtonText => 'Сохранить';
 
   @override
   String get createResourceTitleLabel => 'Название';
@@ -412,7 +484,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get topicCreatedSuccess => 'Тема создана успешно!';
 
   @override
-  String failedToCreateTopic(Object error, Object xato) {
+  String failedToCreateTopic(String error, String xato) {
     return 'Не удалось создать тему: $error';
   }
 
@@ -435,7 +507,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get errorLoadingData => 'Произошла ошибка при загрузке ресурсов. Повторите попытку.';
 
   @override
-  String failedToUpdateTopic(String error, Object xato) {
+  String failedToUpdateTopic(String error, String xato) {
     return 'Ошибка обновления темы: $error';
   }
 
@@ -467,7 +539,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get commentAddedSuccessfully => 'Комментарий успешно добавлен!';
 
   @override
-  String failedToAddComment(Object error, Object xato) {
+  String failedToAddComment(String error, String xato) {
     return 'Не удалось добавить комментарий: $error';
   }
 
@@ -570,7 +642,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteNews(Object error, Object newsTitle, Object xato) {
+  String failedToDeleteNews(String error, Object newsTitle, Object xato) {
     return 'Не удалось удалить \"$newsTitle\": $error';
   }
 
@@ -659,7 +731,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String failedToSaveNews(Object error, Object xato) {
+  String failedToSaveNews(String error, Object xato) {
     return 'Не удалось сохранить новости: $error';
   }
 
@@ -692,7 +764,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteResource(Object error, Object resourceTitle, Object xato) {
+  String failedToDeleteResource(String error, Object resourceTitle, Object xato) {
     return 'Не удалось удалить ресурс \"$resourceTitle\": $error';
   }
 
@@ -735,7 +807,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteQuiz(Object error, Object quizTitle, Object xato) {
+  String failedToDeleteQuiz(String error, Object quizTitle, Object xato) {
     return 'Не удалось удалить тест \"$quizTitle\": $error';
   }
 

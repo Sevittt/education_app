@@ -9,7 +9,79 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Teach&Learn';
+  String get appTitle => 'Court Handbook';
+
+  @override
+  String get loginWelcomeTitle => 'Welcome Back!';
+
+  @override
+  String get loginWelcomeSubtitle => 'Sign in to continue';
+
+  @override
+  String get bottomNavHome => 'Home';
+
+  @override
+  String get bottomNavResources => 'Guides';
+
+  @override
+  String get bottomNavCommunity => 'Forum';
+
+  @override
+  String get bottomNavProfile => 'Profile';
+
+  @override
+  String get resourcesScreenTitle => 'Guides & Manuals';
+
+  @override
+  String get roleXodim => 'Staff';
+
+  @override
+  String get roleEkspert => 'Expert';
+
+  @override
+  String get roleAdmin => 'Administrator';
+
+  @override
+  String get registrationTitle => 'Create Your Account';
+
+  @override
+  String get registrationSubtitle => 'Join the professional community!';
+
+  @override
+  String get registrationFullNameLabel => 'Full Name';
+
+  @override
+  String get registrationFullNameError => 'Please enter your full name';
+
+  @override
+  String get registrationRoleLabel => 'Your Role';
+
+  @override
+  String get registrationRoleError => 'Please select a role';
+
+  @override
+  String get registrationRoleXodim => 'Regular Staff';
+
+  @override
+  String get registrationRoleEkspert => 'Expert (Content Creator)';
+
+  @override
+  String get registrationPasswordLabel => 'Password';
+
+  @override
+  String get registrationPasswordError => 'Password must be at least 6 characters long';
+
+  @override
+  String get registrationConfirmPasswordLabel => 'Confirm Password';
+
+  @override
+  String get registrationConfirmPasswordError => 'Passwords do not match';
+
+  @override
+  String get registrationSignUpButton => 'Sign Up';
+
+  @override
+  String get registrationSwitchToLogin => 'Already have an account? Sign In';
 
   @override
   String get languageEnglish => 'English (US)';
@@ -48,10 +120,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsHelpCenter => 'Help Center';
 
   @override
-  String get settingsAboutApp => 'About Teach & Learn';
+  String get settingsAboutApp => 'About Court Handbook';
 
   @override
-  String get settingsAppLegalese => '© 2025 Teach & Learn Project';
+  String get settingsAppLegalese => '© 2025 Court Handbook Project';
 
   @override
   String get settingsAppDescription => 'Bridging the IT skills gap through collaborative learning and resource sharing.';
@@ -84,7 +156,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeDashboardTitle => 'Dashboard';
 
   @override
-  String get communityScreenTitle => 'Community';
+  String get communityScreenTitle => 'Forum';
 
   @override
   String get profileScreenTitle => 'Profile';
@@ -117,10 +189,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logoutButton => 'Log out';
 
   @override
-  String get resourcesTitle => 'Resources';
+  String get resourcesTitle => 'Guides';
 
   @override
-  String get resourcesSearchHint => 'Search resources...';
+  String get resourcesSearchHint => 'Search guides...';
 
   @override
   String get resourcesFilterByType => 'Filter by Type';
@@ -146,7 +218,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get createResourceScreenTitle => 'Create New Resource';
+  String get createResourceScreenTitle => 'Create New Guide';
 
   @override
   String get createResourceFormWillBeHere => 'Resource creation form will be here.';
@@ -164,7 +236,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createResourceAuthorLabel => 'Author';
 
   @override
-  String get createResourceTypeLabel => 'Resource Type';
+  String get createResourceTypeLabel => 'System Type';
 
   @override
   String get createResourceUrlLabel => 'URL (Optional)';
@@ -191,7 +263,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get editButtonTooltip => 'Edit Resource';
 
   @override
-  String get editResourceScreenTitle => 'Edit Resource';
+  String get editResourceScreenTitle => 'Edit Guide';
 
   @override
   String get resourceTypeLabel => 'Type';
@@ -412,7 +484,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get topicCreatedSuccess => 'Topic created successfully!';
 
   @override
-  String failedToCreateTopic(Object error, Object xato) {
+  String failedToCreateTopic(String error, String xato) {
     return 'Failed to create topic: $error';
   }
 
@@ -435,7 +507,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorLoadingData => 'An error occurred while loading resources. Please try again.';
 
   @override
-  String failedToUpdateTopic(String error, Object xato) {
+  String failedToUpdateTopic(String error, String xato) {
     return 'Error updating topic: $error';
   }
 
@@ -467,7 +539,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commentAddedSuccessfully => 'Comment added successfully!';
 
   @override
-  String failedToAddComment(Object error, Object xato) {
+  String failedToAddComment(String error, String xato) {
     return 'Failed to add comment: $error';
   }
 
@@ -510,7 +582,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quickAccessTitle => 'Quick Access';
 
   @override
-  String get communityTitle => 'Community';
+  String get communityTitle => 'Forum';
 
   @override
   String get profileTitle => 'Profile';
@@ -551,7 +623,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get manageUsersSubtitle => 'View users and manage roles (future)';
 
   @override
-  String get manageResourcesTitle => 'Manage Resources';
+  String get manageResourcesTitle => 'Manage Guides';
 
   @override
   String get manageResourcesSubtitle => 'Oversee all learning resources (future)';
@@ -570,7 +642,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteNews(Object error, Object newsTitle, Object xato) {
+  String failedToDeleteNews(String error, Object newsTitle, Object xato) {
     return 'Failed to delete \"$newsTitle\": $error';
   }
 
@@ -659,7 +731,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String failedToSaveNews(Object error, Object xato) {
+  String failedToSaveNews(String error, Object xato) {
     return 'Failed to save news: $error';
   }
 
@@ -692,7 +764,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteResource(Object error, Object resourceTitle, Object xato) {
+  String failedToDeleteResource(String error, Object resourceTitle, Object xato) {
     return 'Failed to delete resource \"$resourceTitle\": $error';
   }
 
@@ -735,7 +807,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteQuiz(Object error, Object quizTitle, Object xato) {
+  String failedToDeleteQuiz(String error, Object quizTitle, Object xato) {
     return 'Failed to delete quiz \"$quizTitle\": $error';
   }
 

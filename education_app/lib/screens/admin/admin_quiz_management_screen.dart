@@ -1,7 +1,8 @@
 // lib/screens/admin/admin_quiz_management_screen.dart
-import 'package:education_app/l10n/app_localizations.dart';
+//import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart' show AppLocalizations;
 import '../../models/quiz.dart';
 import '../../services/quiz_service.dart';
 import '../resource/quiz/create_quiz_screen.dart'; // For adding new or editing quiz details

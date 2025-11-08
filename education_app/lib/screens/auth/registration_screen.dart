@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/auth_notifier.dart';
 import '../../models/users.dart'; // Import to use UserRole enum
 
@@ -71,6 +72,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Widget build(BuildContext context) {
     final _ = Theme.of(context);
     final authNotifier = Provider.of<AuthNotifier>(context);
+    final l10n = AppLocalizations.of(context)!; // O'ZGARISH
 
     return Scaffold(
       body: Center(
@@ -99,14 +101,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 // Name TextFormField
                 TextFormField(
                   controller: _nameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Full Name',
-                    prefixIcon: Icon(Icons.person),
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: l10n.registrationNameLabel, // O'ZGARISH
+                    prefixIcon: const Icon(Icons.person),
+                    border: const OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Please enter your full name';
+                      return l10n.registrationNameError; // O'ZGARISH
                     }
                     return null;
                   },
@@ -116,15 +118,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 // Email TextFormField
                 TextFormField(
                   controller: _emailController,
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    prefixIcon: Icon(Icons.email_outlined),
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: l10n.emailLabel, // O'ZGARISH
+                    prefixIcon: const Icon(Icons.email_outlined),
+                    border: const OutlineInputBorder(),
                   ),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value == null || !value.contains('@')) {
-                      return 'Please enter a valid email';
+                      return l10n.registrationEmailError; // O'ZGARISH
                     }
                     return null;
                   },
@@ -134,21 +136,21 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 // --- NEW: Role Selection Dropdown ---
                 DropdownButtonFormField<UserRole>(
                   value: _selectedRole,
-                  decoration: const InputDecoration(
-                    labelText: 'I am a...',
-                    prefixIcon: Icon(Icons.work_outline),
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: l10n.registrationRoleLabel, // O'ZGARISH
+                    prefixIcon: const Icon(Icons.work_outline),
+                    border: const OutlineInputBorder(),
                   ),
-                  hint: const Text('Select your role'),
+                  hint: Text(l10n.registrationRoleHint ?? ''), // O'ZGARISH
                   items: [
-                    // We only allow users to register as student or teacher
-                    const DropdownMenuItem(
-                      value: UserRole.student,
-                      child: Text('Student'),
+                    // O'ZGARISH: Faqat xodim va ekspert uchun
+                    DropdownMenuItem(
+                      value: UserRole.xodim,
+                      child: Text(l10n.registrationRoleXodim),
                     ),
-                    const DropdownMenuItem(
-                      value: UserRole.teacher,
-                      child: Text('Teacher'),
+                    DropdownMenuItem(
+                      value: UserRole.ekspert,
+                      child: Text(l10n.registrationRoleEkspert),
                     ),
                   ],
                   onChanged: (value) {
@@ -158,7 +160,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   },
                   validator: (value) {
                     if (value == null) {
-                      return 'Please select a role';
+                      return l10n.registrationRoleError; // O'ZGARISH
                     }
                     return null;
                   },
@@ -168,15 +170,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 // Password TextFormField
                 TextFormField(
                   controller: _passwordController,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                    prefixIcon: Icon(Icons.lock),
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText: l10n.registrationPasswordLabel, // O'ZGARISH
+                    prefixIcon: const Icon(Icons.lock),
+                    border: const OutlineInputBorder(),
                   ),
                   obscureText: true,
                   validator: (value) {
                     if (value == null || value.length < 6) {
-                      return 'Password must be at least 6 characters long';
+                      return l10n.registrationPasswordError; // O'ZGARISH
                     }
                     return null;
                   },
@@ -186,15 +188,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 // Confirm Password TextFormField
                 TextFormField(
                   controller: _confirmPasswordController,
-                  decoration: const InputDecoration(
-                    labelText: 'Confirm Password',
-                    prefixIcon: Icon(Icons.lock_outline),
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    labelText:
+                        l10n.registrationConfirmPasswordLabel, // O'ZGARISH
+                    prefixIcon: const Icon(Icons.lock_outline),
+                    border: const OutlineInputBorder(),
                   ),
                   obscureText: true,
                   validator: (value) {
                     if (value != _passwordController.text) {
-                      return 'Passwords do not match';
+                      return l10n.registrationConfirmPasswordError; // O'ZGARISH
                     }
                     return null;
                   },
@@ -210,14 +213,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   child:
                       authNotifier.isLoading
                           ? const CircularProgressIndicator(color: Colors.white)
-                          : const Text('Sign Up'),
+                          : Text(l10n.registrationSignUpButton), // O'ZGARISH
                 ),
                 const SizedBox(height: 16),
 
                 // Switch to Login Screen
                 TextButton(
                   onPressed: widget.onSwitchToLogin,
-                  child: const Text("Already have an account? Sign In"),
+                  child: Text(l10n.registrationSwitchToLogin), // O'ZGARISH
                 ),
               ],
             ),

@@ -9,7 +9,79 @@ class AppLocalizationsUz extends AppLocalizations {
   AppLocalizationsUz([String locale = 'uz']) : super(locale);
 
   @override
-  String get appTitle => 'Teach&Learn';
+  String get appTitle => 'Sud Qo\'llanmasi';
+
+  @override
+  String get loginWelcomeTitle => 'Xush kelibsiz!';
+
+  @override
+  String get loginWelcomeSubtitle => 'Davom etish uchun kiring';
+
+  @override
+  String get bottomNavHome => 'Bosh Sahifa';
+
+  @override
+  String get bottomNavResources => 'Qo\'llanmalar';
+
+  @override
+  String get bottomNavCommunity => 'Munozara';
+
+  @override
+  String get bottomNavProfile => 'Profil';
+
+  @override
+  String get resourcesScreenTitle => 'Qo\'llanmalar va Yo\'riqnomalar';
+
+  @override
+  String get roleXodim => 'Xodim';
+
+  @override
+  String get roleEkspert => 'Ekspert';
+
+  @override
+  String get roleAdmin => 'Administrator';
+
+  @override
+  String get registrationTitle => 'Hisob Yaratish';
+
+  @override
+  String get registrationSubtitle => 'Professional hamjamiyatga qo\'shiling!';
+
+  @override
+  String get registrationFullNameLabel => 'To\'liq Ism (F.I.Sh.)';
+
+  @override
+  String get registrationFullNameError => 'Iltimos, to\'liq ismingizni kiriting';
+
+  @override
+  String get registrationRoleLabel => 'Sizning Rolingiz';
+
+  @override
+  String get registrationRoleError => 'Iltimos, rolni tanlang';
+
+  @override
+  String get registrationRoleXodim => 'Oddiy Xodim';
+
+  @override
+  String get registrationRoleEkspert => 'Ekspert (Qo\'llanma yaratuvchi)';
+
+  @override
+  String get registrationPasswordLabel => 'Parol';
+
+  @override
+  String get registrationPasswordError => 'Parol kamida 6 belgidan iborat bo\'lishi kerak';
+
+  @override
+  String get registrationConfirmPasswordLabel => 'Parolni tasdiqlang';
+
+  @override
+  String get registrationConfirmPasswordError => 'Parollar mos kelmadi';
+
+  @override
+  String get registrationSignUpButton => 'Ro\'yxatdan o\'tish';
+
+  @override
+  String get registrationSwitchToLogin => 'Hisobingiz bormi? Kirish';
 
   @override
   String get languageEnglish => 'Inglizcha (AQSh)';
@@ -48,13 +120,13 @@ class AppLocalizationsUz extends AppLocalizations {
   String get settingsHelpCenter => 'Yordam markazi';
 
   @override
-  String get settingsAboutApp => 'Teach & Learn haqida';
+  String get settingsAboutApp => 'Sud Qo\'llanmasi haqida';
 
   @override
-  String get settingsAppLegalese => '© 2025 Teach & Learn Loyihasi';
+  String get settingsAppLegalese => '© 2025 Sud Qo\'llanmasi Loyihasi';
 
   @override
-  String get settingsAppDescription => 'Hamkorlikda o\'rganish va manbalarni almashish orqali AT ko\'nikmalari bo\'shlig\'ini to\'ldirish.';
+  String get settingsAppDescription => 'Sud xodimlarining kasbiy kompetentligi uchun mobil platforma.';
 
   @override
   String get errorPrefix => 'Xatolik: ';
@@ -152,7 +224,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get createResourceFormWillBeHere => 'Resurs yaratish shakli shu yerda bo\'ladi.';
 
   @override
-  String get saveButtonText => 'O\'zgarishlarni saqlash';
+  String get saveButtonText => 'Saqlash';
 
   @override
   String get createResourceTitleLabel => 'Sarlavha';
@@ -412,7 +484,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get topicCreatedSuccess => 'Mavzu muvaffaqiyatli yaratildi!';
 
   @override
-  String failedToCreateTopic(Object error, Object xato) {
+  String failedToCreateTopic(String error, String xato) {
     return 'Mavzu yaratib bo\'lmadi: $xato';
   }
 
@@ -435,7 +507,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get errorLoadingData => 'Resurslarni yuklashda xatolik yuz berdi. Qayta urinib ko\'ring.';
 
   @override
-  String failedToUpdateTopic(String error, Object xato) {
+  String failedToUpdateTopic(String error, String xato) {
     return 'Mavzuni yangilashda xatolik yuz berdi: $xato';
   }
 
@@ -467,7 +539,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get commentAddedSuccessfully => 'Izoh muvaffaqiyatli qo\'shildi!';
 
   @override
-  String failedToAddComment(Object error, Object xato) {
+  String failedToAddComment(String error, String xato) {
     return 'Izoh qo\'shib bo\'lmadi: $xato';
   }
 
@@ -570,7 +642,7 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteNews(Object error, Object newsTitle, Object xato) {
+  String failedToDeleteNews(String error, Object newsTitle, Object xato) {
     return '\"$newsTitle\" o\'chirilmadi: $xato';
   }
 
@@ -659,7 +731,7 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String failedToSaveNews(Object error, Object xato) {
+  String failedToSaveNews(String error, Object xato) {
     return 'Yangilikni saqlab bo\'lmadi: $xato';
   }
 
@@ -692,7 +764,7 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteResource(Object error, Object resourceTitle, Object xato) {
+  String failedToDeleteResource(String error, Object resourceTitle, Object xato) {
     return '\"$resourceTitle\" manbasini o\'chirib bo\'lmadi: $xato';
   }
 
@@ -735,7 +807,7 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteQuiz(Object error, Object quizTitle, Object xato) {
+  String failedToDeleteQuiz(String error, Object quizTitle, Object xato) {
     return '\"$quizTitle\" testini o\'chirib bo\'lmadi: $xato';
   }
 

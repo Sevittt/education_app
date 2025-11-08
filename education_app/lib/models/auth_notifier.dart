@@ -52,7 +52,12 @@ class AuthNotifier with ChangeNotifier {
           id: uid,
           name: _pendingUserName ?? _firebaseUser?.displayName ?? 'New User',
           email: _firebaseUser?.email ?? '',
-          role: _pendingUserRole ?? UserRole.student, // Use pending role!
+          // O'ZGARISH: Bu yerda bizning mavzuga mos rollar bo'lishi kerak.
+          // Ro'yxatdan o'tishda tanlangan rolni (pendingUserRole) olamiz.
+          // Agar ro'yxatdan o'tish bo'lmasa (masalan, eski foydalanuvchi), 'student' (Xodim) bo'ladi.
+          role:
+              _pendingUserRole ??
+              UserRole.student, // 'student'ni 'Xodim' deb tushunamiz
           profilePictureUrl: _firebaseUser?.photoURL,
           registrationDate:
               _firebaseUser?.metadata.creationTime ?? DateTime.now(),
@@ -60,6 +65,7 @@ class AuthNotifier with ChangeNotifier {
         );
 
         if (_appUser != null) {
+          // O'ZGARISH: .toMap() dagi xatolik tuzatildi (users.dart faylida)
           await _firestore.collection('users').doc(uid).set(_appUser!.toMap());
         }
 
@@ -99,7 +105,7 @@ class AuthNotifier with ChangeNotifier {
     try {
       // --- NEW: Store name and role before calling Firebase ---
       _pendingUserName = name;
-      _pendingUserRole = role;
+      _pendingUserRole = role; // O'ZGARISH: Ro'lni saqlab qolish
 
       // The actual Firebase sign up still only needs email and password
       final fb_auth.User? user = await _authService.signUpWithEmailAndPassword(

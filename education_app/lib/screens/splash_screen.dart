@@ -55,12 +55,12 @@ class _SplashScreenState extends State<SplashScreen>
 
     return Scaffold(
       backgroundColor:
-          theme.colorScheme.primaryContainer, // Example: Use a theme color
+          theme.colorScheme.surface, // O'ZGARISH: Orqa fonni moslashtirdim
       body: Center(
         child: ScaleTransition(
           scale: _scaleAnimation,
           child: Image.asset(
-            'assets/images/Shared_Knowledge.png', // Your logo
+            'assets/images/app_logo.png', // O'ZGARISH: Yangi logotip yo'li
             width: 400, // Adjust size as needed
             height: 400,
             // Consider adding a semantic label for accessibility

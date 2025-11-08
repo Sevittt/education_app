@@ -7,6 +7,8 @@ enum UserRole {
   student,
   teacher,
   admin,
+  xodim,
+  ekspert,
   // Add other roles as needed
 }
 
@@ -14,6 +16,9 @@ enum UserRole {
 UserRole stringToUserRole(String? roleString) {
   if (roleString == null) return UserRole.student; // Default if null
   try {
+    // O'ZGARISH: Yangi rollarni moslashtirish uchun
+    // Bizning holatda "Xodim", "Ekspert", "Administrator"
+    // Hozircha student/teacher/admin qoldiramiz, keyingi bosqichda o'zgartiramiz
     return UserRole.values.firstWhere(
       (e) =>
           e.toString().split('.').last.toLowerCase() ==
@@ -70,8 +75,12 @@ class User {
       'role': userRoleToString(role), // Store enum as string
       'profilePictureUrl': profilePictureUrl,
       'bio': bio,
-      'registrationDate': registrationDate?.toIso8601String(),
-      'lastLogin': lastLogin?.toIso8601String(),
+      'registrationDate':
+          registrationDate
+              ?.toIso8601String(), // O'ZGARISH: toIso8601String bo'lishi kerak
+      'lastLogin':
+          lastLogin
+              ?.toIso8601String(), // O'ZGARISH: toIso8601String bo'lishi kerak
     };
   }
 

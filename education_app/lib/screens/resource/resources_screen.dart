@@ -1,8 +1,9 @@
 // lib/screens/resource/resources_screen.dart
 
-import 'package:education_app/l10n/app_localizations.dart';
+//import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import 'resource_detail_screen.dart';
 import '../../models/resource.dart';
 import '../../services/resource_service.dart';
@@ -62,19 +63,19 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
         iconData = Icons.article_outlined;
         iconColor = Colors.orange.shade700;
         break;
-      case ResourceType.video:
+      case ResourceType.eSud:
         iconData = Icons.play_circle_outline;
         iconColor = Colors.red.shade700;
         break;
-      case ResourceType.code:
+      case ResourceType.adolat:
         iconData = Icons.code_outlined;
         iconColor = Colors.green.shade700;
         break;
-      case ResourceType.lessonPlan:
+      case ResourceType.jibSud:
         iconData = Icons.assignment_outlined;
         iconColor = Colors.purple.shade700;
         break;
-      case ResourceType.tutorial:
+      case ResourceType.edoSud:
         iconData = Icons.school_outlined;
         iconColor = Colors.blue.shade700;
         break;
@@ -99,7 +100,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final TextTheme textTheme = theme.textTheme;
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!; // O'ZGARISH
     final resourceService = Provider.of<ResourceService>(
       context,
       listen: false,
@@ -107,7 +108,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n?.resourcesTitle ?? 'Resources'),
+        title: Text(l10n.resourcesScreenTitle), // O'ZGARISH
         centerTitle: true,
       ),
       body: RefreshIndicator(
@@ -126,7 +127,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                 // ... (your existing TextField code for search)
                 controller: _searchController,
                 decoration: InputDecoration(
-                  hintText: l10n?.resourcesSearchHint ?? 'Search resources...',
+                  hintText: l10n.resourcesSearchHint, // O'ZGARISH
                   prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24.0),
@@ -145,7 +146,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
               child: DropdownButtonFormField<ResourceType?>(
                 // ... (your existing DropdownButtonFormField code for filter)
                 decoration: InputDecoration(
-                  labelText: l10n?.resourcesFilterByType ?? 'Filter by Type',
+                  labelText: l10n.resourcesFilterByType, // O'ZGARISH
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
@@ -153,12 +154,12 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                   fillColor: colorScheme.surface,
                 ),
                 value: _selectedResourceType,
-                hint: Text(l10n?.resourcesAllTypes ?? 'All Types'),
+                hint: Text(l10n.resourcesAllTypes), // O'ZGARISH
                 isExpanded: true,
                 items: [
                   DropdownMenuItem<ResourceType?>(
                     value: null,
-                    child: Text(l10n?.resourcesAllTypes ?? 'All Types'),
+                    child: Text(l10n.resourcesAllTypes), // O'ZGARISH
                   ),
                   ...ResourceType.values.map((ResourceType type) {
                     return DropdownMenuItem<ResourceType>(
@@ -196,8 +197,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
-                          l10n?.errorLoadingData ??
-                              'An error occurred. Please try again later.',
+                          l10n.errorLoadingData, // O'ZGARISH
                           textAlign: TextAlign.center,
                           style: textTheme.bodyLarge?.copyWith(
                             color: colorScheme.error,
@@ -213,8 +213,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                     // This covers the case where the stream is active but returns an empty list.
                     return Center(
                       child: Text(
-                        l10n?.resourcesNoResourcesFound ??
-                            'No resources found.',
+                        l10n.resourcesNoResourcesFound, // O'ZGARISH
                         style: textTheme.bodyMedium,
                       ),
                     );
@@ -255,8 +254,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            l10n?.resourcesNoResourcesMatch ??
-                                'No resources match your criteria.',
+                            l10n.resourcesNoResourcesMatch, // O'ZGARISH
                             style: textTheme.titleMedium?.copyWith(
                               color: colorScheme.onSurface.withOpacity(0.6),
                             ),

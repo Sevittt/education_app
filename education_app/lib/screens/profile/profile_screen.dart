@@ -7,6 +7,7 @@ import 'package:intl/intl.dart'; // For date formatting
 
 import '../../models/auth_notifier.dart';
 import '../../models/quiz_attempt.dart';
+import '../../models/users.dart'; // O'ZGARISH: users.dart import qilinganiga ishonch hosil qiling
 import '../../services/quiz_service.dart';
 import 'settings_screen.dart';
 import 'theme_options_screen.dart';
@@ -127,6 +128,20 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
+  // O'ZGARISH: Rolni lokalizatsiya qilingan matnga o'girish uchun yordamchi funksiya
+  String? _getRoleName(UserRole role, AppLocalizations l10n) {
+    switch (role) {
+      case UserRole.xodim:
+        return l10n.roleXodim;
+      case UserRole.ekspert:
+        return l10n.roleEkspert;
+      case UserRole.admin:
+        return l10n.roleAdmin;
+      default:
+        return l10n.roleXodim;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -205,7 +220,8 @@ class ProfileScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   Text(
-                    '${l10n.role}: ${appUser?.role.name ?? l10n.loading}',
+                    // O'ZGARISH: Rol nomini yordamchi funksiya orqali olish
+                    '${l10n.roleLabel} ${appUser != null ? _getRoleName(appUser.role, l10n) : l10n.loading}',
                     style: textTheme.titleMedium?.copyWith(
                       color: colorScheme.secondary,
                     ),

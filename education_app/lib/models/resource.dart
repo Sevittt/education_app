@@ -4,7 +4,9 @@
 // import 'package:education_app/screens/resource/create_resource_screen.dart';
 
 // Define the ResourceType enum
-enum ResourceType { article, video, code, lessonPlan, tutorial, other }
+// O'ZGARISH: Enum qiymatlarini mavzuga mosladik
+enum ResourceType { eSud, adolat, jibSud, edoSud, other, article }
+// enum ResourceType { article, video, code, lessonPlan, tutorial, other } // ESKISI
 
 class Resource {
   final String id;
@@ -64,6 +66,7 @@ class Resource {
             typeString.toLowerCase(),
       );
     } catch (e) {
+      // O'ZGARISH: Xatolik yuz berganda 'other' turini belgilash
       print(
         "Warning: Invalid resource type '$typeString' for ID $id. Using 'other'",
       );

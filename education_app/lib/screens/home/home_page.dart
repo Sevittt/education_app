@@ -1,13 +1,19 @@
 // lib/home_page.dart
 
 // lib/screens/home/home_page.dart
-import 'package:education_app/screens/community/community_screen.dart';
-import 'package:education_app/screens/home/home_dashboard_screen.dart';
-import 'package:education_app/screens/profile/profile_screen.dart';
-import 'package:education_app/screens/resource/resources_screen.dart';
+// import 'package:education_app/l10n/app_localizations.dart'; // O'ZGARISH: Lokalizatsiyani import qilish
+// import 'package:education_app/screens/community/community_screen.dart';
+// import 'package:education_app/screens/home/home_dashboard_screen.dart';
+// import 'package:education_app/screens/profile/profile_screen.dart';
+// import 'package:education_app/screens/resource/resources_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
+import 'package:sud_qollanma/screens/community/community_screen.dart';
+import 'package:sud_qollanma/screens/home/home_dashboard_screen.dart';
+import 'package:sud_qollanma/screens/profile/profile_screen.dart';
+import 'package:sud_qollanma/screens/resource/resources_screen.dart';
 import '../../models/auth_notifier.dart';
 import '../../models/users.dart'; // Import UserRole
 import '../resource/create_resource_screen.dart';
@@ -124,7 +130,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var appBar = AppBar(
-      title: const Text('Teach & Learn'), // Updated App Title
+      title: Text(
+        AppLocalizations.of(context)!.appTitle,
+      ), // O'ZGARISH: Sarlavhani lokalizatsiyadan olish
       centerTitle: true,
       elevation: Theme.of(context).appBarTheme.elevation ?? 2.0,
     );

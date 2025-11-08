@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="education_app"
+        android:label="Sud Qo'llanmasi"
         android:name="${applicationName}"
         android:icon="@mipmap/teach">
         <activity

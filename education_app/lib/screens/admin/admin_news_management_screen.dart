@@ -1,8 +1,9 @@
 // lib/screens/admin/admin_news_management_screen.dart
-import 'package:education_app/l10n/app_localizations.dart';
+//import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart'; // For date formatting
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 
 import '../../models/news.dart';
 import '../../services/news_service.dart';

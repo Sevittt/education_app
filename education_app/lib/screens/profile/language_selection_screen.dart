@@ -1,7 +1,8 @@
 // lib/screens/language_selection_screen.dart
-import 'package:education_app/l10n/app_localizations.dart';
+// import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/locale_notifier.dart';
 // Import the generated localizations file to access translated strings
 

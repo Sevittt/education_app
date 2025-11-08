@@ -1,14 +1,29 @@
 // lib/screens/admin/admin_user_list_screen.dart
-import 'package:education_app/l10n/app_localizations.dart';
+// import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart'; // For date formatting
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 
 import '../../models/users.dart'; // Your main User model
 import '../../services/profile_service.dart';
 
 class AdminUserListScreen extends StatelessWidget {
   const AdminUserListScreen({super.key});
+
+  // O'ZGARISH: Rolni lokalizatsiya qilingan matnga o'girish uchun yordamchi funksiya
+  String? _getRoleName(UserRole role, AppLocalizations l10n) {
+    switch (role) {
+      case UserRole.xodim:
+        return l10n.roleXodim;
+      case UserRole.ekspert:
+        return l10n.roleExpert;
+      case UserRole.admin:
+        return l10n.roleAdmin;
+      default:
+        return l10n.roleXodim;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +96,8 @@ class AdminUserListScreen extends StatelessWidget {
                         user.email ?? l10n.noEmailProvided,
                       ), // "No email provided"
                       Text(
-                        '${l10n.roleLabel}: ${userRoleToString(user.role)}', // "Role: {roleName}"
+                        // O'ZGARISH: Rol nomini yordamchi funksiya orqali olish
+                        '${l10n.roleLabel} ${_getRoleName(user.role, l10n)}', // "Role: {roleName}"
                         style: textTheme.bodySmall?.copyWith(
                           color: colorScheme.secondary,
                         ),
