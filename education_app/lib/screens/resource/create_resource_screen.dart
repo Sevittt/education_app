@@ -273,7 +273,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
 
               // Resource Type Dropdown
               DropdownButtonFormField<ResourceType>(
-                value: _selectedResourceType,
+                initialValue: _selectedResourceType,
                 decoration: InputDecoration(
                   labelText: l10n.createResourceTypeLabel,
                   border: const OutlineInputBorder(),

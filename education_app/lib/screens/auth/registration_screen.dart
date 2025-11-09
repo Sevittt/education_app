@@ -135,7 +135,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                 // --- NEW: Role Selection Dropdown ---
                 DropdownButtonFormField<UserRole>(
-                  value: _selectedRole,
+                  initialValue: _selectedRole,
                   decoration: InputDecoration(
                     labelText: l10n.registrationRoleLabel, // O'ZGARISH
                     prefixIcon: const Icon(Icons.work_outline),

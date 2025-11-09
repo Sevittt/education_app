@@ -20,5 +20,5 @@ class ThemeNotifier with ChangeNotifier {
   bool isLightMode() => _themeMode == ThemeMode.light;
   bool isDarkMode() => _themeMode == ThemeMode.dark;
 
-  getTheme() {}
+  void getTheme() {}
 }

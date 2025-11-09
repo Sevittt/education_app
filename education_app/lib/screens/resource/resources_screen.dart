@@ -153,7 +153,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                   filled: true,
                   fillColor: colorScheme.surface,
                 ),
-                value: _selectedResourceType,
+                initialValue: _selectedResourceType,
                 hint: Text(l10n.resourcesAllTypes), // O'ZGARISH
                 isExpanded: true,
                 items: [

@@ -133,5 +133,5 @@ class LanguageSelectionScreen extends StatelessWidget {
 }
 
 extension on AppLocalizations? {
-  get selectLanguage => null;
+  Null get selectLanguage => null;
 }
