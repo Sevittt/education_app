@@ -45,3 +45,11 @@ android {
 flutter {
     source = "../.."
 }
+
+if (_selectedResourceType != null) {
+  resourcesToShow =
+      resourcesToShow
+          .where(
+          .toList();  // ← This is incomplete!
+          )
+}

@@ -3,36 +3,35 @@
 // without Firebase dependencies.
 
 // Define UserRole enum - this should be the single source of truth for UserRole
+// O'ZGARISH: Eski rollar olib tashlandi
 enum UserRole {
-  student,
-  teacher,
-  admin,
   xodim,
   ekspert,
+  admin,
+  teacher,
+  student,
   // Add other roles as needed
 }
 
 // Helper to convert string to UserRole and vice-versa
 UserRole stringToUserRole(String? roleString) {
-  if (roleString == null) return UserRole.student; // Default if null
+  if (roleString == null)
+    return UserRole.xodim; // O'ZGARISH: Standart rol 'xodim'
   try {
-    // O'ZGARISH: Yangi rollarni moslashtirish uchun
-    // Bizning holatda "Xodim", "Ekspert", "Administrator"
-    // Hozircha student/teacher/admin qoldiramiz, keyingi bosqichda o'zgartiramiz
     return UserRole.values.firstWhere(
       (e) =>
           e.toString().split('.').last.toLowerCase() ==
           roleString.toLowerCase(),
-      orElse: () => UserRole.student, // Default if not found
+      orElse: () => UserRole.xodim, // O'ZGARISH: Standart rol 'xodim'
     );
   } catch (e) {
-    return UserRole.student; // Default on error
+    return UserRole.xodim; // O'ZGARISH: Standart rol 'xodim'
   }
 }
 
 String userRoleToString(UserRole? role) {
   return role?.toString().split('.').last ??
-      'student'; // Default to 'student' string
+      'xodim'; // O'ZGARISH: Standart rol 'xodim'
 }
 
 class User {
@@ -150,7 +149,7 @@ class AuthService {
         id: 'u2',
         name: 'Samadov Ubaydulla',
         email: 'samadov@example.com',
-        role: UserRole.student,
+        role: UserRole.xodim, // O'ZGARISH: Standart rol 'xodim'
         profilePictureUrl: 'assets/images/my_pic.jpg',
         lastLogin: DateTime.now(),
         registrationDate: DateTime.now().subtract(const Duration(days: 10)),
@@ -169,7 +168,7 @@ class AuthService {
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       name: name,
       email: email,
-      role: UserRole.student,
+      role: UserRole.xodim, // O'ZGARISH: Standart rol 'xodim'
       registrationDate: DateTime.now(),
       lastLogin: DateTime.now(),
     );

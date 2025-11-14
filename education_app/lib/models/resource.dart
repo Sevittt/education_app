@@ -4,9 +4,8 @@
 // import 'package:education_app/screens/resource/create_resource_screen.dart';
 
 // Define the ResourceType enum
-// O'ZGARISH: Enum qiymatlarini mavzuga mosladik
-enum ResourceType { eSud, adolat, jibSud, edoSud, other, article }
-// enum ResourceType { article, video, code, lessonPlan, tutorial, other } // ESKISI
+// O'ZGARISH: Enum qiymatlari mavzuga mosladik, eskilarini olib tashladik
+enum ResourceType { eSud, adolat, jibSud, edoSud, other }
 
 class Resource {
   final String id;
@@ -57,7 +56,7 @@ class Resource {
     }
 
     // Handle resource type with fallback
-    final typeString = getString('type', 'other');
+    final typeString = getString('type', 'eSud'); // O'ZGARISH: Standart 'eSud'
     ResourceType resourceType;
     try {
       resourceType = ResourceType.values.firstWhere(
@@ -66,11 +65,11 @@ class Resource {
             typeString.toLowerCase(),
       );
     } catch (e) {
-      // O'ZGARISH: Xatolik yuz berganda 'other' turini belgilash
+      // O'ZGARISH: Xatolik yuz berganda 'eSud' turini belgilash
       print(
-        "Warning: Invalid resource type '$typeString' for ID $id. Using 'other'",
+        "Warning: Invalid resource type '$typeString' for ID $id. Using 'eSud'",
       );
-      resourceType = ResourceType.other;
+      resourceType = ResourceType.eSud;
     }
 
     // Handle createdAt with validation

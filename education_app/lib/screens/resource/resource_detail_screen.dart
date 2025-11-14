@@ -208,8 +208,6 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
         return Icons.cloud_upload_outlined;
       case ResourceType.other:
         return Icons.help_outline;
-      default:
-        return Icons.topic_outlined;
     }
   }
 

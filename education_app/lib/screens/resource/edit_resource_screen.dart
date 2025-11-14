@@ -65,8 +65,6 @@ class _EditResourceScreenState extends State<EditResourceScreen> {
         return 'EDO.SUD.UZ';
       case ResourceType.other:
         return 'Boshqalar';
-      default:
-        return 'Noma\'lum';
     }
   }
 

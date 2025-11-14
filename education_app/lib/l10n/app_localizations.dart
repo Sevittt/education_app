@@ -1593,6 +1593,8 @@ abstract class AppLocalizations {
   String? get registrationRoleHint => null;
 
   String? get roleExpert => null;
+
+  String? get searchResources => null;
 }
 
 class _AppLocalizationsDelegate

@@ -53,8 +53,6 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
         return 'EDO.SUD.UZ';
       case ResourceType.other:
         return 'Boshqalar';
-      default:
-        return 'Noma\'lum';
     }
   }
 

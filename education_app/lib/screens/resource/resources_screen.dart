@@ -59,10 +59,6 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
     Color iconColor = colorScheme.primary;
 
     switch (type) {
-      case ResourceType.article:
-        iconData = Icons.article_outlined;
-        iconColor = Colors.orange.shade700;
-        break;
       case ResourceType.eSud:
         iconData = Icons.play_circle_outline;
         iconColor = Colors.red.shade700;
@@ -99,7 +95,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
-    final TextTheme textTheme = theme.textTheme;
+    final TextTheme _textTheme = theme.textTheme;
     final l10n = AppLocalizations.of(context)!; // O'ZGARISH
     final resourceService = Provider.of<ResourceService>(
       context,
@@ -124,10 +120,11 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
-                // ... (your existing TextField code for search)
+                style: _textTheme.bodyMedium,
                 controller: _searchController,
                 decoration: InputDecoration(
-                  hintText: l10n.resourcesSearchHint, // O'ZGARISH
+                  hintText: l10n.searchResources,
+                  hintStyle: _textTheme.bodySmall,
                   prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24.0),
@@ -144,9 +141,8 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: DropdownButtonFormField<ResourceType?>(
-                // ... (your existing DropdownButtonFormField code for filter)
                 decoration: InputDecoration(
-                  labelText: l10n.resourcesFilterByType, // O'ZGARISH
+                  labelText: l10n.resourcesFilterByType,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
@@ -154,21 +150,19 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                   fillColor: colorScheme.surface,
                 ),
                 initialValue: _selectedResourceType,
-                hint: Text(l10n.resourcesAllTypes), // O'ZGARISH
+                hint: Text(l10n.resourcesAllTypes),
                 isExpanded: true,
                 items: [
                   DropdownMenuItem<ResourceType?>(
                     value: null,
-                    child: Text(l10n.resourcesAllTypes), // O'ZGARISH
+                    child: Text(l10n.resourcesAllTypes),
                   ),
                   ...ResourceType.values.map((ResourceType type) {
-                    return DropdownMenuItem<ResourceType>(
+                    return DropdownMenuItem<ResourceType?>(
                       value: type,
-                      child: Text(
-                        type.name[0].toUpperCase() + type.name.substring(1),
-                      ),
+                      child: Text(type.toString().split('.').last),
                     );
-                  }),
+                  }).toList(),
                 ],
                 onChanged: (ResourceType? newValue) {
                   setState(() {
@@ -183,154 +177,59 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                 stream: resourceService.getResources(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting &&
-                      !snapshot.hasData &&
-                      !snapshot.hasError) {
-                    // Show loading indicator only on initial load or if explicitly refreshing without data
+                      !snapshot.hasData) {
                     return const Center(child: CircularProgressIndicator());
                   }
+
                   if (snapshot.hasError) {
-                    print(
-                      "ResourcesScreen StreamBuilder caught an error: ${snapshot.error}",
-                    );
-                    print("Type of error: ${snapshot.error.runtimeType}");
-                    return Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          l10n.errorLoadingData, // O'ZGARISH
-                          textAlign: TextAlign.center,
-                          style: textTheme.bodyLarge?.copyWith(
-                            color: colorScheme.error,
-                          ),
-                        ),
-                      ),
-                    );
-                  }
-                  // If snapshot has data, even during ConnectionState.waiting (which happens during stream updates),
-                  // we can still show the data. Or if connection is done and there's no data.
-                  if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    // If there's no data even after loading (and no error), show no resources found.
-                    // This covers the case where the stream is active but returns an empty list.
-                    return Center(
-                      child: Text(
-                        l10n.resourcesNoResourcesFound, // O'ZGARISH
-                        style: textTheme.bodyMedium,
-                      ),
-                    );
+                    return Center(child: Text('Error: ${snapshot.error}'));
                   }
 
-                  final query = _searchController.text.toLowerCase();
-                  List<Resource> resourcesToShow = snapshot.data!;
+                  List<Resource> resources = snapshot.data ?? [];
 
-                  if (_selectedResourceType != null) {
-                    resourcesToShow =
-                        resourcesToShow
-                            .where(
-                              (resource) =>
-                                  resource.type == _selectedResourceType,
-                            )
-                            .toList();
-                  }
-                  if (query.isNotEmpty) {
-                    resourcesToShow =
-                        resourcesToShow.where((resource) {
-                          return resource.title.toLowerCase().contains(query) ||
-                              resource.description.toLowerCase().contains(
-                                query,
-                              ) ||
-                              resource.author.toLowerCase().contains(query);
-                        }).toList();
-                  }
-
-                  if (resourcesToShow.isEmpty) {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.search_off_outlined,
-                            size: 60,
-                            color: colorScheme.onSurface.withOpacity(0.4),
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            l10n.resourcesNoResourcesMatch, // O'ZGARISH
-                            style: textTheme.titleMedium?.copyWith(
-                              color: colorScheme.onSurface.withOpacity(0.6),
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-
-                  // The ListView needs to be the scrollable child that RefreshIndicator can detect.
-                  // If the Column itself isn't scrollable when the list is short,
-                  // the RefreshIndicator might not trigger easily unless the ListView is long enough
-                  // or the Column is wrapped in a SingleChildScrollView (but StreamBuilder gives a list).
-                  // In this case, ListView.builder is directly scrollable.
-                  return ListView.builder(
-                    padding: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 80.0),
-                    itemCount: resourcesToShow.length,
-                    itemBuilder: (context, index) {
-                      final resource = resourcesToShow[index];
-                      return Card(
-                        // ... (your existing Card and InkWell code for displaying a resource item) ...
-                        margin: const EdgeInsets.symmetric(vertical: 6.0),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(12.0),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder:
-                                    (context) => ResourceDetailScreen(
-                                      resource: resource,
-                                    ),
-                              ),
+                  // Filter by search and resource type
+                  List<Resource> filteredResources =
+                      resources.where((resource) {
+                        final matchesSearch =
+                            resource.title.toLowerCase().contains(
+                              _searchController.text.toLowerCase(),
+                            ) ||
+                            resource.description.toLowerCase().contains(
+                              _searchController.text.toLowerCase(),
                             );
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                _buildResourceTypeIconWidget(
-                                  resource.type,
-                                  context,
-                                ),
-                                const SizedBox(width: 16.0),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        resource.title,
-                                        style: textTheme.titleMedium?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          color: colorScheme.onSurface,
-                                        ),
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      const SizedBox(height: 4.0),
-                                      Text(
-                                        'By: ${resource.author}',
-                                        style: textTheme.bodySmall?.copyWith(
-                                          color: colorScheme.onSurfaceVariant,
-                                        ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+
+                        final matchesType =
+                            _selectedResourceType == null ||
+                            resource.type == _selectedResourceType;
+
+                        return matchesSearch && matchesType;
+                      }).toList();
+
+                  if (filteredResources.isEmpty) {
+                    return Center(child: Text(l10n.resourcesNoResourcesFound));
+                  }
+
+                  return ListView.builder(
+                    itemCount: filteredResources.length,
+                    itemBuilder: (context, index) {
+                      final resource = filteredResources[index];
+                      return ListTile(
+                        leading: _buildResourceTypeIconWidget(
+                          resource.type,
+                          context,
                         ),
+                        title: Text(resource.title),
+                        subtitle: Text(resource.description),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) =>
+                                      ResourceDetailScreen(resource: resource),
+                            ),
+                          );
+                        },
                       );
                     },
                   );
