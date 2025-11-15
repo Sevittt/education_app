@@ -17,7 +17,7 @@ class AdminUserListScreen extends StatelessWidget {
       case UserRole.xodim:
         return l10n.roleXodim;
       case UserRole.ekspert:
-        return l10n.roleExpert;
+        return l10n.roleEkspert;
       case UserRole.admin:
         return l10n.roleAdmin;
       default:

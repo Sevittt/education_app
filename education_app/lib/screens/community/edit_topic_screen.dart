@@ -1,6 +1,5 @@
 // lib/screens/community/edit_topic_screen.dart
 
-// import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Import Provider
 import 'package:sud_qollanma/l10n/app_localizations.dart';
@@ -47,7 +46,7 @@ class _EditTopicScreenState extends State<EditTopicScreen> {
       _isLoading = true;
     });
 
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final communityService = Provider.of<CommunityService>(
       context,
       listen: false,
@@ -66,9 +65,7 @@ class _EditTopicScreenState extends State<EditTopicScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              l10n?.topicUpdatedSuccess ?? 'Topic updated successfully!',
-            ),
+            content: Text(l10n.topicUpdatedSuccess),
             backgroundColor: Colors.green,
           ),
         );
@@ -78,10 +75,7 @@ class _EditTopicScreenState extends State<EditTopicScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              l10n?.failedToUpdateTopic(e.toString(), '') ??
-                  'Failed to update topic: $e',
-            ),
+            content: Text(l10n.failedToUpdateTopic(e.toString(), '')),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
@@ -98,11 +92,11 @@ class _EditTopicScreenState extends State<EditTopicScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final l10n = AppLocalizations.of(context); // For labels and validators
+    final l10n = AppLocalizations.of(context)!; // For labels and validators
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n?.editTopicScreenTitle ?? 'Edit Discussion Topic'),
+        title: Text(l10n.editTopicScreenTitle),
         centerTitle: true,
         actions: [
           if (_isLoading)
@@ -118,7 +112,7 @@ class _EditTopicScreenState extends State<EditTopicScreen> {
             IconButton(
               icon: const Icon(Icons.save_outlined),
               onPressed: _saveTopicChanges,
-              tooltip: l10n?.saveButtonText ?? 'Save Changes',
+              tooltip: l10n.saveButtonText,
             ),
         ],
       ),
@@ -133,8 +127,7 @@ class _EditTopicScreenState extends State<EditTopicScreen> {
                 controller: _titleController,
                 decoration: InputDecoration(
                   labelText:
-                      l10n?.createTopicTitleLabel ??
-                      'Topic Title', // Reusing create screen labels
+                      l10n.createTopicTitleLabel, // Reusing create screen labels
                   hintText: 'Enter a clear and concise title',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
@@ -148,24 +141,21 @@ class _EditTopicScreenState extends State<EditTopicScreen> {
                   final trimmedValue = value?.trim();
                   // Reusing localization keys from CreateTopicScreen for consistency
                   if (trimmedValue == null || trimmedValue.isEmpty) {
-                    return l10n?.createTopicValidationEmpty(
-                          l10n.createTopicTitleLabel,
-                        ) ??
-                        'Title cannot be empty.';
+                    return l10n.createTopicValidationEmpty(
+                      l10n.createTopicTitleLabel,
+                    );
                   }
                   if (trimmedValue.length < 10) {
-                    return l10n?.createTopicValidationMinLength(
-                          l10n.createTopicTitleLabel,
-                          10,
-                        ) ??
-                        'Title must be at least 10 characters long.';
+                    return l10n.createTopicValidationMinLength(
+                      l10n.createTopicTitleLabel,
+                      10,
+                    );
                   }
                   if (trimmedValue.length > 150) {
-                    return l10n?.createTopicValidationMaxLength(
-                          l10n.createTopicTitleLabel,
-                          150,
-                        ) ??
-                        'Title cannot exceed 150 characters.';
+                    return l10n.createTopicValidationMaxLength(
+                      l10n.createTopicTitleLabel,
+                      150,
+                    );
                   }
                   return null;
                 },
@@ -177,9 +167,7 @@ class _EditTopicScreenState extends State<EditTopicScreen> {
               TextFormField(
                 controller: _contentController,
                 decoration: InputDecoration(
-                  labelText:
-                      l10n?.createTopicContentLabel ??
-                      'Discussion Content', // Reusing
+                  labelText: l10n.createTopicContentLabel, // Reusing
                   hintText: 'Share your thoughts or questions in detail...',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0),
@@ -195,24 +183,21 @@ class _EditTopicScreenState extends State<EditTopicScreen> {
                   final trimmedValue = value?.trim();
                   // Reusing localization keys from CreateTopicScreen
                   if (trimmedValue == null || trimmedValue.isEmpty) {
-                    return l10n?.createTopicValidationEmpty(
-                          l10n.createTopicContentLabel,
-                        ) ??
-                        'Content cannot be empty.';
+                    return l10n.createTopicValidationEmpty(
+                      l10n.createTopicContentLabel,
+                    );
                   }
                   if (trimmedValue.length < 20) {
-                    return l10n?.createTopicValidationMinLength(
-                          l10n.createTopicContentLabel,
-                          20,
-                        ) ??
-                        'Content must be at least 20 characters long.';
+                    return l10n.createTopicValidationMinLength(
+                      l10n.createTopicContentLabel,
+                      20,
+                    );
                   }
                   if (trimmedValue.length > 2000) {
-                    return l10n?.createTopicValidationMaxLength(
-                          l10n.createTopicContentLabel,
-                          2000,
-                        ) ??
-                        'Content cannot exceed 2000 characters.';
+                    return l10n.createTopicValidationMaxLength(
+                      l10n.createTopicContentLabel,
+                      2000,
+                    );
                   }
                   return null;
                 },
@@ -224,7 +209,7 @@ class _EditTopicScreenState extends State<EditTopicScreen> {
               if (!_isLoading) // Only show if not loading
                 ElevatedButton.icon(
                   icon: const Icon(Icons.save_alt_outlined),
-                  label: Text(l10n?.saveButtonText ?? 'Save Changes'),
+                  label: Text(l10n.saveButtonText),
                   onPressed: _saveTopicChanges,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: theme.colorScheme.primary,
@@ -244,17 +229,4 @@ class _EditTopicScreenState extends State<EditTopicScreen> {
       ),
     );
   }
-}
-
-// Add new localization keys to your AppLocalizations extension/ARB files if needed
-// (many might be reusable from CreateTopicScreen or other edit screens)
-extension AppLocalizationsEditTopicMessages on AppLocalizations? {
-  String get editTopicScreenTitle =>
-      this?.editTopicScreenTitle ?? 'Edit Discussion Topic';
-  String get topicUpdatedSuccess =>
-      this?.topicUpdatedSuccess ?? 'Topic updated successfully!';
-  String failedToUpdateTopic(String error, String details) =>
-      this?.failedToUpdateTopic(error, details) ??
-      'Failed to update topic: $error';
-  // Ensure saveButtonText and other common validation keys are available/reused from other extensions.
 }

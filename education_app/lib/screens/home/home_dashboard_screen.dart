@@ -1,5 +1,4 @@
 // lib/screens/home/home_dashboard_screen.dart
-// import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
@@ -21,14 +20,12 @@ class HomeDashboardScreen extends StatelessWidget {
   const HomeDashboardScreen({super.key, required this.onTabSelected});
 
   Future<void> _launchUrl(BuildContext context, String urlString) async {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     if (urlString.isEmpty) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(l10n?.urlCannotBeEmpty ?? 'URL cannot be empty'),
-          ),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.urlCannotBeEmpty)));
       }
       return;
     }
@@ -38,10 +35,7 @@ class HomeDashboardScreen extends StatelessWidget {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              l10n?.invalidUrlFormat(urlString) ??
-                  'Invalid URL format: $urlString',
-            ),
+            content: Text(l10n.invalidUrlFormat(urlString)),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
@@ -55,10 +49,7 @@ class HomeDashboardScreen extends StatelessWidget {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(
-                l10n?.couldNotLaunchUrl(urlString) ??
-                    'Could not launch $urlString',
-              ),
+              content: Text(l10n.couldNotLaunchUrl(urlString, '')),
               backgroundColor: Theme.of(context).colorScheme.error,
             ),
           );
@@ -68,10 +59,7 @@ class HomeDashboardScreen extends StatelessWidget {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              l10n?.errorLaunchingUrl(e.toString()) ??
-                  'Error launching URL: $e',
-            ),
+            content: Text(l10n.errorLaunchingUrl(e.toString())),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
@@ -187,7 +175,6 @@ class HomeDashboardScreen extends StatelessWidget {
                     return Center(
                       child: Text(
                         l10n.errorLoadingNews(snapshot.error.toString()),
-                        style: TextStyle(color: colorScheme.error),
                       ),
                     );
                   }

@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:education_app/l10n/app_localizations.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 
 import '../../models/users.dart'; // Your custom User model

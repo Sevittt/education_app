@@ -33,10 +33,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get resourcesScreenTitle => 'Руководства и обучающие материалы';
 
   @override
-  String get roleXodim => 'Staff';
+  String get roleXodim => 'Сотрудник';
 
   @override
-  String get roleEkspert => 'Expert';
+  String get roleEkspert => 'Эксперт';
 
   @override
   String get roleAdmin => 'Администратор';
@@ -242,8 +242,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get createResourceUrlLabel => 'URL (Optional)';
 
   @override
-  String couldNotLaunchUrl(Object url) {
-    return 'Не удалось запустить $url';
+  String couldNotLaunchUrl(Object url, Object urlString) {
+    return 'Could not launch $urlString';
   }
 
   @override
@@ -269,6 +269,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get resourceTypeLabel => 'Тип';
 
   @override
+  String get editTopicScreenTitle => 'Редактировать тему обсуждения';
+
+  @override
   String get authorLabel => 'Автор';
 
   @override
@@ -292,7 +295,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get deleteResourceConfirmTitle => 'Подтвердите удаление';
 
   @override
-  String get deleteResourceConfirmMessage => 'Вы уверены, что хотите удалить этот ресурс? Это действие не может быть отменено.               ';
+  String get deleteResourceConfirmMessage => 'Вы уверены, что хотите удалить этот ресурс? Это действие не может быть отменено.';
 
   @override
   String get cancelButtonText => 'Отмена';
@@ -825,4 +828,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get manageQuizzesSubtitle => 'Контролировать все тесты и их вопросы';
+
+  @override
+  String get registrationEmailError => 'Введите действительный адрес электронной почты';
 }

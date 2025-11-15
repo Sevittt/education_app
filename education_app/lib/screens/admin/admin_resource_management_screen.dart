@@ -1,8 +1,7 @@
 // lib/screens/admin/admin_resource_management_screen.dart
-//import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart'; // For date formatting
+import 'package:intl/intl.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 
 import '../../models/resource.dart';
@@ -66,11 +65,7 @@ class _AdminResourceManagementScreenState
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              l10n.failedToDeleteResource(
-                resource.title,
-                e.toString(),
-                '',
-              ), // Provide the third argument as needed
+              l10n.failedToDeleteResource(resource.title, e.toString(), ''),
             ), // "Failed to delete '{resourceTitle}': {error}"
             backgroundColor: Theme.of(context).colorScheme.error,
           ),

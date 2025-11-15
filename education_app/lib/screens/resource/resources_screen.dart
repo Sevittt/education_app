@@ -1,6 +1,5 @@
 // lib/screens/resource/resources_screen.dart
 
-//import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
@@ -95,7 +94,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
-    final TextTheme _textTheme = theme.textTheme;
+    final TextTheme textTheme = theme.textTheme;
     final l10n = AppLocalizations.of(context)!; // O'ZGARISH
     final resourceService = Provider.of<ResourceService>(
       context,
@@ -120,11 +119,11 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
-                style: _textTheme.bodyMedium,
+                style: textTheme.bodyMedium,
                 controller: _searchController,
                 decoration: InputDecoration(
-                  hintText: l10n.searchResources,
-                  hintStyle: _textTheme.bodySmall,
+                  hintText: l10n.resourcesSearchHint,
+                  hintStyle: textTheme.bodySmall,
                   prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(24.0),
@@ -162,7 +161,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                       value: type,
                       child: Text(type.toString().split('.').last),
                     );
-                  }).toList(),
+                  }),
                 ],
                 onChanged: (ResourceType? newValue) {
                   setState(() {

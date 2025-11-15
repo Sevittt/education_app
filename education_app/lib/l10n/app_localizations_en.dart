@@ -242,7 +242,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createResourceUrlLabel => 'URL (Optional)';
 
   @override
-  String couldNotLaunchUrl(Object url) {
+  String couldNotLaunchUrl(Object url, Object urlString) {
     return 'Could not launch $url';
   }
 
@@ -267,6 +267,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get resourceTypeLabel => 'Type';
+
+  @override
+  String get editTopicScreenTitle => 'Edit Discussion Topic';
 
   @override
   String get authorLabel => 'Author';
@@ -825,4 +828,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get manageQuizzesSubtitle => 'Oversee all quizzes and their questions';
+
+  @override
+  String get registrationEmailError => 'Please enter a valid email address';
 }

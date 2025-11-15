@@ -15,8 +15,9 @@ enum UserRole {
 
 // Helper to convert string to UserRole and vice-versa
 UserRole stringToUserRole(String? roleString) {
-  if (roleString == null)
+  if (roleString == null) {
     return UserRole.xodim; // O'ZGARISH: Standart rol 'xodim'
+  }
   try {
     return UserRole.values.firstWhere(
       (e) =>

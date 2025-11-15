@@ -1,9 +1,8 @@
 // lib/screens/resource/quiz/create_quiz_screen.dart
 
-// import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sud_qollanma/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../../models/quiz.dart';
 import '../../../services/quiz_service.dart';
 import 'add_questions_screen.dart';
@@ -72,9 +71,7 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.createANewQuiz), // Using localization
-      ),
+      appBar: AppBar(title: Text(l10n.createANewQuiz)), // Using localization
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -89,7 +86,7 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a title.'; // This can also be localized
+                    return 'Please enter a title.';
                   }
                   return null;
                 },
@@ -104,7 +101,7 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
                 maxLines: 4,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a description.'; // This can also be localized
+                    return 'Please enter a description.';
                   }
                   return null;
                 },

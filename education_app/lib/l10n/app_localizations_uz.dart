@@ -165,7 +165,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get editProfileButtonText => 'Profilni tahrirlash';
 
   @override
-  String get guestUser => 'Mehmon';
+  String get guestUser => 'Mehmon foydalanuvchi';
 
   @override
   String get updateYourInformation => 'Ma\'lumotlaringizni yangilang';
@@ -242,8 +242,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get createResourceUrlLabel => 'URL (Optional)';
 
   @override
-  String couldNotLaunchUrl(Object url) {
-    return '$url-ni ishga tushirib bo\'lmadi';
+  String couldNotLaunchUrl(Object url, Object urlString) {
+    return 'Could not launch $urlString';
   }
 
   @override
@@ -269,6 +269,9 @@ class AppLocalizationsUz extends AppLocalizations {
   String get resourceTypeLabel => 'Turi';
 
   @override
+  String get editTopicScreenTitle => 'Munozara Mavzusini Tahrirlash';
+
+  @override
   String get authorLabel => 'Muallif';
 
   @override
@@ -292,7 +295,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get deleteResourceConfirmTitle => 'Oʻchirishni tasdiqlang';
 
   @override
-  String get deleteResourceConfirmMessage => 'Haqiqatan ham bu manbani oʻchirib tashlamoqchimisiz? Bu amalni ortga qaytarib bo‘lmaydi.';
+  String get deleteResourceConfirmMessage => 'Haqiqatan ham bu manbani oʻchirib tashlamoqchimisiz? Bu amalni ortga qaytarib bo\'lmaydi.';
 
   @override
   String get cancelButtonText => 'Bekor qilish';
@@ -307,7 +310,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String resourceDeletedError(Object error) {
-    return 'Resursni o‘chirishda xatolik yuz berdi: $error';
+    return 'Resursni o\'chirishda xatolik yuz berdi: $error';
   }
 
   @override
@@ -485,7 +488,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String failedToCreateTopic(String error, String xato) {
-    return 'Mavzu yaratib bo\'lmadi: $xato';
+    return 'Mavzu yaratib bo\'lmadi: $error';
   }
 
   @override
@@ -508,7 +511,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String failedToUpdateTopic(String error, String xato) {
-    return 'Mavzuni yangilashda xatolik yuz berdi: $xato';
+    return 'Mavzuni yangilashda xatolik yuz berdi: $error';
   }
 
   @override
@@ -540,7 +543,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String failedToAddComment(String error, String xato) {
-    return 'Izoh qo\'shib bo\'lmadi: $xato';
+    return 'Izoh qo\'shib bo\'lmadi: $error';
   }
 
   @override
@@ -643,7 +646,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String failedToDeleteNews(String error, Object newsTitle, Object xato) {
-    return '\"$newsTitle\" o\'chirilmadi: $xato';
+    return '\"$newsTitle\" o\'chirilmadi: $error';
   }
 
   @override
@@ -732,7 +735,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String failedToSaveNews(String error, Object xato) {
-    return 'Yangilikni saqlab bo\'lmadi: $xato';
+    return 'Yangilikni saqlab bo\'lmadi: $error';
   }
 
   @override
@@ -747,7 +750,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get noEmailProvided => 'E-pochta taqdim etilmaydi';
 
   @override
-  String get roleLabel => 'rol';
+  String get roleLabel => 'Rol';
 
   @override
   String get registeredOnLabel => 'Ro\'yxatdan o\'tgan';
@@ -765,7 +768,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String failedToDeleteResource(String error, Object resourceTitle, Object xato) {
-    return '\"$resourceTitle\" manbasini o\'chirib bo\'lmadi: $xato';
+    return '\"$resourceTitle\" manbasini o\'chirib bo\'lmadi: $error';
   }
 
   @override
@@ -808,7 +811,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String failedToDeleteQuiz(String error, Object quizTitle, Object xato) {
-    return '\"$quizTitle\" testini o\'chirib bo\'lmadi: $xato';
+    return '\"$quizTitle\" testini o\'chirib bo\'lmadi: $error';
   }
 
   @override
@@ -825,4 +828,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get manageQuizzesSubtitle => 'Barcha testlar va ularning savollarini nazorat qilish';
+
+  @override
+  String get registrationEmailError => 'Yaroqli elektron pochta manzilini kiriting';
 }

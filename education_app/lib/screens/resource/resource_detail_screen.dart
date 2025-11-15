@@ -1,6 +1,5 @@
 // lib/screens/resource/resource_detail_screen.dart
 
-// import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
@@ -49,12 +48,10 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
     } catch (e) {
       // Handle error, maybe show a SnackBar
       if (mounted) {
+        final l10n = AppLocalizations.of(context)!;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              AppLocalizations.of(context)?.errorLoadingQuizzes ??
-                  'Error loading quizzes: $e',
-            ),
+            content: Text(l10n.errorLoadingQuizzes), // Use l10n key
           ),
         );
       }
@@ -70,7 +67,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
   Future<void> _launchResourceUrl(
     BuildContext context,
     String? urlString,
-    AppLocalizations? l10n,
+    AppLocalizations l10n,
   ) async {
     // ... (Keep your existing _launchResourceUrl method here)
     if (urlString == null || urlString.isEmpty) {
@@ -81,10 +78,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              l10n?.invalidUrlFormat(urlString) ??
-                  'Invalid URL format: $urlString',
-            ),
+            content: Text(l10n.invalidUrlFormat(urlString)),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
@@ -98,10 +92,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(
-                l10n?.couldNotLaunchUrl(urlString) ??
-                    'Could not launch $urlString',
-              ),
+              content: Text(l10n.couldNotLaunchUrl(urlString, '')),
               backgroundColor: Theme.of(context).colorScheme.error,
             ),
           );
@@ -111,10 +102,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              l10n?.errorLaunchingUrl(e.toString()) ??
-                  'Error launching URL: $e',
-            ),
+            content: Text(l10n.errorLaunchingUrl(e.toString())),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
@@ -125,21 +113,18 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
   Future<void> _confirmDelete(
     BuildContext context,
     ResourceService resourceService,
-    AppLocalizations? l10n,
+    AppLocalizations l10n,
   ) async {
     // ... (Keep your existing _confirmDelete method here)
     final bool? confirmed = await showDialog<bool>(
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: Text(l10n?.deleteResourceConfirmTitle ?? 'Confirm Deletion'),
-          content: Text(
-            l10n?.deleteResourceConfirmMessage ??
-                'Are you sure you want to delete this resource? This action cannot be undone.',
-          ),
+          title: Text(l10n.deleteResourceConfirmTitle),
+          content: Text(l10n.deleteResourceConfirmMessage),
           actions: <Widget>[
             TextButton(
-              child: Text(l10n?.cancelButtonText ?? 'Cancel'),
+              child: Text(l10n.cancelButtonText),
               onPressed: () {
                 Navigator.of(dialogContext).pop(false);
               },
@@ -148,7 +133,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
               style: TextButton.styleFrom(
                 foregroundColor: Theme.of(dialogContext).colorScheme.error,
               ),
-              child: Text(l10n?.deleteButtonText ?? 'Delete'),
+              child: Text(l10n.deleteButtonText),
               onPressed: () {
                 Navigator.of(dialogContext).pop(true);
               },
@@ -168,11 +153,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(
-                (l10n?.resourceDeletedSuccess ??
-                        'Resource deleted successfully!')
-                    .toString(),
-              ),
+              content: Text(l10n.resourceDeletedSuccess(widget.resource.title)),
               backgroundColor: Colors.green,
             ),
           );
@@ -182,10 +163,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(
-                l10n?.resourceDeletedError(e.toString()) ??
-                    'Error deleting resource: ${e.toString()}',
-              ),
+              content: Text(l10n.resourceDeletedError(e.toString())),
               backgroundColor: Theme.of(context).colorScheme.error,
             ),
           );
@@ -240,7 +218,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
     final UserRole? userRole = authNotifier.appUser?.role;
     final ResourceService resourceService = Provider.of<ResourceService>(
@@ -254,8 +232,8 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
         actions: [
           if (userRole == UserRole.teacher || userRole == UserRole.admin) ...[
             IconButton(
-              icon: const Icon(Icons.edit_outlined),
-              tooltip: l10n?.editButtonTooltip ?? 'Edit Resource',
+              icon: const Icon(Icons.edit),
+              tooltip: l10n.editButtonTooltip,
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -274,7 +252,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
                 Icons.delete_outline,
                 color: Theme.of(context).colorScheme.error,
               ),
-              tooltip: l10n?.deleteButtonTooltip ?? 'Delete Resource',
+              tooltip: l10n.deleteButtonTooltip,
               onPressed: () {
                 _confirmDelete(context, resourceService, l10n);
               },
@@ -305,19 +283,19 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  '${l10n?.resourceTypeLabel ?? 'Type'}: ${widget.resource.type.name[0].toUpperCase()}${widget.resource.type.name.substring(1)}', // Use widget.resource
+                  '${l10n.resourceTypeLabel}: ${widget.resource.type.name[0].toUpperCase()}${widget.resource.type.name.substring(1)}', // Use widget.resource
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
               ],
             ),
             const SizedBox(height: 8.0),
             Text(
-              '${l10n?.authorLabel ?? 'Author'}: ${widget.resource.author}', // Use widget.resource
+              '${l10n.authorLabel}: ${widget.resource.author}', // Use widget.resource
               style: Theme.of(context).textTheme.titleSmall,
             ),
             const SizedBox(height: 8.0),
             Text(
-              '${l10n?.dateAddedLabel ?? 'Added'}: ${MaterialLocalizations.of(context).formatMediumDate(widget.resource.createdAt)}', // Use widget.resource
+              '${l10n.dateAddedLabel}: ${MaterialLocalizations.of(context).formatMediumDate(widget.resource.createdAt)}', // Use widget.resource
               style: Theme.of(context).textTheme.bodySmall,
             ),
             if (widget.resource.url != null &&
@@ -333,7 +311,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
                   ); // Use widget.resource
                 },
                 child: Text(
-                  widget.resource.url!, // Use widget.resource
+                  widget.resource.url!,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: Theme.of(context).colorScheme.secondary,
                     decoration: TextDecoration.underline,
@@ -346,7 +324,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
             const Divider(),
             const SizedBox(height: 16.0),
             Text(
-              l10n?.descriptionLabel ?? 'Description',
+              l10n.descriptionLabel,
               style: Theme.of(
                 context,
               ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
@@ -360,7 +338,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
 
             // --- NEW Section for Related Quizzes ---
             Text(
-              l10n?.relatedQuizzesTitle ?? 'Related Quizzes',
+              l10n.relatedQuizzesTitle,
               style: Theme.of(
                 context,
               ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -372,8 +350,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Text(
-                  l10n?.noQuizzesAvailable ??
-                      'No quizzes available for this resource yet.',
+                  l10n.noQuizzesAvailable,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
@@ -397,17 +374,4 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
       ),
     );
   }
-}
-
-// Ensure your AppLocalizations extensions are updated if new l10n keys are used.
-// Example for new keys (add to your existing extension or create one if needed):
-extension AppLocalizationsQuizMessages on AppLocalizations? {
-  String get errorLoadingQuizzes =>
-      this?.errorLoadingQuizzes ?? 'Error loading quizzes';
-  String get relatedQuizzesTitle =>
-      this?.relatedQuizzesTitle ?? 'Related Quizzes';
-  String get noQuizzesAvailable =>
-      this?.noQuizzesAvailable ?? 'No quizzes available for this resource yet.';
-  // Add other new keys like invalidUrlFormat, couldNotLaunchUrl, errorLaunchingUrl if not already defined
-  // from previous steps for the _launchResourceUrl method.
 }
