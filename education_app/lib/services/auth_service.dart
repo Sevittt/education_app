@@ -1,56 +1,85 @@
 // lib/services/auth_service.dart
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/foundation.dart'; // For kDebugMode
+import 'package:google_sign_in/google_sign_in.dart';
+// --- NEW IMPORTS ---
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../models/users.dart' as app_user_model;
+import 'profile_service.dart';
+// --- END NEW IMPORTS ---
 
 class AuthService {
   // Get the FirebaseAuth instance
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final firebase_auth.FirebaseAuth _firebaseAuth =
+      firebase_auth.FirebaseAuth.instance;
+  final CollectionReference<Map<String, dynamic>> _usersCollection =
+      FirebaseFirestore.instance.collection('users');
+  // --- NEW: AuthService now depends on ProfileService ---
+  final ProfileService _profileService;
+
+  // --- NEW: Constructor to inject ProfileService ---
+  AuthService(this._profileService);
 
   // --- Get Current User ---
   // Provides direct access to the current Firebase User object.
   // This can be null if no user is signed in.
-  User? get currentUser => _firebaseAuth.currentUser;
+  firebase_auth.User? get currentUser => _firebaseAuth.currentUser;
 
   // --- Auth State Changes Stream ---
   // Provides a stream that emits the User object when the auth state changes
   // (e.g., user signs in or signs out). This is useful for listening to auth
   // changes in real-time throughout the app.
-  Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
+  Stream<firebase_auth.User?> get authStateChanges {
+    // --- MODIFIED: Return the raw Firebase user stream ---
+    return _firebaseAuth.authStateChanges();
+  }
 
   // --- Sign Up with Email and Password ---
   // Attempts to create a new user account with the given email and password.
   // Returns the User object if successful, or null if an error occurs.
-  // Handles potential FirebaseAuthException errors.
-  Future<User?> signUpWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
+  // --- MODIFIED: Method signature and implementation ---
+  Future<app_user_model.User?> registerWithEmailAndPassword({
+    required String email,
+    required String password,
+    required String name,
+    required app_user_model.UserRole role,
+  }) async {
     try {
+      // --- REMOVED Username uniqueness check ---
+
       // Attempt to create a new user with Firebase Authentication
-      final UserCredential userCredential = await _firebaseAuth
-          .createUserWithEmailAndPassword(
-            email: email.trim(), // Trim whitespace from email
-            password: password, // Password is used as is
-          );
-      // If user creation is successful, return the User object
-      return userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      // Handle specific Firebase Authentication errors
-      if (kDebugMode) {
-        // Print errors only in debug mode
-        print(
-          'Firebase Auth Exception during sign up: ${e.code} - ${e.message}',
+      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      final firebaseUser = userCredential.user;
+
+      if (firebaseUser != null) {
+        // Update Firebase Auth profile with name
+        await firebaseUser.updateDisplayName(name);
+
+        // Create a new app_user_model.User object
+        final newUser = app_user_model.User(
+          id: firebaseUser.uid,
+          name: name,
+          email: email,
+          role: role,
+          registrationDate: DateTime.now(),
+          lastLogin: DateTime.now(),
         );
+
+        // Save the user's complete profile to Firestore
+        await _usersCollection.doc(firebaseUser.uid).set(newUser.toMap());
+
+        return newUser;
       }
-      // You might want to throw a custom exception or return a specific error code/message
-      // to be handled by the UI. For now, we return null on error.
       return null;
-    } catch (e) {
-      // Handle any other unexpected errors
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      // Catches exceptions like 'email-already-in-use', 'weak-password', etc.
       if (kDebugMode) {
-        print('An unexpected error occurred during sign up: $e');
+        print("FirebaseAuthException during registration: ${e.message}");
       }
-      return null;
+      rethrow; // Rethrow the exception to be handled by the caller (e.g., AuthNotifier)
     }
   }
 
@@ -58,20 +87,26 @@ class AuthService {
   // Attempts to sign in an existing user with the given email and password.
   // Returns the User object if successful, or null if an error occurs.
   // Handles potential FirebaseAuthException errors.
-  Future<User?> signInWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
+  Future<app_user_model.User?> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
     try {
       // Attempt to sign in the user with Firebase Authentication
-      final UserCredential userCredential = await _firebaseAuth
+      final firebase_auth.UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(
             email: email.trim(), // Trim whitespace from email
             password: password, // Password is used as is
           );
-      // If sign-in is successful, return the User object
-      return userCredential.user;
-    } on FirebaseAuthException catch (e) {
+      final firebaseUser = userCredential.user;
+
+      if (firebaseUser != null) {
+        // --- NEW: After successful sign-in, fetch the full app user profile ---
+        final appUser = await _profileService.getUserProfile(firebaseUser.uid);
+        return appUser;
+      }
+      return null;
+    } on firebase_auth.FirebaseAuthException catch (e) {
       // Handle specific Firebase Authentication errors
       if (kDebugMode) {
         // Print errors only in debug mode
@@ -79,17 +114,86 @@ class AuthService {
           'Firebase Auth Exception during sign in: ${e.code} - ${e.message}',
         );
       }
-      // For example, common errors include 'user-not-found', 'wrong-password', 'invalid-email'.
-      // You can check e.code to provide more specific feedback to the user.
-      return null;
+      rethrow; // --- MODIFIED: Rethrow exception instead of returning null
     } catch (e) {
       // Handle any other unexpected errors
       if (kDebugMode) {
-        print('An unexpected error occurred during sign in: $e');
+        print('Unexpected error during sign in: $e');
       }
-      return null;
+      rethrow; // --- MODIFIED: Rethrow exception
     }
   }
+
+  // --- NEW: Sign in with Google ---
+  /// Signs in the user with Google.
+  /// If the user is new, creates a profile in Firestore.
+  Future<app_user_model.User?> signInWithGoogle() async {
+    try {
+      // 1. Trigger the Google Sign-In flow
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) {
+        // User cancelled the flow
+        return null;
+      }
+
+      // 2. Obtain auth details from the request
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      // 3. Create a new Firebase credential
+      final firebase_auth.AuthCredential credential = firebase_auth
+          .GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // 4. Sign in to Firebase with the credential
+      final firebase_auth.UserCredential userCredential = await _firebaseAuth
+          .signInWithCredential(credential);
+      final firebaseUser = userCredential.user;
+
+      if (firebaseUser == null) {
+        throw Exception('Sign in with Google failed.');
+      }
+
+      // 5. Check if this is a new or existing user
+      final docSnapshot = await _usersCollection.doc(firebaseUser.uid).get();
+
+      if (docSnapshot.exists) {
+        // 6a. Existing user: Just update last login and return profile
+        await _usersCollection.doc(firebaseUser.uid).update({
+          'lastLogin': DateTime.now().toIso8601String(),
+        });
+        final appUser = await _profileService.getUserProfile(firebaseUser.uid);
+        return appUser;
+      } else {
+        // 6b. New user: Create a new profile in Firestore
+        final newUser = app_user_model.User(
+          id: firebaseUser.uid,
+          name: firebaseUser.displayName ?? 'New User',
+          email: firebaseUser.email,
+          role: app_user_model.UserRole.xodim, // Default role
+          profilePictureUrl: firebaseUser.photoURL,
+          registrationDate: DateTime.now(),
+          lastLogin: DateTime.now(),
+        );
+
+        await _usersCollection.doc(firebaseUser.uid).set(newUser.toMap());
+        return newUser;
+      }
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      if (kDebugMode) {
+        print("FirebaseAuthException during Google sign in: ${e.message}");
+      }
+      rethrow;
+    } catch (e) {
+      if (kDebugMode) {
+        print("Unexpected error during Google sign in: $e");
+      }
+      rethrow;
+    }
+  }
+  // --- END NEW ---
 
   // --- Sign Out ---
   // Signs out the current user.
@@ -98,6 +202,7 @@ class AuthService {
     try {
       // Attempt to sign out the current user
       await _firebaseAuth.signOut();
+      await GoogleSignIn().signOut(); // Also sign out from Google
     } catch (e) {
       // Handle any errors that might occur during sign out
       if (kDebugMode) {
@@ -105,7 +210,7 @@ class AuthService {
         print('Error signing out: $e');
       }
       // Depending on your app's needs, you might want to re-throw the error
-      // or handle it in a specific way.
+      // or handle it in a specific way. We don't rethrow here.
     }
   }
 

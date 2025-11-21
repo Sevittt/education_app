@@ -38,12 +38,22 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeNotifier()),
         ChangeNotifierProvider(create: (context) => LocaleNotifier()),
-        Provider<AuthService>(create: (_) => AuthService()),
+        // --- MODIFIED: Services that depend on each other ---
+        // ProfileService is independent
+        Provider<ProfileService>(create: (_) => ProfileService()),
+        // AuthService now depends on ProfileService, so we inject it.
+        Provider<AuthService>(
+          create: (context) => AuthService(context.read<ProfileService>()),
+        ),
+        // AuthNotifier depends on AuthService and ProfileService
         ChangeNotifierProvider<AuthNotifier>(
-          create: (context) => AuthNotifier(AuthService()),
+          create:
+              (context) => AuthNotifier(
+                context.read<AuthService>(),
+                context.read<ProfileService>(),
+              ),
         ),
         Provider<ResourceService>(create: (_) => ResourceService()),
-        Provider<ProfileService>(create: (_) => ProfileService()),
 
         // Add this line
         Provider<CommunityService>(create: (_) => CommunityService()),

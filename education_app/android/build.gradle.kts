@@ -19,13 +19,3 @@ subprojects {
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
-
-android {
-    namespace = "com.example.sud_qollanma"
-    compileSdk = flutter.compileSdkVersion
-    defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.sud_qollanma"
-        // You can update the following values to match your application needs.
-    }
-}

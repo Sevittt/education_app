@@ -418,5 +418,46 @@
   "registrationEmailError": "Please enter a valid email address",
   "@registrationEmailError": {
     "description": "Error message if email is invalid"
+  },
+  "dashboardXodimTitle": "My Activity",
+  "@dashboardXodimTitle": {
+    "description": "Title for the regular staff member's dashboard section"
+  },
+  "dashboardEkspertTitle": "My Contributions",
+  "@dashboardEkspertTitle": {
+    "description": "Title for the expert's dashboard section"
+  },
+  "dashboardAdminTitle": "System Overview",
+  "@dashboardAdminTitle": {
+    "description": "Title for the admin's dashboard section"
+  },
+  "seeAllButton": "See All",
+  "@seeAllButton": {
+    "description": "A button to see all items in a list"
+  }
+  ,
+  "noGuidesAuthored": "You have not authored any guides yet.",
+  "@noGuidesAuthored": {
+    "description": "Message displayed when an expert has not authored any guides yet."
+  },
+  "adminStatUsers": "Users",
+  "@adminStatUsers": {
+    "description": "Label for the total users statistic in the admin dashboard."
+  },
+  "adminStatGuides": "Guides",
+  "@adminStatGuides": {
+    "description": "Label for the total guides statistic in the admin dashboard."
+  },
+  "adminStatQuizzes": "Quizzes",
+  "@adminStatQuizzes": {
+    "description": "Label for the total quizzes statistic in the admin dashboard."
+  },
+  "orDivider": "OR",
+  "@orDivider": {
+    "description": "A divider text, like 'OR', between login options."
+  },
+  "signInWithGoogle": "Sign In with Google",
+  "@signInWithGoogle": {
+    "description": "Button text for signing in with a Google account."
   }
 }

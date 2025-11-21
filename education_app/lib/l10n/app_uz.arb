@@ -394,5 +394,46 @@
   "registrationEmailError": "Yaroqli elektron pochta manzilini kiriting",
   "@registrationEmailError": {
     "description": "Noto'g'ri e-pochta manzili bo'lganda xato xabari"
+  },
+  "dashboardXodimTitle": "Mening Faoliyatim",
+  "@dashboardXodimTitle": {
+    "description": "Oddiy xodimning boshqaruv paneli bo'limi uchun sarlavha"
+  },
+  "dashboardEkspertTitle": "Mening Hissam",
+  "@dashboardEkspertTitle": {
+    "description": "Ekspertning boshqaruv paneli bo'limi uchun sarlavha"
+  },
+  "dashboardAdminTitle": "Tizim Holati",
+  "@dashboardAdminTitle": {
+    "description": "Administratorning boshqaruv paneli bo'limi uchun sarlavha"
+  },
+  "seeAllButton": "Barchasini ko'rish",
+  "@seeAllButton": {
+    "description": "Ro'yxatdagi barcha elementlarni ko'rish uchun tugma"
+  }
+  ,
+  "noGuidesAuthored": "Siz hali hech qanday qo'llanma yaratmadingiz.",
+  "@noGuidesAuthored": {
+    "description": "Xabar ekspert hali qo'llanma yaratmaganida ko'rsatiladi."
+  },
+  "adminStatUsers": "Foydalanuvchilar",
+  "@adminStatUsers": {
+    "description": "Administrator panelidagi umumiy foydalanuvchilar statistikasi uchun yorliq."
+  },
+  "adminStatGuides": "Qo'llanmalar",
+  "@adminStatGuides": {
+    "description": "Administrator panelidagi umumiy qo'llanmalar statistikasi uchun yorliq."
+  },
+  "adminStatQuizzes": "Viktorinalar",
+  "@adminStatQuizzes": {
+    "description": "Administrator panelidagi umumiy viktorinalar statistikasi uchun yorliq."
+  },
+  "orDivider": "YOKI",
+  "@orDivider": {
+    "description": "Kirish opsiyalari orasidagi 'YOKI' kabi ajratuvchi matn."
+  },
+  "signInWithGoogle": "Google bilan kirish",
+  "@signInWithGoogle": {
+    "description": "Google hisobi bilan kirish uchun tugma matni."
   }
 }

@@ -387,5 +387,46 @@
   "registrationEmailError": "Введите действительный адрес электронной почты",
   "@registrationEmailError": {
     "description": "Сообщение об ошибке при неверном адресе электронной почты"
+  },
+  "dashboardXodimTitle": "Моя активность",
+  "@dashboardXodimTitle": {
+    "description": "Заголовок для раздела панели управления обычного сотрудника"
+  },
+  "dashboardEkspertTitle": "Мой вклад",
+  "@dashboardEkspertTitle": {
+    "description": "Заголовок для раздела панели управления эксперта"
+  },
+  "dashboardAdminTitle": "Обзор системы",
+  "@dashboardAdminTitle": {
+    "description": "Заголовок для раздела панели управления администратора"
+  },
+  "seeAllButton": "Посмотреть все",
+  "@seeAllButton": {
+    "description": "Кнопка для просмотра всех элементов в списке"
+  },
+  "noGuidesAuthored": "Вы еще не создали ни одного руководства.",
+  "@noGuidesAuthored": {
+    "description": "Сообщение, отображаемое, когда эксперт еще не создал ни одного руководства."
+  },
+  "adminStatUsers": "Пользователи",
+  "@adminStatUsers": {
+    "description": "Метка для статистики общего числа пользователей в панели администратора."
+  },
+  "adminStatGuides": "Руководства",
+  "@adminStatGuides": {
+    "description": "Метка для статистики общего числа руководств в панели администратора."
+  },
+  "adminStatQuizzes": "Викторины",
+  "@adminStatQuizzes": {
+    "description": "Метка для статистики общего числа викторин в панели администратора."
+  }
+  ,
+  "orDivider": "ИЛИ",
+  "@orDivider": {
+    "description": "Текст-разделитель, например 'ИЛИ', между вариантами входа."
+  },
+  "signInWithGoogle": "Войти через Google",
+  "@signInWithGoogle": {
+    "description": "Текст кнопки для входа с помощью учетной записи Google."
   }
 }

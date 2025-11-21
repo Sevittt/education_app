@@ -13,6 +13,10 @@ import 'settings_screen.dart';
 import 'theme_options_screen.dart';
 import 'profile_edit_screen.dart'; // Add this import
 
+// --- ADDED ---
+import 'package:sud_qollanma/screens/admin/admin_panel_screen.dart';
+// --- END ADDED ---
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -116,7 +120,7 @@ class ProfileScreen extends StatelessWidget {
             return Card(
               margin: const EdgeInsets.symmetric(vertical: 6.0),
               child: ListTile(
-                leading: CircleAvatar(child: Text('${attempt.score}')),
+                leading: CircleAvatar(child: Text(attempt.score.toString())),
                 title: Text(attempt.quizTitle),
                 subtitle: Text(formattedDate),
                 trailing: Text('${attempt.score}/${attempt.totalQuestions}'),
@@ -175,21 +179,15 @@ class ProfileScreen extends StatelessWidget {
                     radius: 55,
                     backgroundColor: colorScheme.primaryContainer,
                     backgroundImage:
-                        appUser?.profilePictureUrl != null &&
-                                appUser!.profilePictureUrl!.isNotEmpty
-                            ? NetworkImage(appUser.profilePictureUrl!)
-                            : (firebaseUser?.photoURL != null &&
-                                        firebaseUser!.photoURL!.isNotEmpty
-                                    ? NetworkImage(firebaseUser.photoURL!)
-                                    : const AssetImage(
-                                      'assets/images/my_pic.jpg',
-                                    ))
-                                as ImageProvider<Object>?,
+                        (appUser?.profilePictureUrl?.isNotEmpty == true
+                                ? NetworkImage(appUser!.profilePictureUrl!)
+                                : (firebaseUser?.photoURL?.isNotEmpty == true
+                                    ? NetworkImage(firebaseUser!.photoURL!)
+                                    : null))
+                            as ImageProvider<Object>?,
                     child:
-                        (appUser?.profilePictureUrl == null ||
-                                    appUser!.profilePictureUrl!.isEmpty) &&
-                                (firebaseUser?.photoURL == null ||
-                                    firebaseUser!.photoURL!.isEmpty)
+                        (appUser?.profilePictureUrl?.isEmpty ?? true) &&
+                                (firebaseUser?.photoURL?.isEmpty ?? true)
                             ? Icon(
                               Icons.person_rounded,
                               size: 60,
@@ -213,7 +211,7 @@ class ProfileScreen extends StatelessWidget {
                   if (firebaseUser?.email != null &&
                       (appUser?.name != firebaseUser!.email))
                     Text(
-                      firebaseUser.email!,
+                      firebaseUser.email ?? l10n.noEmailProvided,
                       style: textTheme.bodyMedium?.copyWith(
                         color: colorScheme.onSurfaceVariant,
                       ),
@@ -279,6 +277,28 @@ class ProfileScreen extends StatelessWidget {
                       );
                     },
                   ),
+
+                  // --- ADDED ADMIN PANEL BUTTON LOGIC ---
+                  if (appUser != null && appUser.role == UserRole.admin) ...[
+                    const Divider(height: 1, indent: 16, endIndent: 16),
+                    _buildProfileOptionCard(
+                      context: context,
+                      icon: Icons.admin_panel_settings_outlined,
+                      title: l10n.adminPanelTitle,
+                      subtitle:
+                          l10n.manageNewsSubtitle, // Re-using a good subtitle
+                      enabled: appUser != null,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AdminPanelScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                  // --- END ADDED ---
 
                   // --- NEW: Quiz History Section ---
                   if (appUser != null) ...[

@@ -92,7 +92,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(l10n.couldNotLaunchUrl(urlString, '')),
+              content: Text(l10n.couldNotLaunchUrl(urlString)),
               backgroundColor: Theme.of(context).colorScheme.error,
             ),
           );

@@ -563,7 +563,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Could not launch {url}'**
-  String couldNotLaunchUrl(Object url, Object urlString);
+  String couldNotLaunchUrl(Object url);
 
   /// No description provided for @createResourceValidationEmpty.
   ///
@@ -1584,6 +1584,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter a valid email address'**
   String get registrationEmailError;
+
+  /// Title for the regular staff member's dashboard section
+  ///
+  /// In en, this message translates to:
+  /// **'My Activity'**
+  String get dashboardXodimTitle;
+
+  /// Title for the expert's dashboard section
+  ///
+  /// In en, this message translates to:
+  /// **'My Contributions'**
+  String get dashboardEkspertTitle;
+
+  /// Title for the admin's dashboard section
+  ///
+  /// In en, this message translates to:
+  /// **'System Overview'**
+  String get dashboardAdminTitle;
+
+  /// A button to see all items in a list
+  ///
+  /// In en, this message translates to:
+  /// **'See All'**
+  String get seeAllButton;
+
+  /// Message displayed when an expert has not authored any guides yet.
+  ///
+  /// In en, this message translates to:
+  /// **'You have not authored any guides yet.'**
+  String get noGuidesAuthored;
+
+  /// Label for the total users statistic in the admin dashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Users'**
+  String get adminStatUsers;
+
+  /// Label for the total guides statistic in the admin dashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Guides'**
+  String get adminStatGuides;
+
+  /// Label for the total quizzes statistic in the admin dashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Quizzes'**
+  String get adminStatQuizzes;
+
+  /// A divider text, like 'OR', between login options.
+  ///
+  /// In en, this message translates to:
+  /// **'OR'**
+  String get orDivider;
+
+  /// Button text for signing in with a Google account.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In with Google'**
+  String get signInWithGoogle;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

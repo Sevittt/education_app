@@ -5,26 +5,24 @@ import 'package:flutter/foundation.dart'; // For kDebugMode
 import '../models/users.dart'; // Your custom User model (not UserModel)
 
 class ProfileService {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final firebase_auth.FirebaseAuth _auth = firebase_auth.FirebaseAuth.instance;
-  final String _collectionPath = 'users';
+  // --- MODIFIED: Use a direct CollectionReference for consistency ---
+  final CollectionReference<Map<String, dynamic>> _usersCollection;
+
+  ProfileService()
+    : _usersCollection = FirebaseFirestore.instance.collection('users');
 
   // --- Existing methods like getCurrentUserProfile, updateCurrentUserProfile, etc. ---
-  Future<UserModel?> getCurrentUserProfile() async {
-    // This uses UserModel, ensure your app is consistent
+  // --- MODIFIED: Return the main 'User' model for consistency ---
+  Future<User?> getCurrentUserProfile() async {
     final firebase_auth.User? currentUser = _auth.currentUser;
     if (currentUser == null) return null;
 
     try {
-      final docSnapshot =
-          await _firestore
-              .collection(_collectionPath)
-              .doc(currentUser.uid)
-              .get();
+      final docSnapshot = await _usersCollection.doc(currentUser.uid).get();
       if (docSnapshot.exists && docSnapshot.data() != null) {
-        // Assuming UserModel.fromMap exists and is what you want here.
-        // If you are using your main 'User' model throughout, adjust this.
-        return UserModel.fromMap(docSnapshot.data()!, docSnapshot.id);
+        // Use the main User.fromMap factory
+        return User.fromMap(docSnapshot.data()!, docSnapshot.id);
       }
     } catch (e) {
       if (kDebugMode) {
@@ -41,8 +39,7 @@ class ProfileService {
     if (currentUser == null) return;
 
     try {
-      await _firestore
-          .collection(_collectionPath)
+      await _usersCollection
           .doc(currentUser.uid)
           .update(user.toMap()); // Assuming User model has toMap
     } catch (e) {
@@ -53,12 +50,28 @@ class ProfileService {
     }
   }
 
+  // --- NEW METHOD ---
+  /// Fetches a user's profile by their UID.
+  /// Returns a User object, or null if the user doesn't exist or an error occurs.
+  Future<User?> getUserProfile(String uid) async {
+    try {
+      final docSnapshot = await _usersCollection.doc(uid).get();
+      if (docSnapshot.exists && docSnapshot.data() != null) {
+        return User.fromMap(docSnapshot.data()!, docSnapshot.id);
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error fetching user profile for UID $uid: $e');
+      }
+    }
+    // Return null if user not found or if there was an error
+    return null;
+  }
+
   // --- NEW METHOD: Get all users for Admin ---
   /// Fetches a stream of all user profiles. Intended for admin use.
   Stream<List<User>> getAllUsersStream() {
-    // Returns List<User>
-    return _firestore
-        .collection(_collectionPath)
+    return _usersCollection
         .orderBy('registrationDate', descending: true) // Example order
         .snapshots()
         .map((snapshot) {

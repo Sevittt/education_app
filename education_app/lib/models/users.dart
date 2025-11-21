@@ -39,6 +39,7 @@ class User {
   final String id; // This should be Firebase UID
   String name;
   String? email;
+  String? username; // --- NEW ---
   UserRole role;
   String? profilePictureUrl;
   String? bio;
@@ -50,6 +51,7 @@ class User {
     required this.id,
     required this.name,
     this.email,
+    this.username, // --- NEW ---
     required this.role,
     this.profilePictureUrl,
     this.bio,
@@ -72,6 +74,7 @@ class User {
           id, // Good to store it in the document too, though doc ID is the UID
       'name': name,
       'email': email,
+      'username': username, // --- NEW ---
       'role': userRoleToString(role), // Store enum as string
       'profilePictureUrl': profilePictureUrl,
       'bio': bio,
@@ -90,6 +93,7 @@ class User {
       id: documentId, // Use documentId as the User's id (which is Firebase UID)
       name: map['name'] ?? '',
       email: map['email'] as String?,
+      username: map['username'] as String?, // --- NEW ---
       role: stringToUserRole(map['role'] as String?),
       profilePictureUrl: map['profilePictureUrl'] as String?,
       bio: map['bio'] as String?,
@@ -108,6 +112,7 @@ class User {
     String? id,
     String? name,
     String? email,
+    String? username,
     UserRole? role,
     String? profilePictureUrl,
     String? bio,
@@ -118,103 +123,12 @@ class User {
       id: id ?? this.id,
       name: name ?? this.name,
       email: email ?? this.email,
+      username: username ?? this.username,
       role: role ?? this.role,
       profilePictureUrl: profilePictureUrl ?? this.profilePictureUrl,
       bio: bio ?? this.bio,
       registrationDate: registrationDate ?? this.registrationDate,
       lastLogin: lastLogin ?? this.lastLogin,
     );
-  }
-}
-
-// The AuthService below is the non-Firebase version.
-// We will primarily use the Firebase-based AuthService from 'lib/services/auth_service.dart'
-// for actual authentication, but this User model is what we'll adapt for Firestore profile data.
-
-class AuthService {
-  User? _currentUser;
-
-  Stream<User?> get authStateChanges async* {
-    await Future.delayed(const Duration(milliseconds: 50));
-    yield _currentUser;
-  }
-
-  User? get currentUser => _currentUser;
-
-  Future<User?> signInWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
-    if (email == "test@example.com" && password == "password") {
-      _currentUser = User(
-        id: 'u2',
-        name: 'Samadov Ubaydulla',
-        email: 'samadov@example.com',
-        role: UserRole.xodim, // O'ZGARISH: Standart rol 'xodim'
-        profilePictureUrl: 'assets/images/my_pic.jpg',
-        lastLogin: DateTime.now(),
-        registrationDate: DateTime.now().subtract(const Duration(days: 10)),
-      );
-      return _currentUser;
-    }
-    throw Exception("Invalid credentials (dummy check)");
-  }
-
-  Future<User?> registerWithEmailAndPassword(
-    String email,
-    String password,
-    String name,
-  ) async {
-    _currentUser = User(
-      id: DateTime.now().millisecondsSinceEpoch.toString(),
-      name: name,
-      email: email,
-      role: UserRole.xodim, // O'ZGARISH: Standart rol 'xodim'
-      registrationDate: DateTime.now(),
-      lastLogin: DateTime.now(),
-    );
-    return _currentUser;
-  }
-
-  Future<void> signOut() async {
-    _currentUser = null;
-  }
-
-  Future<void> updateUserProfile(User updatedUser) async {
-    if (_currentUser != null && _currentUser!.id == updatedUser.id) {
-      _currentUser = updatedUser;
-    } else {
-      throw Exception("User not found or ID mismatch for local update.");
-    }
-  }
-}
-
-// --- Additional UserModel for other use cases (e.g., simple user info) ---
-class UserModel {
-  final String uid;
-  final String email;
-  String firstName;
-  String lastName;
-
-  UserModel({
-    required this.uid,
-    required this.email,
-    this.firstName = '',
-    this.lastName = '',
-  });
-
-  // Factory constructor to create a UserModel from a map (e.g., from Firestore)
-  factory UserModel.fromMap(Map<String, dynamic> data, String uid) {
-    return UserModel(
-      uid: uid,
-      email: data['email'] ?? '',
-      firstName: data['firstName'] ?? '',
-      lastName: data['lastName'] ?? '',
-    );
-  }
-
-  // Method to convert a UserModel to a map (e.g., for writing to Firestore)
-  Map<String, dynamic> toMap() {
-    return {'email': email, 'firstName': firstName, 'lastName': lastName};
   }
 }

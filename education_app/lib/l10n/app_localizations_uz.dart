@@ -242,8 +242,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get createResourceUrlLabel => 'URL (Optional)';
 
   @override
-  String couldNotLaunchUrl(Object url, Object urlString) {
-    return 'Could not launch $urlString';
+  String couldNotLaunchUrl(Object url) {
+    return 'Could not launch $url';
   }
 
   @override
@@ -831,4 +831,34 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get registrationEmailError => 'Yaroqli elektron pochta manzilini kiriting';
+
+  @override
+  String get dashboardXodimTitle => 'Mening Faoliyatim';
+
+  @override
+  String get dashboardEkspertTitle => 'Mening Hissam';
+
+  @override
+  String get dashboardAdminTitle => 'Tizim Holati';
+
+  @override
+  String get seeAllButton => 'Barchasini ko\'rish';
+
+  @override
+  String get noGuidesAuthored => 'Siz hali hech qanday qo\'llanma yaratmadingiz.';
+
+  @override
+  String get adminStatUsers => 'Foydalanuvchilar';
+
+  @override
+  String get adminStatGuides => 'Qo\'llanmalar';
+
+  @override
+  String get adminStatQuizzes => 'Viktorinalar';
+
+  @override
+  String get orDivider => 'YOKI';
+
+  @override
+  String get signInWithGoogle => 'Google bilan kirish';
 }

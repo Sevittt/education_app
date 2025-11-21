@@ -42,6 +42,45 @@ class ResourceService {
         });
   }
 
+  // --- NEW METHOD ---
+  /// Fetches a stream of resources created by a specific author.
+  Stream<List<Resource>> getResourcesByAuthor(String authorId) {
+    return _resourcesCollection
+        .where('authorId', isEqualTo: authorId)
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((snapshot) {
+          // This map is for the QuerySnapshot
+          return snapshot.docs.map((doc) {
+            // This map is for each DocumentSnapshot
+            try {
+              final data = doc.data() as Map<String, dynamic>?; // Good cast
+              if (data == null) {
+                // Good null check for data
+                throw Exception(
+                  "Document data is null for resource ID ${doc.id}",
+                );
+              }
+              return Resource.fromMap(doc.id, data);
+            } catch (e) {
+              // Good: Rethrowing to be caught by .handleError or StreamBuilder
+              if (kDebugMode) {
+                print("Error mapping resource with ID ${doc.id}: $e");
+              } // Added print for specific doc error
+              rethrow;
+            }
+          }).toList();
+        })
+        .handleError((error) {
+          // Good: Catches errors from the stream or mapping
+          if (kDebugMode) {
+            print("Error in getResourcesByAuthor stream pipeline: $error");
+          } // Added print for pipeline error
+          throw error; // Rethrows to StreamBuilder
+        });
+  }
+  // --- END NEW METHOD ---
+
   Future<void> addResource(Resource resource) async {
     try {
       await _resourcesCollection.add(

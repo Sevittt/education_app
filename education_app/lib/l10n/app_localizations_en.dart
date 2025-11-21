@@ -242,7 +242,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createResourceUrlLabel => 'URL (Optional)';
 
   @override
-  String couldNotLaunchUrl(Object url, Object urlString) {
+  String couldNotLaunchUrl(Object url) {
     return 'Could not launch $url';
   }
 
@@ -831,4 +831,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get registrationEmailError => 'Please enter a valid email address';
+
+  @override
+  String get dashboardXodimTitle => 'My Activity';
+
+  @override
+  String get dashboardEkspertTitle => 'My Contributions';
+
+  @override
+  String get dashboardAdminTitle => 'System Overview';
+
+  @override
+  String get seeAllButton => 'See All';
+
+  @override
+  String get noGuidesAuthored => 'You have not authored any guides yet.';
+
+  @override
+  String get adminStatUsers => 'Users';
+
+  @override
+  String get adminStatGuides => 'Guides';
+
+  @override
+  String get adminStatQuizzes => 'Quizzes';
+
+  @override
+  String get orDivider => 'OR';
+
+  @override
+  String get signInWithGoogle => 'Sign In with Google';
 }
