@@ -861,4 +861,42 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get signInWithGoogle => 'Войти через Google';
+
+  @override
+  String get themeSystemDefault => 'Системный';
+
+  @override
+  String get themeLight => 'Светлая тема';
+
+  @override
+  String get themeDark => 'Темная тема';
+
+  @override
+  String get bioOptionalLabel => 'Био (необязательно)';
+
+  @override
+  String get profilePictureUrlLabel => 'URL изображения профиля (необязательно)';
+
+  @override
+  String get levelBeginner => 'Начинающий';
+
+  @override
+  String get levelIntermediate => 'Средний';
+
+  @override
+  String get levelAdvanced => 'Продвинутый';
+
+  @override
+  String get levelExpert => 'Эксперт';
+
+  @override
+  String get totalPoints => 'Всего очков';
+
+  @override
+  String get nextLevel => 'Следующий уровень';
+
+  @override
+  String pointsToNextLevel(Object points) {
+    return '$points XP до следующего уровня';
+  }
 }

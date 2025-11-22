@@ -861,4 +861,42 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signInWithGoogle => 'Sign In with Google';
+
+  @override
+  String get themeSystemDefault => 'System Default';
+
+  @override
+  String get themeLight => 'Light Mode';
+
+  @override
+  String get themeDark => 'Dark Mode';
+
+  @override
+  String get bioOptionalLabel => 'Bio (Optional)';
+
+  @override
+  String get profilePictureUrlLabel => 'Profile Picture URL (Optional)';
+
+  @override
+  String get levelBeginner => 'Beginner';
+
+  @override
+  String get levelIntermediate => 'Intermediate';
+
+  @override
+  String get levelAdvanced => 'Advanced';
+
+  @override
+  String get levelExpert => 'Expert';
+
+  @override
+  String get totalPoints => 'Total Points';
+
+  @override
+  String get nextLevel => 'Next Level';
+
+  @override
+  String pointsToNextLevel(Object points) {
+    return '$points XP to next level';
+  }
 }

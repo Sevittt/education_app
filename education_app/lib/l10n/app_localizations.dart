@@ -1644,6 +1644,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign In with Google'**
   String get signInWithGoogle;
+
+  /// No description provided for @themeSystemDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'System Default'**
+  String get themeSystemDefault;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light Mode'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get themeDark;
+
+  /// No description provided for @bioOptionalLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Bio (Optional)'**
+  String get bioOptionalLabel;
+
+  /// No description provided for @profilePictureUrlLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile Picture URL (Optional)'**
+  String get profilePictureUrlLabel;
+
+  /// No description provided for @levelBeginner.
+  ///
+  /// In en, this message translates to:
+  /// **'Beginner'**
+  String get levelBeginner;
+
+  /// No description provided for @levelIntermediate.
+  ///
+  /// In en, this message translates to:
+  /// **'Intermediate'**
+  String get levelIntermediate;
+
+  /// No description provided for @levelAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced'**
+  String get levelAdvanced;
+
+  /// No description provided for @levelExpert.
+  ///
+  /// In en, this message translates to:
+  /// **'Expert'**
+  String get levelExpert;
+
+  /// No description provided for @totalPoints.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Points'**
+  String get totalPoints;
+
+  /// No description provided for @nextLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Next Level'**
+  String get nextLevel;
+
+  /// No description provided for @pointsToNextLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'{points} XP to next level'**
+  String pointsToNextLevel(Object points);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

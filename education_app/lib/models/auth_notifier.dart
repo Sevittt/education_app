@@ -11,8 +11,8 @@ import 'users.dart';
 class AuthNotifier with ChangeNotifier {
   final AuthService _authService;
   final ProfileService _profileService; // --- NEW ---
-  firebase_auth.User? _currentUser;
-  User? _appUser;
+  firebase_auth.AppUser? _currentAppUser;
+  AppUser? _appAppUser;
   bool _isLoading = false;
   String? _errorMessage;
 
@@ -20,42 +20,42 @@ class AuthNotifier with ChangeNotifier {
   AuthNotifier(this._authService, this._profileService) {
     _authService.authStateChanges.listen(_onAuthStateChanged);
     // --- MODIFIED: Check current user on init ---
-    _currentUser = _authService.currentUser;
-    if (_currentUser != null) {
-      _loadUserProfile(_currentUser!.uid);
+    _currentAppUser = _authService.currentAppUser;
+    if (_currentAppUser != null) {
+      _loadAppUserProfile(_currentAppUser!.uid);
     }
   }
 
   // --- Getters ---
-  firebase_auth.User? get currentUser => _currentUser;
-  User? get appUser => _appUser;
+  firebase_auth.AppUser? get currentAppUser => _currentAppUser;
+  AppUser? get appAppUser => _appAppUser;
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
-  bool get isAuthenticated => _currentUser != null;
+  bool get isAuthenticated => _currentAppUser != null;
 
   // --- MODIFIED: Simplified user profile loading ---
-  Future<void> _loadUserProfile(String uid) async {
+  Future<void> _loadAppUserProfile(String uid) async {
     try {
       // Use ProfileService to get the user profile
-      _appUser = await _profileService.getUserProfile(uid);
+      _appAppUser = await _profileService.getAppUserProfile(uid);
     } catch (e) {
-      _appUser = null;
+      _appAppUser = null;
     }
     notifyListeners();
   }
 
   // --- MODIFIED: Simplified auth state change handler ---
-  void _onAuthStateChanged(firebase_auth.User? user) {
-    _currentUser = user;
+  void _onAuthStateChanged(firebase_auth.AppUser? user) {
+    _currentAppUser = user;
     _isLoading = false;
     _clearError();
 
     if (user == null) {
       // This handles sign-out.
-      _appUser = null;
-    } else if (_appUser == null || _appUser!.id != user.uid) {
+      _appAppUser = null;
+    } else if (_appAppUser == null || _appAppUser!.id != user.uid) {
       // This handles the initial app load where a user is already signed in.
-      _loadUserProfile(user.uid);
+      _loadAppUserProfile(user.uid);
     }
     notifyListeners();
   }
@@ -65,13 +65,13 @@ class AuthNotifier with ChangeNotifier {
     _setLoading(true);
     _clearError();
     try {
-      final appUser = await _authService.signInWithGoogle();
-      if (appUser != null) {
-        _appUser = appUser; // Set the user
+      final appAppUser = await _authService.signInWithGoogle();
+      if (appAppUser != null) {
+        _appAppUser = appAppUser; // Set the user
         _setLoading(false);
         return true;
       } else {
-        // User cancelled the flow
+        // AppUser cancelled the flow
         _setLoading(false);
         return false;
       }
@@ -97,7 +97,7 @@ class AuthNotifier with ChangeNotifier {
         password: password,
       );
       if (user != null) {
-        _appUser = user;
+        _appAppUser = user;
       } else {
         throw Exception('Failed to load user profile after sign-in.');
       }
@@ -124,14 +124,14 @@ class AuthNotifier with ChangeNotifier {
     _setLoading(true);
     _clearError();
     try {
-      final appUser = await _authService.registerWithEmailAndPassword(
+      final appAppUser = await _authService.registerWithEmailAndPassword(
         email: email,
         password: password,
         name: name,
         role: role,
       );
-      if (appUser != null) {
-        _appUser = appUser; // --- NEW: Set user immediately after registration
+      if (appAppUser != null) {
+        _appAppUser = appAppUser; // --- NEW: Set user immediately after registration
         _setLoading(false);
         return true;
       } else {
@@ -158,24 +158,24 @@ class AuthNotifier with ChangeNotifier {
   Future<void> signOut() async {
     _setLoading(true);
     // The listener _onAuthStateChanged will be triggered by this
-    // and will set _currentUser and _appUser to null.
+    // and will set _currentAppUser and _appAppUser to null.
     await _authService.signOut();
     _setLoading(false);
   }
 
-  Future<bool> updateUserProfileData(User userProfileToSave) async {
-    if (_currentUser == null) {
-      _setErrorMessage("User not authenticated.");
+  Future<bool> updateAppUserProfileData(AppUser userProfileToSave) async {
+    if (_currentAppUser == null) {
+      _setErrorMessage("AppUser not authenticated.");
       return false;
     }
     _setLoading(true);
     _clearError();
     try {
       // Use the service to update the profile
-      await _profileService.updateCurrentUserProfile(userProfileToSave);
-      await _currentUser?.updateDisplayName(userProfileToSave.name);
+      await _profileService.updateCurrentAppUserProfile(userProfileToSave);
+      await _currentAppUser?.updateDisplayName(userProfileToSave.name);
 
-      _appUser = userProfileToSave;
+      _appAppUser = userProfileToSave;
       _setLoading(false);
       notifyListeners();
       return true;

@@ -38,7 +38,7 @@ class AuthService {
   // Attempts to create a new user account with the given email and password.
   // Returns the User object if successful, or null if an error occurs.
   // --- MODIFIED: Method signature and implementation ---
-  Future<app_user_model.User?> registerWithEmailAndPassword({
+  Future<app_user_model.AppUser?> registerWithEmailAndPassword({
     required String email,
     required String password,
     required String name,
@@ -58,8 +58,8 @@ class AuthService {
         // Update Firebase Auth profile with name
         await firebaseUser.updateDisplayName(name);
 
-        // Create a new app_user_model.User object
-        final newUser = app_user_model.User(
+        // Create a new app_user_model.AppUser object
+        final newUser = app_user_model.AppUser(
           id: firebaseUser.uid,
           name: name,
           email: email,
@@ -87,7 +87,7 @@ class AuthService {
   // Attempts to sign in an existing user with the given email and password.
   // Returns the User object if successful, or null if an error occurs.
   // Handles potential FirebaseAuthException errors.
-  Future<app_user_model.User?> signInWithEmailAndPassword({
+  Future<app_user_model.AppUser?> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -102,7 +102,7 @@ class AuthService {
 
       if (firebaseUser != null) {
         // --- NEW: After successful sign-in, fetch the full app user profile ---
-        final appUser = await _profileService.getUserProfile(firebaseUser.uid);
+        final appUser = await _profileService.getAppUserProfile(firebaseUser.uid);
         return appUser;
       }
       return null;
@@ -127,7 +127,7 @@ class AuthService {
   // --- NEW: Sign in with Google ---
   /// Signs in the user with Google.
   /// If the user is new, creates a profile in Firestore.
-  Future<app_user_model.User?> signInWithGoogle() async {
+  Future<app_user_model.AppUser?> signInWithGoogle() async {
     try {
       // 1. Trigger the Google Sign-In flow
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -164,11 +164,11 @@ class AuthService {
         await _usersCollection.doc(firebaseUser.uid).update({
           'lastLogin': DateTime.now().toIso8601String(),
         });
-        final appUser = await _profileService.getUserProfile(firebaseUser.uid);
+        final appUser = await _profileService.getAppUserProfile(firebaseUser.uid);
         return appUser;
       } else {
         // 6b. New user: Create a new profile in Firestore
-        final newUser = app_user_model.User(
+        final newUser = app_user_model.AppUser(
           id: firebaseUser.uid,
           name: firebaseUser.displayName ?? 'New User',
           email: firebaseUser.email,
@@ -221,4 +221,26 @@ class AuthService {
   // - Sign in with Phone Number (as in F006145.pdf)
   // - Password reset
   // - Email verification
+  // --- Update User XP ---
+  // Updates the user's XP and recalculates their level.
+  Future<void> updateUserXP(String userId, int pointsToAdd) async {
+    try {
+      final userDoc = await _usersCollection.doc(userId).get();
+      if (!userDoc.exists) return;
+
+      final currentXP = (userDoc.data()?['xp'] as int?) ?? 0;
+      final newXP = currentXP + pointsToAdd;
+      final newLevel = app_user_model.AppUser.getLevelFromXP(newXP);
+
+      await _usersCollection.doc(userId).update({
+        'xp': newXP,
+        'level': newLevel,
+      });
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error updating user XP: $e");
+      }
+      rethrow;
+    }
+  }
 }

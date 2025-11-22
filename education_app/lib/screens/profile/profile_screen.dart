@@ -146,6 +146,133 @@ class ProfileScreen extends StatelessWidget {
     }
   }
 
+  // --- ADDED: Helper to get localized level name ---
+  String _getLocalizedLevelName(String level, AppLocalizations l10n) {
+    switch (level) {
+      case 'Boshlang\'ich':
+        return l10n.levelBeginner;
+      case 'O\'rta':
+        return l10n.levelIntermediate;
+      case 'Yuqori':
+        return l10n.levelAdvanced;
+      case 'Ekspert':
+        return l10n.levelExpert;
+      default:
+        return level;
+    }
+  }
+
+  // --- ADDED: Build User Stats Widget ---
+  Widget _buildUserStats(
+    BuildContext context,
+    AppUser appUser,
+    AppLocalizations l10n,
+  ) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+
+    int currentXP = appUser.xp;
+    int nextLevelXP = 100;
+    double progress = 0.0;
+
+    // Calculate progress based on level thresholds
+    if (currentXP < 100) {
+      nextLevelXP = 100;
+      progress = currentXP / 100;
+    } else if (currentXP < 500) {
+      nextLevelXP = 500;
+      progress = (currentXP - 100) / 400;
+    } else if (currentXP < 1000) {
+      nextLevelXP = 1000;
+      progress = (currentXP - 500) / 500;
+    } else {
+      nextLevelXP = 1000; // Max level reached
+      progress = 1.0;
+    }
+
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _getLocalizedLevelName(appUser.level, l10n),
+                      style: textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.primary,
+                      ),
+                    ),
+                    Text(
+                      l10n.totalPoints,
+                      style: textTheme.bodySmall?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    '$currentXP XP',
+                    style: textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onPrimaryContainer,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: LinearProgressIndicator(
+                value: progress,
+                minHeight: 10,
+                backgroundColor: colorScheme.surfaceContainerHighest,
+                valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
+              ),
+            ),
+            const SizedBox(height: 8),
+            if (currentXP < 1000)
+              Text(
+                l10n.pointsToNextLevel(nextLevelXP - currentXP),
+                style: textTheme.bodySmall?.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
+                textAlign: TextAlign.end,
+              )
+            else
+              Text(
+                l10n.levelExpert, // Or a "Max Level Reached" message
+                style: textTheme.bodySmall?.copyWith(
+                  color: colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.end,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -156,7 +283,7 @@ class ProfileScreen extends StatelessWidget {
     final authNotifier = context.watch<AuthNotifier>();
     final firebaseUser = authNotifier.currentUser; // Firebase Auth User
     final appUser =
-        authNotifier.appUser; // Your custom User model from Firestore
+        authNotifier.appAppUser; // Your custom User model from Firestore
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -228,6 +355,13 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
+            // --- ADDED: User Stats Section ---
+            if (appUser != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: _buildUserStats(context, appUser, l10n),
+              ),
+            // --- END ADDED ---
             const SizedBox(height: 20.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),

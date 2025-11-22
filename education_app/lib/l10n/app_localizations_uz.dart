@@ -861,4 +861,42 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get signInWithGoogle => 'Google bilan kirish';
+
+  @override
+  String get themeSystemDefault => 'Tizim tili';
+
+  @override
+  String get themeLight => 'Yorug\' rejim';
+
+  @override
+  String get themeDark => 'Tungi rejim';
+
+  @override
+  String get bioOptionalLabel => 'Bio (Ixtiyoriy)';
+
+  @override
+  String get profilePictureUrlLabel => 'Profil rasmi URL manzili (Ixtiyoriy)';
+
+  @override
+  String get levelBeginner => 'Boshlang\'ich';
+
+  @override
+  String get levelIntermediate => 'O\'rta';
+
+  @override
+  String get levelAdvanced => 'Yuqori';
+
+  @override
+  String get levelExpert => 'Ekspert';
+
+  @override
+  String get totalPoints => 'Jami Ballar';
+
+  @override
+  String get nextLevel => 'Keyingi Daraja';
+
+  @override
+  String pointsToNextLevel(Object points) {
+    return 'Keyingi darajaga $points XP qoldi';
+  }
 }

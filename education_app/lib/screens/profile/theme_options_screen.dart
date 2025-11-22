@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Import provider
+import '../../l10n/app_localizations.dart'; // --- ADDED IMPORT ---
 import '../../models/theme_notifier.dart'; // Import ThemeNotifier
 
 class ThemeOptionsScreen extends StatelessWidget {
@@ -52,7 +53,7 @@ class ThemeOptionsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Theme Options'),
+        title: Text(AppLocalizations.of(context)!.themeOptionsTitle),
         centerTitle: true,
         backgroundColor: currentTheme.colorScheme.surface, // M3 style appbar
         foregroundColor: currentTheme.colorScheme.onSurface,
@@ -63,7 +64,7 @@ class ThemeOptionsScreen extends StatelessWidget {
 
           _buildThemeOptionTile(
             context: context,
-            title: 'System Default',
+            title: AppLocalizations.of(context)!.themeSystemDefault,
             value: ThemeMode.system,
             groupValue: themeNotifier.themeMode,
             onChanged: (ThemeMode? mode) {
@@ -77,7 +78,7 @@ class ThemeOptionsScreen extends StatelessWidget {
 
           _buildThemeOptionTile(
             context: context,
-            title: 'Light Mode',
+            title: AppLocalizations.of(context)!.themeLight,
             value: ThemeMode.light,
             groupValue: themeNotifier.themeMode,
             onChanged: (ThemeMode? mode) {
@@ -91,7 +92,7 @@ class ThemeOptionsScreen extends StatelessWidget {
 
           _buildThemeOptionTile(
             context: context,
-            title: 'Dark Mode',
+            title: AppLocalizations.of(context)!.themeDark,
             value: ThemeMode.dark,
             groupValue: themeNotifier.themeMode,
             onChanged: (ThemeMode? mode) {

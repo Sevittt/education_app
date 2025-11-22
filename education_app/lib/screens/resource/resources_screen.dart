@@ -17,6 +17,7 @@ class ResourcesScreen extends StatefulWidget {
 class _ResourcesScreenState extends State<ResourcesScreen> {
   final TextEditingController _searchController = TextEditingController();
   ResourceType? _selectedResourceType;
+  bool _showOnlyBookmarked = false; // --- ADDED STATE VARIABLE ---
 
   @override
   void initState() {
@@ -170,7 +171,26 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                 },
               ),
             ),
-            const SizedBox(height: 16.0),
+            // --- BOOKMARK FILTER TOGGLE ---
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                children: [
+                  const Text("Faqat saqlanganlar:"),
+                  const Spacer(),
+                  Switch(
+                    value: _showOnlyBookmarked,
+                    onChanged: (value) {
+                      setState(() {
+                        _showOnlyBookmarked = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            // --- END BOOKMARK FILTER TOGGLE ---
+            const SizedBox(height: 8.0),
             Expanded(
               child: StreamBuilder<List<Resource>>(
                 stream: resourceService.getResources(),
@@ -186,47 +206,59 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
 
                   List<Resource> resources = snapshot.data ?? [];
 
-                  // Filter by search and resource type
-                  List<Resource> filteredResources =
-                      resources.where((resource) {
-                        final matchesSearch =
-                            resource.title.toLowerCase().contains(
-                              _searchController.text.toLowerCase(),
-                            ) ||
-                            resource.description.toLowerCase().contains(
-                              _searchController.text.toLowerCase(),
-                            );
+                  // --- BOOKMARK FILTER LOGIC ---
+                  return FutureBuilder<List<String>>(
+                    future: resourceService.getBookmarkedResourceIds(),
+                    builder: (context, bookmarkSnapshot) {
+                      final bookmarkedIds = bookmarkSnapshot.data ?? [];
 
-                        final matchesType =
-                            _selectedResourceType == null ||
-                            resource.type == _selectedResourceType;
+                      // Filter by search and resource type
+                      List<Resource> filteredResources =
+                          resources.where((resource) {
+                            final matchesSearch =
+                                resource.title.toLowerCase().contains(
+                                  _searchController.text.toLowerCase(),
+                                ) ||
+                                resource.description.toLowerCase().contains(
+                                  _searchController.text.toLowerCase(),
+                                );
 
-                        return matchesSearch && matchesType;
-                      }).toList();
+                            final matchesType =
+                                _selectedResourceType == null ||
+                                resource.type == _selectedResourceType;
 
-                  if (filteredResources.isEmpty) {
-                    return Center(child: Text(l10n.resourcesNoResourcesFound));
-                  }
+                            final matchesBookmark = !_showOnlyBookmarked ||
+                                bookmarkedIds.contains(resource.id);
 
-                  return ListView.builder(
-                    itemCount: filteredResources.length,
-                    itemBuilder: (context, index) {
-                      final resource = filteredResources[index];
-                      return ListTile(
-                        leading: _buildResourceTypeIconWidget(
-                          resource.type,
-                          context,
-                        ),
-                        title: Text(resource.title),
-                        subtitle: Text(resource.description),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) =>
-                                      ResourceDetailScreen(resource: resource),
+                            return matchesSearch && matchesType && matchesBookmark;
+                          }).toList();
+                      // --- END BOOKMARK FILTER LOGIC ---
+
+                      if (filteredResources.isEmpty) {
+                        return Center(child: Text(l10n.resourcesNoResourcesFound));
+                      }
+
+                      return ListView.builder(
+                        itemCount: filteredResources.length,
+                        itemBuilder: (context, index) {
+                          final resource = filteredResources[index];
+                          return ListTile(
+                            leading: _buildResourceTypeIconWidget(
+                              resource.type,
+                              context,
                             ),
+                            title: Text(resource.title),
+                            subtitle: Text(resource.description),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) =>
+                                          ResourceDetailScreen(resource: resource),
+                                ),
+                              ).then((_) => setState(() {})); // Refresh on return
+                            },
                           );
                         },
                       );

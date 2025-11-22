@@ -5,11 +5,11 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart'; // For date formatting
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 
-import '../../models/users.dart'; // Your main User model
+import '../../models/users.dart'; // Your main AppUser model
 import '../../services/profile_service.dart';
 
-class AdminUserListScreen extends StatelessWidget {
-  const AdminUserListScreen({super.key});
+class AdminAppUserListScreen extends StatelessWidget {
+  const AdminAppUserListScreen({super.key});
 
   // O'ZGARISH: Rolni lokalizatsiya qilingan matnga o'girish uchun yordamchi funksiya
   String? _getRoleName(UserRole role, AppLocalizations l10n) {
@@ -34,11 +34,11 @@ class AdminUserListScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.manageUsersTitle), // "Manage Users" or "User List"
+        title: Text(l10n.manageAppUsersTitle), // "Manage AppUsers" or "AppUser List"
         centerTitle: true,
       ),
-      body: StreamBuilder<List<User>>(
-        stream: profileService.getAllUsersStream(),
+      body: StreamBuilder<List<AppUser>>(
+        stream: profileService.getAllAppUsersStream(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());

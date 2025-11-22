@@ -220,7 +220,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    final UserRole? userRole = authNotifier.appUser?.role;
+    final UserRole? userRole = authNotifier.appAppUser?.role;
     final ResourceService resourceService = Provider.of<ResourceService>(
       context,
       listen: false,
@@ -258,6 +258,25 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
               },
             ),
           ],
+          // --- BOOKMARK BUTTON ---
+          FutureBuilder<bool>(
+            future: resourceService.isBookmarked(widget.resource.id),
+            builder: (context, snapshot) {
+              final isBookmarked = snapshot.data ?? false;
+              return IconButton(
+                icon: Icon(
+                  isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                  color: isBookmarked ? Theme.of(context).colorScheme.primary : null,
+                ),
+                tooltip: isBookmarked ? "Olib tashlash" : "Saqlash",
+                onPressed: () async {
+                  await resourceService.toggleBookmark(widget.resource.id);
+                  setState(() {}); // UI ni yangilash
+                },
+              );
+            },
+          ),
+          // --- END BOOKMARK BUTTON ---
         ],
       ),
       body: SingleChildScrollView(

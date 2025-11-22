@@ -45,7 +45,7 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
     }
 
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    final currentUser = authNotifier.appUser; // Your custom User model
+    final currentUser = authNotifier.appAppUser; // Your custom User model
     final firebaseUser = authNotifier.currentUser; // Firebase Auth User
 
     if (currentUser == null || firebaseUser == null) {

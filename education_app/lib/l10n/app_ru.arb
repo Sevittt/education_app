@@ -405,6 +405,180 @@
     "description": "Кнопка для просмотра всех элементов в списке"
   },
   "noGuidesAuthored": "Вы еще не создали ни одного руководства.",
+  "failedToAddComment": "Не удалось добавить комментарий: {error}",
+  "@failedToAddComment": {
+    "description": "Сообщение об ошибке при добавлении комментария",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "xato": {
+        "type": "String"
+      }
+    }
+  },
+  "topicUpdatedSuccess": "Тема успешно обновлена!",
+  "noDiscussionsYet": "Пока нет обсуждений.",
+  "beTheFirstToStartConversation": "Начните разговор первым!",
+  "mustBeLoggedInToCreateResource": "Вы должны войти в систему, чтобы создать ресурс.",
+  "profileIncompleteToCreateResource": "Информация вашего профиля неполная. Пожалуйста, обновите свое имя в вашем профиле.",
+  "profileIncompleteToCreateTopic": "Имя вашего профиля не установлено. Пожалуйста, обновите свой профиль.",
+  "commentCannotBeEmpty": "Комментарий не может быть пустым.",
+  "mustBeLoggedInToComment": "Вы должны войти в систему, чтобы оставить комментарий.",
+  "commentAddedSuccessfully": "Комментарий успешно добавлен!",
+  "failedToAddComment": "Не удалось добавить комментарий: {error}",
+  "@failedToAddComment": {
+    "description": "Сообщение об ошибке при добавлении комментария",
+    "placeholders": {
+      "error": {
+        "type": "String" 
+      }
+    }
+  },
+  "postedBy": "Опубликовано {authorName}",
+  "onDate": "в {date}",
+  "repliesTitle": "Ответы",
+  "errorLoadingComments": "Ошибка загрузки комментариев: {error}",
+  "noRepliesYet": "Пока нет ответов. Станьте первым, кто оставит комментарий!",
+  "writeAReplyHint": "Напишите ответ...",
+  "sendCommentTooltip": "Отправить комментарий",
+  "welcomeBack": "С возвращением, {userName}!",
+  "readyToLearnSomethingNew": "Готовы узнать что-то новое сегодня?",
+  "quickAccessTitle": "Быстрый доступ",
+  "communityTitle": "Сообщество",
+  "profileTitle": "Профиль",
+  "latestNewsTitle": "Последние новости",
+  "sourceLabel": "Источник",
+  "quizzesTitle": "Тестовые задания",
+  "urlCannotBeEmpty": "URL не может быть пустым",
+  "errorLoadingNews": "Ошибка загрузки новостей: {error}",
+  "noNewsAvailable": "В данный момент новостей нет.",
+  "adminPanelTitle": "Панель администратора",
+  "manageNewsTitle": "Управление новостями",
+  "manageNewsSubtitle": "Добавление, редактирование или удаление новостных статей",
+  "manageUsersTitle": "Управление пользователями",
+  "manageUsersSubtitle": "Просмотр пользователей и управление ролями (в будущем)",
+  "manageResourcesTitle": "Управление ресурсами",
+  "manageResourcesSubtitle": "Управление всеми учебными ресурсами (в будущем)",
+  "confirmDeleteTitle": "Подтвердить удаление",
+  "confirmDeleteNewsMessage": "Вы уверены, что хотите удалить \"{newsTitle}\"?",
+  "newsDeletedSuccess": "\"{newsTitle}\" успешно удален.",
+  "failedToDeleteNews": "Не удалось удалить \"{newsTitle}\": {error}",
+  "@failedToDeleteNews": {
+    "description": "Error message when deleting news fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "newsTitle": {
+        "type": "Object"
+      }
+    }
+  },
+  "addNewsTooltip": "Добавить новую новостную статью",
+  "editNewsTooltip": "Редактировать новость",
+  "deleteNewsTooltip": "Удалить новость",
+  "addNewsButton": "Добавить новость",
+  "noNewsAvailableManager": "Нет новостных статей. Добавьте одну!",
+  "editNewsTitle": "Редактировать новость",
+  "addNewsTitle": "Добавить новостную статью",
+  "saveNewsTooltip": "Сохранить новость",
+  "newsTitleLabel": "Заголовок",
+  "pleaseEnterNewsTitle": "Введите заголовок новости",
+  "newsTitleMinLength": "Заголовок новости должен быть не менее {length} символов",
+  "newsSourceLabel": "Источник (например, название блога)",
+  "pleaseEnterNewsSource": "Введите источник новостей",
+  "newsUrlLabel": "URL статьи",
+  "pleaseEnterNewsUrl": "Введите URL статьи",
+  "pleaseEnterValidNewsUrl": "Введите действительный URL (начинающийся с http или https).",
+  "newsImageUrlLabel": "URL изображения (необязательно)",
+  "pleaseEnterValidImageUrl": "Введите действительный URL изображения (начинающийся с http или https) или оставьте поле пустым.",
+  "publicationDateLabel": "Дата публикации",
+  "pleaseSelectPublicationDate": "Выберите дату публикации.",
+  "noDateSelected": "Дата не выбрана",
+  "selectDateTooltip": "Выберите дату",
+  "updateNewsButton": "Обновить новости",
+  "addNewsButtonForm": "Добавить новостную статью",
+  "newsUpdatedSuccess": "\"{newsTitle}\" успешно обновлено.",
+  "newsAddedSuccess": "\"{newsTitle}\" успешно добавлено.",
+  "failedToSaveNews": "Не удалось сохранить новости: {error}",
+  "@failedToSaveNews": {
+    "description": "Error message when saving news fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLoadingUsers": "Ошибка загрузки пользователей: {error}",
+  "noUsersFound": "Пользователи не найдены.",
+  "noEmailProvided": "Адрес электронной почты не указан",
+  "roleLabel": "Роль",
+  "registeredOnLabel": "Зарегистрирован",
+  "manageUsersSubtitleNow": "Просмотр и поиск зарегистрированных пользователей",
+  "manageResourcesSubtitleNow": "Просмотр, редактирование или удаление любого учебного ресурса",
+  "confirmDeleteResourceMessage": "Вы уверены, что хотите удалить ресурс \"{resourceTitle}\"?",
+  "resourceDeletedSuccess": "Ресурс \"{resourceTitle}\" успешно удален.",
+  "failedToDeleteResource": "Не удалось удалить ресурс \"{resourceTitle}\": {error}",
+  "@failedToDeleteResource": {
+    "description": "Error message when deleting resource fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "resourceTitle": {
+        "type": "Object"
+      }
+    }
+  },
+  "errorLoadingResources": "Ошибка загрузки ресурсов: {error}",
+  "noResourcesFoundManager": "Ресурсы в системе не найдены.",
+  "editResourceTooltip": "Изменить ресурс",
+  "deleteResourceTooltip": "Удалить ресурс",
+  "manageQuizzesTitle": "Управление тестами",
+  "addQuizTooltip": "Добавить новый тест",
+  "errorLoadingQuizzesAdmin": "Ошибка загрузки тестов: {error}",
+  "noQuizzesFoundManager": "Тестов не найдено. Добавьте один!",
+  "confirmDeleteQuizMessage": "Вы уверены, что хотите удалить тест \"{quizTitle}\" и все его вопросы? Это действие нельзя отменить.",
+  "quizDeletedSuccess": "Тест \"{quizTitle}\" и его вопросы успешно удалены.",
+  "failedToDeleteQuiz": "Не удалось удалить тест \"{quizTitle}\": {error}",
+  "@failedToDeleteQuiz": {
+    "description": "Error message when deleting quiz fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "quizTitle": {
+        "type": "Object"
+      }
+    }
+  },
+  "editDetailsButton": "Изменить сведения",
+  "manageQuestionsButton": "Вопросы",
+  "deleteQuizTooltip": "Удалить тест и Вопросы",
+  "addQuizButton": "Добавить тест",
+  "manageQuizzesSubtitle": "Контролировать все тесты и их вопросы",
+  "registrationEmailError": "Введите действительный адрес электронной почты",
+  "@registrationEmailError": {
+    "description": "Сообщение об ошибке при неверном адресе электронной почты"
+  },
+  "dashboardXodimTitle": "Моя активность",
+  "@dashboardXodimTitle": {
+    "description": "Заголовок для раздела панели управления обычного сотрудника"
+  },
+  "dashboardEkspertTitle": "Мой вклад",
+  "@dashboardEkspertTitle": {
+    "description": "Заголовок для раздела панели управления эксперта"
+  },
+  "dashboardAdminTitle": "Обзор системы",
+  "@dashboardAdminTitle": {
+    "description": "Заголовок для раздела панели управления администратора"
+  },
+  "seeAllButton": "Посмотреть все",
+  "@seeAllButton": {
+    "description": "Кнопка для просмотра всех элементов в списке"
+  },
+  "noGuidesAuthored": "Вы еще не создали ни одного руководства.",
   "@noGuidesAuthored": {
     "description": "Сообщение, отображаемое, когда эксперт еще не создал ни одного руководства."
   },
@@ -428,5 +602,17 @@
   "signInWithGoogle": "Войти через Google",
   "@signInWithGoogle": {
     "description": "Текст кнопки для входа с помощью учетной записи Google."
-  }
+  },
+  "themeSystemDefault": "Системный",
+  "themeLight": "Светлая тема",
+  "themeDark": "Темная тема",
+  "bioOptionalLabel": "Био (необязательно)",
+  "profilePictureUrlLabel": "URL изображения профиля (необязательно)",
+  "levelBeginner": "Начинающий",
+  "levelIntermediate": "Средний",
+  "levelAdvanced": "Продвинутый",
+  "levelExpert": "Эксперт",
+  "totalPoints": "Всего очков",
+  "nextLevel": "Следующий уровень",
+  "pointsToNextLevel": "{points} XP до следующего уровня"
 }

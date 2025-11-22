@@ -97,7 +97,7 @@ class HomeDashboardScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     final authNotifier = Provider.of<AuthNotifier>(context);
-    final User? appUser = authNotifier.appUser;
+    final AppUser? appUser = authNotifier.appAppUser;
     final String userName = appUser?.name ?? l10n.guestUser;
 
     final newsService = Provider.of<NewsService>(context, listen: false);
@@ -382,7 +382,7 @@ class HomeDashboardScreen extends StatelessWidget {
 
   // --- NEW: Helper widget to determine which role dashboard to show ---
   Widget _buildRoleSpecificDashboard(
-    User appUser,
+    AppUser appUser,
     AppLocalizations l10n,
     ThemeData theme,
     BuildContext context, // --- ADDED context ---
@@ -405,7 +405,7 @@ class HomeDashboardScreen extends StatelessWidget {
 
   // --- MODIFIED: Xodim (Staff) Dashboard with real data ---
   Widget _buildXodimDashboard(
-    User appUser,
+    AppUser appUser,
     AppLocalizations l10n,
     ThemeData theme,
     BuildContext context, // --- ADDED context ---
@@ -517,7 +517,7 @@ class HomeDashboardScreen extends StatelessWidget {
 
   // --- MODIFIED: Ekspert (Expert) Dashboard with real data ---
   Widget _buildEkspertDashboard(
-    User appUser,
+    AppUser appUser,
     AppLocalizations l10n,
     ThemeData theme,
     BuildContext context, // --- ADDED context ---
@@ -614,7 +614,7 @@ class HomeDashboardScreen extends StatelessWidget {
 
   // --- MODIFIED: Admin Dashboard with real data ---
   Widget _buildAdminDashboard(
-    User appUser,
+    AppUser appUser,
     AppLocalizations l10n,
     ThemeData theme,
     BuildContext context, // --- ADDED context ---

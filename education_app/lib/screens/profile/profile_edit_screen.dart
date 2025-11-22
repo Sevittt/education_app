@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 
-import '../../models/users.dart'; // Your custom User model
+import '../../models/users.dart'; // Your custom AppUser model
 import '../../models/auth_notifier.dart'; // To get user data and update
 
 class ProfileEditScreen extends StatefulWidget {
@@ -31,12 +31,12 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     // and we can safely access the Provider context.
     if (!_isInitialized) {
       final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-      final appUser = authNotifier.appUser;
+      final appAppUser = authNotifier.appAppUser;
 
-      _nameController = TextEditingController(text: appUser?.name ?? '');
-      _bioController = TextEditingController(text: appUser?.bio ?? '');
+      _nameController = TextEditingController(text: appAppUser?.name ?? '');
+      _bioController = TextEditingController(text: appAppUser?.bio ?? '');
       _photoUrlController = TextEditingController(
-        text: appUser?.profilePictureUrl ?? '',
+        text: appAppUser?.profilePictureUrl ?? '',
       );
 
       _isInitialized = true;
@@ -60,13 +60,13 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
 
-    // It's safe to assume appUser is not null because this screen
+    // It's safe to assume appAppUser is not null because this screen
     // should only be accessible to logged-in users.
-    final currentAppUser = authNotifier.appUser!;
+    final currentAppAppUser = authNotifier.appAppUser!;
 
     try {
-      // Create a new User object with the updated details using copyWith
-      final userToSave = currentAppUser.copyWith(
+      // Create a new AppUser object with the updated details using copyWith
+      final userToSave = currentAppAppUser.copyWith(
         name: _nameController.text.trim(),
         bio:
             _bioController.text.trim().isNotEmpty
@@ -78,7 +78,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 : null,
       );
 
-      final success = await authNotifier.updateUserProfileData(userToSave);
+      final success = await authNotifier.updateAppUserProfileData(userToSave);
 
       if (mounted) {
         if (success) {
@@ -182,22 +182,22 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: _bioController,
-                decoration: const InputDecoration(
-                  labelText: 'Bio (Optional)',
-                  hintText: 'Tell us a little about yourself',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.info_outline),
+                decoration: InputDecoration(
+                  labelText: l10n.bioOptionalLabel,
+                  hintText: 'Tell us a little about yourself', // You might want to localize this too later
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.info_outline),
                 ),
                 maxLines: 3,
               ),
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: _photoUrlController,
-                decoration: const InputDecoration(
-                  labelText: 'Profile Picture URL (Optional)',
+                decoration: InputDecoration(
+                  labelText: l10n.profilePictureUrlLabel,
                   hintText: 'https://example.com/image.png',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.link),
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.link),
                 ),
                 keyboardType: TextInputType.url,
                 validator: (value) {

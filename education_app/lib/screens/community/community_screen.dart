@@ -153,7 +153,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
     final l10n = AppLocalizations.of(context);
 
     final authNotifier = Provider.of<AuthNotifier>(context);
-    final User? currentUser = authNotifier.appUser;
+    final AppUser? currentAppUser = authNotifier.appAppUser;
     final communityService = Provider.of<CommunityService>(
       context,
       listen: false,
@@ -248,9 +248,9 @@ class _CommunityScreenState extends State<CommunityScreen> {
                       final int commentCount = topic.commentCount;
 
                       bool canModify = false;
-                      if (currentUser != null) {
-                        if (currentUser.role == UserRole.admin ||
-                            currentUser.id == topic.authorId) {
+                      if (currentAppUser != null) {
+                        if (currentAppUser.role == UserRole.admin ||
+                            currentAppUser.id == topic.authorId) {
                           canModify = true;
                         }
                       }
