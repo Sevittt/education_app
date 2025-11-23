@@ -30,7 +30,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
   void initState() {
     super.initState();
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    _authorName = authNotifier.appAppUser?.name ?? 'Unknown Teacher';
+    _authorName = authNotifier.appUser?.name ?? 'Unknown Teacher';
   }
 
   @override
@@ -65,7 +65,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
 
     final String? currentUserId = authNotifier.currentUser?.uid;
-    final String? currentUserNameFromAppUser = authNotifier.appAppUser?.name;
+    final String? currentUserNameFromAppUser = authNotifier.appUser?.name;
 
     if (currentUserId == null || currentUserId.isEmpty) {
       if (mounted) {
@@ -162,7 +162,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final authNotifier = Provider.of<AuthNotifier>(context);
-    _authorName = authNotifier.appAppUser?.name ?? 'Unknown Teacher';
+    _authorName = authNotifier.appUser?.name ?? 'Unknown Teacher';
 
     return Scaffold(
       appBar: AppBar(

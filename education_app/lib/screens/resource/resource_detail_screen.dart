@@ -220,7 +220,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    final UserRole? userRole = authNotifier.appAppUser?.role;
+    final UserRole? userRole = authNotifier.appUser?.role;
     final ResourceService resourceService = Provider.of<ResourceService>(
       context,
       listen: false,

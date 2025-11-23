@@ -1,82 +1,82 @@
-// lib/models/auth_notifier.dart
-
-import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:flutter/material.dart';
-import 'package:sud_qollanma/services/auth_service.dart';
-import 'package:sud_qollanma/services/profile_service.dart';
-import 'users.dart';
+import 'package:flutter/foundation.dart';
+import '../services/auth_service.dart';
+import '../services/profile_service.dart';
+import 'users.dart'; // Bizning Custom User modelimiz
 
 class AuthNotifier with ChangeNotifier {
   final AuthService _authService;
-  final ProfileService _profileService; // --- NEW ---
-  firebase_auth.AppUser? _currentAppUser;
-  AppUser? _appAppUser;
+  final ProfileService _profileService;
+  
+  firebase_auth.User? _currentUser; // Firebase User
+  AppUser? _appUser; // Bizning Custom User
+  
   bool _isLoading = false;
   String? _errorMessage;
 
-  // --- MODIFIED: Constructor now accepts ProfileService ---
   AuthNotifier(this._authService, this._profileService) {
     _authService.authStateChanges.listen(_onAuthStateChanged);
-    // --- MODIFIED: Check current user on init ---
-    _currentAppUser = _authService.currentAppUser;
-    if (_currentAppUser != null) {
-      _loadAppUserProfile(_currentAppUser!.uid);
-    }
   }
 
-  // --- Getters ---
-  firebase_auth.AppUser? get currentAppUser => _currentAppUser;
-  AppUser? get appAppUser => _appAppUser;
+  // Getters
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
-  bool get isAuthenticated => _currentAppUser != null;
+  firebase_auth.User? get currentUser => _currentUser;
+  AppUser? get appUser => _appUser;
+  bool get isAuthenticated => _currentUser != null;
 
-  // --- MODIFIED: Simplified user profile loading ---
-  Future<void> _loadAppUserProfile(String uid) async {
-    try {
-      // Use ProfileService to get the user profile
-      _appAppUser = await _profileService.getAppUserProfile(uid);
-    } catch (e) {
-      _appAppUser = null;
-    }
+  // --- Helper Methods (Xatolikni tuzatish) ---
+  void _setLoading(bool value) {
+    _isLoading = value;
     notifyListeners();
   }
 
-  // --- MODIFIED: Simplified auth state change handler ---
-  void _onAuthStateChanged(firebase_auth.AppUser? user) {
-    _currentAppUser = user;
-    _isLoading = false;
-    _clearError();
-
-    if (user == null) {
-      // This handles sign-out.
-      _appAppUser = null;
-    } else if (_appAppUser == null || _appAppUser!.id != user.uid) {
-      // This handles the initial app load where a user is already signed in.
-      _loadAppUserProfile(user.uid);
-    }
+  void _setErrorMessage(String? message) {
+    _errorMessage = message;
     notifyListeners();
   }
 
-  // --- NEW: Sign in with Google Notifier Method ---
-  Future<bool> signInWithGoogle() async {
+  void _clearError() {
+    _errorMessage = null;
+  }
+
+  void _onAuthStateChanged(firebase_auth.User? user) async {
     _setLoading(true);
     _clearError();
+    _currentUser = user;
+
+    if (user == null) {
+      _appUser = null;
+    } else {
+      await _loadUserProfile(user.uid);
+    }
+    _setLoading(false);
+  }
+
+  Future<void> _loadUserProfile(String uid) async {
     try {
-      final appAppUser = await _authService.signInWithGoogle();
-      if (appAppUser != null) {
-        _appAppUser = appAppUser; // Set the user
+      _appUser = await _profileService.getUserProfile(uid);
+    } catch (e) {
+      _setErrorMessage('Profilni yuklashda xatolik: $e');
+      _appUser = null;
+    }
+  }
+
+  // --- Google Sign In ---
+  Future<bool> signInWithGoogle() async {
+    _setLoading(true);
+    _setErrorMessage(null);
+    try {
+      final appUser = await _authService.signInWithGoogle();
+      if (appUser != null) {
+        _appUser = appUser;
         _setLoading(false);
         return true;
-      } else {
-        // AppUser cancelled the flow
-        _setLoading(false);
-        return false;
       }
+      _setLoading(false);
+      return false;
     } on firebase_auth.FirebaseAuthException catch (e) {
-      _setErrorMessage(e.message ?? 'An unknown error occurred.');
+      _setErrorMessage(e.message ?? 'Xatolik yuz berdi.');
       _setLoading(false);
       return false;
     } catch (e) {
@@ -85,26 +85,21 @@ class AuthNotifier with ChangeNotifier {
       return false;
     }
   }
-  // --- END NEW ---
 
-  // --- OLD SIGN IN (Reverted to primary) ---
+  // --- Email/Password Sign In ---
   Future<bool> signIn(String email, String password) async {
     _setLoading(true);
-    _clearError();
+    _setErrorMessage(null);
     try {
-      final user = await _authService.signInWithEmailAndPassword(
+      final appUser = await _authService.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      if (user != null) {
-        _appAppUser = user;
-      } else {
-        throw Exception('Failed to load user profile after sign-in.');
+      if (appUser != null) {
+        _appUser = appUser;
+        _setLoading(false);
+        return true;
       }
-      _setLoading(false);
-      return true;
-    } on firebase_auth.FirebaseAuthException catch (e) {
-      _setErrorMessage(e.message ?? 'An unknown error occurred.');
       _setLoading(false);
       return false;
     } catch (e) {
@@ -114,7 +109,7 @@ class AuthNotifier with ChangeNotifier {
     }
   }
 
-  // --- MODIFIED: Replaced signUp with a cleaner register method ---
+  // --- Register ---
   Future<bool> register({
     required String email,
     required String password,
@@ -122,32 +117,38 @@ class AuthNotifier with ChangeNotifier {
     required UserRole role,
   }) async {
     _setLoading(true);
-    _clearError();
+    _setErrorMessage(null);
     try {
-      final appAppUser = await _authService.registerWithEmailAndPassword(
+      final appUser = await _authService.registerWithEmailAndPassword(
         email: email,
         password: password,
         name: name,
         role: role,
       );
-      if (appAppUser != null) {
-        _appAppUser = appAppUser; // --- NEW: Set user immediately after registration
+      if (appUser != null) {
+        _appUser = appUser;
         _setLoading(false);
         return true;
-      } else {
-        _setErrorMessage('Registration failed.');
-        _setLoading(false);
-        return false;
-      }
-    } on firebase_auth.FirebaseAuthException catch (e) {
-      // --- MODIFIED: Removed username error check ---
-      if (e.code == 'email-already-in-use') {
-        _setErrorMessage('This email is already in use by another account.');
-      } else {
-        _setErrorMessage(e.message ?? 'An unknown error occurred.');
       }
       _setLoading(false);
       return false;
+    } catch (e) {
+      _setErrorMessage(e.toString());
+      _setLoading(false);
+      return false;
+    }
+  }
+
+  // --- Update Profile ---
+  Future<bool> updateUserProfile(AppUser updatedUser) async {
+    _setLoading(true);
+    _setErrorMessage(null);
+    try {
+      await _profileService.updateUserProfile(updatedUser);
+      _appUser = updatedUser;
+      _setLoading(false);
+      notifyListeners();
+      return true;
     } catch (e) {
       _setErrorMessage(e.toString());
       _setLoading(false);
@@ -157,52 +158,7 @@ class AuthNotifier with ChangeNotifier {
 
   Future<void> signOut() async {
     _setLoading(true);
-    // The listener _onAuthStateChanged will be triggered by this
-    // and will set _currentAppUser and _appAppUser to null.
     await _authService.signOut();
     _setLoading(false);
-  }
-
-  Future<bool> updateAppUserProfileData(AppUser userProfileToSave) async {
-    if (_currentAppUser == null) {
-      _setErrorMessage("AppUser not authenticated.");
-      return false;
-    }
-    _setLoading(true);
-    _clearError();
-    try {
-      // Use the service to update the profile
-      await _profileService.updateCurrentAppUserProfile(userProfileToSave);
-      await _currentAppUser?.updateDisplayName(userProfileToSave.name);
-
-      _appAppUser = userProfileToSave;
-      _setLoading(false);
-      notifyListeners();
-      return true;
-    } catch (e) {
-      _setLoading(false);
-      _setErrorMessage("Failed to update profile: ${e.toString()}");
-      notifyListeners();
-      return false;
-    }
-  }
-
-  void _setLoading(bool loading) {
-    _isLoading = loading;
-    notifyListeners();
-  }
-
-  void _setErrorMessage(String? message) {
-    _errorMessage = message;
-  }
-
-  void _clearError() {
-    _errorMessage = null;
-  }
-
-  @override
-  void dispose() {
-    // The stream controller within AuthService will handle closing.
-    super.dispose();
   }
 }

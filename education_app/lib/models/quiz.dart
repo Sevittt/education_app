@@ -29,7 +29,27 @@ class Quiz {
     );
   }
 
+  // --- NEW: fromMap factory ---
+  factory Quiz.fromMap(Map<String, dynamic> data, String id) {
+    return Quiz(
+      id: id,
+      title: data['title'] ?? '',
+      description: data['description'] ?? '',
+      resourceId: data['resourceId'] ?? '',
+      questions: [], // Questions are loaded separately
+    );
+  }
+
   Map<String, dynamic> toFirestore() {
+    return {
+      'title': title,
+      'description': description,
+      'resourceId': resourceId,
+    };
+  }
+
+  // --- NEW: toMap method ---
+  Map<String, dynamic> toMap() {
     return {
       'title': title,
       'description': description,

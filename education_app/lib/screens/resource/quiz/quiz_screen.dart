@@ -65,7 +65,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
   Future<void> _submitQuiz() async {
     final l10n = AppLocalizations.of(context)!;
-    final user = Provider.of<AuthNotifier>(context, listen: false).appAppUser;
+    final user = Provider.of<AuthNotifier>(context, listen: false).appUser;
     if (user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

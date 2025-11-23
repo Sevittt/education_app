@@ -1,49 +1,34 @@
-// lib/screens/admin/admin_panel_screen.dart
-//import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:sud_qollanma/l10n/app_localizations.dart' show AppLocalizations;
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import 'admin_news_management_screen.dart';
-import 'admin_user_list_screen.dart';
 import 'admin_resource_management_screen.dart';
-import 'admin_quiz_management_screen.dart'; // <-- Import the new screen
-// import '../placeholder_screen.dart'; // Keep if used for other placeholders
+import 'admin_quiz_management_screen.dart';
+import 'admin_user_list_screen.dart';
 
 class AdminPanelScreen extends StatelessWidget {
   const AdminPanelScreen({super.key});
-
-  Widget _buildAdminOptionTile({
-    required BuildContext context,
-    required IconData icon,
-    required String title,
-    String? subtitle,
-    VoidCallback? onTap,
-  }) {
-    // ... (this method remains the same)
-    final ThemeData theme = Theme.of(context);
-    return ListTile(
-      leading: Icon(icon, color: theme.colorScheme.primary),
-      title: Text(title, style: theme.textTheme.titleMedium),
-      subtitle: subtitle != null ? Text(subtitle) : null,
-      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 16),
-      onTap: onTap,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.adminPanelTitle), centerTitle: true),
-      body: ListView(
-        padding: const EdgeInsets.all(8.0),
+      appBar: AppBar(
+        title: Text(l10n.adminPanelTitle),
+        centerTitle: true,
+      ),
+      body: GridView.count(
+        padding: const EdgeInsets.all(16.0),
+        crossAxisCount: 2,
+        crossAxisSpacing: 16.0,
+        mainAxisSpacing: 16.0,
         children: [
-          _buildAdminOptionTile(
-            context: context,
-            icon: Icons.article_outlined,
+          _buildAdminCard(
+            context,
+            icon: Icons.newspaper,
             title: l10n.manageNewsTitle,
             subtitle: l10n.manageNewsSubtitle,
+            color: Colors.blue.shade100,
             onTap: () {
               Navigator.push(
                 context,
@@ -53,12 +38,12 @@ class AdminPanelScreen extends StatelessWidget {
               );
             },
           ),
-          const Divider(),
-          _buildAdminOptionTile(
-            context: context,
-            icon: Icons.library_books_outlined,
+          _buildAdminCard(
+            context,
+            icon: Icons.library_books,
             title: l10n.manageResourcesTitle,
             subtitle: l10n.manageResourcesSubtitleNow,
+            color: Colors.green.shade100,
             onTap: () {
               Navigator.push(
                 context,
@@ -68,14 +53,12 @@ class AdminPanelScreen extends StatelessWidget {
               );
             },
           ),
-          const Divider(),
-          _buildAdminOptionTile(
-            // <-- ADD THIS NEW TILE
-            context: context,
-            icon: Icons.quiz_outlined,
-            title: l10n.manageQuizzesTitle, // "Manage Quizzes"
-            subtitle:
-                l10n.manageQuizzesSubtitle, // Add to l10n: "Oversee all quizzes and their questions"
+          _buildAdminCard(
+            context,
+            icon: Icons.quiz,
+            title: l10n.manageQuizzesTitle,
+            subtitle: l10n.manageQuizzesSubtitle,
+            color: Colors.orange.shade100,
             onTap: () {
               Navigator.push(
                 context,
@@ -85,28 +68,69 @@ class AdminPanelScreen extends StatelessWidget {
               );
             },
           ),
-          const Divider(),
-          _buildAdminOptionTile(
-            context: context,
-            icon: Icons.people_alt_outlined,
+          _buildAdminCard(
+            context,
+            icon: Icons.people,
             title: l10n.manageUsersTitle,
             subtitle: l10n.manageUsersSubtitleNow,
+            color: Colors.purple.shade100,
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const AdminUserListScreen(),
+                  builder: (context) => const AdminAppUserListScreen(),
                 ),
               );
             },
           ),
-          // Add more admin options here as you build them
         ],
       ),
     );
   }
-}
 
-// Add/Update localization keys:
-// "manageQuizzesSubtitle": "Oversee all quizzes and their questions"
-// (You should already have "manageQuizzesTitle")
+  Widget _buildAdminCard(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return Card(
+      color: color,
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 40, color: Colors.black87),
+              const SizedBox(height: 12),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                subtitle,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 12, color: Colors.black54),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -126,7 +126,32 @@ class QuizAttempt {
     );
   }
 
+  // --- NEW: fromMap factory ---
+  factory QuizAttempt.fromMap(Map<String, dynamic> data, String id) {
+    return QuizAttempt(
+      id: id,
+      userId: data['userId'] as String? ?? '',
+      quizId: data['quizId'] as String? ?? '',
+      quizTitle: data['quizTitle'] as String? ?? 'Unnamed Quiz',
+      score: (data['score'] as num?)?.toInt() ?? 0,
+      totalQuestions: (data['totalQuestions'] as num?)?.toInt() ?? 0,
+      attemptedAt: data['attemptedAt'] as Timestamp? ?? Timestamp.now(),
+    );
+  }
+
   Map<String, dynamic> toFirestore() {
+    return {
+      'userId': userId,
+      'quizId': quizId,
+      'quizTitle': quizTitle,
+      'score': score,
+      'totalQuestions': totalQuestions,
+      'attemptedAt': attemptedAt,
+    };
+  }
+
+  // --- NEW: toMap method ---
+  Map<String, dynamic> toMap() {
     return {
       'userId': userId,
       'quizId': quizId,

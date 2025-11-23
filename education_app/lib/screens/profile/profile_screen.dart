@@ -283,7 +283,7 @@ class ProfileScreen extends StatelessWidget {
     final authNotifier = context.watch<AuthNotifier>();
     final firebaseUser = authNotifier.currentUser; // Firebase Auth User
     final appUser =
-        authNotifier.appAppUser; // Your custom User model from Firestore
+        authNotifier.appUser; // Your custom User model from Firestore
 
     return Scaffold(
       body: SingleChildScrollView(

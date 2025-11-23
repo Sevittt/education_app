@@ -31,12 +31,12 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     // and we can safely access the Provider context.
     if (!_isInitialized) {
       final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-      final appAppUser = authNotifier.appAppUser;
+      final appUser = authNotifier.appUser;
 
-      _nameController = TextEditingController(text: appAppUser?.name ?? '');
-      _bioController = TextEditingController(text: appAppUser?.bio ?? '');
+      _nameController = TextEditingController(text: appUser?.name ?? '');
+      _bioController = TextEditingController(text: appUser?.bio ?? '');
       _photoUrlController = TextEditingController(
-        text: appAppUser?.profilePictureUrl ?? '',
+        text: appUser?.profilePictureUrl ?? '',
       );
 
       _isInitialized = true;
@@ -60,13 +60,13 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
 
-    // It's safe to assume appAppUser is not null because this screen
+    // It's safe to assume appUser is not null because this screen
     // should only be accessible to logged-in users.
-    final currentAppAppUser = authNotifier.appAppUser!;
+    final currentappUser = authNotifier.appUser!;
 
     try {
       // Create a new AppUser object with the updated details using copyWith
-      final userToSave = currentAppAppUser.copyWith(
+      final userToSave = currentappUser.copyWith(
         name: _nameController.text.trim(),
         bio:
             _bioController.text.trim().isNotEmpty
@@ -78,7 +78,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 : null,
       );
 
-      final success = await authNotifier.updateAppUserProfileData(userToSave);
+      final success = await authNotifier.updateUserProfile(userToSave);
 
       if (mounted) {
         if (success) {

@@ -153,7 +153,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
     final l10n = AppLocalizations.of(context);
 
     final authNotifier = Provider.of<AuthNotifier>(context);
-    final AppUser? currentAppUser = authNotifier.appAppUser;
+    final AppUser? currentAppUser = authNotifier.appUser;
     final communityService = Provider.of<CommunityService>(
       context,
       listen: false,

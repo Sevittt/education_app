@@ -34,11 +34,11 @@ class AdminAppUserListScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.manageAppUsersTitle), // "Manage AppUsers" or "AppUser List"
+        title: Text(l10n.manageUsersTitle), // "Manage AppUsers" or "AppUser List"
         centerTitle: true,
       ),
       body: StreamBuilder<List<AppUser>>(
-        stream: profileService.getAllAppUsersStream(),
+        stream: profileService.getAllUsersStream(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());

@@ -97,7 +97,7 @@ class HomeDashboardScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     final authNotifier = Provider.of<AuthNotifier>(context);
-    final AppUser? appUser = authNotifier.appAppUser;
+    final AppUser? appUser = authNotifier.appUser;
     final String userName = appUser?.name ?? l10n.guestUser;
 
     final newsService = Provider.of<NewsService>(context, listen: false);

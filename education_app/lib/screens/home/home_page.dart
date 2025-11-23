@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildSpeedDial() {
     // Get the user's data from AuthNotifier
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    final user = authNotifier.appAppUser;
+    final user = authNotifier.appUser;
 
     // If there's no user, don't show the button
     if (user == null) {

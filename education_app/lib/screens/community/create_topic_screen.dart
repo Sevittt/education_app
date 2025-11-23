@@ -40,7 +40,7 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
     final String? currentUserId =
         authNotifier.currentUser?.uid; // FirebaseUser UID
     final String? authorDisplayName =
-        authNotifier.appAppUser?.name; // Name from your custom User model
+        authNotifier.appUser?.name; // Name from your custom User model
 
     if (currentUserId == null || currentUserId.isEmpty) {
       if (mounted) {

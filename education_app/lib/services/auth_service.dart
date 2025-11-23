@@ -1,6 +1,6 @@
 // lib/services/auth_service.dart
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:flutter/foundation.dart'; // For kDebugMode
+import 'package:flutter/foundation.dart'; // For kDebugMode and kIsWeb
 import 'package:google_sign_in/google_sign_in.dart';
 // --- NEW IMPORTS ---
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -102,7 +102,7 @@ class AuthService {
 
       if (firebaseUser != null) {
         // --- NEW: After successful sign-in, fetch the full app user profile ---
-        final appUser = await _profileService.getAppUserProfile(firebaseUser.uid);
+        final appUser = await _profileService.getUserProfile(firebaseUser.uid);
         return appUser;
       }
       return null;
@@ -129,27 +129,39 @@ class AuthService {
   /// If the user is new, creates a profile in Firestore.
   Future<app_user_model.AppUser?> signInWithGoogle() async {
     try {
-      // 1. Trigger the Google Sign-In flow
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      if (googleUser == null) {
-        // User cancelled the flow
-        return null;
+      firebase_auth.UserCredential userCredential;
+
+      if (kIsWeb) {
+        // Web platformasi uchun signInWithPopup ishlatamiz
+        final firebase_auth.GoogleAuthProvider googleProvider =
+            firebase_auth.GoogleAuthProvider();
+        
+        // Popup orqali sign in
+        userCredential = await _firebaseAuth.signInWithPopup(googleProvider);
+      } else {
+        // Mobile va desktop uchun GoogleSignIn package ishlatamiz
+        // 1. Trigger the Google Sign-In flow
+        final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+        if (googleUser == null) {
+          // User cancelled the flow
+          return null;
+        }
+
+        // 2. Obtain auth details from the request
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+
+        // 3. Create a new Firebase credential
+        final firebase_auth.AuthCredential credential =
+            firebase_auth.GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        // 4. Sign in to Firebase with the credential
+        userCredential = await _firebaseAuth.signInWithCredential(credential);
       }
 
-      // 2. Obtain auth details from the request
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-
-      // 3. Create a new Firebase credential
-      final firebase_auth.AuthCredential credential = firebase_auth
-          .GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-
-      // 4. Sign in to Firebase with the credential
-      final firebase_auth.UserCredential userCredential = await _firebaseAuth
-          .signInWithCredential(credential);
       final firebaseUser = userCredential.user;
 
       if (firebaseUser == null) {
@@ -164,7 +176,7 @@ class AuthService {
         await _usersCollection.doc(firebaseUser.uid).update({
           'lastLogin': DateTime.now().toIso8601String(),
         });
-        final appUser = await _profileService.getAppUserProfile(firebaseUser.uid);
+        final appUser = await _profileService.getUserProfile(firebaseUser.uid);
         return appUser;
       } else {
         // 6b. New user: Create a new profile in Firestore
@@ -202,7 +214,9 @@ class AuthService {
     try {
       // Attempt to sign out the current user
       await _firebaseAuth.signOut();
-      await GoogleSignIn().signOut(); // Also sign out from Google
+      if (!kIsWeb) {
+        await GoogleSignIn().signOut(); // Also sign out from Google (mobile/desktop)
+      }
     } catch (e) {
       // Handle any errors that might occur during sign out
       if (kDebugMode) {
@@ -216,31 +230,8 @@ class AuthService {
 
   // --- TODO: Add other authentication methods as needed ---
   // For example:
-  // - Sign in with Google
   // - Sign in with Apple
   // - Sign in with Phone Number (as in F006145.pdf)
   // - Password reset
   // - Email verification
-  // --- Update User XP ---
-  // Updates the user's XP and recalculates their level.
-  Future<void> updateUserXP(String userId, int pointsToAdd) async {
-    try {
-      final userDoc = await _usersCollection.doc(userId).get();
-      if (!userDoc.exists) return;
-
-      final currentXP = (userDoc.data()?['xp'] as int?) ?? 0;
-      final newXP = currentXP + pointsToAdd;
-      final newLevel = app_user_model.AppUser.getLevelFromXP(newXP);
-
-      await _usersCollection.doc(userId).update({
-        'xp': newXP,
-        'level': newLevel,
-      });
-    } catch (e) {
-      if (kDebugMode) {
-        print("Error updating user XP: $e");
-      }
-      rethrow;
-    }
-  }
 }

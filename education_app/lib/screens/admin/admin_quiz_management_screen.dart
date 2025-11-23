@@ -51,7 +51,7 @@ class _AdminQuizManagementScreenState extends State<AdminQuizManagementScreen> {
     if (confirmed == true && mounted) {
       try {
         // Use the new service method that also deletes questions
-        await quizService.deleteQuizAndQuestions(quiz.id);
+        await quizService.deleteQuiz(quiz.id);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -102,9 +102,7 @@ class _AdminQuizManagementScreenState extends State<AdminQuizManagementScreen> {
         ],
       ),
       body: StreamBuilder<List<Quiz>>(
-        stream: quizService.getAllQuizzesStream(
-          orderByField: 'title',
-        ), // Example: order by title
+        stream: quizService.getAllQuizzesStream(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
