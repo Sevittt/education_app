@@ -421,7 +421,7 @@ class ProfileScreen extends StatelessWidget {
                       title: l10n.adminPanelTitle,
                       subtitle:
                           l10n.manageNewsSubtitle, // Re-using a good subtitle
-                      enabled: appUser != null,
+                      enabled: true,  // Removed redundant appUser != null check
                       onTap: () {
                         Navigator.push(
                           context,

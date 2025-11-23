@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 import 'resource_detail_screen.dart';
+import 'video_tutorials_screen.dart';
+import '../systems/systems_directory_screen.dart';
+import '../faq/faq_list_screen.dart';
 import '../../models/resource.dart';
 import '../../services/resource_service.dart';
 
@@ -84,7 +87,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
     return Container(
       padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
-        color: iconColor.withOpacity(0.1),
+        color: iconColor.withAlpha(26),
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Icon(iconData, size: 28, color: iconColor),
@@ -106,6 +109,44 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
       appBar: AppBar(
         title: Text(l10n.resourcesScreenTitle), // O'ZGARISH
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.question_answer),
+            tooltip: 'Ko\'p so\'raladigan savollar',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const FAQListScreen(),
+                ),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.computer),
+            tooltip: 'Sud Axborot Tizimlari',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SystemsDirectoryScreen(),
+                ),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.video_library),
+            tooltip: 'Video Qo\'llanmalar',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const VideoTutorialsScreen(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: RefreshIndicator(
         // Wrap the Column with RefreshIndicator
@@ -131,9 +172,7 @@ class _ResourcesScreenState extends State<ResourcesScreen> {
                     borderSide: BorderSide.none,
                   ),
                   filled: true,
-                  fillColor: colorScheme.surfaceContainerHighest.withOpacity(
-                    0.5,
-                  ),
+                  fillColor: colorScheme.surfaceContainerHighest.withAlpha(128),
                   contentPadding: const EdgeInsets.symmetric(vertical: 14.0),
                 ),
               ),

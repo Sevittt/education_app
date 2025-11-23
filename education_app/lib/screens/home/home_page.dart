@@ -13,12 +13,17 @@ import 'package:sud_qollanma/l10n/app_localizations.dart';
 import 'package:sud_qollanma/screens/community/community_screen.dart';
 import 'package:sud_qollanma/screens/home/home_dashboard_screen.dart';
 import 'package:sud_qollanma/screens/profile/profile_screen.dart';
+
 import 'package:sud_qollanma/screens/resource/resources_screen.dart';
+import 'package:sud_qollanma/screens/knowledge_base/knowledge_base_screen.dart'; // Add this import
 import '../../models/auth_notifier.dart';
 import '../../models/users.dart'; // Import UserRole
 import '../resource/create_resource_screen.dart';
 import '../community/create_topic_screen.dart';
 import '../resource/quiz/create_quiz_screen.dart'; // Make sure this import is present
+import '../notifications/notifications_screen.dart';
+import '../../services/notification_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -43,6 +48,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _widgetOptions = <Widget>[
       HomeDashboardScreen(onTabSelected: _onItemTapped),
+      const KnowledgeBaseScreen(),
       const ResourcesScreen(),
       const CommunityScreen(),
       const ProfileScreen(),
@@ -127,6 +133,36 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget _buildNotificationBell() {
+    final String? userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) return const SizedBox.shrink();
+
+    final NotificationService notificationService = NotificationService();
+
+    return StreamBuilder<int>(
+      stream: notificationService.getUnreadCount(userId),
+      builder: (context, snapshot) {
+        final unreadCount = snapshot.data ?? 0;
+
+        return IconButton(
+          icon: Badge(
+            label: Text(unreadCount.toString()),
+            isLabelVisible: unreadCount > 0,
+            child: const Icon(Icons.notifications),
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const NotificationsScreen(),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var appBar = AppBar(
@@ -135,13 +171,16 @@ class _HomePageState extends State<HomePage> {
       ), // O'ZGARISH: Sarlavhani lokalizatsiyadan olish
       centerTitle: true,
       elevation: Theme.of(context).appBarTheme.elevation ?? 2.0,
+      actions: [
+        _buildNotificationBell(),
+      ],
     );
     return Scaffold(
       appBar: appBar,
       body: IndexedStack(index: _selectedIndex, children: _widgetOptions),
       // --- Add the floatingActionButton here ---
       floatingActionButton:
-          (_selectedIndex == 1 || _selectedIndex == 2)
+          (_selectedIndex == 2 || _selectedIndex == 3) // Resources is now 2, Community is 3
               ? _buildSpeedDial()
               : null,
       bottomNavigationBar: BottomNavigationBar(
@@ -153,6 +192,14 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(
               _selectedIndex == 1
+                  ? Icons.menu_book
+                  : Icons.menu_book_outlined,
+            ),
+            label: 'Knowledge',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              _selectedIndex == 2
                   ? Icons.library_books
                   : Icons.library_books_outlined,
             ),
@@ -160,13 +207,13 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              _selectedIndex == 2 ? Icons.people : Icons.people_outline,
+              _selectedIndex == 3 ? Icons.people : Icons.people_outline,
             ),
             label: 'Community',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              _selectedIndex == 3 ? Icons.person : Icons.person_outline,
+              _selectedIndex == 4 ? Icons.person : Icons.person_outline,
             ),
             label: 'Profile',
           ),

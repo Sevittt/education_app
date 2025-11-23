@@ -24,7 +24,7 @@ android {
 
     defaultConfig {
         applicationId = "uz.sud.qollanma" // O'ZGARISH: Paket nomi
-        minSdk = flutter.minSdkVersion
+        minSdk = 21
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
