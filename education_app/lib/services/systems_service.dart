@@ -94,9 +94,21 @@ class SystemsService {
       ]);
 
       return {
-        'articles': results[0].docs.map((d) => d.data()).toList(),
-        'videos': results[1].docs.map((d) => d.data()).toList(),
-        'faqs': results[2].docs.map((d) => d.data()).toList(),
+        'articles': results[0].docs.map((d) {
+          final data = d.data();
+          data['id'] = d.id;
+          return data;
+        }).toList(),
+        'videos': results[1].docs.map((d) {
+          final data = d.data();
+          data['id'] = d.id;
+          return data;
+        }).toList(),
+        'faqs': results[2].docs.map((d) {
+          final data = d.data();
+          data['id'] = d.id;
+          return data;
+        }).toList(),
       };
     } catch (e) {
       print('Error getting system content: $e');

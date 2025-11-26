@@ -3,6 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import '../../models/app_notification.dart';
 import '../../services/notification_service.dart';
+import '../../services/knowledge_base_service.dart';
+import '../../services/video_tutorial_service.dart';
+import '../../services/systems_service.dart';
+import '../../services/faq_service.dart';
+import '../knowledge_base/article_detail_screen.dart';
+import '../resource/video_player_screen.dart';
+import '../systems/system_detail_screen.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
@@ -84,12 +91,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       color: isRead ? null : Colors.blue.shade50,
       child: InkWell(
-        onTap: () async {
-          if (!isRead) {
-            await _service.markAsRead(notification.id, _userId!);
-          }
-          // TODO: Navigate to related content if exists
-        },
+        onTap: () => _handleNotificationTap(notification),
         borderRadius: BorderRadius.circular(12),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -203,5 +205,122 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         ],
       ),
     );
+  }
+  Future<void> _handleNotificationTap(AppNotification notification) async {
+    if (!notification.isReadBy(_userId!)) {
+      await _service.markAsRead(notification.id, _userId!);
+    }
+
+    if (!notification.hasRelatedContent) return;
+
+    // Show loading
+    if (!mounted) return;
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
+
+    try {
+      switch (notification.relatedContentType) {
+        case 'article':
+          await _navigateToArticle(notification.relatedContentId!);
+          break;
+        case 'video':
+          await _navigateToVideo(notification.relatedContentId!);
+          break;
+        case 'system':
+          await _navigateToSystem(notification.relatedContentId!);
+          break;
+        case 'faq':
+          await _navigateToFAQ(notification.relatedContentId!);
+          break;
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Xatolik: $e')),
+        );
+      }
+    } finally {
+      // Hide loading
+      if (mounted) {
+        Navigator.of(context, rootNavigator: true).pop(); 
+      }
+    }
+  }
+
+  Future<void> _navigateToArticle(String id) async {
+    final service = KnowledgeBaseService();
+    final article = await service.getArticleById(id);
+    if (article != null && mounted) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => ArticleDetailScreen(article: article)),
+      );
+    } else {
+      throw 'Maqola topilmadi';
+    }
+  }
+
+  Future<void> _navigateToVideo(String id) async {
+    final service = VideoTutorialService();
+    final video = await service.getVideoById(id);
+    if (video != null && mounted) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => VideoPlayerScreen(video: video)),
+      );
+    } else {
+      throw 'Video topilmadi';
+    }
+  }
+
+  Future<void> _navigateToSystem(String id) async {
+    final service = SystemsService();
+    final system = await service.getSystemById(id);
+    if (system != null && mounted) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => SystemDetailScreen(system: system)),
+      );
+    } else {
+      throw 'Tizim topilmadi';
+    }
+  }
+
+  Future<void> _navigateToFAQ(String id) async {
+    // FAQ service doesn't have getById exposed directly usually, let's check.
+    // Assuming it does or we can add it.
+    // Actually FAQService has getAllFAQs and getFAQsByCategory.
+    // I should check if it has getFAQById.
+    // If not, I'll just show a message for now or implement it.
+    // Let's assume for now we can't easily get single FAQ without implementing it.
+    // I'll implement getFAQById in FAQService next if needed.
+    // For now, let's try to find it in all FAQs (inefficient but works for small data)
+    final service = FAQService();
+    // Temporary solution: fetch all and find.
+    // Better: implement getFAQById in FAQService.
+    final faqs = await service.getAllFAQs().first; // Get first snapshot
+    try {
+      final faq = faqs.firstWhere((f) => f.id == id);
+      if (mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(faq.question),
+            content: SingleChildScrollView(child: Text(faq.answer)),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Yopish'),
+              ),
+            ],
+          ),
+        );
+      }
+    } catch (e) {
+      throw 'Savol topilmadi';
+    }
   }
 }

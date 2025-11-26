@@ -19,6 +19,21 @@ enum TargetAudience {
   specific,      // Maxsus ro'yxat
 }
 
+extension TargetAudienceExtension on TargetAudience {
+  String get displayName {
+    switch (this) {
+      case TargetAudience.all:
+        return "Barchaga";
+      case TargetAudience.beginner:
+        return "Yangi Xodimlarga";
+      case TargetAudience.akt:
+        return "AKT Xodimlariga";
+      case TargetAudience.specific:
+        return "Maxsus";
+    }
+  }
+}
+
 extension NotificationTypeExtension on NotificationType {
   String get displayName {
     switch (this) {

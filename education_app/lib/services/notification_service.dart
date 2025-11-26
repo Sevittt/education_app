@@ -93,10 +93,20 @@ class NotificationService {
         readBy: [],
       );
 
+      return await sendNotification(notification);
+    } catch (e) {
+      print('Error creating notification: $e');
+      return null;
+    }
+  }
+
+  /// Xabarnoma yuborish (Object orqali)
+  Future<String?> sendNotification(AppNotification notification) async {
+    try {
       final docRef = await _notificationsCollection.add(notification.toFirestore());
       return docRef.id;
     } catch (e) {
-      print('Error creating notification: $e');
+      print('Error sending notification: $e');
       return null;
     }
   }

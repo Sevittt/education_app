@@ -28,6 +28,21 @@ extension ArticleCategoryExtension on ArticleCategory {
         return "Umumiy";
     }
   }
+
+  String get icon {
+    switch (this) {
+      case ArticleCategory.beginner:
+        return "👶";
+      case ArticleCategory.akt:
+        return "💻";
+      case ArticleCategory.system:
+        return "🖥️";
+      case ArticleCategory.auth:
+        return "🔐";
+      case ArticleCategory.general:
+        return "📄";
+    }
+  }
 }
 
 /// Knowledge Base maqolalari uchun model

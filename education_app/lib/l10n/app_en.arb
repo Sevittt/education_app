@@ -827,10 +827,215 @@
   "bioOptionalLabel": "Bio (Optional)",
   "profilePictureUrlLabel": "Profile Picture URL (Optional)",
   "levelBeginner": "Beginner",
+  "@failedToAddComment": {
+    "description": "Error message when adding a comment fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "xato": {
+        "type": "String"
+      }
+    }
+  },
+  "postedBy": "Posted by {authorName}",
+  "onDate": "on {date}",
+  "repliesTitle": "Replies",
+  "errorLoadingComments": "Error loading comments: {error}",
+  "noRepliesYet": "No replies yet. Be the first to comment!",
+  "writeAReplyHint": "Write a reply...",
+  "sendCommentTooltip": "Send Comment",
+  "welcomeBack": "Welcome back, {userName}!",
+  "readyToLearnSomethingNew": "Ready to learn something new today?",
+  "quickAccessTitle": "Quick Access",
+  "communityTitle": "Forum",
+  "profileTitle": "Profile",
+  "latestNewsTitle": "Latest News",
+  "sourceLabel": "Source",
+  "quizzesTitle": "Quizzes",
+  "urlCannotBeEmpty": "URL cannot be empty",
+  "errorLoadingNews": "Error loading news: {error}",
+  "noNewsAvailable": "No news available at the moment.",
+  "adminPanelTitle": "Admin Panel",
+  "manageNewsTitle": "Manage News",
+  "manageNewsSubtitle": "Add, edit, or delete news articles",
+  "manageUsersTitle": "Manage Users",
+  "manageUsersSubtitle": "View users and manage roles (future)",
+  "manageResourcesTitle": "Manage Guides",
+  "manageResourcesSubtitle": "Oversee all learning resources (future)",
+  "confirmDeleteTitle": "Confirm Deletion",
+  "confirmDeleteNewsMessage": "Are you sure you want to delete \"{newsTitle}\"?",
+  "newsDeletedSuccess": "\"{newsTitle}\" deleted successfully.",
+  "failedToDeleteNews": "Failed to delete \"{newsTitle}\": {error}",
+  "@failedToDeleteNews": {
+    "description": "Error message when deleting news fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "newsTitle": {
+        "type": "Object"
+      },
+      "xato": {
+        "type": "Object"
+      }
+    }
+  },
+  "addNewsTooltip": "Add New News Article",
+  "editNewsTooltip": "Edit News",
+  "deleteNewsTooltip": "Delete News",
+  "addNewsButton": "Add News",
+  "noNewsAvailableManager": "No news articles found. Add one!",
+  "editNewsTitle": "Edit News",
+  "addNewsTitle": "Add News Article",
+  "saveNewsTooltip": "Save News",
+  "newsTitleLabel": "Title",
+  "pleaseEnterNewsTitle": "Please enter a news title.",
+  "newsTitleMinLength": "News title must be at least {length} characters.",
+  "newsSourceLabel": "Source (e.g., Blog Name)",
+  "pleaseEnterNewsSource": "Please enter the news source.",
+  "newsUrlLabel": "Article URL",
+  "pleaseEnterNewsUrl": "Please enter the article URL.",
+  "pleaseEnterValidNewsUrl": "Please enter a valid URL (starting with http or https).",
+  "newsImageUrlLabel": "Image URL (Optional)",
+  "pleaseEnterValidImageUrl": "Please enter a valid image URL (starting with http or https), or leave blank.",
+  "publicationDateLabel": "Publication Date",
+  "pleaseSelectPublicationDate": "Please select a publication date.",
+  "noDateSelected": "No date selected",
+  "selectDateTooltip": "Select Date",
+  "updateNewsButton": "Update News",
+  "addNewsButtonForm": "Add News Article",
+  "newsUpdatedSuccess": "\"{newsTitle}\" updated successfully.",
+  "newsAddedSuccess": "\"{newsTitle}\" added successfully.",
+  "failedToSaveNews": "Failed to save news: {error}",
+  "@failedToSaveNews": {
+    "description": "Error message when saving news fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "xato": {
+        "type": "Object"
+      }
+    }
+  },
+  "errorLoadingUsers": "Error loading users: {error}",
+  "noUsersFound": "No users found.",
+  "noEmailProvided": "No email provided",
+  "roleLabel": "Role",
+  "registeredOnLabel": "Registered",
+  "manageUsersSubtitleNow": "View and search registered users",
+  "manageResourcesSubtitleNow": "View, edit, or delete any learning resource",
+  "confirmDeleteResourceMessage": "Are you sure you want to delete resource \"{resourceTitle}\"?",
+  "failedToDeleteResource": "Failed to delete resource \"{resourceTitle}\": {error}",
+  "@failedToDeleteResource": {
+    "description": "Error message when deleting resource fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "resourceTitle": {
+        "type": "Object"
+      },
+      "xato": {
+        "type": "Object"
+      }
+    }
+  },
+  "errorLoadingResources": "Error loading resources: {error}",
+  "noResourcesFoundManager": "No resources found in the system.",
+  "editResourceTooltip": "Edit Resource",
+  "deleteResourceTooltip": "Delete Resource",
+  "manageQuizzesTitle": "Manage Quizzes",
+  "addQuizTooltip": "Add New Quiz",
+  "errorLoadingQuizzesAdmin": "Error loading quizzes: {error}",
+  "noQuizzesFoundManager": "No quizzes found. Add one!",
+  "confirmDeleteQuizMessage": "Are you sure you want to delete quiz \"{quizTitle}\" and all its questions? This action cannot be undone.",
+  "quizDeletedSuccess": "Quiz \"{quizTitle}\" and its questions deleted successfully.",
+  "failedToDeleteQuiz": "Failed to delete quiz \"{quizTitle}\": {error}",
+  "@failedToDeleteQuiz": {
+    "description": "Error message when deleting quiz fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "quizTitle": {
+        "type": "Object"
+      },
+      "xato": {
+        "type": "Object"
+      }
+    }
+  },
+  "editDetailsButton": "Edit Details",
+  "manageQuestionsButton": "Questions",
+  "deleteQuizTooltip": "Delete Quiz and Questions",
+  "addQuizButton": "Add Quiz",
+  "manageQuizzesSubtitle": "Oversee all quizzes and their questions",
+  "registrationEmailError": "Please enter a valid email address",
+  "@registrationEmailError": {
+    "description": "Error message if email is invalid"
+  },
+  "dashboardXodimTitle": "My Activity",
+  "@dashboardXodimTitle": {
+    "description": "Title for the regular staff member's dashboard section"
+  },
+  "dashboardEkspertTitle": "My Contributions",
+  "@dashboardEkspertTitle": {
+    "description": "Title for the expert's dashboard section"
+  },
+  "dashboardAdminTitle": "System Overview",
+  "@dashboardAdminTitle": {
+    "description": "Title for the admin's dashboard section"
+  },
+  "seeAllButton": "See All",
+  "@seeAllButton": {
+    "description": "A button to see all items in a list"
+  },
+  "noGuidesAuthored": "You have not authored any guides yet.",
+  "@noGuidesAuthored": {
+    "description": "Message displayed when an expert has not authored any guides yet."
+  },
+  "adminStatUsers": "Users",
+  "@adminStatUsers": {
+    "description": "Label for the total users statistic in the admin dashboard."
+  },
+  "adminStatGuides": "Guides",
+  "@adminStatGuides": {
+    "description": "Label for the total guides statistic in the admin dashboard."
+  },
+  "adminStatQuizzes": "Quizzes",
+  "@adminStatQuizzes": {
+    "description": "Label for the total quizzes statistic in the admin dashboard."
+  },
+  "orDivider": "OR",
+  "@orDivider": {
+    "description": "A divider text, like 'OR', between login options."
+  },
+  "signInWithGoogle": "Sign In with Google",
+  "@signInWithGoogle": {
+    "description": "Button text for signing in with a Google account."
+  },
+  "themeSystemDefault": "System Default",
+  "themeLight": "Light Mode",
+  "themeDark": "Dark Mode",
+  "bioOptionalLabel": "Bio (Optional)",
+  "profilePictureUrlLabel": "Profile Picture URL (Optional)",
+  "levelBeginner": "Beginner",
   "levelIntermediate": "Intermediate",
   "levelAdvanced": "Advanced",
   "levelExpert": "Expert",
   "totalPoints": "Total Points",
   "nextLevel": "Next Level",
-  "pointsToNextLevel": "{points} XP to next level"
+  "pointsToNextLevel": "{points} XP to next level",
+  "manageArticlesTitle": "Articles",
+  "manageArticlesSubtitle": "Manage Knowledge Base",
+  "manageVideosTitle": "Videos",
+  "manageVideosSubtitle": "Manage Video Tutorials",
+  "manageSystemsTitle": "Systems",
+  "manageSystemsSubtitle": "Manage Systems Directory",
+  "manageFaqTitle": "FAQ",
+  "manageFaqSubtitle": "Manage FAQs",
+  "manageNotificationsTitle": "Notifications",
+  "manageNotificationsSubtitle": "Send Notifications"
 }

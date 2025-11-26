@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../models/sud_system.dart';
 import '../../services/systems_service.dart';
+import '../../models/knowledge_article.dart';
+import '../../models/video_tutorial.dart';
+import '../knowledge_base/article_detail_screen.dart';
+import '../resource/video_player_screen.dart';
 
 class SystemDetailScreen extends StatefulWidget {
   final SudSystem system;
@@ -181,9 +185,7 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
         if (widget.system.loginGuideId != null)
           Expanded(
             child: OutlinedButton.icon(
-              onPressed: () {
-                // Navigate to article
-              },
+              onPressed: () => _navigateToArticle(widget.system.loginGuideId!),
               icon: const Icon(Icons.article_outlined),
               label: const Text('Kirish qo\'llanmasi'),
             ),
@@ -193,15 +195,67 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
         if (widget.system.videoGuideId != null)
           Expanded(
             child: OutlinedButton.icon(
-              onPressed: () {
-                // Navigate to video
-              },
+              onPressed: () => _navigateToVideo(widget.system.videoGuideId!),
               icon: const Icon(Icons.play_circle_outline),
               label: const Text('Video qo\'llanma'),
             ),
           ),
       ],
     );
+  }
+
+  Future<void> _navigateToArticle(String articleId) async {
+    // Check if article is already in loaded content
+    final articles = _content['articles'] as List?;
+    Map<String, dynamic>? articleData;
+    
+    if (articles != null) {
+      try {
+        articleData = articles.firstWhere((a) => a['id'] == articleId);
+      } catch (_) {}
+    }
+
+    if (articleData != null) {
+      final article = KnowledgeArticle.fromMap(articleData, articleId);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ArticleDetailScreen(article: article),
+        ),
+      );
+    } else {
+      // Fetch if not found
+      // Note: Ideally we should inject KnowledgeBaseService, but for now we'll create it
+      // or just show a message if not found in the list (assuming all related content is fetched)
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Qo\'llanma topilmadi')),
+      );
+    }
+  }
+
+  Future<void> _navigateToVideo(String videoId) async {
+    final videos = _content['videos'] as List?;
+    Map<String, dynamic>? videoData;
+
+    if (videos != null) {
+      try {
+        videoData = videos.firstWhere((v) => v['id'] == videoId);
+      } catch (_) {}
+    }
+
+    if (videoData != null) {
+      final video = VideoTutorial.fromMap(videoData, videoId);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => VideoPlayerScreen(video: video),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Video topilmadi')),
+      );
+    }
   }
 
   Widget _buildSection(String title, List items) {
@@ -217,14 +271,60 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
         const SizedBox(height: 8),
         ...items.map((item) => ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.arrow_right, color: Colors.blue),
+              leading: Icon(
+                title == 'Videolar' ? Icons.play_circle_outline : Icons.article_outlined,
+                color: Colors.blue,
+              ),
               title: Text(item['title'] ?? item['question'] ?? ''),
+              subtitle: item['description'] != null 
+                  ? Text(
+                      item['description'],
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  : null,
               onTap: () {
-                // Navigate to content
+                if (title == 'Qo\'llanmalar') {
+                  final article = KnowledgeArticle.fromMap(item, item['id']);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ArticleDetailScreen(article: article),
+                    ),
+                  );
+                } else if (title == 'Videolar') {
+                  final video = VideoTutorial.fromMap(item, item['id']);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => VideoPlayerScreen(video: video),
+                    ),
+                  );
+                } else if (title == 'Ko\'p so\'raladigan savollar') {
+                  _showFAQDialog(item['question'], item['answer']);
+                }
               },
             )),
         const SizedBox(height: 16),
       ],
+    );
+  }
+
+  void _showFAQDialog(String question, String answer) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(question),
+        content: SingleChildScrollView(
+          child: Text(answer),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Yopish'),
+          ),
+        ],
+      ),
     );
   }
 }

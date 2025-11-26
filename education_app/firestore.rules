@@ -138,5 +138,23 @@ service cloud.firestore {
     match /user_progress/{userId} {
       allow read, write: if isOwner(userId); // Faqat o'zi o'qiy va yoza oladi
     }
+
+    // 10. Systems Directory (Tizimlar)
+    match /systems/{systemId} {
+      allow read: if true;
+      allow write: if isAdmin() || isEkspert();
+    }
+
+    // 11. FAQs (Savol-Javoblar)
+    match /faqs/{faqId} {
+      allow read: if true;
+      allow write: if isAdmin() || isEkspert();
+    }
+
+    // 12. Notifications (Xabarnomalar)
+    match /notifications/{notificationId} {
+      allow read: if isAuthenticated(); // Hamma o'qiy oladi (o'ziga tegishlisini filtrlaydi)
+      allow write: if isAdmin();
+    }
   }
 }

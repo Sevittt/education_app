@@ -4,6 +4,11 @@ import 'admin_news_management_screen.dart';
 import 'admin_resource_management_screen.dart';
 import 'admin_quiz_management_screen.dart';
 import 'admin_user_list_screen.dart';
+import 'admin_article_management_screen.dart';
+import 'admin_video_management_screen.dart';
+import 'admin_system_management_screen.dart';
+import 'admin_faq_management_screen.dart';
+import 'admin_notification_management_screen.dart';
 
 class AdminPanelScreen extends StatelessWidget {
   const AdminPanelScreen({super.key});
@@ -41,14 +46,74 @@ class AdminPanelScreen extends StatelessWidget {
           _buildAdminCard(
             context,
             icon: Icons.library_books,
-            title: l10n.manageResourcesTitle,
-            subtitle: l10n.manageResourcesSubtitleNow,
+            title: 'Maqolalar',
+            subtitle: 'Bilimlar bazasini boshqarish',
             color: Colors.green.shade100,
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const AdminResourceManagementScreen(),
+                  builder: (context) => const AdminArticleManagementScreen(),
+                ),
+              );
+            },
+          ),
+          _buildAdminCard(
+            context,
+            icon: Icons.video_library,
+            title: 'Videolar',
+            subtitle: 'Video darsliklarni boshqarish',
+            color: Colors.red.shade100,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AdminVideoManagementScreen(),
+                ),
+              );
+            },
+          ),
+          _buildAdminCard(
+            context,
+            icon: Icons.computer,
+            title: 'Tizimlar',
+            subtitle: 'Sud tizimlarini boshqarish',
+            color: Colors.indigo.shade100,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AdminSystemManagementScreen(),
+                ),
+              );
+            },
+          ),
+          _buildAdminCard(
+            context,
+            icon: Icons.question_answer,
+            title: 'Savol-Javob',
+            subtitle: 'FAQ larni boshqarish',
+            color: Colors.amber.shade100,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AdminFAQManagementScreen(),
+                ),
+              );
+            },
+          ),
+          _buildAdminCard(
+            context,
+            icon: Icons.notifications,
+            title: 'Xabarnomalar',
+            subtitle: 'Xabarnoma yuborish',
+            color: Colors.teal.shade100,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AdminNotificationManagementScreen(),
                 ),
               );
             },
