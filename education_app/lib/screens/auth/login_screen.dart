@@ -5,7 +5,7 @@ import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../../models/auth_notifier.dart';
 import 'registration_screen.dart'; // We'll create this next
 // Import AppLocalizations to use translated strings
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:sud_qollanma/l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

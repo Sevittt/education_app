@@ -151,6 +151,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  String _getLanguageName(String localeCode) {
+    switch (localeCode) {
+      case 'uz':
+        return 'O\'zbekcha';
+      case 'ru':
+        return 'Русский';
+      case 'en':
+      default:
+        return 'English (US)';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // Get AppLocalizations instance
@@ -208,8 +220,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             context: context,
             icon: Icons.translate_outlined,
             title: l10n?.settingsLanguage ?? 'Language', // Localized title
-            subtitle:
-                'English (US)', // TODO: Make this dynamic based on selected language
+            subtitle: _getLanguageName(l10n?.localeName ?? 'en'),
             onTap: () {
               // Navigate to the actual LanguageSelectionScreen
               Navigator.push(

@@ -13,8 +13,6 @@ class ThemeOptionsScreen extends StatelessWidget {
     required BuildContext context,
     required String title,
     required ThemeMode value,
-    required ThemeMode groupValue,
-    required ValueChanged<ThemeMode?> onChanged,
     required IconData iconData,
   }) {
     final ThemeData theme = Theme.of(context);
@@ -32,8 +30,6 @@ class ThemeOptionsScreen extends StatelessWidget {
         style: textTheme.titleMedium?.copyWith(color: colorScheme.onSurface),
       ),
       value: value,
-      groupValue: groupValue,
-      onChanged: onChanged,
       activeColor:
           colorScheme.primary, // Color of the radio button when selected
       contentPadding: const EdgeInsets.symmetric(
@@ -58,52 +54,42 @@ class ThemeOptionsScreen extends StatelessWidget {
         backgroundColor: currentTheme.colorScheme.surface, // M3 style appbar
         foregroundColor: currentTheme.colorScheme.onSurface,
       ),
-      body: ListView(
-        children: [
-          const SizedBox(height: 8), // A little space at the top
-
-          _buildThemeOptionTile(
-            context: context,
-            title: AppLocalizations.of(context)!.themeSystemDefault,
-            value: ThemeMode.system,
-            groupValue: themeNotifier.themeMode,
-            onChanged: (ThemeMode? mode) {
-              if (mode != null) {
-                context.read<ThemeNotifier>().setThemeMode(mode);
-              }
-            },
-            iconData: Icons.brightness_auto_outlined, // Icon for system default
-          ),
-          const Divider(height: 1, indent: 16, endIndent: 16),
-
-          _buildThemeOptionTile(
-            context: context,
-            title: AppLocalizations.of(context)!.themeLight,
-            value: ThemeMode.light,
-            groupValue: themeNotifier.themeMode,
-            onChanged: (ThemeMode? mode) {
-              if (mode != null) {
-                context.read<ThemeNotifier>().setThemeMode(mode);
-              }
-            },
-            iconData: Icons.light_mode_outlined, // Icon for light mode
-          ),
-          const Divider(height: 1, indent: 16, endIndent: 16),
-
-          _buildThemeOptionTile(
-            context: context,
-            title: AppLocalizations.of(context)!.themeDark,
-            value: ThemeMode.dark,
-            groupValue: themeNotifier.themeMode,
-            onChanged: (ThemeMode? mode) {
-              if (mode != null) {
-                context.read<ThemeNotifier>().setThemeMode(mode);
-              }
-            },
-            iconData: Icons.dark_mode_outlined, // Icon for dark mode
-          ),
-          const Divider(height: 1, indent: 16, endIndent: 16),
-        ],
+      body: RadioGroup<ThemeMode>(
+        groupValue: themeNotifier.themeMode,
+        onChanged: (ThemeMode? mode) {
+          if (mode != null) {
+            context.read<ThemeNotifier>().setThemeMode(mode);
+          }
+        },
+        child: ListView(
+          children: [
+            const SizedBox(height: 8), // A little space at the top
+  
+            _buildThemeOptionTile(
+              context: context,
+              title: AppLocalizations.of(context)!.themeSystemDefault,
+              value: ThemeMode.system,
+              iconData: Icons.brightness_auto_outlined, // Icon for system default
+            ),
+            const Divider(height: 1, indent: 16, endIndent: 16),
+  
+            _buildThemeOptionTile(
+              context: context,
+              title: AppLocalizations.of(context)!.themeLight,
+              value: ThemeMode.light,
+              iconData: Icons.light_mode_outlined, // Icon for light mode
+            ),
+            const Divider(height: 1, indent: 16, endIndent: 16),
+  
+            _buildThemeOptionTile(
+              context: context,
+              title: AppLocalizations.of(context)!.themeDark,
+              value: ThemeMode.dark,
+              iconData: Icons.dark_mode_outlined, // Icon for dark mode
+            ),
+            const Divider(height: 1, indent: 16, endIndent: 16),
+          ],
+        ),
       ),
     );
   }

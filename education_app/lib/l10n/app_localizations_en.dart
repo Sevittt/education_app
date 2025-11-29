@@ -84,13 +84,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registrationSwitchToLogin => 'Already have an account? Sign In';
 
   @override
-  String get languageEnglish => 'English (US)';
+  String get languageEnglish => 'English';
 
   @override
-  String get languageUzbek => 'Uzbek (Uzbekistan)';
+  String get languageUzbek => 'Uzbek';
 
   @override
-  String get languageRussian => 'Russian (Russia)';
+  String get languageRussian => 'Russian';
 
   @override
   String get languageSystemDefault => 'System Default';
@@ -645,7 +645,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteNews(String error, Object newsTitle, Object xato) {
+  String failedToDeleteNews(String error, Object newsTitle) {
     return 'Failed to delete \"$newsTitle\": $error';
   }
 
@@ -767,7 +767,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteResource(String error, Object resourceTitle, Object xato) {
+  String failedToDeleteResource(String error, Object resourceTitle) {
     return 'Failed to delete resource \"$resourceTitle\": $error';
   }
 
@@ -810,7 +810,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteQuiz(String error, Object quizTitle, Object xato) {
+  String failedToDeleteQuiz(String error, Object quizTitle) {
     return 'Failed to delete quiz \"$quizTitle\": $error';
   }
 
@@ -899,4 +899,67 @@ class AppLocalizationsEn extends AppLocalizations {
   String pointsToNextLevel(Object points) {
     return '$points XP to next level';
   }
+
+  @override
+  String get manageArticlesTitle => 'Articles';
+
+  @override
+  String get manageArticlesSubtitle => 'Manage Knowledge Base';
+
+  @override
+  String get manageVideosTitle => 'Videos';
+
+  @override
+  String get manageVideosSubtitle => 'Manage Video Tutorials';
+
+  @override
+  String get manageSystemsTitle => 'Systems';
+
+  @override
+  String get manageSystemsSubtitle => 'Manage Systems Directory';
+
+  @override
+  String get manageFaqTitle => 'FAQ';
+
+  @override
+  String get manageFaqSubtitle => 'Manage FAQs';
+
+  @override
+  String get manageNotificationsTitle => 'Notifications';
+
+  @override
+  String get manageNotificationsSubtitle => 'Send Notifications';
+
+  @override
+  String get selectLanguage => 'Select Language';
+
+  @override
+  String topicDeletedSuccess(Object topicTitle) {
+    return '\"$topicTitle\" deleted successfully.';
+  }
+
+  @override
+  String failedToDeleteTopic(Object error) {
+    return 'Failed to delete topic: $error';
+  }
+
+  @override
+  String deleteTopicConfirmMessage(Object topicTitle) {
+    return 'Are you sure you want to delete \"$topicTitle\"?';
+  }
+
+  @override
+  String get editTopicTooltip => 'Edit Topic';
+
+  @override
+  String get deleteTopicConfirmTitle => 'Delete Topic';
+
+  @override
+  String get commentPlural => 'Comments';
+
+  @override
+  String get commentSingular => 'Comment';
+
+  @override
+  String get deleteTopicTooltip => 'Delete Topic';
 }

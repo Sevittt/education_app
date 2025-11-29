@@ -21,6 +21,7 @@ import '../../models/resource.dart';
 import '../../services/resource_service.dart';
 import '../../services/profile_service.dart'; // --- ADDED for Admin Panel ---
 import '../admin/admin_panel_screen.dart'; // --- ADDED for Admin Panel link ---
+import '../quiz/quiz_list_screen.dart'; // --- ADDED for Quiz List Screen ---
 // --- END ADDED ---
 
 typedef OnTabSelected = void Function(int index);
@@ -158,14 +159,10 @@ class HomeDashboardScreen extends StatelessWidget {
                   icon: Icons.quiz_outlined,
                   title: l10n.quizzesTitle,
                   onTap: () {
-                    // TODO: Implement navigation to a dedicated Quizzes screen if needed
-                    // For now, it's inside Resources, but this card provides quick access
-                    onTabSelected(
-                      1,
-                    ); // Go to resources, user can find quizzes there
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Find Quizzes in the Guides section'),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const QuizListScreen(),
                       ),
                     );
                   },

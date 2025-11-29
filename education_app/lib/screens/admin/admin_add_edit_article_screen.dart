@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../models/knowledge_article.dart';
 import '../../services/knowledge_base_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AdminAddEditArticleScreen extends StatefulWidget {
   final KnowledgeArticle? article;
@@ -82,6 +83,10 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
           .where((e) => e.isNotEmpty)
           .toList();
 
+      final user = FirebaseAuth.instance.currentUser;
+      final authorId = user?.uid ?? 'admin';
+      final authorName = user?.displayName ?? 'Admin';
+
       final article = KnowledgeArticle(
         id: widget.article?.id ?? '',
         title: _titleController.text,
@@ -92,8 +97,8 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
         pdfUrl: pdfUrl,
         category: _selectedCategory,
         tags: tags,
-        authorId: 'admin', // TODO: Get real user ID
-        authorName: 'Admin', // TODO: Get real user name
+        authorId: authorId,
+        authorName: authorName,
         createdAt: widget.article?.createdAt ?? Timestamp.now(),
         updatedAt: Timestamp.now(),
       );
@@ -157,7 +162,7 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<ArticleCategory>(
-                      value: _selectedCategory,
+                      initialValue: _selectedCategory,
                       decoration: const InputDecoration(
                         labelText: 'Kategoriya',
                         border: OutlineInputBorder(),

@@ -116,7 +116,7 @@ class _AdminSendNotificationScreenState extends State<AdminSendNotificationScree
                     ),
                     const SizedBox(height: 16),
                       DropdownButtonFormField<NotificationType>(
-                      value: _selectedType,
+                      initialValue: _selectedType,
                       decoration: const InputDecoration(
                         labelText: 'Xabarnoma turi',
                         border: OutlineInputBorder(),
@@ -135,7 +135,7 @@ class _AdminSendNotificationScreenState extends State<AdminSendNotificationScree
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<TargetAudience>(
-                      value: _selectedAudience,
+                      initialValue: _selectedAudience,
                       decoration: const InputDecoration(
                         labelText: 'Auditoriya',
                         border: OutlineInputBorder(),

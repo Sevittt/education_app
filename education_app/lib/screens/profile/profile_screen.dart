@@ -496,6 +496,7 @@ class ProfileScreen extends StatelessWidget {
                           },
                         );
                         if (confirmLogout == true) {
+                          if (!context.mounted) return;
                           await context.read<AuthNotifier>().signOut();
                         }
                       },

@@ -84,13 +84,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get registrationSwitchToLogin => 'У вас есть учётная запись? Войти';
 
   @override
-  String get languageEnglish => 'Английский (США)';
+  String get languageEnglish => 'Английский';
 
   @override
-  String get languageUzbek => 'Узбекский (Узбекистан)';
+  String get languageUzbek => 'Узбекский';
 
   @override
-  String get languageRussian => 'Русский (Россия)';
+  String get languageRussian => 'Русский';
 
   @override
   String get languageSystemDefault => 'Системный язык';
@@ -645,7 +645,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteNews(String error, Object newsTitle, Object xato) {
+  String failedToDeleteNews(String error, Object newsTitle) {
     return 'Не удалось удалить \"$newsTitle\": $error';
   }
 
@@ -767,7 +767,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteResource(String error, Object resourceTitle, Object xato) {
+  String failedToDeleteResource(String error, Object resourceTitle) {
     return 'Не удалось удалить ресурс \"$resourceTitle\": $error';
   }
 
@@ -810,7 +810,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteQuiz(String error, Object quizTitle, Object xato) {
+  String failedToDeleteQuiz(String error, Object quizTitle) {
     return 'Не удалось удалить тест \"$quizTitle\": $error';
   }
 
@@ -899,4 +899,67 @@ class AppLocalizationsRu extends AppLocalizations {
   String pointsToNextLevel(Object points) {
     return '$points XP до следующего уровня';
   }
+
+  @override
+  String get manageArticlesTitle => 'Статьи';
+
+  @override
+  String get manageArticlesSubtitle => 'Управление базой знаний';
+
+  @override
+  String get manageVideosTitle => 'Видео';
+
+  @override
+  String get manageVideosSubtitle => 'Управление видеоуроками';
+
+  @override
+  String get manageSystemsTitle => 'Системы';
+
+  @override
+  String get manageSystemsSubtitle => 'Управление справочником систем';
+
+  @override
+  String get manageFaqTitle => 'FAQ';
+
+  @override
+  String get manageFaqSubtitle => 'Управление частыми вопросами';
+
+  @override
+  String get manageNotificationsTitle => 'Уведомления';
+
+  @override
+  String get manageNotificationsSubtitle => 'Отправить уведомления';
+
+  @override
+  String get selectLanguage => 'Выберите язык';
+
+  @override
+  String topicDeletedSuccess(Object topicTitle) {
+    return 'Тема \"$topicTitle\" успешно удалена.';
+  }
+
+  @override
+  String failedToDeleteTopic(Object error) {
+    return 'Не удалось удалить тему: $error';
+  }
+
+  @override
+  String deleteTopicConfirmMessage(Object topicTitle) {
+    return 'Вы уверены, что хотите удалить тему \"$topicTitle\"?';
+  }
+
+  @override
+  String get editTopicTooltip => 'Редактировать тему';
+
+  @override
+  String get deleteTopicConfirmTitle => 'Удалить тему';
+
+  @override
+  String get commentPlural => 'Комментарии';
+
+  @override
+  String get commentSingular => 'Комментарий';
+
+  @override
+  String get deleteTopicTooltip => 'Удалить тему';
 }

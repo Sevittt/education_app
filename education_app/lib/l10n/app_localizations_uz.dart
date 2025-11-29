@@ -84,13 +84,13 @@ class AppLocalizationsUz extends AppLocalizations {
   String get registrationSwitchToLogin => 'Hisobingiz bormi? Kirish';
 
   @override
-  String get languageEnglish => 'Inglizcha (AQSh)';
+  String get languageEnglish => 'Ingliz tili';
 
   @override
-  String get languageUzbek => 'O\'zbekcha (O\'zbekiston)';
+  String get languageUzbek => 'O\'zbek tili';
 
   @override
-  String get languageRussian => 'Ruscha (Rossiya)';
+  String get languageRussian => 'Rus tili';
 
   @override
   String get languageSystemDefault => 'Tizim tili';
@@ -645,7 +645,7 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteNews(String error, Object newsTitle, Object xato) {
+  String failedToDeleteNews(String error, Object newsTitle) {
     return '\"$newsTitle\" o\'chirilmadi: $error';
   }
 
@@ -767,7 +767,7 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteResource(String error, Object resourceTitle, Object xato) {
+  String failedToDeleteResource(String error, Object resourceTitle) {
     return '\"$resourceTitle\" manbasini o\'chirib bo\'lmadi: $error';
   }
 
@@ -810,7 +810,7 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String failedToDeleteQuiz(String error, Object quizTitle, Object xato) {
+  String failedToDeleteQuiz(String error, Object quizTitle) {
     return '\"$quizTitle\" testini o\'chirib bo\'lmadi: $error';
   }
 
@@ -884,19 +884,82 @@ class AppLocalizationsUz extends AppLocalizations {
   String get levelIntermediate => 'O\'rta';
 
   @override
-  String get levelAdvanced => 'Yuqori';
+  String get levelAdvanced => 'Ilg\'or';
 
   @override
   String get levelExpert => 'Ekspert';
 
   @override
-  String get totalPoints => 'Jami Ballar';
+  String get totalPoints => 'Jami ballar';
 
   @override
-  String get nextLevel => 'Keyingi Daraja';
+  String get nextLevel => 'Keyingi daraja';
 
   @override
   String pointsToNextLevel(Object points) {
-    return 'Keyingi darajaga $points XP qoldi';
+    return 'Keyingi darajaga $points XP';
   }
+
+  @override
+  String get manageArticlesTitle => 'Maqolalar';
+
+  @override
+  String get manageArticlesSubtitle => 'Bilimlar bazasini boshqarish';
+
+  @override
+  String get manageVideosTitle => 'Videolar';
+
+  @override
+  String get manageVideosSubtitle => 'Video darsliklarni boshqarish';
+
+  @override
+  String get manageSystemsTitle => 'Tizimlar';
+
+  @override
+  String get manageSystemsSubtitle => 'Tizimlar ma\'lumotnomasini boshqarish';
+
+  @override
+  String get manageFaqTitle => 'TSS';
+
+  @override
+  String get manageFaqSubtitle => 'TSSni boshqarish';
+
+  @override
+  String get manageNotificationsTitle => 'Bildirishnomalar';
+
+  @override
+  String get manageNotificationsSubtitle => 'Bildirishnomalarni yuborish';
+
+  @override
+  String get selectLanguage => 'Tilni tanlang';
+
+  @override
+  String topicDeletedSuccess(Object topicTitle) {
+    return '\"$topicTitle\" muvaffaqiyatli o\'chirildi.';
+  }
+
+  @override
+  String failedToDeleteTopic(Object error) {
+    return 'Mavzuni o\'chirib bo\'lmadi: $error';
+  }
+
+  @override
+  String deleteTopicConfirmMessage(Object topicTitle) {
+    return 'Siz \"$topicTitle\" mavzusini o\'chirib tashlamoqchimisiz?';
+  }
+
+  @override
+  String get editTopicTooltip => 'Mavzuni tahrirlash';
+
+  @override
+  String get deleteTopicConfirmTitle => 'Mavzuni o\'chirish';
+
+  @override
+  String get commentPlural => 'Izohlar';
+
+  @override
+  String get commentSingular => 'Izoh';
+
+  @override
+  String get deleteTopicTooltip => 'Mavzuni o\'chirish';
 }

@@ -168,7 +168,7 @@ class _AdminAddEditSystemScreenState extends State<AdminAddEditSystemScreen> {
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<SystemCategory>(
-                      value: _selectedCategory,
+                      initialValue: _selectedCategory,
                       decoration: const InputDecoration(
                         labelText: 'Kategoriya',
                         border: OutlineInputBorder(),
@@ -187,7 +187,7 @@ class _AdminAddEditSystemScreenState extends State<AdminAddEditSystemScreen> {
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<SystemStatus>(
-                      value: _selectedStatus,
+                      initialValue: _selectedStatus,
                       decoration: const InputDecoration(
                         labelText: 'Holati',
                         border: OutlineInputBorder(),

@@ -87,10 +87,12 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
           _trueFalseCorrectAnswer = null;
         });
 
+        if (!mounted) return;
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text(l10n.questionAddedSuccessfully)));
       } catch (e) {
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('${l10n.failedToAddQuestion}: $e')),
         );
@@ -175,9 +177,25 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
             ),
             const SizedBox(height: 16),
             if (_selectedQuestionType == QuestionType.multipleChoice)
-              ..._buildMultipleChoiceOptions(l10n),
+              RadioGroup<int>(
+                groupValue: _correctAnswerIndex,
+                onChanged: (value) {
+                  setState(() {
+                    _correctAnswerIndex = value;
+                  });
+                },
+                child: Column(
+                  children: _buildMultipleChoiceOptions(l10n),
+                ),
+              ),
             if (_selectedQuestionType == QuestionType.trueFalse)
-              ..._buildTrueFalseOptions(),
+              RadioGroup<String>(
+                groupValue: _trueFalseCorrectAnswer,
+                onChanged: (value) => setState(() => _trueFalseCorrectAnswer = value),
+                child: Column(
+                  children: _buildTrueFalseOptions(),
+                ),
+              ),
             const SizedBox(height: 16),
             _isLoading
                 ? const Center(child: CircularProgressIndicator())
@@ -197,12 +215,6 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
         children: [
           Radio<int>(
             value: index,
-            groupValue: _correctAnswerIndex,
-            onChanged: (value) {
-              setState(() {
-                _correctAnswerIndex = value;
-              });
-            },
           ),
           Expanded(
             child: TextFormField(
@@ -223,14 +235,10 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
       RadioListTile<String>(
         title: const Text('True'),
         value: 'True',
-        groupValue: _trueFalseCorrectAnswer,
-        onChanged: (value) => setState(() => _trueFalseCorrectAnswer = value),
       ),
       RadioListTile<String>(
         title: const Text('False'),
         value: 'False',
-        groupValue: _trueFalseCorrectAnswer,
-        onChanged: (value) => setState(() => _trueFalseCorrectAnswer = value),
       ),
     ];
   }

@@ -106,7 +106,7 @@ class _AdminAddEditFAQScreenState extends State<AdminAddEditFAQScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     DropdownButtonFormField<FAQCategory>(
-                      value: _selectedCategory,
+                      initialValue: _selectedCategory,
                       decoration: const InputDecoration(
                         labelText: 'Kategoriya',
                         border: OutlineInputBorder(),

@@ -52,6 +52,7 @@ class _AdminQuizManagementScreenState extends State<AdminQuizManagementScreen> {
       try {
         // Use the new service method that also deletes questions
         await quizService.deleteQuiz(quiz.id);
+        if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -61,10 +62,11 @@ class _AdminQuizManagementScreenState extends State<AdminQuizManagementScreen> {
           ),
         );
       } catch (e) {
+        if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              l10n.failedToDeleteQuiz(quiz.title, e.toString(), ''),
+              l10n.failedToDeleteQuiz(quiz.title, e.toString()),
             ), // "Failed to delete quiz '{quizTitle}': {error}"
             backgroundColor: Theme.of(context).colorScheme.error,
           ),

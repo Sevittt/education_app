@@ -53,6 +53,7 @@ class _AdminResourceManagementScreenState
     if (confirmed == true && mounted) {
       try {
         await resourceService.deleteResource(resource.id);
+        if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -62,10 +63,11 @@ class _AdminResourceManagementScreenState
           ),
         );
       } catch (e) {
+        if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              l10n.failedToDeleteResource(resource.title, e.toString(), ''),
+              l10n.failedToDeleteResource(resource.title, e.toString()),
             ), // "Failed to delete '{resourceTitle}': {error}"
             backgroundColor: Theme.of(context).colorScheme.error,
           ),

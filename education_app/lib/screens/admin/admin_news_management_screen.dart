@@ -52,6 +52,7 @@ class _AdminNewsManagementScreenState extends State<AdminNewsManagementScreen> {
     if (confirmed == true && mounted) {
       try {
         await newsService.deleteNews(newsItem.id);
+        if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -61,13 +62,13 @@ class _AdminNewsManagementScreenState extends State<AdminNewsManagementScreen> {
           ),
         );
       } catch (e) {
+        if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
               l10n.failedToDeleteNews(
                 newsItem.title,
                 e.toString(),
-                '',
               ), // Provide the third argument as needed
             ), // "Failed to delete '{newsTitle}': {error}"
             backgroundColor: Theme.of(context).colorScheme.error,

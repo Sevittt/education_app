@@ -115,7 +115,7 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
     );
 
     // Topic author name is already part of widget.topic.authorName
-    final String topicAuthorName = widget.topic.authorName;
+
 
     return Scaffold(
       appBar: AppBar(
@@ -133,7 +133,7 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
                   // --- Original Post ---
                   Card(
                     elevation: 1,
-                    color: colorScheme.surfaceContainerHighest.withOpacity(0.3),
+                    color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Column(
@@ -146,17 +146,6 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
                               color: colorScheme.onSurfaceVariant,
                             ),
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            // Using MaterialLocalizations for date formatting
-                            '${l10n.postedBy(topicAuthorName)} ${l10n.onDate(MaterialLocalizations.of(context).formatMediumDate(widget.topic.createdAt))}',
-                            style: textTheme.bodySmall?.copyWith(
-                              color: colorScheme.onSurfaceVariant.withOpacity(
-                                0.8,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12.0),
                           Text(
                             widget.topic.content,
                             style: textTheme.bodyLarge?.copyWith(
@@ -169,7 +158,7 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Divider(color: colorScheme.outline.withOpacity(0.5)),
+                  Divider(color: colorScheme.outline.withValues(alpha: 0.5)),
                   const SizedBox(height: 10),
 
                   // --- Replies Section (Using StreamBuilder) ---
@@ -205,7 +194,7 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
                             child: Text(
                               l10n.noRepliesYet,
                               style: textTheme.bodyMedium?.copyWith(
-                                color: colorScheme.onSurface.withOpacity(0.6),
+                                color: colorScheme.onSurface.withValues(alpha: 0.6),
                               ),
                             ),
                           ),
@@ -303,7 +292,7 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
                         },
                         separatorBuilder:
                             (context, index) => Divider(
-                              color: colorScheme.outline.withOpacity(0.3),
+                              color: colorScheme.outline.withValues(alpha: 0.3),
                               height: 16,
                             ),
                       );
@@ -321,7 +310,7 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
               color: theme.cardColor, // Or theme.colorScheme.surface
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withValues(alpha: 0.05),
                   spreadRadius: 0,
                   blurRadius: 10,
                   offset: const Offset(0, -2),
@@ -338,13 +327,13 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(24.0),
                         borderSide: BorderSide(
-                          color: colorScheme.outline.withOpacity(0.5),
+                          color: colorScheme.outline.withValues(alpha: 0.5),
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(24.0),
                         borderSide: BorderSide(
-                          color: colorScheme.outline.withOpacity(0.5),
+                          color: colorScheme.outline.withValues(alpha: 0.5),
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -356,7 +345,7 @@ class _DiscussionDetailScreenState extends State<DiscussionDetailScreen> {
                       ),
                       filled: true,
                       fillColor: colorScheme.surfaceContainerHighest
-                          .withOpacity(0.5),
+                          .withValues(alpha: 0.5),
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 16.0,
                         vertical: 10.0,

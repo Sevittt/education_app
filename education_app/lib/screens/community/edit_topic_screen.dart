@@ -134,7 +134,7 @@ class _EditTopicScreenState extends State<EditTopicScreen> {
                   ),
                   filled: true,
                   fillColor: theme.colorScheme.surfaceContainerHighest
-                      .withOpacity(0.5),
+                      .withValues(alpha: 0.5),
                   prefixIcon: const Icon(Icons.title_rounded),
                 ),
                 validator: (value) {
@@ -174,7 +174,7 @@ class _EditTopicScreenState extends State<EditTopicScreen> {
                   ),
                   filled: true,
                   fillColor: theme.colorScheme.surfaceContainerHighest
-                      .withOpacity(0.5),
+                      .withValues(alpha: 0.5),
                   prefixIcon: const Icon(Icons.article_outlined),
                 ),
                 maxLines: 8,

@@ -127,7 +127,7 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
           _onCategorySelected(selected ? category : null);
         },
         backgroundColor: Colors.white,
-        selectedColor: Theme.of(context).primaryColor.withOpacity(0.2),
+        selectedColor: Theme.of(context).primaryColor.withValues(alpha: 0.2),
         labelStyle: TextStyle(
           color: isSelected ? Theme.of(context).primaryColor : Colors.black87,
           fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
@@ -241,7 +241,7 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.1),
+                      color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(

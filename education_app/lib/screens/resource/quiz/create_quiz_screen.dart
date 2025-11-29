@@ -58,6 +58,7 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
         setState(() {
           _isLoading = false;
         });
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('${l10n.failedToCreateQuiz}: $e')),
         );

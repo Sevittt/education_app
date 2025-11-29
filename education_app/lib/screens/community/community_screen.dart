@@ -56,6 +56,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
       final l10n = AppLocalizations.of(context);
       try {
         await communityService.updateTopic(updatedTopicFromForm);
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -66,6 +67,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
           ),
         );
       } catch (e) {
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -83,7 +85,6 @@ class _CommunityScreenState extends State<CommunityScreen> {
   }
 
   void _deleteTopic(
-    BuildContext context,
     DiscussionTopic topic,
     CommunityService communityService,
   ) {
@@ -207,13 +208,13 @@ class _CommunityScreenState extends State<CommunityScreen> {
                           Icon(
                             Icons.forum_outlined,
                             size: 60,
-                            color: colorScheme.onSurface.withOpacity(0.4),
+                            color: colorScheme.onSurface.withValues(alpha: 0.4),
                           ),
                           const SizedBox(height: 16),
                           Text(
                             l10n?.noDiscussionsYet ?? 'No discussions yet.',
                             style: textTheme.titleMedium?.copyWith(
-                              color: colorScheme.onSurface.withOpacity(0.6),
+                              color: colorScheme.onSurface.withValues(alpha: 0.6),
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -221,7 +222,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                             l10n?.beTheFirstToStartConversation ??
                                 'Be the first to start a conversation!',
                             style: textTheme.bodyMedium?.copyWith(
-                              color: colorScheme.onSurface.withOpacity(0.6),
+                              color: colorScheme.onSurface.withValues(alpha: 0.6),
                             ),
                           ),
                         ],
@@ -357,7 +358,6 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                           ),
                                           onPressed: () {
                                             _deleteTopic(
-                                              context,
                                               topic,
                                               communityService,
                                             );
@@ -387,32 +387,5 @@ class _CommunityScreenState extends State<CommunityScreen> {
 }
 
 // Add new localization keys to your AppLocalizations extension/ARB files if needed
-extension AppLocalizationsCommunityMessages on AppLocalizations? {
-  String get deleteTopicConfirmTitle =>
-      this?.deleteTopicConfirmTitle ?? 'Confirm Delete';
-  String deleteTopicConfirmMessage(String topicTitle) =>
-      this?.deleteTopicConfirmMessage(topicTitle) ??
-      'Are you sure you want to delete "$topicTitle"?';
-  String topicDeletedSuccess(String topicTitle) =>
-      this?.topicDeletedSuccess(topicTitle) ??
-      '"$topicTitle" deleted successfully.';
-  String get topicUpdatedSuccess =>
-      this?.topicUpdatedSuccess ??
-      'Topic updated successfully!'; // Already in CreateTopicScreen ext
-  String failedToUpdateTopic(String topicTitle, String error) =>
-      this?.failedToUpdateTopic(topicTitle, error) ??
-      'Failed to update topic "$topicTitle": $error'; // Already in CreateTopicScreen ext
-  String failedToDeleteTopic(String error) =>
-      this?.failedToDeleteTopic(error) ?? 'Error deleting topic: $error';
-  String get editTopicTooltip => this?.editTopicTooltip ?? 'Edit Topic';
-  String get deleteTopicTooltip => this?.deleteTopicTooltip ?? 'Delete Topic';
-  String get commentSingular => this?.commentSingular ?? 'reply';
-  String get commentPlural => this?.commentPlural ?? 'replies';
-  String get noDiscussionsYet =>
-      this?.noDiscussionsYet ?? 'No discussions yet.';
-  String get beTheFirstToStartConversation =>
-      this?.beTheFirstToStartConversation ??
-      'Be the first to start a conversation!';
-  // Ensure errorLoadingData is defined in your ARB files
-  // String get errorLoadingData => this?.errorLoadingData ?? 'Error loading data.';
-}
+// Extension removed to avoid recursive getters and rely on generated AppLocalizations or inline defaults.
+

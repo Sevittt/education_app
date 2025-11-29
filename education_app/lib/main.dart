@@ -54,7 +54,7 @@ void main() async {
                 context.read<ProfileService>(),
               ),
         ),
-        Provider<ResourceService>(create: (_) => ResourceService()),
+        ChangeNotifierProvider<ResourceService>(create: (_) => ResourceService()),
 
         // Add this line
         Provider<CommunityService>(create: (_) => CommunityService()),
@@ -103,7 +103,7 @@ class MyApp extends StatelessWidget {
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: lightColorScheme.surface,
           selectedItemColor: lightColorScheme.primary,
-          unselectedItemColor: lightColorScheme.onSurface.withOpacity(0.7),
+          unselectedItemColor: lightColorScheme.onSurface.withValues(alpha: 0.7),
           selectedLabelStyle: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 12,
@@ -133,7 +133,7 @@ class MyApp extends StatelessWidget {
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: darkColorScheme.surface,
           selectedItemColor: darkColorScheme.primary,
-          unselectedItemColor: darkColorScheme.onSurface.withOpacity(0.7),
+          unselectedItemColor: darkColorScheme.onSurface.withValues(alpha: 0.7),
           selectedLabelStyle: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 12,

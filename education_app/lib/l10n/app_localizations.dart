@@ -250,19 +250,19 @@ abstract class AppLocalizations {
   /// No description provided for @languageEnglish.
   ///
   /// In en, this message translates to:
-  /// **'English (US)'**
+  /// **'English'**
   String get languageEnglish;
 
   /// No description provided for @languageUzbek.
   ///
   /// In en, this message translates to:
-  /// **'Uzbek (Uzbekistan)'**
+  /// **'Uzbek'**
   String get languageUzbek;
 
   /// No description provided for @languageRussian.
   ///
   /// In en, this message translates to:
-  /// **'Russian (Russia)'**
+  /// **'Russian'**
   String get languageRussian;
 
   /// No description provided for @languageSystemDefault.
@@ -1265,7 +1265,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Failed to delete \"{newsTitle}\": {error}'**
-  String failedToDeleteNews(String error, Object newsTitle, Object xato);
+  String failedToDeleteNews(String error, Object newsTitle);
 
   /// No description provided for @addNewsTooltip.
   ///
@@ -1481,7 +1481,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Failed to delete resource \"{resourceTitle}\": {error}'**
-  String failedToDeleteResource(String error, Object resourceTitle, Object xato);
+  String failedToDeleteResource(String error, Object resourceTitle);
 
   /// No description provided for @errorLoadingResources.
   ///
@@ -1547,7 +1547,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Failed to delete quiz \"{quizTitle}\": {error}'**
-  String failedToDeleteQuiz(String error, Object quizTitle, Object xato);
+  String failedToDeleteQuiz(String error, Object quizTitle);
 
   /// No description provided for @editDetailsButton.
   ///
@@ -1716,6 +1716,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{points} XP to next level'**
   String pointsToNextLevel(Object points);
+
+  /// No description provided for @manageArticlesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Articles'**
+  String get manageArticlesTitle;
+
+  /// No description provided for @manageArticlesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Knowledge Base'**
+  String get manageArticlesSubtitle;
+
+  /// No description provided for @manageVideosTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Videos'**
+  String get manageVideosTitle;
+
+  /// No description provided for @manageVideosSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Video Tutorials'**
+  String get manageVideosSubtitle;
+
+  /// No description provided for @manageSystemsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Systems'**
+  String get manageSystemsTitle;
+
+  /// No description provided for @manageSystemsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Systems Directory'**
+  String get manageSystemsSubtitle;
+
+  /// No description provided for @manageFaqTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get manageFaqTitle;
+
+  /// No description provided for @manageFaqSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage FAQs'**
+  String get manageFaqSubtitle;
+
+  /// No description provided for @manageNotificationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get manageNotificationsTitle;
+
+  /// No description provided for @manageNotificationsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Notifications'**
+  String get manageNotificationsSubtitle;
+
+  /// No description provided for @selectLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Language'**
+  String get selectLanguage;
+
+  /// No description provided for @topicDeletedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'\"{topicTitle}\" deleted successfully.'**
+  String topicDeletedSuccess(Object topicTitle);
+
+  /// No description provided for @failedToDeleteTopic.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete topic: {error}'**
+  String failedToDeleteTopic(Object error);
+
+  /// No description provided for @deleteTopicConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete \"{topicTitle}\"?'**
+  String deleteTopicConfirmMessage(Object topicTitle);
+
+  /// No description provided for @editTopicTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Topic'**
+  String get editTopicTooltip;
+
+  /// No description provided for @deleteTopicConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Topic'**
+  String get deleteTopicConfirmTitle;
+
+  /// No description provided for @commentPlural.
+  ///
+  /// In en, this message translates to:
+  /// **'Comments'**
+  String get commentPlural;
+
+  /// No description provided for @commentSingular.
+  ///
+  /// In en, this message translates to:
+  /// **'Comment'**
+  String get commentSingular;
+
+  /// No description provided for @deleteTopicTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Topic'**
+  String get deleteTopicTooltip;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

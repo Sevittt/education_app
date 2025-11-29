@@ -220,9 +220,4 @@ class LanguageSelectionScreen extends StatelessWidget {
   }
 }
 
-extension on AppLocalizations? {
-  String? get selectLanguage => this?.selectLanguage;
-  String? get languageEnglish => this?.languageEnglish;
-  String? get languageUzbek => this?.languageUzbek;
-  String? get languageRussian => this?.languageRussian;
-}
+

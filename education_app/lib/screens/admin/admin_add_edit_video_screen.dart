@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../models/video_tutorial.dart';
+import '../../models/sud_system.dart';
 import '../../services/video_tutorial_service.dart';
+import '../../services/systems_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AdminAddEditVideoScreen extends StatefulWidget {
@@ -15,13 +18,17 @@ class AdminAddEditVideoScreen extends StatefulWidget {
 class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
   final _formKey = GlobalKey<FormState>();
   final _service = VideoTutorialService();
+  final _systemsService = SystemsService();
   
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
   late TextEditingController _youtubeIdController;
   late TextEditingController _durationController;
-  VideoCategory _selectedCategory = VideoCategory.beginner;
+  late TextEditingController _tagsController;
   
+  VideoCategory _selectedCategory = VideoCategory.beginner;
+  String? _selectedSystemId;
+  List<SudSystem> _systems = [];
   bool _isLoading = false;
 
   @override
@@ -31,7 +38,19 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
     _descriptionController = TextEditingController(text: widget.video?.description ?? '');
     _youtubeIdController = TextEditingController(text: widget.video?.youtubeId ?? '');
     _durationController = TextEditingController(text: widget.video?.duration.toString() ?? '');
+    _tagsController = TextEditingController(text: widget.video?.tags.join(', ') ?? '');
     _selectedCategory = widget.video?.category ?? VideoCategory.beginner;
+    _selectedSystemId = widget.video?.systemId;
+    _loadSystems();
+  }
+
+  Future<void> _loadSystems() async {
+    final systems = await _systemsService.getAllSystems().first;
+    if (mounted) {
+      setState(() {
+        _systems = systems;
+      });
+    }
   }
 
   @override
@@ -40,6 +59,7 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
     _descriptionController.dispose();
     _youtubeIdController.dispose();
     _durationController.dispose();
+    _tagsController.dispose();
     super.dispose();
   }
 
@@ -49,8 +69,16 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
     setState(() => _isLoading = true);
 
     try {
+      final user = FirebaseAuth.instance.currentUser;
+      final authorId = user?.uid ?? 'admin';
+      final authorName = user?.displayName ?? 'Admin';
 
       final duration = int.tryParse(_durationController.text) ?? 0;
+      final tags = _tagsController.text
+          .split(',')
+          .map((e) => e.trim())
+          .where((e) => e.isNotEmpty)
+          .toList();
 
       final video = VideoTutorial(
         id: widget.video?.id ?? '',
@@ -59,11 +87,11 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
         youtubeId: _youtubeIdController.text,
         duration: duration,
         category: _selectedCategory,
-        systemId: null, // TODO: Add system selection
+        systemId: _selectedSystemId,
         thumbnailUrl: _service.getYoutubeThumbnail(_youtubeIdController.text),
-        tags: [], // TODO: Add tags input
-        authorId: 'admin',
-        authorName: 'Admin',
+        tags: tags,
+        authorId: authorId,
+        authorName: authorName,
         createdAt: widget.video?.createdAt ?? Timestamp.now(),
         order: widget.video?.order ?? 0,
       );
@@ -138,7 +166,7 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<VideoCategory>(
-                      value: _selectedCategory,
+                      initialValue: _selectedCategory,
                       decoration: const InputDecoration(
                         labelText: 'Kategoriya',
                         border: OutlineInputBorder(),
@@ -156,15 +184,48 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
                       },
                     ),
                     const SizedBox(height: 16),
+                    DropdownButtonFormField<String>(
+                      initialValue: _selectedSystemId,
+                      decoration: const InputDecoration(
+                        labelText: 'Tizim (ixtiyoriy)',
+                        border: OutlineInputBorder(),
+                      ),
+                      items: [
+                        const DropdownMenuItem<String>(
+                          value: null,
+                          child: Text('Tanlanmagan'),
+                        ),
+                        ..._systems.map((system) {
+                          return DropdownMenuItem(
+                            value: system.id,
+                            child: Text(system.name),
+                          );
+                        }),
+                      ],
+                      onChanged: (value) {
+                        setState(() => _selectedSystemId = value);
+                      },
+                    ),
+                    const SizedBox(height: 16),
                     TextFormField(
                       controller: _durationController,
                       decoration: const InputDecoration(
-                        labelText: 'Davomiyligi',
+                        labelText: 'Davomiyligi (soniya)',
                         border: OutlineInputBorder(),
-                        hintText: 'Masalan: 10:30',
+                        hintText: 'Masalan: 600',
                       ),
+                      keyboardType: TextInputType.number,
                       validator: (value) =>
                           value?.isEmpty ?? true ? 'Davomiylik kiritilishi shart' : null,
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _tagsController,
+                      decoration: const InputDecoration(
+                        labelText: 'Teglar (vergul bilan ajrating)',
+                        border: OutlineInputBorder(),
+                        hintText: 'masalan: login, xatolik, sozlash',
+                      ),
                     ),
                     const SizedBox(height: 16),
                     TextFormField(

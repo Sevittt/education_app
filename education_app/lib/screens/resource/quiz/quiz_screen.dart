@@ -156,18 +156,22 @@ class _QuizScreenState extends State<QuizScreen> {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 24),
-            ...currentQuestion.options.map((option) {
-              return RadioListTile<String>(
-                title: Text(option),
-                value: option,
-                groupValue: _selectedAnswers[_currentQuestionIndex],
-                onChanged: (value) {
-                  setState(() {
-                    _selectedAnswers[_currentQuestionIndex] = value!;
-                  });
-                },
-              );
-            }),
+            RadioGroup<String>(
+              groupValue: _selectedAnswers[_currentQuestionIndex],
+              onChanged: (value) {
+                setState(() {
+                  _selectedAnswers[_currentQuestionIndex] = value!;
+                });
+              },
+              child: Column(
+                children: currentQuestion.options.map((option) {
+                  return RadioListTile<String>(
+                    title: Text(option),
+                    value: option,
+                  );
+                }).toList(),
+              ),
+            ),
             const Spacer(),
             ElevatedButton(
               onPressed:

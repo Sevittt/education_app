@@ -25,7 +25,7 @@ class PlaceholderScreen extends StatelessWidget {
               Icon(
                 Icons.construction_outlined,
                 size: 80,
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.7),
               ),
               const SizedBox(height: 20),
               Text(
