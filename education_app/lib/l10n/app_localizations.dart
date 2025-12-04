@@ -1830,6 +1830,240 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete Topic'**
   String get deleteTopicTooltip;
+
+  /// Navigation item for the Knowledge Base screen
+  ///
+  /// In en, this message translates to:
+  /// **'Knowledge Base'**
+  String get bottomNavKnowledge;
+
+  /// Title for the Knowledge Base screen
+  ///
+  /// In en, this message translates to:
+  /// **'Knowledge Base'**
+  String get knowledgeBaseTitle;
+
+  /// Placeholder text for the search bar
+  ///
+  /// In en, this message translates to:
+  /// **'Search articles...'**
+  String get searchPlaceholder;
+
+  /// Filter option to show all categories
+  ///
+  /// In en, this message translates to:
+  /// **'All Categories'**
+  String get allCategories;
+
+  /// Message when no articles are found
+  ///
+  /// In en, this message translates to:
+  /// **'No articles found.'**
+  String get noArticlesFound;
+
+  /// Title for the article detail screen
+  ///
+  /// In en, this message translates to:
+  /// **'Article Details'**
+  String get articleDetailTitle;
+
+  /// Prompt for user feedback on article helpfulness
+  ///
+  /// In en, this message translates to:
+  /// **'Was this article helpful?'**
+  String get helpfulFeedback;
+
+  /// Message shown after user provides feedback
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for your feedback!'**
+  String get feedbackThanks;
+
+  /// Tooltip for the share button
+  ///
+  /// In en, this message translates to:
+  /// **'Share Article'**
+  String get shareArticle;
+
+  /// Tooltip for the PDF download button
+  ///
+  /// In en, this message translates to:
+  /// **'Download PDF'**
+  String get downloadPdf;
+
+  /// Label for a pinned article
+  ///
+  /// In en, this message translates to:
+  /// **'Pinned'**
+  String get articlePinned;
+
+  /// No description provided for @settingsAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Settings'**
+  String get settingsAccount;
+
+  /// No description provided for @settingsNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get settingsNotifications;
+
+  /// No description provided for @settingsSecurity.
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get settingsSecurity;
+
+  /// No description provided for @settingsAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'About App'**
+  String get settingsAbout;
+
+  /// No description provided for @settingsHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Help & Guides'**
+  String get settingsHelp;
+
+  /// No description provided for @settingsLogOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Log Out'**
+  String get settingsLogOut;
+
+  /// No description provided for @guideTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Guides'**
+  String get guideTitle;
+
+  /// No description provided for @guideVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Video Tutorials'**
+  String get guideVideo;
+
+  /// No description provided for @guideSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Systems'**
+  String get guideSystem;
+
+  /// No description provided for @changePasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Password'**
+  String get changePasswordTitle;
+
+  /// No description provided for @currentPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Password'**
+  String get currentPassword;
+
+  /// No description provided for @newPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get newPassword;
+
+  /// No description provided for @confirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPassword;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @passwordUpdatedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Password updated successfully'**
+  String get passwordUpdatedSuccess;
+
+  /// No description provided for @passwordMismatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwordMismatch;
+
+  /// No description provided for @errorWrongPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Current password incorrect'**
+  String get errorWrongPassword;
+
+  /// No description provided for @helpCenterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Help Center'**
+  String get helpCenterTitle;
+
+  /// No description provided for @howCanWeHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'How can we help you?'**
+  String get howCanWeHelp;
+
+  /// No description provided for @faqTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Frequently Asked Questions'**
+  String get faqTitle;
+
+  /// No description provided for @contactSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Support'**
+  String get contactSupport;
+
+  /// No description provided for @searchHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Search help...'**
+  String get searchHelp;
+
+  /// No description provided for @faqCategoryLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Login Issues'**
+  String get faqCategoryLogin;
+
+  /// No description provided for @faqCategoryPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password Issues'**
+  String get faqCategoryPassword;
+
+  /// No description provided for @faqCategoryUpload.
+  ///
+  /// In en, this message translates to:
+  /// **'File Upload'**
+  String get faqCategoryUpload;
+
+  /// No description provided for @faqCategoryAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Access Rights'**
+  String get faqCategoryAccess;
+
+  /// No description provided for @faqCategoryGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General Questions'**
+  String get faqCategoryGeneral;
+
+  /// No description provided for @faqCategoryTechnical.
+  ///
+  /// In en, this message translates to:
+  /// **'Technical Issues'**
+  String get faqCategoryTechnical;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

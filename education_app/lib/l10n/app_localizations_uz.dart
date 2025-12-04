@@ -962,4 +962,121 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get deleteTopicTooltip => 'Mavzuni o\'chirish';
+
+  @override
+  String get bottomNavKnowledge => 'Bilimlar Bazasi';
+
+  @override
+  String get knowledgeBaseTitle => 'Bilimlar Bazasi';
+
+  @override
+  String get searchPlaceholder => 'Maqolalarni qidiring...';
+
+  @override
+  String get allCategories => 'Barcha Kategoriyalar';
+
+  @override
+  String get noArticlesFound => 'Maqolalar topilmadi.';
+
+  @override
+  String get articleDetailTitle => 'Maqola Tafsilotlari';
+
+  @override
+  String get helpfulFeedback => 'Ushbu maqola foydali bo\'ldimi?';
+
+  @override
+  String get feedbackThanks => 'Fikringiz uchun tashakkur!';
+
+  @override
+  String get shareArticle => 'Maqolani ulashish';
+
+  @override
+  String get downloadPdf => 'PDF yuklab olish';
+
+  @override
+  String get articlePinned => 'Muhim';
+
+  @override
+  String get settingsAccount => 'Hisob sozlamalari';
+
+  @override
+  String get settingsNotifications => 'Xabarnomalar';
+
+  @override
+  String get settingsSecurity => 'Xavfsizlik';
+
+  @override
+  String get settingsAbout => 'Ilova haqida';
+
+  @override
+  String get settingsHelp => 'Yordam va Qo\'llanmalar';
+
+  @override
+  String get settingsLogOut => 'Chiqish';
+
+  @override
+  String get guideTitle => 'Qo\'llanmalar';
+
+  @override
+  String get guideVideo => 'Video Darsliklar';
+
+  @override
+  String get guideSystem => 'Tizimlar';
+
+  @override
+  String get changePasswordTitle => 'Parolni o\'zgartirish';
+
+  @override
+  String get currentPassword => 'Joriy parol';
+
+  @override
+  String get newPassword => 'Yangi parol';
+
+  @override
+  String get confirmPassword => 'Parolni tasdiqlang';
+
+  @override
+  String get save => 'Saqlash';
+
+  @override
+  String get passwordUpdatedSuccess => 'Parol muvaffaqiyatli o\'zgartirildi';
+
+  @override
+  String get passwordMismatch => 'Parollar mos kelmadi';
+
+  @override
+  String get errorWrongPassword => 'Joriy parol noto\'g\'ri';
+
+  @override
+  String get helpCenterTitle => 'Yordam Markazi';
+
+  @override
+  String get howCanWeHelp => 'Sizga qanday yordam bera olamiz?';
+
+  @override
+  String get faqTitle => 'Ko\'p so\'raladigan savollar';
+
+  @override
+  String get contactSupport => 'Qo\'llab-quvvatlash';
+
+  @override
+  String get searchHelp => 'Yordam qidirish...';
+
+  @override
+  String get faqCategoryLogin => 'Kirish Muammolari';
+
+  @override
+  String get faqCategoryPassword => 'Parol Muammolari';
+
+  @override
+  String get faqCategoryUpload => 'Fayl Yuklash';
+
+  @override
+  String get faqCategoryAccess => 'Ruxsat';
+
+  @override
+  String get faqCategoryGeneral => 'Umumiy';
+
+  @override
+  String get faqCategoryTechnical => 'Texnik';
 }

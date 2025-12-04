@@ -15,6 +15,7 @@ import 'profile_edit_screen.dart'; // Add this import
 
 // --- ADDED ---
 import 'package:sud_qollanma/screens/admin/admin_panel_screen.dart';
+import '../../widgets/quiz_attempt_card.dart'; // --- ADDED ---
 // --- END ADDED ---
 
 class ProfileScreen extends StatelessWidget {
@@ -117,14 +118,11 @@ class ProfileScreen extends StatelessWidget {
               l10n.localeName,
             ).add_jm().format(attempt.attemptedAt.toDate());
 
-            return Card(
-              margin: const EdgeInsets.symmetric(vertical: 6.0),
-              child: ListTile(
-                leading: CircleAvatar(child: Text(attempt.score.toString())),
-                title: Text(attempt.quizTitle),
-                subtitle: Text(formattedDate),
-                trailing: Text('${attempt.score}/${attempt.totalQuestions}'),
-              ),
+            return QuizAttemptCard(
+              attempt: attempt,
+              onTap: () {
+                // Navigate to quiz details if needed
+              },
             );
           },
         );

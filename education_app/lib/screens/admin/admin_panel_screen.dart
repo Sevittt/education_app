@@ -46,8 +46,8 @@ class AdminPanelScreen extends StatelessWidget {
           _buildAdminCard(
             context,
             icon: Icons.library_books,
-            title: 'Maqolalar',
-            subtitle: 'Bilimlar bazasini boshqarish',
+            title: l10n.manageArticlesTitle,
+            subtitle: l10n.manageArticlesSubtitle,
             color: Colors.green.shade100,
             onTap: () {
               Navigator.push(
@@ -61,8 +61,8 @@ class AdminPanelScreen extends StatelessWidget {
           _buildAdminCard(
             context,
             icon: Icons.video_library,
-            title: 'Videolar',
-            subtitle: 'Video darsliklarni boshqarish',
+            title: l10n.manageVideosTitle,
+            subtitle: l10n.manageVideosSubtitle,
             color: Colors.red.shade100,
             onTap: () {
               Navigator.push(
@@ -76,8 +76,8 @@ class AdminPanelScreen extends StatelessWidget {
           _buildAdminCard(
             context,
             icon: Icons.computer,
-            title: 'Tizimlar',
-            subtitle: 'Sud tizimlarini boshqarish',
+            title: l10n.manageSystemsTitle,
+            subtitle: l10n.manageSystemsSubtitle,
             color: Colors.indigo.shade100,
             onTap: () {
               Navigator.push(
@@ -91,8 +91,8 @@ class AdminPanelScreen extends StatelessWidget {
           _buildAdminCard(
             context,
             icon: Icons.question_answer,
-            title: 'Savol-Javob',
-            subtitle: 'FAQ larni boshqarish',
+            title: l10n.manageFaqTitle,
+            subtitle: l10n.manageFaqSubtitle,
             color: Colors.amber.shade100,
             onTap: () {
               Navigator.push(
@@ -106,8 +106,8 @@ class AdminPanelScreen extends StatelessWidget {
           _buildAdminCard(
             context,
             icon: Icons.notifications,
-            title: 'Xabarnomalar',
-            subtitle: 'Xabarnoma yuborish',
+            title: l10n.manageNotificationsTitle,
+            subtitle: l10n.manageNotificationsSubtitle,
             color: Colors.teal.shade100,
             onTap: () {
               Navigator.push(

@@ -650,6 +650,34 @@
   "manageSystemsSubtitle": "Управление справочником систем",
   "manageFaqTitle": "FAQ",
   "manageFaqSubtitle": "Управление частыми вопросами",
+  "settingsAccount": "Настройки аккаунта",
+  "settingsNotifications": "Уведомления",
+  "settingsSecurity": "Безопасность",
+  "settingsAbout": "О приложении",
+  "settingsHelp": "Помощь и руководства",
+  "settingsLogOut": "Выйти",
+  "guideTitle": "Руководства",
+  "guideVideo": "Видеоуроки",
+  "guideSystem": "Системы",
+  "changePasswordTitle": "Изменить пароль",
+  "currentPassword": "Текущий пароль",
+  "newPassword": "Новый пароль",
+  "confirmPassword": "Подтвердите пароль",
+  "save": "Сохранить",
+  "passwordUpdatedSuccess": "Пароль успешно обновлен",
+  "passwordMismatch": "Пароли не совпадают",
+  "errorWrongPassword": "Неверный текущий пароль",
+  "helpCenterTitle": "Центр помощи",
+  "howCanWeHelp": "Как мы можем вам помочь?",
+  "faqTitle": "Часто задаваемые вопросы",
+  "contactSupport": "Связаться с поддержкой",
+  "searchHelp": "Поиск помощи...",
+  "faqCategoryLogin": "Проблемы со входом",
+  "faqCategoryPassword": "Проблемы с паролем",
+  "faqCategoryUpload": "Загрузка файлов",
+  "faqCategoryAccess": "Доступ",
+  "faqCategoryGeneral": "Общие вопросы",
+  "faqCategoryTechnical": "Технические проблемы",
   "@failedToAddComment": {
     "description": "Error message when adding a comment fails",
     "placeholders": {
@@ -858,5 +886,49 @@
   "deleteTopicConfirmTitle": "Удалить тему",
   "commentPlural": "Комментарии",
   "commentSingular": "Комментарий",
-  "deleteTopicTooltip": "Удалить тему"
+  "deleteTopicTooltip": "Удалить тему",
+  "bottomNavKnowledge": "База знаний",
+  "@bottomNavKnowledge": {
+    "description": "Пункт навигации для экрана базы знаний"
+  },
+  "knowledgeBaseTitle": "База знаний",
+  "@knowledgeBaseTitle": {
+    "description": "Заголовок для экрана базы знаний"
+  },
+  "searchPlaceholder": "Искать статьи...",
+  "@searchPlaceholder": {
+    "description": "Текст-заполнитель для строки поиска"
+  },
+  "allCategories": "Все категории",
+  "@allCategories": {
+    "description": "Фильтр для отображения всех категорий"
+  },
+  "noArticlesFound": "Статьи не найдены.",
+  "@noArticlesFound": {
+    "description": "Сообщение при отсутствии статей"
+  },
+  "articleDetailTitle": "Детали статьи",
+  "@articleDetailTitle": {
+    "description": "Заголовок для экрана деталей статьи"
+  },
+  "helpfulFeedback": "Была ли эта статья полезной?",
+  "@helpfulFeedback": {
+    "description": "Запрос обратной связи о полезности статьи"
+  },
+  "feedbackThanks": "Спасибо за ваш отзыв!",
+  "@feedbackThanks": {
+    "description": "Сообщение, отображаемое после предоставления отзыва"
+  },
+  "shareArticle": "Поделиться статьей",
+  "@shareArticle": {
+    "description": "Подсказка для кнопки \"Поделиться\""
+  },
+  "downloadPdf": "Скачать PDF",
+  "@downloadPdf": {
+    "description": "Подсказка для кнопки скачивания PDF"
+  },
+  "articlePinned": "Закреплено",
+  "@articlePinned": {
+    "description": "Метка для закрепленной статьи"
+  }
 }

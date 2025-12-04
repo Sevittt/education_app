@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/faq.dart';
 import '../../services/faq_service.dart';
 
@@ -62,25 +63,26 @@ class _FAQListScreenState extends State<FAQListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ko\'p so\'raladigan savollar'),
+        title: Text(l10n?.faqTitle ?? 'Frequently Asked Questions'),
         centerTitle: true,
       ),
       body: Column(
         children: [
-          _buildSearchBar(),
-          _buildCategoryFilters(),
+          _buildSearchBar(l10n),
+          _buildCategoryFilters(l10n),
           Expanded(
             child: _isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : _filteredFAQs.isEmpty
-                    ? _buildEmptyState()
+                    ? _buildEmptyState(l10n)
                     : ListView.builder(
                         padding: const EdgeInsets.all(16),
                         itemCount: _filteredFAQs.length,
                         itemBuilder: (context, index) {
-                          return _buildFAQTile(_filteredFAQs[index]);
+                          return _buildFAQTile(_filteredFAQs[index], l10n);
                         },
                       ),
           ),
@@ -89,13 +91,13 @@ class _FAQListScreenState extends State<FAQListScreen> {
     );
   }
 
-  Widget _buildSearchBar() {
+  Widget _buildSearchBar(AppLocalizations? l10n) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: TextField(
         controller: _searchController,
         decoration: InputDecoration(
-          hintText: 'Savolni qidiring...',
+          hintText: l10n?.searchHelp ?? 'Search help...',
           prefixIcon: const Icon(Icons.search),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
@@ -108,14 +110,31 @@ class _FAQListScreenState extends State<FAQListScreen> {
     );
   }
 
-  Widget _buildCategoryFilters() {
+  String _getCategoryName(FAQCategory category, AppLocalizations? l10n) {
+    switch (category) {
+      case FAQCategory.login:
+        return l10n?.faqCategoryLogin ?? 'Login Issues';
+      case FAQCategory.password:
+        return l10n?.faqCategoryPassword ?? 'Password Issues';
+      case FAQCategory.upload:
+        return l10n?.faqCategoryUpload ?? 'File Upload';
+      case FAQCategory.access:
+        return l10n?.faqCategoryAccess ?? 'Access Rights';
+      case FAQCategory.general:
+        return l10n?.faqCategoryGeneral ?? 'General Questions';
+      case FAQCategory.technical:
+        return l10n?.faqCategoryTechnical ?? 'Technical Issues';
+    }
+  }
+
+  Widget _buildCategoryFilters(AppLocalizations? l10n) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
           FilterChip(
-            label: const Text('Barchasi'),
+            label: Text(l10n?.allCategories ?? 'All Categories'),
             selected: _selectedCategory == null,
             onSelected: (selected) {
               if (selected) {
@@ -131,7 +150,7 @@ class _FAQListScreenState extends State<FAQListScreen> {
             return Padding(
               padding: const EdgeInsets.only(right: 8),
               child: FilterChip(
-                label: Text('${category.icon} ${category.displayName}'),
+                label: Text('${category.icon} ${_getCategoryName(category, l10n)}'),
                 selected: _selectedCategory == category,
                 onSelected: (selected) {
                   setState(() {
@@ -147,7 +166,7 @@ class _FAQListScreenState extends State<FAQListScreen> {
     );
   }
 
-  Widget _buildFAQTile(FAQ faq) {
+  Widget _buildFAQTile(FAQ faq, AppLocalizations? l10n) {
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -157,7 +176,7 @@ class _FAQListScreenState extends State<FAQListScreen> {
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
-          faq.category.displayName,
+          _getCategoryName(faq.category, l10n),
           style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
         ),
         childrenPadding: const EdgeInsets.all(16),
@@ -173,19 +192,19 @@ class _FAQListScreenState extends State<FAQListScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                'Foydali bo\'ldimi?',
+                l10n?.helpfulFeedback ?? 'Was this helpful?',
                 style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
               ),
               const SizedBox(width: 8),
               IconButton(
                 icon: const Icon(Icons.thumb_up_outlined, size: 20),
                 onPressed: () => _service.incrementHelpfulCount(faq.id),
-                tooltip: 'Ha',
+                tooltip: 'Yes',
               ),
               IconButton(
                 icon: const Icon(Icons.thumb_down_outlined, size: 20),
                 onPressed: () => _service.decrementHelpfulCount(faq.id),
-                tooltip: 'Yo\'q',
+                tooltip: 'No',
               ),
             ],
           ),
@@ -194,7 +213,7 @@ class _FAQListScreenState extends State<FAQListScreen> {
     );
   }
 
-  Widget _buildEmptyState() {
+  Widget _buildEmptyState(AppLocalizations? l10n) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -202,7 +221,7 @@ class _FAQListScreenState extends State<FAQListScreen> {
           Icon(Icons.help_outline, size: 64, color: Colors.grey.shade400),
           const SizedBox(height: 16),
           Text(
-            'Savollar topilmadi',
+            l10n?.noArticlesFound ?? 'No FAQs found',
             style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
           ),
         ],

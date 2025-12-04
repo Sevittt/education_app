@@ -6,7 +6,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../placeholder_screen.dart'; // Import the placeholder screen
 import 'language_selection_screen.dart'; // Import the new LanguageSelectionScreen
+import '../admin/admin_panel_screen.dart'; // Import AdminPanelScreen
+import 'package:provider/provider.dart'; // Import Provider
+import '../../models/auth_notifier.dart'; // Import AuthNotifier
+import '../../models/users.dart'; // Import UserRole
 // Import AppLocalizations to use translated strings
+
+import 'change_password_screen.dart';
+import '../faq/faq_list_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -171,45 +178,56 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          l10n?.settingsLanguage ?? 'Account Settings',
+          l10n?.settingsTitle ?? 'Settings',
         ), // Localized title
         centerTitle: true,
       ),
       body: ListView(
         children: [
-          const SizedBox(height: 8),
+          const SizedBox(height: 20),
+          Center(
+            child: Image.asset(
+              'assets/images/app_logo.png',
+              height: 120,
+              fit: BoxFit.contain,
+              errorBuilder: (context, error, stackTrace) {
+                return const Icon(Icons.settings, size: 80, color: Colors.grey);
+              },
+            ),
+          ),
+          const SizedBox(height: 20),
 
           _buildSwitchSettingsItem(
             context: context,
             icon: Icons.notifications_active_outlined,
-            title: 'Receive Notifications', // This could also be localized
+            title: l10n?.settingsNotifications ?? 'Notifications',
             value: _receiveNotifications,
             onChanged: _updateNotificationSetting,
-            subtitle: 'Get updates about new resources and discussions',
+            subtitle: l10n?.settingsReceiveNotificationsSubtitle ?? 'Get updates about new resources and discussions',
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),
 
           _buildSwitchSettingsItem(
             context: context,
             icon: Icons.location_on_outlined,
-            title: 'Allow Location Access', // This could also be localized
+            title: l10n?.settingsAllowLocation ?? 'Allow Location Access',
             value: _allowLocationAccess,
             onChanged: _updateLocationSetting,
-            subtitle: 'For features requiring your location (if any)',
+            subtitle: l10n?.settingsAllowLocationSubtitle ?? 'For features requiring your location (if any)',
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),
 
           _buildSettingsItem(
             context: context,
             icon: Icons.password_outlined,
-            title: 'Change Password', // This could also be localized
+            title: l10n?.changePasswordTitle ?? 'Change Password',
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder:
                       (context) =>
-                          const PlaceholderScreen(title: 'Change Password'),
+                          const ChangePasswordScreen(),
                 ),
               );
             },
@@ -219,10 +237,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           _buildSettingsItem(
             context: context,
             icon: Icons.translate_outlined,
-            title: l10n?.settingsLanguage ?? 'Language', // Localized title
+            title: l10n?.settingsLanguage ?? 'Language',
             subtitle: _getLanguageName(l10n?.localeName ?? 'en'),
             onTap: () {
-              // Navigate to the actual LanguageSelectionScreen
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -236,14 +253,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
           _buildSettingsItem(
             context: context,
             icon: Icons.help_center_outlined,
-            title: 'Help Center', // This could also be localized
+            title: l10n?.helpCenterTitle ?? 'Help Center',
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder:
                       (context) =>
-                          const PlaceholderScreen(title: 'Help Center'),
+                          const FAQListScreen(),
                 ),
               );
             },
@@ -253,25 +270,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
           _buildSettingsItem(
             context: context,
             icon: Icons.info_outline_rounded,
-            title: 'About Teach & Learn', // This could also be localized
+            title: l10n?.settingsAbout ?? 'About App',
             onTap: () {
               showAboutDialog(
                 context: context,
                 applicationName:
-                    l10n?.appTitle ?? 'Teach & Learn', // Localized app name
-                applicationVersion: '1.0.2', // Example version
+                    l10n?.appTitle ?? 'Court Handbook',
+                applicationVersion: '1.0.2',
                 applicationIcon: Image.asset(
-                  'assets/images/Shared_Knowledge.png',
+                  'assets/images/app_logo.png',
                   width: 60,
                   height: 60,
+                  errorBuilder: (context, error, stackTrace) => const Icon(Icons.info, size: 50),
                 ),
-                applicationLegalese: '© 2025 Teach & Learn Project',
+                applicationLegalese: l10n?.settingsAppLegalese ?? '© 2025 Court Handbook Project',
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(top: 15),
-                    // This text could also be localized if needed
                     child: Text(
-                      l10n?.appTitle ??
+                      l10n?.settingsAppDescription ??
                           'Bridging the IT skills gap through collaborative learning and resource sharing.',
                     ),
                   ),
@@ -280,6 +297,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),
+          const Divider(height: 1, indent: 16, endIndent: 16),
+
+          // --- ADMIN PANEL ENTRY POINT ---
+          // Only show for Admins
+          if (context.watch<AuthNotifier>().appUser?.role == UserRole.admin)
+            Column(
+              children: [
+                _buildSettingsItem(
+                  context: context,
+                  icon: Icons.admin_panel_settings_outlined,
+                  title: l10n?.adminPanelTitle ?? 'Admin Panel',
+                  subtitle: l10n?.manageNewsSubtitle ?? 'Manage app content',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AdminPanelScreen(),
+                      ),
+                    );
+                  },
+                ),
+                const Divider(height: 1, indent: 16, endIndent: 16),
+              ],
+            ),
         ],
       ),
     );

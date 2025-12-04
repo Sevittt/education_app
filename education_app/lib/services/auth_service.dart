@@ -228,10 +228,38 @@ class AuthService {
     }
   }
 
-  // --- TODO: Add other authentication methods as needed ---
-  // For example:
-  // - Sign in with Apple
-  // - Sign in with Phone Number (as in F006145.pdf)
-  // - Password reset
-  // - Email verification
+  // --- Change Password ---
+  // Re-authenticates the user and then updates their password.
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    final user = _firebaseAuth.currentUser;
+    if (user == null) {
+      throw Exception('No user signed in');
+    }
+
+    if (user.email == null) {
+      throw Exception('User email not found');
+    }
+
+    try {
+      // 1. Create credential with current password
+      final credential = firebase_auth.EmailAuthProvider.credential(
+        email: user.email!,
+        password: currentPassword,
+      );
+
+      // 2. Re-authenticate
+      await user.reauthenticateWithCredential(credential);
+
+      // 3. Update password
+      await user.updatePassword(newPassword);
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      if (kDebugMode) {
+        print('Error changing password: ${e.code} - ${e.message}');
+      }
+      rethrow;
+    }
+  }
 }

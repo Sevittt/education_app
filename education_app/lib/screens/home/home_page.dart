@@ -187,7 +187,7 @@ class _HomePageState extends State<HomePage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(_selectedIndex == 0 ? Icons.home : Icons.home_outlined),
-            label: 'Home',
+            label: AppLocalizations.of(context)!.bottomNavHome,
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -195,7 +195,7 @@ class _HomePageState extends State<HomePage> {
                   ? Icons.menu_book
                   : Icons.menu_book_outlined,
             ),
-            label: 'Knowledge',
+            label: AppLocalizations.of(context)!.bottomNavResources,
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -203,19 +203,19 @@ class _HomePageState extends State<HomePage> {
                   ? Icons.library_books
                   : Icons.library_books_outlined,
             ),
-            label: 'Resources',
+            label: AppLocalizations.of(context)!.resourcesTitle,
           ),
           BottomNavigationBarItem(
             icon: Icon(
               _selectedIndex == 3 ? Icons.people : Icons.people_outline,
             ),
-            label: 'Community',
+            label: AppLocalizations.of(context)!.bottomNavCommunity,
           ),
           BottomNavigationBarItem(
             icon: Icon(
               _selectedIndex == 4 ? Icons.person : Icons.person_outline,
             ),
-            label: 'Profile',
+            label: AppLocalizations.of(context)!.bottomNavProfile,
           ),
         ],
         currentIndex: _selectedIndex,

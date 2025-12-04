@@ -161,4 +161,25 @@ class AuthNotifier with ChangeNotifier {
     await _authService.signOut();
     _setLoading(false);
   }
+
+  // --- Change Password ---
+  Future<bool> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    _setLoading(true);
+    _setErrorMessage(null);
+    try {
+      await _authService.changePassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      );
+      _setLoading(false);
+      return true;
+    } catch (e) {
+      _setErrorMessage(e.toString());
+      _setLoading(false);
+      return false;
+    }
+  }
 }

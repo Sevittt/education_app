@@ -962,4 +962,121 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get deleteTopicTooltip => 'Удалить тему';
+
+  @override
+  String get bottomNavKnowledge => 'База знаний';
+
+  @override
+  String get knowledgeBaseTitle => 'База знаний';
+
+  @override
+  String get searchPlaceholder => 'Искать статьи...';
+
+  @override
+  String get allCategories => 'Все категории';
+
+  @override
+  String get noArticlesFound => 'Статьи не найдены.';
+
+  @override
+  String get articleDetailTitle => 'Детали статьи';
+
+  @override
+  String get helpfulFeedback => 'Была ли эта статья полезной?';
+
+  @override
+  String get feedbackThanks => 'Спасибо за ваш отзыв!';
+
+  @override
+  String get shareArticle => 'Поделиться статьей';
+
+  @override
+  String get downloadPdf => 'Скачать PDF';
+
+  @override
+  String get articlePinned => 'Закреплено';
+
+  @override
+  String get settingsAccount => 'Настройки аккаунта';
+
+  @override
+  String get settingsNotifications => 'Уведомления';
+
+  @override
+  String get settingsSecurity => 'Безопасность';
+
+  @override
+  String get settingsAbout => 'О приложении';
+
+  @override
+  String get settingsHelp => 'Помощь и руководства';
+
+  @override
+  String get settingsLogOut => 'Выйти';
+
+  @override
+  String get guideTitle => 'Руководства';
+
+  @override
+  String get guideVideo => 'Видеоуроки';
+
+  @override
+  String get guideSystem => 'Системы';
+
+  @override
+  String get changePasswordTitle => 'Изменить пароль';
+
+  @override
+  String get currentPassword => 'Текущий пароль';
+
+  @override
+  String get newPassword => 'Новый пароль';
+
+  @override
+  String get confirmPassword => 'Подтвердите пароль';
+
+  @override
+  String get save => 'Сохранить';
+
+  @override
+  String get passwordUpdatedSuccess => 'Пароль успешно обновлен';
+
+  @override
+  String get passwordMismatch => 'Пароли не совпадают';
+
+  @override
+  String get errorWrongPassword => 'Неверный текущий пароль';
+
+  @override
+  String get helpCenterTitle => 'Центр помощи';
+
+  @override
+  String get howCanWeHelp => 'Как мы можем вам помочь?';
+
+  @override
+  String get faqTitle => 'Часто задаваемые вопросы';
+
+  @override
+  String get contactSupport => 'Связаться с поддержкой';
+
+  @override
+  String get searchHelp => 'Поиск помощи...';
+
+  @override
+  String get faqCategoryLogin => 'Проблемы со входом';
+
+  @override
+  String get faqCategoryPassword => 'Проблемы с паролем';
+
+  @override
+  String get faqCategoryUpload => 'Загрузка файлов';
+
+  @override
+  String get faqCategoryAccess => 'Доступ';
+
+  @override
+  String get faqCategoryGeneral => 'Общие вопросы';
+
+  @override
+  String get faqCategoryTechnical => 'Технические проблемы';
 }

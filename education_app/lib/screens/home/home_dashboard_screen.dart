@@ -6,22 +6,19 @@ import 'package:sud_qollanma/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart'; // For Timestamp
 import 'package:intl/intl.dart'; // --- ADDED for date formatting ---
-
-// Removed: import '../../data/dummy_data.dart'; // No longer needed for dummyNews
-
-import '../../models/auth_notifier.dart';
-import '../../models/users.dart';
-import '../../models/news.dart'; // Import the News model
-import '../../services/news_service.dart'; // Import the NewsService
-import '../../models/quiz_attempt.dart'; // --- ADDED for Quiz Attempts ---
-import '../../services/quiz_service.dart'; // --- ADDED for QuizService ---
-
-// --- ADDED for Expert & Admin Panel ---
-import '../../models/resource.dart';
 import '../../services/resource_service.dart';
 import '../../services/profile_service.dart'; // --- ADDED for Admin Panel ---
 import '../admin/admin_panel_screen.dart'; // --- ADDED for Admin Panel link ---
 import '../quiz/quiz_list_screen.dart'; // --- ADDED for Quiz List Screen ---
+import '../../models/auth_notifier.dart';
+import '../../models/users.dart';
+import '../../models/news.dart';
+import '../../services/news_service.dart';
+import '../../models/quiz_attempt.dart';
+import '../../services/quiz_service.dart';
+import '../../models/resource.dart';
+import '../search/global_search_screen.dart';
+import '../../widgets/quiz_attempt_card.dart'; // --- ADDED ---
 // --- END ADDED ---
 
 typedef OnTabSelected = void Function(int index);
@@ -465,44 +462,11 @@ class HomeDashboardScreen extends StatelessWidget {
               itemCount: attempts.length > 3 ? 3 : attempts.length,
               itemBuilder: (context, index) {
                 final attempt = attempts[index];
-                final formattedDate = DateFormat.yMMMd(
-                  l10n.localeName,
-                ).format(attempt.attemptedAt.toDate());
-                final scorePercent = (attempt.score /
-                        attempt.totalQuestions *
-                        100)
-                    .toStringAsFixed(0);
-
-                return Card(
-                  elevation: 1,
-                  margin: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: colorScheme.primaryContainer,
-                      child: Text(
-                        '$scorePercent%',
-                        style: textTheme.labelMedium?.copyWith(
-                          color: colorScheme.onPrimaryContainer,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    title: Text(
-                      attempt.quizTitle,
-                      style: textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    subtitle: Text(formattedDate),
-                    trailing: Text(
-                      '${attempt.score}/${attempt.totalQuestions}',
-                      style: textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                return QuizAttemptCard(
+                  attempt: attempt,
+                  onTap: () {
+                    // Navigate to quiz details or results if needed
+                  },
                 );
               },
             );
@@ -586,10 +550,7 @@ class HomeDashboardScreen extends StatelessWidget {
                   elevation: 1,
                   margin: const EdgeInsets.symmetric(vertical: 4.0),
                   child: ListTile(
-                    leading: Icon(
-                      Icons.description_outlined,
-                      color: colorScheme.primary,
-                    ),
+                    leading: Icon(Icons.description, color: colorScheme.primary),
                     title: Text(
                       resource.title,
                       style: textTheme.titleSmall?.copyWith(
@@ -598,7 +559,13 @@ class HomeDashboardScreen extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    subtitle: Text(resource.type.name.toUpperCase()),
+                    subtitle: Text(
+                      resource.type.name.toUpperCase(),
+                      style: textTheme.bodySmall,
+                    ),
+                    onTap: () {
+                      // TODO: Navigate to resource detail
+                    },
                   ),
                 );
               },
@@ -798,9 +765,3 @@ class HomeDashboardScreen extends StatelessWidget {
     );
   }
 }
-
-// Add new localization keys to your .arb files:
-// "urlCannotBeEmpty": "URL cannot be empty",
-// "errorLoadingNews": "Error loading news: {error}",
-// "noNewsAvailable": "No news available at the moment."
-// And ensure existing ones like "sourceLabel" are present.

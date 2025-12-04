@@ -651,6 +651,36 @@
   "manageSystemsSubtitle": "Tizimlar ma'lumotnomasini boshqarish",
   "manageFaqTitle": "TSS",
   "manageFaqSubtitle": "TSSni boshqarish",
+  "manageNotificationsTitle": "Xabarnomalar",
+  "manageNotificationsSubtitle": "Xabarnoma yuborish",
+  "settingsAccount": "Hisob sozlamalari",
+  "settingsNotifications": "Xabarnomalar",
+  "settingsSecurity": "Xavfsizlik",
+  "settingsAbout": "Ilova haqida",
+  "settingsHelp": "Yordam va Qo'llanmalar",
+  "settingsLogOut": "Chiqish",
+  "guideTitle": "Qo'llanmalar",
+  "guideVideo": "Video Darsliklar",
+  "guideSystem": "Tizimlar",
+  "changePasswordTitle": "Parolni o'zgartirish",
+  "currentPassword": "Joriy parol",
+  "newPassword": "Yangi parol",
+  "confirmPassword": "Parolni tasdiqlang",
+  "save": "Saqlash",
+  "passwordUpdatedSuccess": "Parol muvaffaqiyatli o'zgartirildi",
+  "passwordMismatch": "Parollar mos kelmadi",
+  "errorWrongPassword": "Joriy parol noto'g'ri",
+  "helpCenterTitle": "Yordam Markazi",
+  "howCanWeHelp": "Sizga qanday yordam bera olamiz?",
+  "faqTitle": "Ko'p so'raladigan savollar",
+  "contactSupport": "Qo'llab-quvvatlash",
+  "searchHelp": "Yordam qidirish...",
+  "faqCategoryLogin": "Kirish Muammolari",
+  "faqCategoryPassword": "Parol Muammolari",
+  "faqCategoryUpload": "Fayl Yuklash",
+  "faqCategoryAccess": "Ruxsat",
+  "faqCategoryGeneral": "Umumiy",
+  "faqCategoryTechnical": "Texnik",
 
   "@failedToAddComment": {
     "description": "Error message when adding a comment fails",
@@ -861,5 +891,49 @@
   "deleteTopicConfirmTitle": "Mavzuni o'chirish",
   "commentPlural": "Izohlar",
   "commentSingular": "Izoh",
-  "deleteTopicTooltip": "Mavzuni o'chirish"
+  "deleteTopicTooltip": "Mavzuni o'chirish",
+  "bottomNavKnowledge": "Bilimlar Bazasi",
+  "@bottomNavKnowledge": {
+    "description": "Bilimlar bazasi ekrani uchun navigatsiya elementi"
+  },
+  "knowledgeBaseTitle": "Bilimlar Bazasi",
+  "@knowledgeBaseTitle": {
+    "description": "Bilimlar bazasi ekrani uchun sarlavha"
+  },
+  "searchPlaceholder": "Maqolalarni qidiring...",
+  "@searchPlaceholder": {
+    "description": "Qidiruv maydoni uchun matn"
+  },
+  "allCategories": "Barcha Kategoriyalar",
+  "@allCategories": {
+    "description": "Barcha kategoriyalarni ko'rsatish uchun filtr"
+  },
+  "noArticlesFound": "Maqolalar topilmadi.",
+  "@noArticlesFound": {
+    "description": "Maqolalar topilmaganda xabar"
+  },
+  "articleDetailTitle": "Maqola Tafsilotlari",
+  "@articleDetailTitle": {
+    "description": "Maqola tafsilotlari ekrani uchun sarlavha"
+  },
+  "helpfulFeedback": "Ushbu maqola foydali bo'ldimi?",
+  "@helpfulFeedback": {
+    "description": "Maqola foydaliligi haqida foydalanuvchi fikri uchun so'rov"
+  },
+  "feedbackThanks": "Fikringiz uchun tashakkur!",
+  "@feedbackThanks": {
+    "description": "Fikr bildirilgandan so'ng ko'rsatiladigan xabar"
+  },
+  "shareArticle": "Maqolani ulashish",
+  "@shareArticle": {
+    "description": "Ulashish tugmasi uchun ko'rsatma"
+  },
+  "downloadPdf": "PDF yuklab olish",
+  "@downloadPdf": {
+    "description": "PDF yuklab olish tugmasi uchun ko'rsatma"
+  },
+  "articlePinned": "Muhim",
+  "@articlePinned": {
+    "description": "Muhim maqola uchun yorliq"
+  }
 }

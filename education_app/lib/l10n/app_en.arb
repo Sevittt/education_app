@@ -670,6 +670,8 @@
   "manageSystemsSubtitle": "Manage Systems Directory",
   "manageFaqTitle": "FAQ",
   "manageFaqSubtitle": "Manage FAQs",
+  "manageNotificationsTitle": "Notifications",
+  "manageNotificationsSubtitle": "Send Notifications",
   
   "errorLoadingComments": "Error loading comments: {error}",
   "noRepliesYet": "No replies yet. Be the first to comment!",
@@ -891,5 +893,77 @@
   "deleteTopicConfirmTitle": "Delete Topic",
   "commentPlural": "Comments",
   "commentSingular": "Comment",
-  "deleteTopicTooltip": "Delete Topic"
+  "deleteTopicTooltip": "Delete Topic",
+  "bottomNavKnowledge": "Knowledge Base",
+  "@bottomNavKnowledge": {
+    "description": "Navigation item for the Knowledge Base screen"
+  },
+  "knowledgeBaseTitle": "Knowledge Base",
+  "@knowledgeBaseTitle": {
+    "description": "Title for the Knowledge Base screen"
+  },
+  "searchPlaceholder": "Search articles...",
+  "@searchPlaceholder": {
+    "description": "Placeholder text for the search bar"
+  },
+  "allCategories": "All Categories",
+  "@allCategories": {
+    "description": "Filter option to show all categories"
+  },
+  "noArticlesFound": "No articles found.",
+  "@noArticlesFound": {
+    "description": "Message when no articles are found"
+  },
+  "articleDetailTitle": "Article Details",
+  "@articleDetailTitle": {
+    "description": "Title for the article detail screen"
+  },
+  "helpfulFeedback": "Was this article helpful?",
+  "@helpfulFeedback": {
+    "description": "Prompt for user feedback on article helpfulness"
+  },
+  "feedbackThanks": "Thank you for your feedback!",
+  "@feedbackThanks": {
+    "description": "Message shown after user provides feedback"
+  },
+  "shareArticle": "Share Article",
+  "@shareArticle": {
+    "description": "Tooltip for the share button"
+  },
+  "downloadPdf": "Download PDF",
+  "@downloadPdf": {
+    "description": "Tooltip for the PDF download button"
+  },
+  "articlePinned": "Pinned",
+  "@articlePinned": {
+    "description": "Label for a pinned article"
+  },
+  "settingsAccount": "Account Settings",
+  "settingsNotifications": "Notifications",
+  "settingsSecurity": "Security",
+  "settingsAbout": "About App",
+  "settingsHelp": "Help & Guides",
+  "settingsLogOut": "Log Out",
+  "guideTitle": "Guides",
+  "guideVideo": "Video Tutorials",
+  "guideSystem": "Systems",
+  "changePasswordTitle": "Change Password",
+  "currentPassword": "Current Password",
+  "newPassword": "New Password",
+  "confirmPassword": "Confirm Password",
+  "save": "Save",
+  "passwordUpdatedSuccess": "Password updated successfully",
+  "passwordMismatch": "Passwords do not match",
+  "errorWrongPassword": "Current password incorrect",
+  "helpCenterTitle": "Help Center",
+  "howCanWeHelp": "How can we help you?",
+  "faqTitle": "Frequently Asked Questions",
+  "contactSupport": "Contact Support",
+  "searchHelp": "Search help...",
+  "faqCategoryLogin": "Login Issues",
+  "faqCategoryPassword": "Password Issues",
+  "faqCategoryUpload": "File Upload",
+  "faqCategoryAccess": "Access Rights",
+  "faqCategoryGeneral": "General Questions",
+  "faqCategoryTechnical": "Technical Issues"
 }

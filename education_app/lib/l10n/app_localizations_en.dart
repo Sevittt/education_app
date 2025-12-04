@@ -962,4 +962,121 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get deleteTopicTooltip => 'Delete Topic';
+
+  @override
+  String get bottomNavKnowledge => 'Knowledge Base';
+
+  @override
+  String get knowledgeBaseTitle => 'Knowledge Base';
+
+  @override
+  String get searchPlaceholder => 'Search articles...';
+
+  @override
+  String get allCategories => 'All Categories';
+
+  @override
+  String get noArticlesFound => 'No articles found.';
+
+  @override
+  String get articleDetailTitle => 'Article Details';
+
+  @override
+  String get helpfulFeedback => 'Was this article helpful?';
+
+  @override
+  String get feedbackThanks => 'Thank you for your feedback!';
+
+  @override
+  String get shareArticle => 'Share Article';
+
+  @override
+  String get downloadPdf => 'Download PDF';
+
+  @override
+  String get articlePinned => 'Pinned';
+
+  @override
+  String get settingsAccount => 'Account Settings';
+
+  @override
+  String get settingsNotifications => 'Notifications';
+
+  @override
+  String get settingsSecurity => 'Security';
+
+  @override
+  String get settingsAbout => 'About App';
+
+  @override
+  String get settingsHelp => 'Help & Guides';
+
+  @override
+  String get settingsLogOut => 'Log Out';
+
+  @override
+  String get guideTitle => 'Guides';
+
+  @override
+  String get guideVideo => 'Video Tutorials';
+
+  @override
+  String get guideSystem => 'Systems';
+
+  @override
+  String get changePasswordTitle => 'Change Password';
+
+  @override
+  String get currentPassword => 'Current Password';
+
+  @override
+  String get newPassword => 'New Password';
+
+  @override
+  String get confirmPassword => 'Confirm Password';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get passwordUpdatedSuccess => 'Password updated successfully';
+
+  @override
+  String get passwordMismatch => 'Passwords do not match';
+
+  @override
+  String get errorWrongPassword => 'Current password incorrect';
+
+  @override
+  String get helpCenterTitle => 'Help Center';
+
+  @override
+  String get howCanWeHelp => 'How can we help you?';
+
+  @override
+  String get faqTitle => 'Frequently Asked Questions';
+
+  @override
+  String get contactSupport => 'Contact Support';
+
+  @override
+  String get searchHelp => 'Search help...';
+
+  @override
+  String get faqCategoryLogin => 'Login Issues';
+
+  @override
+  String get faqCategoryPassword => 'Password Issues';
+
+  @override
+  String get faqCategoryUpload => 'File Upload';
+
+  @override
+  String get faqCategoryAccess => 'Access Rights';
+
+  @override
+  String get faqCategoryGeneral => 'General Questions';
+
+  @override
+  String get faqCategoryTechnical => 'Technical Issues';
 }
