@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/knowledge_article.dart';
 import '../../services/knowledge_base_service.dart';
 
@@ -37,9 +38,9 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
     _tagsController = TextEditingController(text: widget.article?.tags.join(', ') ?? '');
     _selectedCategory = widget.article?.category ?? ArticleCategory.general;
     _pdfUrl = widget.article?.pdfUrl;
-    if (_pdfUrl != null) {
-      _pdfFileName = 'Mavjud PDF fayl';
-    }
+    // Note: We can't access l10n here in initState easily without context, 
+    // but we can set _pdfFileName in build or use a boolean flag.
+    // For simplicity, we'll handle the display logic in build.
   }
 
   @override
@@ -68,6 +69,7 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _isLoading = true);
+    final l10n = AppLocalizations.of(context)!;
 
     try {
       String? pdfUrl = _pdfUrl;
@@ -114,13 +116,13 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
       if (mounted) {
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Maqola saqlandi')),
+          SnackBar(content: Text(l10n.articleSavedSuccess)),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Xatolik: $e')),
+          SnackBar(content: Text('${l10n.errorPrefix}$e')),
         );
       }
     } finally {
@@ -132,13 +134,24 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
+    // Determine PDF file name display
+    String pdfDisplayText = l10n.noPdfSelected;
+    if (_pdfFileName != null) {
+      pdfDisplayText = _pdfFileName!;
+    } else if (_pdfUrl != null) {
+      pdfDisplayText = l10n.existingPdfFile;
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.article == null ? 'Yangi Maqola' : 'Maqolani Tahrirlash'),
+        title: Text(widget.article == null ? l10n.addArticleTitle : l10n.editArticleTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.save),
             onPressed: _isLoading ? null : _saveArticle,
+            tooltip: l10n.save,
           ),
         ],
       ),
@@ -153,19 +166,19 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
                   children: [
                     TextFormField(
                       controller: _titleController,
-                      decoration: const InputDecoration(
-                        labelText: 'Sarlavha',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.titleLabel,
+                        border: const OutlineInputBorder(),
                       ),
                       validator: (value) =>
-                          value?.isEmpty ?? true ? 'Sarlavha kiritilishi shart' : null,
+                          value?.isEmpty ?? true ? l10n.titleRequired : null,
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<ArticleCategory>(
                       initialValue: _selectedCategory,
-                      decoration: const InputDecoration(
-                        labelText: 'Kategoriya',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.categoryLabel,
+                        border: const OutlineInputBorder(),
                       ),
                       items: ArticleCategory.values.map((category) {
                         return DropdownMenuItem(
@@ -182,33 +195,33 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _contentController,
-                      decoration: const InputDecoration(
-                        labelText: 'Mazmuni (Markdown)',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.contentLabel,
+                        border: const OutlineInputBorder(),
                         alignLabelWithHint: true,
                       ),
                       maxLines: 10,
                       validator: (value) =>
-                          value?.isEmpty ?? true ? 'Mazmun kiritilishi shart' : null,
+                          value?.isEmpty ?? true ? l10n.contentRequired : null,
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _tagsController,
-                      decoration: const InputDecoration(
-                        labelText: 'Teglar (vergul bilan ajrating)',
-                        border: OutlineInputBorder(),
-                        hintText: 'masalan: sud, qonun, kodeks',
+                      decoration: InputDecoration(
+                        labelText: l10n.tagsLabel,
+                        border: const OutlineInputBorder(),
+                        hintText: l10n.tagsHint,
                       ),
                     ),
                     const SizedBox(height: 16),
                     Card(
                       child: ListTile(
                         leading: const Icon(Icons.picture_as_pdf, color: Colors.red),
-                        title: Text(_pdfFileName ?? 'PDF fayl tanlanmagan'),
+                        title: Text(pdfDisplayText),
                         trailing: IconButton(
                           icon: const Icon(Icons.upload_file),
                           onPressed: _pickPdf,
-                          tooltip: 'PDF yuklash',
+                          tooltip: l10n.uploadPdfTooltip,
                         ),
                       ),
                     ),
@@ -216,7 +229,7 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
                       Padding(
                         padding: const EdgeInsets.only(top: 8),
                         child: Text(
-                          'Joriy fayl: $_pdfUrl',
+                          l10n.currentFileLabel(_pdfUrl!),
                           style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
                           overflow: TextOverflow.ellipsis,
                         ),

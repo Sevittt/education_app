@@ -614,7 +614,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get adminPanelTitle => 'Admin paneli';
 
   @override
-  String get manageNewsTitle => 'Yangiliklarni boshqarish';
+  String get manageNewsTitle => 'Yangiliklar Boshqaruvi';
 
   @override
   String get manageNewsSubtitle => 'Yangilik maqolalarini qo\'shish, tahrirlash yoki o\'chirish';
@@ -648,6 +648,54 @@ class AppLocalizationsUz extends AppLocalizations {
   String failedToDeleteNews(String error, Object newsTitle) {
     return '\"$newsTitle\" o\'chirilmadi: $error';
   }
+
+  @override
+  String get faqTitle => 'Ko\'p so\'raladigan savollar';
+
+  @override
+  String get searchHelp => 'Yordam izlash...';
+
+  @override
+  String get allCategories => 'Barcha toifalar';
+
+  @override
+  String get helpfulFeedback => 'Bu foydali bo\'ldimi?';
+
+  @override
+  String get noArticlesFound => 'Savollar topilmadi';
+
+  @override
+  String get settingsNotifications => 'Xabarnomalar';
+
+  @override
+  String get changePasswordTitle => 'Parolni o\'zgartirish';
+
+  @override
+  String get helpCenterTitle => 'Yordam markazi';
+
+  @override
+  String get settingsAbout => 'Ilova haqida';
+
+  @override
+  String get passwordUpdatedSuccess => 'Parol muvaffaqiyatli yangilandi';
+
+  @override
+  String get errorWrongPassword => 'Joriy parol noto\'g\'ri';
+
+  @override
+  String get currentPassword => 'Joriy parol';
+
+  @override
+  String get newPassword => 'Yangi parol';
+
+  @override
+  String get confirmPassword => 'Parolni tasdiqlang';
+
+  @override
+  String get passwordMismatch => 'Parollar mos kelmadi';
+
+  @override
+  String get save => 'Saqlash';
 
   @override
   String get addNewsTooltip => 'Yangi maqola qo\'shish';
@@ -901,19 +949,19 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get manageArticlesTitle => 'Maqolalar';
+  String get manageArticlesTitle => 'Maqolalar Boshqaruvi';
 
   @override
   String get manageArticlesSubtitle => 'Bilimlar bazasini boshqarish';
 
   @override
-  String get manageVideosTitle => 'Videolar';
+  String get manageVideosTitle => 'Video Darsliklar Boshqaruvi';
 
   @override
   String get manageVideosSubtitle => 'Video darsliklarni boshqarish';
 
   @override
-  String get manageSystemsTitle => 'Tizimlar';
+  String get manageSystemsTitle => 'Tizimlar Boshqaruvi';
 
   @override
   String get manageSystemsSubtitle => 'Tizimlar ma\'lumotnomasini boshqarish';
@@ -964,119 +1012,321 @@ class AppLocalizationsUz extends AppLocalizations {
   String get deleteTopicTooltip => 'Mavzuni o\'chirish';
 
   @override
-  String get bottomNavKnowledge => 'Bilimlar Bazasi';
+  String get faqCategoryLogin => 'Kirish muammolari';
 
   @override
-  String get knowledgeBaseTitle => 'Bilimlar Bazasi';
+  String get faqCategoryPassword => 'Parol muammolari';
 
   @override
-  String get searchPlaceholder => 'Maqolalarni qidiring...';
+  String get faqCategoryUpload => 'Fayl yuklash';
 
   @override
-  String get allCategories => 'Barcha Kategoriyalar';
+  String get faqCategoryAccess => 'Kirish huquqlari';
 
   @override
-  String get noArticlesFound => 'Maqolalar topilmadi.';
+  String get faqCategoryGeneral => 'Umumiy savollar';
 
   @override
-  String get articleDetailTitle => 'Maqola Tafsilotlari';
+  String get faqCategoryTechnical => 'Texnik muammolar';
 
   @override
-  String get helpfulFeedback => 'Ushbu maqola foydali bo\'ldimi?';
+  String confirmDeleteArticleMessage(Object articleTitle) {
+    return 'Siz \"$articleTitle\" maqolasini o\'chirib tashlamoqchimisiz?';
+  }
 
   @override
-  String get feedbackThanks => 'Fikringiz uchun tashakkur!';
+  String get addArticleTitle => 'Yangi Maqola';
 
   @override
-  String get shareArticle => 'Maqolani ulashish';
+  String get editArticleTitle => 'Maqolani Tahrirlash';
 
   @override
-  String get downloadPdf => 'PDF yuklab olish';
+  String get categoryLabel => 'Kategoriya';
 
   @override
-  String get articlePinned => 'Muhim';
+  String get contentLabel => 'Mazmuni (Markdown)';
 
   @override
-  String get settingsAccount => 'Hisob sozlamalari';
+  String get tagsLabel => 'Teglar (vergul bilan ajrating)';
 
   @override
-  String get settingsNotifications => 'Xabarnomalar';
+  String get tagsHint => 'masalan: sud, qonun, kodeks';
 
   @override
-  String get settingsSecurity => 'Xavfsizlik';
+  String get noPdfSelected => 'PDF fayl tanlanmagan';
 
   @override
-  String get settingsAbout => 'Ilova haqida';
+  String get uploadPdfTooltip => 'PDF yuklash';
 
   @override
-  String get settingsHelp => 'Yordam va Qo\'llanmalar';
+  String currentFileLabel(Object url) {
+    return 'Joriy fayl: $url';
+  }
 
   @override
-  String get settingsLogOut => 'Chiqish';
+  String get existingPdfFile => 'Mavjud PDF fayl';
 
   @override
-  String get guideTitle => 'Qo\'llanmalar';
+  String get articleSavedSuccess => 'Maqola saqlandi';
 
   @override
-  String get guideVideo => 'Video Darsliklar';
+  String get titleRequired => 'Sarlavha kiritilishi shart';
 
   @override
-  String get guideSystem => 'Tizimlar';
+  String get contentRequired => 'Mazmun kiritilishi shart';
 
   @override
-  String get changePasswordTitle => 'Parolni o\'zgartirish';
+  String confirmDeleteVideoMessage(Object videoTitle) {
+    return 'Siz \"$videoTitle\" videosini o\'chirib tashlamoqchimisiz?';
+  }
 
   @override
-  String get currentPassword => 'Joriy parol';
+  String get videoDeletedSuccess => 'Video o\'chirildi';
 
   @override
-  String get newPassword => 'Yangi parol';
+  String get noVideosFound => 'Videolar yo\'q';
 
   @override
-  String get confirmPassword => 'Parolni tasdiqlang';
+  String get addVideoTitle => 'Yangi Video';
 
   @override
-  String get save => 'Saqlash';
+  String get editVideoTitle => 'Videoni Tahrirlash';
 
   @override
-  String get passwordUpdatedSuccess => 'Parol muvaffaqiyatli o\'zgartirildi';
+  String get videoSavedSuccess => 'Video saqlandi';
 
   @override
-  String get passwordMismatch => 'Parollar mos kelmadi';
+  String get youtubeIdLabel => 'YouTube ID';
 
   @override
-  String get errorWrongPassword => 'Joriy parol noto\'g\'ri';
+  String get youtubeIdHint => 'Masalan: dQw4w9WgXcQ';
 
   @override
-  String get helpCenterTitle => 'Yordam Markazi';
+  String get youtubeIdRequired => 'YouTube ID kiritilishi shart';
 
   @override
-  String get howCanWeHelp => 'Sizga qanday yordam bera olamiz?';
+  String get systemOptionalLabel => 'Tizim (ixtiyoriy)';
 
   @override
-  String get faqTitle => 'Ko\'p so\'raladigan savollar';
+  String get notSelectedLabel => 'Tanlanmagan';
 
   @override
-  String get contactSupport => 'Qo\'llab-quvvatlash';
+  String get durationLabel => 'Davomiyligi (soniya)';
 
   @override
-  String get searchHelp => 'Yordam qidirish...';
+  String get durationHint => 'Masalan: 600';
 
   @override
-  String get faqCategoryLogin => 'Kirish Muammolari';
+  String get durationRequired => 'Davomiylik kiritilishi shart';
 
   @override
-  String get faqCategoryPassword => 'Parol Muammolari';
+  String get videoTagsHint => 'masalan: login, xatolik, sozlash';
 
   @override
-  String get faqCategoryUpload => 'Fayl Yuklash';
+  String get descriptionRequired => 'Tavsif kiritilishi shart';
 
   @override
-  String get faqCategoryAccess => 'Ruxsat';
+  String confirmDeleteSystemMessage(Object systemName) {
+    return 'Siz \"$systemName\" tizimini o\'chirib tashlamoqchimisiz?';
+  }
 
   @override
-  String get faqCategoryGeneral => 'Umumiy';
+  String get systemDeletedSuccess => 'Tizim o\'chirildi';
 
   @override
-  String get faqCategoryTechnical => 'Texnik';
+  String get noSystemsFound => 'Tizimlar yo\'q';
+
+  @override
+  String get addSystemTitle => 'Yangi Tizim';
+
+  @override
+  String get editSystemTitle => 'Tizimni Tahrirlash';
+
+  @override
+  String get systemSavedSuccess => 'Tizim saqlandi';
+
+  @override
+  String get shortNameLabel => 'Qisqa nomi';
+
+  @override
+  String get shortNameHint => 'Masalan: e-SUD';
+
+  @override
+  String get nameRequired => 'Nom kiritilishi shart';
+
+  @override
+  String get fullNameLabel => 'To\'liq nomi';
+
+  @override
+  String get fullNameRequired => 'To\'liq nom kiritilishi shart';
+
+  @override
+  String get websiteUrlLabel => 'Veb-sayt manzili';
+
+  @override
+  String get urlRequired => 'URL kiritilishi shart';
+
+  @override
+  String get logoUrlLabel => 'Logo URL';
+
+  @override
+  String get logoUrlRequired => 'Logo URL kiritilishi shart';
+
+  @override
+  String get statusLabel => 'Holati';
+
+  @override
+  String get loginGuideIdLabel => 'Kirish qo\'llanmasi ID (ixtiyoriy)';
+
+  @override
+  String get videoGuideIdLabel => 'Video qo\'llanma ID (ixtiyoriy)';
+
+  @override
+  String confirmDeleteFaqMessage(Object question) {
+    return 'Siz \"$question\" savolini o\'chirib tashlamoqchimisiz?';
+  }
+
+  @override
+  String get faqDeletedSuccess => 'Savol o\'chirildi';
+
+  @override
+  String get noFaqsFound => 'Savollar yo\'q';
+
+  @override
+  String get addFaqTitle => 'Yangi Savol';
+
+  @override
+  String get editFaqTitle => 'Savolni Tahrirlash';
+
+  @override
+  String get faqSavedSuccess => 'Savol saqlandi';
+
+  @override
+  String get questionLabel => 'Savol';
+
+  @override
+  String get questionRequired => 'Savol kiritilishi shart';
+
+  @override
+  String get answerLabel => 'Javob (Markdown)';
+
+  @override
+  String get answerRequired => 'Javob kiritilishi shart';
+
+  @override
+  String get add => 'Qo\'shish';
+
+  @override
+  String get titleLabel => 'Sarlavha';
+
+  @override
+  String get edit => 'Tahrirlash';
+
+  @override
+  String get delete => 'O\'chirish';
+
+  @override
+  String get cancel => 'Bekor qilish';
+
+  @override
+  String get search => 'Qidirish...';
+
+  @override
+  String get fieldRequired => 'Maydon to\'ldirilishi shart';
+
+  @override
+  String get confirmDelete => 'Haqiqatan ham o\'chirmoqchimisiz?';
+
+  @override
+  String get successSaved => 'Muvaffaqiyatli saqlandi';
+
+  @override
+  String get successDeleted => 'Muvaffaqiyatli o\'chirildi';
+
+  @override
+  String get notificationManagementTitle => 'Xabarnomalar Boshqaruvi';
+
+  @override
+  String get notificationHistoryTitle => 'Xabarnomalar Tarixi';
+
+  @override
+  String get notificationHistoryPlaceholder => 'Bu yerda yuborilgan xabarnomalar tarixi ko\'rinadi (tez orada).';
+
+  @override
+  String get sendNewNotificationButton => 'Yangi Xabarnoma Yuborish';
+
+  @override
+  String get sendNotificationTitle => 'Xabarnoma Yuborish';
+
+  @override
+  String get notificationSentSuccess => 'Xabarnoma yuborildi';
+
+  @override
+  String get notificationTitleLabel => 'Sarlavha';
+
+  @override
+  String get notificationTitleRequired => 'Sarlavha kiritilishi shart';
+
+  @override
+  String get notificationBodyLabel => 'Xabar matni';
+
+  @override
+  String get notificationBodyRequired => 'Matn kiritilishi shart';
+
+  @override
+  String get notificationTypeLabel => 'Xabarnoma turi';
+
+  @override
+  String get targetAudienceLabel => 'Auditoriya';
+
+  @override
+  String get resourceTabArticles => 'Maqolalar';
+
+  @override
+  String get resourceTabVideos => 'Videolar';
+
+  @override
+  String get resourceTabFiles => 'Fayllar';
+
+  @override
+  String get filesTabTitle => 'Fayllar';
+
+  @override
+  String get systemsDirectoryTitle => 'Sud Axborot Tizimlari';
+
+  @override
+  String get bookmarkSaveTooltip => 'Saqlash';
+
+  @override
+  String get bookmarkRemoveTooltip => 'Olib tashlash';
+
+  @override
+  String get resourceTypeOther => 'Boshqalar';
+
+  @override
+  String get openFile => 'Faylni ochish';
+
+  @override
+  String get fileSize => 'Fayl hajmi';
+
+  @override
+  String get selectFile => 'Fayl tanlang';
+
+  @override
+  String get upload => 'Yuklash';
+
+  @override
+  String get processing => 'Bajarilmoqda...';
+
+  @override
+  String get urlLabel => 'Havola (URL)';
+
+  @override
+  String get resourceTypePDF => 'PDF Qo\'llanma';
+
+  @override
+  String get resourceTypeVideo => 'Video Darslik';
+
+  @override
+  String get resourceTypeLink => 'Veb Havola';
 }

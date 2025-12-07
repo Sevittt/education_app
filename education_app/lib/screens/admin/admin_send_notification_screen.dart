@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../models/app_notification.dart';
 import '../../services/notification_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 
 class AdminSendNotificationScreen extends StatefulWidget {
   const AdminSendNotificationScreen({super.key});
@@ -39,6 +40,7 @@ class _AdminSendNotificationScreenState extends State<AdminSendNotificationScree
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _isLoading = true);
+    final l10n = AppLocalizations.of(context)!;
 
     try {
       final notification = AppNotification(
@@ -56,13 +58,13 @@ class _AdminSendNotificationScreenState extends State<AdminSendNotificationScree
       if (mounted) {
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Xabarnoma yuborildi')),
+          SnackBar(content: Text(l10n.notificationSentSuccess)),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Xatolik: $e')),
+          SnackBar(content: Text('${l10n.errorPrefix}$e')),
         );
       }
     } finally {
@@ -74,9 +76,10 @@ class _AdminSendNotificationScreenState extends State<AdminSendNotificationScree
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Xabarnoma Yuborish'),
+        title: Text(l10n.sendNotificationTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.send),
@@ -95,31 +98,31 @@ class _AdminSendNotificationScreenState extends State<AdminSendNotificationScree
                   children: [
                     TextFormField(
                       controller: _titleController,
-                      decoration: const InputDecoration(
-                        labelText: 'Sarlavha',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.notificationTitleLabel,
+                        border: const OutlineInputBorder(),
                       ),
                       validator: (value) =>
-                          value?.isEmpty ?? true ? 'Sarlavha kiritilishi shart' : null,
+                          value?.isEmpty ?? true ? l10n.notificationTitleRequired : null,
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _bodyController,
-                      decoration: const InputDecoration(
-                        labelText: 'Xabar matni',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.notificationBodyLabel,
+                        border: const OutlineInputBorder(),
                         alignLabelWithHint: true,
                       ),
                       maxLines: 5,
                       validator: (value) =>
-                          value?.isEmpty ?? true ? 'Matn kiritilishi shart' : null,
+                          value?.isEmpty ?? true ? l10n.notificationBodyRequired : null,
                     ),
                     const SizedBox(height: 16),
                       DropdownButtonFormField<NotificationType>(
                       initialValue: _selectedType,
-                      decoration: const InputDecoration(
-                        labelText: 'Xabarnoma turi',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.notificationTypeLabel,
+                        border: const OutlineInputBorder(),
                       ),
                       items: NotificationType.values.map((type) {
                         return DropdownMenuItem(
@@ -136,9 +139,9 @@ class _AdminSendNotificationScreenState extends State<AdminSendNotificationScree
                     const SizedBox(height: 16),
                     DropdownButtonFormField<TargetAudience>(
                       initialValue: _selectedAudience,
-                      decoration: const InputDecoration(
-                        labelText: 'Auditoriya',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.targetAudienceLabel,
+                        border: const OutlineInputBorder(),
                       ),
                       items: TargetAudience.values.map((audience) {
                         return DropdownMenuItem(

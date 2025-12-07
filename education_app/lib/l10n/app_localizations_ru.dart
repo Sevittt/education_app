@@ -275,10 +275,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get authorLabel => 'Автор';
 
   @override
-  String get dateAddedLabel => 'Добавлен';
+  String get dateAddedLabel => 'Добавлено';
 
   @override
-  String get launchingUrlMessage => 'Запуск URL';
+  String get launchingUrlMessage => 'Запуск URL...';
 
   @override
   String get descriptionLabel => 'Описание';
@@ -288,7 +288,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String resourceUpdatedError(String error) {
-    return 'Ошибка обновления ресурса: $error';
+    return 'Ошибка при обновлении ресурса: $error';
   }
 
   @override
@@ -650,6 +650,54 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String get faqTitle => 'FAQ';
+
+  @override
+  String get searchHelp => 'Поиск справки...';
+
+  @override
+  String get allCategories => 'Все категории';
+
+  @override
+  String get helpfulFeedback => 'Была ли эта статья полезной?';
+
+  @override
+  String get noArticlesFound => 'Статьи не найдены.';
+
+  @override
+  String get settingsNotifications => 'Уведомления';
+
+  @override
+  String get changePasswordTitle => 'Изменить пароль';
+
+  @override
+  String get helpCenterTitle => 'Центр помощи';
+
+  @override
+  String get settingsAbout => 'О приложении';
+
+  @override
+  String get passwordUpdatedSuccess => 'Пароль успешно обновлен';
+
+  @override
+  String get errorWrongPassword => 'Неверный текущий пароль';
+
+  @override
+  String get currentPassword => 'Текущий пароль';
+
+  @override
+  String get newPassword => 'Новый пароль';
+
+  @override
+  String get confirmPassword => 'Подтвердите пароль';
+
+  @override
+  String get passwordMismatch => 'Пароли не совпадают';
+
+  @override
+  String get save => 'Сохранить';
+
+  @override
   String get addNewsTooltip => 'Добавить новую новостную статью';
 
   @override
@@ -964,105 +1012,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get deleteTopicTooltip => 'Удалить тему';
 
   @override
-  String get bottomNavKnowledge => 'База знаний';
-
-  @override
-  String get knowledgeBaseTitle => 'База знаний';
-
-  @override
-  String get searchPlaceholder => 'Искать статьи...';
-
-  @override
-  String get allCategories => 'Все категории';
-
-  @override
-  String get noArticlesFound => 'Статьи не найдены.';
-
-  @override
-  String get articleDetailTitle => 'Детали статьи';
-
-  @override
-  String get helpfulFeedback => 'Была ли эта статья полезной?';
-
-  @override
-  String get feedbackThanks => 'Спасибо за ваш отзыв!';
-
-  @override
-  String get shareArticle => 'Поделиться статьей';
-
-  @override
-  String get downloadPdf => 'Скачать PDF';
-
-  @override
-  String get articlePinned => 'Закреплено';
-
-  @override
-  String get settingsAccount => 'Настройки аккаунта';
-
-  @override
-  String get settingsNotifications => 'Уведомления';
-
-  @override
-  String get settingsSecurity => 'Безопасность';
-
-  @override
-  String get settingsAbout => 'О приложении';
-
-  @override
-  String get settingsHelp => 'Помощь и руководства';
-
-  @override
-  String get settingsLogOut => 'Выйти';
-
-  @override
-  String get guideTitle => 'Руководства';
-
-  @override
-  String get guideVideo => 'Видеоуроки';
-
-  @override
-  String get guideSystem => 'Системы';
-
-  @override
-  String get changePasswordTitle => 'Изменить пароль';
-
-  @override
-  String get currentPassword => 'Текущий пароль';
-
-  @override
-  String get newPassword => 'Новый пароль';
-
-  @override
-  String get confirmPassword => 'Подтвердите пароль';
-
-  @override
-  String get save => 'Сохранить';
-
-  @override
-  String get passwordUpdatedSuccess => 'Пароль успешно обновлен';
-
-  @override
-  String get passwordMismatch => 'Пароли не совпадают';
-
-  @override
-  String get errorWrongPassword => 'Неверный текущий пароль';
-
-  @override
-  String get helpCenterTitle => 'Центр помощи';
-
-  @override
-  String get howCanWeHelp => 'Как мы можем вам помочь?';
-
-  @override
-  String get faqTitle => 'Часто задаваемые вопросы';
-
-  @override
-  String get contactSupport => 'Связаться с поддержкой';
-
-  @override
-  String get searchHelp => 'Поиск помощи...';
-
-  @override
   String get faqCategoryLogin => 'Проблемы со входом';
 
   @override
@@ -1072,11 +1021,312 @@ class AppLocalizationsRu extends AppLocalizations {
   String get faqCategoryUpload => 'Загрузка файлов';
 
   @override
-  String get faqCategoryAccess => 'Доступ';
+  String get faqCategoryAccess => 'Права доступа';
 
   @override
   String get faqCategoryGeneral => 'Общие вопросы';
 
   @override
   String get faqCategoryTechnical => 'Технические проблемы';
+
+  @override
+  String confirmDeleteArticleMessage(Object articleTitle) {
+    return 'Вы уверены, что хотите удалить статью \"$articleTitle\"?';
+  }
+
+  @override
+  String get addArticleTitle => 'Новая статья';
+
+  @override
+  String get editArticleTitle => 'Редактировать статью';
+
+  @override
+  String get categoryLabel => 'Категория';
+
+  @override
+  String get contentLabel => 'Содержание (Markdown)';
+
+  @override
+  String get tagsLabel => 'Теги (через запятую)';
+
+  @override
+  String get tagsHint => 'например: суд, закон, кодекс';
+
+  @override
+  String get noPdfSelected => 'PDF файл не выбран';
+
+  @override
+  String get uploadPdfTooltip => 'Загрузить PDF';
+
+  @override
+  String currentFileLabel(Object url) {
+    return 'Текущий файл: $url';
+  }
+
+  @override
+  String get existingPdfFile => 'Существующий PDF файл';
+
+  @override
+  String get articleSavedSuccess => 'Статья сохранена';
+
+  @override
+  String get titleRequired => 'Требуется заголовок';
+
+  @override
+  String get contentRequired => 'Требуется содержание';
+
+  @override
+  String confirmDeleteVideoMessage(Object videoTitle) {
+    return 'Вы уверены, что хотите удалить видео \"$videoTitle\"?';
+  }
+
+  @override
+  String get videoDeletedSuccess => 'Видео удалено';
+
+  @override
+  String get noVideosFound => 'Видео не найдено';
+
+  @override
+  String get addVideoTitle => 'Новое видео';
+
+  @override
+  String get editVideoTitle => 'Редактировать видео';
+
+  @override
+  String get videoSavedSuccess => 'Видео сохранено';
+
+  @override
+  String get youtubeIdLabel => 'YouTube ID';
+
+  @override
+  String get youtubeIdHint => 'например: dQw4w9WgXcQ';
+
+  @override
+  String get youtubeIdRequired => 'Требуется YouTube ID';
+
+  @override
+  String get systemOptionalLabel => 'Система (необязательно)';
+
+  @override
+  String get notSelectedLabel => 'Не выбрано';
+
+  @override
+  String get durationLabel => 'Длительность (секунды)';
+
+  @override
+  String get durationHint => 'например: 600';
+
+  @override
+  String get durationRequired => 'Требуется длительность';
+
+  @override
+  String get videoTagsHint => 'например: вход, ошибка, настройки';
+
+  @override
+  String get descriptionRequired => 'Требуется описание';
+
+  @override
+  String confirmDeleteSystemMessage(Object systemName) {
+    return 'Вы уверены, что хотите удалить систему \"$systemName\"?';
+  }
+
+  @override
+  String get systemDeletedSuccess => 'Система удалена';
+
+  @override
+  String get noSystemsFound => 'Системы не найдены';
+
+  @override
+  String get addSystemTitle => 'Новая система';
+
+  @override
+  String get editSystemTitle => 'Редактировать систему';
+
+  @override
+  String get systemSavedSuccess => 'Система сохранена';
+
+  @override
+  String get shortNameLabel => 'Короткое название';
+
+  @override
+  String get shortNameHint => 'например: e-SUD';
+
+  @override
+  String get nameRequired => 'Требуется название';
+
+  @override
+  String get fullNameLabel => 'Полное название';
+
+  @override
+  String get fullNameRequired => 'Требуется полное название';
+
+  @override
+  String get websiteUrlLabel => 'URL веб-сайта';
+
+  @override
+  String get urlRequired => 'Требуется URL';
+
+  @override
+  String get logoUrlLabel => 'URL логотипа';
+
+  @override
+  String get logoUrlRequired => 'Требуется URL логотипа';
+
+  @override
+  String get statusLabel => 'Статус';
+
+  @override
+  String get loginGuideIdLabel => 'ID руководства по входу (необязательно)';
+
+  @override
+  String get videoGuideIdLabel => 'ID видеоруководства (необязательно)';
+
+  @override
+  String confirmDeleteFaqMessage(Object question) {
+    return 'Вы уверены, что хотите удалить вопрос \"$question\"?';
+  }
+
+  @override
+  String get faqDeletedSuccess => 'Вопрос удален';
+
+  @override
+  String get noFaqsFound => 'Вопросы не найдены';
+
+  @override
+  String get addFaqTitle => 'Новый вопрос';
+
+  @override
+  String get editFaqTitle => 'Редактировать вопрос';
+
+  @override
+  String get faqSavedSuccess => 'Вопрос сохранен';
+
+  @override
+  String get questionLabel => 'Вопрос';
+
+  @override
+  String get questionRequired => 'Требуется вопрос';
+
+  @override
+  String get answerLabel => 'Ответ (Markdown)';
+
+  @override
+  String get answerRequired => 'Требуется ответ';
+
+  @override
+  String get add => 'Добавить';
+
+  @override
+  String get titleLabel => 'Заголовок';
+
+  @override
+  String get edit => 'Редактировать';
+
+  @override
+  String get delete => 'Удалить';
+
+  @override
+  String get cancel => 'Отмена';
+
+  @override
+  String get search => 'Поиск...';
+
+  @override
+  String get fieldRequired => 'Поле обязательно для заполнения';
+
+  @override
+  String get confirmDelete => 'Вы уверены, что хотите удалить?';
+
+  @override
+  String get successSaved => 'Успешно сохранено';
+
+  @override
+  String get successDeleted => 'Успешно удалено';
+
+  @override
+  String get notificationManagementTitle => 'Управление уведомлениями';
+
+  @override
+  String get notificationHistoryTitle => 'История уведомлений';
+
+  @override
+  String get notificationHistoryPlaceholder => 'Здесь будет отображаться история отправленных уведомлений (скоро).';
+
+  @override
+  String get sendNewNotificationButton => 'Отправить новое уведомление';
+
+  @override
+  String get sendNotificationTitle => 'Отправить уведомление';
+
+  @override
+  String get notificationSentSuccess => 'Уведомление отправлено';
+
+  @override
+  String get notificationTitleLabel => 'Заголовок';
+
+  @override
+  String get notificationTitleRequired => 'Требуется заголовок';
+
+  @override
+  String get notificationBodyLabel => 'Текст сообщения';
+
+  @override
+  String get notificationBodyRequired => 'Требуется текст сообщения';
+
+  @override
+  String get notificationTypeLabel => 'Тип уведомления';
+
+  @override
+  String get targetAudienceLabel => 'Аудитория';
+
+  @override
+  String get resourceTabArticles => 'Статьи';
+
+  @override
+  String get resourceTabVideos => 'Видео';
+
+  @override
+  String get resourceTabFiles => 'Файлы';
+
+  @override
+  String get filesTabTitle => 'Файлы';
+
+  @override
+  String get systemsDirectoryTitle => 'Справочник Судебных Систем';
+
+  @override
+  String get bookmarkSaveTooltip => 'Сохранить';
+
+  @override
+  String get bookmarkRemoveTooltip => 'Удалить из сохраненных';
+
+  @override
+  String get resourceTypeOther => 'Другое';
+
+  @override
+  String get openFile => 'Открыть файл';
+
+  @override
+  String get fileSize => 'Размер файла';
+
+  @override
+  String get selectFile => 'Выбрать файл';
+
+  @override
+  String get upload => 'Загрузить';
+
+  @override
+  String get processing => 'Обработка...';
+
+  @override
+  String get urlLabel => 'Ссылка (URL)';
+
+  @override
+  String get resourceTypePDF => 'PDF Руководство';
+
+  @override
+  String get resourceTypeVideo => 'Видеоурок';
+
+  @override
+  String get resourceTypeLink => 'Веб-ссылка';
 }

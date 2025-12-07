@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/app_notification.dart';
 import '../../services/notification_service.dart';
 import 'admin_send_notification_screen.dart';
@@ -18,9 +19,10 @@ class _AdminNotificationManagementScreenState extends State<AdminNotificationMan
   
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Xabarnomalar Boshqaruvi'),
+        title: Text(l10n.notificationManagementTitle),
         centerTitle: true,
       ),
       body: Center(
@@ -29,17 +31,17 @@ class _AdminNotificationManagementScreenState extends State<AdminNotificationMan
           children: [
             const Icon(Icons.notifications_active, size: 80, color: Colors.blue),
             const SizedBox(height: 20),
-            const Text(
-              'Xabarnomalar Tarixi',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            Text(
+              l10n.notificationHistoryTitle,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Text(
-                'Bu yerda yuborilgan xabarnomalar tarixi ko\'rinadi (tez orada).',
+                l10n.notificationHistoryPlaceholder,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.grey),
+                style: const TextStyle(color: Colors.grey),
               ),
             ),
             const SizedBox(height: 30),
@@ -53,7 +55,7 @@ class _AdminNotificationManagementScreenState extends State<AdminNotificationMan
                 );
               },
               icon: const Icon(Icons.send),
-              label: const Text('Yangi Xabarnoma Yuborish'),
+              label: Text(l10n.sendNewNotificationButton),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
               ),

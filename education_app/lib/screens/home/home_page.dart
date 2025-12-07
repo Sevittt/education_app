@@ -15,7 +15,7 @@ import 'package:sud_qollanma/screens/home/home_dashboard_screen.dart';
 import 'package:sud_qollanma/screens/profile/profile_screen.dart';
 
 import 'package:sud_qollanma/screens/resource/resources_screen.dart';
-import 'package:sud_qollanma/screens/knowledge_base/knowledge_base_screen.dart'; // Add this import
+
 import '../../models/auth_notifier.dart';
 import '../../models/users.dart'; // Import UserRole
 import '../resource/create_resource_screen.dart';
@@ -48,7 +48,6 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _widgetOptions = <Widget>[
       HomeDashboardScreen(onTabSelected: _onItemTapped),
-      const KnowledgeBaseScreen(),
       const ResourcesScreen(),
       const CommunityScreen(),
       const ProfileScreen(),
@@ -180,7 +179,7 @@ class _HomePageState extends State<HomePage> {
       body: IndexedStack(index: _selectedIndex, children: _widgetOptions),
       // --- Add the floatingActionButton here ---
       floatingActionButton:
-          (_selectedIndex == 2 || _selectedIndex == 3) // Resources is now 2, Community is 3
+          (_selectedIndex == 1 || _selectedIndex == 2) // Resources is now 1, Community is 2
               ? _buildSpeedDial()
               : null,
       bottomNavigationBar: BottomNavigationBar(
@@ -199,21 +198,13 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              _selectedIndex == 2
-                  ? Icons.library_books
-                  : Icons.library_books_outlined,
-            ),
-            label: AppLocalizations.of(context)!.resourcesTitle,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              _selectedIndex == 3 ? Icons.people : Icons.people_outline,
+              _selectedIndex == 2 ? Icons.people : Icons.people_outline,
             ),
             label: AppLocalizations.of(context)!.bottomNavCommunity,
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              _selectedIndex == 4 ? Icons.person : Icons.person_outline,
+              _selectedIndex == 3 ? Icons.person : Icons.person_outline,
             ),
             label: AppLocalizations.of(context)!.bottomNavProfile,
           ),

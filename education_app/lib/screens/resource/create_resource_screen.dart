@@ -52,7 +52,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
       case ResourceType.edoSud:
         return 'EDO.SUD.UZ';
       case ResourceType.other:
-        return 'Boshqalar';
+        return l10n.resourceTypeOther;
     }
   }
 
@@ -73,7 +73,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
           SnackBar(
             content: Text(
               l10n?.mustBeLoggedInToCreateResource ??
-                  'You must be logged in to create a resource.',
+                  'Resurs yaratish uchun tizimga kirgan bo\'lishingiz kerak.',
             ),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
@@ -91,7 +91,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
           SnackBar(
             content: Text(
               l10n?.profileIncompleteToCreateResource ??
-                  'Your profile information is incomplete. Please update your name in your profile.',
+                  'Profilingiz ma\'lumotlari to\'liq emas.',
             ),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
@@ -130,7 +130,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              l10n?.resourceAddedSuccess ?? 'Resource added successfully!',
+              l10n?.resourceAddedSuccess ?? 'Resurs muvaffaqiyatli qo\'shildi!',
             ),
             backgroundColor: Colors.green,
           ),
@@ -143,7 +143,7 @@ class _CreateResourceScreenState extends State<CreateResourceScreen> {
           SnackBar(
             content: Text(
               l10n?.resourceAddedError(e.toString()) ??
-                  'Error adding resource: $e',
+                  'Xatolik: $e',
             ),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),

@@ -64,7 +64,7 @@ class _EditResourceScreenState extends State<EditResourceScreen> {
       case ResourceType.edoSud:
         return 'EDO.SUD.UZ';
       case ResourceType.other:
-        return 'Boshqalar';
+        return l10n.resourceTypeOther;
     }
   }
 
@@ -104,7 +104,7 @@ class _EditResourceScreenState extends State<EditResourceScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              l10n?.resourceUpdatedSuccess ?? 'Resource updated successfully!',
+              l10n?.resourceUpdatedSuccess ?? 'Resurs muvaffaqiyatli yangilandi!',
             ),
             backgroundColor: Colors.green,
           ),
@@ -117,7 +117,7 @@ class _EditResourceScreenState extends State<EditResourceScreen> {
           SnackBar(
             content: Text(
               l10n?.resourceUpdatedError(e.toString()) ??
-                  'Error updating resource: $e',
+                  'Xatolik: $e',
             ),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),

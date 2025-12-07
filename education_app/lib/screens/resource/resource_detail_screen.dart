@@ -268,7 +268,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
                   isBookmarked ? Icons.bookmark : Icons.bookmark_border,
                   color: isBookmarked ? Theme.of(context).colorScheme.primary : null,
                 ),
-                tooltip: isBookmarked ? "Olib tashlash" : "Saqlash",
+                tooltip: isBookmarked ? l10n.bookmarkRemoveTooltip : l10n.bookmarkSaveTooltip,
                 onPressed: () async {
                   await resourceService.toggleBookmark(widget.resource.id);
                   setState(() {}); // UI ni yangilash

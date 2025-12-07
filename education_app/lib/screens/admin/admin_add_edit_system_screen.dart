@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/sud_system.dart';
 import '../../services/systems_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -59,6 +60,7 @@ class _AdminAddEditSystemScreenState extends State<AdminAddEditSystemScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _isLoading = true);
+    final l10n = AppLocalizations.of(context)!;
 
     try {
       final system = SudSystem(
@@ -88,13 +90,13 @@ class _AdminAddEditSystemScreenState extends State<AdminAddEditSystemScreen> {
       if (mounted) {
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Tizim saqlandi')),
+          SnackBar(content: Text(l10n.systemSavedSuccess)),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Xatolik: $e')),
+          SnackBar(content: Text('${l10n.errorPrefix}$e')),
         );
       }
     } finally {
@@ -106,13 +108,15 @@ class _AdminAddEditSystemScreenState extends State<AdminAddEditSystemScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.system == null ? 'Yangi Tizim' : 'Tizimni Tahrirlash'),
+        title: Text(widget.system == null ? l10n.addSystemTitle : l10n.editSystemTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.save),
             onPressed: _isLoading ? null : _saveSystem,
+            tooltip: l10n.save,
           ),
         ],
       ),
@@ -127,51 +131,51 @@ class _AdminAddEditSystemScreenState extends State<AdminAddEditSystemScreen> {
                   children: [
                     TextFormField(
                       controller: _nameController,
-                      decoration: const InputDecoration(
-                        labelText: 'Qisqa nomi',
-                        border: OutlineInputBorder(),
-                        hintText: 'e-SUD',
+                      decoration: InputDecoration(
+                        labelText: l10n.shortNameLabel,
+                        border: const OutlineInputBorder(),
+                        hintText: l10n.shortNameHint,
                       ),
                       validator: (value) =>
-                          value?.isEmpty ?? true ? 'Nom kiritilishi shart' : null,
+                          value?.isEmpty ?? true ? l10n.nameRequired : null,
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _fullNameController,
-                      decoration: const InputDecoration(
-                        labelText: 'To\'liq nomi',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.fullNameLabel,
+                        border: const OutlineInputBorder(),
                       ),
                       validator: (value) =>
-                          value?.isEmpty ?? true ? 'To\'liq nom kiritilishi shart' : null,
+                          value?.isEmpty ?? true ? l10n.fullNameRequired : null,
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _urlController,
-                      decoration: const InputDecoration(
-                        labelText: 'Veb-sayt manzili',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.websiteUrlLabel,
+                        border: const OutlineInputBorder(),
                         hintText: 'https://esud.uz',
                       ),
                       validator: (value) =>
-                          value?.isEmpty ?? true ? 'URL kiritilishi shart' : null,
+                          value?.isEmpty ?? true ? l10n.urlRequired : null,
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _logoUrlController,
-                      decoration: const InputDecoration(
-                        labelText: 'Logo URL',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.logoUrlLabel,
+                        border: const OutlineInputBorder(),
                       ),
                       validator: (value) =>
-                          value?.isEmpty ?? true ? 'Logo URL kiritilishi shart' : null,
+                          value?.isEmpty ?? true ? l10n.logoUrlRequired : null,
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<SystemCategory>(
                       initialValue: _selectedCategory,
-                      decoration: const InputDecoration(
-                        labelText: 'Kategoriya',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.categoryLabel,
+                        border: const OutlineInputBorder(),
                       ),
                       items: SystemCategory.values.map((category) {
                         return DropdownMenuItem(
@@ -188,9 +192,9 @@ class _AdminAddEditSystemScreenState extends State<AdminAddEditSystemScreen> {
                     const SizedBox(height: 16),
                     DropdownButtonFormField<SystemStatus>(
                       initialValue: _selectedStatus,
-                      decoration: const InputDecoration(
-                        labelText: 'Holati',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.statusLabel,
+                        border: const OutlineInputBorder(),
                       ),
                       items: SystemStatus.values.map((status) {
                         return DropdownMenuItem(
@@ -207,29 +211,29 @@ class _AdminAddEditSystemScreenState extends State<AdminAddEditSystemScreen> {
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _descriptionController,
-                      decoration: const InputDecoration(
-                        labelText: 'Tavsif',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.descriptionLabel,
+                        border: const OutlineInputBorder(),
                         alignLabelWithHint: true,
                       ),
                       maxLines: 5,
                       validator: (value) =>
-                          value?.isEmpty ?? true ? 'Tavsif kiritilishi shart' : null,
+                          value?.isEmpty ?? true ? l10n.descriptionRequired : null,
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _loginGuideIdController,
-                      decoration: const InputDecoration(
-                        labelText: 'Kirish qo\'llanmasi ID (ixtiyoriy)',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.loginGuideIdLabel,
+                        border: const OutlineInputBorder(),
                       ),
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _videoGuideIdController,
-                      decoration: const InputDecoration(
-                        labelText: 'Video qo\'llanma ID (ixtiyoriy)',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.videoGuideIdLabel,
+                        border: const OutlineInputBorder(),
                       ),
                     ),
                   ],

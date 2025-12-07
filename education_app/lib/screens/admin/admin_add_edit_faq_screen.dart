@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/faq.dart';
 import '../../services/faq_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -41,6 +42,7 @@ class _AdminAddEditFAQScreenState extends State<AdminAddEditFAQScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _isLoading = true);
+    final l10n = AppLocalizations.of(context)!;
 
     try {
       if (widget.faq == null) {
@@ -68,13 +70,13 @@ class _AdminAddEditFAQScreenState extends State<AdminAddEditFAQScreen> {
       if (mounted) {
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Savol saqlandi')),
+          SnackBar(content: Text(l10n.faqSavedSuccess)),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Xatolik: $e')),
+          SnackBar(content: Text('${l10n.errorPrefix}$e')),
         );
       }
     } finally {
@@ -86,13 +88,15 @@ class _AdminAddEditFAQScreenState extends State<AdminAddEditFAQScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.faq == null ? 'Yangi Savol' : 'Savolni Tahrirlash'),
+        title: Text(widget.faq == null ? l10n.addFaqTitle : l10n.editFaqTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.save),
             onPressed: _isLoading ? null : _saveFAQ,
+            tooltip: l10n.save,
           ),
         ],
       ),
@@ -107,9 +111,9 @@ class _AdminAddEditFAQScreenState extends State<AdminAddEditFAQScreen> {
                   children: [
                     DropdownButtonFormField<FAQCategory>(
                       initialValue: _selectedCategory,
-                      decoration: const InputDecoration(
-                        labelText: 'Kategoriya',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.categoryLabel,
+                        border: const OutlineInputBorder(),
                       ),
                       items: FAQCategory.values.map((category) {
                         return DropdownMenuItem(
@@ -126,25 +130,25 @@ class _AdminAddEditFAQScreenState extends State<AdminAddEditFAQScreen> {
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _questionController,
-                      decoration: const InputDecoration(
-                        labelText: 'Savol',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.questionLabel,
+                        border: const OutlineInputBorder(),
                       ),
                       maxLines: 2,
                       validator: (value) =>
-                          value?.isEmpty ?? true ? 'Savol kiritilishi shart' : null,
+                          value?.isEmpty ?? true ? l10n.questionRequired : null,
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _answerController,
-                      decoration: const InputDecoration(
-                        labelText: 'Javob (Markdown)',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.answerLabel,
+                        border: const OutlineInputBorder(),
                         alignLabelWithHint: true,
                       ),
                       maxLines: 10,
                       validator: (value) =>
-                          value?.isEmpty ?? true ? 'Javob kiritilishi shart' : null,
+                          value?.isEmpty ?? true ? l10n.answerRequired : null,
                     ),
                   ],
                 ),

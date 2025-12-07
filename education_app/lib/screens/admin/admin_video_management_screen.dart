@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/video_tutorial.dart';
 import '../../services/video_tutorial_service.dart';
 import 'admin_add_edit_video_screen.dart';
@@ -14,32 +15,31 @@ class _AdminVideoManagementScreenState extends State<AdminVideoManagementScreen>
   final VideoTutorialService _service = VideoTutorialService();
 
   Future<void> _deleteVideo(VideoTutorial video) async {
+    final l10n = AppLocalizations.of(context)!;
     final bool? confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Videoni o\'chirish'),
-        content: Text('Siz "${video.title}" videosini o\'chirmoqchimisiz?'),
+        title: Text(l10n.confirmDeleteTitle),
+        content: Text(l10n.confirmDeleteVideoMessage(video.title)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Bekor qilish'),
+            child: Text(l10n.cancelButton),
           ),
           TextButton(
             style: TextButton.styleFrom(foregroundColor: Colors.red),
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('O\'chirish'),
+            child: Text(l10n.deleteButtonText),
           ),
         ],
       ),
     );
 
     if (confirmed == true && mounted) {
-      // Note: VideoTutorialService needs a delete method. 
-      // Assuming it exists or I will add it.
       await _service.deleteVideo(video.id);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Video o\'chirildi')),
+          SnackBar(content: Text(l10n.videoDeletedSuccess)),
         );
       }
     }
@@ -47,16 +47,17 @@ class _AdminVideoManagementScreenState extends State<AdminVideoManagementScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Videolarni Boshqarish'),
+        title: Text(l10n.manageVideosTitle),
         centerTitle: true,
       ),
       body: StreamBuilder<List<VideoTutorial>>(
-        stream: _service.getAllVideos(), // Assuming this method exists to get all videos
+        stream: _service.getAllVideos(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Center(child: Text('Xatolik: ${snapshot.error}'));
+            return Center(child: Text('${l10n.errorPrefix}${snapshot.error}'));
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -66,7 +67,7 @@ class _AdminVideoManagementScreenState extends State<AdminVideoManagementScreen>
           final videos = snapshot.data ?? [];
 
           if (videos.isEmpty) {
-            return const Center(child: Text('Videolar yo\'q'));
+            return Center(child: Text(l10n.noVideosFound));
           }
 
           return ListView.builder(
@@ -103,10 +104,12 @@ class _AdminVideoManagementScreenState extends State<AdminVideoManagementScreen>
                             ),
                           );
                         },
+                        tooltip: l10n.editResourceTooltip,
                       ),
                       IconButton(
                         icon: const Icon(Icons.delete, color: Colors.red),
                         onPressed: () => _deleteVideo(video),
+                        tooltip: l10n.deleteResourceTooltip,
                       ),
                     ],
                   ),
@@ -126,6 +129,7 @@ class _AdminVideoManagementScreenState extends State<AdminVideoManagementScreen>
             ),
           );
         },
+        tooltip: l10n.add,
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/video_tutorial.dart';
 import '../../models/sud_system.dart';
 import '../../services/video_tutorial_service.dart';
@@ -67,6 +68,7 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _isLoading = true);
+    final l10n = AppLocalizations.of(context)!;
 
     try {
       final user = FirebaseAuth.instance.currentUser;
@@ -107,13 +109,13 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
       if (mounted) {
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Video saqlandi')),
+          SnackBar(content: Text(l10n.videoSavedSuccess)),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Xatolik: $e')),
+          SnackBar(content: Text('${l10n.errorPrefix}$e')),
         );
       }
     } finally {
@@ -125,13 +127,15 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.video == null ? 'Yangi Video' : 'Videoni Tahrirlash'),
+        title: Text(widget.video == null ? l10n.addVideoTitle : l10n.editVideoTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.save),
             onPressed: _isLoading ? null : _saveVideo,
+            tooltip: l10n.save,
           ),
         ],
       ),
@@ -146,30 +150,30 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
                   children: [
                     TextFormField(
                       controller: _titleController,
-                      decoration: const InputDecoration(
-                        labelText: 'Sarlavha',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.titleLabel,
+                        border: const OutlineInputBorder(),
                       ),
                       validator: (value) =>
-                          value?.isEmpty ?? true ? 'Sarlavha kiritilishi shart' : null,
+                          value?.isEmpty ?? true ? l10n.titleRequired : null,
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _youtubeIdController,
-                      decoration: const InputDecoration(
-                        labelText: 'YouTube ID',
-                        border: OutlineInputBorder(),
-                        hintText: 'Masalan: dQw4w9WgXcQ',
+                      decoration: InputDecoration(
+                        labelText: l10n.youtubeIdLabel,
+                        border: const OutlineInputBorder(),
+                        hintText: l10n.youtubeIdHint,
                       ),
                       validator: (value) =>
-                          value?.isEmpty ?? true ? 'YouTube ID kiritilishi shart' : null,
+                          value?.isEmpty ?? true ? l10n.youtubeIdRequired : null,
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<VideoCategory>(
                       initialValue: _selectedCategory,
-                      decoration: const InputDecoration(
-                        labelText: 'Kategoriya',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.categoryLabel,
+                        border: const OutlineInputBorder(),
                       ),
                       items: VideoCategory.values.map((category) {
                         return DropdownMenuItem(
@@ -186,14 +190,14 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
                     const SizedBox(height: 16),
                     DropdownButtonFormField<String>(
                       initialValue: _selectedSystemId,
-                      decoration: const InputDecoration(
-                        labelText: 'Tizim (ixtiyoriy)',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.systemOptionalLabel,
+                        border: const OutlineInputBorder(),
                       ),
                       items: [
-                        const DropdownMenuItem<String>(
+                        DropdownMenuItem<String>(
                           value: null,
-                          child: Text('Tanlanmagan'),
+                          child: Text(l10n.notSelectedLabel),
                         ),
                         ..._systems.map((system) {
                           return DropdownMenuItem(
@@ -209,35 +213,35 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _durationController,
-                      decoration: const InputDecoration(
-                        labelText: 'Davomiyligi (soniya)',
-                        border: OutlineInputBorder(),
-                        hintText: 'Masalan: 600',
+                      decoration: InputDecoration(
+                        labelText: l10n.durationLabel,
+                        border: const OutlineInputBorder(),
+                        hintText: l10n.durationHint,
                       ),
                       keyboardType: TextInputType.number,
                       validator: (value) =>
-                          value?.isEmpty ?? true ? 'Davomiylik kiritilishi shart' : null,
+                          value?.isEmpty ?? true ? l10n.durationRequired : null,
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _tagsController,
-                      decoration: const InputDecoration(
-                        labelText: 'Teglar (vergul bilan ajrating)',
-                        border: OutlineInputBorder(),
-                        hintText: 'masalan: login, xatolik, sozlash',
+                      decoration: InputDecoration(
+                        labelText: l10n.tagsLabel,
+                        border: const OutlineInputBorder(),
+                        hintText: l10n.videoTagsHint,
                       ),
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: _descriptionController,
-                      decoration: const InputDecoration(
-                        labelText: 'Tavsif',
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: l10n.descriptionLabel,
+                        border: const OutlineInputBorder(),
                         alignLabelWithHint: true,
                       ),
                       maxLines: 5,
                       validator: (value) =>
-                          value?.isEmpty ?? true ? 'Tavsif kiritilishi shart' : null,
+                          value?.isEmpty ?? true ? l10n.descriptionRequired : null,
                     ),
                   ],
                 ),

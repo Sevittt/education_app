@@ -1,311 +1,63 @@
-// lib/screens/resource/resources_screen.dart
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
-import 'resource_detail_screen.dart';
-import 'video_tutorials_screen.dart';
 import '../systems/systems_directory_screen.dart';
 import '../faq/faq_list_screen.dart';
-import '../../models/resource.dart';
-import '../../services/resource_service.dart';
+import 'tabs/articles_tab.dart';
+import 'tabs/videos_tab.dart';
+import 'tabs/files_tab.dart';
 
-class ResourcesScreen extends StatefulWidget {
+class ResourcesScreen extends StatelessWidget {
   const ResourcesScreen({super.key});
 
   @override
-  State<ResourcesScreen> createState() => _ResourcesScreenState();
-}
-
-class _ResourcesScreenState extends State<ResourcesScreen> {
-  final TextEditingController _searchController = TextEditingController();
-  ResourceType? _selectedResourceType;
-  bool _showOnlyBookmarked = false; // --- ADDED STATE VARIABLE ---
-
-  @override
-  void initState() {
-    super.initState();
-    _searchController.addListener(() {
-      setState(() {});
-    });
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  // The onRefresh callback for RefreshIndicator
-  Future<void> _handleRefresh() async {
-    // For Firestore streams, the stream is already live.
-    // This callback mainly provides visual feedback.
-    // You could add a slight delay to make the indicator visible for a moment.
-    await Future.delayed(const Duration(milliseconds: 500)); // Optional delay
-
-    // If you had a way to force re-fetch or clear a cache in your service, you'd call it here.
-    // For now, just ensuring the UI can rebuild if needed.
-    if (mounted) {
-      setState(() {
-        // This setState call might not be strictly necessary if the StreamBuilder
-        // is the only thing updating from data changes, but it doesn't hurt
-        // if you want to ensure any other part of the screen dependent on state refreshes.
-      });
-    }
-  }
-
-  Widget _buildResourceTypeIconWidget(ResourceType type, BuildContext context) {
-    // ... (your existing _buildResourceTypeIconWidget code)
-    final ThemeData theme = Theme.of(context);
-    final ColorScheme colorScheme = theme.colorScheme;
-    IconData iconData;
-    Color iconColor = colorScheme.primary;
-
-    switch (type) {
-      case ResourceType.eSud:
-        iconData = Icons.play_circle_outline;
-        iconColor = Colors.red.shade700;
-        break;
-      case ResourceType.adolat:
-        iconData = Icons.code_outlined;
-        iconColor = Colors.green.shade700;
-        break;
-      case ResourceType.jibSud:
-        iconData = Icons.assignment_outlined;
-        iconColor = Colors.purple.shade700;
-        break;
-      case ResourceType.edoSud:
-        iconData = Icons.school_outlined;
-        iconColor = Colors.blue.shade700;
-        break;
-      case ResourceType.other:
-        iconData = Icons.help_outline;
-        iconColor = Colors.grey.shade700;
-        break;
-    }
-
-    return Container(
-      padding: const EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        color: iconColor.withAlpha(26),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Icon(iconData, size: 28, color: iconColor),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final ColorScheme colorScheme = theme.colorScheme;
-    final TextTheme textTheme = theme.textTheme;
-    final l10n = AppLocalizations.of(context)!; // O'ZGARISH
-    final resourceService = Provider.of<ResourceService>(
-      context,
-      listen: false,
-    );
+    final l10n = AppLocalizations.of(context)!;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.resourcesScreenTitle), // O'ZGARISH
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.question_answer),
-            tooltip: 'Ko\'p so\'raladigan savollar',
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const FAQListScreen(),
-                ),
-              );
-            },
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(l10n.resourcesScreenTitle),
+          centerTitle: true,
+          bottom: TabBar(
+            tabs: [
+              Tab(text: l10n.resourceTabArticles, icon: const Icon(Icons.article_outlined)),
+              Tab(text: l10n.resourceTabVideos, icon: const Icon(Icons.video_library_outlined)),
+              Tab(text: l10n.resourceTabFiles, icon: const Icon(Icons.folder_open_outlined)),
+            ],
           ),
-          IconButton(
-            icon: const Icon(Icons.computer),
-            tooltip: 'Sud Axborot Tizimlari',
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SystemsDirectoryScreen(),
-                ),
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.video_library),
-            tooltip: 'Video Qo\'llanmalar',
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const VideoTutorialsScreen(),
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-      body: RefreshIndicator(
-        // Wrap the Column with RefreshIndicator
-        onRefresh: _handleRefresh, // Assign the callback
-        color: Theme.of(context).colorScheme.primary, // Indicator color
-        backgroundColor:
-            Theme.of(
-              context,
-            ).colorScheme.surfaceContainerHighest, // Background of indicator
-        child: Column(
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.question_answer),
+              tooltip: l10n.faqTitle,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FAQListScreen(),
+                  ),
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.computer),
+              tooltip: l10n.systemsDirectoryTitle,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SystemsDirectoryScreen(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+        body: const TabBarView(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                style: textTheme.bodyMedium,
-                controller: _searchController,
-                decoration: InputDecoration(
-                  hintText: l10n.resourcesSearchHint,
-                  hintStyle: textTheme.bodySmall,
-                  prefixIcon: const Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(24.0),
-                    borderSide: BorderSide.none,
-                  ),
-                  filled: true,
-                  fillColor: colorScheme.surfaceContainerHighest.withAlpha(128),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 14.0),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: DropdownButtonFormField<ResourceType?>(
-                decoration: InputDecoration(
-                  labelText: l10n.resourcesFilterByType,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  filled: true,
-                  fillColor: colorScheme.surface,
-                ),
-                initialValue: _selectedResourceType,
-                hint: Text(l10n.resourcesAllTypes),
-                isExpanded: true,
-                items: [
-                  DropdownMenuItem<ResourceType?>(
-                    value: null,
-                    child: Text(l10n.resourcesAllTypes),
-                  ),
-                  ...ResourceType.values.map((ResourceType type) {
-                    return DropdownMenuItem<ResourceType?>(
-                      value: type,
-                      child: Text(type.toString().split('.').last),
-                    );
-                  }),
-                ],
-                onChanged: (ResourceType? newValue) {
-                  setState(() {
-                    _selectedResourceType = newValue;
-                  });
-                },
-              ),
-            ),
-            // --- BOOKMARK FILTER TOGGLE ---
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
-                children: [
-                  const Text("Faqat saqlanganlar:"),
-                  const Spacer(),
-                  Switch(
-                    value: _showOnlyBookmarked,
-                    onChanged: (value) {
-                      setState(() {
-                        _showOnlyBookmarked = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-            // --- END BOOKMARK FILTER TOGGLE ---
-            const SizedBox(height: 8.0),
-            Expanded(
-              child: StreamBuilder<List<Resource>>(
-                stream: resourceService.getResources(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting &&
-                      !snapshot.hasData) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-
-                  if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  }
-
-                  List<Resource> resources = snapshot.data ?? [];
-
-                  // --- BOOKMARK FILTER LOGIC ---
-                  return FutureBuilder<List<String>>(
-                    future: resourceService.getBookmarkedResourceIds(),
-                    builder: (context, bookmarkSnapshot) {
-                      final bookmarkedIds = bookmarkSnapshot.data ?? [];
-
-                      // Filter by search and resource type
-                      List<Resource> filteredResources =
-                          resources.where((resource) {
-                            final matchesSearch =
-                                resource.title.toLowerCase().contains(
-                                  _searchController.text.toLowerCase(),
-                                ) ||
-                                resource.description.toLowerCase().contains(
-                                  _searchController.text.toLowerCase(),
-                                );
-
-                            final matchesType =
-                                _selectedResourceType == null ||
-                                resource.type == _selectedResourceType;
-
-                            final matchesBookmark = !_showOnlyBookmarked ||
-                                bookmarkedIds.contains(resource.id);
-
-                            return matchesSearch && matchesType && matchesBookmark;
-                          }).toList();
-                      // --- END BOOKMARK FILTER LOGIC ---
-
-                      if (filteredResources.isEmpty) {
-                        return Center(child: Text(l10n.resourcesNoResourcesFound));
-                      }
-
-                      return ListView.builder(
-                        itemCount: filteredResources.length,
-                        itemBuilder: (context, index) {
-                          final resource = filteredResources[index];
-                          return ListTile(
-                            leading: _buildResourceTypeIconWidget(
-                              resource.type,
-                              context,
-                            ),
-                            title: Text(resource.title),
-                            subtitle: Text(resource.description),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder:
-                                      (context) =>
-                                          ResourceDetailScreen(resource: resource),
-                                ),
-                              ).then((_) => setState(() {})); // Refresh on return
-                            },
-                          );
-                        },
-                      );
-                    },
-                  );
-                },
-              ),
-            ),
+            ArticlesTab(),
+            VideosTab(),
+            FilesTab(),
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/knowledge_article.dart';
 import '../../services/knowledge_base_service.dart';
 import 'admin_add_edit_article_screen.dart';
@@ -15,20 +16,21 @@ class _AdminArticleManagementScreenState extends State<AdminArticleManagementScr
   final KnowledgeBaseService _service = KnowledgeBaseService();
 
   Future<void> _deleteArticle(KnowledgeArticle article) async {
+    final l10n = AppLocalizations.of(context)!;
     final bool? confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Maqolani o\'chirish'),
-        content: Text('Siz "${article.title}" maqolasini o\'chirmoqchimisiz?'),
+        title: Text(l10n.confirmDeleteTitle),
+        content: Text(l10n.confirmDeleteArticleMessage(article.title)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Bekor qilish'),
+            child: Text(l10n.cancelButton),
           ),
           TextButton(
             style: TextButton.styleFrom(foregroundColor: Colors.red),
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('O\'chirish'),
+            child: Text(l10n.deleteButtonText),
           ),
         ],
       ),
@@ -38,7 +40,7 @@ class _AdminArticleManagementScreenState extends State<AdminArticleManagementScr
       await _service.deleteArticle(article.id);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Maqola o\'chirildi')),
+          SnackBar(content: Text(l10n.resourceDeletedSuccess(article.title))),
         );
       }
     }
@@ -46,16 +48,17 @@ class _AdminArticleManagementScreenState extends State<AdminArticleManagementScr
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Maqolalarni Boshqarish'),
+        title: Text(l10n.manageArticlesTitle),
         centerTitle: true,
       ),
       body: StreamBuilder<List<KnowledgeArticle>>(
         stream: _service.getAllArticles(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Center(child: Text('Xatolik: ${snapshot.error}'));
+            return Center(child: Text('${l10n.errorPrefix}${snapshot.error}'));
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -65,7 +68,7 @@ class _AdminArticleManagementScreenState extends State<AdminArticleManagementScr
           final articles = snapshot.data ?? [];
 
           if (articles.isEmpty) {
-            return const Center(child: Text('Maqolalar yo\'q'));
+            return Center(child: Text(l10n.noResourcesFoundManager));
           }
 
           return ListView.builder(
@@ -101,10 +104,12 @@ class _AdminArticleManagementScreenState extends State<AdminArticleManagementScr
                             ),
                           );
                         },
+                        tooltip: l10n.editResourceTooltip,
                       ),
                       IconButton(
                         icon: const Icon(Icons.delete, color: Colors.red),
                         onPressed: () => _deleteArticle(article),
+                        tooltip: l10n.deleteResourceTooltip,
                       ),
                     ],
                   ),
@@ -124,6 +129,7 @@ class _AdminArticleManagementScreenState extends State<AdminArticleManagementScr
             ),
           );
         },
+        tooltip: l10n.add,
       ),
     );
   }

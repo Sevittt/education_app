@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/faq.dart';
 import '../../services/faq_service.dart';
 import 'admin_add_edit_faq_screen.dart';
@@ -14,20 +15,21 @@ class _AdminFAQManagementScreenState extends State<AdminFAQManagementScreen> {
   final FAQService _service = FAQService();
 
   Future<void> _deleteFAQ(FAQ faq) async {
+    final l10n = AppLocalizations.of(context)!;
     final bool? confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Savolni o\'chirish'),
-        content: Text('Siz "${faq.question}" savolini o\'chirmoqchimisiz?'),
+        title: Text(l10n.confirmDeleteTitle),
+        content: Text(l10n.confirmDeleteFaqMessage(faq.question)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Bekor qilish'),
+            child: Text(l10n.cancelButton),
           ),
           TextButton(
             style: TextButton.styleFrom(foregroundColor: Colors.red),
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('O\'chirish'),
+            child: Text(l10n.deleteButtonText),
           ),
         ],
       ),
@@ -37,7 +39,7 @@ class _AdminFAQManagementScreenState extends State<AdminFAQManagementScreen> {
       await _service.deleteFAQ(faq.id);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Savol o\'chirildi')),
+          SnackBar(content: Text(l10n.faqDeletedSuccess)),
         );
       }
     }
@@ -45,16 +47,17 @@ class _AdminFAQManagementScreenState extends State<AdminFAQManagementScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Savol-Javoblarni Boshqarish'),
+        title: Text(l10n.manageFaqTitle),
         centerTitle: true,
       ),
       body: StreamBuilder<List<FAQ>>(
         stream: _service.getAllFAQs(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Center(child: Text('Xatolik: ${snapshot.error}'));
+            return Center(child: Text('${l10n.errorPrefix}${snapshot.error}'));
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -64,7 +67,7 @@ class _AdminFAQManagementScreenState extends State<AdminFAQManagementScreen> {
           final faqs = snapshot.data ?? [];
 
           if (faqs.isEmpty) {
-            return const Center(child: Text('Savollar yo\'q'));
+            return Center(child: Text(l10n.noFaqsFound));
           }
 
           return ListView.builder(
@@ -98,10 +101,12 @@ class _AdminFAQManagementScreenState extends State<AdminFAQManagementScreen> {
                             ),
                           );
                         },
+                        tooltip: l10n.editResourceTooltip,
                       ),
                       IconButton(
                         icon: const Icon(Icons.delete, color: Colors.red),
                         onPressed: () => _deleteFAQ(faq),
+                        tooltip: l10n.deleteResourceTooltip,
                       ),
                     ],
                   ),
@@ -121,6 +126,7 @@ class _AdminFAQManagementScreenState extends State<AdminFAQManagementScreen> {
             ),
           );
         },
+        tooltip: l10n.add,
       ),
     );
   }

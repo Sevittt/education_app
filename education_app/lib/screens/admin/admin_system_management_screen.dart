@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/sud_system.dart';
 import '../../services/systems_service.dart';
 import 'admin_add_edit_system_screen.dart';
@@ -14,20 +15,21 @@ class _AdminSystemManagementScreenState extends State<AdminSystemManagementScree
   final SystemsService _service = SystemsService();
 
   Future<void> _deleteSystem(SudSystem system) async {
+    final l10n = AppLocalizations.of(context)!;
     final bool? confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Tizimni o\'chirish'),
-        content: Text('Siz "${system.name}" tizimini o\'chirmoqchimisiz?'),
+        title: Text(l10n.confirmDeleteTitle),
+        content: Text(l10n.confirmDeleteSystemMessage(system.name)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Bekor qilish'),
+            child: Text(l10n.cancelButton),
           ),
           TextButton(
             style: TextButton.styleFrom(foregroundColor: Colors.red),
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('O\'chirish'),
+            child: Text(l10n.deleteButtonText),
           ),
         ],
       ),
@@ -37,7 +39,7 @@ class _AdminSystemManagementScreenState extends State<AdminSystemManagementScree
       await _service.deleteSystem(system.id);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Tizim o\'chirildi')),
+          SnackBar(content: Text(l10n.systemDeletedSuccess)),
         );
       }
     }
@@ -45,16 +47,17 @@ class _AdminSystemManagementScreenState extends State<AdminSystemManagementScree
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tizimlarni Boshqarish'),
+        title: Text(l10n.manageSystemsTitle),
         centerTitle: true,
       ),
       body: StreamBuilder<List<SudSystem>>(
         stream: _service.getAllSystems(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Center(child: Text('Xatolik: ${snapshot.error}'));
+            return Center(child: Text('${l10n.errorPrefix}${snapshot.error}'));
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -64,7 +67,7 @@ class _AdminSystemManagementScreenState extends State<AdminSystemManagementScree
           final systems = snapshot.data ?? [];
 
           if (systems.isEmpty) {
-            return const Center(child: Text('Tizimlar yo\'q'));
+            return Center(child: Text(l10n.noSystemsFound));
           }
 
           return ListView.builder(
@@ -102,10 +105,12 @@ class _AdminSystemManagementScreenState extends State<AdminSystemManagementScree
                             ),
                           );
                         },
+                        tooltip: l10n.editResourceTooltip,
                       ),
                       IconButton(
                         icon: const Icon(Icons.delete, color: Colors.red),
                         onPressed: () => _deleteSystem(system),
+                        tooltip: l10n.deleteResourceTooltip,
                       ),
                     ],
                   ),
@@ -125,6 +130,7 @@ class _AdminSystemManagementScreenState extends State<AdminSystemManagementScree
             ),
           );
         },
+        tooltip: l10n.add,
       ),
     );
   }

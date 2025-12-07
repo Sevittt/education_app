@@ -650,6 +650,54 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get faqTitle => 'FAQ';
+
+  @override
+  String get searchHelp => 'Search help...';
+
+  @override
+  String get allCategories => 'All Categories';
+
+  @override
+  String get helpfulFeedback => 'Was this helpful?';
+
+  @override
+  String get noArticlesFound => 'No FAQs found';
+
+  @override
+  String get settingsNotifications => 'Notifications';
+
+  @override
+  String get changePasswordTitle => 'Change Password';
+
+  @override
+  String get helpCenterTitle => 'Help Center';
+
+  @override
+  String get settingsAbout => 'About App';
+
+  @override
+  String get passwordUpdatedSuccess => 'Password updated successfully';
+
+  @override
+  String get errorWrongPassword => 'Incorrect current password';
+
+  @override
+  String get currentPassword => 'Current Password';
+
+  @override
+  String get newPassword => 'New Password';
+
+  @override
+  String get confirmPassword => 'Confirm Password';
+
+  @override
+  String get passwordMismatch => 'Passwords do not match';
+
+  @override
+  String get save => 'Save';
+
+  @override
   String get addNewsTooltip => 'Add New News Article';
 
   @override
@@ -964,105 +1012,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteTopicTooltip => 'Delete Topic';
 
   @override
-  String get bottomNavKnowledge => 'Knowledge Base';
-
-  @override
-  String get knowledgeBaseTitle => 'Knowledge Base';
-
-  @override
-  String get searchPlaceholder => 'Search articles...';
-
-  @override
-  String get allCategories => 'All Categories';
-
-  @override
-  String get noArticlesFound => 'No articles found.';
-
-  @override
-  String get articleDetailTitle => 'Article Details';
-
-  @override
-  String get helpfulFeedback => 'Was this article helpful?';
-
-  @override
-  String get feedbackThanks => 'Thank you for your feedback!';
-
-  @override
-  String get shareArticle => 'Share Article';
-
-  @override
-  String get downloadPdf => 'Download PDF';
-
-  @override
-  String get articlePinned => 'Pinned';
-
-  @override
-  String get settingsAccount => 'Account Settings';
-
-  @override
-  String get settingsNotifications => 'Notifications';
-
-  @override
-  String get settingsSecurity => 'Security';
-
-  @override
-  String get settingsAbout => 'About App';
-
-  @override
-  String get settingsHelp => 'Help & Guides';
-
-  @override
-  String get settingsLogOut => 'Log Out';
-
-  @override
-  String get guideTitle => 'Guides';
-
-  @override
-  String get guideVideo => 'Video Tutorials';
-
-  @override
-  String get guideSystem => 'Systems';
-
-  @override
-  String get changePasswordTitle => 'Change Password';
-
-  @override
-  String get currentPassword => 'Current Password';
-
-  @override
-  String get newPassword => 'New Password';
-
-  @override
-  String get confirmPassword => 'Confirm Password';
-
-  @override
-  String get save => 'Save';
-
-  @override
-  String get passwordUpdatedSuccess => 'Password updated successfully';
-
-  @override
-  String get passwordMismatch => 'Passwords do not match';
-
-  @override
-  String get errorWrongPassword => 'Current password incorrect';
-
-  @override
-  String get helpCenterTitle => 'Help Center';
-
-  @override
-  String get howCanWeHelp => 'How can we help you?';
-
-  @override
-  String get faqTitle => 'Frequently Asked Questions';
-
-  @override
-  String get contactSupport => 'Contact Support';
-
-  @override
-  String get searchHelp => 'Search help...';
-
-  @override
   String get faqCategoryLogin => 'Login Issues';
 
   @override
@@ -1079,4 +1028,305 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faqCategoryTechnical => 'Technical Issues';
+
+  @override
+  String confirmDeleteArticleMessage(Object articleTitle) {
+    return 'Are you sure you want to delete the article \"$articleTitle\"?';
+  }
+
+  @override
+  String get addArticleTitle => 'New Article';
+
+  @override
+  String get editArticleTitle => 'Edit Article';
+
+  @override
+  String get categoryLabel => 'Category';
+
+  @override
+  String get contentLabel => 'Content (Markdown)';
+
+  @override
+  String get tagsLabel => 'Tags (comma separated)';
+
+  @override
+  String get tagsHint => 'e.g. court, law, code';
+
+  @override
+  String get noPdfSelected => 'No PDF file selected';
+
+  @override
+  String get uploadPdfTooltip => 'Upload PDF';
+
+  @override
+  String currentFileLabel(Object url) {
+    return 'Current file: $url';
+  }
+
+  @override
+  String get existingPdfFile => 'Existing PDF file';
+
+  @override
+  String get articleSavedSuccess => 'Article saved';
+
+  @override
+  String get titleRequired => 'Title is required';
+
+  @override
+  String get contentRequired => 'Content is required';
+
+  @override
+  String confirmDeleteVideoMessage(Object videoTitle) {
+    return 'Are you sure you want to delete the video \"$videoTitle\"?';
+  }
+
+  @override
+  String get videoDeletedSuccess => 'Video deleted';
+
+  @override
+  String get noVideosFound => 'No videos found';
+
+  @override
+  String get addVideoTitle => 'New Video';
+
+  @override
+  String get editVideoTitle => 'Edit Video';
+
+  @override
+  String get videoSavedSuccess => 'Video saved';
+
+  @override
+  String get youtubeIdLabel => 'YouTube ID';
+
+  @override
+  String get youtubeIdHint => 'e.g. dQw4w9WgXcQ';
+
+  @override
+  String get youtubeIdRequired => 'YouTube ID is required';
+
+  @override
+  String get systemOptionalLabel => 'System (Optional)';
+
+  @override
+  String get notSelectedLabel => 'Not Selected';
+
+  @override
+  String get durationLabel => 'Duration (seconds)';
+
+  @override
+  String get durationHint => 'e.g. 600';
+
+  @override
+  String get durationRequired => 'Duration is required';
+
+  @override
+  String get videoTagsHint => 'e.g. login, error, settings';
+
+  @override
+  String get descriptionRequired => 'Description is required';
+
+  @override
+  String confirmDeleteSystemMessage(Object systemName) {
+    return 'Are you sure you want to delete the system \"$systemName\"?';
+  }
+
+  @override
+  String get systemDeletedSuccess => 'System deleted';
+
+  @override
+  String get noSystemsFound => 'No systems found';
+
+  @override
+  String get addSystemTitle => 'New System';
+
+  @override
+  String get editSystemTitle => 'Edit System';
+
+  @override
+  String get systemSavedSuccess => 'System saved';
+
+  @override
+  String get shortNameLabel => 'Short Name';
+
+  @override
+  String get shortNameHint => 'e.g. e-SUD';
+
+  @override
+  String get nameRequired => 'Name is required';
+
+  @override
+  String get fullNameLabel => 'Full Name';
+
+  @override
+  String get fullNameRequired => 'Full name is required';
+
+  @override
+  String get websiteUrlLabel => 'Website URL';
+
+  @override
+  String get urlRequired => 'URL is required';
+
+  @override
+  String get logoUrlLabel => 'Logo URL';
+
+  @override
+  String get logoUrlRequired => 'Logo URL is required';
+
+  @override
+  String get statusLabel => 'Status';
+
+  @override
+  String get loginGuideIdLabel => 'Login Guide ID (Optional)';
+
+  @override
+  String get videoGuideIdLabel => 'Video Guide ID (Optional)';
+
+  @override
+  String confirmDeleteFaqMessage(Object question) {
+    return 'Are you sure you want to delete the question \"$question\"?';
+  }
+
+  @override
+  String get faqDeletedSuccess => 'Question deleted';
+
+  @override
+  String get noFaqsFound => 'No questions found';
+
+  @override
+  String get addFaqTitle => 'New Question';
+
+  @override
+  String get editFaqTitle => 'Edit Question';
+
+  @override
+  String get faqSavedSuccess => 'Question saved';
+
+  @override
+  String get questionLabel => 'Question';
+
+  @override
+  String get questionRequired => 'Question is required';
+
+  @override
+  String get answerLabel => 'Answer (Markdown)';
+
+  @override
+  String get answerRequired => 'Answer is required';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get titleLabel => 'Title';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get search => 'Search...';
+
+  @override
+  String get fieldRequired => 'Field is required';
+
+  @override
+  String get confirmDelete => 'Are you sure you want to delete?';
+
+  @override
+  String get successSaved => 'Saved successfully';
+
+  @override
+  String get successDeleted => 'Deleted successfully';
+
+  @override
+  String get notificationManagementTitle => 'Notification Management';
+
+  @override
+  String get notificationHistoryTitle => 'Notification History';
+
+  @override
+  String get notificationHistoryPlaceholder => 'History of sent notifications will appear here (coming soon).';
+
+  @override
+  String get sendNewNotificationButton => 'Send New Notification';
+
+  @override
+  String get sendNotificationTitle => 'Send Notification';
+
+  @override
+  String get notificationSentSuccess => 'Notification sent';
+
+  @override
+  String get notificationTitleLabel => 'Title';
+
+  @override
+  String get notificationTitleRequired => 'Title is required';
+
+  @override
+  String get notificationBodyLabel => 'Message Body';
+
+  @override
+  String get notificationBodyRequired => 'Message body is required';
+
+  @override
+  String get notificationTypeLabel => 'Notification Type';
+
+  @override
+  String get targetAudienceLabel => 'Audience';
+
+  @override
+  String get resourceTabArticles => 'Articles';
+
+  @override
+  String get resourceTabVideos => 'Videos';
+
+  @override
+  String get resourceTabFiles => 'Files';
+
+  @override
+  String get filesTabTitle => 'Files';
+
+  @override
+  String get systemsDirectoryTitle => 'Court Information Systems';
+
+  @override
+  String get bookmarkSaveTooltip => 'Bookmark';
+
+  @override
+  String get bookmarkRemoveTooltip => 'Remove Bookmark';
+
+  @override
+  String get resourceTypeOther => 'Others';
+
+  @override
+  String get openFile => 'Open File';
+
+  @override
+  String get fileSize => 'File Size';
+
+  @override
+  String get selectFile => 'Select File';
+
+  @override
+  String get upload => 'Upload';
+
+  @override
+  String get processing => 'Processing...';
+
+  @override
+  String get urlLabel => 'URL';
+
+  @override
+  String get resourceTypePDF => 'PDF Manual';
+
+  @override
+  String get resourceTypeVideo => 'Video Tutorial';
+
+  @override
+  String get resourceTypeLink => 'Web Link';
 }

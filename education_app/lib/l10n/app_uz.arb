@@ -287,7 +287,7 @@
   "errorLoadingNews": "Yangiliklarni yuklashda xatolik yuz berdi: {error}",
   "noNewsAvailable": "Hozirda hech qanday yangilik mavjud emas.",
   "adminPanelTitle": "Admin paneli",
-  "manageNewsTitle": "Yangiliklarni boshqarish",
+  "manageNewsTitle": "Yangiliklar Boshqaruvi",
   "manageNewsSubtitle": "Yangilik maqolalarini qo'shish, tahrirlash yoki o'chirish",
   "manageUsersTitle": "Foydalanuvchilarni boshqarish",
   "manageUsersSubtitle": "Foydalanuvchilarni ko'rish va rollarni boshqarish (kelajakda)",
@@ -447,438 +447,15 @@
   "totalPoints": "Jami ballar",
   "nextLevel": "Keyingi daraja",
   "pointsToNextLevel": "Keyingi darajaga {points} XP",
-  "manageArticlesTitle": "Maqolalar",
+  "manageArticlesTitle": "Maqolalar Boshqaruvi",
   "manageArticlesSubtitle": "Bilimlar bazasini boshqarish",
-  "manageVideosTitle": "Videolar",
+  "manageVideosTitle": "Video Darsliklar Boshqaruvi",
   "manageVideosSubtitle": "Video darsliklarni boshqarish",
-  
-  "commentCannotBeEmpty": "Izoh bo'sh bo'lishi mumkin emas.",
-  "mustBeLoggedInToComment": "Izoh berish uchun tizimga kirgan bo'lishingiz kerak.",
-  "commentAddedSuccessfully": "Izoh muvaffaqiyatli qo'shildi!",
-  "failedToAddComment": "Izoh qo'shib bo'lmadi: {error}",
-  "@failedToAddComment": {
-    "description": "Error message when adding a comment fails",
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "postedBy": "Muallif: {authorName}",
-  "onDate": "kun {date}",
-  "repliesTitle": "Javoblar",
-  "errorLoadingComments": "Izohlarni yuklashda xatolik yuz berdi: {error}",
-  "noRepliesYet": "Hali javob yo'q. Birinchi bo'lib fikr bildiring!",
-  "writeAReplyHint": "Javob yozing...",
-  "sendCommentTooltip": "Izoh yuborish",
-  "welcomeBack": "Qaytib xush kelibsiz, {userName}!",
-  "readyToLearnSomethingNew": "Bugun yangi narsalarni o'rganishga tayyormisiz?",
-  "quickAccessTitle": "Tez kirish",
-  "communityTitle": "Hamjamiyat",
-  "profileTitle": "Profil",
-  "latestNewsTitle": "So'nggi yangiliklar",
-  "sourceLabel": "Manba",
-  "quizzesTitle": "Viktorinalar",
-  "urlCannotBeEmpty": "URL bo'sh bo'lishi mumkin emas",
-  "errorLoadingNews": "Yangiliklarni yuklashda xatolik yuz berdi: {error}",
-  "noNewsAvailable": "Hozirda hech qanday yangilik mavjud emas.",
-  "adminPanelTitle": "Admin paneli",
-  "manageNewsTitle": "Yangiliklarni boshqarish",
-  "manageNewsSubtitle": "Yangilik maqolalarini qo'shish, tahrirlash yoki o'chirish",
-  "manageUsersTitle": "Foydalanuvchilarni boshqarish",
-  "manageUsersSubtitle": "Foydalanuvchilarni ko'rish va rollarni boshqarish (kelajakda)",
-  "manageResourcesTitle": "Resurslarni boshqarish",
-  "manageResourcesSubtitle": "Barcha o'quv resurslarini nazorat qilish (kelajakda)",
-  "confirmDeleteTitle": "O'chirishni tasdiqlang",
-  "confirmDeleteNewsMessage": "Siz \"{newsTitle}\"ni o'chirib tashlamoqchimisiz?",
-  "newsDeletedSuccess": "\"{newsTitle}\" muvaffaqiyatli o'chirildi.",
-  "failedToDeleteNews": "\"{newsTitle}\" o'chirilmadi: {error}",
-  "@failedToDeleteNews": {
-    "description": "Error message when deleting news fails",
-    "placeholders": {
-      "error": {
-        "type": "String"
-      },
-      "newsTitle": {
-        "type": "Object"
-      }
-    }
-  },
-  "addNewsTooltip": "Yangi maqola qo'shish",
-  "editNewsTooltip": "Yangilikni tahrirlash",
-  "deleteNewsTooltip": "Yangilikni o'chirish",
-  "addNewsButton": "Yangilik qo'shish",
-  "noNewsAvailableManager": "Hech qanday yangilik maqolasi topilmadi. Bittasini qo'shing!",
-  "editNewsTitle": "Yangilikni tahrirlash",
-  "addNewsTitle": "Yangilik maqolasini qo'shish",
-  "saveNewsTooltip": "Yangilikni saqlash",
-  "newsTitleLabel": "Sarlavha",
-  "pleaseEnterNewsTitle": "Iltimos, yangilik sarlavhasini kiriting.",
-  "newsTitleMinLength": "Yangiliklar nomi kamida {length} belgidan iborat bo'lishi kerak.",
-  "newsSourceLabel": "Manba (masalan, Blog nomi)",
-  "pleaseEnterNewsSource": "Iltimos, yangiliklar manbasini kiriting.",
-  "newsUrlLabel": "Maqola URL manzili",
-  "pleaseEnterNewsUrl": "Maqola URL manzilini kiriting.",
-  "pleaseEnterValidNewsUrl": "Iltimos, to'g'ri URL manzilini kiriting (http yoki https bilan boshlanadi).",
-  "newsImageUrlLabel": "Rasm URL manzili (ixtiyoriy)",
-  "pleaseEnterValidImageUrl": "Iltimos, haqiqiy rasm URL manzilini kiriting (http yoki https bilan boshlanadi) yoki bo'sh qoldiring.",
-  "publicationDateLabel": "Nashr qilingan sana",
-  "pleaseSelectPublicationDate": "Iltimos, nashr sanasini tanlang.",
-  "noDateSelected": "Sana tanlanmagan",
-  "selectDateTooltip": "Sanani tanlang",
-  "updateNewsButton": "Yangiliklarni yangilash",
-  "addNewsButtonForm": "Yangilik maqolasini qo'shish",
-  "newsUpdatedSuccess": "\"{newsTitle}\" muvaffaqiyatli yangilandi.",
-  "newsAddedSuccess": "\"{newsTitle}\" muvaffaqiyatli qo'shildi.",
-  "failedToSaveNews": "Yangilikni saqlab bo'lmadi: {error}",
-  "@failedToSaveNews": {
-    "description": "Error message when saving news fails",
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "errorLoadingUsers": "Foydalanuvchilarni yuklashda xatolik yuz berdi: {error}",
-  "noUsersFound": "Hech qanday foydalanuvchi topilmadi.",
-  "noEmailProvided": "E-pochta taqdim etilmaydi",
-  "roleLabel": "Rol",
-  "registeredOnLabel": "Ro'yxatdan o'tgan",
-  "manageUsersSubtitleNow": "Ro'yxatdan o'tgan foydalanuvchilarni ko'rish va qidirish",
-  "manageResourcesSubtitleNow": "Har qanday o'quv manbasini ko'rish, tahrirlash yoki o'chirish",
-  "confirmDeleteResourceMessage": "Siz \"{resourceTitle}\" manbasini o'chirib tashlamoqchimisiz?",
-  "resourceDeletedSuccess": "\"{resourceTitle}\" resursi muvaffaqiyatli o'chirildi.",
-  "failedToDeleteResource": "\"{resourceTitle}\" manbasini o'chirib bo'lmadi: {error}",
-  "@failedToDeleteResource": {
-    "description": "Error message when deleting resource fails",
-    "placeholders": {
-      "error": {
-        "type": "String"
-      },
-      "resourceTitle": {
-        "type": "Object"
-      }
-    }
-  },
-  "errorLoadingResources": "Resurslarni yuklashda xatolik yuz berdi: {error}",
-  "noResourcesFoundManager": "Tizimda hech qanday manba topilmadi.",
-  "editResourceTooltip": "Resursni tahrirlash",
-  "deleteResourceTooltip": "Resursni o'chirish",
-  "manageQuizzesTitle": "Viktorinalarni boshqarish",
-  "addQuizTooltip": "Yangi test qo'shish",
-  "errorLoadingQuizzesAdmin": "Viktorinalarni yuklashda xatolik yuz berdi: {error}",
-  "noQuizzesFoundManager": "Hech qanday test topilmadi. Bittasini qo'shing!",
-  "confirmDeleteQuizMessage": "Siz \"{quizTitle}\" testini va uning barcha savollarini o'chirib tashlamoqchimisiz? Bu amalni ortga qaytarib bo'lmaydi.",
-  "quizDeletedSuccess": "\"{quizTitle}\" testi va uning savollari muvaffaqiyatli o'chirildi.",
-  "failedToDeleteQuiz": "\"{quizTitle}\" testini o'chirib bo'lmadi: {error}",
-  "@failedToDeleteQuiz": {
-    "description": "Error message when deleting quiz fails",
-    "placeholders": {
-      "error": {
-        "type": "String"
-      },
-      "quizTitle": {
-        "type": "Object"
-      }
-    }
-  },
-  "editDetailsButton": "Tafsilotlarni tahrirlash",
-  "manageQuestionsButton": "Savollar",
-  "deleteQuizTooltip": "Viktorina va savollarni o'chirish",
-  "addQuizButton": "Viktorina qo'shish",
-  "manageQuizzesSubtitle": "Barcha testlar va ularning savollarini nazorat qilish",
-  "registrationEmailError": "Yaroqli elektron pochta manzilini kiriting",
-  "@registrationEmailError": {
-    "description": "Noto'g'ri e-pochta manzili bo'lganda xato xabari"
-  },
-  "dashboardXodimTitle": "Mening Faoliyatim",
-  "@dashboardXodimTitle": {
-    "description": "Oddiy xodimning boshqaruv paneli bo'limi uchun sarlavha"
-  },
-  "dashboardEkspertTitle": "Mening Hissam",
-  "@dashboardEkspertTitle": {
-    "description": "Ekspertning boshqaruv paneli bo'limi uchun sarlavha"
-  },
-  "dashboardAdminTitle": "Tizim Holati",
-  "@dashboardAdminTitle": {
-    "description": "Administratorning boshqaruv paneli bo'limi uchun sarlavha"
-  },
-  "seeAllButton": "Barchasini ko'rish",
-  "@seeAllButton": {
-    "description": "Ro'yxatdagi barcha elementlarni ko'rish uchun tugma"
-  },
-  "noGuidesAuthored": "Siz hali hech qanday qo'llanma yaratmadingiz.",
-  "@noGuidesAuthored": {
-    "description": "Xabar ekspert hali qo'llanma yaratmaganida ko'rsatiladi."
-  },
-  "adminStatUsers": "Foydalanuvchilar",
-  "@adminStatUsers": {
-    "description": "Administrator panelidagi umumiy foydalanuvchilar statistikasi uchun yorliq."
-  },
-  "adminStatGuides": "Qo'llanmalar",
-  "@adminStatGuides": {
-    "description": "Administrator panelidagi umumiy qo'llanmalar statistikasi uchun yorliq."
-  },
-  "adminStatQuizzes": "Viktorinalar",
-  "@adminStatQuizzes": {
-    "description": "Administrator panelidagi umumiy viktorinalar statistikasi uchun yorliq."
-  },
-  "orDivider": "YOKI",
-  "@orDivider": {
-    "description": "Kirish opsiyalari orasidagi 'YOKI' kabi ajratuvchi matn."
-  },
-  "signInWithGoogle": "Google bilan kirish",
-  "@signInWithGoogle": {
-    "description": "Google hisobi bilan kirish uchun tugma matni."
-  },
-  "themeSystemDefault": "Tizim tili",
-  "themeLight": "Yorug' rejim",
-  "themeDark": "Tungi rejim",
-  "bioOptionalLabel": "Bio (Ixtiyoriy)",
-  "profilePictureUrlLabel": "Profil rasmi URL manzili (Ixtiyoriy)",
-  "levelBeginner": "Boshlang'ich",
-  "levelIntermediate": "O'rta",
-  "levelAdvanced": "Ilg'or",
-  "levelExpert": "Ekspert",
-  "totalPoints": "Jami ballar",
-  "nextLevel": "Keyingi daraja",
-  "pointsToNextLevel": "Keyingi darajaga {points} XP",
-  "manageArticlesTitle": "Maqolalar",
-  "manageArticlesSubtitle": "Bilimlar bazasini boshqarish",
-  "manageVideosTitle": "Videolar",
-  "manageVideosSubtitle": "Video darsliklarni boshqarish",
-  "manageSystemsTitle": "Tizimlar",
-  "manageSystemsSubtitle": "Tizimlar ma'lumotnomasini boshqarish",
-  "manageFaqTitle": "TSS",
-  "manageFaqSubtitle": "TSSni boshqarish",
-  "manageNotificationsTitle": "Xabarnomalar",
-  "manageNotificationsSubtitle": "Xabarnoma yuborish",
-  "settingsAccount": "Hisob sozlamalari",
-  "settingsNotifications": "Xabarnomalar",
-  "settingsSecurity": "Xavfsizlik",
-  "settingsAbout": "Ilova haqida",
-  "settingsHelp": "Yordam va Qo'llanmalar",
-  "settingsLogOut": "Chiqish",
-  "guideTitle": "Qo'llanmalar",
-  "guideVideo": "Video Darsliklar",
-  "guideSystem": "Tizimlar",
-  "changePasswordTitle": "Parolni o'zgartirish",
-  "currentPassword": "Joriy parol",
-  "newPassword": "Yangi parol",
-  "confirmPassword": "Parolni tasdiqlang",
-  "save": "Saqlash",
-  "passwordUpdatedSuccess": "Parol muvaffaqiyatli o'zgartirildi",
-  "passwordMismatch": "Parollar mos kelmadi",
-  "errorWrongPassword": "Joriy parol noto'g'ri",
-  "helpCenterTitle": "Yordam Markazi",
-  "howCanWeHelp": "Sizga qanday yordam bera olamiz?",
-  "faqTitle": "Ko'p so'raladigan savollar",
-  "contactSupport": "Qo'llab-quvvatlash",
-  "searchHelp": "Yordam qidirish...",
-  "faqCategoryLogin": "Kirish Muammolari",
-  "faqCategoryPassword": "Parol Muammolari",
-  "faqCategoryUpload": "Fayl Yuklash",
-  "faqCategoryAccess": "Ruxsat",
-  "faqCategoryGeneral": "Umumiy",
-  "faqCategoryTechnical": "Texnik",
-
-  "@failedToAddComment": {
-    "description": "Error message when adding a comment fails",
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "postedBy": "Muallif: {authorName}",
-  "onDate": "kun {date}",
-  "repliesTitle": "Javoblar",
-  "errorLoadingComments": "Izohlarni yuklashda xatolik yuz berdi: {error}",
-  "noRepliesYet": "Hali javob yo'q. Birinchi bo'lib fikr bildiring!",
-  "writeAReplyHint": "Javob yozing...",
-  "sendCommentTooltip": "Izoh yuborish",
-  "welcomeBack": "Qaytib xush kelibsiz, {userName}!",
-  "readyToLearnSomethingNew": "Bugun yangi narsalarni o'rganishga tayyormisiz?",
-  "quickAccessTitle": "Tez kirish",
-  "communityTitle": "Hamjamiyat",
-  "profileTitle": "Profil",
-  "latestNewsTitle": "So'nggi yangiliklar",
-  "sourceLabel": "Manba",
-  "quizzesTitle": "Viktorinalar",
-  "urlCannotBeEmpty": "URL bo'sh bo'lishi mumkin emas",
-  "errorLoadingNews": "Yangiliklarni yuklashda xatolik yuz berdi: {error}",
-  "noNewsAvailable": "Hozirda hech qanday yangilik mavjud emas.",
-  "adminPanelTitle": "Admin paneli",
-  "manageNewsTitle": "Yangiliklarni boshqarish",
-  "manageNewsSubtitle": "Yangilik maqolalarini qo'shish, tahrirlash yoki o'chirish",
-  "manageUsersTitle": "Foydalanuvchilarni boshqarish",
-  "manageUsersSubtitle": "Foydalanuvchilarni ko'rish va rollarni boshqarish (kelajakda)",
-  "manageResourcesTitle": "Resurslarni boshqarish",
-  "manageResourcesSubtitle": "Barcha o'quv resurslarini nazorat qilish (kelajakda)",
-  "confirmDeleteTitle": "O'chirishni tasdiqlang",
-  "confirmDeleteNewsMessage": "Siz \"{newsTitle}\"ni o'chirib tashlamoqchimisiz?",
-  "newsDeletedSuccess": "\"{newsTitle}\" muvaffaqiyatli o'chirildi.",
-  "failedToDeleteNews": "\"{newsTitle}\" o'chirilmadi: {error}",
-  "@failedToDeleteNews": {
-    "description": "Error message when deleting news fails",
-    "placeholders": {
-      "error": {
-        "type": "String"
-      },
-      "newsTitle": {
-        "type": "Object"
-      }
-    }
-  },
-  "addNewsTooltip": "Yangi maqola qo'shish",
-  "editNewsTooltip": "Yangilikni tahrirlash",
-  "deleteNewsTooltip": "Yangilikni o'chirish",
-  "addNewsButton": "Yangilik qo'shish",
-  "noNewsAvailableManager": "Hech qanday yangilik maqolasi topilmadi. Bittasini qo'shing!",
-  "editNewsTitle": "Yangilikni tahrirlash",
-  "addNewsTitle": "Yangilik maqolasini qo'shish",
-  "saveNewsTooltip": "Yangilikni saqlash",
-  "newsTitleLabel": "Sarlavha",
-  "pleaseEnterNewsTitle": "Iltimos, yangilik sarlavhasini kiriting.",
-  "newsTitleMinLength": "Yangiliklar nomi kamida {length} belgidan iborat bo'lishi kerak.",
-  "newsSourceLabel": "Manba (masalan, Blog nomi)",
-  "pleaseEnterNewsSource": "Iltimos, yangiliklar manbasini kiriting.",
-  "newsUrlLabel": "Maqola URL manzili",
-  "pleaseEnterNewsUrl": "Maqola URL manzilini kiriting.",
-  "pleaseEnterValidNewsUrl": "Iltimos, to'g'ri URL manzilini kiriting (http yoki https bilan boshlanadi).",
-  "newsImageUrlLabel": "Rasm URL manzili (ixtiyoriy)",
-  "pleaseEnterValidImageUrl": "Iltimos, haqiqiy rasm URL manzilini kiriting (http yoki https bilan boshlanadi) yoki bo'sh qoldiring.",
-  "publicationDateLabel": "Nashr qilingan sana",
-  "pleaseSelectPublicationDate": "Iltimos, nashr sanasini tanlang.",
-  "noDateSelected": "Sana tanlanmagan",
-  "selectDateTooltip": "Sanani tanlang",
-  "updateNewsButton": "Yangiliklarni yangilash",
-  "addNewsButtonForm": "Yangilik maqolasini qo'shish",
-  "newsUpdatedSuccess": "\"{newsTitle}\" muvaffaqiyatli yangilandi.",
-  "newsAddedSuccess": "\"{newsTitle}\" muvaffaqiyatli qo'shildi.",
-  "failedToSaveNews": "Yangilikni saqlab bo'lmadi: {error}",
-  "@failedToSaveNews": {
-    "description": "Error message when saving news fails",
-    "placeholders": {
-      "error": {
-        "type": "String"
-      }
-    }
-  },
-  "errorLoadingUsers": "Foydalanuvchilarni yuklashda xatolik yuz berdi: {error}",
-  "noUsersFound": "Hech qanday foydalanuvchi topilmadi.",
-  "noEmailProvided": "E-pochta taqdim etilmaydi",
-  "roleLabel": "Rol",
-  "registeredOnLabel": "Ro'yxatdan o'tgan",
-  "manageUsersSubtitleNow": "Ro'yxatdan o'tgan foydalanuvchilarni ko'rish va qidirish",
-  "manageResourcesSubtitleNow": "Har qanday o'quv manbasini ko'rish, tahrirlash yoki o'chirish",
-  "confirmDeleteResourceMessage": "Siz \"{resourceTitle}\" manbasini o'chirib tashlamoqchimisiz?",
-  "resourceDeletedSuccess": "\"{resourceTitle}\" resursi muvaffaqiyatli o'chirildi.",
-  "failedToDeleteResource": "\"{resourceTitle}\" manbasini o'chirib bo'lmadi: {error}",
-  "@failedToDeleteResource": {
-    "description": "Error message when deleting resource fails",
-    "placeholders": {
-      "error": {
-        "type": "String"
-      },
-      "resourceTitle": {
-        "type": "Object"
-      }
-    }
-  },
-  "errorLoadingResources": "Resurslarni yuklashda xatolik yuz berdi: {error}",
-  "noResourcesFoundManager": "Tizimda hech qanday manba topilmadi.",
-  "editResourceTooltip": "Resursni tahrirlash",
-  "deleteResourceTooltip": "Resursni o'chirish",
-  "manageQuizzesTitle": "Viktorinalarni boshqarish",
-  "addQuizTooltip": "Yangi test qo'shish",
-  "errorLoadingQuizzesAdmin": "Viktorinalarni yuklashda xatolik yuz berdi: {error}",
-  "noQuizzesFoundManager": "Hech qanday test topilmadi. Bittasini qo'shing!",
-  "confirmDeleteQuizMessage": "Siz \"{quizTitle}\" testini va uning barcha savollarini o'chirib tashlamoqchimisiz? Bu amalni ortga qaytarib bo'lmaydi.",
-  "quizDeletedSuccess": "\"{quizTitle}\" testi va uning savollari muvaffaqiyatli o'chirildi.",
-  "failedToDeleteQuiz": "\"{quizTitle}\" testini o'chirib bo'lmadi: {error}",
-  "@failedToDeleteQuiz": {
-    "description": "Error message when deleting quiz fails",
-    "placeholders": {
-      "error": {
-        "type": "String"
-      },
-      "quizTitle": {
-        "type": "Object"
-      }
-    }
-  },
-  "editDetailsButton": "Tafsilotlarni tahrirlash",
-  "manageQuestionsButton": "Savollar",
-  "deleteQuizTooltip": "Viktorina va savollarni o'chirish",
-  "addQuizButton": "Viktorina qo'shish",
-  "manageQuizzesSubtitle": "Barcha testlar va ularning savollarini nazorat qilish",
-  "registrationEmailError": "Yaroqli elektron pochta manzilini kiriting",
-  "@registrationEmailError": {
-    "description": "Noto'g'ri e-pochta manzili bo'lganda xato xabari"
-  },
-  "dashboardXodimTitle": "Mening Faoliyatim",
-  "@dashboardXodimTitle": {
-    "description": "Oddiy xodimning boshqaruv paneli bo'limi uchun sarlavha"
-  },
-  "dashboardEkspertTitle": "Mening Hissam",
-  "@dashboardEkspertTitle": {
-    "description": "Ekspertning boshqaruv paneli bo'limi uchun sarlavha"
-  },
-  "dashboardAdminTitle": "Tizim Holati",
-  "@dashboardAdminTitle": {
-    "description": "Administratorning boshqaruv paneli bo'limi uchun sarlavha"
-  },
-  "seeAllButton": "Barchasini ko'rish",
-  "@seeAllButton": {
-    "description": "Ro'yxatdagi barcha elementlarni ko'rish uchun tugma"
-  },
-  "noGuidesAuthored": "Siz hali hech qanday qo'llanma yaratmadingiz.",
-  "@noGuidesAuthored": {
-    "description": "Xabar ekspert hali qo'llanma yaratmaganida ko'rsatiladi."
-  },
-  "adminStatUsers": "Foydalanuvchilar",
-  "@adminStatUsers": {
-    "description": "Administrator panelidagi umumiy foydalanuvchilar statistikasi uchun yorliq."
-  },
-  "adminStatGuides": "Qo'llanmalar",
-  "@adminStatGuides": {
-    "description": "Administrator panelidagi umumiy qo'llanmalar statistikasi uchun yorliq."
-  },
-  "adminStatQuizzes": "Viktorinalar",
-  "@adminStatQuizzes": {
-    "description": "Administrator panelidagi umumiy viktorinalar statistikasi uchun yorliq."
-  },
-  "orDivider": "YOKI",
-  "@orDivider": {
-    "description": "Kirish opsiyalari orasidagi 'YOKI' kabi ajratuvchi matn."
-  },
-  "signInWithGoogle": "Google bilan kirish",
-  "@signInWithGoogle": {
-    "description": "Google hisobi bilan kirish uchun tugma matni."
-  },
-  "themeSystemDefault": "Tizim tili",
-  "themeLight": "Yorug' rejim",
-  "themeDark": "Tungi rejim",
-  "bioOptionalLabel": "Bio (Ixtiyoriy)",
-  "profilePictureUrlLabel": "Profil rasmi URL manzili (Ixtiyoriy)",
-  "levelBeginner": "Boshlang'ich",
-  "levelIntermediate": "O'rta",
-  "levelAdvanced": "Ilg'or",
-  "levelExpert": "Ekspert",
-  "totalPoints": "Jami ballar",
-  "nextLevel": "Keyingi daraja",
-  "pointsToNextLevel": "Keyingi darajaga {points} XP",
-  "manageArticlesTitle": "Maqolalar",
-  "manageArticlesSubtitle": "Bilimlar bazasini boshqarish",
-  "manageVideosTitle": "Videolar",
-  "manageVideosSubtitle": "Video darsliklarni boshqarish",
-  "manageSystemsTitle": "Tizimlar",
+  "manageSystemsTitle": "Tizimlar Boshqaruvi",
   "manageSystemsSubtitle": "Tizimlar ma'lumotnomasini boshqarish",
   "manageFaqTitle": "TSS",
   "manageFaqSubtitle": "TSSni boshqarish",
   "manageNotificationsTitle": "Bildirishnomalar",
-
   "manageNotificationsSubtitle": "Bildirishnomalarni yuborish",
   "selectLanguage": "Tilni tanlang",
   "languageEnglish": "Ingliz tili",
@@ -892,6 +469,12 @@
   "commentPlural": "Izohlar",
   "commentSingular": "Izoh",
   "deleteTopicTooltip": "Mavzuni o'chirish",
+  "faqCategoryLogin": "Kirish muammolari",
+  "faqCategoryPassword": "Parol muammolari",
+  "faqCategoryUpload": "Fayl yuklash",
+  "faqCategoryAccess": "Kirish huquqlari",
+  "faqCategoryGeneral": "Umumiy savollar",
+  "faqCategoryTechnical": "Texnik muammolar",
   "bottomNavKnowledge": "Bilimlar Bazasi",
   "@bottomNavKnowledge": {
     "description": "Bilimlar bazasi ekrani uchun navigatsiya elementi"
@@ -935,5 +518,130 @@
   "articlePinned": "Muhim",
   "@articlePinned": {
     "description": "Muhim maqola uchun yorliq"
-  }
+  },
+  "confirmDeleteArticleMessage": "Siz \"{articleTitle}\" maqolasini o'chirib tashlamoqchimisiz?",
+  "addArticleTitle": "Yangi Maqola",
+  "editArticleTitle": "Maqolani Tahrirlash",
+  "categoryLabel": "Kategoriya",
+  "contentLabel": "Mazmuni (Markdown)",
+  "tagsLabel": "Teglar (vergul bilan ajrating)",
+  "tagsHint": "masalan: sud, qonun, kodeks",
+  "noPdfSelected": "PDF fayl tanlanmagan",
+  "uploadPdfTooltip": "PDF yuklash",
+  "currentFileLabel": "Joriy fayl: {url}",
+  "existingPdfFile": "Mavjud PDF fayl",
+  "articleSavedSuccess": "Maqola saqlandi",
+  "titleRequired": "Sarlavha kiritilishi shart",
+  "contentRequired": "Mazmun kiritilishi shart",
+  "confirmDeleteVideoMessage": "Siz \"{videoTitle}\" videosini o'chirib tashlamoqchimisiz?",
+  "videoDeletedSuccess": "Video o'chirildi",
+  "noVideosFound": "Videolar yo'q",
+  "addVideoTitle": "Yangi Video",
+  "editVideoTitle": "Videoni Tahrirlash",
+  "videoSavedSuccess": "Video saqlandi",
+  "youtubeIdLabel": "YouTube ID",
+  "youtubeIdHint": "Masalan: dQw4w9WgXcQ",
+  "youtubeIdRequired": "YouTube ID kiritilishi shart",
+  "systemOptionalLabel": "Tizim (ixtiyoriy)",
+  "notSelectedLabel": "Tanlanmagan",
+  "durationLabel": "Davomiyligi (soniya)",
+  "durationHint": "Masalan: 600",
+  "durationRequired": "Davomiylik kiritilishi shart",
+  "videoTagsHint": "masalan: login, xatolik, sozlash",
+  "descriptionRequired": "Tavsif kiritilishi shart",
+  "confirmDeleteSystemMessage": "Siz \"{systemName}\" tizimini o'chirib tashlamoqchimisiz?",
+  "systemDeletedSuccess": "Tizim o'chirildi",
+  "noSystemsFound": "Tizimlar yo'q",
+  "addSystemTitle": "Yangi Tizim",
+  "editSystemTitle": "Tizimni Tahrirlash",
+  "systemSavedSuccess": "Tizim saqlandi",
+  "shortNameLabel": "Qisqa nomi",
+  "shortNameHint": "Masalan: e-SUD",
+  "nameRequired": "Nom kiritilishi shart",
+  "fullNameLabel": "To'liq nomi",
+  "fullNameRequired": "To'liq nom kiritilishi shart",
+  "websiteUrlLabel": "Veb-sayt manzili",
+  "urlRequired": "URL kiritilishi shart",
+  "logoUrlLabel": "Logo URL",
+  "logoUrlRequired": "Logo URL kiritilishi shart",
+  "statusLabel": "Holati",
+  "loginGuideIdLabel": "Kirish qo'llanmasi ID (ixtiyoriy)",
+  "videoGuideIdLabel": "Video qo'llanma ID (ixtiyoriy)",
+  "confirmDeleteFaqMessage": "Siz \"{question}\" savolini o'chirib tashlamoqchimisiz?",
+  "faqDeletedSuccess": "Savol o'chirildi",
+  "noFaqsFound": "Savollar yo'q",
+  "addFaqTitle": "Yangi Savol",
+  "editFaqTitle": "Savolni Tahrirlash",
+  "faqSavedSuccess": "Savol saqlandi",
+  "questionLabel": "Savol",
+  "questionRequired": "Savol kiritilishi shart",
+  "answerLabel": "Javob (Markdown)",
+  "answerRequired": "Javob kiritilishi shart",
+  "add": "Qo'shish",
+  "titleLabel": "Sarlavha",
+  "edit": "Tahrirlash",
+  "delete": "O'chirish",
+  "cancel": "Bekor qilish",
+  "search": "Qidirish...",
+  "fieldRequired": "Maydon to'ldirilishi shart",
+  "confirmDelete": "Haqiqatan ham o'chirmoqchimisiz?",
+  "successSaved": "Muvaffaqiyatli saqlandi",
+  "successDeleted": "Muvaffaqiyatli o'chirildi",
+  "notificationManagementTitle": "Xabarnomalar Boshqaruvi",
+  "notificationHistoryTitle": "Xabarnomalar Tarixi",
+  "notificationHistoryPlaceholder": "Bu yerda yuborilgan xabarnomalar tarixi ko'rinadi (tez orada).",
+  "sendNewNotificationButton": "Yangi Xabarnoma Yuborish",
+  "sendNotificationTitle": "Xabarnoma Yuborish",
+  "notificationSentSuccess": "Xabarnoma yuborildi",
+  "notificationTitleLabel": "Sarlavha",
+  "notificationTitleRequired": "Sarlavha kiritilishi shart",
+  "notificationBodyLabel": "Xabar matni",
+  "notificationBodyRequired": "Matn kiritilishi shart",
+  "notificationTypeLabel": "Xabarnoma turi",
+  "targetAudienceLabel": "Auditoriya",
+  "failedToDeleteNews": "\"{newsTitle}\" o'chirilmadi: {error}",
+  "@failedToDeleteNews": {
+    "description": "Error message when deleting news fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "newsTitle": {
+        "type": "Object"
+      }
+    }
+  },
+  "faqTitle": "Ko'p so'raladigan savollar",
+  "searchHelp": "Yordam izlash...",
+  "allCategories": "Barcha toifalar",
+  "helpfulFeedback": "Bu foydali bo'ldimi?",
+  "noArticlesFound": "Savollar topilmadi",
+  "settingsNotifications": "Xabarnomalar",
+  "changePasswordTitle": "Parolni o'zgartirish",
+  "helpCenterTitle": "Yordam markazi",
+  "settingsAbout": "Ilova haqida",
+  "passwordUpdatedSuccess": "Parol muvaffaqiyatli yangilandi",
+  "errorWrongPassword": "Joriy parol noto'g'ri",
+  "currentPassword": "Joriy parol",
+  "newPassword": "Yangi parol",
+  "confirmPassword": "Parolni tasdiqlang",
+  "passwordMismatch": "Parollar mos kelmadi",
+  "save": "Saqlash",
+  "resourceTabArticles": "Maqolalar",
+  "resourceTabVideos": "Videolar",
+  "resourceTabFiles": "Fayllar",
+  "systemsDirectoryTitle": "Sud Axborot Tizimlari",
+  "bookmarkSaveTooltip": "Saqlash",
+  "bookmarkRemoveTooltip": "Olib tashlash",
+  "resourceTypeOther": "Boshqalar",
+  "filesTabTitle": "Fayllar",
+  "openFile": "Faylni ochish",
+  "fileSize": "Fayl hajmi",
+  "selectFile": "Fayl tanlang",
+  "upload": "Yuklash",
+  "processing": "Bajarilmoqda...",
+  "urlLabel": "Havola (URL)",
+  "resourceTypePDF": "PDF Qo'llanma",
+  "resourceTypeVideo": "Video Darslik",
+  "resourceTypeLink": "Veb Havola"
 }

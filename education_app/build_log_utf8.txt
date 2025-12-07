@@ -1,0 +1,88 @@
+﻿Running Gradle task 'assembleRelease'...                        
+flutter : Warning: Flutter support 
+for your project's Kotlin version 
+(1.8.22) will soon be dropped. Please 
+upgrade your Kotlin version to a 
+version of at least 2.1.0 soon.
+At line:1 char:1
++ flutter build apk > build_log.txt 
+2>&1
++ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpec 
+   ified: (Warning: Flutte...ast 2.1  
+  .0 soon.:String) [], RemoteExcept   
+ ion
+    + FullyQualifiedErrorId : NativeC 
+   ommandError
+ 
+Alternatively, use the flag "--android
+-skip-build-dependency-validation" to 
+bypass this check.
+
+Potential fix: Your project's KGP 
+version is typically defined in the 
+plugins block of the 
+`settings.gradle` file (D:\Workshop\ed
+ucation_app\education_app\android/sett
+ings.gradle), by a plugin with the id 
+of org.jetbrains.kotlin.android. 
+If you don't see a plugins block, 
+your project was likely created with 
+an older template version, in which 
+case it is most likely defined in the 
+top-level build.gradle file (D:\Worksh
+op\education_app\education_app\android
+/build.gradle) by the 
+ext.kotlin_version property.
+
+
+FAILURE: Build failed with an 
+exception.
+
+* What went wrong:
+Execution failed for task 
+':app:checkReleaseAarMetadata'.
+> A failure occurred while executing c
+om.android.build.gradle.internal.tasks
+.CheckAarMetadataWorkAction
+   > 3 issues were found when 
+checking AAR metadata:
+
+       1.  Dependency 
+'androidx.browser:browser:1.9.0' 
+requires Android Gradle plugin 8.9.1 
+or higher.
+
+           This build currently uses 
+Android Gradle plugin 8.7.0.
+
+       2.  Dependency 
+'androidx.core:core-ktx:1.17.0' 
+requires Android Gradle plugin 8.9.1 
+or higher.
+
+           This build currently uses 
+Android Gradle plugin 8.7.0.
+
+       3.  Dependency 
+'androidx.core:core:1.17.0' requires 
+Android Gradle plugin 8.9.1 or higher.
+
+           This build currently uses 
+Android Gradle plugin 8.7.0.
+
+* Try:
+> Run with --stacktrace option to get 
+the stack trace.
+> Run with --info or --debug option 
+to get more log output.
+> Run with --scan to get full 
+insights.
+> Get more help at 
+https://help.gradle.org.
+
+BUILD FAILED in 8s
+Running Gradle task 'assembleRelease'...                            8.6s
+Gradle task assembleRelease failed 
+with exit code 1

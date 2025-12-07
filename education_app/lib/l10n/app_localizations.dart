@@ -1267,6 +1267,102 @@ abstract class AppLocalizations {
   /// **'Failed to delete \"{newsTitle}\": {error}'**
   String failedToDeleteNews(String error, Object newsTitle);
 
+  /// No description provided for @faqTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get faqTitle;
+
+  /// No description provided for @searchHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Search help...'**
+  String get searchHelp;
+
+  /// No description provided for @allCategories.
+  ///
+  /// In en, this message translates to:
+  /// **'All Categories'**
+  String get allCategories;
+
+  /// No description provided for @helpfulFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Was this helpful?'**
+  String get helpfulFeedback;
+
+  /// No description provided for @noArticlesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No FAQs found'**
+  String get noArticlesFound;
+
+  /// No description provided for @settingsNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get settingsNotifications;
+
+  /// No description provided for @changePasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Password'**
+  String get changePasswordTitle;
+
+  /// No description provided for @helpCenterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Help Center'**
+  String get helpCenterTitle;
+
+  /// No description provided for @settingsAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'About App'**
+  String get settingsAbout;
+
+  /// No description provided for @passwordUpdatedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Password updated successfully'**
+  String get passwordUpdatedSuccess;
+
+  /// No description provided for @errorWrongPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect current password'**
+  String get errorWrongPassword;
+
+  /// No description provided for @currentPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Password'**
+  String get currentPassword;
+
+  /// No description provided for @newPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get newPassword;
+
+  /// No description provided for @confirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPassword;
+
+  /// No description provided for @passwordMismatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwordMismatch;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
   /// No description provided for @addNewsTooltip.
   ///
   /// In en, this message translates to:
@@ -1831,204 +1927,6 @@ abstract class AppLocalizations {
   /// **'Delete Topic'**
   String get deleteTopicTooltip;
 
-  /// Navigation item for the Knowledge Base screen
-  ///
-  /// In en, this message translates to:
-  /// **'Knowledge Base'**
-  String get bottomNavKnowledge;
-
-  /// Title for the Knowledge Base screen
-  ///
-  /// In en, this message translates to:
-  /// **'Knowledge Base'**
-  String get knowledgeBaseTitle;
-
-  /// Placeholder text for the search bar
-  ///
-  /// In en, this message translates to:
-  /// **'Search articles...'**
-  String get searchPlaceholder;
-
-  /// Filter option to show all categories
-  ///
-  /// In en, this message translates to:
-  /// **'All Categories'**
-  String get allCategories;
-
-  /// Message when no articles are found
-  ///
-  /// In en, this message translates to:
-  /// **'No articles found.'**
-  String get noArticlesFound;
-
-  /// Title for the article detail screen
-  ///
-  /// In en, this message translates to:
-  /// **'Article Details'**
-  String get articleDetailTitle;
-
-  /// Prompt for user feedback on article helpfulness
-  ///
-  /// In en, this message translates to:
-  /// **'Was this article helpful?'**
-  String get helpfulFeedback;
-
-  /// Message shown after user provides feedback
-  ///
-  /// In en, this message translates to:
-  /// **'Thank you for your feedback!'**
-  String get feedbackThanks;
-
-  /// Tooltip for the share button
-  ///
-  /// In en, this message translates to:
-  /// **'Share Article'**
-  String get shareArticle;
-
-  /// Tooltip for the PDF download button
-  ///
-  /// In en, this message translates to:
-  /// **'Download PDF'**
-  String get downloadPdf;
-
-  /// Label for a pinned article
-  ///
-  /// In en, this message translates to:
-  /// **'Pinned'**
-  String get articlePinned;
-
-  /// No description provided for @settingsAccount.
-  ///
-  /// In en, this message translates to:
-  /// **'Account Settings'**
-  String get settingsAccount;
-
-  /// No description provided for @settingsNotifications.
-  ///
-  /// In en, this message translates to:
-  /// **'Notifications'**
-  String get settingsNotifications;
-
-  /// No description provided for @settingsSecurity.
-  ///
-  /// In en, this message translates to:
-  /// **'Security'**
-  String get settingsSecurity;
-
-  /// No description provided for @settingsAbout.
-  ///
-  /// In en, this message translates to:
-  /// **'About App'**
-  String get settingsAbout;
-
-  /// No description provided for @settingsHelp.
-  ///
-  /// In en, this message translates to:
-  /// **'Help & Guides'**
-  String get settingsHelp;
-
-  /// No description provided for @settingsLogOut.
-  ///
-  /// In en, this message translates to:
-  /// **'Log Out'**
-  String get settingsLogOut;
-
-  /// No description provided for @guideTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Guides'**
-  String get guideTitle;
-
-  /// No description provided for @guideVideo.
-  ///
-  /// In en, this message translates to:
-  /// **'Video Tutorials'**
-  String get guideVideo;
-
-  /// No description provided for @guideSystem.
-  ///
-  /// In en, this message translates to:
-  /// **'Systems'**
-  String get guideSystem;
-
-  /// No description provided for @changePasswordTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Change Password'**
-  String get changePasswordTitle;
-
-  /// No description provided for @currentPassword.
-  ///
-  /// In en, this message translates to:
-  /// **'Current Password'**
-  String get currentPassword;
-
-  /// No description provided for @newPassword.
-  ///
-  /// In en, this message translates to:
-  /// **'New Password'**
-  String get newPassword;
-
-  /// No description provided for @confirmPassword.
-  ///
-  /// In en, this message translates to:
-  /// **'Confirm Password'**
-  String get confirmPassword;
-
-  /// No description provided for @save.
-  ///
-  /// In en, this message translates to:
-  /// **'Save'**
-  String get save;
-
-  /// No description provided for @passwordUpdatedSuccess.
-  ///
-  /// In en, this message translates to:
-  /// **'Password updated successfully'**
-  String get passwordUpdatedSuccess;
-
-  /// No description provided for @passwordMismatch.
-  ///
-  /// In en, this message translates to:
-  /// **'Passwords do not match'**
-  String get passwordMismatch;
-
-  /// No description provided for @errorWrongPassword.
-  ///
-  /// In en, this message translates to:
-  /// **'Current password incorrect'**
-  String get errorWrongPassword;
-
-  /// No description provided for @helpCenterTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Help Center'**
-  String get helpCenterTitle;
-
-  /// No description provided for @howCanWeHelp.
-  ///
-  /// In en, this message translates to:
-  /// **'How can we help you?'**
-  String get howCanWeHelp;
-
-  /// No description provided for @faqTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Frequently Asked Questions'**
-  String get faqTitle;
-
-  /// No description provided for @contactSupport.
-  ///
-  /// In en, this message translates to:
-  /// **'Contact Support'**
-  String get contactSupport;
-
-  /// No description provided for @searchHelp.
-  ///
-  /// In en, this message translates to:
-  /// **'Search help...'**
-  String get searchHelp;
-
   /// No description provided for @faqCategoryLogin.
   ///
   /// In en, this message translates to:
@@ -2064,6 +1962,588 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Technical Issues'**
   String get faqCategoryTechnical;
+
+  /// No description provided for @confirmDeleteArticleMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete the article \"{articleTitle}\"?'**
+  String confirmDeleteArticleMessage(Object articleTitle);
+
+  /// No description provided for @addArticleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New Article'**
+  String get addArticleTitle;
+
+  /// No description provided for @editArticleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Article'**
+  String get editArticleTitle;
+
+  /// No description provided for @categoryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get categoryLabel;
+
+  /// No description provided for @contentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Content (Markdown)'**
+  String get contentLabel;
+
+  /// No description provided for @tagsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Tags (comma separated)'**
+  String get tagsLabel;
+
+  /// No description provided for @tagsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. court, law, code'**
+  String get tagsHint;
+
+  /// No description provided for @noPdfSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'No PDF file selected'**
+  String get noPdfSelected;
+
+  /// No description provided for @uploadPdfTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload PDF'**
+  String get uploadPdfTooltip;
+
+  /// No description provided for @currentFileLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Current file: {url}'**
+  String currentFileLabel(Object url);
+
+  /// No description provided for @existingPdfFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Existing PDF file'**
+  String get existingPdfFile;
+
+  /// No description provided for @articleSavedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Article saved'**
+  String get articleSavedSuccess;
+
+  /// No description provided for @titleRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Title is required'**
+  String get titleRequired;
+
+  /// No description provided for @contentRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Content is required'**
+  String get contentRequired;
+
+  /// No description provided for @confirmDeleteVideoMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete the video \"{videoTitle}\"?'**
+  String confirmDeleteVideoMessage(Object videoTitle);
+
+  /// No description provided for @videoDeletedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Video deleted'**
+  String get videoDeletedSuccess;
+
+  /// No description provided for @noVideosFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No videos found'**
+  String get noVideosFound;
+
+  /// No description provided for @addVideoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New Video'**
+  String get addVideoTitle;
+
+  /// No description provided for @editVideoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Video'**
+  String get editVideoTitle;
+
+  /// No description provided for @videoSavedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Video saved'**
+  String get videoSavedSuccess;
+
+  /// No description provided for @youtubeIdLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'YouTube ID'**
+  String get youtubeIdLabel;
+
+  /// No description provided for @youtubeIdHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. dQw4w9WgXcQ'**
+  String get youtubeIdHint;
+
+  /// No description provided for @youtubeIdRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'YouTube ID is required'**
+  String get youtubeIdRequired;
+
+  /// No description provided for @systemOptionalLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'System (Optional)'**
+  String get systemOptionalLabel;
+
+  /// No description provided for @notSelectedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Not Selected'**
+  String get notSelectedLabel;
+
+  /// No description provided for @durationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration (seconds)'**
+  String get durationLabel;
+
+  /// No description provided for @durationHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. 600'**
+  String get durationHint;
+
+  /// No description provided for @durationRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration is required'**
+  String get durationRequired;
+
+  /// No description provided for @videoTagsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. login, error, settings'**
+  String get videoTagsHint;
+
+  /// No description provided for @descriptionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Description is required'**
+  String get descriptionRequired;
+
+  /// No description provided for @confirmDeleteSystemMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete the system \"{systemName}\"?'**
+  String confirmDeleteSystemMessage(Object systemName);
+
+  /// No description provided for @systemDeletedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'System deleted'**
+  String get systemDeletedSuccess;
+
+  /// No description provided for @noSystemsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No systems found'**
+  String get noSystemsFound;
+
+  /// No description provided for @addSystemTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New System'**
+  String get addSystemTitle;
+
+  /// No description provided for @editSystemTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit System'**
+  String get editSystemTitle;
+
+  /// No description provided for @systemSavedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'System saved'**
+  String get systemSavedSuccess;
+
+  /// No description provided for @shortNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Short Name'**
+  String get shortNameLabel;
+
+  /// No description provided for @shortNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. e-SUD'**
+  String get shortNameHint;
+
+  /// No description provided for @nameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Name is required'**
+  String get nameRequired;
+
+  /// No description provided for @fullNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name'**
+  String get fullNameLabel;
+
+  /// No description provided for @fullNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name is required'**
+  String get fullNameRequired;
+
+  /// No description provided for @websiteUrlLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Website URL'**
+  String get websiteUrlLabel;
+
+  /// No description provided for @urlRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'URL is required'**
+  String get urlRequired;
+
+  /// No description provided for @logoUrlLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Logo URL'**
+  String get logoUrlLabel;
+
+  /// No description provided for @logoUrlRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Logo URL is required'**
+  String get logoUrlRequired;
+
+  /// No description provided for @statusLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get statusLabel;
+
+  /// No description provided for @loginGuideIdLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Login Guide ID (Optional)'**
+  String get loginGuideIdLabel;
+
+  /// No description provided for @videoGuideIdLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Video Guide ID (Optional)'**
+  String get videoGuideIdLabel;
+
+  /// No description provided for @confirmDeleteFaqMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete the question \"{question}\"?'**
+  String confirmDeleteFaqMessage(Object question);
+
+  /// No description provided for @faqDeletedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Question deleted'**
+  String get faqDeletedSuccess;
+
+  /// No description provided for @noFaqsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No questions found'**
+  String get noFaqsFound;
+
+  /// No description provided for @addFaqTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New Question'**
+  String get addFaqTitle;
+
+  /// No description provided for @editFaqTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Question'**
+  String get editFaqTitle;
+
+  /// No description provided for @faqSavedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Question saved'**
+  String get faqSavedSuccess;
+
+  /// No description provided for @questionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Question'**
+  String get questionLabel;
+
+  /// No description provided for @questionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Question is required'**
+  String get questionRequired;
+
+  /// No description provided for @answerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Answer (Markdown)'**
+  String get answerLabel;
+
+  /// No description provided for @answerRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Answer is required'**
+  String get answerRequired;
+
+  /// No description provided for @add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get add;
+
+  /// No description provided for @titleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get titleLabel;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search...'**
+  String get search;
+
+  /// No description provided for @fieldRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Field is required'**
+  String get fieldRequired;
+
+  /// No description provided for @confirmDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete?'**
+  String get confirmDelete;
+
+  /// No description provided for @successSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved successfully'**
+  String get successSaved;
+
+  /// No description provided for @successDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Deleted successfully'**
+  String get successDeleted;
+
+  /// No description provided for @notificationManagementTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Management'**
+  String get notificationManagementTitle;
+
+  /// No description provided for @notificationHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification History'**
+  String get notificationHistoryTitle;
+
+  /// No description provided for @notificationHistoryPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'History of sent notifications will appear here (coming soon).'**
+  String get notificationHistoryPlaceholder;
+
+  /// No description provided for @sendNewNotificationButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Send New Notification'**
+  String get sendNewNotificationButton;
+
+  /// No description provided for @sendNotificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Notification'**
+  String get sendNotificationTitle;
+
+  /// No description provided for @notificationSentSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification sent'**
+  String get notificationSentSuccess;
+
+  /// No description provided for @notificationTitleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get notificationTitleLabel;
+
+  /// No description provided for @notificationTitleRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Title is required'**
+  String get notificationTitleRequired;
+
+  /// No description provided for @notificationBodyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Message Body'**
+  String get notificationBodyLabel;
+
+  /// No description provided for @notificationBodyRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Message body is required'**
+  String get notificationBodyRequired;
+
+  /// No description provided for @notificationTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification Type'**
+  String get notificationTypeLabel;
+
+  /// No description provided for @targetAudienceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Audience'**
+  String get targetAudienceLabel;
+
+  /// No description provided for @resourceTabArticles.
+  ///
+  /// In en, this message translates to:
+  /// **'Articles'**
+  String get resourceTabArticles;
+
+  /// No description provided for @resourceTabVideos.
+  ///
+  /// In en, this message translates to:
+  /// **'Videos'**
+  String get resourceTabVideos;
+
+  /// No description provided for @resourceTabFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Files'**
+  String get resourceTabFiles;
+
+  /// No description provided for @filesTabTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Files'**
+  String get filesTabTitle;
+
+  /// No description provided for @systemsDirectoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Court Information Systems'**
+  String get systemsDirectoryTitle;
+
+  /// No description provided for @bookmarkSaveTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Bookmark'**
+  String get bookmarkSaveTooltip;
+
+  /// No description provided for @bookmarkRemoveTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Bookmark'**
+  String get bookmarkRemoveTooltip;
+
+  /// No description provided for @resourceTypeOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Others'**
+  String get resourceTypeOther;
+
+  /// No description provided for @openFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Open File'**
+  String get openFile;
+
+  /// No description provided for @fileSize.
+  ///
+  /// In en, this message translates to:
+  /// **'File Size'**
+  String get fileSize;
+
+  /// No description provided for @selectFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Select File'**
+  String get selectFile;
+
+  /// No description provided for @upload.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload'**
+  String get upload;
+
+  /// No description provided for @processing.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing...'**
+  String get processing;
+
+  /// No description provided for @urlLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'URL'**
+  String get urlLabel;
+
+  /// No description provided for @resourceTypePDF.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF Manual'**
+  String get resourceTypePDF;
+
+  /// No description provided for @resourceTypeVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Video Tutorial'**
+  String get resourceTypeVideo;
+
+  /// No description provided for @resourceTypeLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Web Link'**
+  String get resourceTypeLink;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

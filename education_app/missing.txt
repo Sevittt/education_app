@@ -1,0 +1,9 @@
+{
+  "ru": [
+    "authorLabel",
+    "dateAddedLabel",
+    "launchingUrlMessage",
+    "resourceUpdatedSuccess",
+    "resourceUpdatedError"
+  ]
+}
