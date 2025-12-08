@@ -153,8 +153,10 @@ service cloud.firestore {
 
     // 12. Notifications (Xabarnomalar)
     match /notifications/{notificationId} {
-      allow read: if isAuthenticated(); // Hamma o'qiy oladi (o'ziga tegishlisini filtrlaydi)
-      allow write: if isAdmin();
+      allow read: if isAuthenticated(); 
+      allow create, delete: if isAdmin();
+      // Allow users to update 'readBy' to mark as read
+      allow update: if isAdmin() || (isAuthenticated() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['readBy']));
     }
   }
 }

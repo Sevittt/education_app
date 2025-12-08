@@ -150,7 +150,7 @@ class _FilesTabState extends State<FilesTab> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
-                const Text("Faqat saqlanganlar:"),
+                Text(l10n.onlySaved),
                 const Spacer(),
                 Switch(
                   value: _showOnlyBookmarked,

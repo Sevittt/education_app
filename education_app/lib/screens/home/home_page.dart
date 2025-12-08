@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
       actions.add(
         SpeedDialChild(
           child: const Icon(Icons.chat_bubble),
-          label: 'Create Discussion',
+          label: AppLocalizations.of(context)!.actionCreateDiscussion,
           onTap: () {
             Navigator.push(
               context,
@@ -84,12 +84,12 @@ class _HomePageState extends State<HomePage> {
         ),
       );
 
-      // ACTIONS: Create Resource & Quiz (only for teachers and admins)
-      if (user.role == UserRole.teacher || user.role == UserRole.admin) {
+      // ACTIONS: Create Resource & Quiz (only for experts and admins)
+      if (user.role == UserRole.ekspert || user.role == UserRole.admin) {
         actions.add(
           SpeedDialChild(
             child: const Icon(Icons.description),
-            label: 'Create Resource',
+            label: AppLocalizations.of(context)!.actionCreateResource,
             onTap: () {
               Navigator.push(
                 context,
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
         actions.add(
           SpeedDialChild(
             child: const Icon(Icons.quiz),
-            label: 'Create Quiz',
+            label: AppLocalizations.of(context)!.actionCreateQuiz,
             onTap: () {
               Navigator.push(
                 context,

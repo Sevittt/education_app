@@ -118,6 +118,26 @@
   - Faol foydalanuvchilar
   - Popular resurslar
 
+### 🔔 Xabarnomalar (Notifications)
+
+- **Turlari**
+  - Tizim yangiliklari
+  - Yangi kontent (Maqola, Video)
+  - Eslatmalar
+  - Murojaat holati o'zgarishi
+
+- **Funksiyalar**
+  - O'qilmaganlar soni (Badge)
+  - "Mark all as read" imkoniyati
+  - To'g'ridan-to'g'ri kontentga o'tish
+
+### 📊 Statistika va Tarix
+
+- **Viktorina Tarixi**
+  - To'liq tarix (Vaqt bo'yicha guruhlangan)
+  - So'nggi natijalar (Profil preview)
+  - Batafsil natijalar ko'rish
+
 ### 🌍 Lokalizatsiya
 
 - **Multi-language Support**
@@ -262,16 +282,16 @@ flutter run -d ios
 <!-- Screenshots qo'shiladi -->
 
 ### Home Screen
-*[Screenshot joylashtiring]*
+![alt text](image.png)
 
 ### Test Topshirish
-*[Screenshot joylashtiring]*
+![alt text](image-3.png)
 
 ### Admin Dashboard
-*[Screenshot joylashtiring]*
+![alt text](image-2.png)
 
 ### Profile Screen
-*[Screenshot joylashtiring]*
+![alt text](image-1.png)
 
 ---
 
@@ -321,7 +341,7 @@ Error: Red (#F44336)
 
 ### O'rta Muddatli (3-6 oy)
 
-- [ ] 🎥 Video Content
+- [x] 🎥 Video Content
   - Video darslar qo'llab-quvvatlash
   - YouTube integratsiya
   - Video progress tracking
@@ -331,7 +351,7 @@ Error: Red (#F44336)
   - Code snippet
   - LaTeX formula
 
-- [ ] 🏆 Achievements & Badges
+- [x] 🏆 Achievements & Badges
   - Yutuq tizimi
   - Nishonlar to'plami
   - Leaderboard

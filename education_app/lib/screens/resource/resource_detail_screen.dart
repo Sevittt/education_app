@@ -230,7 +230,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
       appBar: AppBar(
         title: Text(widget.resource.title), // Use widget.resource
         actions: [
-          if (userRole == UserRole.teacher || userRole == UserRole.admin) ...[
+          if (userRole == UserRole.ekspert || userRole == UserRole.admin) ...[
             IconButton(
               icon: const Icon(Icons.edit),
               tooltip: l10n.editButtonTooltip,

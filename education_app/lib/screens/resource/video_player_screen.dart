@@ -3,6 +3,9 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:intl/intl.dart';
 import '../../models/video_tutorial.dart';
 import '../../services/video_tutorial_service.dart';
+import '../../services/gamification_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../../l10n/app_localizations.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
   final VideoTutorial video;
@@ -42,6 +45,37 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   void _listener() {
     if (_isPlayerReady && mounted && !_controller.value.isFullScreen) {
       setState(() {});
+    }
+    
+    // Check if video finished
+    if (_isPlayerReady && _controller.value.playerState == PlayerState.ended) {
+      _awardPointsForWatching();
+    }
+  }
+
+  bool _pointsAwarded = false;
+
+  Future<void> _awardPointsForWatching() async {
+    if (_pointsAwarded) return;
+    
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) return;
+
+    _pointsAwarded = true;
+    
+    // Award 10 points for watching a video
+    await GamificationService().awardPoints(
+      userId: userId, 
+      points: 10, 
+      actionType: 'video_watched',
+      description: 'Watched video: ${widget.video.title}'
+    );
+
+    if (mounted) {
+       final l10n = AppLocalizations.of(context)!;
+       ScaffoldMessenger.of(context).showSnackBar(
+         SnackBar(content: Text(l10n.pointsEarned(10))),
+       );
     }
   }
 

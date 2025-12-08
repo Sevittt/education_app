@@ -2544,6 +2544,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Web Link'**
   String get resourceTypeLink;
+
+  /// No description provided for @onlySaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Only Saved'**
+  String get onlySaved;
+
+  /// No description provided for @searchArticlesPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Search articles...'**
+  String get searchArticlesPlaceholder;
+
+  /// No description provided for @filterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get filterAll;
+
+  /// No description provided for @noResultsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No results found'**
+  String get noResultsFound;
+
+  /// No description provided for @noArticlesAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No articles available'**
+  String get noArticlesAvailable;
+
+  /// No description provided for @noVideosAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No videos available'**
+  String get noVideosAvailable;
+
+  /// No description provided for @actionCreateDiscussion.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Discussion'**
+  String get actionCreateDiscussion;
+
+  /// No description provided for @actionCreateResource.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Resource'**
+  String get actionCreateResource;
+
+  /// No description provided for @actionCreateQuiz.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Quiz'**
+  String get actionCreateQuiz;
+
+  /// No description provided for @notificationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationsTitle;
+
+  /// No description provided for @loginRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Login required'**
+  String get loginRequired;
+
+  /// No description provided for @markAllAsReadTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all as read'**
+  String get markAllAsReadTooltip;
+
+  /// No description provided for @allNotificationsReadMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'All notifications marked as read'**
+  String get allNotificationsReadMessage;
+
+  /// No description provided for @noNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications'**
+  String get noNotifications;
+
+  /// No description provided for @closeAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get closeAction;
+
+  /// No description provided for @leaderboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Leaderboard'**
+  String get leaderboardTitle;
+
+  /// No description provided for @pointsEarned.
+  ///
+  /// In en, this message translates to:
+  /// **'You earned {points} XP!'**
+  String pointsEarned(int points);
+
+  /// No description provided for @levelUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Congratulations! New Level: {level}'**
+  String levelUp(String level);
+
+  /// No description provided for @rank.
+  ///
+  /// In en, this message translates to:
+  /// **'Rank'**
+  String get rank;
+
+  /// No description provided for @quizHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz History'**
+  String get quizHistoryTitle;
+
+  /// No description provided for @seeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'See All'**
+  String get seeAll;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @yesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get yesterday;
+
+  /// No description provided for @thisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'This Week'**
+  String get thisWeek;
+
+  /// No description provided for @older.
+  ///
+  /// In en, this message translates to:
+  /// **'Older Results'**
+  String get older;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

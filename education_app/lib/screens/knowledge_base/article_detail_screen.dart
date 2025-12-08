@@ -4,6 +4,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:intl/intl.dart';
 import '../../models/knowledge_article.dart';
 import '../../services/knowledge_base_service.dart';
+import '../../services/gamification_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../../l10n/app_localizations.dart';
 
 class ArticleDetailScreen extends StatefulWidget {
   final KnowledgeArticle article;
@@ -21,6 +24,8 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
   final KnowledgeBaseService _service = KnowledgeBaseService();
   bool _hasVoted = false;
   late int _currentHelpfulCount;
+  final ScrollController _scrollController = ScrollController();
+  bool _pointsAwarded = false;
 
   @override
   void initState() {
@@ -28,6 +33,46 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
     _currentHelpfulCount = widget.article.helpful;
     // Increment views when screen opens
     _service.incrementViews(widget.article.id);
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_pointsAwarded) return;
+    
+    // Check if scrolled to bottom
+    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 50) {
+      _awardPointsForReading();
+    }
+  }
+
+  Future<void> _awardPointsForReading() async {
+    if (_pointsAwarded) return;
+    
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) return;
+
+    _pointsAwarded = true;
+    
+    // Award 5 points for reading an article
+    await GamificationService().awardPoints(
+      userId: userId, 
+      points: 5, 
+      actionType: 'article_read',
+      description: 'Read article: ${widget.article.title}'
+    );
+
+    if (mounted) {
+       final l10n = AppLocalizations.of(context)!;
+       ScaffoldMessenger.of(context).showSnackBar(
+         SnackBar(content: Text(l10n.pointsEarned(5))),
+       );
+    }
   }
 
   Future<void> _handleVote() async {
@@ -79,6 +124,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
         children: [
           Expanded(
             child: SingleChildScrollView(
+              controller: _scrollController,
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

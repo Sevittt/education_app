@@ -3,6 +3,7 @@
 // import 'package:education_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/discussion_topic.dart';
 import '../../services/community_service.dart';
@@ -112,8 +113,8 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
       await communityService.createTopic(
         newTopic.title,
         newTopic.content,
-        newTopic.authorName,
         newTopic.authorId,
+        newTopic.authorName,
       );
 
       if (mounted) {
@@ -128,11 +129,14 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
         Navigator.pop(context);
       }
     } catch (e) {
+      if (kDebugMode) {
+        print("CREATE TOPIC ERROR: $e");
+      }
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              l10n?.failedToCreateTopic('Error', e.toString()) ??
+              l10n?.failedToCreateTopic(e.toString(), '') ??
                   'Failed to create topic: $e',
             ),
             backgroundColor: Theme.of(context).colorScheme.error,

@@ -1329,4 +1329,83 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get resourceTypeLink => 'Veb Havola';
+
+  @override
+  String get onlySaved => 'Faqat saqlanganlar';
+
+  @override
+  String get searchArticlesPlaceholder => 'Maqolalarni qidirish...';
+
+  @override
+  String get filterAll => 'Barchasi';
+
+  @override
+  String get noResultsFound => 'Hech narsa topilmadi';
+
+  @override
+  String get noArticlesAvailable => 'Maqolalar mavjud emas';
+
+  @override
+  String get noVideosAvailable => 'Videolar mavjud emas';
+
+  @override
+  String get actionCreateDiscussion => 'Muhokama yaratish';
+
+  @override
+  String get actionCreateResource => 'Resurs yaratish';
+
+  @override
+  String get actionCreateQuiz => 'Test yaratish';
+
+  @override
+  String get notificationsTitle => 'Xabarnomalar';
+
+  @override
+  String get loginRequired => 'Tizimga kirish kerak';
+
+  @override
+  String get markAllAsReadTooltip => 'Hammasini o\'qilgan deb belgilash';
+
+  @override
+  String get allNotificationsReadMessage => 'Barcha xabarnomalar o\'qilgan deb belgilandi';
+
+  @override
+  String get noNotifications => 'Xabarnomalar yo\'q';
+
+  @override
+  String get closeAction => 'Yopish';
+
+  @override
+  String get leaderboardTitle => 'Liderlar Jadvali';
+
+  @override
+  String pointsEarned(int points) {
+    return 'Siz $points XP oldingiz!';
+  }
+
+  @override
+  String levelUp(String level) {
+    return 'Tabriklaymiz! Yangi daraja: $level';
+  }
+
+  @override
+  String get rank => 'O\'rin';
+
+  @override
+  String get quizHistoryTitle => 'Viktorina Tarixi';
+
+  @override
+  String get seeAll => 'Barchasini ko\'rish';
+
+  @override
+  String get today => 'Bugun';
+
+  @override
+  String get yesterday => 'Kecha';
+
+  @override
+  String get thisWeek => 'Shu hafta';
+
+  @override
+  String get older => 'Eski natijalar';
 }

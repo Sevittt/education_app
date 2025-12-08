@@ -15,7 +15,9 @@ import 'profile_edit_screen.dart'; // Add this import
 
 // --- ADDED ---
 import 'package:sud_qollanma/screens/admin/admin_panel_screen.dart';
-import '../../widgets/quiz_attempt_card.dart'; // --- ADDED ---
+import 'package:sud_qollanma/screens/profile/leaderboard_screen.dart'; 
+import 'package:sud_qollanma/screens/profile/quiz_history_screen.dart'; // --- ADDED ---
+import '../../widgets/quiz_attempt_card.dart';
 // --- END ADDED ---
 
 class ProfileScreen extends StatelessWidget {
@@ -87,7 +89,8 @@ class ProfileScreen extends StatelessWidget {
     final quizService = Provider.of<QuizService>(context, listen: false);
 
     return StreamBuilder<List<QuizAttempt>>(
-      stream: quizService.getAttemptsForUser(userId),
+      // O'ZGARISH: Faqat oxirgi 3 ta urinishni olish (Preview)
+      stream: quizService.getRecentAttempts(userId, limit: 3),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -365,6 +368,21 @@ class ProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 children: [
+                  // --- Leaderboard Option ---
+                  _buildProfileOptionCard(
+                    context: context,
+                    icon: Icons.leaderboard_outlined,
+                    title: l10n.leaderboardTitle,
+                    enabled: appUser != null,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LeaderboardScreen(),
+                        ),
+                      );
+                    },
+                  ),
                   _buildProfileOptionCard(
                     context: context,
                     icon: Icons.manage_accounts_outlined,
@@ -440,11 +458,28 @@ class ProfileScreen extends StatelessWidget {
                       endIndent: 16,
                       thickness: 0.5,
                     ),
-                    Text(
-                      l10n.myQuizHistory,
-                      style: textTheme.titleLarge?.copyWith(
-                        color: colorScheme.onSurface,
-                      ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                         Text(
+                          l10n.myQuizHistory,
+                          style: textTheme.titleLarge?.copyWith(
+                            color: colorScheme.onSurface,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const QuizHistoryScreen(),
+                              ),
+                            );
+                          },
+                          child: Text(l10n.seeAll),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 8.0),
                     _buildQuizHistoryList(context, appUser.id, l10n),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../../models/knowledge_article.dart';
 import '../../../services/knowledge_base_service.dart';
 import '../../knowledge_base/article_detail_screen.dart';
@@ -70,7 +71,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
       child: TextField(
         controller: _searchController,
         decoration: InputDecoration(
-          hintText: 'Maqolalarni qidirish...',
+          hintText: AppLocalizations.of(context)!.searchArticlesPlaceholder,
           prefixIcon: const Icon(Icons.search),
           suffixIcon: _searchQuery.isNotEmpty
               ? IconButton(
@@ -99,7 +100,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         children: [
-          _buildCategoryChip(null, 'Barchasi'),
+          _buildCategoryChip(null, AppLocalizations.of(context)!.filterAll),
           ...ArticleCategory.values.map((category) {
             return _buildCategoryChip(category, category.displayName);
           }),
@@ -143,7 +144,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
             Icon(Icons.search_off, size: 64, color: Colors.grey.shade400),
             const SizedBox(height: 16),
             Text(
-              'Hech narsa topilmadi',
+              AppLocalizations.of(context)!.noResultsFound,
               style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
             ),
           ],
@@ -189,7 +190,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
                 Icon(Icons.library_books_outlined, size: 64, color: Colors.grey.shade400),
                 const SizedBox(height: 16),
                 Text(
-                  'Maqolalar mavjud emas',
+                  AppLocalizations.of(context)!.noArticlesAvailable,
                   style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
                 ),
               ],

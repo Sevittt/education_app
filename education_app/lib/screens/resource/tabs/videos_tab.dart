@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../../models/video_tutorial.dart';
 import '../../../services/video_tutorial_service.dart';
 import '../video_player_screen.dart';
@@ -37,7 +38,7 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
           labelColor: Theme.of(context).primaryColor,
           unselectedLabelColor: Colors.grey,
           tabs: [
-            const Tab(text: 'Barchasi'),
+            Tab(text: AppLocalizations.of(context)!.filterAll),
             ...VideoCategory.values.map((category) {
               return Tab(text: category.displayName);
             }),
@@ -70,7 +71,7 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
       stream: stream,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Center(child: Text('Xatolik yuz berdi: ${snapshot.error}'));
+          return Center(child: Text('${AppLocalizations.of(context)!.errorPrefix}${snapshot.error}'));
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -87,7 +88,7 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
                 Icon(Icons.video_library_outlined, size: 64, color: Colors.grey.shade400),
                 const SizedBox(height: 16),
                 Text(
-                  'Videolar mavjud emas',
+                  AppLocalizations.of(context)!.noVideosAvailable,
                   style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
                 ),
               ],

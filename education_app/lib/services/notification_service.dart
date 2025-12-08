@@ -136,21 +136,35 @@ class NotificationService {
     }
   }
 
-  /// Barcha xabarnomalarni o'qilgan deb belgilash
-  Future<bool> markAllAsRead(String userId) async {
+  /// Barcha xabarnomalarni o'qilgan deb belgilash (Batch Write)
+  Future<Map<String, dynamic>> markAllAsRead(String userId) async {
     try {
-      final notifications = await getUserNotifications(userId).first;
-      
-      for (var notification in notifications) {
-        if (!notification.isReadBy(userId)) {
-          await markAsRead(notification.id, userId);
+      final notificationsSnapshot = await _notificationsCollection
+          .where('targetAudience', whereIn: ['all', userId])
+          .get();
+
+      final batch = FirebaseFirestore.instance.batch();
+      bool hasUpdates = false;
+
+      for (var doc in notificationsSnapshot.docs) {
+        final data = doc.data();
+        final readBy = List<String>.from(data['readBy'] ?? []);
+
+        if (!readBy.contains(userId)) {
+          readBy.add(userId);
+          batch.update(doc.reference, {'readBy': readBy});
+          hasUpdates = true;
         }
       }
+
+      if (hasUpdates) {
+        await batch.commit();
+      }
       
-      return true;
+      return {'success': true};
     } catch (e) {
       print('Error marking all as read: $e');
-      return false;
+      return {'success': false, 'error': e.toString()};
     }
   }
 

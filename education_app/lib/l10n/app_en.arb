@@ -620,5 +620,44 @@
   "urlLabel": "URL",
   "resourceTypePDF": "PDF Manual",
   "resourceTypeVideo": "Video Tutorial",
-  "resourceTypeLink": "Web Link"
+  "resourceTypeLink": "Web Link",
+  "onlySaved": "Only Saved",
+  "searchArticlesPlaceholder": "Search articles...",
+  "filterAll": "All",
+  "noResultsFound": "No results found",
+  "noArticlesAvailable": "No articles available",
+  "noVideosAvailable": "No videos available",
+  "actionCreateDiscussion": "Create Discussion",
+  "actionCreateResource": "Create Resource",
+  "actionCreateQuiz": "Create Quiz",
+  "notificationsTitle": "Notifications",
+  "loginRequired": "Login required",
+  "markAllAsReadTooltip": "Mark all as read",
+  "allNotificationsReadMessage": "All notifications marked as read",
+  "noNotifications": "No notifications",
+  "closeAction": "Close",
+  "leaderboardTitle": "Leaderboard",
+  "pointsEarned": "You earned {points} XP!",
+  "@pointsEarned": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "levelUp": "Congratulations! New Level: {level}",
+  "@levelUp": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "rank": "Rank",
+  "quizHistoryTitle": "Quiz History",
+  "seeAll": "See All",
+  "today": "Today",
+  "yesterday": "Yesterday",
+  "thisWeek": "This Week",
+  "older": "Older Results"
 }

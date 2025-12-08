@@ -1329,4 +1329,83 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get resourceTypeLink => 'Web Link';
+
+  @override
+  String get onlySaved => 'Only Saved';
+
+  @override
+  String get searchArticlesPlaceholder => 'Search articles...';
+
+  @override
+  String get filterAll => 'All';
+
+  @override
+  String get noResultsFound => 'No results found';
+
+  @override
+  String get noArticlesAvailable => 'No articles available';
+
+  @override
+  String get noVideosAvailable => 'No videos available';
+
+  @override
+  String get actionCreateDiscussion => 'Create Discussion';
+
+  @override
+  String get actionCreateResource => 'Create Resource';
+
+  @override
+  String get actionCreateQuiz => 'Create Quiz';
+
+  @override
+  String get notificationsTitle => 'Notifications';
+
+  @override
+  String get loginRequired => 'Login required';
+
+  @override
+  String get markAllAsReadTooltip => 'Mark all as read';
+
+  @override
+  String get allNotificationsReadMessage => 'All notifications marked as read';
+
+  @override
+  String get noNotifications => 'No notifications';
+
+  @override
+  String get closeAction => 'Close';
+
+  @override
+  String get leaderboardTitle => 'Leaderboard';
+
+  @override
+  String pointsEarned(int points) {
+    return 'You earned $points XP!';
+  }
+
+  @override
+  String levelUp(String level) {
+    return 'Congratulations! New Level: $level';
+  }
+
+  @override
+  String get rank => 'Rank';
+
+  @override
+  String get quizHistoryTitle => 'Quiz History';
+
+  @override
+  String get seeAll => 'See All';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get yesterday => 'Yesterday';
+
+  @override
+  String get thisWeek => 'This Week';
+
+  @override
+  String get older => 'Older Results';
 }

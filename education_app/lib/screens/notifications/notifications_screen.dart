@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import '../../models/app_notification.dart';
@@ -26,58 +27,71 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   Widget build(BuildContext context) {
     if (_userId == null) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Xabarnomalar')),
-        body: const Center(child: Text('Tizimga kirish kerak')),
+        appBar: AppBar(title: Text(AppLocalizations.of(context)!.notificationsTitle)),
+        body: Center(child: Text(AppLocalizations.of(context)!.loginRequired)),
       );
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Xabarnomalar'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.done_all),
-            tooltip: 'Hammasini o\'qilgan deb belgilash',
-            onPressed: () async {
-              final messenger = ScaffoldMessenger.of(context);
-              await _service.markAllAsRead(_userId!);
-              if (!mounted) return;
-              messenger.showSnackBar(
-                const SnackBar(
-                  content: Text('Barcha xabarnomalar o\'qilgan deb belgilandi'),
+    return StreamBuilder<List<AppNotification>>(
+      stream: _service.getUserNotifications(_userId!),
+      builder: (context, snapshot) {
+        final notifications = snapshot.data ?? [];
+        final hasUnread = notifications.any((n) => !n.isReadBy(_userId!));
+
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(AppLocalizations.of(context)!.notificationsTitle),
+            centerTitle: true,
+            actions: [
+              if (hasUnread)
+                IconButton(
+                  icon: const Icon(Icons.done_all),
+                  tooltip: AppLocalizations.of(context)!.markAllAsReadTooltip,
+                  onPressed: () async {
+                    final messenger = ScaffoldMessenger.of(context);
+                    final result = await _service.markAllAsRead(_userId!);
+                    if (!mounted) return;
+                    
+                    if (result['success'] == true) {
+                      messenger.showSnackBar(
+                        SnackBar(
+                          content: Text(AppLocalizations.of(context)!.allNotificationsReadMessage),
+                        ),
+                      );
+                    } else {
+                      messenger.showSnackBar(
+                        SnackBar(content: Text('Error: ${result['error']}')),
+                      );
+                    }
+                  },
                 ),
+            ],
+          ),
+          body: Builder(
+            builder: (context) {
+              if (snapshot.hasError) {
+                return Center(child: Text('${AppLocalizations.of(context)!.errorPrefix}${snapshot.error}'));
+              }
+
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              if (notifications.isEmpty) {
+                return _buildEmptyState();
+              }
+
+              return ListView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: notifications.length,
+                itemBuilder: (context, index) {
+                  return _buildNotificationCard(notifications[index]);
+                },
               );
             },
           ),
-        ],
-      ),
-      body: StreamBuilder<List<AppNotification>>(
-        stream: _service.getUserNotifications(_userId!),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Center(child: Text('Xatolik: ${snapshot.error}'));
-          }
-
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final notifications = snapshot.data ?? [];
-
-          if (notifications.isEmpty) {
-            return _buildEmptyState();
-          }
-
-          return ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: notifications.length,
-            itemBuilder: (context, index) {
-              return _buildNotificationCard(notifications[index]);
-            },
-          );
-        },
-      ),
+        );
+      },
     );
   }
 
@@ -199,7 +213,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           Icon(Icons.notifications_none, size: 64, color: Colors.grey.shade400),
           const SizedBox(height: 16),
           Text(
-            'Xabarnomalar yo\'q',
+            AppLocalizations.of(context)!.noNotifications,
             style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
           ),
         ],
@@ -239,7 +253,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Xatolik: $e')),
+          SnackBar(content: Text('${AppLocalizations.of(context)!.errorPrefix}$e')),
         );
       }
     } finally {
@@ -313,7 +327,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Yopish'),
+                child: Text(AppLocalizations.of(context)!.closeAction),
               ),
             ],
           ),

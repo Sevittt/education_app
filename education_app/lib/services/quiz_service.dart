@@ -123,6 +123,20 @@ class QuizService {
       }).toList();
     });
   }
+
+  // --- NEW: Gets only recent attempts (for Profile Preview) ---
+  Stream<List<QuizAttempt>> getRecentAttempts(String userId, {int limit = 3}) {
+    return _attemptsCollection
+        .where('userId', isEqualTo: userId)
+        .orderBy('attemptedAt', descending: true)
+        .limit(limit)
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return QuizAttempt.fromMap(doc.data(), doc.id);
+      }).toList();
+    });
+  }
   
   // --- Testni o'chirish ---
   Future<void> deleteQuiz(String quizId) async {

@@ -7,9 +7,7 @@ enum UserRole {
   xodim,
   ekspert,
   admin,
-  teacher,
-  student,
-  // Add other roles as needed
+  // Removed legacy roles: teacher, student
 }
 
 // Helper to convert string to UserRole and vice-versa
@@ -17,6 +15,15 @@ UserRole stringToUserRole(String? roleString) {
   if (roleString == null) {
     return UserRole.xodim;
   }
+  
+  // Backward compatibility for legacy roles
+  if (roleString.toLowerCase() == 'teacher') {
+    return UserRole.ekspert;
+  }
+  if (roleString.toLowerCase() == 'student') {
+    return UserRole.xodim;
+  }
+
   try {
     return UserRole.values.firstWhere(
       (e) =>

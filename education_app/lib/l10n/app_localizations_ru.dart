@@ -1329,4 +1329,83 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get resourceTypeLink => 'Веб-ссылка';
+
+  @override
+  String get onlySaved => 'Только сохраненные';
+
+  @override
+  String get searchArticlesPlaceholder => 'Поиск статей...';
+
+  @override
+  String get filterAll => 'Все';
+
+  @override
+  String get noResultsFound => 'Результатов не найдено';
+
+  @override
+  String get noArticlesAvailable => 'Статьи недоступны';
+
+  @override
+  String get noVideosAvailable => 'Видео недоступны';
+
+  @override
+  String get actionCreateDiscussion => 'Создать обсуждение';
+
+  @override
+  String get actionCreateResource => 'Создать ресурс';
+
+  @override
+  String get actionCreateQuiz => 'Создать тест';
+
+  @override
+  String get notificationsTitle => 'Уведомления';
+
+  @override
+  String get loginRequired => 'Требуется вход';
+
+  @override
+  String get markAllAsReadTooltip => 'Отметить все как прочитанные';
+
+  @override
+  String get allNotificationsReadMessage => 'Все уведомления отмечены как прочитанные';
+
+  @override
+  String get noNotifications => 'Нет уведомлений';
+
+  @override
+  String get closeAction => 'Закрыть';
+
+  @override
+  String get leaderboardTitle => 'Таблица лидеров';
+
+  @override
+  String pointsEarned(int points) {
+    return 'Вы заработали $points XP!';
+  }
+
+  @override
+  String levelUp(String level) {
+    return 'Поздравляем! Новый уровень: $level';
+  }
+
+  @override
+  String get rank => 'Место';
+
+  @override
+  String get quizHistoryTitle => 'История викторин';
+
+  @override
+  String get seeAll => 'Показать все';
+
+  @override
+  String get today => 'Сегодня';
+
+  @override
+  String get yesterday => 'Вчера';
+
+  @override
+  String get thisWeek => 'На этой неделе';
+
+  @override
+  String get older => 'Старые результаты';
 }
