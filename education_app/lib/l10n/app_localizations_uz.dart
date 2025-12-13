@@ -1408,4 +1408,37 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get older => 'Eski natijalar';
+
+  @override
+  String get contactSupport => 'Qo\'llab-quvvatlash';
+
+  @override
+  String get landingTitle => 'Professional Platforma';
+
+  @override
+  String get landingSubtitle => 'Huquqiy bilimingizni oshiring. Istalgan vaqtda.';
+
+  @override
+  String get landingLogin => 'Kirish';
+
+  @override
+  String get landingRegister => 'Ro\'yxatdan o\'tish';
+
+  @override
+  String get featureKnowledgeBase => 'Bilimlar Bazasi';
+
+  @override
+  String get featureKnowledgeBaseDesc => 'Keng ko\'lamli huquqiy resurslar va hujjatlar kutubxonasi.';
+
+  @override
+  String get featureVideoTutorials => 'Video Darsliklar';
+
+  @override
+  String get featureVideoTutorialsDesc => 'Mutaxassislar tomonidan tayyorlangan video qo\'llanmalar.';
+
+  @override
+  String get featureGamification => 'Gamifikatsiya';
+
+  @override
+  String get featureGamificationDesc => 'XP va nishonlar yig\'ing, reytingda bellashing.';
 }

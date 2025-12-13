@@ -2694,6 +2694,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Older Results'**
   String get older;
+
+  /// No description provided for @contactSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Support'**
+  String get contactSupport;
+
+  /// No description provided for @landingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Professional Platform'**
+  String get landingTitle;
+
+  /// No description provided for @landingSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Elevate your legal knowledge. Anytime. Anywhere.'**
+  String get landingSubtitle;
+
+  /// No description provided for @landingLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get landingLogin;
+
+  /// No description provided for @landingRegister.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get landingRegister;
+
+  /// No description provided for @featureKnowledgeBase.
+  ///
+  /// In en, this message translates to:
+  /// **'Knowledge Base'**
+  String get featureKnowledgeBase;
+
+  /// No description provided for @featureKnowledgeBaseDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Access a vast library of legal resources and documents.'**
+  String get featureKnowledgeBaseDesc;
+
+  /// No description provided for @featureVideoTutorials.
+  ///
+  /// In en, this message translates to:
+  /// **'Video Tutorials'**
+  String get featureVideoTutorials;
+
+  /// No description provided for @featureVideoTutorialsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn from expert-led video guides and webinars.'**
+  String get featureVideoTutorialsDesc;
+
+  /// No description provided for @featureGamification.
+  ///
+  /// In en, this message translates to:
+  /// **'Gamification'**
+  String get featureGamification;
+
+  /// No description provided for @featureGamificationDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Earn XP, badges, and compete on the leaderboard.'**
+  String get featureGamificationDesc;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

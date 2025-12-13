@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../widgets/responsive_layout.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../../models/knowledge_article.dart';
 import '../../../services/knowledge_base_service.dart';
@@ -152,12 +153,27 @@ class _ArticlesTabState extends State<ArticlesTab> {
       );
     }
 
-    return ListView.builder(
-      padding: const EdgeInsets.all(16),
-      itemCount: _searchResults.length,
-      itemBuilder: (context, index) {
-        return _buildArticleCard(_searchResults[index]);
-      },
+    return ResponsiveLayout(
+      mobileBody: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: _searchResults.length,
+        itemBuilder: (context, index) {
+          return _buildArticleCard(_searchResults[index]);
+        },
+      ),
+      desktopBody: GridView.builder(
+        padding: const EdgeInsets.all(16),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          childAspectRatio: 0.8,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+        ),
+        itemCount: _searchResults.length,
+        itemBuilder: (context, index) {
+          return _buildArticleCard(_searchResults[index]);
+        },
+      ),
     );
   }
 
@@ -198,12 +214,27 @@ class _ArticlesTabState extends State<ArticlesTab> {
           );
         }
 
-        return ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: articles.length,
-          itemBuilder: (context, index) {
-            return _buildArticleCard(articles[index]);
-          },
+        return ResponsiveLayout(
+          mobileBody: ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemCount: articles.length,
+            itemBuilder: (context, index) {
+              return _buildArticleCard(articles[index]);
+            },
+          ),
+          desktopBody: GridView.builder(
+            padding: const EdgeInsets.all(16),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: 0.8, // Adjusted for article card height
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+            ),
+            itemCount: articles.length,
+            itemBuilder: (context, index) {
+              return _buildArticleCard(articles[index]);
+            },
+          ),
         );
       },
     );

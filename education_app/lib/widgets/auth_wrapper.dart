@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/auth_notifier.dart'; // Your AuthNotifier
 import '../screens/home/home_page.dart'; // Your main app screen
-import '../screens/auth/login_screen.dart'; // Your login screen
+import '../screens/landing_screen.dart'; // Import LandingScreen
 
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({super.key});
@@ -27,9 +27,9 @@ class AuthWrapper extends StatelessWidget {
           // If authenticated, show the HomePage
           return const HomePage();
         } else {
-          // If not authenticated, show the LoginScreen
-          // Users can navigate to RegistrationScreen from LoginScreen
-          return const LoginScreen();
+          // If not authenticated, show the LandingScreen
+          // Users can navigate to Login/Registration from there
+          return const LandingScreen();
         }
       },
     );

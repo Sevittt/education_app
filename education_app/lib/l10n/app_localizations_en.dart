@@ -1408,4 +1408,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get older => 'Older Results';
+
+  @override
+  String get contactSupport => 'Contact Support';
+
+  @override
+  String get landingTitle => 'Professional Platform';
+
+  @override
+  String get landingSubtitle => 'Elevate your legal knowledge. Anytime. Anywhere.';
+
+  @override
+  String get landingLogin => 'Login';
+
+  @override
+  String get landingRegister => 'Register';
+
+  @override
+  String get featureKnowledgeBase => 'Knowledge Base';
+
+  @override
+  String get featureKnowledgeBaseDesc => 'Access a vast library of legal resources and documents.';
+
+  @override
+  String get featureVideoTutorials => 'Video Tutorials';
+
+  @override
+  String get featureVideoTutorialsDesc => 'Learn from expert-led video guides and webinars.';
+
+  @override
+  String get featureGamification => 'Gamification';
+
+  @override
+  String get featureGamificationDesc => 'Earn XP, badges, and compete on the leaderboard.';
 }

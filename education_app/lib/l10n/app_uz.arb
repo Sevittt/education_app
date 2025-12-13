@@ -668,5 +668,17 @@
   "today": "Bugun",
   "yesterday": "Kecha",
   "thisWeek": "Shu hafta",
-  "older": "Eski natijalar"
+  "older": "Eski natijalar",
+  "contactSupport": "Qo'llab-quvvatlash",
+
+  "landingTitle": "Professional Platforma",
+  "landingSubtitle": "Huquqiy bilimingizni oshiring. Istalgan vaqtda.",
+  "landingLogin": "Kirish",
+  "landingRegister": "Ro'yxatdan o'tish",
+  "featureKnowledgeBase": "Bilimlar Bazasi",
+  "featureKnowledgeBaseDesc": "Keng ko'lamli huquqiy resurslar va hujjatlar kutubxonasi.",
+  "featureVideoTutorials": "Video Darsliklar",
+  "featureVideoTutorialsDesc": "Mutaxassislar tomonidan tayyorlangan video qo'llanmalar.",
+  "featureGamification": "Gamifikatsiya",
+  "featureGamificationDesc": "XP va nishonlar yig'ing, reytingda bellashing."
 }

@@ -24,6 +24,8 @@ import '../resource/quiz/create_quiz_screen.dart'; // Make sure this import is p
 import '../notifications/notifications_screen.dart';
 import '../../services/notification_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../widgets/responsive_layout.dart';
+import 'web_home_shell.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -164,22 +166,24 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // Shared AppBar Logic
     var appBar = AppBar(
       title: Text(
         AppLocalizations.of(context)!.appTitle,
-      ), // O'ZGARISH: Sarlavhani lokalizatsiyadan olish
+      ),
       centerTitle: true,
       elevation: Theme.of(context).appBarTheme.elevation ?? 2.0,
       actions: [
         _buildNotificationBell(),
       ],
     );
-    return Scaffold(
+
+    // Mobile Body (Existing Logic)
+    Widget mobileBody = Scaffold(
       appBar: appBar,
       body: IndexedStack(index: _selectedIndex, children: _widgetOptions),
-      // --- Add the floatingActionButton here ---
       floatingActionButton:
-          (_selectedIndex == 1 || _selectedIndex == 2) // Resources is now 1, Community is 2
+          (_selectedIndex == 1 || _selectedIndex == 2)
               ? _buildSpeedDial()
               : null,
       bottomNavigationBar: BottomNavigationBar(
@@ -190,9 +194,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              _selectedIndex == 1
-                  ? Icons.menu_book
-                  : Icons.menu_book_outlined,
+              _selectedIndex == 1 ? Icons.menu_book : Icons.menu_book_outlined,
             ),
             label: AppLocalizations.of(context)!.bottomNavResources,
           ),
@@ -217,6 +219,25 @@ class _HomePageState extends State<HomePage> {
             Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
         type: Theme.of(context).bottomNavigationBarTheme.type,
       ),
+    );
+
+    // Desktop Body (New WebHomeShell Logic)
+    Widget desktopBody = WebHomeShell(
+      selectedIndex: _selectedIndex,
+      onDestinationSelected: _onItemTapped,
+      floatingActionButton:
+          (_selectedIndex == 1 || _selectedIndex == 2)
+              ? _buildSpeedDial()
+              : null,
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _widgetOptions,
+      ),
+    );
+
+    return ResponsiveLayout(
+      mobileBody: mobileBody,
+      desktopBody: desktopBody,
     );
   }
 }

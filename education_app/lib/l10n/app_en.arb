@@ -659,5 +659,17 @@
   "today": "Today",
   "yesterday": "Yesterday",
   "thisWeek": "This Week",
-  "older": "Older Results"
+  "older": "Older Results",
+  "contactSupport": "Contact Support",
+
+  "landingTitle": "Professional Platform",
+  "landingSubtitle": "Elevate your legal knowledge. Anytime. Anywhere.",
+  "landingLogin": "Login",
+  "landingRegister": "Register",
+  "featureKnowledgeBase": "Knowledge Base",
+  "featureKnowledgeBaseDesc": "Access a vast library of legal resources and documents.",
+  "featureVideoTutorials": "Video Tutorials",
+  "featureVideoTutorialsDesc": "Learn from expert-led video guides and webinars.",
+  "featureGamification": "Gamification",
+  "featureGamificationDesc": "Earn XP, badges, and compete on the leaderboard."
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../widgets/responsive_layout.dart';
 import 'package:intl/intl.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../../models/video_tutorial.dart';
@@ -96,12 +97,27 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
           );
         }
 
-        return ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: videos.length,
-          itemBuilder: (context, index) {
-            return _buildVideoCard(videos[index]);
-          },
+        return ResponsiveLayout(
+          mobileBody: ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemCount: videos.length,
+            itemBuilder: (context, index) {
+              return _buildVideoCard(videos[index]);
+            },
+          ),
+          desktopBody: GridView.builder(
+            padding: const EdgeInsets.all(16),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: 1.2, // Adjusted for video card height
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+            ),
+            itemCount: videos.length,
+            itemBuilder: (context, index) {
+              return _buildVideoCard(videos[index]);
+            },
+          ),
         );
       },
     );

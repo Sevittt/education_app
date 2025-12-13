@@ -644,5 +644,17 @@
   "today": "Сегодня",
   "yesterday": "Вчера",
   "thisWeek": "На этой неделе",
-  "older": "Старые результаты"
+  "older": "Старые результаты",
+  "contactSupport": "Поддержка",
+
+  "landingTitle": "Профессиональная Платформа",
+  "landingSubtitle": "Повышайте свои правовые знания. В любое время.",
+  "landingLogin": "Войти",
+  "landingRegister": "Регистрация",
+  "featureKnowledgeBase": "База Знаний",
+  "featureKnowledgeBaseDesc": "Доступ к обширной библиотеке правовых ресурсов.",
+  "featureVideoTutorials": "Видеоуроки",
+  "featureVideoTutorialsDesc": "Учитесь по видео-руководствам от экспертов.",
+  "featureGamification": "Геймификация",
+  "featureGamificationDesc": "Зарабатывайте XP, значки и соревнуйтесь в рейтинге."
 }

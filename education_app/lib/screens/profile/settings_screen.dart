@@ -12,6 +12,8 @@ import '../../models/auth_notifier.dart'; // Import AuthNotifier
 import '../../models/users.dart'; // Import UserRole
 // Import AppLocalizations to use translated strings
 
+import 'package:url_launcher/url_launcher.dart'; // Import url_launcher
+
 import 'change_password_screen.dart';
 import '../faq/faq_list_screen.dart';
 
@@ -74,6 +76,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ),
       );
+    }
+  }
+
+  Future<void> _openTelegram() async {
+    final Uri url = Uri.parse('https://t.me/sudqollanma');
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      if (mounted) {
+         // Fallback or error message, though usually externalApplication mode handles it gracefully/silently if fails
+         debugPrint('Could not launch using external application');
+         // Try default mode as backup
+         if (!await launchUrl(url)) {
+            if (mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Could not open Telegram link')),
+              );
+            }
+         }
+      }
     }
   }
 
@@ -247,6 +267,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               );
             },
+          ),
+          const Divider(height: 1, indent: 16, endIndent: 16),
+
+          _buildSettingsItem(
+            context: context,
+            icon: Icons.send_rounded, // Telegram icon style
+            title: l10n?.contactSupport ?? 'Contact Support',
+            subtitle: '@sudqollanma',
+            onTap: _openTelegram,
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),
 

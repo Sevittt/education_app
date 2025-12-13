@@ -1408,4 +1408,37 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get older => 'Старые результаты';
+
+  @override
+  String get contactSupport => 'Поддержка';
+
+  @override
+  String get landingTitle => 'Профессиональная Платформа';
+
+  @override
+  String get landingSubtitle => 'Повышайте свои правовые знания. В любое время.';
+
+  @override
+  String get landingLogin => 'Войти';
+
+  @override
+  String get landingRegister => 'Регистрация';
+
+  @override
+  String get featureKnowledgeBase => 'База Знаний';
+
+  @override
+  String get featureKnowledgeBaseDesc => 'Доступ к обширной библиотеке правовых ресурсов.';
+
+  @override
+  String get featureVideoTutorials => 'Видеоуроки';
+
+  @override
+  String get featureVideoTutorialsDesc => 'Учитесь по видео-руководствам от экспертов.';
+
+  @override
+  String get featureGamification => 'Геймификация';
+
+  @override
+  String get featureGamificationDesc => 'Зарабатывайте XP, значки и соревнуйтесь в рейтинге.';
 }
