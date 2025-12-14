@@ -237,6 +237,7 @@ class _HomePageState extends State<HomePage> {
 
     return ResponsiveLayout(
       mobileBody: mobileBody,
+      tabletBody: desktopBody,
       desktopBody: desktopBody,
     );
   }
