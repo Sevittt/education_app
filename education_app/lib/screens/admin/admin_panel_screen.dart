@@ -9,6 +9,7 @@ import 'admin_video_management_screen.dart';
 import 'admin_system_management_screen.dart';
 import 'admin_faq_management_screen.dart';
 import 'admin_notification_management_screen.dart';
+import 'admin_analytics_screen.dart';
 
 class AdminPanelScreen extends StatelessWidget {
   const AdminPanelScreen({super.key});
@@ -28,6 +29,21 @@ class AdminPanelScreen extends StatelessWidget {
         crossAxisSpacing: 16.0,
         mainAxisSpacing: 16.0,
         children: [
+          _buildAdminCard(
+            context,
+            icon: Icons.insights,
+            title: AppLocalizations.of(context)!.analyticsTitle,
+            subtitle: AppLocalizations.of(context)!.analyticsSubtitle,
+            color: Colors.indigo.shade100,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AdminAnalyticsScreen(),
+                ),
+              );
+            },
+          ),
           _buildAdminCard(
             context,
             icon: Icons.newspaper,

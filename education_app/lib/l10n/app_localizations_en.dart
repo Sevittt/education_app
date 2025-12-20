@@ -1441,4 +1441,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get featureGamificationDesc => 'Earn XP, badges, and compete on the leaderboard.';
+
+  @override
+  String get analyticsTitle => 'Learning Analytics (xAPI)';
+
+  @override
+  String get analyticsSubtitle => 'Learning Records';
+
+  @override
+  String get totalRecords => 'Total Records';
+
+  @override
+  String get realTime => 'Real-time';
+
+  @override
+  String get activityDistribution => 'Activity Distribution';
+
+  @override
+  String get recentActivityFeed => 'Recent Activity Feed';
+
+  @override
+  String get noRecords => 'No learning records found yet.';
+
+  @override
+  String get unknownUser => 'Unknown User';
+
+  @override
+  String get unknownObject => 'Unknown Object';
+
+  @override
+  String get justNow => 'Just now';
+
+  @override
+  String get quizzes => 'Quizzes';
+
+  @override
+  String get simulations => 'Simulations';
 }

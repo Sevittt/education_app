@@ -59,6 +59,17 @@ class ProfileService {
     }
   }
 
+  // --- NEW: Real-time user profile stream ---
+  Stream<AppUser?> getUserProfileStream(String uid) {
+    return _usersCollection.doc(uid).snapshots().map((doc) {
+      if (doc.exists && doc.data() != null) {
+        return AppUser.fromMap(doc.data()!, uid);
+      }
+      return null;
+    });
+  }
+  // --- END NEW ---
+
   Future<void> updateUserProfile(AppUser user) async {
     await _usersCollection.doc(user.id).update(user.toMap());
   }

@@ -88,35 +88,24 @@
   - Savol-javob
   - Tajriba almashish
 
-### 🎮 Gamification
+### 🎮 Gamification 2.0 (Competency-Based)
 
-- **XP (Experience Points) Tizimi**
-  - Test topshirish uchun XP olish
-  - Resurs yaratish uchun ball
-  - Faol ishtirok uchun mukofotlar
+- **XP & Levels Engine**
+  - **Gatekeeper Logic**: Keyingi darajaga o'tish uchun faqat XP yetarli emas, ma'lum kompetensiya talablari (testlar soni, simulyatsiyalar) bajarilishi shart.
+  - **Dynamic XP**: Har bir harakat (Video, Test, Simulyatsiya) uchun alohida XP qiymatlari.
+  - **Level Capping**: Talablar bajarilmaguncha level capped bo'ladi.
 
-- **Darajalar (Levels)**
-  - Boshlang'ich (0-100 XP)
-  - O'rta (100-500 XP)
-  - Yuqori (500-1000 XP)
-  - Ekspert (1000+ XP)
+- **Leaderboard**
+  - Top 20 eng faol foydalanuvchilar
+  - Real-time yangilanish
 
-### 👨‍💼 Admin Panel
+### 📊 Learning Analytics (xAPI)
 
-- **Foydalanuvchilar Boshqaruvi**
-  - Barcha foydalanuvchilarni ko'rish
-  - Rol va ma'lumotlarni ko'rish
-  - Registratsiya tarixini kuzatish
-
-- **Kontent Moderatsiyasi**
-  - Yangiliklar boshqaruvi
-  - Resurslarni tasdiqlash
-  - Testlarni nazorat qilish
-
-- **Dashboard**
-  - Statistika va hisobotlar
-  - Faol foydalanuvchilar
-  - Popular resurslar
+- **xAPI (Experience API) Integration**
+  - Barcha o'quv faoliyatlari (Video ko'rish, Test ishlash) standart xAPI statement formatida saqlanadi.
+  - **LRS (Learning Record Store)** sifatida Firestore ishlatiladi.
+  - **Analytics Dashboard**: Admin panelda o'quv jarayonini chuqur tahlil qilish imkoniyati.
+  - **Gamification Trigger**: xAPI statementlar avtomatik ravishda gamification engine'ni ishga tushiradi.
 
 ### 🔔 Xabarnomalar (Notifications)
 

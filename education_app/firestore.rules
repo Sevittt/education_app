@@ -158,5 +158,22 @@ service cloud.firestore {
       // Allow users to update 'readBy' to mark as read
       allow update: if isAdmin() || (isAuthenticated() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['readBy']));
     }
+    // 13. Learning Records (xAPI)
+    match /learning_records/{recordId} {
+      // Admin va Ekspertlar barcha xAPI yozuvlarini o'qiy oladi (Analytics uchun)
+      allow read: if isAdmin() || isEkspert();
+      
+      // Har qanday tizimga kirgan foydalanuvchi xAPI statement yozishi mumkin
+      allow create: if isAuthenticated() &&
+                      request.resource.data.actor is map &&
+                      request.resource.data.verb is map &&
+                      request.resource.data.object is map;
+      
+      // xAPI yozuvlari o'zgarmasdir (immutable)
+      allow update: if false;
+      
+      // Faqat admin tozalash ishlarini olib borishi mumkin
+      allow delete: if isAdmin();
+    }
   }
 }

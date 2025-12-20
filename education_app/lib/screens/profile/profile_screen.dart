@@ -18,6 +18,7 @@ import 'package:sud_qollanma/screens/admin/admin_panel_screen.dart';
 import 'package:sud_qollanma/screens/profile/leaderboard_screen.dart'; 
 import 'package:sud_qollanma/screens/profile/quiz_history_screen.dart'; // --- ADDED ---
 import '../../widgets/quiz_attempt_card.dart';
+import '../../config/gamification_rules.dart'; // Add Gamification Rules
 // --- END ADDED ---
 
 class ProfileScreen extends StatelessWidget {
@@ -164,6 +165,7 @@ class ProfileScreen extends StatelessWidget {
   }
 
   // --- ADDED: Build User Stats Widget ---
+  // --- ADDED: Build User Stats Widget ---
   Widget _buildUserStats(
     BuildContext context,
     AppUser appUser,
@@ -174,22 +176,47 @@ class ProfileScreen extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     int currentXP = appUser.xp;
-    int nextLevelXP = 100;
-    double progress = 0.0;
+    
+    // Determine Target Level based on current level
+    // Logic: Look at current level, decide what's next and what's needed.
+    String nextLevelName = '';
+    int xpTarget = 0;
+    int quizzesTarget = 0;
+    int simsTarget = 0;
+    bool isMaxLevel = false;
 
-    // Calculate progress based on level thresholds
-    if (currentXP < 100) {
-      nextLevelXP = 100;
-      progress = currentXP / 100;
-    } else if (currentXP < 500) {
-      nextLevelXP = 500;
-      progress = (currentXP - 100) / 400;
-    } else if (currentXP < 1000) {
-      nextLevelXP = 1000;
-      progress = (currentXP - 500) / 500;
+    // We use the raw strings from Rules or the User's current level
+    if (appUser.level == GamificationRules.levelNewbie) {
+      nextLevelName = GamificationRules.levelSpecialist;
+      xpTarget = GamificationRules.xpThresholdSpecialist;
+    } else if (appUser.level == GamificationRules.levelSpecialist) {
+      nextLevelName = GamificationRules.levelExpert;
+      xpTarget = GamificationRules.xpThresholdExpert;
+      quizzesTarget = GamificationRules.reqQuizzesForExpert;
+    } else if (appUser.level == GamificationRules.levelExpert) {
+      nextLevelName = GamificationRules.levelMaster;
+      xpTarget = GamificationRules.xpThresholdMaster;
+      simsTarget = GamificationRules.reqSimsForMaster;
+    } else if (appUser.level == GamificationRules.levelMaster) {
+      isMaxLevel = true;
+      xpTarget = GamificationRules.xpThresholdMaster; // Just filter
     } else {
-      nextLevelXP = 1000; // Max level reached
-      progress = 1.0;
+        // Fallback
+      nextLevelName = GamificationRules.levelSpecialist;
+      xpTarget = GamificationRules.xpThresholdSpecialist;
+    }
+
+    // Calculate Progress for XP
+    double progress = 0.0;
+    
+    // If calculating progress from 0 to Target
+    // Simple logic: XP / Target. 
+    // If we want relative progress (e.g. from 200 to 800), we need previous threshold.
+    // For now simple 0-based progress is easier to understand for users "You have 500/800".
+    if (!isMaxLevel) {
+        progress = (currentXP / xpTarget).clamp(0.0, 1.0);
+    } else {
+        progress = 1.0;
     }
 
     return Card(
@@ -200,6 +227,7 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Header
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -213,12 +241,20 @@ class ProfileScreen extends StatelessWidget {
                         color: colorScheme.primary,
                       ),
                     ),
-                    Text(
-                      l10n.totalPoints,
-                      style: textTheme.bodySmall?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
+                    if (!isMaxLevel)
+                      Text(
+                        '${l10n.nextLevel}: ${_getLocalizedLevelName(nextLevelName, l10n)}',
+                         style: textTheme.bodySmall?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                      )
+                    else
+                         Text(
+                        l10n.levelExpert, // "Max Level" or similar
+                         style: textTheme.bodySmall?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                        ),
                       ),
-                    ),
                   ],
                 ),
                 Container(
@@ -241,6 +277,8 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
+            
+            // Progress Bar (XP)
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: LinearProgressIndicator(
@@ -250,28 +288,60 @@ class ProfileScreen extends StatelessWidget {
                 valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
               ),
             ),
-            const SizedBox(height: 8),
-            if (currentXP < 1000)
-              Text(
-                l10n.pointsToNextLevel(nextLevelXP - currentXP),
-                style: textTheme.bodySmall?.copyWith(
-                  color: colorScheme.onSurfaceVariant,
-                ),
-                textAlign: TextAlign.end,
-              )
-            else
-              Text(
-                l10n.levelExpert, // Or a "Max Level Reached" message
-                style: textTheme.bodySmall?.copyWith(
-                  color: colorScheme.primary,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.end,
-              ),
+             const SizedBox(height: 8),
+             
+             // Requirements Checklist
+             if (!isMaxLevel) ...[
+                 // XP Requirement
+                 _buildRequirementRow(
+                     context, 
+                     icon: Icons.star, 
+                     label: '$currentXP / $xpTarget XP', 
+                     isMet: currentXP >= xpTarget
+                 ),
+                 // Quiz Requirement (if exists)
+                 if (quizzesTarget > 0)
+                    _buildRequirementRow(
+                        context, 
+                        icon: Icons.quiz, 
+                        label: '${l10n.quizzes}: ${appUser.quizzesPassed} / $quizzesTarget', 
+                        isMet: appUser.quizzesPassed >= quizzesTarget
+                    ),
+                 // Sims Requirement (if exists)
+                 if (simsTarget > 0)
+                    _buildRequirementRow(
+                        context, 
+                        icon: Icons.science, // Icon for sims
+                        label: '${l10n.simulations}: ${appUser.simulationsCompleted} / $simsTarget', 
+                        isMet: appUser.simulationsCompleted >= simsTarget
+                    ),
+             ] else 
+                 Text(
+                   l10n.levelExpert, // Max Message
+                   style: TextStyle(color: colorScheme.primary),
+                 ),
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildRequirementRow(BuildContext context, {required IconData icon, required String label, required bool isMet}) {
+      final color = isMet ? Colors.green : Colors.grey;
+      return Padding(
+        padding: const EdgeInsets.only(top: 4.0),
+        child: Row(
+            children: [
+                Icon(isMet ? Icons.check_circle : Icons.circle_outlined, size: 16, color: color),
+                const SizedBox(width: 8),
+                Text(label, style: TextStyle(
+                    color: isMet ? Colors.black87 : Colors.grey.shade600,
+                    fontWeight: isMet ? FontWeight.bold : FontWeight.normal,
+                    decoration: isMet ? TextDecoration.none : TextDecoration.none
+                )),
+            ],
+        ),
+      );
   }
 
   @override

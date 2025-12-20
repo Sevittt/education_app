@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 import '../../models/knowledge_article.dart';
 import '../../services/knowledge_base_service.dart';
 import '../../services/gamification_service.dart';
+import '../../services/xapi_service.dart';
+import '../../models/xapi/xapi_statement.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../l10n/app_localizations.dart';
 
@@ -34,6 +36,24 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
     // Increment views when screen opens
     _service.incrementViews(widget.article.id);
     _scrollController.addListener(_onScroll);
+    
+    // xAPI Tracking - Experienced (Viewed)
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+       final actor = _getCurrentActor();
+       final statement = XApiStatement(
+         actor: actor,
+         verb: XApiVerbs.experienced,
+         object: XApiObject(
+           id: widget.article.id,
+           definition: {
+             'type': 'http://adlnet.gov/expapi/activities/article',
+             'name': {'en-US': widget.article.title},
+           },
+         ),
+         timestamp: DateTime.now(),
+       );
+       await XApiService().recordStatement(statement);
+    });
   }
 
   @override
@@ -67,11 +87,47 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
       description: 'Read article: ${widget.article.title}'
     );
 
+    // xAPI Tracking - Completed
+    final actor = _getCurrentActor();
+    final statement = XApiStatement(
+      actor: actor,
+      verb: XApiVerbs.completed,
+      object: XApiObject(
+        id: widget.article.id, // e.g. "article_123" (Should technically be a URI)
+        definition: {
+          'type': 'http://adlnet.gov/expapi/activities/article',
+          'name': {'en-US': widget.article.title},
+        },
+      ),
+      result: XApiResult(
+        completion: true,
+        success: true,
+      ),
+      timestamp: DateTime.now(),
+    );
+    await XApiService().recordStatement(statement);
+
     if (mounted) {
        final l10n = AppLocalizations.of(context)!;
        ScaffoldMessenger.of(context).showSnackBar(
          SnackBar(content: Text(l10n.pointsEarned(5))),
        );
+    }
+  }
+
+  // Helper to construct actor for direct statements
+  XApiActor _getCurrentActor() {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      return XApiActor(
+        mbox: 'mailto:${user.email ?? "no-email-${user.uid}@sudqollanma.uz"}',
+        name: user.displayName ?? 'User ${user.uid.substring(0, 5)}',
+      );
+    } else {
+      return XApiActor(
+        mbox: 'mailto:guest@sudqollanma.uz',
+        name: 'Guest User',
+      );
     }
   }
 

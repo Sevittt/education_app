@@ -2760,6 +2760,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Earn XP, badges, and compete on the leaderboard.'**
   String get featureGamificationDesc;
+
+  /// No description provided for @analyticsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning Analytics (xAPI)'**
+  String get analyticsTitle;
+
+  /// No description provided for @analyticsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning Records'**
+  String get analyticsSubtitle;
+
+  /// No description provided for @totalRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Records'**
+  String get totalRecords;
+
+  /// No description provided for @realTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Real-time'**
+  String get realTime;
+
+  /// No description provided for @activityDistribution.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity Distribution'**
+  String get activityDistribution;
+
+  /// No description provided for @recentActivityFeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Activity Feed'**
+  String get recentActivityFeed;
+
+  /// No description provided for @noRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'No learning records found yet.'**
+  String get noRecords;
+
+  /// No description provided for @unknownUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown User'**
+  String get unknownUser;
+
+  /// No description provided for @unknownObject.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Object'**
+  String get unknownObject;
+
+  /// No description provided for @justNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Just now'**
+  String get justNow;
+
+  /// No description provided for @quizzes.
+  ///
+  /// In en, this message translates to:
+  /// **'Quizzes'**
+  String get quizzes;
+
+  /// No description provided for @simulations.
+  ///
+  /// In en, this message translates to:
+  /// **'Simulations'**
+  String get simulations;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

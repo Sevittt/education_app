@@ -680,5 +680,18 @@
   "featureVideoTutorials": "Video Darsliklar",
   "featureVideoTutorialsDesc": "Mutaxassislar tomonidan tayyorlangan video qo'llanmalar.",
   "featureGamification": "Gamifikatsiya",
-  "featureGamificationDesc": "XP va nishonlar yig'ing, reytingda bellashing."
+  "featureGamificationDesc": "XP va nishonlar yig'ing, reytingda bellashing.",
+  "analyticsTitle": "O'quv Tahlili (xAPI)",
+  "analyticsSubtitle": "O'quv Yozuvlari",
+  "totalRecords": "Jami Yozuvlar",
+  "realTime": "Real vaqtda",
+  "activityDistribution": "Faoliyat Taqsimoti",
+  "recentActivityFeed": "So'nggi Faoliyatlar",
+  "noRecords": "Hozircha o'quv yozuvlari topilmadi.",
+  "unknownUser": "Noma'lum Foydalanuvchi",
+  "unknownObject": "Noma'lum Obyekt",
+  "justNow": "Hozirgina",
+  "quizzes": "Viktorinalar",
+  "simulations": "Simulyatsiyalar",
+  "nextLevel": "Keyingi daraja"
 }

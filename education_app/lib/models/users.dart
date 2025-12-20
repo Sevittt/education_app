@@ -52,8 +52,10 @@ class AppUser {
   DateTime? lastLogin;
   int xp;
   String level;
+  int quizzesPassed;
+  int simulationsCompleted;
 
-  // Existing constructor
+  // Constructor
   AppUser({
     required this.id,
     required this.name,
@@ -66,6 +68,8 @@ class AppUser {
     this.lastLogin,
     this.xp = 0,
     this.level = 'Boshlang\'ich',
+    this.quizzesPassed = 0,
+    this.simulationsCompleted = 0,
   });
 
   // Create a AppUser object from a Firestore map
@@ -88,6 +92,8 @@ class AppUser {
               : null,
       xp: map['xp'] ?? 0,
       level: map['level'] ?? 'Boshlang\'ich',
+      quizzesPassed: map['quizzesPassed'] ?? 0,
+      simulationsCompleted: map['simulationsCompleted'] ?? 0,
     );
   }
 
@@ -104,6 +110,8 @@ class AppUser {
       'lastLogin': lastLogin?.toIso8601String(),
       'xp': xp,
       'level': level,
+      'quizzesPassed': quizzesPassed,
+      'simulationsCompleted': simulationsCompleted,
     };
   }
 
@@ -119,6 +127,8 @@ class AppUser {
     DateTime? lastLogin,
     int? xp,
     String? level,
+    int? quizzesPassed,
+    int? simulationsCompleted,
   }) {
     return AppUser(
       id: id ?? this.id,
@@ -132,12 +142,16 @@ class AppUser {
       lastLogin: lastLogin ?? this.lastLogin,
       xp: xp ?? this.xp,
       level: level ?? this.level,
+      quizzesPassed: quizzesPassed ?? this.quizzesPassed,
+      simulationsCompleted: simulationsCompleted ?? this.simulationsCompleted,
     );
   }
 
   // Helper to calculate level based on XP
   static String getLevelFromXP(int xp) {
-    if (xp >= 1000) return 'Ekspert';
+    // NOTE: This is a simplified legacy helper.
+    // Use GamificationRules.calculateLevel() for full logic with counters.
+    if (xp >= 1000) return 'Ekspert'; // Should technically use GamificationRules
     if (xp >= 500) return 'Yuqori';
     if (xp >= 100) return 'O\'rta';
     return 'Boshlang\'ich';

@@ -1441,4 +1441,40 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get featureGamificationDesc => 'XP va nishonlar yig\'ing, reytingda bellashing.';
+
+  @override
+  String get analyticsTitle => 'O\'quv Tahlili (xAPI)';
+
+  @override
+  String get analyticsSubtitle => 'O\'quv Yozuvlari';
+
+  @override
+  String get totalRecords => 'Jami Yozuvlar';
+
+  @override
+  String get realTime => 'Real vaqtda';
+
+  @override
+  String get activityDistribution => 'Faoliyat Taqsimoti';
+
+  @override
+  String get recentActivityFeed => 'So\'nggi Faoliyatlar';
+
+  @override
+  String get noRecords => 'Hozircha o\'quv yozuvlari topilmadi.';
+
+  @override
+  String get unknownUser => 'Noma\'lum Foydalanuvchi';
+
+  @override
+  String get unknownObject => 'Noma\'lum Obyekt';
+
+  @override
+  String get justNow => 'Hozirgina';
+
+  @override
+  String get quizzes => 'Viktorinalar';
+
+  @override
+  String get simulations => 'Simulyatsiyalar';
 }

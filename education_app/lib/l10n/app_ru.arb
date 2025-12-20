@@ -656,5 +656,18 @@
   "featureVideoTutorials": "Видеоуроки",
   "featureVideoTutorialsDesc": "Учитесь по видео-руководствам от экспертов.",
   "featureGamification": "Геймификация",
-  "featureGamificationDesc": "Зарабатывайте XP, значки и соревнуйтесь в рейтинге."
+  "featureGamificationDesc": "Зарабатывайте XP, значки и соревнуйтесь в рейтинге.",
+  "analyticsTitle": "Аналитика Обучения (xAPI)",
+  "analyticsSubtitle": "Учебные Записи",
+  "totalRecords": "Всего Записей",
+  "realTime": "В реальном времени",
+  "activityDistribution": "Распределение Активности",
+  "recentActivityFeed": "Лента Недавней Активности",
+  "noRecords": "Учебные записи пока не найдены.",
+  "unknownUser": "Неизвестный Пользователь",
+  "unknownObject": "Неизвестный Объект",
+  "justNow": "Только что",
+  "quizzes": "Викторины",
+  "simulations": "Симуляции",
+  "nextLevel": "Следующий уровень"
 }

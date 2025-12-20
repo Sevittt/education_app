@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/foundation.dart';
+import 'dart:async'; // Added for StreamSubscription
 import '../services/auth_service.dart';
 import '../services/profile_service.dart';
 import 'users.dart'; // Bizning Custom User modelimiz
@@ -13,6 +14,7 @@ class AuthNotifier with ChangeNotifier {
   
   bool _isLoading = false;
   String? _errorMessage;
+  StreamSubscription<AppUser?>? _userSubscription; // Added subscription
 
   AuthNotifier(this._authService, this._profileService) {
     _authService.authStateChanges.listen(_onAuthStateChanged);
@@ -47,19 +49,31 @@ class AuthNotifier with ChangeNotifier {
 
     if (user == null) {
       _appUser = null;
+      _userSubscription?.cancel(); // Cancel subscription on logout
     } else {
-      await _loadUserProfile(user.uid);
+      // Use stream instead of one-time get
+      _subscribeToUserProfile(user.uid);
     }
     _setLoading(false);
   }
 
-  Future<void> _loadUserProfile(String uid) async {
-    try {
-      _appUser = await _profileService.getUserProfile(uid);
-    } catch (e) {
-      _setErrorMessage('Profilni yuklashda xatolik: $e');
-      _appUser = null;
-    }
+  void _subscribeToUserProfile(String uid) {
+    _userSubscription?.cancel(); // Cancel any existing subscription
+    _userSubscription = _profileService.getUserProfileStream(uid).listen(
+      (appUser) {
+        _appUser = appUser;
+        notifyListeners(); // Notify UI of updates (XP, Level, etc.)
+      },
+      onError: (e) {
+        _setErrorMessage('Profilni yangilashda xatolik: $e');
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _userSubscription?.cancel();
+    super.dispose();
   }
 
   // --- Google Sign In ---

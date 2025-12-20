@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/quiz.dart';
 import '../models/question.dart';
 import '../models/quiz_attempt.dart';
+import 'xapi_service.dart';
 
 class QuizService {
   final CollectionReference<Map<String, dynamic>> _quizzesCollection =
@@ -109,6 +110,24 @@ class QuizService {
   // --- Test urinishini saqlash ---
   Future<void> saveQuizAttempt(QuizAttempt attempt) async {
     await _attemptsCollection.add(attempt.toMap());
+    
+    // xAPI Tracking
+    try {
+      final double percentage = attempt.totalQuestions > 0 
+          ? (attempt.score / attempt.totalQuestions) * 100 
+          : 0.0;
+      
+      final bool passed = percentage >= 70.0; // Assuming 70% is passing
+
+      await XApiService().trackQuizCompleted(
+        quizId: attempt.quizId,
+        title: attempt.quizTitle,
+        score: percentage, // Sending percentage as score (0-100)
+        passed: passed,
+      );
+    } catch (e) {
+      print("xAPI Error in saveQuizAttempt: $e");
+    }
   }
 
   // --- Foydalanuvchi urinishlarini olish ---

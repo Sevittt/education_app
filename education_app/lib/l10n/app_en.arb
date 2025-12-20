@@ -671,5 +671,18 @@
   "featureVideoTutorials": "Video Tutorials",
   "featureVideoTutorialsDesc": "Learn from expert-led video guides and webinars.",
   "featureGamification": "Gamification",
-  "featureGamificationDesc": "Earn XP, badges, and compete on the leaderboard."
+  "featureGamificationDesc": "Earn XP, badges, and compete on the leaderboard.",
+  "analyticsTitle": "Learning Analytics (xAPI)",
+  "analyticsSubtitle": "Learning Records",
+  "totalRecords": "Total Records",
+  "realTime": "Real-time",
+  "activityDistribution": "Activity Distribution",
+  "recentActivityFeed": "Recent Activity Feed",
+  "noRecords": "No learning records found yet.",
+  "unknownUser": "Unknown User",
+  "unknownObject": "Unknown Object",
+  "justNow": "Just now",
+  "quizzes": "Quizzes",
+  "simulations": "Simulations",
+  "nextLevel": "Next Level"
 }

@@ -1441,4 +1441,40 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get featureGamificationDesc => 'Зарабатывайте XP, значки и соревнуйтесь в рейтинге.';
+
+  @override
+  String get analyticsTitle => 'Аналитика Обучения (xAPI)';
+
+  @override
+  String get analyticsSubtitle => 'Учебные Записи';
+
+  @override
+  String get totalRecords => 'Всего Записей';
+
+  @override
+  String get realTime => 'В реальном времени';
+
+  @override
+  String get activityDistribution => 'Распределение Активности';
+
+  @override
+  String get recentActivityFeed => 'Лента Недавней Активности';
+
+  @override
+  String get noRecords => 'Учебные записи пока не найдены.';
+
+  @override
+  String get unknownUser => 'Неизвестный Пользователь';
+
+  @override
+  String get unknownObject => 'Неизвестный Объект';
+
+  @override
+  String get justNow => 'Только что';
+
+  @override
+  String get quizzes => 'Викторины';
+
+  @override
+  String get simulations => 'Симуляции';
 }
