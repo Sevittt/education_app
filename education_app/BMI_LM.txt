@@ -92,3 +92,120 @@ Step 7: Continuous Quality Review
 To ensure the quality and reliability of the work done during development (especially important if using AI-assisted coding tools), perform automated checks:
 • Automated Scanning (Quality Gates): Integrate code analysis tools (like SonarQube or similar open-source alternatives) into your build process. These "quality gates" will automatically scan the Flutter codebase for bugs, security vulnerabilities, and code quality issues immediately upon creation, preventing unstable code from being merged,.
 • Test Data Against Reports: Regularly generate mock reports from your Firestore data. Check that the collected xAPI data aligns with expected outputs. If discrepancies exist, investigate whether the collection script (xAPIService) is reporting faulty data, or if the underlying data in Firestore is inaccurate,.
+
+
+🔄 Yangi Reja: "Simulyatorsiz ham Sifatli Tizim"
+Biz Simulyator o'rniga, Viktorina (Quiz) modulini shunday kuchaytiramizki, u xodimning nafaqat bilimini, balki reaksiyasi va tezligini ham tekshiradi.
+
+Mana biz amalga oshiradigan "Sifatli O'zgarishlar":
+
+1. "Kahoot" Effekti: Tezlik va Aniqlik ⚡️
+Oddiy testda: "Javob berdi = 1 ball". Zerikarli. Bizning yangi tizimda:
+
+Savolga 5 soniyada javob bersa: +20 XP (Tezkor fikrlash).
+
+15 soniyada javob bersa: +15 XP.
+
+30 soniyada javob bersa: +10 XP.
+
+Natija: Bu xodimni uxlab qolmasdan, tez qaror qabul qilishga o'rgatadi (Sudda vaqt g'animat).
+
+2. "Duolingo" Effekti: Ketma-ketlik (Streak) 🔥
+Xodim har kuni kirib bitta maqola o‘qisa yoki test yechsa, "Streak" (Olov) yonadi.
+
+3 kun kirmasa, olovi o'chadi va XP kamayishi mumkin.
+
+Natija: Bu xodimni tizimga har kuni kirishga majbur qiladi (Habit building).
+
+3. "Gatekeeper" (Darvozabon) Tizimi 🛡
+Boyagi gapimiz kuchida qoladi: "Ekspert" bo'lish uchun xodim kamida 5 ta testdan 100% natija bilan o'tishi shart.
+
+Bu Simulyator yo'qligini bildirmaydi, chunki "Ekspert" darajasi baribir qiyin bo'ladi.
+
+# Role: Senior Flutter Developer & Gamification Engineer
+# Task: Implement "Advanced Gamification Engine" (Kahoot/Duolingo Style)
+
+# Context:
+We are pausing the "Simulator" feature to focus on quality. Instead, we want to upgrade the **Quiz** and **User Engagement** mechanics to be highly interactive, similar to **Kahoot** and **Duolingo**.
+
+# Action Plan:
+
+## 1. Update `GamificationRules` (`lib/config/gamification_rules.dart`)
+Define granular XP rewards based on user performance:
+- `xpLoginStreak`: 5 (Per day)
+- `xpQuizBase`: 10 (Standard correct answer)
+- `xpSpeedBonus`: 5 (Answered within 5 seconds)
+- `xpPerfectQuiz`: 50 (All answers correct)
+- `xpArticleScroll`: 5 (Passive reading)
+
+## 2. Update `AppUser` Model (`lib/models/users.dart`)
+Add fields to track advanced stats:
+- `currentStreak`: int (Days in a row)
+- `lastLoginDate`: DateTime
+- `totalQuizzesAced`: int (Perfect score count)
+- `fastestQuizTime`: int (Seconds)
+
+## 3. Implement `GamificationService` Logic
+**A. Streak Logic:**
+   - On app open, check `lastLoginDate`.
+   - If `yesterday`, increment `currentStreak` & award `xpLoginStreak`.
+   - If `older`, reset `currentStreak` to 1.
+
+**B. Quiz Logic (The "Kahoot" Effect):**
+   - Method: `calculateQuizScore(bool isCorrect, int timeTakenSeconds)`
+   - If `isCorrect`:
+     - Base XP = 10
+     - If `timeTakenSeconds < 5` -> Add +5 Bonus.
+   - Return total XP for that question.
+
+**C. Gatekeeper (Level Up):**
+   - **Specialist:** 200 XP.
+   - **Expert:** 800 XP + must have `totalQuizzesAced >= 3`.
+   - **Master:** 2000 XP + must have `currentStreak >= 7`.
+
+## 4. xAPI Integration
+- Log these specific events to Firestore `learning_records`:
+  - Verb: `http://adlnet.gov/expapi/verbs/scored`
+  - Result: `{"score": ..., "response_time": "PT4S"}` (ISO 8601 duration)
+
+# Output:
+Provide the full code for `GamificationRules`, updated `AppUser`, and the logic-heavy `GamificationService`.
+
+
+This report outlines the technical and pedagogical methodology for the full integration of the Experience API (xAPI) standard into the Sud Qo'llanma platform. The objective is to transition from a localized data model to a globally interoperable, machine-interchangeable system capable of measuring granular judicial competency.
+1. Architectural Foundation: The Learning Record Store (LRS)
+The first requirement for xAPI integration is the establishment of a Learning Record Store (LRS), which serves as the system of record for all xAPI data. Unlike the current architecture that stores progress solely within Cloud Firestore, an LRS is responsible for receiving, validating, and providing access to learning records via RESTful web-service APIs.
+• Practical Implementation: The application acts as a Learning Record Provider (LRP), generating JSON-formatted statements and sending them to the LRS using HTTP methods (GET, PUT, POST).
+• Current State Comparison: Currently, our "Sud Qo'llanma" data is trapped in a NoSQL database (Firestore). By adding an LRS (such as ADL's open-source LRS), we ensure the data is portable and avoids "vendor-lock," allowing the Supreme Court to migrate data between systems in the future.
+2. Data Modeling: The Actor-Verb-Object Strategy
+Every interaction in the app must be modeled as a "triple" to ensure semantic interoperability.
+• Step 1: Identifying the Actor. We must use an Inverse Functional Identifier (IFI) to uniquely identify court staff. While our current system uses a userId, xAPI requires an mbox (email) or a unique account (e.g., employee ID + court domain).
+• Step 2: Defining the Verb. Verbs must be specific to provide meaning. We will use the ADL Vocabulary to map our 3-Tier system:
+    ◦ Tier 1 (Knowledge): experienced (article), completed (video).
+    ◦ Tier 2 (Verification): passed (quiz), mastered (100% score).
+    ◦ Tier 3 (Application): interacted (simulator step), performed (procedural task).
+• Step 3: Object Identifiers. Every learning resource (e.g., "E-SUD Entry Guide") must have a globally unique Activity ID formatted as an IRI.
+• Comparison: Our current model uses simple string labels; xAPI uses resolvable URIs that carry their definitions with them across different platforms.
+3. Granular Tracking via Context and Result Extensions
+The power of xAPI lies in its ability to capture the "how" of learning, not just the "what".
+• Context Activities: We will use the context object to group statements. For example, a statement about a specific quiz answer can be linked to a "Parent" activity (the E-SUD module) and a "Grouping" activity (the 2025 Digital Competency Program).
+• Result Extensions: To measure the ROI of training, we will use result extensions to capture non-traditional data like the duration of a simulation session or the number of hints used in the Interactive Simulator.
+• Comparison: Standard tracking only shows "pass/fail". xAPI will show exactly where a court clerk struggled in the E-SUD sandbox, allowing for targeted remedial training.
+4. Communication and Technical Reliability
+• Batching Statements: To optimize mobile performance and reduce computational load on the device, the app will batch multiple statements into a single request package.
+• Offline Mode Synchronization: Since court staff in remote districts may face unstable connectivity, xAPI allows for offline tracking. Statements will be stored locally on the Flutter client and synced automatically once internet access is restored.
+• Security (The CIA Triad): To protect sensitive judicial training data, all transmissions will use HTTPS/TLS encryption, and the LRS will use OAuth 2.0 for secure authentication.
+5. Advanced Decision Support: The Learning Record Consumer (LRC)
+Once the data is in the LRS, it can be accessed by an LRC (such as our planned AI Assistant) to perform predictive analytics.
+• Adaptive Learning Loops: The AI can query the LRS to see if a specific user failed a Tier 3 simulation and automatically recommend a Tier 1 microlearning video to bridge that specific knowledge gap.
+• Competency Passports: Following European Judicial Training standards, this data can be rolled into a digital "Competency Passport," providing verified proof of an employee's digital literacy.
+Conclusion: Methodology Comparison Matrix
+
+FeatureCurrent   |Implementation (Firestore Only) | Integrated xAPI Strategy (LRS + cmi5)
+Interoperability | Low (Data siloed in one app)  |High (Data interchangeable across DoD/Court systems)
+Granularity      | Medium (Score and completion)  |Extreme (Button clicks, time per slide, distraction)
+Standardization  | Proprietary logic              |Universal Actor-Verb-Object Grammar
+Security         | Firebase Auth only             |OAuth 2.0 + Sovereign Hosting Compliance
+ROI Measurement  | Qualitative estimates          |Quantitative "Task-Performance" analytics
+
+By integrating xAPI, the "Sud Qo'llanma" project matures from a simple education app into a Durable Context Engine that supports the full lifecycle of a judicial employee’s digital professional development.

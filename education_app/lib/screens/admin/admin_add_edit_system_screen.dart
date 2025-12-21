@@ -180,7 +180,7 @@ class _AdminAddEditSystemScreenState extends State<AdminAddEditSystemScreen> {
                       items: SystemCategory.values.map((category) {
                         return DropdownMenuItem(
                           value: category,
-                          child: Text(category.displayName),
+                          child: Text(category.getDisplayName(l10n)),
                         );
                       }).toList(),
                       onChanged: (value) {
@@ -199,7 +199,7 @@ class _AdminAddEditSystemScreenState extends State<AdminAddEditSystemScreen> {
                       items: SystemStatus.values.map((status) {
                         return DropdownMenuItem(
                           value: status,
-                          child: Text(status.displayName),
+                          child: Text(status.getDisplayName(l10n)),
                         );
                       }).toList(),
                       onChanged: (value) {

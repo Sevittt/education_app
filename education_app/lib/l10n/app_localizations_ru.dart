@@ -132,6 +132,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get errorPrefix => 'Ошибка: ';
 
   @override
+  String get days => 'дней';
+
+  @override
   String get resourcesNoResourcesFound => 'Ресурсы не найдены.';
 
   @override
@@ -382,41 +385,41 @@ class AppLocalizationsRu extends AppLocalizations {
   String get quiz => 'Викторина';
 
   @override
-  String get quizNotFound => 'Викторина не найдена.';
+  String get quizNotFound => 'Тест не найден';
 
   @override
-  String get failedToLoadQuiz => 'Не удалось загрузить викторину';
+  String get failedToLoadQuiz => 'Не удалось загрузить тест';
 
   @override
-  String question(Object number) {
-    return 'Вопрос $number';
+  String question(String index) {
+    return 'Вопрос $index';
   }
 
   @override
-  String totalQuestions(Object total) {
-    return 'из $total';
+  String totalQuestions(String total) {
+    return 'Всего: $total';
   }
 
   @override
-  String get submitQuiz => 'Отправить викторину';
+  String get submitQuiz => 'Завершить';
 
   @override
   String get nextQuestion => 'Следующий вопрос';
 
   @override
-  String get quizResults => 'Результаты викторины';
+  String get quizResults => 'Результаты теста';
 
   @override
   String get quizCompletionMessage => 'Вы завершили викторину!';
 
   @override
-  String get yourScore => 'Ваш счет:';
+  String get yourScore => 'Ваш результат';
 
   @override
   String get done => 'Готово';
 
   @override
-  String get failedToSaveAttempt => 'Не удалось сохранить вашу попытку';
+  String get failedToSaveAttempt => 'Ошибка при сохранении результата';
 
   @override
   String get myQuizHistory => 'Моя история викторин';
@@ -926,7 +929,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profilePictureUrlLabel => 'URL изображения профиля (необязательно)';
 
   @override
-  String get levelBeginner => 'Начинающий';
+  String get levelBeginner => 'Новичок';
 
   @override
   String get levelIntermediate => 'Средний';
@@ -1477,4 +1480,92 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get simulations => 'Симуляции';
+
+  @override
+  String get catNewEmployees => 'Новые сотрудники';
+
+  @override
+  String get catIctSpecialists => 'ИКТ специалисты';
+
+  @override
+  String get catSystems => 'Системы';
+
+  @override
+  String get catAuth => 'Аутентификация';
+
+  @override
+  String get catGeneral => 'Общее';
+
+  @override
+  String get rankBeginner => 'Начинающий';
+
+  @override
+  String get rankIntermediate => 'Средний уровень';
+
+  @override
+  String get rankAdvanced => 'Продвинутый';
+
+  @override
+  String get sysCatPrimary => 'Основные системы';
+
+  @override
+  String get sysCatSecondary => 'Дополнительные системы';
+
+  @override
+  String get sysCatSupport => 'Системы поддержки';
+
+  @override
+  String get sysStatusActive => 'Активно';
+
+  @override
+  String get sysStatusMaintenance => 'Техподдержка';
+
+  @override
+  String get sysStatusInactive => 'Неактивно';
+
+  @override
+  String videoViews(int count) {
+    return '$count просмотров';
+  }
+
+  @override
+  String get videoAuthorSubtitle => 'Автор';
+
+  @override
+  String get videoDescriptionTitle => 'Описание';
+
+  @override
+  String get sysStatusDeprecated => 'Устарело';
+
+  @override
+  String get sysStatusOffline => 'Отключено';
+
+  @override
+  String get systemsDirectoryAll => 'Все';
+
+  @override
+  String systemsDirectoryError(String error) {
+    return 'Произошла ошибка: $error';
+  }
+
+  @override
+  String get systemsDirectoryEmpty => 'Системы отсутствуют';
+
+  @override
+  String get backToKnowledgeBase => 'Вернуться к руководствам';
+
+  @override
+  String get quizSuccessMessage => 'Отличный результат!';
+
+  @override
+  String get quizFailureMessage => 'Попробуйте еще раз!';
+
+  @override
+  String get speedBonus => 'СКОРОСТНОЙ БОНУС';
+
+  @override
+  String get levelSpecialist => 'Специалист';
+
+  @override
+  String get levelMaster => 'Мастер';
 }

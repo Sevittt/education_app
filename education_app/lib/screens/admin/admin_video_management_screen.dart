@@ -90,7 +90,7 @@ class _AdminVideoManagementScreenState extends State<AdminVideoManagementScreen>
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  subtitle: Text(video.category.displayName),
+                  subtitle: Text(video.category.getDisplayName(l10n)),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [

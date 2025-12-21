@@ -41,7 +41,7 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
           tabs: [
             Tab(text: AppLocalizations.of(context)!.filterAll),
             ...VideoCategory.values.map((category) {
-              return Tab(text: category.displayName);
+              return Tab(text: category.getDisplayName(AppLocalizations.of(context)!));
             }),
           ],
         ),
@@ -191,7 +191,7 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
-                          video.category.displayName,
+                          video.category.getDisplayName(AppLocalizations.of(context)!),
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: 12,

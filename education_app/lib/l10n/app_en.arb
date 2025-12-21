@@ -97,6 +97,7 @@
   "settingsAppLegalese": "© 2025 Court Handbook Project",
   "settingsAppDescription": "Bridging the IT skills gap through collaborative learning and resource sharing.",
   "errorPrefix": "Error: ",
+  "days": "days",
   "resourcesNoResourcesFound": "No resources found.",
   "loginButtonText": "Login",
   "signUpButtonText": "Sign Up",
@@ -684,5 +685,72 @@
   "justNow": "Just now",
   "quizzes": "Quizzes",
   "simulations": "Simulations",
-  "nextLevel": "Next Level"
+  "nextLevel": "Next Level",
+  "catNewEmployees": "New Employees",
+  "catIctSpecialists": "ICT Specialists",
+  "catSystems": "Systems",
+  "catAuth": "Authentication",
+  "catGeneral": "General",
+  "rankBeginner": "Beginner",
+  "rankIntermediate": "Intermediate",
+  "rankAdvanced": "Advanced",
+  "sysCatPrimary": "Primary Systems",
+  "sysCatSecondary": "Secondary Systems",
+  "sysCatSupport": "Support Systems",
+  "sysStatusActive": "Active",
+  "sysStatusMaintenance": "Maintenance",
+  "sysStatusInactive": "Inactive",
+  "videoViews": "{count} views",
+  "@videoViews": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "videoAuthorSubtitle": "Author",
+  "videoDescriptionTitle": "Description",
+  "sysStatusDeprecated": "Deprecated",
+  "sysStatusOffline": "Offline",
+  "systemsDirectoryAll": "All",
+  "systemsDirectoryError": "An error occurred: {error}",
+  "@systemsDirectoryError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "systemsDirectoryEmpty": "No systems available",
+  "quizResults": "Quiz Results",
+  "yourScore": "Your Score",
+  "backToKnowledgeBase": "Back to Guides",
+  "quizSuccessMessage": "Great result!",
+  "quizFailureMessage": "Try again!",
+  "failedToLoadQuiz": "Failed to load quiz",
+  "failedToSaveAttempt": "Failed to save attempt",
+  "quizNotFound": "Quiz not found",
+  "submitQuiz": "Submit",
+  "nextQuestion": "Next Question",
+  "question": "Question {index}",
+  "@question": {
+    "placeholders": {
+      "index": {
+        "type": "String"
+      }
+    }
+  },
+  "speedBonus": "SPEED BONUS",
+  "levelBeginner": "Newbie",
+  "levelSpecialist": "Specialist",
+  "levelExpert": "Expert",
+  "levelMaster": "Master",
+  "totalQuestions": "Total: {total}",
+  "@totalQuestions": {
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  }
 }

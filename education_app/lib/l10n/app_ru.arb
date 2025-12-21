@@ -97,6 +97,7 @@
   "settingsAppLegalese": "© 2025 Проект Справочник Судьи",
   "settingsAppDescription": "Мобильная платформа для повышения профессиональной компетентности работников суда.",
   "errorPrefix": "Ошибка: ",
+  "days": "дней",
   "resourcesNoResourcesFound": "Ресурсы не найдены.",
   "loginButtonText": "Войти",
   "signUpButtonText": "Зарегистрироваться",
@@ -471,14 +472,6 @@
   "@bottomNavKnowledge": {
     "description": "Пункт навигации для экрана базы знаний"
   },
-  "knowledgeBaseTitle": "База знаний",
-  "@knowledgeBaseTitle": {
-    "description": "Заголовок для экрана базы знаний"
-  },
-  "searchPlaceholder": "Искать статьи...",
-  "@searchPlaceholder": {
-    "description": "Текст-заполнитель для строки поиска"
-  },
   "allCategories": "Все категории",
   "@allCategories": {
     "description": "Фильтр для отображения всех категорий"
@@ -669,5 +662,72 @@
   "justNow": "Только что",
   "quizzes": "Викторины",
   "simulations": "Симуляции",
-  "nextLevel": "Следующий уровень"
+  "nextLevel": "Следующий уровень",
+  "catNewEmployees": "Новые сотрудники",
+  "catIctSpecialists": "ИКТ специалисты",
+  "catSystems": "Системы",
+  "catAuth": "Аутентификация",
+  "catGeneral": "Общее",
+  "rankBeginner": "Начинающий",
+  "rankIntermediate": "Средний уровень",
+  "rankAdvanced": "Продвинутый",
+  "sysCatPrimary": "Основные системы",
+  "sysCatSecondary": "Дополнительные системы",
+  "sysCatSupport": "Системы поддержки",
+  "sysStatusActive": "Активно",
+  "sysStatusMaintenance": "Техподдержка",
+  "sysStatusInactive": "Неактивно",
+  "videoViews": "{count} просмотров",
+  "@videoViews": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "videoAuthorSubtitle": "Автор",
+  "videoDescriptionTitle": "Описание",
+  "sysStatusDeprecated": "Устарело",
+  "sysStatusOffline": "Отключено",
+  "systemsDirectoryAll": "Все",
+  "systemsDirectoryError": "Произошла ошибка: {error}",
+  "@systemsDirectoryError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "systemsDirectoryEmpty": "Системы отсутствуют",
+  "quizResults": "Результаты теста",
+  "yourScore": "Ваш результат",
+  "backToKnowledgeBase": "Вернуться к руководствам",
+  "quizSuccessMessage": "Отличный результат!",
+  "quizFailureMessage": "Попробуйте еще раз!",
+  "failedToLoadQuiz": "Не удалось загрузить тест",
+  "failedToSaveAttempt": "Ошибка при сохранении результата",
+  "quizNotFound": "Тест не найден",
+  "submitQuiz": "Завершить",
+  "nextQuestion": "Следующий вопрос",
+  "question": "Вопрос {index}",
+  "@question": {
+    "placeholders": {
+      "index": {
+        "type": "String"
+      }
+    }
+  },
+  "speedBonus": "СКОРОСТНОЙ БОНУС",
+  "levelBeginner": "Новичок",
+  "levelSpecialist": "Специалист",
+  "levelExpert": "Эксперт",
+  "levelMaster": "Мастер",
+  "totalQuestions": "Всего: {total}",
+  "@totalQuestions": {
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  }
 }

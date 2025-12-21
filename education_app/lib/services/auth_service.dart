@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/users.dart' as app_user_model;
 import 'profile_service.dart';
+import 'gamification_service.dart';
 // --- END NEW IMPORTS ---
 
 class AuthService {
@@ -71,6 +72,9 @@ class AuthService {
         // Save the user's complete profile to Firestore
         await _usersCollection.doc(firebaseUser.uid).set(newUser.toMap());
 
+        // --- NEW: Trigger streak check ---
+        await GamificationService().checkAndUpdateStreak(firebaseUser.uid);
+
         return newUser;
       }
       return null;
@@ -103,6 +107,10 @@ class AuthService {
       if (firebaseUser != null) {
         // --- NEW: After successful sign-in, fetch the full app user profile ---
         final appUser = await _profileService.getUserProfile(firebaseUser.uid);
+        
+        // --- NEW: Trigger streak check ---
+        await GamificationService().checkAndUpdateStreak(firebaseUser.uid);
+        
         return appUser;
       }
       return null;
@@ -191,6 +199,10 @@ class AuthService {
         );
 
         await _usersCollection.doc(firebaseUser.uid).set(newUser.toMap());
+        
+        // --- NEW: Trigger streak check ---
+        await GamificationService().checkAndUpdateStreak(firebaseUser.uid);
+        
         return newUser;
       }
     } on firebase_auth.FirebaseAuthException catch (e) {

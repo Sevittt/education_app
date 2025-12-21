@@ -73,27 +73,17 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
 
   Future<void> _awardPointsForReading() async {
     if (_pointsAwarded) return;
-    
-    final userId = FirebaseAuth.instance.currentUser?.uid;
-    if (userId == null) return;
 
-    _pointsAwarded = true;
+    // We no longer call awardPoints directly here. 
+    // Instead, we record the xAPI statement and let GamificationService handle the reward.
     
-    // Award 5 points for reading an article
-    await GamificationService().awardPoints(
-      userId: userId, 
-      points: 5, 
-      actionType: 'article_read',
-      description: 'Read article: ${widget.article.title}'
-    );
-
     // xAPI Tracking - Completed
     final actor = _getCurrentActor();
     final statement = XApiStatement(
       actor: actor,
       verb: XApiVerbs.completed,
       object: XApiObject(
-        id: widget.article.id, // e.g. "article_123" (Should technically be a URI)
+        id: widget.article.id,
         definition: {
           'type': 'http://adlnet.gov/expapi/activities/article',
           'name': {'en-US': widget.article.title},
@@ -105,22 +95,27 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
       ),
       timestamp: DateTime.now(),
     );
+
+    _pointsAwarded = true;
     await XApiService().recordStatement(statement);
 
     if (mounted) {
        final l10n = AppLocalizations.of(context)!;
        ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(content: Text(l10n.pointsEarned(5))),
+         SnackBar(
+           content: Text(l10n.pointsEarned(5)),
+           backgroundColor: Colors.green,
+         ),
        );
     }
   }
 
-  // Helper to construct actor for direct statements
+  // Helper to construct actor for direct statements (DEPRECATED: Use XApiService methods instead where possible)
   XApiActor _getCurrentActor() {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       return XApiActor(
-        mbox: 'mailto:${user.email ?? "no-email-${user.uid}@sudqollanma.uz"}',
+        mbox: 'mailto:${user.uid}@sudqollanma.uz',
         name: user.displayName ?? 'User ${user.uid.substring(0, 5)}',
       );
     } else {
@@ -236,7 +231,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(
-            widget.article.category.displayName,
+            widget.article.category.getDisplayName(AppLocalizations.of(context)!),
             style: TextStyle(
               color: Theme.of(context).primaryColor,
               fontWeight: FontWeight.bold,

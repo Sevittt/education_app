@@ -20,16 +20,30 @@ class QuizScreen extends StatefulWidget {
   State<QuizScreen> createState() => _QuizScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
+class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateMixin {
   Quiz? _quiz;
   bool _isLoading = true;
   int _currentQuestionIndex = 0;
   final Map<int, String> _selectedAnswers = {};
+  DateTime? _startTime; // Total quiz start time
+  late final AnimationController _timerController;
 
   @override
   void initState() {
     super.initState();
     _fetchQuiz();
+    _startTime = DateTime.now();
+    
+    _timerController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 5),
+    )..reverse(from: 1.0); // Start counting down from 100%
+  }
+
+  @override
+  void dispose() {
+    _timerController.dispose();
+    super.dispose();
   }
 
   Future<void> _fetchQuiz() async {
@@ -59,6 +73,7 @@ class _QuizScreenState extends State<QuizScreen> {
     if (_currentQuestionIndex < _quiz!.questions.length - 1) {
       setState(() {
         _currentQuestionIndex++;
+        _timerController.reverse(from: 1.0);
       });
     }
   }
@@ -68,8 +83,8 @@ class _QuizScreenState extends State<QuizScreen> {
     final user = Provider.of<AuthNotifier>(context, listen: false).appUser;
     if (user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('You must be logged in to submit a quiz.'),
+        SnackBar(
+          content: Text(l10n.loginRequired),
         ),
       );
       return;
@@ -82,6 +97,10 @@ class _QuizScreenState extends State<QuizScreen> {
       }
     }
 
+    final int timeTakenSeconds = _startTime != null 
+        ? DateTime.now().difference(_startTime!).inSeconds 
+        : 0;
+
     final attempt = QuizAttempt(
       id: '',
       userId: user.id,
@@ -90,6 +109,7 @@ class _QuizScreenState extends State<QuizScreen> {
       score: score,
       totalQuestions: _quiz!.questions.length,
       attemptedAt: Timestamp.now(),
+      timeTakenSeconds: timeTakenSeconds,
     );
 
     try {
@@ -141,15 +161,52 @@ class _QuizScreenState extends State<QuizScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(_quiz!.title)),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              '${l10n.question('${_currentQuestionIndex + 1}')} ${l10n.totalQuestions('${_quiz!.questions.length}')}',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
+      body: Column(
+        children: [
+          // --- NEW: Visual Timer Bar for Speed Bonus ---
+          AnimatedBuilder(
+            animation: _timerController,
+            builder: (context, child) {
+              return LinearProgressIndicator(
+                value: _timerController.value,
+                backgroundColor: Colors.grey.withAlpha(26),
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  Color.lerp(Colors.red, Colors.green, _timerController.value) ?? Colors.green,
+                ),
+                minHeight: 6,
+              );
+            },
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '${l10n.question('${_currentQuestionIndex + 1}')} ${l10n.totalQuestions('${_quiz!.questions.length}')}',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      // --- NEW: Speed Bonus Badge ---
+                      if (_timerController.value > 0)
+                         Row(
+                           children: [
+                             const Icon(Icons.bolt, color: Colors.amber, size: 20),
+                             Text(
+                               l10n.speedBonus,
+                               style: TextStyle(
+                                 color: Colors.amber.shade700,
+                                 fontWeight: FontWeight.bold,
+                                 fontSize: 12,
+                               ),
+                             ),
+                           ],
+                         ),
+                    ],
+                  ),
             const SizedBox(height: 8),
             Text(
               currentQuestion.questionText,
@@ -186,6 +243,9 @@ class _QuizScreenState extends State<QuizScreen> {
           ],
         ),
       ),
+    ),
+    ],
+    ),
     );
   }
 }

@@ -112,6 +112,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return YoutubePlayerBuilder(
       player: YoutubePlayer(
         controller: _controller,
@@ -138,7 +139,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       _buildVideoInfo(),
                       const Divider(height: 32),
                       Text(
-                        'Tavsif',
+                        l10n.videoDescriptionTitle,
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -175,7 +176,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         Row(
           children: [
             Text(
-              '${widget.video.views} ko\'rishlar',
+              AppLocalizations.of(context)!.videoViews(widget.video.views),
               style: TextStyle(color: Colors.grey.shade600),
             ),
             const SizedBox(width: 8),
@@ -207,7 +208,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  'Muallif',
+                  AppLocalizations.of(context)!.videoAuthorSubtitle,
                   style: TextStyle(color: Colors.grey.shade500, fontSize: 12),
                 ),
               ],

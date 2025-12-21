@@ -10,15 +10,16 @@ class QuizAttempt {
   final int score;
   final int totalQuestions;
   final Timestamp attemptedAt;
-
+  final int? timeTakenSeconds; // New field for Kahoot-style speed tracking
   QuizAttempt({
     required this.id,
     required this.userId,
     required this.quizId,
-    required this.quizTitle, // Added this field
+    required this.quizTitle,
     required this.score,
     required this.totalQuestions,
     required this.attemptedAt,
+    this.timeTakenSeconds,
   });
 
   factory QuizAttempt.fromFirestore(DocumentSnapshot doc) {
@@ -123,6 +124,7 @@ class QuizAttempt {
       score: scoreValue,
       totalQuestions: totalQuestionsValue,
       attemptedAt: attemptedAtValue,
+      timeTakenSeconds: data['timeTakenSeconds'] as int?,
     );
   }
 
@@ -136,6 +138,7 @@ class QuizAttempt {
       score: (data['score'] as num?)?.toInt() ?? 0,
       totalQuestions: (data['totalQuestions'] as num?)?.toInt() ?? 0,
       attemptedAt: data['attemptedAt'] as Timestamp? ?? Timestamp.now(),
+      timeTakenSeconds: data['timeTakenSeconds'] as int?,
     );
   }
 
@@ -159,6 +162,7 @@ class QuizAttempt {
       'score': score,
       'totalQuestions': totalQuestions,
       'attemptedAt': attemptedAt,
+      'timeTakenSeconds': timeTakenSeconds,
     };
   }
 }

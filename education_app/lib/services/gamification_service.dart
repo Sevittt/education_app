@@ -12,11 +12,73 @@ class GamificationService {
   factory GamificationService() => _instance;
   GamificationService._internal();
 
+  /// ENGINE: Calculates XP for a quiz question based on correctness and speed
+  int calculateQuizScore(bool isCorrect, int timeTakenSeconds) {
+    if (!isCorrect) return 0;
+    
+    int points = GamificationRules.xpQuizBase;
+    
+    // speed bonus (within 5 seconds)
+    if (timeTakenSeconds <= 5) {
+      points += GamificationRules.xpSpeedBonus;
+    }
+    
+    return points;
+  }
+
+  /// ENGINE: Daily Streak Logic (Duolingo style)
+  Future<void> checkAndUpdateStreak(String userId) async {
+    final userRef = _firestore.collection(_collectionName).doc(userId);
+    
+    await _firestore.runTransaction((transaction) async {
+      final userDoc = await transaction.get(userRef);
+      if (!userDoc.exists) return;
+      
+      final data = userDoc.data()!;
+      final lastLogin = data['lastLoginDate'] != null 
+          ? DateTime.tryParse(data['lastLoginDate'] as String) 
+          : null;
+      int currentStreak = (data['currentStreak'] as num?)?.toInt() ?? 0;
+      int currentXP = (data['xp'] as num?)?.toInt() ?? 0;
+      
+      final now = DateTime.now();
+      final today = DateTime(now.year, now.month, now.day);
+      
+      if (lastLogin == null) {
+        // First time
+        currentStreak = 1;
+        currentXP += GamificationRules.xpLoginStreak;
+      } else {
+        final lastLoginDay = DateTime(lastLogin.year, lastLogin.month, lastLogin.day);
+        final difference = today.difference(lastLoginDay).inDays;
+        
+        if (difference == 1) {
+          // Consecutive day
+          currentStreak++;
+          currentXP += GamificationRules.xpLoginStreak;
+        } else if (difference > 1) {
+          // Streak broken
+          currentStreak = 1;
+          currentXP += GamificationRules.xpLoginStreak;
+        } else if (difference == 0) {
+          // Already logged in today
+          return;
+        }
+      }
+      
+      transaction.update(userRef, {
+        'currentStreak': currentStreak,
+        'xp': currentXP,
+        'lastLoginDate': now.toIso8601String(),
+      });
+    });
+  }
+
   /// ENGINE: Central method to process xAPI statements and award tailored XP
   Future<void> processXApiEvent(XApiStatement statement) async {
     final userId = statement.actor.mbox.replaceAll('mailto:', '');
 
-    if (userId == null) {
+    if (userId.isEmpty) {
       print('GamificationEngine: No userId found in statement.');
       return;
     }
@@ -29,17 +91,17 @@ class GamificationService {
     // Let's rely on the Helper awardPoints for now if ID is tricky, BUT 
     // let's try to extract ID if it's "no-email-UID".
     
+    // 1. Extract UID from mbox (format: mailto:UID@sudqollanma.uz)
     String finalUserId = userId;
-    if (userId.contains('no-email-')) {
-        final parts = userId.split('no-email-');
-        if (parts.length > 1) {
-            finalUserId = parts[1].split('@')[0];
-        }
-    } else {
-        // It's an email, we might need to lookup UID. 
-        // For this MVP, let's assume we can't easily do email->UID here without extra query.
-        // So we will only process if we have a UID-like string or if XApiService passes it.
-        // SKIPPING complex lookup for safety.
+    if (userId.contains('@')) {
+        // Extract what's before @ and after mailto:
+        finalUserId = userId.split('@')[0];
+    }
+    
+    // Safety check: ensure we aren't using a placeholder
+    if (finalUserId == 'guest') {
+        print('GamificationEngine: Skipping reward for guest user.');
+        return;
     }
 
     // Determine Action and XP based on Rules
@@ -48,7 +110,7 @@ class GamificationService {
     String description = '';
 
     final verbId = statement.verb.id; // e.g. http://adlnet.gov/expapi/verbs/completed
-    final activityType = statement.object.definition?['type'] as String?;
+    final activityType = statement.object.definition['type'] as String?;
 
     // 1. Video Watch
     if (activityType == 'http://adlnet.gov/expapi/activities/video') {
@@ -60,21 +122,39 @@ class GamificationService {
     }
     // 2. Quiz Completion
     else if (activityType == 'http://adlnet.gov/expapi/activities/assessment') {
-        if (verbId.endsWith('passed')) {
+            // Quiz base score is already calculated or we replace it
             pointsToAward = GamificationRules.xpQuizPass;
             actionType = 'quiz_passed';
             description = 'Passed quiz';
             
             // Check for Perfect Score Bonus
-            // Assuming result.score.scaled is 1.0 or result.score.raw is 100
             final rawScore = statement.result?.score?['raw'];
             if (rawScore == 100) {
                  pointsToAward += GamificationRules.xpQuizPerfect;
+                 actionType = 'quiz_aced'; // Special action for gatekeeper
                  description += ' (Perfect Score!)';
             }
+            
+            // Speed Bonus from result.duration (ISO 8601 like PT4S)
+            final durationStr = statement.result?.duration; // e.g., "PT4S"
+            if (durationStr != null && durationStr.startsWith('PT')) {
+               final secondsStr = durationStr.substring(2).replaceAll('S', '');
+               final seconds = int.tryParse(secondsStr);
+               if (seconds != null && seconds <= 5) {
+                   pointsToAward += GamificationRules.xpSpeedBonus;
+                   description += ' (Speed Bonus!)';
+               }
+            }
+        }
+    // 3. Article Read/Scroll
+    else if (activityType == 'http://adlnet.gov/expapi/activities/article') {
+        if (verbId.endsWith('completed')) {
+            pointsToAward = GamificationRules.xpArticleScroll;
+            actionType = 'article_read';
+            description = 'Read article';
         }
     }
-    // 3. Simulation
+    // 4. Simulation
     else if (activityType == 'http://adlnet.gov/expapi/activities/simulation') {
         if (verbId.endsWith('performed') || verbId.endsWith('completed')) {
              pointsToAward = GamificationRules.xpSimComplete;
@@ -88,12 +168,15 @@ class GamificationService {
     }
 
     if (pointsToAward > 0) {
+        print('GamificationEngine: Awarding $pointsToAward XP for $actionType to user $finalUserId');
         await awardPoints(
             userId: finalUserId,
             points: pointsToAward,
             actionType: actionType,
             description: description,
         );
+    } else {
+        print('GamificationEngine: No points awarded for activity $activityType, verb $verbId');
     }
   }
 
@@ -114,6 +197,8 @@ class GamificationService {
       final data = userDoc.data()!;
       int currentXP = (data['xp'] as num?)?.toInt() ?? 0;
       int quizzesPassed = (data['quizzesPassed'] as num?)?.toInt() ?? 0;
+      int quizzesAced = (data['totalQuizzesAced'] as num?)?.toInt() ?? 0;
+      int currentStreak = (data['currentStreak'] as num?)?.toInt() ?? 0;
       int simsCompleted = (data['simulationsCompleted'] as num?)?.toInt() ?? 0;
 
       // 1. Calculate New XP
@@ -122,6 +207,9 @@ class GamificationService {
       // 2. Update Counters based on Action Type
       if (actionType == 'quiz_passed') {
         quizzesPassed++;
+      } else if (actionType == 'quiz_aced') {
+        quizzesPassed++;
+        quizzesAced++;
       } else if (actionType == 'simulation_completed') {
         simsCompleted++;
       }
@@ -130,6 +218,8 @@ class GamificationService {
       final newLevel = GamificationRules.calculateLevel(
         xp: newXP, 
         quizzesPassed: quizzesPassed, 
+        quizzesAced: quizzesAced,
+        currentStreak: currentStreak,
         simulationsCompleted: simsCompleted
       );
 
@@ -137,6 +227,7 @@ class GamificationService {
         'xp': newXP,
         'level': newLevel,
         'quizzesPassed': quizzesPassed,
+        'totalQuizzesAced': quizzesAced,
         'simulationsCompleted': simsCompleted,
         'lastActivity': FieldValue.serverTimestamp(),
       });

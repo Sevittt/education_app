@@ -97,6 +97,7 @@
   "settingsAppLegalese": "© 2025 Sud Qo'llanmasi Loyihasi",
   "settingsAppDescription": "Sud xodimlarining kasbiy kompetentligi uchun mobil platforma.",
   "errorPrefix": "Xatolik: ",
+  "days": "kun",
   "resourcesNoResourcesFound": "Resurslar topilmadi.",
   "loginButtonText": "Kirish",
   "signUpButtonText": "Ro'yxatdan o'tish",
@@ -479,14 +480,6 @@
   "@bottomNavKnowledge": {
     "description": "Bilimlar bazasi ekrani uchun navigatsiya elementi"
   },
-  "knowledgeBaseTitle": "Bilimlar Bazasi",
-  "@knowledgeBaseTitle": {
-    "description": "Bilimlar bazasi ekrani uchun sarlavha"
-  },
-  "searchPlaceholder": "Maqolalarni qidiring...",
-  "@searchPlaceholder": {
-    "description": "Qidiruv maydoni uchun matn"
-  },
   "allCategories": "Barcha Kategoriyalar",
   "@allCategories": {
     "description": "Barcha kategoriyalarni ko'rsatish uchun filtr"
@@ -693,5 +686,72 @@
   "justNow": "Hozirgina",
   "quizzes": "Viktorinalar",
   "simulations": "Simulyatsiyalar",
-  "nextLevel": "Keyingi daraja"
+  "nextLevel": "Keyingi daraja",
+  "catNewEmployees": "Yangi Xodimlar",
+  "catIctSpecialists": "AKT Mutaxassislari",
+  "catSystems": "Tizimlar",
+  "catAuth": "Kirish/Login",
+  "catGeneral": "Umumiy",
+  "rankBeginner": "Boshlang'ich",
+  "rankIntermediate": "O'rta Daraja",
+  "rankAdvanced": "Ilg'or",
+  "sysCatPrimary": "Asosiy Tizimlar",
+  "sysCatSecondary": "Qo'shimcha Tizimlar",
+  "sysCatSupport": "Yordam Tizimlari",
+  "sysStatusActive": "Faol",
+  "sysStatusMaintenance": "Ta'mirlashda",
+  "sysStatusInactive": "Nofaol",
+  "videoViews": "{count} ko'rishlar",
+  "@videoViews": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "videoAuthorSubtitle": "Muallif",
+  "videoDescriptionTitle": "Tavsif",
+  "sysStatusDeprecated": "Eski Versiya",
+  "sysStatusOffline": "O'chirilgan",
+  "systemsDirectoryAll": "Barchasi",
+  "systemsDirectoryError": "Xatolik yuz berdi: {error}",
+  "@systemsDirectoryError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "systemsDirectoryEmpty": "Tizimlar mavjud emas",
+  "quizResults": "Viktorina natijalari",
+  "yourScore": "Sizning natijangiz",
+  "backToKnowledgeBase": "Qo'llanmalarga qaytish",
+  "quizSuccessMessage": "Ajoyib natija!",
+  "quizFailureMessage": "Yana bir bor urinib ko'ring!",
+  "failedToLoadQuiz": "Viktorinani yuklab bo'lmadi",
+  "failedToSaveAttempt": "Natijani saqlashda xatolik",
+  "quizNotFound": "Viktorina topilmadi",
+  "submitQuiz": "Yakunlash",
+  "nextQuestion": "Keyingi savol",
+  "question": "Savol {index}",
+  "@question": {
+    "placeholders": {
+      "index": {
+        "type": "String"
+      }
+    }
+  },
+  "speedBonus": "TEZKOR BONUS",
+  "levelBeginner": "Boshlang'ich",
+  "levelSpecialist": "Mutaxassis",
+  "levelExpert": "Ekspert",
+  "levelMaster": "Usta (Master)",
+  "totalQuestions": "Jami: {total}",
+  "@totalQuestions": {
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  }
 }

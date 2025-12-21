@@ -178,7 +178,7 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
                       items: VideoCategory.values.map((category) {
                         return DropdownMenuItem(
                           value: category,
-                          child: Text(category.displayName),
+                          child: Text(category.getDisplayName(l10n)),
                         );
                       }).toList(),
                       onChanged: (value) {

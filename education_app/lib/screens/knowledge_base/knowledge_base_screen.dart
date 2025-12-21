@@ -4,6 +4,7 @@ import '../../models/knowledge_article.dart';
 import '../../services/knowledge_base_service.dart';
 import 'article_detail_screen.dart';
 import 'package:intl/intl.dart';
+import '../../l10n/app_localizations.dart';
 
 class KnowledgeBaseScreen extends StatefulWidget {
   const KnowledgeBaseScreen({super.key});
@@ -55,9 +56,10 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bilimlar Bazasi'),
+        title: Text(l10n.featureKnowledgeBase),
         centerTitle: true,
       ),
       body: Column(
@@ -73,12 +75,13 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
   }
 
   Widget _buildSearchBar() {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextField(
         controller: _searchController,
         decoration: InputDecoration(
-          hintText: 'Maqolalarni qidirish...',
+          hintText: l10n.searchArticlesPlaceholder,
           prefixIcon: const Icon(Icons.search),
           suffixIcon: _searchQuery.isNotEmpty
               ? IconButton(
@@ -101,15 +104,16 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
   }
 
   Widget _buildCategoryFilter() {
+    final l10n = AppLocalizations.of(context)!;
     return SizedBox(
       height: 50,
       child: ListView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         children: [
-          _buildCategoryChip(null, 'Barchasi'),
+          _buildCategoryChip(null, l10n.allCategories),
           ...ArticleCategory.values.map((category) {
-            return _buildCategoryChip(category, category.displayName);
+            return _buildCategoryChip(category, category.getDisplayName(l10n));
           }),
         ],
       ),
@@ -144,6 +148,7 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
 
   Widget _buildSearchResults() {
     if (_searchResults.isEmpty) {
+      final l10n = AppLocalizations.of(context)!;
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -151,7 +156,7 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
             Icon(Icons.search_off, size: 64, color: Colors.grey.shade400),
             const SizedBox(height: 16),
             Text(
-              'Hech narsa topilmadi',
+              l10n.noResultsFound,
               style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
             ),
           ],
@@ -190,6 +195,7 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
         final articles = snapshot.data ?? [];
 
         if (articles.isEmpty) {
+          final l10n = AppLocalizations.of(context)!;
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -197,7 +203,7 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
                 Icon(Icons.library_books_outlined, size: 64, color: Colors.grey.shade400),
                 const SizedBox(height: 16),
                 Text(
-                  'Maqolalar mavjud emas',
+                  l10n.noArticlesAvailable,
                   style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
                 ),
               ],
@@ -245,7 +251,7 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      article.category.displayName,
+                      article.category.getDisplayName(AppLocalizations.of(context)!),
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 12,

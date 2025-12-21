@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/video_tutorial.dart';
 import '../../services/video_tutorial_service.dart';
 import 'video_player_screen.dart';
@@ -30,17 +31,18 @@ class _VideoTutorialsScreenState extends State<VideoTutorialsScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Video Qo\'llanmalar'),
+        title: Text(l10n.manageVideosTitle),
         centerTitle: true,
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
           tabs: [
-            const Tab(text: 'Barchasi'),
+            Tab(text: l10n.allCategories),
             ...VideoCategory.values.map((category) {
-              return Tab(text: category.displayName);
+              return Tab(text: category.getDisplayName(l10n));
             }),
           ],
         ),
@@ -68,8 +70,9 @@ class _VideoTutorialsScreenState extends State<VideoTutorialsScreen>
     return StreamBuilder<List<VideoTutorial>>(
       stream: stream,
       builder: (context, snapshot) {
+        final l10n = AppLocalizations.of(context)!;
         if (snapshot.hasError) {
-          return Center(child: Text('Xatolik yuz berdi: ${snapshot.error}'));
+          return Center(child: Text(l10n.systemsDirectoryError(snapshot.error.toString())));
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -86,7 +89,7 @@ class _VideoTutorialsScreenState extends State<VideoTutorialsScreen>
                 Icon(Icons.video_library_outlined, size: 64, color: Colors.grey.shade400),
                 const SizedBox(height: 16),
                 Text(
-                  'Videolar mavjud emas',
+                  l10n.noVideosFound,
                   style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
                 ),
               ],
@@ -173,7 +176,7 @@ class _VideoTutorialsScreenState extends State<VideoTutorialsScreen>
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
-                          video.category.displayName,
+                          video.category.getDisplayName(AppLocalizations.of(context)!),
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: 12,

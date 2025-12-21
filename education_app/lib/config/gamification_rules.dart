@@ -2,11 +2,15 @@ class GamificationRules {
   // --- XP Constants ---
   // Tier 1: Passive (Knowledge)
   static const int xpArticleView = 5;
+  static const int xpArticleScroll = 5;
   static const int xpVideoComplete = 10;
   
   // Tier 2: Active (Verification)
+  static const int xpQuizBase = 10;
   static const int xpQuizPass = 20;
-  static const int xpQuizPerfect = 10; // Bonus for 100% score
+  static const int xpQuizPerfect = 50; // Bonus for 100% score
+  static const int xpSpeedBonus = 5; // Updated to 5 per BMI_LM.txt
+  static const int xpLoginStreak = 5; // Per day (Duolingo style)
 
   // Tier 3: Practical (Simulation)
   static const int xpSimInteraction = 50;
@@ -19,6 +23,8 @@ class GamificationRules {
 
   // --- Content Requirements (Gatekeepers) ---
   static const int reqQuizzesForExpert = 5;
+  static const int reqQuizzesAcedForExpert = 3;
+  static const int reqStreakForMaster = 7;
   static const int reqSimsForMaster = 3;
 
   // --- Level Names ---
@@ -31,23 +37,25 @@ class GamificationRules {
   static String calculateLevel({
     required int xp,
     required int quizzesPassed,
+    required int quizzesAced,
+    required int currentStreak,
     required int simulationsCompleted,
   }) {
     // 1. Check for Master
     if (xp >= xpThresholdMaster) {
-      if (simulationsCompleted >= reqSimsForMaster) {
+      if (simulationsCompleted >= reqSimsForMaster && currentStreak >= reqStreakForMaster) {
         return levelMaster;
       } else {
-        return levelExpert; // Capped at Expert if Sims not done
+        return levelExpert; // Capped at Expert
       }
     }
 
     // 2. Check for Expert
     if (xp >= xpThresholdExpert) {
-      if (quizzesPassed >= reqQuizzesForExpert) {
+      if (quizzesPassed >= reqQuizzesForExpert && quizzesAced >= reqQuizzesAcedForExpert) {
         return levelExpert;
       } else {
-        return levelSpecialist; // Capped at Specialist if Quizzes not done
+        return levelSpecialist; // Capped at Specialist
       }
     }
 

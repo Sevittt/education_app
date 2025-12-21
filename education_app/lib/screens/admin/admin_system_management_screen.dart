@@ -91,7 +91,7 @@ class _AdminSystemManagementScreenState extends State<AdminSystemManagementScree
                     system.name,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  subtitle: Text(system.category.displayName),
+                  subtitle: Text(system.category.getDisplayName(l10n)),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [

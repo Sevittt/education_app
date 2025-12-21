@@ -118,9 +118,6 @@ class ProfileScreen extends StatelessWidget {
           itemCount: attempts.length,
           itemBuilder: (context, index) {
             final attempt = attempts[index];
-            final formattedDate = DateFormat.yMMMd(
-              l10n.localeName,
-            ).add_jm().format(attempt.attemptedAt.toDate());
 
             return QuizAttemptCard(
               attempt: attempt,
@@ -143,8 +140,6 @@ class ProfileScreen extends StatelessWidget {
         return l10n.roleEkspert;
       case UserRole.admin:
         return l10n.roleAdmin;
-      default:
-        return l10n.roleXodim;
     }
   }
 
@@ -164,7 +159,45 @@ class ProfileScreen extends StatelessWidget {
     }
   }
 
-  // --- ADDED: Build User Stats Widget ---
+  // --- NEW: Build Streak Badge ---
+  Widget _buildStreakBadge(BuildContext context, AppUser appUser, AppLocalizations l10n) {
+     if (appUser.currentStreak == 0) return const SizedBox.shrink();
+     
+     return Container(
+       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+       decoration: BoxDecoration(
+         gradient: LinearGradient(
+           colors: [Colors.orange.shade700, Colors.red.shade600],
+           begin: Alignment.topLeft,
+           end: Alignment.bottomRight,
+         ),
+         borderRadius: BorderRadius.circular(20),
+         boxShadow: [
+           BoxShadow(
+             color: Colors.red.withAlpha(50),
+             blurRadius: 8,
+             offset: const Offset(0, 4),
+           ),
+         ],
+       ),
+       child: Row(
+         mainAxisSize: MainAxisSize.min,
+         children: [
+           const Text('🔥', style: TextStyle(fontSize: 18)),
+           const SizedBox(width: 4),
+           Text(
+             '${appUser.currentStreak} ${l10n.days}',
+             style: const TextStyle(
+               color: Colors.white,
+               fontWeight: FontWeight.bold,
+               fontSize: 14,
+             ),
+           ),
+         ],
+       ),
+     );
+  }
+
   // --- ADDED: Build User Stats Widget ---
   Widget _buildUserStats(
     BuildContext context,
@@ -197,6 +230,8 @@ class ProfileScreen extends StatelessWidget {
       nextLevelName = GamificationRules.levelMaster;
       xpTarget = GamificationRules.xpThresholdMaster;
       simsTarget = GamificationRules.reqSimsForMaster;
+      // Streak requirement for Master
+      // User requested "Master: 2000 XP + must have currentStreak >= 7"
     } else if (appUser.level == GamificationRules.levelMaster) {
       isMaxLevel = true;
       xpTarget = GamificationRules.xpThresholdMaster; // Just filter
@@ -244,49 +279,60 @@ class ProfileScreen extends StatelessWidget {
                     if (!isMaxLevel)
                       Text(
                         '${l10n.nextLevel}: ${_getLocalizedLevelName(nextLevelName, l10n)}',
-                         style: textTheme.bodySmall?.copyWith(
+                        style: textTheme.bodySmall?.copyWith(
                           color: colorScheme.onSurfaceVariant,
                         ),
                       )
                     else
-                         Text(
-                        l10n.levelExpert, // "Max Level" or similar
-                         style: textTheme.bodySmall?.copyWith(
+                      Text(
+                        l10n.levelExpert, // This is just a placeholder logic from old file
+                        style: textTheme.bodySmall?.copyWith(
                           color: colorScheme.onSurfaceVariant,
                         ),
                       ),
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: colorScheme.primaryContainer,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    '$currentXP XP',
-                    style: textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.onPrimaryContainer,
-                    ),
-                  ),
-                ),
+                // --- NEW: Streak Badge ---
+                _buildStreakBadge(context, appUser, l10n),
               ],
             ),
             const SizedBox(height: 16),
             
-            // Progress Bar (XP)
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: LinearProgressIndicator(
-                value: progress,
-                minHeight: 10,
-                backgroundColor: colorScheme.surfaceContainerHighest,
-                valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
-              ),
+            // --- UPDATED: XP Progress with Animation ---
+            Text(
+              'XP: $currentXP / $xpTarget',
+              style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            TweenAnimationBuilder<double>(
+              tween: Tween<double>(begin: 0, end: progress),
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.easeOutCubic,
+              builder: (context, value, child) {
+                return Column(
+                  children: [
+                    LinearProgressIndicator(
+                      value: value,
+                      backgroundColor: colorScheme.surfaceContainerHighest,
+                      borderRadius: BorderRadius.circular(8),
+                      minHeight: 12,
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          '${(value * 100).toInt()}%',
+                          style: textTheme.labelSmall?.copyWith(
+                            color: colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              },
             ),
              const SizedBox(height: 8),
              
@@ -299,19 +345,38 @@ class ProfileScreen extends StatelessWidget {
                      label: '$currentXP / $xpTarget XP', 
                      isMet: currentXP >= xpTarget
                  ),
-                 // Quiz Requirement (if exists)
-                 if (quizzesTarget > 0)
+                  // Quiz Requirement (if exists)
+                  if (quizzesTarget > 0)
                     _buildRequirementRow(
                         context, 
                         icon: Icons.quiz, 
                         label: '${l10n.quizzes}: ${appUser.quizzesPassed} / $quizzesTarget', 
                         isMet: appUser.quizzesPassed >= quizzesTarget
                     ),
-                 // Sims Requirement (if exists)
-                 if (simsTarget > 0)
+                  
+                  // Aced Quizzes Requirement (Expert level)
+                  if (appUser.level == GamificationRules.levelSpecialist)
                     _buildRequirementRow(
                         context, 
-                        icon: Icons.science, // Icon for sims
+                        icon: Icons.workspace_premium, 
+                        label: 'Aced Quizzes: ${appUser.totalQuizzesAced} / ${GamificationRules.reqQuizzesAcedForExpert}', 
+                        isMet: appUser.totalQuizzesAced >= GamificationRules.reqQuizzesAcedForExpert
+                    ),
+
+                  // Streak Requirement (Master level)
+                  if (appUser.level == GamificationRules.levelExpert)
+                    _buildRequirementRow(
+                        context, 
+                        icon: Icons.local_fire_department, 
+                        label: 'Streak: ${appUser.currentStreak} / ${GamificationRules.reqStreakForMaster} ${l10n.days}', 
+                        isMet: appUser.currentStreak >= GamificationRules.reqStreakForMaster
+                    ),
+
+                  // Sims Requirement (if exists)
+                  if (simsTarget > 0)
+                    _buildRequirementRow(
+                        context, 
+                        icon: Icons.science, 
                         label: '${l10n.simulations}: ${appUser.simulationsCompleted} / $simsTarget', 
                         isMet: appUser.simulationsCompleted >= simsTarget
                     ),

@@ -72,10 +72,9 @@ class XApiService {
   Future<void> trackQuizCompleted({
     required String quizId,
     required String title,
-    required double score, // Raw percentage 0-100? or scaled 0.0-1.0? 
-                           // User said "score" but usage implies raw/scaled. 
-                           // I'll assume 0-100 for raw and normalize for scaled.
+    required double score, 
     required bool passed,
+    int? timeTakenSeconds,
   }) async {
     final actor = _getCurrentActor();
     
@@ -92,9 +91,10 @@ class XApiService {
       result: XApiResult(
         success: passed,
         completion: true,
+        duration: timeTakenSeconds != null ? 'PT${timeTakenSeconds}S' : null,
         score: {
           'raw': score,
-          'scaled': score / 100.0, // Assuming score is percentage 0-100
+          'scaled': score / 100.0,
         },
       ),
       timestamp: DateTime.now(),
@@ -138,8 +138,10 @@ class XApiService {
   XApiActor _getCurrentActor() {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null) {
+      // CRITICAL: We use mailto:UID@sudqollanma.uz so GamificationService 
+      // can reliably extract the Firestore Document ID (UID).
       return XApiActor(
-        mbox: 'mailto:${user.email ?? "no-email-${user.uid}@sudqollanma.uz"}',
+        mbox: 'mailto:${user.uid}@sudqollanma.uz',
         name: user.displayName ?? 'User ${user.uid.substring(0, 5)}',
       );
     } else {

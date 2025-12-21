@@ -103,7 +103,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
         children: [
           _buildCategoryChip(null, AppLocalizations.of(context)!.filterAll),
           ...ArticleCategory.values.map((category) {
-            return _buildCategoryChip(category, category.displayName);
+            return _buildCategoryChip(category, category.getDisplayName(AppLocalizations.of(context)!));
           }),
         ],
       ),
@@ -269,7 +269,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      article.category.displayName,
+                      article.category.getDisplayName(AppLocalizations.of(context)!),
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 12,

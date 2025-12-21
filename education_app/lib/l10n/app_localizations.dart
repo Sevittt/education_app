@@ -343,6 +343,12 @@ abstract class AppLocalizations {
   /// **'Error: '**
   String get errorPrefix;
 
+  /// No description provided for @days.
+  ///
+  /// In en, this message translates to:
+  /// **'days'**
+  String get days;
+
   /// No description provided for @resourcesNoResourcesFound.
   ///
   /// In en, this message translates to:
@@ -814,7 +820,7 @@ abstract class AppLocalizations {
   /// No description provided for @quizNotFound.
   ///
   /// In en, this message translates to:
-  /// **'Quiz not found.'**
+  /// **'Quiz not found'**
   String get quizNotFound;
 
   /// No description provided for @failedToLoadQuiz.
@@ -826,19 +832,19 @@ abstract class AppLocalizations {
   /// No description provided for @question.
   ///
   /// In en, this message translates to:
-  /// **'Question {number}'**
-  String question(Object number);
+  /// **'Question {index}'**
+  String question(String index);
 
   /// No description provided for @totalQuestions.
   ///
   /// In en, this message translates to:
-  /// **'of {total}'**
-  String totalQuestions(Object total);
+  /// **'Total: {total}'**
+  String totalQuestions(String total);
 
   /// No description provided for @submitQuiz.
   ///
   /// In en, this message translates to:
-  /// **'Submit Quiz'**
+  /// **'Submit'**
   String get submitQuiz;
 
   /// No description provided for @nextQuestion.
@@ -862,7 +868,7 @@ abstract class AppLocalizations {
   /// No description provided for @yourScore.
   ///
   /// In en, this message translates to:
-  /// **'Your Score:'**
+  /// **'Your Score'**
   String get yourScore;
 
   /// No description provided for @done.
@@ -874,7 +880,7 @@ abstract class AppLocalizations {
   /// No description provided for @failedToSaveAttempt.
   ///
   /// In en, this message translates to:
-  /// **'Failed to save your attempt'**
+  /// **'Failed to save attempt'**
   String get failedToSaveAttempt;
 
   /// No description provided for @myQuizHistory.
@@ -1774,7 +1780,7 @@ abstract class AppLocalizations {
   /// No description provided for @levelBeginner.
   ///
   /// In en, this message translates to:
-  /// **'Beginner'**
+  /// **'Newbie'**
   String get levelBeginner;
 
   /// No description provided for @levelIntermediate.
@@ -2832,6 +2838,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Simulations'**
   String get simulations;
+
+  /// No description provided for @catNewEmployees.
+  ///
+  /// In en, this message translates to:
+  /// **'New Employees'**
+  String get catNewEmployees;
+
+  /// No description provided for @catIctSpecialists.
+  ///
+  /// In en, this message translates to:
+  /// **'ICT Specialists'**
+  String get catIctSpecialists;
+
+  /// No description provided for @catSystems.
+  ///
+  /// In en, this message translates to:
+  /// **'Systems'**
+  String get catSystems;
+
+  /// No description provided for @catAuth.
+  ///
+  /// In en, this message translates to:
+  /// **'Authentication'**
+  String get catAuth;
+
+  /// No description provided for @catGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get catGeneral;
+
+  /// No description provided for @rankBeginner.
+  ///
+  /// In en, this message translates to:
+  /// **'Beginner'**
+  String get rankBeginner;
+
+  /// No description provided for @rankIntermediate.
+  ///
+  /// In en, this message translates to:
+  /// **'Intermediate'**
+  String get rankIntermediate;
+
+  /// No description provided for @rankAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced'**
+  String get rankAdvanced;
+
+  /// No description provided for @sysCatPrimary.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary Systems'**
+  String get sysCatPrimary;
+
+  /// No description provided for @sysCatSecondary.
+  ///
+  /// In en, this message translates to:
+  /// **'Secondary Systems'**
+  String get sysCatSecondary;
+
+  /// No description provided for @sysCatSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Support Systems'**
+  String get sysCatSupport;
+
+  /// No description provided for @sysStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get sysStatusActive;
+
+  /// No description provided for @sysStatusMaintenance.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintenance'**
+  String get sysStatusMaintenance;
+
+  /// No description provided for @sysStatusInactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get sysStatusInactive;
+
+  /// No description provided for @videoViews.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} views'**
+  String videoViews(int count);
+
+  /// No description provided for @videoAuthorSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Author'**
+  String get videoAuthorSubtitle;
+
+  /// No description provided for @videoDescriptionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get videoDescriptionTitle;
+
+  /// No description provided for @sysStatusDeprecated.
+  ///
+  /// In en, this message translates to:
+  /// **'Deprecated'**
+  String get sysStatusDeprecated;
+
+  /// No description provided for @sysStatusOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline'**
+  String get sysStatusOffline;
+
+  /// No description provided for @systemsDirectoryAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get systemsDirectoryAll;
+
+  /// No description provided for @systemsDirectoryError.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred: {error}'**
+  String systemsDirectoryError(String error);
+
+  /// No description provided for @systemsDirectoryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No systems available'**
+  String get systemsDirectoryEmpty;
+
+  /// No description provided for @backToKnowledgeBase.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Guides'**
+  String get backToKnowledgeBase;
+
+  /// No description provided for @quizSuccessMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Great result!'**
+  String get quizSuccessMessage;
+
+  /// No description provided for @quizFailureMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again!'**
+  String get quizFailureMessage;
+
+  /// No description provided for @speedBonus.
+  ///
+  /// In en, this message translates to:
+  /// **'SPEED BONUS'**
+  String get speedBonus;
+
+  /// No description provided for @levelSpecialist.
+  ///
+  /// In en, this message translates to:
+  /// **'Specialist'**
+  String get levelSpecialist;
+
+  /// No description provided for @levelMaster.
+  ///
+  /// In en, this message translates to:
+  /// **'Master'**
+  String get levelMaster;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

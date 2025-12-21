@@ -53,7 +53,11 @@ class AppUser {
   int xp;
   String level;
   int quizzesPassed;
+  int totalQuizzesAced;
   int simulationsCompleted;
+  int currentStreak;
+  DateTime? lastLoginDate;
+  int? fastestQuizTime;
 
   // Constructor
   AppUser({
@@ -69,7 +73,11 @@ class AppUser {
     this.xp = 0,
     this.level = 'Boshlang\'ich',
     this.quizzesPassed = 0,
+    this.totalQuizzesAced = 0,
     this.simulationsCompleted = 0,
+    this.currentStreak = 0,
+    this.lastLoginDate,
+    this.fastestQuizTime,
   });
 
   // Create a AppUser object from a Firestore map
@@ -93,7 +101,13 @@ class AppUser {
       xp: map['xp'] ?? 0,
       level: map['level'] ?? 'Boshlang\'ich',
       quizzesPassed: map['quizzesPassed'] ?? 0,
+      totalQuizzesAced: map['totalQuizzesAced'] ?? 0,
       simulationsCompleted: map['simulationsCompleted'] ?? 0,
+      currentStreak: map['currentStreak'] ?? 0,
+      lastLoginDate: map['lastLoginDate'] != null
+          ? DateTime.tryParse(map['lastLoginDate'] as String)
+          : null,
+      fastestQuizTime: map['fastestQuizTime'] as int?,
     );
   }
 
@@ -111,7 +125,11 @@ class AppUser {
       'xp': xp,
       'level': level,
       'quizzesPassed': quizzesPassed,
+      'totalQuizzesAced': totalQuizzesAced,
       'simulationsCompleted': simulationsCompleted,
+      'currentStreak': currentStreak,
+      'lastLoginDate': lastLoginDate?.toIso8601String(),
+      'fastestQuizTime': fastestQuizTime,
     };
   }
 
@@ -128,7 +146,11 @@ class AppUser {
     int? xp,
     String? level,
     int? quizzesPassed,
+    int? totalQuizzesAced,
     int? simulationsCompleted,
+    int? currentStreak,
+    DateTime? lastLoginDate,
+    int? fastestQuizTime,
   }) {
     return AppUser(
       id: id ?? this.id,
@@ -143,7 +165,11 @@ class AppUser {
       xp: xp ?? this.xp,
       level: level ?? this.level,
       quizzesPassed: quizzesPassed ?? this.quizzesPassed,
+      totalQuizzesAced: totalQuizzesAced ?? this.totalQuizzesAced,
       simulationsCompleted: simulationsCompleted ?? this.simulationsCompleted,
+      currentStreak: currentStreak ?? this.currentStreak,
+      lastLoginDate: lastLoginDate ?? this.lastLoginDate,
+      fastestQuizTime: fastestQuizTime ?? this.fastestQuizTime,
     );
   }
 

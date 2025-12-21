@@ -406,7 +406,6 @@ class HomeDashboardScreen extends StatelessWidget {
   ) {
     // --- ADDED QuizService instance ---
     final quizService = Provider.of<QuizService>(context, listen: false);
-    final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
     return Column(

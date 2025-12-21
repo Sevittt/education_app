@@ -2,6 +2,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:sud_qollanma/l10n/app_localizations.dart';
+
 /// Article kategoriyalari enum
 /// Enum ishlatish - hardcoded string'lardan ko'ra xavfsizroq!
 enum ArticleCategory {
@@ -14,18 +16,18 @@ enum ArticleCategory {
 
 /// Extension - enum'ni string'ga va qaytarib o'girish uchun
 extension ArticleCategoryExtension on ArticleCategory {
-  String get displayName {
+  String getDisplayName(AppLocalizations l10n) {
     switch (this) {
       case ArticleCategory.beginner:
-        return "Yangi Xodimlar";
+        return l10n.catNewEmployees;
       case ArticleCategory.akt:
-        return "AKT Mutaxassislari";
+        return l10n.catIctSpecialists;
       case ArticleCategory.system:
-        return "Tizimlar";
+        return l10n.catSystems;
       case ArticleCategory.auth:
-        return "Kirish/Login";
+        return l10n.catAuth;
       case ArticleCategory.general:
-        return "Umumiy";
+        return l10n.catGeneral;
     }
   }
 

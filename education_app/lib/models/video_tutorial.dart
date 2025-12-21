@@ -2,6 +2,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:sud_qollanma/l10n/app_localizations.dart';
+
 /// Video tutorial kategoriyalari
 enum VideoCategory {
   beginner,      // Boshlang'ich
@@ -10,14 +12,14 @@ enum VideoCategory {
 }
 
 extension VideoCategoryExtension on VideoCategory {
-  String get displayName {
+  String getDisplayName(AppLocalizations l10n) {
     switch (this) {
       case VideoCategory.beginner:
-        return "Boshlang'ich";
+        return l10n.rankBeginner;
       case VideoCategory.intermediate:
-        return "O'rta Daraja";
+        return l10n.rankIntermediate;
       case VideoCategory.advanced:
-        return "Ilg'or";
+        return l10n.rankAdvanced;
     }
   }
 }

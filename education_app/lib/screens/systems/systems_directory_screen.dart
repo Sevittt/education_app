@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../models/sud_system.dart';
 import '../../services/systems_service.dart';
 import 'system_detail_screen.dart';
+import '../../l10n/app_localizations.dart';
 
 class SystemsDirectoryScreen extends StatefulWidget {
   const SystemsDirectoryScreen({super.key});
@@ -30,17 +31,18 @@ class _SystemsDirectoryScreenState extends State<SystemsDirectoryScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sud Axborot Tizimlari'),
+        title: Text(l10n.systemsDirectoryTitle),
         centerTitle: true,
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
           tabs: [
-            const Tab(text: 'Barchasi'),
+            Tab(text: l10n.systemsDirectoryAll),
             ...SystemCategory.values.map((category) {
-              return Tab(text: category.displayName);
+              return Tab(text: category.getDisplayName(l10n));
             }),
           ],
         ),
@@ -68,8 +70,9 @@ class _SystemsDirectoryScreenState extends State<SystemsDirectoryScreen>
     return StreamBuilder<List<SudSystem>>(
       stream: stream,
       builder: (context, snapshot) {
+        final l10n = AppLocalizations.of(context)!;
         if (snapshot.hasError) {
-          return Center(child: Text('Xatolik yuz berdi: ${snapshot.error}'));
+          return Center(child: Text(l10n.systemsDirectoryError(snapshot.error.toString())));
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -86,7 +89,7 @@ class _SystemsDirectoryScreenState extends State<SystemsDirectoryScreen>
                 Icon(Icons.computer, size: 64, color: Colors.grey.shade400),
                 const SizedBox(height: 16),
                 Text(
-                  'Tizimlar mavjud emas',
+                  l10n.systemsDirectoryEmpty,
                   style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
                 ),
               ],
@@ -132,9 +135,9 @@ class _SystemsDirectoryScreenState extends State<SystemsDirectoryScreen>
                   borderRadius: BorderRadius.circular(12),
                   image: system.logoUrl != null
                       ? DecorationImage(
-                          image: NetworkImage(system.logoUrl!),
-                          fit: BoxFit.cover,
-                        )
+                           image: NetworkImage(system.logoUrl!),
+                           fit: BoxFit.cover,
+                         )
                       : null,
                 ),
                 child: system.logoUrl == null
@@ -177,6 +180,7 @@ class _SystemsDirectoryScreenState extends State<SystemsDirectoryScreen>
   }
 
   Widget _buildStatusChip(SystemStatus status) {
+    final l10n = AppLocalizations.of(context)!;
     Color color;
     switch (status) {
       case SystemStatus.active:
@@ -200,7 +204,7 @@ class _SystemsDirectoryScreenState extends State<SystemsDirectoryScreen>
         border: Border.all(color: color),
       ),
       child: Text(
-        status.displayName,
+        status.getDisplayName(l10n),
         style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.bold),
       ),
     );

@@ -183,7 +183,7 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
                       items: ArticleCategory.values.map((category) {
                         return DropdownMenuItem(
                           value: category,
-                          child: Text('${category.icon} ${category.displayName}'),
+                          child: Text('${category.icon} ${category.getDisplayName(l10n)}'),
                         );
                       }).toList(),
                       onChanged: (value) {

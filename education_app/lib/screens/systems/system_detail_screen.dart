@@ -6,6 +6,7 @@ import '../../models/knowledge_article.dart';
 import '../../models/video_tutorial.dart';
 import '../knowledge_base/article_detail_screen.dart';
 import '../resource/video_player_screen.dart';
+import '../../l10n/app_localizations.dart';
 
 class SystemDetailScreen extends StatefulWidget {
   final SudSystem system;
@@ -50,6 +51,7 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.system.name),
@@ -68,11 +70,11 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
                   _buildQuickLinks(),
                   const SizedBox(height: 24),
                   if (_content['articles'] != null && (_content['articles'] as List).isNotEmpty)
-                    _buildSection('Qo\'llanmalar', _content['articles']),
+                    _buildSection(l10n.resourceTabArticles, _content['articles']),
                   if (_content['videos'] != null && (_content['videos'] as List).isNotEmpty)
-                    _buildSection('Videolar', _content['videos']),
+                    _buildSection(l10n.resourceTabVideos, _content['videos']),
                   if (_content['faqs'] != null && (_content['faqs'] as List).isNotEmpty)
-                    _buildSection('Ko\'p so\'raladigan savollar', _content['faqs']),
+                    _buildSection(l10n.faqTitle, _content['faqs']),
                 ],
               ),
             ),
@@ -81,7 +83,7 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
         child: ElevatedButton.icon(
           onPressed: _launchUrl,
           icon: const Icon(Icons.open_in_new),
-          label: const Text('Tizimga kirish'),
+          label: Text(l10n.landingLogin), // Reusing login or should add more specific key
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 16),
           ),
@@ -131,6 +133,7 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
   }
 
   Widget _buildStatusChip(SystemStatus status) {
+    final l10n = AppLocalizations.of(context)!;
     Color color;
     switch (status) {
       case SystemStatus.active:
@@ -146,26 +149,44 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
         color = Colors.red;
         break;
     }
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: color.withAlpha(26),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color),
-      ),
-      child: Text(
-        status.displayName,
-        style: TextStyle(color: color, fontSize: 12),
-      ),
+    return Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: color.withAlpha(26),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: color),
+          ),
+          child: Text(
+            status.getDisplayName(l10n),
+            style: TextStyle(color: color, fontSize: 12),
+          ),
+        ),
+        const SizedBox(width: 8),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: Colors.blue.withAlpha(26),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.blue),
+          ),
+          child: Text(
+            widget.system.category.getDisplayName(l10n),
+            style: const TextStyle(color: Colors.blue, fontSize: 12),
+          ),
+        ),
+      ],
     );
   }
 
   Widget _buildDescription() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Tavsif',
+          l10n.descriptionLabel,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -180,6 +201,7 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
   }
 
   Widget _buildQuickLinks() {
+    final l10n = AppLocalizations.of(context)!;
     return Row(
       children: [
         if (widget.system.loginGuideId != null)
@@ -187,7 +209,7 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
             child: OutlinedButton.icon(
               onPressed: () => _navigateToArticle(widget.system.loginGuideId!),
               icon: const Icon(Icons.article_outlined),
-              label: const Text('Kirish qo\'llanmasi'),
+              label: Text(l10n.loginGuideIdLabel),
             ),
           ),
         if (widget.system.loginGuideId != null && widget.system.videoGuideId != null)
@@ -197,7 +219,7 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
             child: OutlinedButton.icon(
               onPressed: () => _navigateToVideo(widget.system.videoGuideId!),
               icon: const Icon(Icons.play_circle_outline),
-              label: const Text('Video qo\'llanma'),
+              label: Text(l10n.videoGuideIdLabel),
             ),
           ),
       ],
@@ -311,6 +333,7 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
   }
 
   void _showFAQDialog(String question, String answer) {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -321,7 +344,7 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Yopish'),
+            child: Text(l10n.closeAction),
           ),
         ],
       ),

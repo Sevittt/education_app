@@ -96,7 +96,7 @@ class _QuizAttemptCardState extends State<QuizAttemptCard>
                         child: CircularProgressIndicator(
                           value: percentage / 100,
                           strokeWidth: 6,
-                          backgroundColor: color.withOpacity(0.2),
+                          backgroundColor: color.withAlpha(51),
                           valueColor: AlwaysStoppedAnimation<Color>(color),
                         ),
                       ),
@@ -151,7 +151,7 @@ class _QuizAttemptCardState extends State<QuizAttemptCard>
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: color.withOpacity(0.1),
+                      color: color.withAlpha(26),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(

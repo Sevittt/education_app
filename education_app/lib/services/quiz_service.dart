@@ -124,6 +124,7 @@ class QuizService {
         title: attempt.quizTitle,
         score: percentage, // Sending percentage as score (0-100)
         passed: passed,
+        timeTakenSeconds: attempt.timeTakenSeconds,
       );
     } catch (e) {
       print("xAPI Error in saveQuizAttempt: $e");

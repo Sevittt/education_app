@@ -2,6 +2,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:sud_qollanma/l10n/app_localizations.dart';
+
 /// Tizim kategoriyalari
 enum SystemCategory {
   primary,    // Asosiy tizimlar (edo, ms, jib)
@@ -18,29 +20,29 @@ enum SystemStatus {
 }
 
 extension SystemCategoryExtension on SystemCategory {
-  String get displayName {
+  String getDisplayName(AppLocalizations l10n) {
     switch (this) {
       case SystemCategory.primary:
-        return "Asosiy Tizimlar";
+        return l10n.sysCatPrimary;
       case SystemCategory.secondary:
-        return "Qo'shimcha Tizimlar";
+        return l10n.sysCatSecondary;
       case SystemCategory.support:
-        return "Yordam Tizimlari";
+        return l10n.sysCatSupport;
     }
   }
 }
 
 extension SystemStatusExtension on SystemStatus {
-  String get displayName {
+  String getDisplayName(AppLocalizations l10n) {
     switch (this) {
       case SystemStatus.active:
-        return "Faol";
+        return l10n.sysStatusActive;
       case SystemStatus.maintenance:
-        return "Texnik Xizmat";
+        return l10n.sysStatusMaintenance;
       case SystemStatus.deprecated:
-        return "Eski Versiya";
+        return l10n.sysStatusDeprecated;
       case SystemStatus.offline:
-        return "O'chirilgan";
+        return l10n.sysStatusOffline;
     }
   }
 }

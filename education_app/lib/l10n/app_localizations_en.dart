@@ -132,6 +132,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorPrefix => 'Error: ';
 
   @override
+  String get days => 'days';
+
+  @override
   String get resourcesNoResourcesFound => 'No resources found.';
 
   @override
@@ -382,23 +385,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quiz => 'Quiz';
 
   @override
-  String get quizNotFound => 'Quiz not found.';
+  String get quizNotFound => 'Quiz not found';
 
   @override
   String get failedToLoadQuiz => 'Failed to load quiz';
 
   @override
-  String question(Object number) {
-    return 'Question $number';
+  String question(String index) {
+    return 'Question $index';
   }
 
   @override
-  String totalQuestions(Object total) {
-    return 'of $total';
+  String totalQuestions(String total) {
+    return 'Total: $total';
   }
 
   @override
-  String get submitQuiz => 'Submit Quiz';
+  String get submitQuiz => 'Submit';
 
   @override
   String get nextQuestion => 'Next Question';
@@ -410,13 +413,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quizCompletionMessage => 'You have completed the quiz!';
 
   @override
-  String get yourScore => 'Your Score:';
+  String get yourScore => 'Your Score';
 
   @override
   String get done => 'Done';
 
   @override
-  String get failedToSaveAttempt => 'Failed to save your attempt';
+  String get failedToSaveAttempt => 'Failed to save attempt';
 
   @override
   String get myQuizHistory => 'My Quiz History';
@@ -926,7 +929,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profilePictureUrlLabel => 'Profile Picture URL (Optional)';
 
   @override
-  String get levelBeginner => 'Beginner';
+  String get levelBeginner => 'Newbie';
 
   @override
   String get levelIntermediate => 'Intermediate';
@@ -1477,4 +1480,92 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get simulations => 'Simulations';
+
+  @override
+  String get catNewEmployees => 'New Employees';
+
+  @override
+  String get catIctSpecialists => 'ICT Specialists';
+
+  @override
+  String get catSystems => 'Systems';
+
+  @override
+  String get catAuth => 'Authentication';
+
+  @override
+  String get catGeneral => 'General';
+
+  @override
+  String get rankBeginner => 'Beginner';
+
+  @override
+  String get rankIntermediate => 'Intermediate';
+
+  @override
+  String get rankAdvanced => 'Advanced';
+
+  @override
+  String get sysCatPrimary => 'Primary Systems';
+
+  @override
+  String get sysCatSecondary => 'Secondary Systems';
+
+  @override
+  String get sysCatSupport => 'Support Systems';
+
+  @override
+  String get sysStatusActive => 'Active';
+
+  @override
+  String get sysStatusMaintenance => 'Maintenance';
+
+  @override
+  String get sysStatusInactive => 'Inactive';
+
+  @override
+  String videoViews(int count) {
+    return '$count views';
+  }
+
+  @override
+  String get videoAuthorSubtitle => 'Author';
+
+  @override
+  String get videoDescriptionTitle => 'Description';
+
+  @override
+  String get sysStatusDeprecated => 'Deprecated';
+
+  @override
+  String get sysStatusOffline => 'Offline';
+
+  @override
+  String get systemsDirectoryAll => 'All';
+
+  @override
+  String systemsDirectoryError(String error) {
+    return 'An error occurred: $error';
+  }
+
+  @override
+  String get systemsDirectoryEmpty => 'No systems available';
+
+  @override
+  String get backToKnowledgeBase => 'Back to Guides';
+
+  @override
+  String get quizSuccessMessage => 'Great result!';
+
+  @override
+  String get quizFailureMessage => 'Try again!';
+
+  @override
+  String get speedBonus => 'SPEED BONUS';
+
+  @override
+  String get levelSpecialist => 'Specialist';
+
+  @override
+  String get levelMaster => 'Master';
 }

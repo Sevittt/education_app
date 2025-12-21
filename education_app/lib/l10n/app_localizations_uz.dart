@@ -132,6 +132,9 @@ class AppLocalizationsUz extends AppLocalizations {
   String get errorPrefix => 'Xatolik: ';
 
   @override
+  String get days => 'kun';
+
+  @override
   String get resourcesNoResourcesFound => 'Resurslar topilmadi.';
 
   @override
@@ -382,23 +385,23 @@ class AppLocalizationsUz extends AppLocalizations {
   String get quiz => 'Viktorina';
 
   @override
-  String get quizNotFound => 'Viktorina topilmadi.';
+  String get quizNotFound => 'Viktorina topilmadi';
 
   @override
   String get failedToLoadQuiz => 'Viktorinani yuklab bo\'lmadi';
 
   @override
-  String question(Object number) {
-    return '$number-savol';
+  String question(String index) {
+    return 'Savol $index';
   }
 
   @override
-  String totalQuestions(Object total) {
-    return '$total dan';
+  String totalQuestions(String total) {
+    return 'Jami: $total';
   }
 
   @override
-  String get submitQuiz => 'Viktorinani yuborish';
+  String get submitQuiz => 'Yakunlash';
 
   @override
   String get nextQuestion => 'Keyingi savol';
@@ -410,13 +413,13 @@ class AppLocalizationsUz extends AppLocalizations {
   String get quizCompletionMessage => 'Siz viktorinani yakunladingiz!';
 
   @override
-  String get yourScore => 'Sizning balingiz:';
+  String get yourScore => 'Sizning natijangiz';
 
   @override
   String get done => 'Bajarildi';
 
   @override
-  String get failedToSaveAttempt => 'Urinishingizni saqlab bo\'lmadi';
+  String get failedToSaveAttempt => 'Natijani saqlashda xatolik';
 
   @override
   String get myQuizHistory => 'Mening Viktorina Tarixim';
@@ -1477,4 +1480,92 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get simulations => 'Simulyatsiyalar';
+
+  @override
+  String get catNewEmployees => 'Yangi Xodimlar';
+
+  @override
+  String get catIctSpecialists => 'AKT Mutaxassislari';
+
+  @override
+  String get catSystems => 'Tizimlar';
+
+  @override
+  String get catAuth => 'Kirish/Login';
+
+  @override
+  String get catGeneral => 'Umumiy';
+
+  @override
+  String get rankBeginner => 'Boshlang\'ich';
+
+  @override
+  String get rankIntermediate => 'O\'rta Daraja';
+
+  @override
+  String get rankAdvanced => 'Ilg\'or';
+
+  @override
+  String get sysCatPrimary => 'Asosiy Tizimlar';
+
+  @override
+  String get sysCatSecondary => 'Qo\'shimcha Tizimlar';
+
+  @override
+  String get sysCatSupport => 'Yordam Tizimlari';
+
+  @override
+  String get sysStatusActive => 'Faol';
+
+  @override
+  String get sysStatusMaintenance => 'Ta\'mirlashda';
+
+  @override
+  String get sysStatusInactive => 'Nofaol';
+
+  @override
+  String videoViews(int count) {
+    return '$count ko\'rishlar';
+  }
+
+  @override
+  String get videoAuthorSubtitle => 'Muallif';
+
+  @override
+  String get videoDescriptionTitle => 'Tavsif';
+
+  @override
+  String get sysStatusDeprecated => 'Eski Versiya';
+
+  @override
+  String get sysStatusOffline => 'O\'chirilgan';
+
+  @override
+  String get systemsDirectoryAll => 'Barchasi';
+
+  @override
+  String systemsDirectoryError(String error) {
+    return 'Xatolik yuz berdi: $error';
+  }
+
+  @override
+  String get systemsDirectoryEmpty => 'Tizimlar mavjud emas';
+
+  @override
+  String get backToKnowledgeBase => 'Qo\'llanmalarga qaytish';
+
+  @override
+  String get quizSuccessMessage => 'Ajoyib natija!';
+
+  @override
+  String get quizFailureMessage => 'Yana bir bor urinib ko\'ring!';
+
+  @override
+  String get speedBonus => 'TEZKOR BONUS';
+
+  @override
+  String get levelSpecialist => 'Mutaxassis';
+
+  @override
+  String get levelMaster => 'Usta (Master)';
 }
