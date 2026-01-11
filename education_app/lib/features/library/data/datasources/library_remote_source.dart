@@ -167,4 +167,44 @@ class LibraryRemoteSource {
             article.tags.any((tag) => tag.toLowerCase().contains(lowerQuery)))
         .toList();
   }
+
+  // ==========================================
+  // VIDEO CRUD OPERATIONS (Admin)
+  // ==========================================
+
+  /// Create a new video.
+  Future<String> createVideo(Map<String, dynamic> data) async {
+    final docRef = await _videosCollection.add(data);
+    return docRef.id;
+  }
+
+  /// Update an existing video.
+  Future<void> updateVideo(String id, Map<String, dynamic> data) async {
+    await _videosCollection.doc(id).update(data);
+  }
+
+  /// Delete a video.
+  Future<void> deleteVideo(String id) async {
+    await _videosCollection.doc(id).delete();
+  }
+
+  // ==========================================
+  // ARTICLE CRUD OPERATIONS (Admin)
+  // ==========================================
+
+  /// Create a new article.
+  Future<String> createArticle(Map<String, dynamic> data) async {
+    final docRef = await _articlesCollection.add(data);
+    return docRef.id;
+  }
+
+  /// Update an existing article.
+  Future<void> updateArticle(String id, Map<String, dynamic> data) async {
+    await _articlesCollection.doc(id).update(data);
+  }
+
+  /// Delete an article.
+  Future<void> deleteArticle(String id) async {
+    await _articlesCollection.doc(id).delete();
+  }
 }
