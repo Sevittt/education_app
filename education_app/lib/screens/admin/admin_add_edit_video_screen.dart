@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
-import '../../models/video_tutorial.dart';
-import '../../models/sud_system.dart';
-import '../../services/video_tutorial_service.dart';
-import '../../services/systems_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
+import 'package:sud_qollanma/features/library/domain/entities/video_entity.dart';
+import 'package:sud_qollanma/models/sud_system.dart';
+import 'package:sud_qollanma/services/systems_service.dart';
 
 class AdminAddEditVideoScreen extends StatefulWidget {
-  final VideoTutorial? video;
+  final VideoEntity? video;
 
   const AdminAddEditVideoScreen({super.key, this.video});
 
@@ -18,7 +18,6 @@ class AdminAddEditVideoScreen extends StatefulWidget {
 
 class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _service = VideoTutorialService();
   final _systemsService = SystemsService();
   
   late TextEditingController _titleController;
@@ -27,10 +26,19 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
   late TextEditingController _durationController;
   late TextEditingController _tagsController;
   
-  VideoCategory _selectedCategory = VideoCategory.beginner;
+  String _selectedCategory = 'beginner';
   String? _selectedSystemId;
   List<SudSystem> _systems = [];
   bool _isLoading = false;
+
+  // Video categories - now as strings to match VideoEntity
+  static const List<String> _categories = [
+    'beginner',
+    'intermediate',
+    'advanced',
+    'practical',
+    'theory',
+  ];
 
   @override
   void initState() {
@@ -38,9 +46,9 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
     _titleController = TextEditingController(text: widget.video?.title ?? '');
     _descriptionController = TextEditingController(text: widget.video?.description ?? '');
     _youtubeIdController = TextEditingController(text: widget.video?.youtubeId ?? '');
-    _durationController = TextEditingController(text: widget.video?.duration.toString() ?? '');
+    _durationController = TextEditingController(text: widget.video?.durationSeconds.toString() ?? '');
     _tagsController = TextEditingController(text: widget.video?.tags.join(', ') ?? '');
-    _selectedCategory = widget.video?.category ?? VideoCategory.beginner;
+    _selectedCategory = widget.video?.category ?? 'beginner';
     _selectedSystemId = widget.video?.systemId;
     _loadSystems();
   }
@@ -64,11 +72,30 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
     super.dispose();
   }
 
+  String _getCategoryDisplayName(String category, AppLocalizations l10n) {
+    // Using hardcoded names since localization keys may not exist
+    switch (category) {
+      case 'beginner':
+        return 'Boshlang\'ich';
+      case 'intermediate':
+        return 'O\'rta';
+      case 'advanced':
+        return 'Yuqori';
+      case 'practical':
+        return 'Amaliy';
+      case 'theory':
+        return 'Nazariy';
+      default:
+        return category;
+    }
+  }
+
   Future<void> _saveVideo() async {
     if (!_formKey.currentState!.validate()) return;
 
     setState(() => _isLoading = true);
     final l10n = AppLocalizations.of(context)!;
+    final provider = context.read<LibraryProvider>();
 
     try {
       final user = FirebaseAuth.instance.currentUser;
@@ -82,28 +109,30 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
           .where((e) => e.isNotEmpty)
           .toList();
 
-      final video = VideoTutorial(
+      final video = VideoEntity(
         id: widget.video?.id ?? '',
         title: _titleController.text,
         description: _descriptionController.text,
         youtubeId: _youtubeIdController.text,
-        duration: duration,
+        durationSeconds: duration,
         category: _selectedCategory,
         systemId: _selectedSystemId,
-        thumbnailUrl: _service.getYoutubeThumbnail(_youtubeIdController.text),
+        thumbnailUrl: provider.getYoutubeThumbnail(_youtubeIdController.text),
         tags: tags,
         authorId: authorId,
         authorName: authorName,
-        createdAt: widget.video?.createdAt ?? Timestamp.now(),
+        views: widget.video?.views ?? 0,
+        likes: widget.video?.likes ?? 0,
+        createdAt: widget.video?.createdAt ?? DateTime.now(),
         order: widget.video?.order ?? 0,
       );
 
       if (widget.video == null) {
         // Create new
-        await _service.createVideo(video);
+        await provider.createVideo(video);
       } else {
         // Update existing
-        await _service.updateVideo(widget.video!.id, video);
+        await provider.updateVideo(widget.video!.id, video);
       }
 
       if (mounted) {
@@ -169,16 +198,16 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
                           value?.isEmpty ?? true ? l10n.youtubeIdRequired : null,
                     ),
                     const SizedBox(height: 16),
-                    DropdownButtonFormField<VideoCategory>(
-                      initialValue: _selectedCategory,
+                    DropdownButtonFormField<String>(
+                      value: _selectedCategory,
                       decoration: InputDecoration(
                         labelText: l10n.categoryLabel,
                         border: const OutlineInputBorder(),
                       ),
-                      items: VideoCategory.values.map((category) {
+                      items: _categories.map((category) {
                         return DropdownMenuItem(
                           value: category,
-                          child: Text(category.getDisplayName(l10n)),
+                          child: Text(_getCategoryDisplayName(category, l10n)),
                         );
                       }).toList(),
                       onChanged: (value) {
@@ -189,7 +218,7 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<String>(
-                      initialValue: _selectedSystemId,
+                      value: _selectedSystemId,
                       decoration: InputDecoration(
                         labelText: l10n.systemOptionalLabel,
                         border: const OutlineInputBorder(),

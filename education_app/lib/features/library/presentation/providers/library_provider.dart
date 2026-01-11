@@ -103,4 +103,132 @@ class LibraryProvider extends ChangeNotifier {
   Future<List<ArticleEntity>> searchArticles(String query) async {
     return _repository.searchArticles(query);
   }
+
+  // --- Video CRUD ---
+
+  Future<String> createVideo(VideoEntity video) async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+    try {
+      final id = await _repository.createVideo(video);
+      await loadVideos(); // Refresh list
+      return id;
+    } catch (e) {
+      _error = e.toString();
+      _isLoading = false;
+      notifyListeners();
+      rethrow;
+    }
+  }
+
+  Future<void> updateVideo(String id, VideoEntity video) async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+    try {
+      await _repository.updateVideo(id, video);
+      await loadVideos(); // Refresh list
+    } catch (e) {
+      _error = e.toString();
+      _isLoading = false;
+      notifyListeners();
+      rethrow;
+    }
+  }
+
+  Future<void> deleteVideo(String id) async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+    try {
+      await _repository.deleteVideo(id);
+      _videos.removeWhere((v) => v.id == id);
+      _isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      _error = e.toString();
+      _isLoading = false;
+      notifyListeners();
+      rethrow;
+    }
+  }
+
+  String getYoutubeThumbnail(String youtubeId) {
+    return _repository.getYoutubeThumbnail(youtubeId);
+  }
+
+  Future<VideoEntity?> getVideoById(String id) async {
+    return _repository.getVideoById(id);
+  }
+
+  // --- Article CRUD ---
+
+  Future<String> createArticle(ArticleEntity article) async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+    try {
+      final id = await _repository.createArticle(article);
+      await loadArticles(); // Refresh list
+      return id;
+    } catch (e) {
+      _error = e.toString();
+      _isLoading = false;
+      notifyListeners();
+      rethrow;
+    }
+  }
+
+  Future<void> updateArticle(String id, ArticleEntity article) async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+    try {
+      await _repository.updateArticle(id, article);
+      await loadArticles(); // Refresh list
+    } catch (e) {
+      _error = e.toString();
+      _isLoading = false;
+      notifyListeners();
+      rethrow;
+    }
+  }
+
+  Future<void> deleteArticle(String id) async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+    try {
+      await _repository.deleteArticle(id);
+      _articles.removeWhere((a) => a.id == id);
+      _isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      _error = e.toString();
+      _isLoading = false;
+      notifyListeners();
+      rethrow;
+    }
+  }
+
+  Future<ArticleEntity?> getArticleById(String id) async {
+    return _repository.getArticleById(id);
+  }
+
+  Future<void> incrementArticleHelpful(String id) async {
+    await _repository.incrementArticleHelpful(id);
+  }
+
+  Future<void> decrementArticleHelpful(String id) async {
+    await _repository.decrementArticleHelpful(id);
+  }
+
+  Future<void> incrementVideoLikes(String id) async {
+    await _repository.incrementVideoLikes(id);
+  }
+
+  Future<void> decrementVideoLikes(String id) async {
+    await _repository.decrementVideoLikes(id);
+  }
 }

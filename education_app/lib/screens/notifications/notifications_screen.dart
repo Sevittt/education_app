@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import '../../models/app_notification.dart';
 import '../../services/notification_service.dart';
-import '../../services/knowledge_base_service.dart';
-import '../../services/video_tutorial_service.dart';
 import '../../services/systems_service.dart';
 import '../../services/faq_service.dart';
+import '../../features/library/presentation/providers/library_provider.dart';
 import '../knowledge_base/article_detail_screen.dart';
 import '../resource/video_player_screen.dart';
 import '../systems/system_detail_screen.dart';
@@ -61,7 +61,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                       );
                     } else {
                       messenger.showSnackBar(
-                        SnackBar(content: Text('Error: ${result['error']}')),
+                        SnackBar(content: Text(AppLocalizations.of(context)!.errorGeneric(result['error']))),
                       );
                     }
                   },
@@ -201,6 +201,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       decoration: BoxDecoration(
         color: color.withAlpha(26),
         shape: BoxShape.circle,
+        // ignore: deprecated_member_use
       ),
       child: Icon(iconData, color: color, size: 24),
     );
@@ -266,12 +267,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   }
 
   Future<void> _navigateToArticle(String id) async {
-    final service = KnowledgeBaseService();
-    final article = await service.getArticleById(id);
+    final provider = Provider.of<LibraryProvider>(context, listen: false);
+    final article = await provider.getArticleById(id);
     if (article != null && mounted) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => ArticleDetailScreen(article: article)),
+        MaterialPageRoute(builder: (_) => ArticleDetailScreen(articleEntity: article)),
       );
     } else {
       throw 'Maqola topilmadi';
@@ -279,12 +280,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   }
 
   Future<void> _navigateToVideo(String id) async {
-    final service = VideoTutorialService();
-    final video = await service.getVideoById(id);
+    final provider = Provider.of<LibraryProvider>(context, listen: false);
+    final video = await provider.getVideoById(id);
     if (video != null && mounted) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => VideoPlayerScreen(video: video)),
+        MaterialPageRoute(builder: (_) => VideoPlayerScreen(videoEntity: video)),
       );
     } else {
       throw 'Video topilmadi';
@@ -305,18 +306,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   }
 
   Future<void> _navigateToFAQ(String id) async {
-    // FAQ service doesn't have getById exposed directly usually, let's check.
-    // Assuming it does or we can add it.
-    // Actually FAQService has getAllFAQs and getFAQsByCategory.
-    // I should check if it has getFAQById.
-    // If not, I'll just show a message for now or implement it.
-    // Let's assume for now we can't easily get single FAQ without implementing it.
-    // I'll implement getFAQById in FAQService next if needed.
-    // For now, let's try to find it in all FAQs (inefficient but works for small data)
     final service = FAQService();
-    // Temporary solution: fetch all and find.
-    // Better: implement getFAQById in FAQService.
-    final faqs = await service.getAllFAQs().first; // Get first snapshot
+    final faqs = await service.getAllFAQs().first;
     try {
       final faq = faqs.firstWhere((f) => f.id == id);
       if (mounted) {

@@ -2005,6 +2005,30 @@ abstract class AppLocalizations {
   /// **'Category'**
   String get categoryLabel;
 
+  /// No description provided for @articleCategoryGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get articleCategoryGeneral;
+
+  /// No description provided for @articleCategoryProcedure.
+  ///
+  /// In en, this message translates to:
+  /// **'Procedure'**
+  String get articleCategoryProcedure;
+
+  /// No description provided for @articleCategoryLaw.
+  ///
+  /// In en, this message translates to:
+  /// **'Legislation'**
+  String get articleCategoryLaw;
+
+  /// No description provided for @articleCategoryFaq.
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get articleCategoryFaq;
+
   /// No description provided for @contentLabel.
   ///
   /// In en, this message translates to:
@@ -3018,6 +3042,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Master'**
   String get levelMaster;
+
+  /// No description provided for @errorCouldNotOpenLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open link'**
+  String get errorCouldNotOpenLink;
+
+  /// No description provided for @errorResourceNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Resource not found'**
+  String get errorResourceNotFound;
+
+  /// No description provided for @errorVideoNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Video not found'**
+  String get errorVideoNotFound;
+
+  /// No description provided for @errorPdfOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open PDF file'**
+  String get errorPdfOpen;
+
+  /// No description provided for @errorTelegramOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open Telegram link'**
+  String get errorTelegramOpen;
+
+  /// No description provided for @errorGeneric.
+  ///
+  /// In en, this message translates to:
+  /// **'An error occurred: {error}'**
+  String errorGeneric(Object error);
+
+  /// No description provided for @labelTrue.
+  ///
+  /// In en, this message translates to:
+  /// **'True'**
+  String get labelTrue;
+
+  /// No description provided for @labelFalse.
+  ///
+  /// In en, this message translates to:
+  /// **'False'**
+  String get labelFalse;
+
+  /// No description provided for @labelPass.
+  ///
+  /// In en, this message translates to:
+  /// **'PASS'**
+  String get labelPass;
+
+  /// No description provided for @labelFail.
+  ///
+  /// In en, this message translates to:
+  /// **'FAIL'**
+  String get labelFail;
+
+  /// No description provided for @labelPdfAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF available'**
+  String get labelPdfAvailable;
+
+  /// No description provided for @actionOk.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get actionOk;
+
+  /// No description provided for @actionGoBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Go Back'**
+  String get actionGoBack;
+
+  /// No description provided for @searchNoResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No results found'**
+  String get searchNoResults;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -4,8 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
 import 'package:sud_qollanma/features/library/domain/entities/article_entity.dart';
-// Legacy import for ArticleDetailScreen (still uses old model, to be refactored later)
-import 'package:sud_qollanma/models/knowledge_article.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart'; // For Timestamp
 import 'article_detail_screen.dart';
 
@@ -209,7 +208,8 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
         }
 
         if (provider.error != null && provider.articles.isEmpty) {
-          return Center(child: Text('Xatolik yuz berdi: ${provider.error}'));
+          final l10n = AppLocalizations.of(context)!;
+          return Center(child: Text(l10n.errorGeneric(provider.error ?? 'Unknown')));
         }
 
         final allArticles = provider.articles;
@@ -258,26 +258,7 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
             context,
             MaterialPageRoute(
               builder: (context) => ArticleDetailScreen(
-                article: KnowledgeArticle(
-                  id: article.id,
-                  title: article.title,
-                  description: article.description,
-                  content: article.content,
-                  pdfUrl: article.pdfUrl,
-                  category: ArticleCategory.values.firstWhere(
-                    (e) => e.name == article.category,
-                    orElse: () => ArticleCategory.general,
-                  ),
-                  systemId: article.systemId,
-                  tags: article.tags,
-                  authorId: article.authorId,
-                  authorName: article.authorName,
-                  views: article.views,
-                  helpful: article.helpful,
-                  createdAt: Timestamp.fromDate(article.createdAt),
-                  updatedAt: Timestamp.fromDate(article.updatedAt),
-                  isPinned: article.isPinned,
-                ),
+                articleEntity: article,
               ),
             ),
           );

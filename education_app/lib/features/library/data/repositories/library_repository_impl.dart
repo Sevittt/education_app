@@ -88,4 +88,83 @@ class LibraryRepositoryImpl implements LibraryRepository {
   Future<List<ArticleEntity>> searchArticles(String query) async {
     return _remoteSource.searchArticles(query);
   }
+
+  // --- Video CRUD ---
+
+  @override
+  Future<String> createVideo(VideoEntity video) async {
+    return _remoteSource.createVideo(_videoEntityToMap(video));
+  }
+
+  @override
+  Future<void> updateVideo(String id, VideoEntity video) async {
+    await _remoteSource.updateVideo(id, _videoEntityToMap(video));
+  }
+
+  @override
+  Future<void> deleteVideo(String id) async {
+    await _remoteSource.deleteVideo(id);
+  }
+
+  @override
+  String getYoutubeThumbnail(String youtubeId) {
+    return 'https://img.youtube.com/vi/$youtubeId/maxresdefault.jpg';
+  }
+
+  // --- Article CRUD ---
+
+  @override
+  Future<String> createArticle(ArticleEntity article) async {
+    return _remoteSource.createArticle(_articleEntityToMap(article));
+  }
+
+  @override
+  Future<void> updateArticle(String id, ArticleEntity article) async {
+    await _remoteSource.updateArticle(id, _articleEntityToMap(article));
+  }
+
+  @override
+  Future<void> deleteArticle(String id) async {
+    await _remoteSource.deleteArticle(id);
+  }
+
+  // --- Helpers ---
+
+  Map<String, dynamic> _videoEntityToMap(VideoEntity video) {
+    return {
+      'title': video.title,
+      'description': video.description,
+      'youtubeId': video.youtubeId,
+      'duration': video.durationSeconds,
+      'category': video.category,
+      'systemId': video.systemId,
+      'thumbnailUrl': video.thumbnailUrl,
+      'tags': video.tags,
+      'authorId': video.authorId,
+      'authorName': video.authorName,
+      'views': video.views,
+      'likes': video.likes,
+      'createdAt': video.createdAt,
+      'order': video.order,
+    };
+  }
+
+  Map<String, dynamic> _articleEntityToMap(ArticleEntity article) {
+    return {
+      'title': article.title,
+      'description': article.description,
+      'content': article.content,
+      'pdfUrl': article.pdfUrl,
+      'category': article.category,
+      'systemId': article.systemId,
+      'tags': article.tags,
+      'authorId': article.authorId,
+      'authorName': article.authorName,
+      'views': article.views,
+      'helpful': article.helpful,
+      'createdAt': article.createdAt,
+      'updatedAt': article.updatedAt,
+      'isPinned': article.isPinned,
+    };
+  }
 }

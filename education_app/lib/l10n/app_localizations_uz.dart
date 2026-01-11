@@ -1053,6 +1053,18 @@ class AppLocalizationsUz extends AppLocalizations {
   String get categoryLabel => 'Kategoriya';
 
   @override
+  String get articleCategoryGeneral => 'Umumiy';
+
+  @override
+  String get articleCategoryProcedure => 'Protsedura';
+
+  @override
+  String get articleCategoryLaw => 'Qonunchilik';
+
+  @override
+  String get articleCategoryFaq => 'Ko\'p so\'raladigan';
+
+  @override
   String get contentLabel => 'Mazmuni (Markdown)';
 
   @override
@@ -1574,4 +1586,48 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get levelMaster => 'Usta (Master)';
+
+  @override
+  String get errorCouldNotOpenLink => 'Havolani ochib bo\'lmadi';
+
+  @override
+  String get errorResourceNotFound => 'Qo\'llanma topilmadi';
+
+  @override
+  String get errorVideoNotFound => 'Video topilmadi';
+
+  @override
+  String get errorPdfOpen => 'PDF faylni ochib bo\'lmadi';
+
+  @override
+  String get errorTelegramOpen => 'Telegram havolasini ochib bo\'lmadi';
+
+  @override
+  String errorGeneric(Object error) {
+    return 'Xatolik yuz berdi: $error';
+  }
+
+  @override
+  String get labelTrue => 'To\'g\'ri';
+
+  @override
+  String get labelFalse => 'Noto\'g\'ri';
+
+  @override
+  String get labelPass => 'O\'TDI';
+
+  @override
+  String get labelFail => 'YIQILDI';
+
+  @override
+  String get labelPdfAvailable => 'PDF mavjud';
+
+  @override
+  String get actionOk => 'OK';
+
+  @override
+  String get actionGoBack => 'Orqaga qaytish';
+
+  @override
+  String get searchNoResults => 'Hech narsa topilmadi';
 }

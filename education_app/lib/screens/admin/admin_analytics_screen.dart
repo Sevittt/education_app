@@ -28,7 +28,7 @@ class _AdminAnalyticsScreenState extends State<AdminAnalyticsScreen> {
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(child: Text(AppLocalizations.of(context)!.errorGeneric(snapshot.error ?? 'Unknown error')));
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -236,25 +236,30 @@ class _AdminAnalyticsScreenState extends State<AdminAnalyticsScreen> {
   }
 
   Widget? _buildResultBadge(bool? success, dynamic score) {
-     if (success == null && score == null) return null;
-     
-     if (success != null) {
-       return Chip(
-         label: Text(success ? 'PASS' : 'FAIL', style: const TextStyle(fontSize: 10, color: Colors.white)),
-         backgroundColor: success ? Colors.green : Colors.red,
-         padding: EdgeInsets.zero,
-         visualDensity: VisualDensity.compact,
-       );
-     }
-     
-     if (score != null) {
-       return Chip(
-         label: Text('$score%', style: const TextStyle(fontSize: 10)),
-         padding: EdgeInsets.zero,
-         visualDensity: VisualDensity.compact,
-       );
-     }
-     return null;
+    if (success == null && score == null) return null;
+
+    final l10n = AppLocalizations.of(context)!;
+
+    if (success != null) {
+      return Chip(
+        label: Text(
+          success ? l10n.labelPass : l10n.labelFail,
+          style: const TextStyle(fontSize: 10, color: Colors.white),
+        ),
+        backgroundColor: success ? Colors.green : Colors.red,
+        padding: EdgeInsets.zero,
+        visualDensity: VisualDensity.compact,
+      );
+    }
+
+    if (score != null) {
+      return Chip(
+        label: Text('$score%', style: const TextStyle(fontSize: 10)),
+        padding: EdgeInsets.zero,
+        visualDensity: VisualDensity.compact,
+      );
+    }
+    return null;
   }
 
   IconData _getIconForVerb(String verb) {

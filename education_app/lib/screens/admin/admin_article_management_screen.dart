@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
-import '../../models/knowledge_article.dart';
-import '../../services/knowledge_base_service.dart';
+import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
+import 'package:sud_qollanma/features/library/domain/entities/article_entity.dart';
 import 'admin_add_edit_article_screen.dart';
 
 class AdminArticleManagementScreen extends StatefulWidget {
@@ -13,9 +14,30 @@ class AdminArticleManagementScreen extends StatefulWidget {
 }
 
 class _AdminArticleManagementScreenState extends State<AdminArticleManagementScreen> {
-  final KnowledgeBaseService _service = KnowledgeBaseService();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<LibraryProvider>().watchArticles();
+    });
+  }
 
-  Future<void> _deleteArticle(KnowledgeArticle article) async {
+  String _getCategoryIcon(String category) {
+    switch (category) {
+      case 'general':
+        return '📄';
+      case 'procedure':
+        return '📋';
+      case 'law':
+        return '⚖️';
+      case 'faq':
+        return '❓';
+      default:
+        return '📄';
+    }
+  }
+
+  Future<void> _deleteArticle(ArticleEntity article) async {
     final l10n = AppLocalizations.of(context)!;
     final bool? confirmed = await showDialog<bool>(
       context: context,
@@ -37,7 +59,7 @@ class _AdminArticleManagementScreenState extends State<AdminArticleManagementScr
     );
 
     if (confirmed == true && mounted) {
-      await _service.deleteArticle(article.id);
+      await context.read<LibraryProvider>().deleteArticle(article.id);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l10n.resourceDeletedSuccess(article.title))),
@@ -54,18 +76,17 @@ class _AdminArticleManagementScreenState extends State<AdminArticleManagementScr
         title: Text(l10n.manageArticlesTitle),
         centerTitle: true,
       ),
-      body: StreamBuilder<List<KnowledgeArticle>>(
-        stream: _service.getAllArticles(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Center(child: Text('${l10n.errorPrefix}${snapshot.error}'));
-          }
-
-          if (snapshot.connectionState == ConnectionState.waiting) {
+      body: Consumer<LibraryProvider>(
+        builder: (context, provider, child) {
+          if (provider.isLoading && provider.articles.isEmpty) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final articles = snapshot.data ?? [];
+          if (provider.error != null && provider.articles.isEmpty) {
+            return Center(child: Text('${l10n.errorPrefix}${provider.error}'));
+          }
+
+          final articles = provider.articles;
 
           if (articles.isEmpty) {
             return Center(child: Text(l10n.noResourcesFoundManager));
@@ -80,7 +101,7 @@ class _AdminArticleManagementScreenState extends State<AdminArticleManagementScr
                 margin: const EdgeInsets.only(bottom: 12),
                 child: ListTile(
                   leading: CircleAvatar(
-                    child: Text(article.category.icon),
+                    child: Text(_getCategoryIcon(article.category)),
                   ),
                   title: Text(
                     article.title,
@@ -89,7 +110,7 @@ class _AdminArticleManagementScreenState extends State<AdminArticleManagementScr
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
-                    DateFormat('dd.MM.yyyy').format(article.updatedAt.toDate()),
+                    DateFormat('dd.MM.yyyy').format(article.updatedAt),
                   ),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,

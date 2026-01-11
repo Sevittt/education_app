@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../models/sud_system.dart';
 import '../../services/systems_service.dart';
-import '../../models/knowledge_article.dart';
-import '../../models/video_tutorial.dart';
+import 'package:sud_qollanma/features/library/data/models/article_model.dart';
+import 'package:sud_qollanma/features/library/data/models/video_model.dart';
 import '../knowledge_base/article_detail_screen.dart';
 import '../resource/video_player_screen.dart';
 import '../../l10n/app_localizations.dart';
@@ -43,7 +43,7 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Havolani ochib bo\'lmadi')),
+          SnackBar(content: Text(AppLocalizations.of(context)!.errorCouldNotOpenLink)),
         );
       }
     }
@@ -83,7 +83,7 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
         child: ElevatedButton.icon(
           onPressed: _launchUrl,
           icon: const Icon(Icons.open_in_new),
-          label: Text(l10n.landingLogin), // Reusing login or should add more specific key
+          label: Text(l10n.loginWelcomeTitle), // Using generic login welcome title for now
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(vertical: 16),
           ),
@@ -238,11 +238,11 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
     }
 
     if (articleData != null) {
-      final article = KnowledgeArticle.fromMap(articleData, articleId);
+      final article = ArticleModel.fromMap(articleData, articleId);
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => ArticleDetailScreen(article: article),
+          builder: (_) => ArticleDetailScreen(articleEntity: article),
         ),
       );
     } else {
@@ -250,7 +250,7 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
       // Note: Ideally we should inject KnowledgeBaseService, but for now we'll create it
       // or just show a message if not found in the list (assuming all related content is fetched)
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Qo\'llanma topilmadi')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.errorResourceNotFound)),
       );
     }
   }
@@ -266,16 +266,16 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
     }
 
     if (videoData != null) {
-      final video = VideoTutorial.fromMap(videoData, videoId);
+      final video = VideoModel.fromMap(videoData, videoId);
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => VideoPlayerScreen(video: video),
+          builder: (_) => VideoPlayerScreen(videoEntity: video),
         ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Video topilmadi')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.errorVideoNotFound)),
       );
     }
   }
@@ -307,19 +307,19 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
                   : null,
               onTap: () {
                 if (title == 'Qo\'llanmalar') {
-                  final article = KnowledgeArticle.fromMap(item, item['id']);
+                  final article = ArticleModel.fromMap(item, item['id']);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => ArticleDetailScreen(article: article),
+                      builder: (_) => ArticleDetailScreen(articleEntity: article),
                     ),
                   );
                 } else if (title == 'Videolar') {
-                  final video = VideoTutorial.fromMap(item, item['id']);
+                  final video = VideoModel.fromMap(item, item['id']);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => VideoPlayerScreen(video: video),
+                      builder: (_) => VideoPlayerScreen(videoEntity: video),
                     ),
                   );
                 } else if (title == 'Ko\'p so\'raladigan savollar') {

@@ -518,6 +518,10 @@
   "addArticleTitle": "Yangi Maqola",
   "editArticleTitle": "Maqolani Tahrirlash",
   "categoryLabel": "Kategoriya",
+  "articleCategoryGeneral": "Umumiy",
+  "articleCategoryProcedure": "Protsedura",
+  "articleCategoryLaw": "Qonunchilik",
+  "articleCategoryFaq": "Ko'p so'raladigan",
   "contentLabel": "Mazmuni (Markdown)",
   "tagsLabel": "Teglar (vergul bilan ajrating)",
   "tagsHint": "masalan: sud, qonun, kodeks",
@@ -755,5 +759,26 @@
         "type": "String"
       }
     }
-  }
+  },
+  "errorCouldNotOpenLink": "Havolani ochib bo'lmadi",
+  "errorResourceNotFound": "Qo'llanma topilmadi",
+  "errorVideoNotFound": "Video topilmadi",
+  "errorPdfOpen": "PDF faylni ochib bo'lmadi",
+  "errorTelegramOpen": "Telegram havolasini ochib bo'lmadi",
+  "errorGeneric": "Xatolik yuz berdi: {error}",
+  "@errorGeneric": {
+    "placeholders": {
+      "error": {
+        "type": "Object"
+      }
+    }
+  },
+  "labelTrue": "To'g'ri",
+  "labelFalse": "Noto'g'ri",
+  "labelPass": "O'TDI",
+  "labelFail": "YIQILDI",
+  "labelPdfAvailable": "PDF mavjud",
+  "actionOk": "OK",
+  "actionGoBack": "Orqaga qaytish",
+  "searchNoResults": "Hech narsa topilmadi"
 }

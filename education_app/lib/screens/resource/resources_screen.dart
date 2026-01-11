@@ -6,6 +6,8 @@ import 'tabs/articles_tab.dart';
 import 'tabs/videos_tab.dart';
 import 'tabs/files_tab.dart';
 
+import 'package:sud_qollanma/screens/resource/quiz/quiz_list_screen.dart';
+
 class ResourcesScreen extends StatelessWidget {
   const ResourcesScreen({super.key});
 
@@ -14,16 +16,18 @@ class ResourcesScreen extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: Text(l10n.resourcesScreenTitle),
           centerTitle: true,
           bottom: TabBar(
+            isScrollable: true,
             tabs: [
               Tab(text: l10n.resourceTabArticles, icon: const Icon(Icons.article_outlined)),
               Tab(text: l10n.resourceTabVideos, icon: const Icon(Icons.video_library_outlined)),
               Tab(text: l10n.resourceTabFiles, icon: const Icon(Icons.folder_open_outlined)),
+              Tab(text: l10n.quizTitle, icon: const Icon(Icons.quiz_outlined)),
             ],
           ),
           actions: [
@@ -53,11 +57,12 @@ class ResourcesScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
-            ArticlesTab(),
-            VideosTab(),
-            FilesTab(),
+            const ArticlesTab(),
+            const VideosTab(),
+            const FilesTab(),
+            const QuizListScreen(),
           ],
         ),
       ),

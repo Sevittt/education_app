@@ -1053,6 +1053,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get categoryLabel => 'Category';
 
   @override
+  String get articleCategoryGeneral => 'General';
+
+  @override
+  String get articleCategoryProcedure => 'Procedure';
+
+  @override
+  String get articleCategoryLaw => 'Legislation';
+
+  @override
+  String get articleCategoryFaq => 'FAQ';
+
+  @override
   String get contentLabel => 'Content (Markdown)';
 
   @override
@@ -1574,4 +1586,48 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get levelMaster => 'Master';
+
+  @override
+  String get errorCouldNotOpenLink => 'Could not open link';
+
+  @override
+  String get errorResourceNotFound => 'Resource not found';
+
+  @override
+  String get errorVideoNotFound => 'Video not found';
+
+  @override
+  String get errorPdfOpen => 'Could not open PDF file';
+
+  @override
+  String get errorTelegramOpen => 'Could not open Telegram link';
+
+  @override
+  String errorGeneric(Object error) {
+    return 'An error occurred: $error';
+  }
+
+  @override
+  String get labelTrue => 'True';
+
+  @override
+  String get labelFalse => 'False';
+
+  @override
+  String get labelPass => 'PASS';
+
+  @override
+  String get labelFail => 'FAIL';
+
+  @override
+  String get labelPdfAvailable => 'PDF available';
+
+  @override
+  String get actionOk => 'OK';
+
+  @override
+  String get actionGoBack => 'Go Back';
+
+  @override
+  String get searchNoResults => 'No results found';
 }

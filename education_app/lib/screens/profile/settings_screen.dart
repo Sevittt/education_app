@@ -10,6 +10,7 @@ import '../admin/admin_panel_screen.dart'; // Import AdminPanelScreen
 import 'package:provider/provider.dart'; // Import Provider
 import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart'; // Import AuthNotifier
 import '../../models/users.dart'; // Import UserRole
+import '../../models/locale_notifier.dart'; // Import LocaleNotifier
 // Import AppLocalizations to use translated strings
 
 import 'package:url_launcher/url_launcher.dart'; // Import url_launcher
@@ -89,7 +90,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
          if (!await launchUrl(url)) {
             if (mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Could not open Telegram link')),
+                SnackBar(content: Text(AppLocalizations.of(context)!.errorTelegramOpen)),
               );
             }
          }
@@ -194,6 +195,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     // Get AppLocalizations instance
     final AppLocalizations? l10n = AppLocalizations.of(context);
+    final localeNotifier = Provider.of<LocaleNotifier>(context);
+    final currentLanguage = _getLanguageName(localeNotifier.appLocale?.languageCode ?? 'en');
 
     return Scaffold(
       appBar: AppBar(
@@ -234,6 +237,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
             value: _allowLocationAccess,
             onChanged: _updateLocationSetting,
             subtitle: l10n?.settingsAllowLocationSubtitle ?? 'For features requiring your location (if any)',
+          ),
+          const Divider(height: 1, indent: 16, endIndent: 16),
+
+          _buildSettingsItem(
+            context: context,
+            icon: Icons.language,
+            title: l10n?.language ?? 'Language',
+            subtitle: currentLanguage,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LanguageSelectionScreen(),
+                ),
+              );
+            },
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),
 

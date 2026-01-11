@@ -103,7 +103,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('An error occurred: ${error.toString()}'),
+            content: Text(l10n.errorGeneric(error.toString())),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );

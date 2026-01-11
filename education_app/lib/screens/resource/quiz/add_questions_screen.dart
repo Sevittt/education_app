@@ -233,11 +233,11 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
   List<Widget> _buildTrueFalseOptions() {
     return [
       RadioListTile<String>(
-        title: const Text('True'),
+        title: Text(AppLocalizations.of(context)!.labelTrue),
         value: 'True',
       ),
       RadioListTile<String>(
-        title: const Text('False'),
+        title: Text(AppLocalizations.of(context)!.labelFalse),
         value: 'False',
       ),
     ];

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../shared/layouts/responsive_layout.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
-import '../../../models/knowledge_article.dart';
-import '../../../services/knowledge_base_service.dart';
+import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
+import 'package:sud_qollanma/features/library/domain/entities/article_entity.dart';
 import '../../knowledge_base/article_detail_screen.dart';
 
 class ArticlesTab extends StatefulWidget {
@@ -13,13 +14,28 @@ class ArticlesTab extends StatefulWidget {
 }
 
 class _ArticlesTabState extends State<ArticlesTab> {
-  final KnowledgeBaseService _service = KnowledgeBaseService();
   final TextEditingController _searchController = TextEditingController();
   
-  ArticleCategory? _selectedCategory;
+  String? _selectedCategory;
   String _searchQuery = '';
   bool _isSearching = false;
-  List<KnowledgeArticle> _searchResults = [];
+  List<ArticleEntity> _searchResults = [];
+
+  // Article categories as strings
+  static const List<String> _categories = [
+    'general',
+    'procedure',
+    'law',
+    'faq',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<LibraryProvider>().watchArticles();
+    });
+  }
 
   @override
   void dispose() {
@@ -27,24 +43,43 @@ class _ArticlesTabState extends State<ArticlesTab> {
     super.dispose();
   }
 
-  void _onSearch(String query) async {
+  String _getCategoryDisplayName(String category, AppLocalizations l10n) {
+    switch (category) {
+      case 'general':
+        return l10n.articleCategoryGeneral;
+      case 'procedure':
+        return l10n.articleCategoryProcedure;
+      case 'law':
+        return l10n.articleCategoryLaw;
+      case 'faq':
+        return l10n.articleCategoryFaq;
+      default:
+        return category;
+    }
+  }
+
+  void _onSearch(String query) {
+    final provider = context.read<LibraryProvider>();
     setState(() {
       _searchQuery = query;
       _isSearching = query.isNotEmpty;
     });
 
     if (_isSearching) {
-      final results = await _service.searchArticles(query);
-      setState(() {
-        _searchResults = results;
-      });
+      final allArticles = provider.articles;
+      _searchResults = allArticles.where((article) {
+        final titleMatch = article.title.toLowerCase().contains(query.toLowerCase());
+        final descMatch = article.description.toLowerCase().contains(query.toLowerCase());
+        final contentMatch = article.content.toLowerCase().contains(query.toLowerCase());
+        return titleMatch || descMatch || contentMatch;
+      }).toList();
+      setState(() {});
     }
   }
 
-  void _onCategorySelected(ArticleCategory? category) {
+  void _onCategorySelected(String? category) {
     setState(() {
       _selectedCategory = category;
-      // Clear search when changing category to avoid confusion
       if (_isSearching) {
         _searchController.clear();
         _searchQuery = '';
@@ -95,22 +130,23 @@ class _ArticlesTabState extends State<ArticlesTab> {
   }
 
   Widget _buildCategoryFilter() {
+    final l10n = AppLocalizations.of(context)!;
     return SizedBox(
       height: 50,
       child: ListView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         children: [
-          _buildCategoryChip(null, AppLocalizations.of(context)!.filterAll),
-          ...ArticleCategory.values.map((category) {
-            return _buildCategoryChip(category, category.getDisplayName(AppLocalizations.of(context)!));
+          _buildCategoryChip(null, l10n.filterAll),
+          ..._categories.map((category) {
+            return _buildCategoryChip(category, _getCategoryDisplayName(category, l10n));
           }),
         ],
       ),
     );
   }
 
-  Widget _buildCategoryChip(ArticleCategory? category, String label) {
+  Widget _buildCategoryChip(String? category, String label) {
     final isSelected = _selectedCategory == category;
     return Padding(
       padding: const EdgeInsets.only(right: 8),
@@ -178,25 +214,23 @@ class _ArticlesTabState extends State<ArticlesTab> {
   }
 
   Widget _buildArticleList() {
-    Stream<List<KnowledgeArticle>> stream;
-    if (_selectedCategory != null) {
-      stream = _service.getArticlesByCategory(_selectedCategory!);
-    } else {
-      stream = _service.getAllArticles();
-    }
-
-    return StreamBuilder<List<KnowledgeArticle>>(
-      stream: stream,
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Center(child: Text('Xatolik yuz berdi: ${snapshot.error}'));
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
+    final l10n = AppLocalizations.of(context)!;
+    
+    return Consumer<LibraryProvider>(
+      builder: (context, provider, child) {
+        if (provider.isLoading && provider.articles.isEmpty) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        final articles = snapshot.data ?? [];
+        if (provider.error != null && provider.articles.isEmpty) {
+          final l10n = AppLocalizations.of(context)!;
+          return Center(child: Text(l10n.errorGeneric(provider.error ?? 'Unknown')));
+        }
+
+        List<ArticleEntity> articles = provider.articles;
+        if (_selectedCategory != null) {
+          articles = articles.where((a) => a.category == _selectedCategory).toList();
+        }
 
         if (articles.isEmpty) {
           return Center(
@@ -206,7 +240,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
                 Icon(Icons.library_books_outlined, size: 64, color: Colors.grey.shade400),
                 const SizedBox(height: 16),
                 Text(
-                  AppLocalizations.of(context)!.noArticlesAvailable,
+                  l10n.noArticlesAvailable,
                   style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
                 ),
               ],
@@ -226,7 +260,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
             padding: const EdgeInsets.all(16),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              childAspectRatio: 0.8, // Adjusted for article card height
+              childAspectRatio: 0.8,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
             ),
@@ -240,7 +274,8 @@ class _ArticlesTabState extends State<ArticlesTab> {
     );
   }
 
-  Widget _buildArticleCard(KnowledgeArticle article) {
+  Widget _buildArticleCard(ArticleEntity article) {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 2,
@@ -250,7 +285,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ArticleDetailScreen(article: article),
+              builder: (context) => ArticleDetailScreen(articleEntity: article),
             ),
           );
         },
@@ -269,7 +304,7 @@ class _ArticlesTabState extends State<ArticlesTab> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      article.category.getDisplayName(AppLocalizations.of(context)!),
+                      _getCategoryDisplayName(article.category, l10n),
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 12,

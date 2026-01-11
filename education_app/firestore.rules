@@ -28,30 +28,31 @@ service cloud.firestore {
     match /learning_records/{recordId} {
       allow create: if isAuthenticated() && 
                     request.resource.data.actor.mbox == ('mailto:' + request.auth.uid + '@sudqollanma.uz');
-      allow read: if isOwner(request.resource.data.actor.uid) || isAdmin(); // Assuming uid is stored
+      allow read: if isAuthenticated();
       allow update: if false; // Logs are immutable
       allow delete: if isAdmin();
     }
 
-    // --- Content (Articles, Videos, Systems) ---
-    // Public Read (Authenticted), Admin Write.
+    // --- Content Collections ---
+    // PUBLIC READ for all content, Admin write only
+    // This allows anyone (including unauthenticated users) to read content
     match /knowledge_base/{docId} {
-      allow read: if isAuthenticated();
+      allow read: if true;
       allow write: if isAdmin();
     }
     
     match /video_tutorials/{docId} {
-      allow read: if isAuthenticated();
+      allow read: if true;
       allow write: if isAdmin();
     }
     
     match /systems_directory/{docId} {
-      allow read: if isAuthenticated();
+      allow read: if true;
       allow write: if isAdmin();
     }
 
     match /faq/{docId} {
-      allow read: if isAuthenticated();
+      allow read: if true;
       allow write: if isAdmin();
     }
     
@@ -59,8 +60,33 @@ service cloud.firestore {
        allow read: if isAuthenticated();
        allow write: if isAdmin();
     }
+    
+    // --- Quizzes Collection ---
+    match /quizzes/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    // --- Resources Collection ---
+    match /resources/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    // --- Community Collection ---
+    match /community_posts/{docId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update, delete: if isOwner(resource.data.authorId) || isAdmin();
+    }
+    
+    // --- News Collection ---
+    match /news/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
 
-    // --- Default Deny ---
+    // --- Default Deny (for any unmatched paths) ---
     match /{document=**} {
       allow read, write: if false;
     }

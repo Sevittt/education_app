@@ -174,7 +174,7 @@ class _FilesTabState extends State<FilesTab> {
                 }
 
                 if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
+                  return Center(child: Text(l10n.errorGeneric(snapshot.error ?? 'Unknown error')));
                 }
 
                 List<Resource> resources = snapshot.data ?? [];

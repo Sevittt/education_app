@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
-import '../../models/video_tutorial.dart';
-import '../../services/video_tutorial_service.dart';
+import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
+import 'package:sud_qollanma/features/library/domain/entities/video_entity.dart';
 import 'admin_add_edit_video_screen.dart';
 
 class AdminVideoManagementScreen extends StatefulWidget {
@@ -12,9 +13,16 @@ class AdminVideoManagementScreen extends StatefulWidget {
 }
 
 class _AdminVideoManagementScreenState extends State<AdminVideoManagementScreen> {
-  final VideoTutorialService _service = VideoTutorialService();
+  @override
+  void initState() {
+    super.initState();
+    // Start watching videos on init
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<LibraryProvider>().watchVideos();
+    });
+  }
 
-  Future<void> _deleteVideo(VideoTutorial video) async {
+  Future<void> _deleteVideo(VideoEntity video) async {
     final l10n = AppLocalizations.of(context)!;
     final bool? confirmed = await showDialog<bool>(
       context: context,
@@ -36,7 +44,7 @@ class _AdminVideoManagementScreenState extends State<AdminVideoManagementScreen>
     );
 
     if (confirmed == true && mounted) {
-      await _service.deleteVideo(video.id);
+      await context.read<LibraryProvider>().deleteVideo(video.id);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l10n.videoDeletedSuccess)),
@@ -53,18 +61,17 @@ class _AdminVideoManagementScreenState extends State<AdminVideoManagementScreen>
         title: Text(l10n.manageVideosTitle),
         centerTitle: true,
       ),
-      body: StreamBuilder<List<VideoTutorial>>(
-        stream: _service.getAllVideos(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Center(child: Text('${l10n.errorPrefix}${snapshot.error}'));
-          }
-
-          if (snapshot.connectionState == ConnectionState.waiting) {
+      body: Consumer<LibraryProvider>(
+        builder: (context, provider, child) {
+          if (provider.isLoading && provider.videos.isEmpty) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final videos = snapshot.data ?? [];
+          if (provider.error != null && provider.videos.isEmpty) {
+            return Center(child: Text('${l10n.errorPrefix}${provider.error}'));
+          }
+
+          final videos = provider.videos;
 
           if (videos.isEmpty) {
             return Center(child: Text(l10n.noVideosFound));
@@ -90,7 +97,7 @@ class _AdminVideoManagementScreenState extends State<AdminVideoManagementScreen>
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  subtitle: Text(video.category.getDisplayName(l10n)),
+                  subtitle: Text(video.category),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [

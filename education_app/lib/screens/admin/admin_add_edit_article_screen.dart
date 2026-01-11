@@ -1,14 +1,12 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
-import '../../models/knowledge_article.dart';
-import '../../services/knowledge_base_service.dart';
+import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
+import 'package:sud_qollanma/features/library/domain/entities/article_entity.dart';
 
 class AdminAddEditArticleScreen extends StatefulWidget {
-  final KnowledgeArticle? article;
+  final ArticleEntity? article;
 
   const AdminAddEditArticleScreen({super.key, this.article});
 
@@ -18,17 +16,22 @@ class AdminAddEditArticleScreen extends StatefulWidget {
 
 class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _service = KnowledgeBaseService();
   
   late TextEditingController _titleController;
   late TextEditingController _contentController;
   late TextEditingController _tagsController;
-  ArticleCategory _selectedCategory = ArticleCategory.general;
+  String _selectedCategory = 'general';
   
   bool _isLoading = false;
   String? _pdfUrl;
-  String? _pdfFileName;
-  File? _selectedPdfFile;
+
+  // Article categories
+  static const List<String> _categories = [
+    'general',
+    'procedure',
+    'law',
+    'faq',
+  ];
 
   @override
   void initState() {
@@ -36,11 +39,8 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
     _titleController = TextEditingController(text: widget.article?.title ?? '');
     _contentController = TextEditingController(text: widget.article?.content ?? '');
     _tagsController = TextEditingController(text: widget.article?.tags.join(', ') ?? '');
-    _selectedCategory = widget.article?.category ?? ArticleCategory.general;
+    _selectedCategory = widget.article?.category ?? 'general';
     _pdfUrl = widget.article?.pdfUrl;
-    // Note: We can't access l10n here in initState easily without context, 
-    // but we can set _pdfFileName in build or use a boolean flag.
-    // For simplicity, we'll handle the display logic in build.
   }
 
   @override
@@ -51,17 +51,35 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
     super.dispose();
   }
 
-  Future<void> _pickPdf() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['pdf'],
-    );
+  String _getCategoryDisplayName(String category) {
+    if (!mounted) return category;
+    final l10n = AppLocalizations.of(context)!;
+    switch (category) {
+      case 'general':
+        return l10n.articleCategoryGeneral;
+      case 'procedure':
+        return l10n.articleCategoryProcedure;
+      case 'law':
+        return l10n.articleCategoryLaw;
+      case 'faq':
+        return l10n.articleCategoryFaq;
+      default:
+        return category;
+    }
+  }
 
-    if (result != null) {
-      setState(() {
-        _selectedPdfFile = File(result.files.single.path!);
-        _pdfFileName = result.files.single.name;
-      });
+  String _getCategoryIcon(String category) {
+    switch (category) {
+      case 'general':
+        return '📄';
+      case 'procedure':
+        return '📋';
+      case 'law':
+        return '⚖️';
+      case 'faq':
+        return '❓';
+      default:
+        return '📄';
     }
   }
 
@@ -70,15 +88,9 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
 
     setState(() => _isLoading = true);
     final l10n = AppLocalizations.of(context)!;
+    final provider = context.read<LibraryProvider>();
 
     try {
-      String? pdfUrl = _pdfUrl;
-      
-      // Upload PDF if selected
-      if (_selectedPdfFile != null) {
-        pdfUrl = await _service.uploadPDF(_selectedPdfFile!, 'temp_${DateTime.now().millisecondsSinceEpoch}');
-      }
-
       final tags = _tagsController.text
           .split(',')
           .map((e) => e.trim())
@@ -89,28 +101,30 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
       final authorId = user?.uid ?? 'admin';
       final authorName = user?.displayName ?? 'Admin';
 
-      final article = KnowledgeArticle(
+      final article = ArticleEntity(
         id: widget.article?.id ?? '',
         title: _titleController.text,
         description: _contentController.text.length > 100 
             ? '${_contentController.text.substring(0, 100)}...' 
             : _contentController.text,
         content: _contentController.text,
-        pdfUrl: pdfUrl,
+        pdfUrl: _pdfUrl,
         category: _selectedCategory,
+        systemId: widget.article?.systemId,
         tags: tags,
         authorId: authorId,
         authorName: authorName,
-        createdAt: widget.article?.createdAt ?? Timestamp.now(),
-        updatedAt: Timestamp.now(),
+        views: widget.article?.views ?? 0,
+        helpful: widget.article?.helpful ?? 0,
+        createdAt: widget.article?.createdAt ?? DateTime.now(),
+        updatedAt: DateTime.now(),
+        isPinned: widget.article?.isPinned ?? false,
       );
 
       if (widget.article == null) {
-        // Create new
-        await _service.createArticle(article);
+        await provider.createArticle(article);
       } else {
-        // Update existing
-        await _service.updateArticle(widget.article!.id, article);
+        await provider.updateArticle(widget.article!.id, article);
       }
 
       if (mounted) {
@@ -136,11 +150,8 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     
-    // Determine PDF file name display
     String pdfDisplayText = l10n.noPdfSelected;
-    if (_pdfFileName != null) {
-      pdfDisplayText = _pdfFileName!;
-    } else if (_pdfUrl != null) {
+    if (_pdfUrl != null) {
       pdfDisplayText = l10n.existingPdfFile;
     }
 
@@ -174,16 +185,16 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
                           value?.isEmpty ?? true ? l10n.titleRequired : null,
                     ),
                     const SizedBox(height: 16),
-                    DropdownButtonFormField<ArticleCategory>(
-                      initialValue: _selectedCategory,
+                    DropdownButtonFormField<String>(
+                      value: _selectedCategory,
                       decoration: InputDecoration(
                         labelText: l10n.categoryLabel,
                         border: const OutlineInputBorder(),
                       ),
-                      items: ArticleCategory.values.map((category) {
+                      items: _categories.map((category) {
                         return DropdownMenuItem(
                           value: category,
-                          child: Text('${category.icon} ${category.getDisplayName(l10n)}'),
+                          child: Text('${_getCategoryIcon(category)} ${_getCategoryDisplayName(category)}'),
                         );
                       }).toList(),
                       onChanged: (value) {
@@ -218,22 +229,11 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
                       child: ListTile(
                         leading: const Icon(Icons.picture_as_pdf, color: Colors.red),
                         title: Text(pdfDisplayText),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.upload_file),
-                          onPressed: _pickPdf,
-                          tooltip: l10n.uploadPdfTooltip,
-                        ),
+                        subtitle: _pdfUrl != null 
+                            ? Text(AppLocalizations.of(context)!.labelPdfAvailable, style: TextStyle(color: Colors.green.shade600))
+                            : null,
                       ),
                     ),
-                    if (_pdfUrl != null && _selectedPdfFile == null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: Text(
-                          l10n.currentFileLabel(_pdfUrl!),
-                          style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
                   ],
                 ),
               ),

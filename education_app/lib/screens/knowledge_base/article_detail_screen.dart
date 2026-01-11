@@ -2,39 +2,79 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:intl/intl.dart';
-import '../../models/knowledge_article.dart';
-import '../../services/knowledge_base_service.dart';
+import 'package:provider/provider.dart';
+
 import '../../services/gamification_service.dart';
 import '../../services/xapi_service.dart';
 import '../../models/xapi/xapi_statement.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../l10n/app_localizations.dart';
-
-class ArticleDetailScreen extends StatefulWidget {
-  final KnowledgeArticle article;
+import 'package:sud_qollanma/features/library/domain/entities/article_entity.dart';
+import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
 
   const ArticleDetailScreen({
     super.key,
-    required this.article,
+    required this.articleEntity,
   });
+
+  final ArticleEntity articleEntity;
 
   @override
   State<ArticleDetailScreen> createState() => _ArticleDetailScreenState();
 }
 
 class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
-  final KnowledgeBaseService _service = KnowledgeBaseService();
   bool _hasVoted = false;
   late int _currentHelpfulCount;
   final ScrollController _scrollController = ScrollController();
   bool _pointsAwarded = false;
 
+  // Helper getters to abstract data source
+  String get _articleId => widget.articleEntity.id;
+  String get _articleTitle => widget.articleEntity.title;
+  String get _articleDescription => widget.articleEntity.description;
+  String get _articleContent => widget.articleEntity.content;
+  String get _authorName => widget.articleEntity.authorName;
+  String get _category => widget.articleEntity.category;
+  String? get _pdfUrl => widget.articleEntity.pdfUrl;
+  int get _initialHelpful => widget.articleEntity.helpful;
+  List<String> get _tags => widget.articleEntity.tags;
+  DateTime get _createdAt => widget.articleEntity.createdAt;
+
+  String _getCategoryDisplayName(String category) {
+    // Ensure l10n is available, if context is not valid yet, return category
+    if (!mounted) return category;
+    
+    final l10n = AppLocalizations.of(context)!;
+    switch (category) {
+      case 'general':
+        return l10n.articleCategoryGeneral;
+      case 'procedure':
+        return l10n.articleCategoryProcedure;
+      case 'law':
+        return l10n.articleCategoryLaw;
+      case 'faq':
+        return l10n.articleCategoryFaq;
+      default:
+        return category;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    _currentHelpfulCount = widget.article.helpful;
-    // Increment views when screen opens
-    _service.incrementViews(widget.article.id);
+    _currentHelpfulCount = _initialHelpful;
+    // Increment views via provider if using entity, else via service
+    if (widget.articleEntity != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<LibraryProvider>().incrementArticleViews(_articleId);
+      });
+    } else {
+      // Use LibraryProvider for metrics
+      if (mounted) {
+        context.read<LibraryProvider>().incrementArticleViews(_articleId);
+      }
+    }
     _scrollController.addListener(_onScroll);
     
     // xAPI Tracking - Experienced (Viewed)
@@ -44,10 +84,10 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
          actor: actor,
          verb: XApiVerbs.experienced,
          object: XApiObject(
-           id: widget.article.id,
+           id: _articleId,
            definition: {
              'type': 'http://adlnet.gov/expapi/activities/article',
-             'name': {'en-US': widget.article.title},
+             'name': {'en-US': _articleTitle},
            },
          ),
          timestamp: DateTime.now(),
@@ -83,10 +123,10 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
       actor: actor,
       verb: XApiVerbs.completed,
       object: XApiObject(
-        id: widget.article.id,
+        id: _articleId,
         definition: {
           'type': 'http://adlnet.gov/expapi/activities/article',
-          'name': {'en-US': widget.article.title},
+          'name': {'en-US': _articleTitle},
         },
       ),
       result: XApiResult(
@@ -129,14 +169,14 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
   Future<void> _handleVote() async {
     if (_hasVoted) {
       // Undo vote
-      await _service.decrementHelpful(widget.article.id);
+      await context.read<LibraryProvider>().decrementArticleHelpful(_articleId);
       setState(() {
         _hasVoted = false;
         _currentHelpfulCount--;
       });
     } else {
       // Vote
-      await _service.incrementHelpful(widget.article.id);
+      await context.read<LibraryProvider>().incrementArticleHelpful(_articleId);
       setState(() {
         _hasVoted = true;
         _currentHelpfulCount++;
@@ -145,13 +185,13 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
   }
 
   Future<void> _launchPdfUrl() async {
-    if (widget.article.pdfUrl == null) return;
+    if (_pdfUrl == null) return;
     
-    final Uri url = Uri.parse(widget.article.pdfUrl!);
+    final Uri url = Uri.parse(_pdfUrl!);
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('PDF faylni ochib bo\'lmadi')),
+           SnackBar(content: Text(AppLocalizations.of(context)!.errorPdfOpen)),
         );
       }
     }
@@ -161,9 +201,9 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.article.title),
+        title: Text(_articleTitle),
         actions: [
-          if (widget.article.pdfUrl != null)
+          if (_pdfUrl != null)
             IconButton(
               icon: const Icon(Icons.picture_as_pdf),
               tooltip: 'PDF yuklab olish',
@@ -183,7 +223,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                   _buildHeader(),
                   const Divider(height: 32),
                   MarkdownBody(
-                    data: widget.article.content,
+                    data: _articleContent,
                     selectable: true,
                     styleSheet: MarkdownStyleSheet(
                       h1: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -231,7 +271,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(
-            widget.article.category.getDisplayName(AppLocalizations.of(context)!),
+            _getCategoryDisplayName(_category),
             style: TextStyle(
               color: Theme.of(context).primaryColor,
               fontWeight: FontWeight.bold,
@@ -240,14 +280,14 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
         ),
         const SizedBox(height: 12),
         Text(
-          widget.article.title,
+          _articleTitle,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
         const SizedBox(height: 8),
         Text(
-          widget.article.description,
+          _articleDescription,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
             color: Colors.grey.shade600,
           ),
@@ -265,11 +305,11 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.article.authorName,
+                  _authorName,
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  DateFormat('dd MMM yyyy').format(widget.article.createdAt.toDate()),
+                  DateFormat('dd MMM yyyy').format(_createdAt),
                   style: TextStyle(color: Colors.grey.shade500, fontSize: 12),
                 ),
               ],
@@ -281,12 +321,12 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
   }
 
   Widget _buildTags() {
-    if (widget.article.tags.isEmpty) return const SizedBox.shrink();
+    if (_tags.isEmpty) return const SizedBox.shrink();
 
     return Wrap(
       spacing: 8,
       runSpacing: 8,
-      children: widget.article.tags.map((tag) {
+      children: _tags.map((tag) {
         return Chip(
           label: Text('#$tag'),
           backgroundColor: Colors.grey.shade100,

@@ -1,5 +1,6 @@
 // lib/screens/placeholder_screen.dart
 import 'package:flutter/material.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 
 class PlaceholderScreen extends StatelessWidget {
   final String title;
@@ -36,7 +37,7 @@ class PlaceholderScreen extends StatelessWidget {
               const SizedBox(height: 30),
               ElevatedButton.icon(
                 icon: const Icon(Icons.arrow_back_ios_new),
-                label: const Text('Go Back'),
+                label: Text(AppLocalizations.of(context)!.actionGoBack),
                 onPressed: () {
                   Navigator.pop(context);
                 },

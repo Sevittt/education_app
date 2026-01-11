@@ -1,13 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sud_qollanma/models/search_result.dart';
 import 'package:sud_qollanma/services/faq_service.dart';
-import 'package:sud_qollanma/services/knowledge_base_service.dart';
 import 'package:sud_qollanma/services/systems_service.dart';
-import 'package:sud_qollanma/services/video_tutorial_service.dart';
+import 'package:sud_qollanma/features/library/data/repositories/library_repository_impl.dart';
+import 'package:sud_qollanma/features/library/data/datasources/library_remote_source.dart';
+import 'package:sud_qollanma/features/library/domain/entities/article_entity.dart';
+import 'package:sud_qollanma/features/library/domain/entities/video_entity.dart';
 
 class GlobalSearchService {
-  final KnowledgeBaseService _knowledgeBaseService = KnowledgeBaseService();
+  // Using Repository Implementation directly as this is a Service
+  // In a full clean architecture, this might be a UseCase
+  final LibraryRepositoryImpl _libraryRepository = LibraryRepositoryImpl(
+    remoteSource: LibraryRemoteSource(),
+  );
+  
   final SystemsService _systemsService = SystemsService();
-  final VideoTutorialService _videoTutorialService = VideoTutorialService();
   final FAQService _faqService = FAQService();
 
   Future<List<SearchResult>> searchAll(String query) async {
@@ -19,17 +26,16 @@ class GlobalSearchService {
 
     try {
       // Fetch all data in parallel
-      // Note: We use .first to get the current snapshot from the Streams
       final results = await Future.wait([
-        _knowledgeBaseService.getAllArticles().first,
+        _libraryRepository.getArticles(),
         _systemsService.getAllSystems().first,
-        _videoTutorialService.getAllVideos().first,
+        _libraryRepository.getVideos(),
         _faqService.getAllFAQs().first,
       ]);
 
-      final articles = results[0] as List<dynamic>;
+      final articles = results[0] as List<ArticleEntity>;
       final systems = results[1] as List<dynamic>;
-      final videos = results[2] as List<dynamic>;
+      final videos = results[2] as List<VideoEntity>;
       final faqs = results[3] as List<dynamic>;
 
       List<SearchResult> searchResults = [];
@@ -37,11 +43,11 @@ class GlobalSearchService {
       // Process Articles
       for (var article in articles) {
         if (article.title.toLowerCase().contains(lowerQuery) ||
-            article.summary.toLowerCase().contains(lowerQuery)) {
+            article.description.toLowerCase().contains(lowerQuery)) {
           searchResults.add(SearchResult(
             id: article.id,
             title: article.title,
-            description: article.summary,
+            description: article.description,
             type: 'article',
             originalObject: article,
           ));

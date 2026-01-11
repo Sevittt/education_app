@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../shared/layouts/responsive_layout.dart';
+import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import '../../../../shared/layouts/responsive_layout.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
-import '../../../models/video_tutorial.dart';
-import '../../../services/video_tutorial_service.dart';
+import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
+import 'package:sud_qollanma/features/library/domain/entities/video_entity.dart';
 import '../video_player_screen.dart';
 
 class VideosTab extends StatefulWidget {
@@ -14,13 +15,24 @@ class VideosTab extends StatefulWidget {
 }
 
 class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMixin {
-  final VideoTutorialService _service = VideoTutorialService();
   late TabController _tabController;
+  
+  // Video categories as strings
+  static const List<String> _categories = [
+    'beginner',
+    'intermediate',
+    'advanced',
+    'practical',
+    'theory',
+  ];
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: VideoCategory.values.length + 1, vsync: this);
+    _tabController = TabController(length: _categories.length + 1, vsync: this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<LibraryProvider>().watchVideos();
+    });
   }
 
   @override
@@ -29,8 +41,37 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
     super.dispose();
   }
 
+  String _getCategoryDisplayName(String category, AppLocalizations l10n) {
+    switch (category) {
+      case 'beginner':
+        return 'Boshlang\'ich';
+      case 'intermediate':
+        return 'O\'rta';
+      case 'advanced':
+        return 'Yuqori';
+      case 'practical':
+        return 'Amaliy';
+      case 'theory':
+        return 'Nazariy';
+      default:
+        return category;
+    }
+  }
+
+  String _formatDuration(int seconds) {
+    final duration = Duration(seconds: seconds);
+    final hours = duration.inHours;
+    final minutes = duration.inMinutes.remainder(60);
+    final secs = duration.inSeconds.remainder(60);
+    if (hours > 0) {
+      return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
+    }
+    return '${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
+  }
+
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         TabBar(
@@ -39,9 +80,9 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
           labelColor: Theme.of(context).primaryColor,
           unselectedLabelColor: Colors.grey,
           tabs: [
-            Tab(text: AppLocalizations.of(context)!.filterAll),
-            ...VideoCategory.values.map((category) {
-              return Tab(text: category.getDisplayName(AppLocalizations.of(context)!));
+            Tab(text: l10n.filterAll),
+            ..._categories.map((category) {
+              return Tab(text: _getCategoryDisplayName(category, l10n));
             }),
           ],
         ),
@@ -50,7 +91,7 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
             controller: _tabController,
             children: [
               _buildVideoList(null), // All videos
-              ...VideoCategory.values.map((category) {
+              ..._categories.map((category) {
                 return _buildVideoList(category);
               }),
             ],
@@ -60,26 +101,23 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
     );
   }
 
-  Widget _buildVideoList(VideoCategory? category) {
-    Stream<List<VideoTutorial>> stream;
-    if (category != null) {
-      stream = _service.getVideosByCategory(category.name);
-    } else {
-      stream = _service.getAllVideos();
-    }
-
-    return StreamBuilder<List<VideoTutorial>>(
-      stream: stream,
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Center(child: Text('${AppLocalizations.of(context)!.errorPrefix}${snapshot.error}'));
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
+  Widget _buildVideoList(String? category) {
+    final l10n = AppLocalizations.of(context)!;
+    
+    return Consumer<LibraryProvider>(
+      builder: (context, provider, child) {
+        if (provider.isLoading && provider.videos.isEmpty) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        final videos = snapshot.data ?? [];
+        if (provider.error != null && provider.videos.isEmpty) {
+          return Center(child: Text('${l10n.errorPrefix}${provider.error}'));
+        }
+
+        List<VideoEntity> videos = provider.videos;
+        if (category != null) {
+          videos = videos.where((v) => v.category == category).toList();
+        }
 
         if (videos.isEmpty) {
           return Center(
@@ -89,7 +127,7 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
                 Icon(Icons.video_library_outlined, size: 64, color: Colors.grey.shade400),
                 const SizedBox(height: 16),
                 Text(
-                  AppLocalizations.of(context)!.noVideosAvailable,
+                  l10n.noVideosAvailable,
                   style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
                 ),
               ],
@@ -109,7 +147,7 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
             padding: const EdgeInsets.all(16),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              childAspectRatio: 1.2, // Adjusted for video card height
+              childAspectRatio: 1.2,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
             ),
@@ -123,7 +161,8 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
     );
   }
 
-  Widget _buildVideoCard(VideoTutorial video) {
+  Widget _buildVideoCard(VideoEntity video) {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 2,
@@ -133,7 +172,7 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => VideoPlayerScreen(video: video),
+              builder: (context) => VideoPlayerScreen(videoEntity: video),
             ),
           );
         },
@@ -141,7 +180,6 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Thumbnail placeholder (in a real app, use Image.network with video.thumbnailUrl)
             Container(
               height: 180,
               decoration: BoxDecoration(
@@ -169,7 +207,7 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
-                        video.formattedDuration,
+                        _formatDuration(video.durationSeconds),
                         style: const TextStyle(color: Colors.white, fontSize: 12),
                       ),
                     ),
@@ -191,7 +229,7 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
-                          video.category.getDisplayName(AppLocalizations.of(context)!),
+                          _getCategoryDisplayName(video.category, l10n),
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: 12,
@@ -201,7 +239,7 @@ class _VideosTabState extends State<VideosTab> with SingleTickerProviderStateMix
                       ),
                       const Spacer(),
                       Text(
-                        DateFormat('dd MMM').format(video.createdAt.toDate()),
+                        DateFormat('dd MMM').format(video.createdAt),
                         style: TextStyle(color: Colors.grey.shade500, fontSize: 12),
                       ),
                     ],

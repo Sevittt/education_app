@@ -5,8 +5,7 @@ import 'package:sud_qollanma/l10n/app_localizations.dart';
 import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
 import 'package:sud_qollanma/features/library/domain/entities/video_entity.dart';
 import 'package:sud_qollanma/shared/widgets/custom_network_image.dart';
-// Legacy import for VideoPlayerScreen (still uses old model, to be refactored later)
-import 'package:sud_qollanma/models/video_tutorial.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart'; // For Timestamp
 import 'video_player_screen.dart';
 
@@ -135,25 +134,7 @@ class _VideoTutorialsScreenState extends State<VideoTutorialsScreen>
             context,
             MaterialPageRoute(
               builder: (context) => VideoPlayerScreen(
-                video: VideoTutorial(
-                  id: video.id,
-                  title: video.title,
-                  description: video.description,
-                  youtubeId: video.youtubeId,
-                  duration: video.durationSeconds,
-                  category: VideoCategory.values.firstWhere(
-                    (e) => e.name == video.category,
-                    orElse: () => VideoCategory.beginner,
-                  ),
-                  thumbnailUrl: video.thumbnailUrl,
-                  tags: video.tags,
-                  authorId: video.authorId,
-                  authorName: video.authorName,
-                  views: video.views,
-                  likes: video.likes,
-                  createdAt: Timestamp.fromDate(video.createdAt),
-                  order: video.order,
-                ),
+                videoEntity: video,
               ),
             ),
           );

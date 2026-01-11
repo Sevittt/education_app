@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
 import 'package:sud_qollanma/models/search_result.dart';
 import 'package:sud_qollanma/services/global_search_service.dart';
 import 'package:sud_qollanma/screens/knowledge_base/article_detail_screen.dart';
 import 'package:sud_qollanma/screens/resource/video_player_screen.dart';
 import 'package:sud_qollanma/screens/systems/system_detail_screen.dart'; // Import SystemDetailScreen
-import 'package:sud_qollanma/models/knowledge_article.dart';
-import 'package:sud_qollanma/models/video_tutorial.dart';
+import 'package:sud_qollanma/features/library/domain/entities/article_entity.dart';
+import 'package:sud_qollanma/features/library/domain/entities/video_entity.dart';
 import 'package:sud_qollanma/models/sud_system.dart';
 
 class GlobalSearchScreen extends StatefulWidget {
@@ -130,6 +131,8 @@ class _GlobalSearchScreenState extends State<GlobalSearchScreen> {
     );
   }
 
+
+
   void _navigateToDetail(SearchResult result) {
     switch (result.type) {
       case 'article':
@@ -137,7 +140,7 @@ class _GlobalSearchScreenState extends State<GlobalSearchScreen> {
           context,
           MaterialPageRoute(
             builder: (context) => ArticleDetailScreen(
-              article: result.originalObject as KnowledgeArticle,
+              articleEntity: result.originalObject as ArticleEntity,
             ),
           ),
         );
@@ -147,7 +150,7 @@ class _GlobalSearchScreenState extends State<GlobalSearchScreen> {
           context,
           MaterialPageRoute(
             builder: (context) => VideoPlayerScreen(
-              video: result.originalObject as VideoTutorial,
+              videoEntity: result.originalObject as VideoEntity,
             ),
           ),
         );
@@ -171,7 +174,7 @@ class _GlobalSearchScreenState extends State<GlobalSearchScreen> {
             title: Text(result.title),
             content: Text(result.description),
             actions: [
-              TextButton(onPressed: () => Navigator.pop(context), child: const Text('OK'))
+              TextButton(onPressed: () => Navigator.pop(context), child: Text(AppLocalizations.of(context)!.actionOk))
             ],
           ),
         );
@@ -211,7 +214,7 @@ class _GlobalSearchScreenState extends State<GlobalSearchScreen> {
                       const Icon(Icons.search_off, size: 64, color: Colors.grey),
                       const SizedBox(height: 16),
                       Text(
-                        'Hech narsa topilmadi',
+                        AppLocalizations.of(context)!.searchNoResults,
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               color: Colors.grey,
                             ),

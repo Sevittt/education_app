@@ -530,6 +530,10 @@
   "addArticleTitle": "New Article",
   "editArticleTitle": "Edit Article",
   "categoryLabel": "Category",
+  "articleCategoryGeneral": "General",
+  "articleCategoryProcedure": "Procedure",
+  "articleCategoryLaw": "Legislation",
+  "articleCategoryFaq": "FAQ",
   "contentLabel": "Content (Markdown)",
   "tagsLabel": "Tags (comma separated)",
   "tagsHint": "e.g. court, law, code",
@@ -754,5 +758,26 @@
         "type": "String"
       }
     }
-  }
+  },
+  "errorCouldNotOpenLink": "Could not open link",
+  "errorResourceNotFound": "Resource not found",
+  "errorVideoNotFound": "Video not found",
+  "errorPdfOpen": "Could not open PDF file",
+  "errorTelegramOpen": "Could not open Telegram link",
+  "errorGeneric": "An error occurred: {error}",
+  "@errorGeneric": {
+    "placeholders": {
+      "error": {
+        "type": "Object"
+      }
+    }
+  },
+  "labelTrue": "True",
+  "labelFalse": "False",
+  "labelPass": "PASS",
+  "labelFail": "FAIL",
+  "labelPdfAvailable": "PDF available",
+  "actionOk": "OK",
+  "actionGoBack": "Go Back",
+  "searchNoResults": "No results found"
 }
