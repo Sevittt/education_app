@@ -121,7 +121,6 @@ class _AdminSystemManagementScreenState extends State<AdminSystemManagementScree
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
         onPressed: () {
           Navigator.push(
             context,
@@ -131,6 +130,7 @@ class _AdminSystemManagementScreenState extends State<AdminSystemManagementScree
           );
         },
         tooltip: l10n.add,
+        child: const Icon(Icons.add),
       ),
     );
   }

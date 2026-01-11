@@ -209,3 +209,82 @@ Security         | Firebase Auth only             |OAuth 2.0 + Sovereign Hosting
 ROI Measurement  | Qualitative estimates          |Quantitative "Task-Performance" analytics
 
 By integrating xAPI, the "Sud Qo'llanma" project matures from a simple education app into a Durable Context Engine that supports the full lifecycle of a judicial employee’s digital professional development.
+
+
+Bizning maqsad — "Kahoot" (tezlik/adrenalin) va "Duolingo" (doimiylik/streak) uslubini olib kirish. Hozirgi skrinlaringiz "akademik" va jiddiy ko‘rinishga ega, bu yaxshi, lekin motivatsiya uchun biroz "quruq".
+
+Quyida Skrinlar Tahlili va Kerakli O‘zgarishlar:
+
+🔎 1. UI/UX Tahlili va "Bo‘shliqlar" (Gap Analysis)
+
+Skrin (Oyna)  |  Hozirgi Holat (Current) | Muammo  |  Bizga Kerak (Target Vision)
+Profil Oynasi (ProfileScreen) | Ism, Rol va oddiy XP | Foydalanuvchi "keyingi darajaga qancha | Progress Bar: "Ekspert bo‘lishga 50 XP qoldi". Streak (Olov): "🔥 3 kun ketma-ket".
+                              |matni (masalan: XP: 150). | qoldi?" degan savolga javob topa olmaydi.|
+Viktorina Oynasi (QuizScreen) | Savol, variantlar va     | Bosim yo‘q. Xodim choy ichib, sekin o‘ylashi mumkin. | Taymer (Countdown): Tepada vaqt ketyapti. Tezlik Bonusi: "5 soniyada topdingiz! +5 XP".
+                              | "Keyingi" tugmasi.       | "Siz 80% to‘pladingiz".Hissiyatsiz. "Qoyil!" yoki "Afsus!" degan emotsiya yo‘q.Animatsiya: Konfetti (Confetti) yog‘ilishi yoki xafa bo‘lgan "Emoji".Liderlar Jadvali (Leaderboard)Oddiy ro‘yxat (List).Kim birinchi ekanligi yaqqol ajralib turmaydi.
+Natija Oynasi (QuizResultScreen) | "Siz 80% to‘pladingiz"| Hissiyatsiz. "Qoyil!" yoki "Afsus!" | Animatsiya: Konfetti (Confetti) yog‘ilishi yoki xafa bo‘lgan "Emoji". 
+                                                         | degan emotsiya yo‘q.
+Liderlar Jadvali (Leaderboard) | Oddiy ro‘yxat (List).   | Kim birinchi ekanligi yaqqol ajralib turmaydi. | Podium: 1, 2, 3-o‘rinlar alohida oltin, kumush, bronza rangda.
+
+🛠 2. Ishni nimadan boshlaymiz? (Logic First)
+Chiroyli UI chizishdan oldin, uning "Miya"sini (Logic) to‘g‘rilab olishimiz kerak. Hozir biz GamificationRules va AppUser modellarini yangilaymiz, shunda ular Streak (ketma-ketlik) va Speed Bonus (tezlik)ni tushunadigan bo‘ladi.
+
+Antigravity uchun Topshiriq (Prompt):
+
+Quyidagi kod orqali biz tizimga "Olov" (Streak) va "Tezlik" mantiqini o‘rgatamiz.
+// lib/config/gamification_rules.dart
+
+class GamificationRules {
+  // 1. Asosiy Ballar
+  static const int xpLoginStreak = 5;      // Har kuni kirgani uchun
+  static const int xpQuizBase = 10;        // To'g'ri javob uchun
+  static const int xpArticleRead = 5;      // Maqola o'qigani uchun
+  
+  // 2. Bonuslar (Kahoot Style)
+  static const int xpSpeedBonus = 5;       // 5 soniyada topsa
+  static const int xpPerfectQuiz = 50;     // 100% yechsa
+  
+  // 3. Darajalar (Gatekeeper System)
+  static const int levelSpecialist = 200;
+  static const int levelExpert = 800;      // + 5 ta Quiz shart
+  static const int levelMaster = 2000;     // + 7 kunlik Streak shart
+}
+
+Antigravity uchun Prompt:
+
+# Role: Senior Flutter Developer
+# Task: Upgrade Gamification Logic for "Streak" and "Speed"
+
+# Context:
+We are upgrading the app to support "Kahoot-style" speed bonuses and "Duolingo-style" daily streaks. 
+We need to update the User Model and the Gamification Service.
+
+# Action Plan:
+
+## 1. Update `AppUser` Model (`lib/models/users.dart`)
+Add these fields to track advanced stats:
+- `int currentStreak` (Days logged in consecutively)
+- `DateTime? lastLoginDate`
+- `int totalQuizzesAced` (Perfect scores)
+- `int fastestQuizAnswer` (Best time in seconds)
+
+## 2. Update `GamificationService` (`lib/services/gamification_service.dart`)
+Implement two core logic flows:
+
+**A. Daily Streak Logic (Call this on App Start):**
+- Check `lastLoginDate`. 
+- If `null`: Set streak = 1.
+- If `yesterday`: Increment streak (+1). Award `xpLoginStreak`.
+- If `older than yesterday`: Reset streak to 1.
+- Save new `lastLoginDate`.
+
+**B. Quiz Scoring Logic (Call this after each question):**
+- Function: `int calculateQuestionScore({required bool isCorrect, required int timeTaken})`
+- Logic: 
+  - If `!isCorrect` return 0.
+  - Base XP = `GamificationRules.xpQuizBase`.
+  - If `timeTaken <= 5` (seconds) -> Add `GamificationRules.xpSpeedBonus`.
+- Return total XP.
+
+# Output:
+Provide the full Dart code for the updated `AppUser` model and `GamificationService`.

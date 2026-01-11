@@ -155,6 +155,13 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
       );
     }
 
+    if (_quiz!.questions.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(title: Text(_quiz!.title)),
+        body: Center(child: Text(l10n.noQuestionsAddedYet)),
+      );
+    }
+
     final Question currentQuestion = _quiz!.questions[_currentQuestionIndex];
     final bool isLastQuestion =
         _currentQuestionIndex == _quiz!.questions.length - 1;
@@ -171,7 +178,8 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
                 value: _timerController.value,
                 backgroundColor: Colors.grey.withAlpha(26),
                 valueColor: AlwaysStoppedAnimation<Color>(
-                  Color.lerp(Colors.red, Colors.green, _timerController.value) ?? Colors.green,
+                  Color.lerp(Colors.red, Colors.green, _timerController.value) ??
+                      Colors.green,
                 ),
                 minHeight: 6,
               );
@@ -183,7 +191,7 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                   Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -192,60 +200,69 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
                       ),
                       // --- NEW: Speed Bonus Badge ---
                       if (_timerController.value > 0)
-                         Row(
-                           children: [
-                             const Icon(Icons.bolt, color: Colors.amber, size: 20),
-                             Text(
-                               l10n.speedBonus,
-                               style: TextStyle(
-                                 color: Colors.amber.shade700,
-                                 fontWeight: FontWeight.bold,
-                                 fontSize: 12,
-                               ),
-                             ),
-                           ],
-                         ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.bolt,
+                              color: Colors.amber,
+                              size: 20,
+                            ),
+                            Text(
+                              l10n.speedBonus,
+                              style: TextStyle(
+                                color: Colors.amber.shade700,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
                     ],
                   ),
-            const SizedBox(height: 8),
-            Text(
-              currentQuestion.questionText,
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            const SizedBox(height: 24),
-            RadioGroup<String>(
-              groupValue: _selectedAnswers[_currentQuestionIndex],
-              onChanged: (value) {
-                setState(() {
-                  _selectedAnswers[_currentQuestionIndex] = value!;
-                });
-              },
-              child: Column(
-                children: currentQuestion.options.map((option) {
-                  return RadioListTile<String>(
-                    title: Text(option),
-                    value: option,
-                  );
-                }).toList(),
+                  const SizedBox(height: 16),
+                  Text(
+                    currentQuestion.questionText,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  const SizedBox(height: 24),
+                  RadioGroup<String>(
+                    groupValue: _selectedAnswers[_currentQuestionIndex],
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedAnswers[_currentQuestionIndex] = value!;
+                      });
+                    },
+                    child: Column(
+                      children:
+                          currentQuestion.options.map((option) {
+                            return RadioListTile<String>(
+                              title: Text(option),
+                              value: option,
+                            );
+                          }).toList(),
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+                ],
               ),
             ),
-            const Spacer(),
-            ElevatedButton(
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton(
               onPressed:
                   _selectedAnswers[_currentQuestionIndex] == null
                       ? null
                       : (isLastQuestion ? _submitQuiz : _nextQuestion),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
+                minimumSize: const Size(double.infinity, 50),
               ),
               child: Text(isLastQuestion ? l10n.submitQuiz : l10n.nextQuestion),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    ),
-    ],
-    ),
     );
   }
 }

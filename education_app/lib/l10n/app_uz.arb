@@ -3,6 +3,8 @@
   "@appTitle": {
     "description": "Dasturning sarlavhasi"
   },
+  "openInYoutube": "YouTube orqali ochish",
+  "watchOnYoutube": "YouTube da ko'rish",
   "loginWelcomeTitle": "Xush kelibsiz!",
   "@loginWelcomeTitle": {
     "description": "Kirish ekranidagi sarlavha"

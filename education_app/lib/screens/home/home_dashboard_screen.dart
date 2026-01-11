@@ -391,9 +391,6 @@ class HomeDashboardScreen extends StatelessWidget {
       case UserRole.admin:
         // --- MODIFIED: Pass context to the widget ---
         return _buildAdminDashboard(appUser, l10n, theme, context);
-      default:
-        // --- MODIFIED: Pass context to the widget ---
-        return _buildXodimDashboard(appUser, l10n, theme, context);
     }
   }
 

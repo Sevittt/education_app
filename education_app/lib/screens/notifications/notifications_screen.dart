@@ -48,6 +48,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   icon: const Icon(Icons.done_all),
                   tooltip: AppLocalizations.of(context)!.markAllAsReadTooltip,
                   onPressed: () async {
+                    final l10n = AppLocalizations.of(context)!;
                     final messenger = ScaffoldMessenger.of(context);
                     final result = await _service.markAllAsRead(_userId!);
                     if (!mounted) return;
@@ -55,7 +56,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     if (result['success'] == true) {
                       messenger.showSnackBar(
                         SnackBar(
-                          content: Text(AppLocalizations.of(context)!.allNotificationsReadMessage),
+                          content: Text(l10n.allNotificationsReadMessage),
                         ),
                       );
                     } else {

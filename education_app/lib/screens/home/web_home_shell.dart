@@ -55,7 +55,7 @@ class _WebHomeShellState extends State<WebHomeShell> {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -100,7 +100,7 @@ class _WebHomeShellState extends State<WebHomeShell> {
         color: theme.colorScheme.surface,
         border: Border(
           right: BorderSide(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha: 0.2),
           ),
         ),
       ),

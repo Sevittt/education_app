@@ -12,6 +12,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Court Handbook';
 
   @override
+  String get openInYoutube => 'Open in YouTube';
+
+  @override
+  String get watchOnYoutube => 'Watch on YouTube';
+
+  @override
   String get loginWelcomeTitle => 'Welcome Back!';
 
   @override

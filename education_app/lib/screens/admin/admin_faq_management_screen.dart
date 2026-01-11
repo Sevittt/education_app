@@ -117,7 +117,6 @@ class _AdminFAQManagementScreenState extends State<AdminFAQManagementScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
         onPressed: () {
           Navigator.push(
             context,
@@ -127,6 +126,7 @@ class _AdminFAQManagementScreenState extends State<AdminFAQManagementScreen> {
           );
         },
         tooltip: l10n.add,
+        child: const Icon(Icons.add),
       ),
     );
   }

@@ -12,6 +12,12 @@ class AppLocalizationsUz extends AppLocalizations {
   String get appTitle => 'Sud Qo\'llanmasi';
 
   @override
+  String get openInYoutube => 'YouTube orqali ochish';
+
+  @override
+  String get watchOnYoutube => 'YouTube da ko\'rish';
+
+  @override
   String get loginWelcomeTitle => 'Xush kelibsiz!';
 
   @override

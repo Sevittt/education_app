@@ -152,7 +152,7 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<QuestionType>(
-              initialValue: _selectedQuestionType,
+              value: _selectedQuestionType,
               items:
                   QuestionType.values
                       .map(

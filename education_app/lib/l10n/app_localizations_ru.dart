@@ -12,6 +12,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get appTitle => 'Справочник Судьи';
 
   @override
+  String get openInYoutube => 'Открыть в YouTube';
+
+  @override
+  String get watchOnYoutube => 'Смотреть в YouTube';
+
+  @override
   String get loginWelcomeTitle => 'Добро пожаловать!';
 
   @override

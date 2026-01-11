@@ -8,6 +8,8 @@ import '../../services/xapi_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../l10n/app_localizations.dart';
 import '../../config/gamification_rules.dart';
+import 'package:flutter/foundation.dart'; // For kIsWeb
+import 'package:url_launcher/url_launcher.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
   final VideoTutorial video;
@@ -94,6 +96,15 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     super.dispose();
   }
 
+  Future<void> _launchYoutubeVideo(String videoId) async {
+    final url = Uri.parse('https://www.youtube.com/watch?v=$videoId');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      debugPrint('Could not launch $url');
+    }
+  }
+
   Future<void> _handleLike() async {
     if (_hasLiked) {
       await _service.decrementLikes(widget.video.id);
@@ -113,6 +124,46 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    if (kIsWeb) {
+      // Fallback for Web: Show thumbnail and button to open in new tab
+      return Scaffold(
+        appBar: AppBar(title: Text(widget.video.title)),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Display Thumbnail
+              if (widget.video.thumbnailUrl.isNotEmpty)
+                Container(
+                  width: 320,
+                  height: 180,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    image: DecorationImage(
+                      image: NetworkImage(widget.video.thumbnailUrl),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              const SizedBox(height: 24),
+              Text(
+                l10n.openInYoutube,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton.icon(
+                onPressed: () {
+                   _launchYoutubeVideo(widget.video.youtubeId);
+                },
+                icon: const Icon(Icons.open_in_new),
+                label: Text(l10n.watchOnYoutube),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+    
     return YoutubePlayerBuilder(
       player: YoutubePlayer(
         controller: _controller,

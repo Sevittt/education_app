@@ -103,6 +103,18 @@ abstract class AppLocalizations {
   /// **'Court Handbook'**
   String get appTitle;
 
+  /// No description provided for @openInYoutube.
+  ///
+  /// In en, this message translates to:
+  /// **'Open in YouTube'**
+  String get openInYoutube;
+
+  /// No description provided for @watchOnYoutube.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch on YouTube'**
+  String get watchOnYoutube;
+
   /// Title on the login screen
   ///
   /// In en, this message translates to:

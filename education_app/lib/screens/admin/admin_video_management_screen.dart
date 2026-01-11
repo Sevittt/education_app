@@ -120,7 +120,6 @@ class _AdminVideoManagementScreenState extends State<AdminVideoManagementScreen>
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
         onPressed: () {
           Navigator.push(
             context,
@@ -130,6 +129,7 @@ class _AdminVideoManagementScreenState extends State<AdminVideoManagementScreen>
           );
         },
         tooltip: l10n.add,
+        child: const Icon(Icons.add),
       ),
     );
   }

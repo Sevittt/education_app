@@ -3,6 +3,8 @@
   "@appTitle": {
     "description": "The title of the application"
   },
+  "openInYoutube": "Open in YouTube",
+  "watchOnYoutube": "Watch on YouTube",
   "loginWelcomeTitle": "Welcome Back!",
   "@loginWelcomeTitle": {
     "description": "Title on the login screen"

@@ -3,6 +3,8 @@
   "@appTitle": {
     "description": "Название приложения"
   },
+  "openInYoutube": "Открыть в YouTube",
+  "watchOnYoutube": "Смотреть в YouTube",
   "loginWelcomeTitle": "Добро пожаловать!",
   "@loginWelcomeTitle": {
     "description": "Заголовок экрана входа"

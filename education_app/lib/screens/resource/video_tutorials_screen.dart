@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/video_tutorial.dart';
 import '../../services/video_tutorial_service.dart';
+import '../../widgets/custom_network_image.dart';
 import 'video_player_screen.dart';
 
 class VideoTutorialsScreen extends StatefulWidget {
@@ -127,39 +128,57 @@ class _VideoTutorialsScreenState extends State<VideoTutorialsScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Thumbnail placeholder (in a real app, use Image.network with video.thumbnailUrl)
-            Container(
-              height: 180,
-              decoration: BoxDecoration(
-                color: Colors.black87,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-                image: video.thumbnailUrl.isNotEmpty
-                    ? DecorationImage(
-                        image: NetworkImage(video.thumbnailUrl),
-                        fit: BoxFit.cover,
-                      )
-                    : null,
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  if (video.thumbnailUrl.isEmpty)
-                    const Icon(Icons.play_circle_outline, size: 64, color: Colors.white),
-                  Positioned(
-                    bottom: 8,
-                    right: 8,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withAlpha(179),
-                        borderRadius: BorderRadius.circular(4),
+            // Thumbnail using CustomNetworkImage for caching
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              child: SizedBox(
+                height: 180,
+                width: double.infinity,
+                child: Stack(
+                  alignment: Alignment.center,
+                  fit: StackFit.expand,
+                  children: [
+                    CustomNetworkImage(
+                      imageUrl: video.thumbnailUrl,
+                      fit: BoxFit.cover,
+                      placeholder: Container(
+                        color: Colors.black87,
+                        child: const Center(
+                          child: CircularProgressIndicator(color: Colors.white),
+                        ),
                       ),
-                      child: Text(
-                        video.formattedDuration,
-                        style: const TextStyle(color: Colors.white, fontSize: 12),
+                      errorWidget: Container(
+                        color: Colors.black87,
+                        child: const Icon(Icons.play_circle_outline, size: 64, color: Colors.white),
                       ),
                     ),
-                  ),
-                ],
+                    // Play Icon Overlay (always visible slightly for affordance)
+                    if (video.thumbnailUrl.isNotEmpty)
+                      Container(
+                        color: Colors.black.withValues(alpha: 0.2), // Slight darken
+                        child: const Center(
+                          child: Icon(Icons.play_circle_fill, size: 48, color: Colors.white70),
+                        ),
+                      ),
+                    
+                    // Duration Badge
+                    Positioned(
+                      bottom: 8,
+                      right: 8,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withValues(alpha: 0.7),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          video.formattedDuration,
+                          style: const TextStyle(color: Colors.white, fontSize: 12),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Padding(
