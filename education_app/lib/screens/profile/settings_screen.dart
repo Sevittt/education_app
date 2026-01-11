@@ -4,14 +4,14 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
-import '../placeholder_screen.dart'; // Import the placeholder screen
-import 'language_selection_screen.dart'; // Import the new LanguageSelectionScreen
-import '../admin/admin_panel_screen.dart'; // Import AdminPanelScreen
-import 'package:provider/provider.dart'; // Import Provider
-import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart'; // Import AuthNotifier
-import '../../models/users.dart'; // Import UserRole
-import '../../models/locale_notifier.dart'; // Import LocaleNotifier
-// Import AppLocalizations to use translated strings
+import '../placeholder_screen.dart';
+import '../admin/admin_panel_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
+import '../../models/users.dart';
+import 'package:sud_qollanma/core/providers/locale_provider.dart';
+import 'package:sud_qollanma/features/profile/presentation/screens/language_screen.dart';
+
 
 import 'package:url_launcher/url_launcher.dart'; // Import url_launcher
 
@@ -195,8 +195,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     // Get AppLocalizations instance
     final AppLocalizations? l10n = AppLocalizations.of(context);
-    final localeNotifier = Provider.of<LocaleNotifier>(context);
-    final currentLanguage = _getLanguageName(localeNotifier.appLocale?.languageCode ?? 'en');
+    final localeProvider = Provider.of<LocaleProvider>(context);
+    final currentLanguage = _getLanguageName(localeProvider.appLocale?.languageCode ?? 'en');
 
     return Scaffold(
       appBar: AppBar(
@@ -243,13 +243,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           _buildSettingsItem(
             context: context,
             icon: Icons.language,
-            title: l10n?.language ?? 'Language',
+            title: l10n?.settingsLanguage ?? 'Language',
             subtitle: currentLanguage,
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const LanguageSelectionScreen(),
+                  builder: (context) => const LanguageScreen(),
                 ),
               );
             },
@@ -273,21 +273,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),
 
-          _buildSettingsItem(
-            context: context,
-            icon: Icons.translate_outlined,
-            title: l10n?.settingsLanguage ?? 'Language',
-            subtitle: _getLanguageName(l10n?.localeName ?? 'en'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LanguageSelectionScreen(),
-                ),
-              );
-            },
-          ),
-          const Divider(height: 1, indent: 16, endIndent: 16),
+
 
           _buildSettingsItem(
             context: context,

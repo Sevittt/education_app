@@ -12,6 +12,7 @@ import '../../l10n/app_localizations.dart';
 import 'package:sud_qollanma/features/library/domain/entities/article_entity.dart';
 import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
 
+class ArticleDetailScreen extends StatefulWidget {
   const ArticleDetailScreen({
     super.key,
     required this.articleEntity,

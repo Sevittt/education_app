@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
-import '../../models/locale_notifier.dart';
+import 'package:sud_qollanma/core/providers/locale_provider.dart';
 
-class LanguageSelectionScreen extends StatelessWidget {
-  const LanguageSelectionScreen({super.key});
+class LanguageScreen extends StatelessWidget {
+  const LanguageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final AppLocalizations? l10n = AppLocalizations.of(context);
-    final localeNotifier = context.watch<LocaleNotifier>();
-    final currentLocale = localeNotifier.appLocale;
+    final localeProvider = context.watch<LocaleProvider>();
+    final currentLocale = localeProvider.appLocale;
 
     return Scaffold(
       appBar: AppBar(
@@ -44,7 +44,7 @@ class LanguageSelectionScreen extends StatelessWidget {
                 icon: Icons.settings_system_daydream,
                 isSelected: currentLocale == null,
                 onTap: () {
-                  localeNotifier.clearLocale();
+                  localeProvider.clearLocale();
                   _showConfirmation(context, "System default language selected");
                 },
               ),
@@ -58,7 +58,7 @@ class LanguageSelectionScreen extends StatelessWidget {
                 flag: "🇺🇸",
                 isSelected: currentLocale?.languageCode == 'en',
                 onTap: () {
-                  localeNotifier.setLocale(const Locale('en'));
+                  localeProvider.setLocale(const Locale('en'));
                   _showConfirmation(context, "English selected");
                 },
               ),
@@ -70,7 +70,7 @@ class LanguageSelectionScreen extends StatelessWidget {
                 flag: "🇺🇿",
                 isSelected: currentLocale?.languageCode == 'uz',
                 onTap: () {
-                  localeNotifier.setLocale(const Locale('uz'));
+                  localeProvider.setLocale(const Locale('uz'));
                   _showConfirmation(context, "O'zbek tili tanlandi");
                 },
               ),
@@ -82,7 +82,7 @@ class LanguageSelectionScreen extends StatelessWidget {
                 flag: "🇷🇺",
                 isSelected: currentLocale?.languageCode == 'ru',
                 onTap: () {
-                  localeNotifier.setLocale(const Locale('ru'));
+                  localeProvider.setLocale(const Locale('ru'));
                   _showConfirmation(context, "Русский язык выбран");
                 },
               ),
@@ -219,5 +219,3 @@ class LanguageSelectionScreen extends StatelessWidget {
     );
   }
 }
-
-

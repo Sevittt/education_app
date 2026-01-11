@@ -38,7 +38,7 @@ import 'package:sud_qollanma/services/notification_service.dart';
 
 // Legacy Notifiers (To be moved to core/ in future phases)
 import 'package:sud_qollanma/models/theme_notifier.dart';
-import 'package:sud_qollanma/models/locale_notifier.dart';
+import 'package:sud_qollanma/core/providers/locale_provider.dart';
 
 // Legacy Screens for Routes (To be migrated to features/ in future phases)
 import 'package:sud_qollanma/screens/knowledge_base/knowledge_base_screen.dart';
@@ -67,7 +67,7 @@ void main() async {
       providers: [
         // --- Core Notifiers ---
         ChangeNotifierProvider(create: (_) => ThemeNotifier()),
-        ChangeNotifierProvider(create: (_) => LocaleNotifier()),
+        ChangeNotifierProvider(create: (_) => LocaleProvider()),
 
         // --- Feature: Auth ---
         Provider<ProfileService>(create: (_) => ProfileService()),
@@ -104,7 +104,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeNotifier = context.watch<ThemeNotifier>();
-    final localeNotifier = context.watch<LocaleNotifier>();
+    final localeProvider = context.watch<LocaleProvider>();
 
     return MaterialApp(
       onGenerateTitle: (BuildContext context) {
@@ -113,7 +113,7 @@ class MyApp extends StatelessWidget {
       themeMode: themeNotifier.themeMode,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      locale: localeNotifier.appLocale,
+      locale: localeProvider.appLocale,
       supportedLocales: const [
         Locale('en', ''),
         Locale('uz', ''),

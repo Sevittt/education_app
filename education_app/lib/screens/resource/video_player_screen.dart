@@ -125,11 +125,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   Future<void> _handleLike() async {
     if (_hasLiked) {
-      if (widget.videoEntity != null) {
-        await context.read<LibraryProvider>().decrementVideoLikes(_videoId);
-      } else {
-        if (mounted) await context.read<LibraryProvider>().decrementVideoLikes(_videoId);
-      }
+      await context.read<LibraryProvider>().decrementVideoLikes(_videoId);
       setState(() {
         _hasLiked = false;
         _currentLikes--;
