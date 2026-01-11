@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
-import '../../../models/auth_notifier.dart';
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
 import 'registration_screen.dart'; // We'll create this next
 // Import AppLocalizations to use translated strings
 // import 'package:sud_qollanma/l10n/app_localizations.dart';

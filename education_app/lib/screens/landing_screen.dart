@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
-import 'auth/login_screen.dart';
-import 'auth/registration_screen.dart';
+import 'package:sud_qollanma/features/auth/presentation/screens/login_screen.dart'; // Fixed path
+import 'package:sud_qollanma/features/auth/presentation/screens/registration_screen.dart'; // Fixed path
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});

@@ -1,11 +1,4 @@
 // lib/home_page.dart
-
-// lib/screens/home/home_page.dart
-// import 'package:education_app/l10n/app_localizations.dart'; // O'ZGARISH: Lokalizatsiyani import qilish
-// import 'package:education_app/screens/community/community_screen.dart';
-// import 'package:education_app/screens/home/home_dashboard_screen.dart';
-// import 'package:education_app/screens/profile/profile_screen.dart';
-// import 'package:education_app/screens/resource/resources_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -16,7 +9,7 @@ import 'package:sud_qollanma/screens/profile/profile_screen.dart';
 
 import 'package:sud_qollanma/screens/resource/resources_screen.dart';
 
-import '../../models/auth_notifier.dart';
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
 import '../../models/users.dart'; // Import UserRole
 import '../resource/create_resource_screen.dart';
 import '../community/create_topic_screen.dart';
@@ -24,7 +17,7 @@ import '../resource/quiz/create_quiz_screen.dart'; // Make sure this import is p
 import '../notifications/notifications_screen.dart';
 import '../../services/notification_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../widgets/responsive_layout.dart';
+import '../../shared/layouts/responsive_layout.dart';
 import 'web_home_shell.dart';
 
 class HomePage extends StatefulWidget {

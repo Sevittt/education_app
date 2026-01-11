@@ -7,7 +7,7 @@ import 'package:sud_qollanma/l10n/app_localizations.dart';
 
 import '../../models/discussion_topic.dart';
 import '../../models/comment.dart';
-import '../../models/auth_notifier.dart'; // For current user details
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart'; // For current user details
 import '../../services/community_service.dart'; // To interact with Firebase
 
 // Removed uuid import as Firestore generates IDs for new documents

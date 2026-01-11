@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../models/knowledge_article.dart';
-import '../../services/knowledge_base_service.dart';
-import 'article_detail_screen.dart';
 import 'package:intl/intl.dart';
-import '../../l10n/app_localizations.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
+import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
+import 'package:sud_qollanma/features/library/domain/entities/article_entity.dart';
+// Legacy import for ArticleDetailScreen (still uses old model, to be refactored later)
+import 'package:sud_qollanma/models/knowledge_article.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // For Timestamp
+import 'article_detail_screen.dart';
 
+/// Refactored Knowledge Base Screen using LibraryProvider.
 class KnowledgeBaseScreen extends StatefulWidget {
   const KnowledgeBaseScreen({super.key});
 
@@ -14,18 +18,46 @@ class KnowledgeBaseScreen extends StatefulWidget {
 }
 
 class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
-  final KnowledgeBaseService _service = KnowledgeBaseService();
   final TextEditingController _searchController = TextEditingController();
+  final List<String> _categories = ['all', 'beginner', 'akt', 'system', 'auth', 'general'];
   
-  ArticleCategory? _selectedCategory;
+  String? _selectedCategory;
   String _searchQuery = '';
   bool _isSearching = false;
-  List<KnowledgeArticle> _searchResults = [];
+  List<ArticleEntity> _searchResults = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // Fetch articles on init
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<LibraryProvider>().watchArticles();
+    });
+  }
 
   @override
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+
+  String _getCategoryDisplayName(String category, AppLocalizations l10n) {
+    switch (category) {
+      case 'all':
+        return l10n.allCategories;
+      case 'beginner':
+        return l10n.catNewEmployees;
+      case 'akt':
+        return l10n.catIctSpecialists;
+      case 'system':
+        return l10n.catSystems;
+      case 'auth':
+        return l10n.catAuth;
+      case 'general':
+        return l10n.catGeneral;
+      default:
+        return category;
+    }
   }
 
   void _onSearch(String query) async {
@@ -35,17 +67,16 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
     });
 
     if (_isSearching) {
-      final results = await _service.searchArticles(query);
+      final results = await context.read<LibraryProvider>().searchArticles(query);
       setState(() {
         _searchResults = results;
       });
     }
   }
 
-  void _onCategorySelected(ArticleCategory? category) {
+  void _onCategorySelected(String? category) {
     setState(() {
       _selectedCategory = category;
-      // Clear search when changing category to avoid confusion
       if (_isSearching) {
         _searchController.clear();
         _searchQuery = '';
@@ -64,18 +95,17 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
       ),
       body: Column(
         children: [
-          _buildSearchBar(),
-          _buildCategoryFilter(),
+          _buildSearchBar(l10n),
+          _buildCategoryFilter(l10n),
           Expanded(
-            child: _isSearching ? _buildSearchResults() : _buildArticleList(),
+            child: _isSearching ? _buildSearchResults(l10n) : _buildArticleList(l10n),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildSearchBar() {
-    final l10n = AppLocalizations.of(context)!;
+  Widget _buildSearchBar(AppLocalizations l10n) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextField(
@@ -103,24 +133,23 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
     );
   }
 
-  Widget _buildCategoryFilter() {
-    final l10n = AppLocalizations.of(context)!;
+  Widget _buildCategoryFilter(AppLocalizations l10n) {
     return SizedBox(
       height: 50,
       child: ListView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        children: [
-          _buildCategoryChip(null, l10n.allCategories),
-          ...ArticleCategory.values.map((category) {
-            return _buildCategoryChip(category, category.getDisplayName(l10n));
-          }),
-        ],
+        children: _categories.map((category) {
+          return _buildCategoryChip(
+            category == 'all' ? null : category,
+            _getCategoryDisplayName(category, l10n),
+          );
+        }).toList(),
       ),
     );
   }
 
-  Widget _buildCategoryChip(ArticleCategory? category, String label) {
+  Widget _buildCategoryChip(String? category, String label) {
     final isSelected = _selectedCategory == category;
     return Padding(
       padding: const EdgeInsets.only(right: 8),
@@ -146,9 +175,8 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
     );
   }
 
-  Widget _buildSearchResults() {
+  Widget _buildSearchResults(AppLocalizations l10n) {
     if (_searchResults.isEmpty) {
-      final l10n = AppLocalizations.of(context)!;
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -168,34 +196,28 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
       padding: const EdgeInsets.all(16),
       itemCount: _searchResults.length,
       itemBuilder: (context, index) {
-        return _buildArticleCard(_searchResults[index]);
+        return _buildArticleCard(_searchResults[index], l10n);
       },
     );
   }
 
-  Widget _buildArticleList() {
-    Stream<List<KnowledgeArticle>> stream;
-    if (_selectedCategory != null) {
-      stream = _service.getArticlesByCategory(_selectedCategory!);
-    } else {
-      stream = _service.getAllArticles();
-    }
-
-    return StreamBuilder<List<KnowledgeArticle>>(
-      stream: stream,
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Center(child: Text('Xatolik yuz berdi: ${snapshot.error}'));
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
+  Widget _buildArticleList(AppLocalizations l10n) {
+    return Consumer<LibraryProvider>(
+      builder: (context, provider, child) {
+        if (provider.isLoading && provider.articles.isEmpty) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        final articles = snapshot.data ?? [];
+        if (provider.error != null && provider.articles.isEmpty) {
+          return Center(child: Text('Xatolik yuz berdi: ${provider.error}'));
+        }
+
+        final allArticles = provider.articles;
+        final articles = _selectedCategory == null
+            ? allArticles
+            : allArticles.where((a) => a.category == _selectedCategory).toList();
 
         if (articles.isEmpty) {
-          final l10n = AppLocalizations.of(context)!;
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -215,24 +237,48 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
           padding: const EdgeInsets.all(16),
           itemCount: articles.length,
           itemBuilder: (context, index) {
-            return _buildArticleCard(articles[index]);
+            return _buildArticleCard(articles[index], l10n);
           },
         );
       },
     );
   }
 
-  Widget _buildArticleCard(KnowledgeArticle article) {
+  Widget _buildArticleCard(ArticleEntity article, AppLocalizations l10n) {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         onTap: () {
+          // Increment views
+          context.read<LibraryProvider>().incrementArticleViews(article.id);
+          // Navigate to detail screen (using legacy model for now)
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ArticleDetailScreen(article: article),
+              builder: (context) => ArticleDetailScreen(
+                article: KnowledgeArticle(
+                  id: article.id,
+                  title: article.title,
+                  description: article.description,
+                  content: article.content,
+                  pdfUrl: article.pdfUrl,
+                  category: ArticleCategory.values.firstWhere(
+                    (e) => e.name == article.category,
+                    orElse: () => ArticleCategory.general,
+                  ),
+                  systemId: article.systemId,
+                  tags: article.tags,
+                  authorId: article.authorId,
+                  authorName: article.authorName,
+                  views: article.views,
+                  helpful: article.helpful,
+                  createdAt: Timestamp.fromDate(article.createdAt),
+                  updatedAt: Timestamp.fromDate(article.updatedAt),
+                  isPinned: article.isPinned,
+                ),
+              ),
             ),
           );
         },
@@ -251,7 +297,7 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      article.category.getDisplayName(AppLocalizations.of(context)!),
+                      _getCategoryDisplayName(article.category, l10n),
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 12,
@@ -267,10 +313,7 @@ class _KnowledgeBaseScreenState extends State<KnowledgeBaseScreen> {
               const SizedBox(height: 12),
               Text(
                 article.title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),

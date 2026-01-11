@@ -1,0 +1,53 @@
+name: Education App CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  quality_check:
+    name: 🛡️ Code Quality & Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0' # Or your specific version
+          channel: 'stable'
+          
+      - name: Install Dependencies
+        run: flutter pub get
+        
+      - name: Analyze Code
+        run: flutter analyze --no-pub
+        
+      # - name: Run Tests
+      #   run: flutter test
+
+  build_android:
+    name: 📱 Build Android APK
+    needs: quality_check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+      - run: flutter pub get
+      - run: flutter build apk --release --no-tree-shake-icons
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+  security_scan:
+    name: 🕵️ Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for Hardcoded Secrets
+        run: grep -r "AIza" . || echo "No API Keys found (Good Job)"

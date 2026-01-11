@@ -8,7 +8,7 @@ import '../placeholder_screen.dart'; // Import the placeholder screen
 import 'language_selection_screen.dart'; // Import the new LanguageSelectionScreen
 import '../admin/admin_panel_screen.dart'; // Import AdminPanelScreen
 import 'package:provider/provider.dart'; // Import Provider
-import '../../models/auth_notifier.dart'; // Import AuthNotifier
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart'; // Import AuthNotifier
 import '../../models/users.dart'; // Import UserRole
 // Import AppLocalizations to use translated strings
 

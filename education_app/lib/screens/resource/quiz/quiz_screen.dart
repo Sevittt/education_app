@@ -7,7 +7,7 @@ import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../../models/quiz.dart';
 import '../../../models/question.dart';
 import '../../../models/quiz_attempt.dart';
-import '../../../models/auth_notifier.dart';
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
 import '../../../services/quiz_service.dart';
 import 'quiz_results_screen.dart';
 

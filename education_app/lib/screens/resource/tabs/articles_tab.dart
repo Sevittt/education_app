@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../widgets/responsive_layout.dart';
+import '../../../../shared/layouts/responsive_layout.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../../models/knowledge_article.dart';
 import '../../../services/knowledge_base_service.dart';
