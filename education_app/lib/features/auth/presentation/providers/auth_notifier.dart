@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/foundation.dart';
 import 'dart:async'; // Added for StreamSubscription
-import '../services/auth_service.dart';
-import '../services/profile_service.dart';
-import 'users.dart'; // Bizning Custom User modelimiz
+import 'package:sud_qollanma/features/auth/data/datasources/auth_service.dart';
+import 'package:sud_qollanma/services/profile_service.dart'; // Fixed path
+import 'package:sud_qollanma/models/users.dart'; // Fixed path - Bizning Custom User modelimiz
 
 class AuthNotifier with ChangeNotifier {
   final AuthService _authService;

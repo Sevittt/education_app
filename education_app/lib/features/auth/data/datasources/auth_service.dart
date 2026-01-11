@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart'; // For kDebugMode and kIsWeb
 import 'package:google_sign_in/google_sign_in.dart';
 // --- NEW IMPORTS ---
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../models/users.dart' as app_user_model;
-import 'profile_service.dart';
-import 'gamification_service.dart';
+import '../../../../models/users.dart' as app_user_model;
+import '../../../../services/profile_service.dart';
+import '../../../../services/gamification_service.dart';
 // --- END NEW IMPORTS ---
 
 class AuthService {

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/resource.dart';
-import '../../models/auth_notifier.dart';
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
 import '../../services/resource_service.dart';
 
 class CreateResourceScreen extends StatefulWidget {

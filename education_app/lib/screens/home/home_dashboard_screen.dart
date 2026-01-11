@@ -10,7 +10,7 @@ import '../../services/resource_service.dart';
 import '../../services/profile_service.dart'; // --- ADDED for Admin Panel ---
 import '../admin/admin_panel_screen.dart'; // --- ADDED for Admin Panel link ---
 import '../quiz/quiz_list_screen.dart'; // --- ADDED for Quiz List Screen ---
-import '../../models/auth_notifier.dart';
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
 import '../../models/users.dart';
 import '../../models/news.dart';
 import '../../services/news_service.dart';

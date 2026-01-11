@@ -8,7 +8,7 @@ import 'package:sud_qollanma/l10n/app_localizations.dart';
 
 import '../../models/news.dart';
 import '../../services/news_service.dart';
-// import '../../models/auth_notifier.dart'; // Only if you plan to log who edited/created
+// import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart'; // Only if you plan to log who edited/created
 
 class AdminAddEditNewsScreen extends StatefulWidget {
   final News? newsItemToEdit;

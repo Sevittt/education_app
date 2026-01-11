@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../widgets/responsive_layout.dart';
+import '../../../../shared/layouts/responsive_layout.dart';
 import 'package:intl/intl.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../../models/video_tutorial.dart';

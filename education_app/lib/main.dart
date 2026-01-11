@@ -35,8 +35,10 @@ import 'firebase_options.dart'; // THIS IMPORT IS CRUCIAL
 import 'screens/splash_screen.dart'; // Your splash screen
 import 'models/theme_notifier.dart';
 import 'models/locale_notifier.dart';
-import 'models/auth_notifier.dart'; // Import AuthNotifier
-import 'services/auth_service.dart'; // Import AuthService
+import 'features/auth/presentation/providers/auth_notifier.dart'; // Import AuthNotifier
+import 'features/auth/data/datasources/auth_service.dart'; // Import AuthService
+import 'package:sud_qollanma/core/theme/app_theme.dart'; // Import AppTheme
+import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart'; // NEW: LibraryProvider
 
 void main() async {
   // Ensure Flutter bindings are initialized before Firebase
@@ -91,6 +93,8 @@ void main() async {
         Provider<SystemsService>(create: (_) => SystemsService()),
         Provider<FAQService>(create: (_) => FAQService()),
         Provider<NotificationService>(create: (_) => NotificationService()),
+        // NEW: Library Feature Provider
+        ChangeNotifierProvider<LibraryProvider>(create: (_) => LibraryProvider()),
       ],
       child: const MyApp(),
     ),
@@ -105,15 +109,7 @@ class MyApp extends StatelessWidget {
     final themeNotifier = context.watch<ThemeNotifier>();
     final localeNotifier = context.watch<LocaleNotifier>();
 
-    // Theme data (assuming your M3 theme setup is here or imported)
-    final ColorScheme lightColorScheme = ColorScheme.fromSeed(
-      seedColor: Colors.indigo, // O'ZGARISH: Rasmiyroq rang uchun Colors.indigo
-      brightness: Brightness.light,
-    );
-    final ColorScheme darkColorScheme = ColorScheme.fromSeed(
-      seedColor: Colors.indigo, // O'ZGARISH: Rasmiyroq rang uchun Colors.indigo
-      brightness: Brightness.dark,
-    );
+    // ... imports ...
 
     return MaterialApp(
       onGenerateTitle: (BuildContext context) {
@@ -121,66 +117,8 @@ class MyApp extends StatelessWidget {
         return AppLocalizations.of(context)?.appTitle ?? 'Sud Qo\'llanmasi';
       },
       themeMode: themeNotifier.themeMode,
-      theme: ThemeData(
-        colorScheme: lightColorScheme,
-        useMaterial3: true,
-        scaffoldBackgroundColor: lightColorScheme.surface,
-        appBarTheme: AppBarTheme(
-          backgroundColor: lightColorScheme.primary,
-          foregroundColor: lightColorScheme.onPrimary,
-          elevation: 2.0,
-        ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: lightColorScheme.surface,
-          selectedItemColor: lightColorScheme.primary,
-          unselectedItemColor: lightColorScheme.onSurface.withValues(alpha: 0.7),
-          selectedLabelStyle: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 12,
-          ),
-          unselectedLabelStyle: const TextStyle(fontSize: 12),
-          type: BottomNavigationBarType.fixed,
-          elevation: 5.0,
-        ),
-        cardTheme: CardThemeData(
-          elevation: 1.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-          ),
-          margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-        ),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      darkTheme: ThemeData(
-        colorScheme: darkColorScheme,
-        useMaterial3: true,
-        scaffoldBackgroundColor: darkColorScheme.surface,
-        appBarTheme: AppBarTheme(
-          backgroundColor: darkColorScheme.surface,
-          foregroundColor: darkColorScheme.onSurface,
-          elevation: 2.0,
-        ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: darkColorScheme.surface,
-          selectedItemColor: darkColorScheme.primary,
-          unselectedItemColor: darkColorScheme.onSurface.withValues(alpha: 0.7),
-          selectedLabelStyle: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 12,
-          ),
-          unselectedLabelStyle: const TextStyle(fontSize: 12),
-          type: BottomNavigationBarType.fixed,
-          elevation: 5.0,
-        ),
-        cardTheme: CardThemeData(
-          elevation: 2.0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-          ),
-          margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-        ),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
       locale: localeNotifier.appLocale,
       supportedLocales: const [
         Locale('en', ''),

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart'; // For date formatting
 
-import '../../models/auth_notifier.dart';
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
 import '../../models/quiz_attempt.dart';
 import '../../models/users.dart'; // O'ZGARISH: users.dart import qilinganiga ishonch hosil qiling
 import '../../services/quiz_service.dart';

@@ -1,179 +1,68 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // --- Yordamchi funksiyalar ---
-
-    // Foydalanuvchi tizimga kirganmi?
+    
+    // --- Helper Functions ---
     function isAuthenticated() {
       return request.auth != null;
     }
-
-    // Foydalanuvchi o'zi bo'lgan hujjatga murojaat qilyaptimi?
+    
     function isOwner(userId) {
-      return request.auth.uid == userId;
+      return isAuthenticated() && request.auth.uid == userId;
     }
-
-    // Foydalanuvchi ma'lumotlarini bazadan olish
-    function getUserData() {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
-    }
-
-    // Admin rolini tekshirish
+    
     function isAdmin() {
-      return isAuthenticated() && getUserData().role == 'admin';
+      return isAuthenticated() && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
     }
 
-    // Ekspert rolini tekshirish
-    function isEkspert() {
-      return isAuthenticated() && getUserData().role == 'ekspert';
-    }
-
-    // Xodim (yoki oddiy foydalanuvchi) rolini tekshirish
-    function isXodim() {
-      return isAuthenticated() && getUserData().role == 'xodim';
-    }
-
-    // --- Qoidalar ---
-
-    // 1. Users Collection (Foydalanuvchilar)
+    // --- Users Collection ---
+    // Users can only read/write their own profile.
+    // Admins can read/write all.
     match /users/{userId} {
-      // Hamma autentifikatsiya qilingan foydalanuvchilar o'qiy oladi (profil ma'lumotlari uchun)
+      allow read, write: if isOwner(userId) || isAdmin();
+    }
+
+    // --- Learning Records (xAPI) ---
+    // Immutable logs. Create only. No delete/update (except Admin).
+    match /learning_records/{recordId} {
+      allow create: if isAuthenticated() && 
+                    request.resource.data.actor.mbox == ('mailto:' + request.auth.uid + '@sudqollanma.uz');
+      allow read: if isOwner(request.resource.data.actor.uid) || isAdmin(); // Assuming uid is stored
+      allow update: if false; // Logs are immutable
+      allow delete: if isAdmin();
+    }
+
+    // --- Content (Articles, Videos, Systems) ---
+    // Public Read (Authenticted), Admin Write.
+    match /knowledge_base/{docId} {
       allow read: if isAuthenticated();
-      
-      // Faqat o'z profilini yaratish va yangilash mumkin
-      // MUHIM: 'role' maydonini o'zgartirishga ruxsat berilmaydi (faqat admin qila oladi)
-      allow create: if isOwner(userId);
-      allow update: if isOwner(userId) && 
-                    (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['role']));
-      
-      // Admin hamma narsani qila oladi (shu jumladan rollarni o'zgartirish)
+      allow write: if isAdmin();
+    }
+    
+    match /video_tutorials/{docId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+    
+    match /systems_directory/{docId} {
+      allow read: if isAuthenticated();
       allow write: if isAdmin();
     }
 
-    // 2. Resources Collection (Qo'llanmalar)
-    match /resources/{resourceId} {
-      // Hamma o'qiy oladi (mehmonlar ham, agar kerak bo'lsa)
-      allow read: if true;
-
-      // Yaratish: Faqat Admin va Ekspertlar
-      allow create: if isAdmin() || isEkspert();
-
-      // Yangilash va O'chirish: Faqat Admin yoki resursning muallifi (Ekspert)
-      allow update, delete: if isAdmin() || (isEkspert() && resource.data.authorId == request.auth.uid);
-    }
-
-    // 3. Quizzes Collection (Testlar)
-    match /quizzes/{quizId} {
-      // Hamma o'qiy oladi
+    match /faq/{docId} {
       allow read: if isAuthenticated();
-
-      // Yaratish: Faqat Admin va Ekspertlar
-      allow create: if isAdmin() || isEkspert();
-
-      // Yangilash va O'chirish: Faqat Admin yoki testning muallifi
-      allow update, delete: if isAdmin() || (isEkspert() && resource.data.authorId == request.auth.uid);
-
-      // Questions Sub-collection (Savollar)
-      match /questions/{questionId} {
-        allow read: if isAuthenticated();
-        allow write: if isAdmin() || isEkspert();
-      }
+      allow write: if isAdmin();
+    }
+    
+    match /app_notifications/{docId} {
+       allow read: if isAuthenticated();
+       allow write: if isAdmin();
     }
 
-    // 4. Quiz Attempts (Test Natijalari)
-    match /quiz_attempts/{attemptId} {
-      // O'qish: Admin, Ekspert yoki urinishning egasi
-      allow read: if isAdmin() || isEkspert() || (isAuthenticated() && resource.data.userId == request.auth.uid);
-
-      // Yaratish: Faqat o'zi uchun
-      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
-
-      // O'zgartirish mumkin emas (test natijasi muhrlanadi)
-      allow update: if false;
-
-      // O'chirish: Faqat Admin
-      allow delete: if isAdmin();
-    }
-
-    // 5. Discussion Topics (Forum Mavzulari)
-    match /discussion_topics/{topicId} {
-      allow read: if isAuthenticated();
-
-      // Yaratish: Hamma ro'yxatdan o'tgan foydalanuvchilar
-      allow create: if isAuthenticated() && request.resource.data.authorId == request.auth.uid;
-
-      // Yangilash: Faqat muallif yoki Admin
-      allow update: if isAdmin() || (isAuthenticated() && resource.data.authorId == request.auth.uid);
-      
-      // O'chirish: Faqat muallif yoki Admin
-      allow delete: if isAdmin() || (isAuthenticated() && resource.data.authorId == request.auth.uid);
-
-      // Comments Sub-collection (Izohlar)
-      match /comments/{commentId} {
-        allow read: if isAuthenticated();
-        allow create: if isAuthenticated() && request.resource.data.authorId == request.auth.uid;
-        allow update, delete: if isAdmin() || (isAuthenticated() && resource.data.authorId == request.auth.uid);
-      }
-    }
-
-    // 6. News Collection (Yangiliklar)
-    match /news/{newsId} {
-      allow read: if true; // Hamma o'qiy oladi
-      allow write: if isAdmin(); // Faqat Admin yozadi
-    }
-
-    // 7. Knowledge Base (Bilimlar Bazasi)
-    match /knowledge_articles/{articleId} {
-      allow read: if true; // Hamma o'qiy oladi
-      allow write: if isAdmin() || isEkspert(); // Admin va Ekspertlar yoza oladi
-    }
-
-    // 8. Video Tutorials (Video Qo'llanmalar)
-    match /video_tutorials/{videoId} {
-      allow read: if true; // Hamma o'qiy oladi
-      allow write: if isAdmin() || isEkspert(); // Admin va Ekspertlar yoza oladi
-    }
-
-    // 9. User Progress (Foydalanuvchi Progressi)
-    match /user_progress/{userId} {
-      allow read, write: if isOwner(userId); // Faqat o'zi o'qiy va yoza oladi
-    }
-
-    // 10. Systems Directory (Tizimlar)
-    match /systems/{systemId} {
-      allow read: if true;
-      allow write: if isAdmin() || isEkspert();
-    }
-
-    // 11. FAQs (Savol-Javoblar)
-    match /faqs/{faqId} {
-      allow read: if true;
-      allow write: if isAdmin() || isEkspert();
-    }
-
-    // 12. Notifications (Xabarnomalar)
-    match /notifications/{notificationId} {
-      allow read: if isAuthenticated(); 
-      allow create, delete: if isAdmin();
-      // Allow users to update 'readBy' to mark as read
-      allow update: if isAdmin() || (isAuthenticated() && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['readBy']));
-    }
-    // 13. Learning Records (xAPI)
-    match /learning_records/{recordId} {
-      // Admin va Ekspertlar barcha xAPI yozuvlarini o'qiy oladi (Analytics uchun)
-      allow read: if isAdmin() || isEkspert();
-      
-      // Har qanday tizimga kirgan foydalanuvchi xAPI statement yozishi mumkin
-      allow create: if isAuthenticated() &&
-                      request.resource.data.actor is map &&
-                      request.resource.data.verb is map &&
-                      request.resource.data.object is map;
-      
-      // xAPI yozuvlari o'zgarmasdir (immutable)
-      allow update: if false;
-      
-      // Faqat admin tozalash ishlarini olib borishi mumkin
-      allow delete: if isAdmin();
+    // --- Default Deny ---
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }

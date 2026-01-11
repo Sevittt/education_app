@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/users.dart';
 import '../../services/gamification_service.dart';
-import '../../models/auth_notifier.dart';
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
 
 class LeaderboardScreen extends StatelessWidget {
   const LeaderboardScreen({super.key});

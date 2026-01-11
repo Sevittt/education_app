@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 
 import '../../models/users.dart'; // Your custom AppUser model
-import '../../models/auth_notifier.dart'; // To get user data and update
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart'; // To get user data and update
 
 class ProfileEditScreen extends StatefulWidget {
   const ProfileEditScreen({super.key});

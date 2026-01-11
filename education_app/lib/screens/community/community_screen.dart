@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/discussion_topic.dart';
 import '../../models/users.dart';
-import '../../models/auth_notifier.dart';
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
 import '../../services/community_service.dart';
 import 'discussion_detail_screen.dart';
 import 'edit_topic_screen.dart';

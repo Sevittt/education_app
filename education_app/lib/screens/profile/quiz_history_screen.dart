@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import '../../l10n/app_localizations.dart';
-import '../../models/auth_notifier.dart';
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
 import '../../models/quiz_attempt.dart';
 import '../../services/quiz_service.dart';
 import '../../widgets/quiz_attempt_card.dart';

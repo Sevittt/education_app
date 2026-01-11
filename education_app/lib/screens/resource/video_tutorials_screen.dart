@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-import '../../l10n/app_localizations.dart';
-import '../../models/video_tutorial.dart';
-import '../../services/video_tutorial_service.dart';
-import '../../widgets/custom_network_image.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
+import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
+import 'package:sud_qollanma/features/library/domain/entities/video_entity.dart';
+import 'package:sud_qollanma/shared/widgets/custom_network_image.dart';
+// Legacy import for VideoPlayerScreen (still uses old model, to be refactored later)
+import 'package:sud_qollanma/models/video_tutorial.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // For Timestamp
 import 'video_player_screen.dart';
 
+/// Refactored Video Tutorials Screen using LibraryProvider.
 class VideoTutorialsScreen extends StatefulWidget {
   const VideoTutorialsScreen({super.key});
 
@@ -15,19 +20,38 @@ class VideoTutorialsScreen extends StatefulWidget {
 
 class _VideoTutorialsScreenState extends State<VideoTutorialsScreen>
     with SingleTickerProviderStateMixin {
-  final VideoTutorialService _service = VideoTutorialService();
   late TabController _tabController;
+  final List<String> _categories = ['all', 'beginner', 'intermediate', 'advanced'];
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: VideoCategory.values.length + 1, vsync: this);
+    _tabController = TabController(length: _categories.length, vsync: this);
+    // Fetch videos on init
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<LibraryProvider>().watchVideos();
+    });
   }
 
   @override
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  String _getCategoryDisplayName(String category, AppLocalizations l10n) {
+    switch (category) {
+      case 'all':
+        return l10n.allCategories;
+      case 'beginner':
+        return l10n.rankBeginner;
+      case 'intermediate':
+        return l10n.rankIntermediate;
+      case 'advanced':
+        return l10n.rankAdvanced;
+      default:
+        return category;
+    }
   }
 
   @override
@@ -40,86 +64,97 @@ class _VideoTutorialsScreenState extends State<VideoTutorialsScreen>
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
-          tabs: [
-            Tab(text: l10n.allCategories),
-            ...VideoCategory.values.map((category) {
-              return Tab(text: category.getDisplayName(l10n));
-            }),
-          ],
+          tabs: _categories.map((category) {
+            return Tab(text: _getCategoryDisplayName(category, l10n));
+          }).toList(),
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          _buildVideoList(null), // All videos
-          ...VideoCategory.values.map((category) {
-            return _buildVideoList(category);
-          }),
-        ],
+      body: Consumer<LibraryProvider>(
+        builder: (context, provider, child) {
+          if (provider.isLoading && provider.videos.isEmpty) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (provider.error != null && provider.videos.isEmpty) {
+            return Center(child: Text(l10n.systemsDirectoryError(provider.error!)));
+          }
+
+          return TabBarView(
+            controller: _tabController,
+            children: _categories.map((category) {
+              return _buildVideoList(provider.videos, category, l10n);
+            }).toList(),
+          );
+        },
       ),
     );
   }
 
-  Widget _buildVideoList(VideoCategory? category) {
-    Stream<List<VideoTutorial>> stream;
-    if (category != null) {
-      stream = _service.getVideosByCategory(category.name);
-    } else {
-      stream = _service.getAllVideos();
+  Widget _buildVideoList(List<VideoEntity> allVideos, String category, AppLocalizations l10n) {
+    final videos = category == 'all'
+        ? allVideos
+        : allVideos.where((v) => v.category == category).toList();
+
+    if (videos.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.video_library_outlined, size: 64, color: Colors.grey.shade400),
+            const SizedBox(height: 16),
+            Text(
+              l10n.noVideosFound,
+              style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
+            ),
+          ],
+        ),
+      );
     }
 
-    return StreamBuilder<List<VideoTutorial>>(
-      stream: stream,
-      builder: (context, snapshot) {
-        final l10n = AppLocalizations.of(context)!;
-        if (snapshot.hasError) {
-          return Center(child: Text(l10n.systemsDirectoryError(snapshot.error.toString())));
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
-        final videos = snapshot.data ?? [];
-
-        if (videos.isEmpty) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.video_library_outlined, size: 64, color: Colors.grey.shade400),
-                const SizedBox(height: 16),
-                Text(
-                  l10n.noVideosFound,
-                  style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
-                ),
-              ],
-            ),
-          );
-        }
-
-        return ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: videos.length,
-          itemBuilder: (context, index) {
-            return _buildVideoCard(videos[index]);
-          },
-        );
+    return ListView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: videos.length,
+      itemBuilder: (context, index) {
+        return _buildVideoCard(videos[index], l10n);
       },
     );
   }
 
-  Widget _buildVideoCard(VideoTutorial video) {
+  Widget _buildVideoCard(VideoEntity video, AppLocalizations l10n) {
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         onTap: () {
+          // Increment views
+          context.read<LibraryProvider>().incrementVideoViews(video.id);
+          // Navigate to player (using legacy model for now)
+          // In a full refactor, VideoPlayerScreen would also use VideoEntity
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => VideoPlayerScreen(video: video),
+              builder: (context) => VideoPlayerScreen(
+                video: VideoTutorial(
+                  id: video.id,
+                  title: video.title,
+                  description: video.description,
+                  youtubeId: video.youtubeId,
+                  duration: video.durationSeconds,
+                  category: VideoCategory.values.firstWhere(
+                    (e) => e.name == video.category,
+                    orElse: () => VideoCategory.beginner,
+                  ),
+                  thumbnailUrl: video.thumbnailUrl,
+                  tags: video.tags,
+                  authorId: video.authorId,
+                  authorName: video.authorName,
+                  views: video.views,
+                  likes: video.likes,
+                  createdAt: Timestamp.fromDate(video.createdAt),
+                  order: video.order,
+                ),
+              ),
             ),
           );
         },
@@ -127,8 +162,7 @@ class _VideoTutorialsScreenState extends State<VideoTutorialsScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Thumbnail placeholder (in a real app, use Image.network with video.thumbnailUrl)
-            // Thumbnail using CustomNetworkImage for caching
+            // Thumbnail
             ClipRRect(
               borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
               child: SizedBox(
@@ -152,15 +186,13 @@ class _VideoTutorialsScreenState extends State<VideoTutorialsScreen>
                         child: const Icon(Icons.play_circle_outline, size: 64, color: Colors.white),
                       ),
                     ),
-                    // Play Icon Overlay (always visible slightly for affordance)
                     if (video.thumbnailUrl.isNotEmpty)
                       Container(
-                        color: Colors.black.withValues(alpha: 0.2), // Slight darken
+                        color: Colors.black.withValues(alpha: 0.2),
                         child: const Center(
                           child: Icon(Icons.play_circle_fill, size: 48, color: Colors.white70),
                         ),
                       ),
-                    
                     // Duration Badge
                     Positioned(
                       bottom: 8,
@@ -195,7 +227,7 @@ class _VideoTutorialsScreenState extends State<VideoTutorialsScreen>
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
-                          video.category.getDisplayName(AppLocalizations.of(context)!),
+                          _getCategoryDisplayName(video.category, l10n),
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: 12,
@@ -205,7 +237,7 @@ class _VideoTutorialsScreenState extends State<VideoTutorialsScreen>
                       ),
                       const Spacer(),
                       Text(
-                        DateFormat('dd MMM').format(video.createdAt.toDate()),
+                        DateFormat('dd MMM').format(video.createdAt),
                         style: TextStyle(color: Colors.grey.shade500, fontSize: 12),
                       ),
                     ],
@@ -213,10 +245,7 @@ class _VideoTutorialsScreenState extends State<VideoTutorialsScreen>
                   const SizedBox(height: 8),
                   Text(
                     video.title,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),

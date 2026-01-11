@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 import '../../models/discussion_topic.dart';
 import '../../services/community_service.dart';
-import '../../models/auth_notifier.dart';
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
 
 class CreateTopicScreen extends StatefulWidget {
   const CreateTopicScreen({super.key});
