@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/video_model.dart';
 import '../models/article_model.dart';
+import '../models/resource_model.dart';
 
 /// Remote Data Source for Library Feature.
 /// 
@@ -12,6 +13,9 @@ class LibraryRemoteSource {
   
   final CollectionReference<Map<String, dynamic>> _articlesCollection =
       FirebaseFirestore.instance.collection('knowledge_base');
+
+  final CollectionReference<Map<String, dynamic>> _resourcesCollection =
+      FirebaseFirestore.instance.collection('resources');
 
   // ==========================================
   // VIDEO OPERATIONS
@@ -91,6 +95,15 @@ class LibraryRemoteSource {
         .toList();
   }
 
+  /// Get videos by System ID.
+  Future<List<VideoModel>> getVideosBySystem(String systemId) async {
+    final snapshot = await _videosCollection
+        .where('systemId', isEqualTo: systemId)
+        .orderBy('createdAt', descending: true)
+        .get();
+    return snapshot.docs.map((doc) => VideoModel.fromFirestore(doc)).toList();
+  }
+
   // ==========================================
   // ARTICLE OPERATIONS
   // ==========================================
@@ -168,6 +181,15 @@ class LibraryRemoteSource {
         .toList();
   }
 
+  /// Get articles by System ID.
+  Future<List<ArticleModel>> getArticlesBySystem(String systemId) async {
+    final snapshot = await _articlesCollection
+        .where('systemId', isEqualTo: systemId)
+        .orderBy('createdAt', descending: true)
+        .get();
+    return snapshot.docs.map((doc) => ArticleModel.fromFirestore(doc)).toList();
+  }
+
   // ==========================================
   // VIDEO CRUD OPERATIONS (Admin)
   // ==========================================
@@ -203,8 +225,54 @@ class LibraryRemoteSource {
     await _articlesCollection.doc(id).update(data);
   }
 
-  /// Delete an article.
   Future<void> deleteArticle(String id) async {
     await _articlesCollection.doc(id).delete();
+  }
+
+  // ==========================================
+  // RESOURCE OPERATIONS
+  // ==========================================
+
+  /// Get all resources as a Stream.
+  Stream<List<ResourceModel>> watchResources() {
+    return _resourcesCollection
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((snapshot) =>
+            snapshot.docs.map((doc) => ResourceModel.fromFirestore(doc)).toList());
+  }
+
+  /// Get all resources as a Future.
+  Future<List<ResourceModel>> getResources() async {
+    final snapshot = await _resourcesCollection
+        .orderBy('createdAt', descending: true)
+        .get();
+    return snapshot.docs.map((doc) => ResourceModel.fromFirestore(doc)).toList();
+  }
+
+  /// Get resources by Author ID.
+  Stream<List<ResourceModel>> watchResourcesByAuthor(String authorId) {
+    return _resourcesCollection
+        .where('authorId', isEqualTo: authorId)
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((snapshot) =>
+            snapshot.docs.map((doc) => ResourceModel.fromFirestore(doc)).toList());
+  }
+
+  /// Create a new resource.
+  Future<String> createResource(Map<String, dynamic> data) async {
+    final docRef = await _resourcesCollection.add(data);
+    return docRef.id;
+  }
+
+  /// Update an existing resource.
+  Future<void> updateResource(String id, Map<String, dynamic> data) async {
+    await _resourcesCollection.doc(id).update(data);
+  }
+
+  /// Delete a resource.
+  Future<void> deleteResource(String id) async {
+    await _resourcesCollection.doc(id).delete();
   }
 }

@@ -1,0 +1,100 @@
+﻿Analyzing education_app...                                      
+
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\theme\app_theme.dart:75:59 - deprecated_member_use
+  error - The argument type 'CardTheme' can't be assigned to the parameter type 'CardThemeData?'.  - lib\core\theme\app_theme.dart:84:18 - argument_type_not_assignable
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\theme\app_theme.dart:89:53 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\theme\app_theme.dart:165:54 - deprecated_member_use
+  error - The argument type 'CardTheme' can't be assigned to the parameter type 'CardThemeData?'.  - lib\core\theme\app_theme.dart:174:18 - argument_type_not_assignable
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\core\theme\app_theme.dart:179:48 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\admin\presentation\screens\admin_add_edit_article_screen.dart:189:23 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\admin\presentation\screens\admin_add_edit_video_screen.dart:208:23 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\admin\presentation\screens\admin_add_edit_video_screen.dart:227:23 - deprecated_member_use
+  error - Target of URI doesn't exist: '../../l10n/app_localizations.dart' - lib\features\admin\presentation\screens\admin_analytics_screen.dart:6:8 - uri_does_not_exist
+  error - The name 'context' is already defined - lib\features\admin\presentation\screens\admin_news_management_screen.dart:24:18 - duplicate_definition
+  error - The name 'News' isn't a type, so it can't be used as a type argument - lib\features\admin\presentation\screens\admin_news_management_screen.dart:110:32 - non_type_as_type_argument
+  error - The argument type 'NewsNotifier' can't be assigned to the parameter type 'BuildContext'.  - lib\features\admin\presentation\screens\admin_news_management_screen.dart:213:58 - argument_type_not_assignable
+  error - 4 positional arguments expected by '_deleteNewsItem', but 3 found - lib\features\admin\presentation\screens\admin_news_management_screen.dart:213:80 - not_enough_positional_arguments
+  error - Target of URI doesn't exist: '../resource/quiz/create_quiz_screen.dart' - lib\features\admin\presentation\screens\admin_quiz_management_screen.dart:8:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../resource/quiz/add_questions_screen.dart' - lib\features\admin\presentation\screens\admin_quiz_management_screen.dart:9:8 - uri_does_not_exist
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\features\admin\presentation\screens\admin_quiz_management_screen.dart:52:15 - use_build_context_synchronously
+  error - The name 'CreateQuizScreen' isn't a class - lib\features\admin\presentation\screens\admin_quiz_management_screen.dart:104:47 - creation_with_non_type
+  error - The method 'AddQuestionsScreen' isn't defined for the type '_AdminQuizManagementScreenState' - lib\features\admin\presentation\screens\admin_quiz_management_screen.dart:205:43 - undefined_method
+  error - The name 'CreateQuizScreen' isn't a class - lib\features\admin\presentation\screens\admin_quiz_management_screen.dart:236:59 - creation_with_non_type
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\features\admin\presentation\screens\admin_resource_management_screen.dart:54:15 - use_build_context_synchronously
+  error - Undefined class 'XApiActor' - lib\features\analytics\domain\usecases\analytics_usecases.dart:136:3 - undefined_class
+  error - The method 'XApiActor' isn't defined for the type 'TrackVideoWatched' - lib\features\analytics\domain\usecases\analytics_usecases.dart:139:14 - undefined_method
+  error - The method 'XApiActor' isn't defined for the type 'TrackVideoWatched' - lib\features\analytics\domain\usecases\analytics_usecases.dart:144:14 - undefined_method
+  error - Undefined class 'XApiActor' - lib\features\analytics\domain\usecases\analytics_usecases.dart:200:3 - undefined_class
+  error - The method 'XApiActor' isn't defined for the type 'TrackQuizCompleted' - lib\features\analytics\domain\usecases\analytics_usecases.dart:203:14 - undefined_method
+  error - The method 'XApiActor' isn't defined for the type 'TrackQuizCompleted' - lib\features\analytics\domain\usecases\analytics_usecases.dart:208:14 - undefined_method
+  error - Target of URI doesn't exist: '../features/auth/presentation/screens/auth_wrapper.dart' - lib\features\auth\presentation\screens\splash_screen.dart:5:8 - uri_does_not_exist
+  error - The name 'AuthWrapper' isn't a class - lib\features\auth\presentation\screens\splash_screen.dart:39:57 - creation_with_non_type
+  error - Target of URI doesn't exist: '../../../../models/users.dart' - lib\features\community\presentation\screens\community_screen.dart:12:8 - uri_does_not_exist
+warning - The value of the local variable 'colorScheme' isn't used - lib\features\community\presentation\screens\community_screen.dart:107:11 - unused_local_variable
+  error - Undefined class 'AppUser' - lib\features\community\presentation\screens\community_screen.dart:110:11 - undefined_class
+  error - Undefined name 'UserRole' - lib\features\community\presentation\screens\community_screen.dart:142:47 - undefined_identifier
+  error - The getter 'currentUser' isn't defined for the type 'AuthNotifier' - lib\features\community\presentation\screens\create_topic_screen.dart:34:39 - undefined_getter
+  error - The getter 'currentUser' isn't defined for the type 'AuthNotifier' - lib\features\community\presentation\screens\topic_detail_screen.dart:29:39 - undefined_getter
+warning - Duplicate import - lib\features\home\presentation\screens\home_dashboard_screen.dart:8:8 - duplicate_import
+  error - The method 'toDate' isn't defined for the type 'DateTime' - lib\features\home\presentation\screens\home_dashboard_screen.dart:313:58 - undefined_method
+  error - The name 'AuthRepository' isn't a type, so it can't be used as a type argument - lib\features\home\presentation\screens\home_dashboard_screen.dart:554:40 - non_type_as_type_argument
+warning - The value of the local variable 'count' isn't used - lib\features\home\presentation\screens\home_dashboard_screen.dart:621:24 - unused_local_variable
+   info - Parameters ''id', 'title', 'description', 'content', 'pdfUrl', 'category', 'systemId', 'tags', 'authorId', 'authorName', 'views', 'helpful', 'createdAt', 'updatedAt', and 'isPinned'' could be super parameters - lib\features\library\data\models\article_model.dart:8:9 - use_super_parameters
+   info - Parameters ''id', 'title', 'description', 'youtubeId', 'durationSeconds', 'category', 'systemId', 'thumbnailUrl', 'tags', 'authorId', 'authorName', 'views', 'likes', 'createdAt', and 'order'' could be super parameters - lib\features\library\data\models\video_model.dart:8:9 - use_super_parameters
+warning - Duplicate import - lib\features\library\domain\repositories\library_repository.dart:2:8 - duplicate_import
+  error - Target of URI doesn't exist: '../../../analytics/domain/entities/xapi/xapi_statement.dart' - lib\features\library\presentation\screens\article_detail_screen.dart:14:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../analytics/domain/entities/xapi/xapi_verb.dart' - lib\features\library\presentation\screens\article_detail_screen.dart:15:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../analytics/domain/entities/xapi/xapi_object.dart' - lib\features\library\presentation\screens\article_detail_screen.dart:16:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../analytics/domain/entities/xapi/xapi_result.dart' - lib\features\library\presentation\screens\article_detail_screen.dart:17:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../../analytics/domain/entities/xapi/xapi_actor.dart' - lib\features\library\presentation\screens\article_detail_screen.dart:18:8 - uri_does_not_exist
+  error - The method 'XApiStatement' isn't defined for the type '_ArticleDetailScreenState' - lib\features\library\presentation\screens\article_detail_screen.dart:82:26 - undefined_method
+  error - Undefined name 'XApiVerbs' - lib\features\library\presentation\screens\article_detail_screen.dart:84:16 - undefined_identifier
+  error - The method 'XApiObject' isn't defined for the type '_ArticleDetailScreenState' - lib\features\library\presentation\screens\article_detail_screen.dart:85:18 - undefined_method
+  error - The method 'XApiStatement' isn't defined for the type '_ArticleDetailScreenState' - lib\features\library\presentation\screens\article_detail_screen.dart:121:23 - undefined_method
+  error - Undefined name 'XApiVerbs' - lib\features\library\presentation\screens\article_detail_screen.dart:123:13 - undefined_identifier
+  error - The method 'XApiObject' isn't defined for the type '_ArticleDetailScreenState' - lib\features\library\presentation\screens\article_detail_screen.dart:124:15 - undefined_method
+  error - The method 'XApiResult' isn't defined for the type '_ArticleDetailScreenState' - lib\features\library\presentation\screens\article_detail_screen.dart:131:15 - undefined_method
+   info - Don't use 'BuildContext's across async gaps - lib\features\library\presentation\screens\article_detail_screen.dart:144:41 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\features\library\presentation\screens\article_detail_screen.dart:145:29 - use_build_context_synchronously
+  error - Undefined class 'XApiActor' - lib\features\library\presentation\screens\article_detail_screen.dart:154:3 - undefined_class
+  error - The method 'XApiActor' isn't defined for the type '_ArticleDetailScreenState' - lib\features\library\presentation\screens\article_detail_screen.dart:157:14 - undefined_method
+  error - The method 'XApiActor' isn't defined for the type '_ArticleDetailScreenState' - lib\features\library\presentation\screens\article_detail_screen.dart:162:14 - undefined_method
+  error - The getter 'currentUser' isn't defined for the type 'AuthNotifier' - lib\features\library\presentation\screens\create_resource_screen.dart:67:48 - undefined_getter
+  error - Target of URI doesn't exist: '../../models/users.dart' - lib\features\library\presentation\screens\resource_detail_screen.dart:9:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: 'quiz/quiz_screen.dart' - lib\features\library\presentation\screens\resource_detail_screen.dart:16:8 - uri_does_not_exist
+  error - A try block must be followed by an 'on', 'catch', or 'finally' clause - lib\features\library\presentation\screens\resource_detail_screen.dart:44:5 - missing_catch_or_finally
+  error - Expected to find '}' - lib\features\library\presentation\screens\resource_detail_screen.dart:65:3 - expected_token
+   info - Don't use 'BuildContext's across async gaps - lib\features\library\presentation\screens\resource_detail_screen.dart:149:15 - use_build_context_synchronously
+  error - The method 'QuizScreen' isn't defined for the type '_ResourceDetailScreenState' - lib\features\library\presentation\screens\resource_detail_screen.dart:210:37 - undefined_method
+  error - Undefined class 'UserRole' - lib\features\library\presentation\screens\resource_detail_screen.dart:222:11 - undefined_class
+  error - Undefined name 'UserRole' - lib\features\library\presentation\screens\resource_detail_screen.dart:229:27 - undefined_identifier
+  error - Undefined name 'UserRole' - lib\features\library\presentation\screens\resource_detail_screen.dart:229:59 - undefined_identifier
+  error - The name 'FAQListScreen' isn't a class - lib\features\library\presentation\screens\resources_screen.dart:41:49 - creation_with_non_type
+  error - Target of URI doesn't exist: '../../../../shared/layouts/responsive_layout.dart' - lib\features\library\presentation\screens\tabs\articles_tab.dart:3:8 - uri_does_not_exist
+  error - The method 'ResponsiveLayout' isn't defined for the type '_ArticlesTabState' - lib\features\library\presentation\screens\tabs\articles_tab.dart:192:12 - undefined_method
+  error - The method 'ResponsiveLayout' isn't defined for the type '_ArticlesTabState' - lib\features\library\presentation\screens\tabs\articles_tab.dart:251:16 - undefined_method
+warning - The declaration '_handleRefresh' isn't referenced - lib\features\library\presentation\screens\tabs\files_tab.dart:34:16 - unused_element
+  error - The method 'getBookmarkedResourceIds' isn't defined for the type 'LibraryProvider' - lib\features\library\presentation\screens\tabs\files_tab.dart:193:47 - undefined_method
+  error - Target of URI doesn't exist: '../../../../shared/layouts/responsive_layout.dart' - lib\features\library\presentation\screens\tabs\videos_tab.dart:4:8 - uri_does_not_exist
+  error - The method 'ResponsiveLayout' isn't defined for the type '_VideosTabState' - lib\features\library\presentation\screens\tabs\videos_tab.dart:138:16 - undefined_method
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\notifications\presentation\screens\admin_send_notification_screen.dart:126:23 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\notifications\presentation\screens\admin_send_notification_screen.dart:145:23 - deprecated_member_use
+  error - Target of URI doesn't exist: '../../models/users.dart' - lib\features\profile\presentation\screens\profile_edit_screen.dart:7:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../l10n/app_localizations.dart' - lib\features\profile\presentation\screens\profile_screen.dart:3:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../widgets/quiz_attempt_card.dart' - lib\features\profile\presentation\screens\profile_screen.dart:23:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../config/gamification_rules.dart' - lib\features\profile\presentation\screens\profile_screen.dart:24:8 - uri_does_not_exist
+  error - The method 'QuizAttemptCard' isn't defined for the type 'ProfileScreen' - lib\features\profile\presentation\screens\profile_screen.dart:122:20 - undefined_method
+  error - The getter 'currentUser' isn't defined for the type 'AuthNotifier' - lib\features\profile\presentation\screens\profile_screen.dart:420:39 - undefined_getter
+  error - The name 'getRecentUserAttempts' is already defined - lib\features\quiz\data\datasources\quiz_remote_datasource.dart:14:34 - duplicate_definition
+  error - The method 'QuizModel' isn't defined for the type 'QuizRepositoryImpl' - lib\features\quiz\data\repositories\quiz_repository_impl.dart:47:23 - undefined_method
+  error - Undefined class 'Question' - lib\features\quiz\data\repositories\quiz_repository_impl.dart:58:43 - undefined_class
+  error - The method 'QuestionModel' isn't defined for the type 'QuizRepositoryImpl' - lib\features\quiz\data\repositories\quiz_repository_impl.dart:59:27 - undefined_method
+  error - 'getRecentUserAttempts' isn't a field in the enclosing class - lib\features\quiz\presentation\providers\quiz_provider.dart:29:5 - initializing_formal_for_non_existent_field
+  error - 'getQuizzesByResourceId' isn't a field in the enclosing class - lib\features\quiz\presentation\providers\quiz_provider.dart:30:5 - initializing_formal_for_non_existent_field
+  error - The method 'getRecentUserAttempts' isn't defined for the type 'QuizProvider' - lib\features\quiz\presentation\providers\quiz_provider.dart:83:18 - undefined_method
+  error - The method 'getQuizzesByResourceId' isn't defined for the type 'QuizProvider' - lib\features\quiz\presentation\providers\quiz_provider.dart:87:18 - undefined_method
+  error - Undefined class 'Question' - lib\features\quiz\presentation\providers\quiz_provider.dart:102:43 - undefined_class
+warning - The value of the local variable 'l10n' isn't used - lib\features\quiz\presentation\screens\create_quiz_screen.dart:66:11 - unused_local_variable
+  error - Target of URI doesn't exist: '../../l10n/app_localizations.dart' - lib\features\quiz\presentation\screens\quiz_history_screen.dart:5:8 - uri_does_not_exist
+  error - Target of URI doesn't exist: '../../widgets/quiz_attempt_card.dart' - lib\features\quiz\presentation\screens\quiz_history_screen.dart:11:8 - uri_does_not_exist
+  error - The method 'QuizAttemptCard' isn't defined for the type 'QuizHistoryScreen' - lib\features\quiz\presentation\screens\quiz_history_screen.dart:71:24 - undefined_method

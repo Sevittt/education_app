@@ -19,6 +19,7 @@ dependencies:
   uuid: ^4.5.1 
   shared_preferences: ^2.5.3 
   intl: ^0.20.2
+  equatable: ^2.0.5
   google_sign_in: ^6.2.1 
   path_provider: ^2.0.9 
   flutter_speed_dial: ^7.0.0 # Add this line
@@ -35,6 +36,8 @@ dependencies:
   lottie: ^3.1.2
   firebase_crashlytics: ^5.0.0
   cached_network_image: ^3.4.1
+  google_fonts: ^7.0.2
+  animations: ^2.1.1
   # --- END UPDATED ---
 
 dev_dependencies:

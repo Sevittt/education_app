@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart'; // Your AuthNotifier
-import 'package:sud_qollanma/screens/home/home_page.dart'; // Fixed path
-import 'package:sud_qollanma/screens/landing_screen.dart'; // Fixed path
+import 'package:sud_qollanma/features/home/presentation/screens/home_page.dart'; // Fixed path
+import 'package:sud_qollanma/features/auth/presentation/screens/landing_screen.dart'; // Fixed path
 
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({super.key});

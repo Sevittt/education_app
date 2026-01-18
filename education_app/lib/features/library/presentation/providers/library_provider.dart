@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/video_entity.dart';
 import '../../domain/entities/article_entity.dart';
+import '../../domain/entities/resource_entity.dart';
 import '../../domain/repositories/library_repository.dart';
 import '../../data/repositories/library_repository_impl.dart';
 
@@ -17,12 +18,14 @@ class LibraryProvider extends ChangeNotifier {
   // --- State ---
   List<VideoEntity> _videos = [];
   List<ArticleEntity> _articles = [];
+  List<ResourceEntity> _resources = [];
   bool _isLoading = false;
   String? _error;
 
   // --- Getters ---
   List<VideoEntity> get videos => _videos;
   List<ArticleEntity> get articles => _articles;
+  List<ResourceEntity> get resources => _resources;
   bool get isLoading => _isLoading;
   String? get error => _error;
 
@@ -102,6 +105,14 @@ class LibraryProvider extends ChangeNotifier {
 
   Future<List<ArticleEntity>> searchArticles(String query) async {
     return _repository.searchArticles(query);
+  }
+
+  Future<List<VideoEntity>> getVideosBySystem(String systemId) async {
+    return _repository.getVideosBySystem(systemId);
+  }
+
+  Future<List<ArticleEntity>> getArticlesBySystem(String systemId) async {
+    return _repository.getArticlesBySystem(systemId);
   }
 
   // --- Video CRUD ---
@@ -230,5 +241,107 @@ class LibraryProvider extends ChangeNotifier {
 
   Future<void> decrementVideoLikes(String id) async {
     await _repository.decrementVideoLikes(id);
+  }
+
+  // --- Resource Actions ---
+
+  Future<void> loadResources() async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+
+    try {
+      _resources = await _repository.getResources();
+    } catch (e) {
+      _error = e.toString();
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  void watchResources() {
+    _repository.watchResources().listen(
+      (resources) {
+        _resources = resources;
+        notifyListeners();
+      },
+      onError: (e) {
+        _error = e.toString();
+        notifyListeners();
+      },
+    );
+  }
+
+  // --- Resource CRUD ---
+
+  Future<String> createResource(ResourceEntity resource) async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+    try {
+      final id = await _repository.createResource(resource);
+      await loadResources();
+      return id;
+    } catch (e) {
+      _error = e.toString();
+      _isLoading = false;
+      notifyListeners();
+      rethrow;
+    }
+  }
+
+  Future<void> updateResource(String id, ResourceEntity resource) async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+    try {
+      await _repository.updateResource(id, resource);
+      await loadResources();
+    } catch (e) {
+      _error = e.toString();
+      _isLoading = false;
+      notifyListeners();
+      rethrow;
+    }
+  }
+
+  Future<void> deleteResource(String id) async {
+    _isLoading = true;
+    _error = null;
+    notifyListeners();
+    try {
+      await _repository.deleteResource(id);
+      _resources.removeWhere((r) => r.id == id);
+      _isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      _error = e.toString();
+      _isLoading = false;
+      notifyListeners();
+      rethrow;
+    }
+  }
+
+  // --- Resource Bookmarks ---
+
+  Future<void> toggleResourceBookmark(String id) async {
+    await _repository.toggleResourceBookmark(id);
+    notifyListeners(); // Force rebuild
+  }
+
+  Future<bool> isResourceBookmarked(String id) async {
+    return _repository.isResourceBookmarked(id);
+  }
+
+  Future<List<String>> getBookmarkedResourceIds() async {
+    return _repository.getBookmarkedResourceIds();
+  }
+
+  // --- Streams for UI (e.g. Dashboard) ---
+  Stream<List<ResourceEntity>> get resourcesStream => _repository.watchResources();
+  
+  Stream<List<ResourceEntity>> watchResourcesByAuthor(String authorId) {
+    return _repository.watchResourcesByAuthor(authorId);
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../models/quiz_attempt.dart';
+import 'package:sud_qollanma/features/quiz/domain/entities/quiz_attempt.dart'; // Clean Arch Entity
+// import '../models/quiz_attempt.dart'; // REMOVED
 
 class QuizAttemptCard extends StatefulWidget {
   final QuizAttempt attempt;
@@ -135,7 +136,7 @@ class _QuizAttemptCardState extends State<QuizAttemptCard>
                             const SizedBox(width: 4),
                             Text(
                               DateFormat.yMMMd().format(
-                                widget.attempt.attemptedAt.toDate(),
+                                widget.attempt.attemptedAt,
                               ),
                               style: theme.textTheme.bodySmall?.copyWith(
                                 color: theme.colorScheme.onSurfaceVariant,
