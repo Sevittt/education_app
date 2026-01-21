@@ -105,4 +105,10 @@ class AppUser extends Equatable {
         lastLoginDate,
         fastestQuizTime,
       ];
+  static String getLevelFromXP(int xp) {
+    if (xp >= 1000) return 'levelExpert';
+    if (xp >= 500) return 'levelAdvanced';
+    if (xp >= 100) return 'levelIntermediate';
+    return 'levelBeginner';
+  }
 }

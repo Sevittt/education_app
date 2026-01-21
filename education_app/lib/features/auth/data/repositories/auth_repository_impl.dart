@@ -92,4 +92,9 @@ class AuthRepositoryImpl implements AuthRepository {
   Stream<AppUser?> getUserProfileStream(String uid) {
     return _remoteDataSource.getUserProfileStream(uid);
   }
+
+  @override
+  Future<void> updateUserXP(String userId, int newXP, String newLevel) async {
+    await _remoteDataSource.updateUserXP(userId, newXP, newLevel);
+  }
 }

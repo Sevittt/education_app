@@ -205,4 +205,25 @@ class AuthNotifier with ChangeNotifier {
       return false;
     }
   }
+
+
+  Future<void> updateUserXP(int xpToAdd) async {
+    if (_currentUser == null) return;
+    
+    final int currentXP = _currentUser!.xp;
+    final int newXP = currentXP + xpToAdd;
+    final String newLevel = AppUser.getLevelFromXP(newXP);
+    
+    // Optimistic update
+    final updatedUser = _currentUser!.copyWith(xp: newXP, level: newLevel);
+    _currentUser = updatedUser;
+    notifyListeners();
+
+    try {
+      await _authRepository.updateUserXP(updatedUser.id, newXP, newLevel);
+    } catch (e) {
+      debugPrint("Error updating XP: $e");
+      // Optionally revert state here if needed
+    }
+  }
 }
