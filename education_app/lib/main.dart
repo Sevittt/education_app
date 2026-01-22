@@ -160,7 +160,6 @@ void main() async {
         ),
 
         // --- Feature: Auth ---
-        // --- Feature: Auth ---
         Provider<AuthRemoteDataSource>(
           create: (_) => AuthRemoteDataSourceImpl(),
         ),
@@ -177,7 +176,8 @@ void main() async {
         ),
 
         // --- Feature: Library ---
-        ChangeNotifierProvider<LibraryProvider>(create: (_) => LibraryProvider()),
+        Provider<LibraryRepository>(create: (context) => LibraryRepositoryImpl()),
+        ChangeNotifierProvider<LibraryProvider>(create: (context) => LibraryProvider(repository: context.read<LibraryRepository>())),
 
         // --- Feature: Community (Clean Arch) ---
         Provider<CommunityRemoteDataSource>(create: (_) => CommunityRemoteDataSourceImpl()),
@@ -321,14 +321,6 @@ void main() async {
           ),
         ),
 
-        // --- Legacy Services (Facades) ---migrated) ---
-        // ChangeNotifierProvider<ResourceService>(create: (_) => ResourceService()), // REMOVED
-        // Provider<CommunityService>(create: (_) => CommunityService()), // REMOVED
-        // Provider<QuizService>(create: (_) => QuizService()), // REMOVED
-        // Provider<NewsService>(create: (_) => NewsService()), // REMOVED
-        // Provider<SystemsService>(create: (_) => SystemsService()), // REMOVED
-
-
         // --- Feature: FAQ (Clean Arch) ---
         Provider<FaqRemoteDataSource>(
           create: (_) => FaqRemoteDataSourceImpl(),
@@ -363,35 +355,6 @@ void main() async {
           ),
         ),
 
-        // Provider<FAQService>(create: (_) => FAQService()), // Replaced by Clean Arch
-        // Feature: Quiz (Clean Arch)
-        Provider<QuizRemoteDataSource>(create: (_) => QuizRemoteDataSourceImpl()),
-        Provider<QuizRepository>(create: (context) => QuizRepositoryImpl(remoteDataSource: context.read<QuizRemoteDataSource>())),
-        // Quiz UseCases
-        Provider<GetQuizzes>(create: (context) => GetQuizzes(context.read<QuizRepository>())),
-        Provider<GetQuizById>(create: (context) => GetQuizById(context.read<QuizRepository>())),
-        Provider<GetQuizzesByResourceId>(create: (context) => GetQuizzesByResourceId(context.read<QuizRepository>())),
-        Provider<SubmitQuizAttempt>(create: (context) => SubmitQuizAttempt(context.read<QuizRepository>())),
-        Provider<GetUserAttempts>(create: (context) => GetUserAttempts(context.read<QuizRepository>())),
-        Provider<GetRecentUserAttempts>(create: (context) => GetRecentUserAttempts(context.read<QuizRepository>())),
-        Provider<DeleteQuiz>(create: (context) => DeleteQuiz(context.read<QuizRepository>())),
-        Provider<CreateQuiz>(create: (context) => CreateQuiz(context.read<QuizRepository>())),
-        Provider<AddQuestionToQuiz>(create: (context) => AddQuestionToQuiz(context.read<QuizRepository>())),
-        // Quiz Provider
-        ChangeNotifierProvider<QuizProvider>(
-          create: (context) => QuizProvider(
-            getQuizzes: context.read<GetQuizzes>(),
-            getQuizById: context.read<GetQuizById>(),
-            submitQuizAttempt: context.read<SubmitQuizAttempt>(),
-            getUserAttempts: context.read<GetUserAttempts>(),
-            getRecentUserAttempts: context.read<GetRecentUserAttempts>(), 
-            getQuizzesByResourceId: context.read<GetQuizzesByResourceId>(),
-            deleteQuizUseCase: context.read<DeleteQuiz>(),
-            createQuizUseCase: context.read<CreateQuiz>(),
-            addQuestionToQuizUseCase: context.read<AddQuestionToQuiz>(),
-          ),
-        ),
-
         // Feature: Notifications (Clean Arch)
         Provider<NotificationRemoteDataSource>(create: (_) => NotificationRemoteDataSourceImpl()),
         Provider<NotificationRepository>(
@@ -422,12 +385,6 @@ void main() async {
           ),
         ),
 
-        // Feature: Library
-        Provider<LibraryRepository>(create: (context) => LibraryRepositoryImpl()),
-        ChangeNotifierProvider<LibraryProvider>(create: (context) => LibraryProvider(repository: context.read<LibraryRepository>())),
-        
-
-
         // Feature: Analytics (Clean Arch)
         Provider<AnalyticsRemoteDataSource>(create: (_) => AnalyticsRemoteDataSourceImpl()),
         Provider<AnalyticsRepository>(create: (context) => AnalyticsRepositoryImpl(context.read<AnalyticsRemoteDataSource>())),
@@ -450,9 +407,6 @@ void main() async {
         ChangeNotifierProvider<SearchNotifier>(
           create: (context) => SearchNotifier(searchAll: context.read<SearchAll>()),
         ),
-        
-        // Notifier
-        // ChangeNotifierProvider<GamificationNotifier>(...) // If needed
       ],
       child: const MyApp(),
     ),
