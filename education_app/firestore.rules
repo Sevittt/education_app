@@ -1,0 +1,122 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // --- Helper Functions ---
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    function isExpertOrAdmin() {
+      let role = get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+      return isAuthenticated() && (role == 'admin' || role == 'ekspert');
+    }
+
+    // --- Users Collection ---
+    // Users can only read/write their own profile.
+    // Admins can read/write all.
+    match /users/{userId} {
+      allow read, write: if isOwner(userId) || isAdmin();
+    }
+
+    // --- Learning Records (xAPI) ---
+    // Immutable logs. Create only. No delete/update (except Admin).
+    match /learning_records/{recordId} {
+      allow create: if isAuthenticated() && 
+                    request.resource.data.actor.mbox == ('mailto:' + request.auth.uid + '@sudqollanma.uz');
+      allow read: if isAuthenticated();
+      allow update: if false; // Logs are immutable
+      allow delete: if isAdmin();
+    }
+
+    // --- Content Collections ---
+    // PUBLIC READ for all content, Admin/Expert write
+    // This allows anyone (including unauthenticated users) to read content
+    match /resources/{docId} {
+      allow read: if true;
+      allow write: if isExpertOrAdmin();
+    }
+
+    match /knowledge_base/{docId} {
+      allow read: if true;
+      allow write: if isExpertOrAdmin();
+    }
+    
+    match /video_tutorials/{docId} {
+      allow read: if true;
+      allow write: if isExpertOrAdmin();
+    }
+    
+    match /systems_directory/{docId} {
+      allow read: if true;
+      allow write: if isExpertOrAdmin();
+    }
+
+    match /faq/{docId} {
+      allow read: if true;
+      allow write: if isExpertOrAdmin();
+    }
+    
+    match /app_notifications/{docId} {
+       allow read: if isAuthenticated();
+       allow write: if isAdmin(); // Notifications typically Admin only
+    }
+    
+    // --- Community Collection (discussion_topics) ---
+    match /discussion_topics/{topicId} {
+      allow read: if true;
+      allow create: if isAuthenticated();
+      allow update, delete: if isOwner(resource.data.authorId) || isAdmin(); // Experts moderate as Users unless we add isExpertOrAdmin here. Let's stick to Admin for moderation for now.
+      
+      // Comments Subcollection
+      match /comments/{commentId} {
+        allow read: if true;
+        allow create: if isAuthenticated();
+        allow update, delete: if isOwner(resource.data.authorId) || isAdmin();
+      }
+    }
+    
+    // Legacy fix if any code still refers to 'topics' (optional but safe)
+    match /topics/{topicId} {
+      allow read: if true;
+    }
+
+    // --- Quizzes Collection ---
+    match /quizzes/{quizId} {
+      allow read: if true;
+      allow write: if isExpertOrAdmin();
+      
+      // Questions Subcollection
+      match /questions/{questionId} {
+        allow read: if true;
+        allow write: if isExpertOrAdmin();
+      }
+    }
+    
+    // --- Quiz Attempts ---
+    match /quiz_attempts/{attemptId} {
+      allow create: if isAuthenticated();
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+    }
+    
+    // --- News Collection ---
+    match /news/{docId} {
+      allow read: if true;
+      allow write: if isExpertOrAdmin();
+    }
+
+    // --- Default Deny (for any unmatched paths) ---
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

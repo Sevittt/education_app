@@ -1,0 +1,57 @@
+name: sud_qollanma
+description: "Sud xodimlarining kasbiy kompetentligi uchun mobil platforma."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0' # --- MODIFIED: Widened the SDK range a bit ---
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations: # Add this for localization
+    sdk: flutter         # Add this for localization
+
+  cupertino_icons: ^1.0.8 
+  url_launcher: ^6.3.1 
+  provider: ^6.1.5 
+  uuid: ^4.5.1 
+  shared_preferences: ^2.5.3 
+  intl: ^0.20.2
+  equatable: ^2.0.5
+  google_sign_in: ^6.2.1 
+  path_provider: ^2.0.9 
+  flutter_speed_dial: ^7.0.0 # Add this line
+  # --- UPDATED FIREBASE PACKAGES ---
+  # These versions are new and will contain the 'FlutterFireOptions' class
+  firebase_core: ^4.2.1
+  firebase_auth: ^6.1.2
+  cloud_firestore: ^6.1.0
+  firebase_storage: ^13.0.4  # PDF upload uchun
+  flutter_markdown: ^0.7.7+1
+  youtube_player_flutter: ^9.0.1
+  file_picker: ^10.3.7
+  confetti: ^0.7.0
+  lottie: ^3.1.2
+  firebase_crashlytics: ^5.0.0
+  cached_network_image: ^3.4.1
+  google_fonts: ^7.0.2
+  animations: ^2.1.1
+  # --- END UPDATED ---
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0 # Or latest
+  
+flutter:
+  uses-material-design: true
+  generate: true # Add this line to enable code generation for localization
+
+  assets:
+    - assets/images/app_logo.png 
+    - assets/images/solijonov_madamin.jpg
+    - assets/images/my_pic.jpg
+    - assets/images/google_logo.png # --- ADDED: Make sure you have this logo! ---
+    - assets/images/Shared_Knowledge.png

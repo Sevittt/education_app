@@ -1,0 +1,760 @@
+{
+  "appTitle": "Справочник Судьи",
+  "@appTitle": {
+    "description": "Название приложения"
+  },
+  "openInYoutube": "Открыть в YouTube",
+  "watchOnYoutube": "Смотреть в YouTube",
+  "loginWelcomeTitle": "Добро пожаловать!",
+  "@loginWelcomeTitle": {
+    "description": "Заголовок экрана входа"
+  },
+  "loginWelcomeSubtitle": "Войдите, чтобы продолжить",
+  "@loginWelcomeSubtitle": {
+    "description": "Текст подзаголовка экрана входа"
+  },
+  "bottomNavHome": "Главная",
+  "bottomNavResources": "Руководства",
+  "bottomNavCommunity": "Обсуждение",
+  "bottomNavProfile": "Профиль",
+  "resourcesScreenTitle": "Руководства и обучающие материалы",
+  "@resourcesScreenTitle": {
+    "description": "Заголовок страницы с руководствами"
+  },
+  "roleXodim": "Сотрудник",
+  "@roleXodim": {
+    "description": "Обычный сотрудник Роль"
+  },
+  "roleEkspert": "Эксперт",
+  "@roleEkspert": {
+    "description": "Роль эксперта, которая может создавать контент"
+  },
+  "roleAdmin": "Администратор",
+  "@roleAdmin": {
+    "description": "Роль администратора"
+  },
+  "registrationTitle": "Создать учётную запись",
+  "registrationSubtitle": "Присоединяйтесь к профессиональному сообществу!",
+  "registrationFullNameLabel": "ФИО",
+  "@registrationFullNameLabel": {
+    "description": "Поле для ввода имени при регистрации"
+  },
+  "registrationFullNameError": "Пожалуйста, введите своё полное имя",
+  "@registrationFullNameError": {
+    "description": "Ошибка при отсутствии имени"
+  },
+  "registrationRoleLabel": "Ваша роль",
+  "@registrationRoleLabel": {
+    "description": "Выберите роль при регистрация"
+  },
+  "registrationRoleError": "Выберите роль",
+  "@registrationRoleError": {
+    "description": "Ошибка, если роль не выбрана"
+  },
+  "registrationRoleXodim": "Обычный сотрудник",
+  "@registrationRoleXodim": {
+    "description": "Выбор роли сотрудника"
+  },
+  "registrationRoleEkspert": "Эксперт (создатель руководства)",
+  "@registrationRoleEkspert": {
+    "description": "Выбор роли эксперта"
+  },
+  "registrationPasswordLabel": "Пароль",
+  "@registrationPasswordLabel": {
+    "description": "Текст для поля пароля"
+  },
+  "registrationPasswordError": "Пароль должен быть не менее 6 символов",
+  "@registrationPasswordError": {
+    "description": "Ошибка, если пароль короткий"
+  },
+  "registrationConfirmPasswordLabel": "Подтвердить пароль",
+  "@registrationConfirmPasswordLabel": {
+    "description": "Поле подтверждения пароля"
+  },
+  "registrationConfirmPasswordError": "Пароли не совпали",
+  "@registrationConfirmPasswordError": {
+    "description": "Ошибка при несовпадении паролей"
+  },
+  "registrationSignUpButton": "Зарегистрироваться",
+  "@registrationSignUpButton": {
+    "description": "Кнопка регистрации"
+  },
+  "registrationSwitchToLogin": "У вас есть учётная запись? Войти",
+  "@registrationSwitchToLogin": {
+    "description": "Текст для перехода на страницу входа"
+  },
+  "languageEnglish": "Английский (США)",
+  "languageUzbek": "Узбекский (Узбекистан)",
+  "languageRussian": "Русский (Россия)",
+  "languageSystemDefault": "Системный язык",
+  "settingsScreenTitle": "Настройки",
+  "settingsLanguage": "Язык",
+  "settingsReceiveNotifications": "Получать уведомления",
+  "settingsReceiveNotificationsSubtitle": "Получайте обновления о новых ресурсах и обсуждениях",
+  "settingsAllowLocation": "Разрешить доступ к местоположению",
+  "settingsAllowLocationSubtitle": "Для функций, требующих вашего местоположения (если есть)",
+  "settingsChangePassword": "Изменить пароль",
+  "settingsHelpCenter": "Центр помощи",
+  "settingsAboutApp": "О Справочнике Судьи",
+  "settingsAppLegalese": "© 2025 Проект Справочник Судьи",
+  "settingsAppDescription": "Мобильная платформа для повышения профессиональной компетентности работников суда.",
+  "errorPrefix": "Ошибка: ",
+  "days": "дней",
+  "resourcesNoResourcesFound": "Ресурсы не найдены.",
+  "loginButtonText": "Войти",
+  "signUpButtonText": "Зарегистрироваться",
+  "logoutButtonText": "Выйти",
+  "logoutConfirmTitle": "Вы уверены, что хотите выйти?",
+  "emailLabel": "Электронная почта",
+  "passwordLabel": "Пароль",
+  "homeDashboardTitle": "Панель управления",
+  "communityScreenTitle": "Сообщество",
+  "profileScreenTitle": "Профиль",
+  "editProfileButtonText": "Редактировать профиль",
+  "guestUser": "Гость",
+  "updateYourInformation": "Обновите вашу информацию",
+  "loginToEditProfile": "Войдите, чтобы редактировать профиль",
+  "settingsTitle": "Настройки",
+  "themeOptionsTitle": "Опции темы",
+  "logoutConfirmMessage": "Вы уверены, что хотите выйти из аккаунта?",
+  "cancelButton": "Отмена",
+  "logoutButton": "Выйти",
+  "resourcesTitle": "Ресурсы",
+  "resourcesSearchHint": "Поиск ресурсов...",
+  "resourcesFilterByType": "Фильтровать по типу",
+  "resourcesAllTypes": "Все типы",
+  "resourcesNoResourcesMatch": "Ресурсы, соответствующие вашим критериям, не найдены.",
+  "resourcesTryAdjusting": "Попробуйте изменить поиск или фильтр.",
+  "resourcesCreateButton": "Создать",
+  "resourceAddedSuccess": "Ресурс успешно добавлен!",
+  "resourceAddedError": "Ошибка при добавлении ресурса: {error}",
+  "@resourceAddedError": {
+    "description": "Сообщение об ошибке при неудачном добавлении ресурса",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Ошибка сетевого подключения"
+      }
+    }
+  },
+  "createResourceScreenTitle": "Создать Новый Ресурс",
+  "createResourceFormWillBeHere": "Форма создания ресурса будет здесь.",
+  "saveButtonText": "Сохранить",
+  "createResourceTitleLabel": "Название",
+  "createResourceDescriptionLabel": "Описание",
+  "createResourceAuthorLabel": "Автор",
+  "createResourceTypeLabel": "Тип ресурса",
+  "createResourceUrlLabel": "URL (Optional)",
+  "couldNotLaunchUrl": "Could not launch {url}",
+  "createResourceValidationEmpty": "Пожалуйста, введите {fieldName}",
+  "createResourceValidationSelect": "Пожалуйста, выберите {fieldName}",
+  "createResourceValidationInvalidUrl": "Введите действительный URL-адрес",
+  "editButtonTooltip": "Редактировать ресурс",
+  "editResourceScreenTitle": "Редактировать ресурс",
+  "resourceTypeLabel": "Тип",
+  "editTopicScreenTitle": "Редактировать тему обсуждения",
+  "deleteResourceConfirmTitle": "Подтвердите удаление",
+  "deleteResourceConfirmMessage": "Вы уверены, что хотите удалить этот ресурс? Это действие не может быть отменено.",
+  "cancelButtonText": "Отмена",
+  "deleteButtonText": "Удалить",
+  "resourceDeletedSuccess": "Ресурс успешно удален!",
+  "resourceDeletedError": "Ошибка удаления ресурса: {error}",
+  "deleteButtonTooltip": "Удалить ресурс",
+  "createANewQuiz": "Создать новую викторину",
+  "quizTitle": "Название викторины",
+  "quizDescription": "Описание",
+  "saveAndAddQuestions": "Сохранить и добавить вопросы",
+  "failedToCreateQuiz": "Не удалось создать викторину",
+  "addQuestions": "Добавить вопросы",
+  "finish": "ЗАВЕРШИТЬ",
+  "questionText": "Текст вопроса",
+  "pleaseEnterAQuestion": "Пожалуйста, введите вопрос",
+  "questionType": "Тип вопроса",
+  "multipleChoice": "Множественный выбор",
+  "trueFalse": "Верно/Неверно",
+  "pleaseSelectCorrectAnswer": "Пожалуйста, выберите правильный ответ.",
+  "option": "Вариант {number}",
+  "pleaseEnterAnOption": "Пожалуйста, введите вариант",
+  "addQuestion": "Добавить вопрос",
+  "questionAddedSuccessfully": "Вопрос успешно добавлен!",
+  "failedToAddQuestion": "Не удалось добавить вопрос",
+  "noQuestionsAddedYet": "Вопросы еще не добавлены.",
+  "correctAnswer": "Правильный ответ",
+  "quiz": "Викторина",
+  "quizNotFound": "Викторина не найдена.",
+  "failedToLoadQuiz": "Не удалось загрузить викторину",
+  "question": "Вопрос {number}",
+  "totalQuestions": "из {total}",
+  "submitQuiz": "Отправить викторину",
+  "nextQuestion": "Следующий вопрос",
+  "quizResults": "Результаты викторины",
+  "quizCompletionMessage": "Вы завершили викторину!",
+  "yourScore": "Ваш счет:",
+  "done": "Готово",
+  "failedToSaveAttempt": "Не удалось сохранить вашу попытку",
+  "myQuizHistory": "Моя история викторин",
+  "noQuizAttempts": "Вы еще не проходили ни одной викторины.",
+  "score": "Счет",
+  "role": "Роль",
+  "loading": "Загрузка...",
+  "relatedQuizzesTitle": "Похожие тесты",
+  "noQuizzesAvailable": "Пока нет доступных тестов для этого ресурса",
+  "errorLoadingQuizzes": "Ошибка загрузки тестов",
+  "invalidUrlFormat": "Неверный формат URL: {url}",
+  "errorLaunchingUrl": "Ошибка запуска URL: {error}",
+  "createResourceValidationMinLength": "{fieldName} должно быть не менее {length} символов в длину",
+  "createResourceValidationMaxLength": "{fieldName} не может превышать {length} символов",
+  "titleMinLength": "Заголовок должен быть не менее 5 символов в длину",
+  "titleMaxLength": "Заголовок не может превышать 100 символов",
+  "createTopicScreenTitle": "Начать новое обсуждение",
+  "createTopicTitleLabel": "Заголовок темы",
+  "createTopicContentLabel": "Содержимое обсуждения",
+  "createTopicButtonText": "Создать тему обсуждения",
+  "mustBeLoggedInToCreateTopic": "Чтобы создать тему, вам необходимо войти в систему.",
+  "topicCreatedSuccess": "Тема создана успешно!",
+  "failedToCreateTopic": "Не удалось создать тему: {error}",
+  "@failedToCreateTopic": {
+    "description": "Error message when creating a topic fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "createTopicValidationEmpty": "{fieldName} не может быть пустым.",
+  "createTopicValidationMinLength": "{fieldName} должно быть не менее {length} символов в длину.",
+  "createTopicValidationMaxLength": "{fieldName} не может превышать {length} символов в длину.",
+  "errorLoadingData": "Произошла ошибка при загрузке ресурсов. Повторите попытку.",
+  "failedToUpdateTopic": "Ошибка обновления темы: {error}",
+  "@failedToUpdateTopic": {
+    "description": "Сообщение об ошибке отображается при сбое обновления темы",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Ошибка сети"
+      }
+    }
+  },
+  "topicUpdatedSuccess": "Тема успешно обновлена!",
+  "noDiscussionsYet": "Пока нет обсуждений.",
+  "beTheFirstToStartConversation": "Начните разговор первым!",
+  "mustBeLoggedInToCreateResource": "Вы должны войти в систему, чтобы создать ресурс.",
+  "profileIncompleteToCreateResource": "Информация вашего профиля неполная. Пожалуйста, обновите свое имя в вашем профиле.",
+  "profileIncompleteToCreateTopic": "Имя вашего профиля не установлено. Пожалуйста, обновите свой профиль.",
+  "commentCannotBeEmpty": "Комментарий не может быть пустым.",
+  "mustBeLoggedInToComment": "Вы должны войти в систему, чтобы оставить комментарий.",
+  "commentAddedSuccessfully": "Комментарий успешно добавлен!",
+  "failedToAddComment": "Не удалось добавить комментарий: {error}",
+  "@failedToAddComment": {
+    "description": "Error message when adding a comment fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postedBy": "Опубликовано {authorName}",
+  "onDate": "в {date}",
+  "repliesTitle": "Ответы",
+  "errorLoadingComments": "Ошибка загрузки комментариев: {error}",
+  "noRepliesYet": "Пока нет ответов. Станьте первым, кто оставит комментарий!",
+  "writeAReplyHint": "Напишите ответ...",
+  "sendCommentTooltip": "Отправить комментарий",
+  "welcomeBack": "С возвращением, {userName}!",
+  "readyToLearnSomethingNew": "Готовы узнать что-то новое сегодня?",
+  "quickAccessTitle": "Быстрый доступ",
+  "communityTitle": "Сообщество",
+  "profileTitle": "Профиль",
+  "latestNewsTitle": "Последние новости",
+  "sourceLabel": "Источник",
+  "quizzesTitle": "Тестовые задания",
+  "urlCannotBeEmpty": "URL не может быть пустым",
+  "errorLoadingNews": "Ошибка загрузки новостей: {error}",
+  "noNewsAvailable": "В данный момент новостей нет.",
+  "adminPanelTitle": "Панель администратора",
+  "manageNewsTitle": "Управление новостями",
+  "manageNewsSubtitle": "Добавление, редактирование или удаление новостных статей",
+  "manageUsersTitle": "Управление пользователями",
+  "manageUsersSubtitle": "Просмотр пользователей и управление ролями (в будущем)",
+  "manageResourcesTitle": "Управление ресурсами",
+  "manageResourcesSubtitle": "Управление всеми учебными ресурсами (в будущем)",
+  "confirmDeleteTitle": "Подтвердить удаление",
+  "confirmDeleteNewsMessage": "Вы уверены, что хотите удалить \"{newsTitle}\"?",
+  "newsDeletedSuccess": "\"{newsTitle}\" успешно удален.",
+  "failedToDeleteNews": "Не удалось удалить \"{newsTitle}\": {error}",
+  "@failedToDeleteNews": {
+    "description": "Error message when deleting news fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "newsTitle": {
+        "type": "Object"
+      }
+    }
+  },
+  "faqTitle": "FAQ",
+  "searchHelp": "Поиск справки...",
+  "allCategories": "Все категории",
+  "helpfulFeedback": "Было ли это полезно?",
+  "noArticlesFound": "Вопросы не найдены",
+  "settingsNotifications": "Уведомления",
+  "changePasswordTitle": "Изменить пароль",
+  "helpCenterTitle": "Центр помощи",
+  "settingsAbout": "О приложении",
+  "passwordUpdatedSuccess": "Пароль успешно обновлен",
+  "errorWrongPassword": "Неверный текущий пароль",
+  "currentPassword": "Текущий пароль",
+  "newPassword": "Новый пароль",
+  "confirmPassword": "Подтвердите пароль",
+  "passwordMismatch": "Пароли не совпадают",
+  "save": "Сохранить",
+  "addNewsTooltip": "Добавить новую новостную статью",
+  "editNewsTooltip": "Редактировать новость",
+  "deleteNewsTooltip": "Удалить новость",
+  "addNewsButton": "Добавить новость",
+  "noNewsAvailableManager": "Нет новостных статей. Добавьте одну!",
+  "editNewsTitle": "Редактировать новость",
+  "addNewsTitle": "Добавить новостную статью",
+  "saveNewsTooltip": "Сохранить новость",
+  "newsTitleLabel": "Заголовок",
+  "pleaseEnterNewsTitle": "Введите заголовок новости",
+  "newsTitleMinLength": "Заголовок новости должен быть не менее {length} символов",
+  "newsSourceLabel": "Источник (например, название блога)",
+  "pleaseEnterNewsSource": "Введите источник новостей",
+  "newsUrlLabel": "URL статьи",
+  "pleaseEnterNewsUrl": "Введите URL статьи",
+  "pleaseEnterValidNewsUrl": "Введите действительный URL (начинающийся с http или https).",
+  "newsImageUrlLabel": "URL изображения (необязательно)",
+  "pleaseEnterValidImageUrl": "Введите действительный URL изображения (начинающийся с http или https) или оставьте поле пустым.",
+  "publicationDateLabel": "Дата публикации",
+  "pleaseSelectPublicationDate": "Выберите дату публикации.",
+  "noDateSelected": "Дата не выбрана",
+  "selectDateTooltip": "Выберите дату",
+  "updateNewsButton": "Обновить новости",
+  "addNewsButtonForm": "Добавить новостную статью",
+  "newsUpdatedSuccess": "\"{newsTitle}\" успешно обновлено.",
+  "newsAddedSuccess": "\"{newsTitle}\" успешно добавлено.",
+  "failedToSaveNews": "Не удалось сохранить новости: {error}",
+  "@failedToSaveNews": {
+    "description": "Error message when saving news fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLoadingUsers": "Ошибка загрузки пользователей: {error}",
+  "noUsersFound": "Пользователи не найдены.",
+  "noEmailProvided": "Адрес электронной почты не указан",
+  "roleLabel": "Роль",
+  "registeredOnLabel": "Зарегистрирован",
+  "manageUsersSubtitleNow": "Просмотр и поиск зарегистрированных пользователей",
+  "manageResourcesSubtitleNow": "Просмотр, редактирование или удаление любого учебного ресурса",
+  "confirmDeleteResourceMessage": "Вы уверены, что хотите удалить ресурс \"{resourceTitle}\"?",
+  "resourceDeletedSuccess": "Ресурс \"{resourceTitle}\" успешно удален.",
+  "failedToDeleteResource": "Не удалось удалить ресурс \"{resourceTitle}\": {error}",
+  "@failedToDeleteResource": {
+    "description": "Error message when deleting resource fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "resourceTitle": {
+        "type": "Object"
+      }
+    }
+  },
+  "errorLoadingResources": "Ошибка загрузки ресурсов: {error}",
+  "noResourcesFoundManager": "Ресурсы в системе не найдены.",
+  "editResourceTooltip": "Изменить ресурс",
+  "deleteResourceTooltip": "Удалить ресурс",
+  "manageQuizzesTitle": "Управление тестами",
+  "addQuizTooltip": "Добавить новый тест",
+  "errorLoadingQuizzesAdmin": "Ошибка загрузки тестов: {error}",
+  "noQuizzesFoundManager": "Тестов не найдено. Добавьте один!",
+  "confirmDeleteQuizMessage": "Вы уверены, что хотите удалить тест \"{quizTitle}\" и все его вопросы? Это действие нельзя отменить.",
+  "quizDeletedSuccess": "Тест \"{quizTitle}\" и его вопросы успешно удалены.",
+  "failedToDeleteQuiz": "Не удалось удалить тест \"{quizTitle}\": {error}",
+  "@failedToDeleteQuiz": {
+    "description": "Error message when deleting quiz fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "quizTitle": {
+        "type": "Object"
+      }
+    }
+  },
+  "editDetailsButton": "Изменить сведения",
+  "manageQuestionsButton": "Вопросы",
+  "deleteQuizTooltip": "Удалить тест и Вопросы",
+  "addQuizButton": "Добавить тест",
+  "manageQuizzesSubtitle": "Контролировать все тесты и их вопросы",
+  "registrationEmailError": "Введите действительный адрес электронной почты",
+  "@registrationEmailError": {
+    "description": "Сообщение об ошибке при неверном адресе электронной почты"
+  },
+  "dashboardXodimTitle": "Моя активность",
+  "@dashboardXodimTitle": {
+    "description": "Заголовок для раздела панели управления обычного сотрудника"
+  },
+  "dashboardEkspertTitle": "Мой вклад",
+  "@dashboardEkspertTitle": {
+    "description": "Заголовок для раздела панели управления эксперта"
+  },
+  "dashboardAdminTitle": "Обзор системы",
+  "@dashboardAdminTitle": {
+    "description": "Заголовок для раздела панели управления администратора"
+  },
+  "seeAllButton": "Посмотреть все",
+  "@seeAllButton": {
+    "description": "Кнопка для просмотра всех элементов в списке"
+  },
+  "noGuidesAuthored": "Вы еще не создали ни одного руководства.",
+  "@noGuidesAuthored": {
+    "description": "Сообщение, отображаемое, когда эксперт еще не создал ни одного руководства."
+  },
+  "adminStatUsers": "Пользователи",
+  "@adminStatUsers": {
+    "description": "Метка для статистики общего числа пользователей в панели администратора."
+  },
+  "adminStatGuides": "Руководства",
+  "@adminStatGuides": {
+    "description": "Метка для статистики общего числа руководств в панели администратора."
+  },
+  "adminStatQuizzes": "Викторины",
+  "@adminStatQuizzes": {
+    "description": "Метка для статистики общего числа викторин в панели администратора."
+  },
+  "orDivider": "ИЛИ",
+  "@orDivider": {
+    "description": "Текст-разделитель, например 'ИЛИ', между вариантами входа."
+  },
+  "signInWithGoogle": "Войти через Google",
+  "@signInWithGoogle": {
+    "description": "Текст кнопки для входа с помощью учетной записи Google."
+  },
+  "themeSystemDefault": "Системный",
+  "themeLight": "Светлая тема",
+  "themeDark": "Темная тема",
+  "bioOptionalLabel": "Био (необязательно)",
+  "profilePictureUrlLabel": "URL изображения профиля (необязательно)",
+  "levelBeginner": "Начинающий",
+  "levelIntermediate": "Средний",
+  "levelAdvanced": "Продвинутый",
+  "levelExpert": "Эксперт",
+  "totalPoints": "Всего очков",
+  "nextLevel": "Следующий уровень",
+  "pointsToNextLevel": "{points} XP до следующего уровня",
+  "manageArticlesTitle": "Статьи",
+  "manageArticlesSubtitle": "Управление базой знаний",
+  "manageVideosTitle": "Видео",
+  "manageVideosSubtitle": "Управление видеоуроками",
+  "manageSystemsTitle": "Системы",
+  "manageSystemsSubtitle": "Управление справочником систем",
+  "manageFaqTitle": "FAQ",
+  "manageFaqSubtitle": "Управление частыми вопросами",
+  "manageNotificationsTitle": "Уведомления",
+  "manageNotificationsSubtitle": "Отправить уведомления",
+  "selectLanguage": "Выберите язык",
+  "languageEnglish": "Английский",
+  "languageUzbek": "Узбекский",
+  "languageRussian": "Русский",
+  "topicDeletedSuccess": "Тема \"{topicTitle}\" успешно удалена.",
+  "failedToDeleteTopic": "Не удалось удалить тему: {error}",
+  "deleteTopicConfirmMessage": "Вы уверены, что хотите удалить тему \"{topicTitle}\"?",
+  "editTopicTooltip": "Редактировать тему",
+  "deleteTopicConfirmTitle": "Удалить тему",
+  "commentPlural": "Комментарии",
+  "commentSingular": "Комментарий",
+  "deleteTopicTooltip": "Удалить тему",
+  "bottomNavKnowledge": "База знаний",
+  "@bottomNavKnowledge": {
+    "description": "Пункт навигации для экрана базы знаний"
+  },
+  "allCategories": "Все категории",
+  "@allCategories": {
+    "description": "Фильтр для отображения всех категорий"
+  },
+  "noArticlesFound": "Статьи не найдены.",
+  "@noArticlesFound": {
+    "description": "Сообщение при отсутствии статей"
+  },
+  "articleDetailTitle": "Детали статьи",
+  "@articleDetailTitle": {
+    "description": "Заголовок для экрана деталей статьи"
+  },
+  "helpfulFeedback": "Была ли эта статья полезной?",
+  "@helpfulFeedback": {
+    "description": "Запрос обратной связи о полезности статьи"
+  },
+  "feedbackThanks": "Спасибо за ваш отзыв!",
+  "@feedbackThanks": {
+    "description": "Сообщение, отображаемое после предоставления отзыва"
+  },
+  "shareArticle": "Поделиться статьей",
+  "@shareArticle": {
+    "description": "Подсказка для кнопки \"Поделиться\""
+  },
+  "downloadPdf": "Скачать PDF",
+  "@downloadPdf": {
+    "description": "Подсказка для кнопки скачивания PDF"
+  },
+  "articlePinned": "Закреплено",
+  "@articlePinned": {
+    "description": "Метка для закрепленной статьи"
+  },
+  "confirmDeleteArticleMessage": "Вы уверены, что хотите удалить статью \"{articleTitle}\"?",
+  "articleSavedSuccess": "Статья сохранена",
+  "addArticleTitle": "Новая статья",
+  "editArticleTitle": "Редактировать статью",
+  "categoryLabel": "Категория",
+  "articleCategoryGeneral": "Общее",
+  "articleCategoryProcedure": "Процедура",
+  "articleCategoryLaw": "Законодательство",
+  "articleCategoryFaq": "Часто задаваемые вопросы",
+  "contentLabel": "Содержание (Markdown)",
+  "tagsLabel": "Теги (через запятую)",
+  "tagsHint": "например: суд, закон, кодекс",
+  "noPdfSelected": "PDF файл не выбран",
+  "uploadPdfTooltip": "Загрузить PDF",
+  "currentFileLabel": "Текущий файл: {url}",
+  "existingPdfFile": "Существующий PDF файл",
+  "titleRequired": "Требуется заголовок",
+  "contentRequired": "Требуется содержание",
+  "confirmDeleteVideoMessage": "Вы уверены, что хотите удалить видео \"{videoTitle}\"?",
+  "videoDeletedSuccess": "Видео удалено",
+  "noVideosFound": "Видео не найдено",
+  "videoSavedSuccess": "Видео сохранено",
+  "addVideoTitle": "Новое видео",
+  "editVideoTitle": "Редактировать видео",
+  "youtubeIdLabel": "YouTube ID",
+  "youtubeIdHint": "например: dQw4w9WgXcQ",
+  "youtubeIdRequired": "Требуется YouTube ID",
+  "systemOptionalLabel": "Система (необязательно)",
+  "notSelectedLabel": "Не выбрано",
+  "durationLabel": "Длительность (секунды)",
+  "durationHint": "например: 600",
+  "durationRequired": "Требуется длительность",
+  "videoTagsHint": "например: вход, ошибка, настройки",
+  "descriptionLabel": "Описание",
+  "descriptionRequired": "Требуется описание",
+  "confirmDeleteSystemMessage": "Вы уверены, что хотите удалить систему \"{systemName}\"?",
+  "systemDeletedSuccess": "Система удалена",
+  "noSystemsFound": "Системы не найдены",
+  "systemSavedSuccess": "Система сохранена",
+  "addSystemTitle": "Новая система",
+  "editSystemTitle": "Редактировать систему",
+  "shortNameLabel": "Короткое название",
+  "shortNameHint": "например: e-SUD",
+  "nameRequired": "Требуется название",
+  "fullNameLabel": "Полное название",
+  "fullNameRequired": "Требуется полное название",
+  "websiteUrlLabel": "URL веб-сайта",
+  "urlRequired": "Требуется URL",
+  "logoUrlLabel": "URL логотипа",
+  "logoUrlRequired": "Требуется URL логотипа",
+  "statusLabel": "Статус",
+  "loginGuideIdLabel": "ID руководства по входу (необязательно)",
+  "videoGuideIdLabel": "ID видеоруководства (необязательно)",
+  "confirmDeleteFaqMessage": "Вы уверены, что хотите удалить вопрос \"{question}\"?",
+  "faqDeletedSuccess": "Вопрос удален",
+  "noFaqsFound": "Вопросы не найдены",
+  "addFaqTitle": "Новый вопрос",
+  "editFaqTitle": "Редактировать вопрос",
+  "faqSavedSuccess": "Вопрос сохранен",
+  "questionLabel": "Вопрос",
+  "questionRequired": "Требуется вопрос",
+  "answerLabel": "Ответ (Markdown)",
+  "answerRequired": "Требуется ответ",
+  "add": "Добавить",
+  "titleLabel": "Заголовок",
+  "edit": "Редактировать",
+  "delete": "Удалить",
+  "cancel": "Отмена",
+  "search": "Поиск...",
+  "fieldRequired": "Поле обязательно для заполнения",
+  "confirmDelete": "Вы уверены, что хотите удалить?",
+  "successSaved": "Успешно сохранено",
+  "successDeleted": "Успешно удалено",
+  "notificationManagementTitle": "Управление уведомлениями",
+  "notificationHistoryTitle": "История уведомлений",
+  "notificationHistoryPlaceholder": "Здесь будет отображаться история отправленных уведомлений (скоро).",
+  "sendNewNotificationButton": "Отправить новое уведомление",
+  "sendNotificationTitle": "Отправить уведомление",
+  "notificationSentSuccess": "Уведомление отправлено",
+  "notificationTitleLabel": "Заголовок",
+  "notificationTitleRequired": "Требуется заголовок",
+  "notificationBodyLabel": "Текст сообщения",
+  "notificationBodyRequired": "Требуется текст сообщения",
+  "notificationTypeLabel": "Тип уведомления",
+  "targetAudienceLabel": "Аудитория",
+  "resourceTabArticles": "Статьи",
+  "resourceTabVideos": "Видео",
+  "resourceTabFiles": "Файлы",
+  "filesTabTitle": "Файлы",
+  "systemsDirectoryTitle": "Справочник Судебных Систем",
+  "bookmarkSaveTooltip": "Сохранить",
+  "bookmarkRemoveTooltip": "Удалить из сохраненных",
+  "resourceTypeOther": "Другое",
+  "openFile": "Открыть файл",
+  "fileSize": "Размер файла",
+  "selectFile": "Выбрать файл",
+  "upload": "Загрузить",
+  "processing": "Обработка...",
+  "urlLabel": "Ссылка (URL)",
+  "resourceTypePDF": "PDF Руководство",
+  "resourceTypeVideo": "Видеоурок",
+  "resourceTypeLink": "Веб-ссылка",
+  "faqCategoryLogin": "Проблемы со входом",
+  "faqCategoryPassword": "Проблемы с паролем",
+  "faqCategoryUpload": "Загрузка файлов",
+  "faqCategoryAccess": "Права доступа",
+  "faqCategoryGeneral": "Общие вопросы",
+  "faqCategoryTechnical": "Технические проблемы",
+  "authorLabel": "Автор",
+  "dateAddedLabel": "Добавлено",
+  "launchingUrlMessage": "Запуск URL...",
+  "resourceUpdatedSuccess": "Ресурс успешно обновлен!",
+  "resourceUpdatedError": "Ошибка при обновлении ресурса: {error}",
+  "onlySaved": "Только сохраненные",
+  "searchArticlesPlaceholder": "Поиск статей...",
+  "filterAll": "Все",
+  "noResultsFound": "Результатов не найдено",
+  "noArticlesAvailable": "Статьи недоступны",
+  "noVideosAvailable": "Видео недоступны",
+  "actionCreateDiscussion": "Создать обсуждение",
+  "actionCreateResource": "Создать ресурс",
+  "actionCreateQuiz": "Создать тест",
+  "notificationsTitle": "Уведомления",
+  "loginRequired": "Требуется вход",
+  "markAllAsReadTooltip": "Отметить все как прочитанные",
+  "allNotificationsReadMessage": "Все уведомления отмечены как прочитанные",
+  "noNotifications": "Нет уведомлений",
+  "closeAction": "Закрыть",
+  "leaderboardTitle": "Таблица лидеров",
+  "pointsEarned": "Вы заработали {points} XP!",
+  "levelUp": "Поздравляем! Новый уровень: {level}",
+  "rank": "Место",
+  "quizHistoryTitle": "История викторин",
+  "seeAll": "Показать все",
+  "today": "Сегодня",
+  "yesterday": "Вчера",
+  "thisWeek": "На этой неделе",
+  "older": "Старые результаты",
+  "contactSupport": "Поддержка",
+
+  "landingTitle": "Профессиональная Платформа",
+  "landingSubtitle": "Повышайте свои правовые знания. В любое время.",
+  "landingLogin": "Войти",
+  "landingRegister": "Регистрация",
+  "featureKnowledgeBase": "База Знаний",
+  "featureKnowledgeBaseDesc": "Доступ к обширной библиотеке правовых ресурсов.",
+  "featureVideoTutorials": "Видеоуроки",
+  "featureVideoTutorialsDesc": "Учитесь по видео-руководствам от экспертов.",
+  "featureGamification": "Геймификация",
+  "featureGamificationDesc": "Зарабатывайте XP, значки и соревнуйтесь в рейтинге.",
+  "analyticsTitle": "Аналитика Обучения (xAPI)",
+  "analyticsSubtitle": "Учебные Записи",
+  "totalRecords": "Всего Записей",
+  "realTime": "В реальном времени",
+  "activityDistribution": "Распределение Активности",
+  "recentActivityFeed": "Лента Недавней Активности",
+  "noRecords": "Учебные записи пока не найдены.",
+  "unknownUser": "Неизвестный Пользователь",
+  "unknownObject": "Неизвестный Объект",
+  "justNow": "Только что",
+  "quizzes": "Викторины",
+  "simulations": "Симуляции",
+  "nextLevel": "Следующий уровень",
+  "catNewEmployees": "Новые сотрудники",
+  "catIctSpecialists": "ИКТ специалисты",
+  "catSystems": "Системы",
+  "catAuth": "Аутентификация",
+  "catGeneral": "Общее",
+  "rankBeginner": "Начинающий",
+  "rankIntermediate": "Средний уровень",
+  "rankAdvanced": "Продвинутый",
+  "sysCatPrimary": "Основные системы",
+  "sysCatSecondary": "Дополнительные системы",
+  "sysCatSupport": "Системы поддержки",
+  "sysStatusActive": "Активно",
+  "sysStatusMaintenance": "Техподдержка",
+  "sysStatusInactive": "Неактивно",
+  "videoViews": "{count} просмотров",
+  "@videoViews": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "videoAuthorSubtitle": "Автор",
+  "videoDescriptionTitle": "Описание",
+  "sysStatusDeprecated": "Устарело",
+  "sysStatusOffline": "Отключено",
+  "systemsDirectoryAll": "Все",
+  "systemsDirectoryError": "Произошла ошибка: {error}",
+  "@systemsDirectoryError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "systemsDirectoryEmpty": "Системы отсутствуют",
+  "quizResults": "Результаты теста",
+  "yourScore": "Ваш результат",
+  "backToKnowledgeBase": "Вернуться к руководствам",
+  "quizSuccessMessage": "Отличный результат!",
+  "quizFailureMessage": "Попробуйте еще раз!",
+  "failedToLoadQuiz": "Не удалось загрузить тест",
+  "failedToSaveAttempt": "Ошибка при сохранении результата",
+  "quizNotFound": "Тест не найден",
+  "submitQuiz": "Завершить",
+  "nextQuestion": "Следующий вопрос",
+  "question": "Вопрос {index}",
+  "@question": {
+    "placeholders": {
+      "index": {
+        "type": "String"
+      }
+    }
+  },
+  "speedBonus": "СКОРОСТНОЙ БОНУС",
+  "levelBeginner": "Новичок",
+  "levelSpecialist": "Специалист",
+  "levelExpert": "Эксперт",
+  "levelMaster": "Мастер",
+  "totalQuestions": "Всего: {total}",
+  "@totalQuestions": {
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "errorCouldNotOpenLink": "Не удалось открыть ссылку",
+  "errorResourceNotFound": "Ресурс не найден",
+  "errorVideoNotFound": "Видео не найдено",
+  "errorPdfOpen": "Не удалось открыть PDF файл",
+  "errorTelegramOpen": "Не удалось открыть ссылку Telegram",
+  "errorGeneric": "Произошла ошибка: {error}",
+  "@errorGeneric": {
+    "placeholders": {
+      "error": {
+        "type": "Object"
+      }
+    }
+  },
+  "labelTrue": "Верно",
+  "labelFalse": "Неверно",
+  "labelPass": "ЗАЧТЕНО",
+  "labelFail": "НЕ ЗАЧТЕНО",
+  "labelPdfAvailable": "PDF доступен",
+  "actionOk": "ОК",
+  "actionGoBack": "Назад",
+  "searchNoResults": "Результатов не найдено"
+}
