@@ -42,7 +42,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (success) {
       if (mounted) {
-        // AuthWrapper handles navigation
+        // AuthWrapper handles the page display, but we need to remove LoginScreen from the stack
+        Navigator.of(context).popUntil((route) => route.isFirst);
       }
     } else {
       if (mounted && authNotifier.errorMessage != null) {
@@ -59,7 +60,12 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _googleSignIn() async {
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
     final success = await authNotifier.signInWithGoogle();
-    if (!success && mounted && authNotifier.errorMessage != null) {
+    
+    if (success) {
+      if (mounted) {
+       Navigator.of(context).popUntil((route) => route.isFirst);
+      }
+    } else if (mounted && authNotifier.errorMessage != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(authNotifier.errorMessage!),

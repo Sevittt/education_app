@@ -60,8 +60,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     if (!mounted) return;
     if (success) {
-      // On success, the AuthWrapper will handle navigation to HomePage
-      // No need to call Navigator.of(context).pushReplacement here
+       Navigator.of(context).popUntil((route) => route.isFirst);
     } else if (authNotifier.errorMessage != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -76,7 +75,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Future<void> _googleSignIn() async {
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
     final success = await authNotifier.signInWithGoogle();
-    if (!success && mounted && authNotifier.errorMessage != null) {
+    
+    if (success) {
+      if (mounted) {
+       Navigator.of(context).popUntil((route) => route.isFirst);
+      }
+    } else if (mounted && authNotifier.errorMessage != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(authNotifier.errorMessage!),
@@ -84,7 +88,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         ),
       );
     }
-    // Successful login is handled by the wrapper, which will navigate away
   }
   // --- END NEW ---
 
