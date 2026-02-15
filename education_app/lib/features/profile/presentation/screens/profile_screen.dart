@@ -183,7 +183,7 @@ class ProfileScreen extends StatelessWidget {
          borderRadius: BorderRadius.circular(20),
          boxShadow: [
            BoxShadow(
-             color: Colors.black.withOpacity(0.2), // Darker shadow for glass
+             color: Colors.black.withValues(alpha: 0.2), // Darker shadow for glass
              blurRadius: 8,
              offset: const Offset(0, 4),
            ),

@@ -102,11 +102,18 @@ class HomeDashboardScreen extends StatelessWidget {
 
     final newsNotifier = Provider.of<NewsNotifier>(context, listen: false);
 
-    return Container(
-      decoration: BoxDecoration(
-        gradient: isDark ? AppColors.darkGlassGradient : AppColors.primaryGradient,
-        // Optional: Add pattern/image opacity like login screen if desired
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AiChatScreen())),
+        backgroundColor: AppColors.primary,
+        heroTag: 'ai_chat_fab',
+        child: const Icon(Icons.auto_awesome, color: Colors.white),
       ),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: isDark ? AppColors.darkGlassGradient : AppColors.primaryGradient,
+        ),
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -124,10 +131,48 @@ class HomeDashboardScreen extends StatelessWidget {
               Text(
                 l10n.readyToLearnSomethingNew,
                 style: theme.textTheme.titleMedium?.copyWith(
-                  color: Colors.white.withOpacity(0.9),
+                  color: Colors.white.withValues(alpha: 0.9),
                 ),
               ),
-              const SizedBox(height: 28.0),
+              const SizedBox(height: 16.0),
+
+              // --- Global Search Bar ---
+              GlassCard(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                borderRadius: 16,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const GlobalSearchScreen()),
+                  );
+                },
+                child: Row(
+                  children: [
+                    Icon(Icons.search, color: Colors.white.withValues(alpha: 0.7)),
+                    const SizedBox(width: 12),
+                    Text(
+                      '${l10n.search}',
+                      style: TextStyle(
+                        color: Colors.white.withValues(alpha: 0.6),
+                        fontSize: 16,
+                      ),
+                    ),
+                    const Spacer(),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Text(
+                        '🔍',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20.0),
 
               // --- Quick Access Section ---
               Text(
@@ -317,6 +362,7 @@ class HomeDashboardScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
       ),
     );
   }

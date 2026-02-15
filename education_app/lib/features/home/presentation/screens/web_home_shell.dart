@@ -63,7 +63,13 @@ class _WebHomeShellState extends State<WebHomeShell> {
       ),
       child: Row(
         children: [
-          const SizedBox(width: 20),
+          const SizedBox(width: 8),
+          IconButton(
+            icon: Icon(_isMenuOpen ? Icons.menu_open : Icons.menu),
+            onPressed: _toggleMenu,
+            color: Colors.grey.shade700,
+          ),
+          const SizedBox(width: 8),
           Image.asset(
             'assets/images/app_logo.png',
             height: 40,
@@ -106,16 +112,7 @@ class _WebHomeShellState extends State<WebHomeShell> {
       ),
       child: Column(
         children: [
-          // Toggle Button
-          Align(
-            alignment: Alignment.centerRight,
-            child: IconButton(
-              icon: Icon(_isMenuOpen ? Icons.chevron_left : Icons.menu),
-              onPressed: _toggleMenu,
-              color: Colors.grey.shade600,
-            ),
-          ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 16),
           
           // Menu Items
           _buildMenuItem(
@@ -160,13 +157,17 @@ class _WebHomeShellState extends State<WebHomeShell> {
       waitDuration: const Duration(milliseconds: 500),
       child: InkWell(
         onTap: () => widget.onDestinationSelected(index),
+        borderRadius: BorderRadius.circular(8),
         child: Container(
           height: 50,
           margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
-            color: isSelected ? theme.colorScheme.primaryContainer : null,
+            color: isSelected ? theme.colorScheme.primary.withValues(alpha: 0.1) : null,
             borderRadius: BorderRadius.circular(8),
+             border: isSelected ? Border(
+              left: BorderSide(color: theme.colorScheme.primary, width: 4),
+            ) : null,
           ),
           child: Row(
             mainAxisAlignment: _isMenuOpen ? MainAxisAlignment.start : MainAxisAlignment.center,
@@ -182,7 +183,7 @@ class _WebHomeShellState extends State<WebHomeShell> {
                     label,
                     style: TextStyle(
                       color: isSelected ? theme.colorScheme.primary : Colors.grey.shade700,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),

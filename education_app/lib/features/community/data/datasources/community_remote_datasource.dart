@@ -9,6 +9,7 @@ abstract class CommunityRemoteDataSource {
   Future<void> deleteTopic(String topicId);
   Stream<List<CommentModel>> getCommentsForTopic(String topicId);
   Future<void> addComment(String topicId, Map<String, dynamic> data);
+  Future<void> updateTopic(String topicId, Map<String, dynamic> data);
 }
 
 class CommunityRemoteDataSourceImpl implements CommunityRemoteDataSource {
@@ -34,6 +35,14 @@ class CommunityRemoteDataSourceImpl implements CommunityRemoteDataSource {
       ...data,
       'createdAt': FieldValue.serverTimestamp(),
       'commentCount': 0,
+    });
+  }
+
+  @override
+  Future<void> updateTopic(String topicId, Map<String, dynamic> data) async {
+    await _firestore.collection('discussion_topics').doc(topicId).update({
+      ...data,
+      'updatedAt': FieldValue.serverTimestamp(),
     });
   }
 

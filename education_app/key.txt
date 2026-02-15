@@ -1,0 +1,417 @@
+To integrate reCAPTCHA Enterprise with your Flutter app, you'll generally follow these steps:
+
+Register a reCAPTCHA Enterprise Key:
+Navigate to the reCAPTCHA Enterprise section in the Google Cloud Console.
+Create a new reCAPTCHA key. When configuring the key, specify the type of integration (e.g., website, Android app, iOS app). For a Flutter web app, you'd typically choose a "Website" key.
+You'll receive a site key (public key) which your Flutter frontend will use.
+Add reCAPTCHA to your Flutter Web App:
+Load the reCAPTCHA JavaScript API: In your Flutter index.html file (located in the web directory of your Flutter project), you'll need to include the reCAPTCHA Enterprise JavaScript API script, referencing your site key.
+
+<head>
+  <script src="https://www.google.com/recaptcha/enterprise.js?render=YOUR_SITE_KEY"></script>
+  <!-- Other head content -->
+</head>
+ my site key: "6LcXt2ksAAAAACBflTwfsXe9yUDY6s9S1pLAqoZB"
+
+Replace YOUR_SITE_KEY with the key you obtained in the previous step.
+Execute reCAPTCHA: In your Flutter code, when a user performs an action you want to protect (like submitting a login form), you'll need to call the grecaptcha.enterprise.execute function. This will generate a reCAPTCHA token. Since Flutter web runs in the browser, you can use JavaScript interop packages (like js or flutter_js ) to call this JavaScript function from your Dart code.
+
+// Example using a hypothetical js interop for illustration
+import 'dart:js' as js;
+
+Future<String> executeRecaptcha(String siteKey, String action) async {
+  final completer = Completer<String>();
+  js.context['grecaptcha']['enterprise'].callMethod(
+    'ready',
+    [
+      js.allowInterop(() async {
+        final token = await js.context['grecaptcha']['enterprise'].callMethod(
+          'execute',
+          [siteKey, js.JsObject.jsify({'action': action})]
+        );
+        completer.complete(token.toString());
+      })
+    ]
+  );
+  return completer.future;
+}
+
+// In your Flutter widget:
+ElevatedButton(
+  onPressed: () async {
+    final token = await executeRecaptcha('YOUR_SITE_KEY', 'LOGIN');
+    // Send this token to your backend for verification
+  },
+  child: Text('Login'),
+)
+
+
+The exact implementation for calling JavaScript from Flutter might vary slightly based on the interop package you choose.
+Verify the reCAPTCHA Token on your Backend:
+After your Flutter app gets the reCAPTCHA token, it needs to send this token to your backend server.
+Your backend server then makes a request to the reCAPTCHA Enterprise verification API, sending the token and your secret key (which should never be exposed in your frontend).
+reCAPTCHA Enterprise will respond with a risk score and other details, indicating whether the interaction is likely legitimate or bot-driven. Your backend should use this information to decide whether to proceed with the user's action.
+By following these steps, you can effectively integrate reCAPTCHA Enterprise into your Flutter web application to protect against bot attacks.
+
+# reCAPTCHA Enterprise Key
+
+Authenticate to reCAPTCHA
+
+
+This document describes how to authenticate to reCAPTCHA programmatically. How you authenticate to reCAPTCHA depends on the interface you use to access the API and the environment where your code is running.
+
+For more information about Google Cloud authentication, see the Authentication methods.
+
+API access
+reCAPTCHA supports programmatic access. You can access the API in the following ways:
+
+Client libraries
+Google Cloud CLI
+REST
+Client libraries
+The reCAPTCHA client libraries provide high-level language support for authenticating to reCAPTCHA programmatically. To authenticate calls to Google Cloud APIs, client libraries support Application Default Credentials (ADC); the libraries look for credentials in a set of defined locations and use those credentials to authenticate requests to the API. With ADC, you can make credentials available to your application in a variety of environments, such as local development or production, without needing to modify your application code.
+
+Google Cloud CLI
+When you use the gcloud CLI to access reCAPTCHA, you log in to the gcloud CLI with a user account, which provides the credentials used by the gcloud CLI commands.
+
+If your organization's security policies prevent user accounts from having the required permissions, you can use service account impersonation.
+
+For more information, see Authenticate for using the gcloud CLI. For more information about using the gcloud CLI with reCAPTCHA, see the gcloud CLI reference pages.
+
+REST
+You can authenticate to the reCAPTCHA API by using your gcloud CLI credentials or by using Application Default Credentials. For more information about authentication for REST requests, see Authenticate for using REST. For information about the types of credentials, see gcloud CLI credentials and ADC credentials.
+
+API keys
+API keys provide a way to associate an API call with a project, which is used for billing and quota purposes, without determining the identity of the caller. API keys can be used only with API methods that support API keys.
+
+reCAPTCHA supports API keys for the following API methods:
+
+projects.assessments.create
+projects.assessments.annotate
+ListRelatedAccountGroupMemberships
+ListRelatedAccountGroups
+SearchRelatedAccountGroupMemberships
+ListFirewallPolicies
+For general information about using API keys, see Authenticate using API keys.
+
+Set up authentication for reCAPTCHA
+How you set up authentication depends on the environment where your code is running.
+
+The following options for setting up authentication are the most commonly used. For more options and information about authentication, see Authentication methods.
+
+For a local development environment
+You can set up credentials for a local development environment in the following ways:
+
+User credentials for client libraries or third-party tools
+User credentials for REST requests from the command line
+Service account impersonation
+Client libraries or third-party tools
+Set up Application Default Credentials (ADC) in your local environment:
+
+Install the Google Cloud CLI. After installation, initialize the Google Cloud CLI by running the following command:
+
+
+
+gcloud init
+If you're using an external identity provider (IdP), you must first sign in to the gcloud CLI with your federated identity.
+
+If you're using a local shell, then create local authentication credentials for your user account:
+
+
+
+gcloud auth application-default login
+You don't need to do this if you're using Cloud Shell.
+
+If an authentication error is returned, and you are using an external identity provider (IdP), confirm that you have signed in to the gcloud CLI with your federated identity.
+
+A sign-in screen appears. After you sign in, your credentials are stored in the local credential file used by ADC.
+
+For more information about working with ADC in a local environment, see Set up ADC for a local development environment.
+
+REST requests from the command line
+When you make a REST request from the command line, you can use your gcloud CLI credentials by including gcloud auth print-access-token as part of the command that sends the request.
+
+The following example lists service accounts for the specified project. You can use the same pattern for any REST request.
+
+Before using any of the request data, make the following replacements:
+
+PROJECT_ID: Your Google Cloud project ID.
+To send your request, expand one of these options:
+
+PowerShell (Windows):
+Execute the following command:
+
+$cred = gcloud auth print-access-token
+$headers = @{ "Authorization" = "Bearer $cred" }
+
+Invoke-WebRequest `
+    -Method GET `
+    -Headers $headers `
+    -Uri "https://iam.googleapis.com/v1/projects/PROJECT_ID/serviceAccounts" | Select-Object -Expand Content
+
+For more information about authenticating using REST and gRPC, see Authenticate for using REST. For information about the difference between your local ADC credentials and your gcloud CLI credentials, see gcloud CLI authentication configuration and ADC configuration.
+
+Service account impersonation
+In most cases, you can use your user credentials to authenticate from a local development environment. If that is not feasible, or if you need to test the permissions assigned to a service account, you can use service account impersonation. You must have the iam.serviceAccounts.getAccessToken permission, which is included in the Service Account Token Creator (roles/iam.serviceAccountTokenCreator) IAM role.
+
+You can set up the gcloud CLI to use service account impersonation by using the gcloud config set command:
+
+
+
+gcloud config set auth/impersonate_service_account SERVICE_ACCT_EMAIL
+For select languages, you can use service account impersonation to create a local ADC file for use by client libraries. This approach is supported only for the Go, Java, Node.js, and Python client libraries—it is not supported for the other languages. To set up a local ADC file with service account impersonation, use the --impersonate-service-account flag with the gcloud auth application-default login command:
+
+
+
+gcloud auth application-default login --impersonate-service-account=SERVICE_ACCT_EMAIL
+For more information about service account impersonation, see Use service account impersonation.
+
+On Google Cloud
+To authenticate a workload running on Google Cloud, you use the credentials of the service account attached to the compute resource where your code is running, such as a Compute Engine virtual machine (VM) instance. This approach is the preferred authentication method for code running on a Google Cloud compute resource.
+
+For most services, you must attach the service account when you create the resource that will run your code; you cannot add or replace the service account later. Compute Engine is an exception—it lets you attach a service account to a VM instance at any time.
+
+Use the gcloud CLI to create a service account and attach it to your resource:
+
+Install the Google Cloud CLI. After installation, initialize the Google Cloud CLI by running the following command:
+
+
+
+gcloud init
+If you're using an external identity provider (IdP), you must first sign in to the gcloud CLI with your federated identity.
+
+Set up authentication:
+
+Ensure that you have the Create Service Accounts IAM role (roles/iam.serviceAccountCreator) and the Project IAM Admin role (roles/resourcemanager.projectIamAdmin). Learn how to grant roles.
+Create the service account:
+
+
+
+gcloud iam service-accounts create SERVICE_ACCOUNT_NAME
+Replace SERVICE_ACCOUNT_NAME with a name for the service account.
+
+To provide access to your project and your resources, grant a role to the service account:
+
+
+
+gcloud projects add-iam-policy-binding PROJECT_ID --member="serviceAccount:SERVICE_ACCOUNT_NAME@PROJECT_ID.iam.gserviceaccount.com" --role=ROLE
+Replace the following:
+
+SERVICE_ACCOUNT_NAME: the name of the service account
+PROJECT_ID: the project ID where you created the service account
+ROLE: the role to grant
+Note: The --role flag affects which resources the service account can access in your project. You can revoke these roles or grant additional roles later. In production environments, do not grant the Owner, Editor, or Viewer roles. Instead, grant a predefined role or custom role that meets your needs.
+To grant another role to the service account, run the command as you did in the previous step.
+Grant the required role to the principal that will attach the service account to other resources.
+
+
+
+gcloud iam service-accounts add-iam-policy-binding SERVICE_ACCOUNT_NAME@PROJECT_ID.iam.gserviceaccount.com --member="user:USER_EMAIL" --role=roles/iam.serviceAccountUser
+Replace the following:
+
+SERVICE_ACCOUNT_NAME: the name of the service account
+PROJECT_ID: the project ID where you created the service account
+USER_EMAIL: the email address for a Google Account
+Create the resource that will run your code, and attach the service account to that resource. For example, if you use Compute Engine:
+
+Create a Compute Engine instance. Configure the instance as follows:
+Replace INSTANCE_NAME with your preferred instance name.
+Set the --zone flag to the zone in which you want to create your instance.
+Set the --service-account flag to the email address for the service account that you created.
+
+
+gcloud compute instances create INSTANCE_NAME --zone=ZONE --service-account=SERVICE_ACCOUNT_EMAIL
+For more information about authenticating to Google APIs, see Authentication methods.
+
+On-premises or on a different cloud provider
+The preferred method to set up authentication from outside of Google Cloud is to use workload identity federation. For more information, see Set up ADC for on-premises or another cloud provider in the authentication documentation.
+
+Access control for reCAPTCHA
+After you authenticate to reCAPTCHA, you must be authorized to access Google Cloud resources. reCAPTCHA uses Identity and Access Management (IAM) for authorization.
+
+For more information about the roles for reCAPTCHA, see Access control with IAM. For more information about IAM and authorization, see IAM overview.
+
+Access control with IAM
+
+
+reCAPTCHA offers Role-Based Access Control (RBAC) with Identity and Access Management (IAM) and access control for reCAPTCHA APIs using VPC Service Controls.
+
+Role-based access control with IAM
+IAM lets you give granular access to specific Google Cloud resources and prevents unwanted access to other resources, such as logs and analytics.
+
+This section describes the IAM roles for reCAPTCHA.
+
+To learn how to assign IAM roles to a user or service account, read Granting, changing, and revoking access to resources in the IAM documentation.
+
+Roles and permissions
+The following table lists the necessary IAM roles and their permissions for reCAPTCHA:
+
+Enter a role or permission
+3 results
+Role	                                                                      Permissions
+reCAPTCHA Enterprise Admin 
+(roles/recaptchaenterprise.admin)
+
+Access to view and modify reCAPTCHA Enterprise keys
+
+                                                                            monitoring.timeSeries.list
+
+                                                                            recaptchaenterprise.firewallpolicies.*
+                                                                              recaptchaenterprise.firewallpolicies.create
+                                                                            recaptchaenterprise.firewallpolicies.delete
+                                                                            recaptchaenterprise.firewallpolicies.get
+                                                                            recaptchaenterprise.firewallpolicies.list
+                                                                            recaptchaenterprise.firewallpolicies.update
+                                                                            recaptchaenterprise.keys.*
+                                                                            recaptchaenterprise.keys.create
+                                                                            recaptchaenterprise.keys.createTagBinding
+                                                                            recaptchaenterprise.keys.delete
+                                                                            recaptchaenterprise.keys.deleteTagBinding
+                                                                            recaptchaenterprise.keys.get
+                                                                            recaptchaenterprise.keys.list
+                                                                            recaptchaenterprise.keys.listEffectiveTags
+                                                                            recaptchaenterprise.keys.listTagBindings
+                                                                            recaptchaenterprise.keys.retrievelegacysecretkey
+                                                                            recaptchaenterprise.keys.update
+
+                                                                              recaptchaenterprise.metrics.get
+
+                                                                            recaptchaenterprise.projectmetadata.*
+                                                                            recaptchaenterprise.projectmetadata.get
+                                                                            recaptchaenterprise.projectmetadata.update
+
+                                                                            resourcemanager.projects.get
+
+                                                                            resourcemanager.projects.list
+
+reCAPTCHA Enterprise Agent 
+(roles/recaptchaenterprise.agent)
+
+Access to create and annotate reCAPTCHA Enterprise assessments
+
+                                                                            recaptchaenterprise.assessments.*
+                                                                            recaptchaenterprise.assessments.annotate
+                                                                            recaptchaenterprise.assessments.create
+                                                                            recaptchaenterprise.firewallpolicies.list
+
+                                                                            recaptchaenterprise.relatedaccountgroupmemberships.list
+
+                                                                            recaptchaenterprise.relatedaccountgroups.list
+
+                                                                            resourcemanager.projects.get
+
+                                                                            resourcemanager.projects.list
+
+reCAPTCHA Enterprise Viewer 
+(roles/recaptchaenterprise.viewer)
+
+Access to view reCAPTCHA Enterprise keys and metrics
+
+                                                                          monitoring.timeSeries.list
+
+                                                                          recaptchaenterprise.firewallpolicies.get
+
+                                                                          recaptchaenterprise.firewallpolicies.list
+
+                                                                          recaptchaenterprise.keys.get
+
+                                                                          recaptchaenterprise.keys.list
+
+                                                                          recaptchaenterprise.keys.listEffectiveTags
+
+                                                                          recaptchaenterprise.keys.listTagBindings
+
+                                                                          recaptchaenterprise.metrics.get
+
+                                                                          recaptchaenterprise.projectmetadata.get
+
+                                                                          resourcemanager.projects.get
+
+                                                                          resourcemanager.projects.list
+
+Custom roles
+You might require custom roles for use cases such as regulatory requirements. To create a custom role that includes reCAPTCHA permissions, perform the appropriate action as shown in the following table:
+
+Role description	                                                            Action
+Role that only grants permissions                                            Choose from the permissions in the API permissions section.
+for the reCAPTCHA Enterprise API
+
+Role that grants permissions for                                             Choose permissions groups in the in the Roles and permissions section.
+the reCAPTCHA Enterprise API and console	
+
+Role that grants the ability                                                Include the permissions in the role roles/recaptchaenterprise.agent in the Roles and permissions section.
+to create and annotate assessments	
+
+
+For more information on custom roles, go to Creating and managing custom roles.
+
+API permissions
+The following table lists the permissions that the caller must have to call each method in the reCAPTCHA Enterprise API, recaptchaenterprise.googleapis.com/v1:
+
+Method (REST/RPC)	                             Required Permissions	                      For resource type
+[recaptchaenterprise.assessments.annotate]     recaptchaenterprise.assessments.annotate	  project
+ / [AnnotateAssessmentRequest]	
+[recaptchaenterprise.assessments.create]       recaptchaenterprise.assessments.create	    project
+ / [CreateAssessmentRequest]	
+[recaptchaenterprise.keys.create]              recaptchaenterprise.keys.create	          project
+ / [CreateKeyRequest]	
+[recaptchaenterprise.keys.delete]              recaptchaenterprise.keys.delete	          project
+ / [DeleteKeyRequest]	
+[recaptchaenterprise.keys.get]                 recaptchaenterprise.keys.get	              project
+[recaptchaenterprise.keys.list] 
+/ [ListKeysRequest]	                           recaptchaenterprise.keys.list	            project
+[recaptchaenterprise.keys.update] 
+  / [UpdateKeyRequest]	                         recaptchaenterprise.keys.update	        project
+
+VPC Service Controls
+VPC Service Controls support reCAPTCHA to provide additional access control for reCAPTCHA APIs. For more information, see Supported products and limitations > reCAPTCHA Enterprise.
+
+
+reCAPTCHA keys overview
+
+This document provides an overview of reCAPTCHA keys (also known as keys).
+
+A reCAPTCHA key is a unique, case-sensitive string of 40 characters that needs to be installed on web pages, in mobile applications, or at the WAF layer to integrate reCAPTCHA.
+
+A reCAPTCHA key returns a score for each request, which is based on the user interactions with your site or application. By interpreting these scores, you can take appropriate actions for your site or application, such as allowing or blocking users.
+
+Example reCAPTCHA key: 6Lcm3XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX5mfX
+
+Note: In some parts of the API reference documentation, reCAPTCHA keys are also referred to as site keys.
+reCAPTCHA keys can have one of the following integration types:
+
+SCORE: Returns risk scores. It doesn't display the I'm not a robot checkbox and never shows CAPTCHA challenges.
+CHECKBOX: Displays the I'm not a robot checkbox and might show CAPTCHA challenges after the checkbox is checked.
+POLICY_BASED_CHALLENGE: Triggers CAPTCHA challenges based on a score threshold and challenge difficulty.
+INVISIBLE: Doesn't display the I'm not a robot checkbox, but might show CAPTCHA challenges after risk analysis.
+The following table lists reCAPTCHA keys that are supported for each platform:
+
+Platform	Description	                  Supported keys	        Challenge type
+web	      For integration               Score-based keys	      SCORE      
+          on web pages.	                Checkbox keys	          CHECKBOX
+                                        Policy-based
+                                        challenge keys	        POLICY_BASED_CHALLENGE 
+
+mobile	For integration with            reCAPTCHA keys          SCORE
+        Android and iOS apps.	        	for Android
+                                        reCAPTCHA keys for iOS	SCORE    
+                                        
+WAF	    For web pages and APIs          action-token keys	      SCORE and CHECKBOX
+        served through WAF or           session-token keys	    SCORE
+        Edge compute servers.	          challenge-page keys	    INVISIBLE
+
+API	    For integration with APIs or    express keys		        SCORE
+        clients like IoT devices 
+        that do not support the 
+        reCAPTCHA JavaScript 
+        or mobile SDKs.	
+
+Review
+Trigger an event to run reCAPTCHA and confirm that your frontend and backend are configured correctly. Note that it can take a few minutes after your site requests a score for activity to start appearing in the Overview tab.
+
+Build on your basic integration:
+
+Interpret assessments : Learn how to interpret scores, understand the level of risk user interactions pose and take appropriate actions for your site.
+Annotate assessments : Learn how to tune your model by sending the assessment IDs back to reCAPTCHA to confirm results or correct errors.
+Your site protection is limited. Add a billing account today to guarantee uninterrupted, full featured security for your site. You will continue to enjoy 10,000 assessments per month at no cost.
+

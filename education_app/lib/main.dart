@@ -11,6 +11,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 // Firebase Core
 import 'package:firebase_core/firebase_core.dart';
 // Systems Feature
+import 'package:firebase_app_check/firebase_app_check.dart'; // Security
 import 'package:sud_qollanma/features/systems/data/datasources/systems_remote_datasource.dart';
 import 'package:sud_qollanma/features/systems/data/repositories/systems_repository_impl.dart';
 import 'package:sud_qollanma/features/systems/domain/repositories/systems_repository.dart';
@@ -24,6 +25,7 @@ import 'firebase_options.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 
 // Core Layer
+import 'package:sud_qollanma/core/constants/api_constants.dart';
 import 'package:sud_qollanma/core/theme/app_theme.dart';
 
 // Feature: Auth
@@ -103,6 +105,8 @@ import 'package:sud_qollanma/features/notifications/presentation/providers/notif
 // Feature: Search (Clean Arch)
 import 'package:sud_qollanma/features/search/domain/usecases/search_all.dart';
 import 'package:sud_qollanma/features/search/presentation/providers/search_notifier.dart';
+import 'package:sud_qollanma/core/services/ai_service.dart';
+import 'package:sud_qollanma/features/ai_chat/presentation/providers/ai_notifier.dart';
 
 
 
@@ -120,6 +124,28 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // --- Security: Firebase App Check ---
+  try {
+    await FirebaseAppCheck.instance.activate(
+      // Android: Use Play Integrity in Release, Debug Provider in Debug
+      androidProvider: kReleaseMode
+          ? AndroidProvider.playIntegrity
+          : AndroidProvider.debug,
+      // iOS: Use App Attest in Release, Debug Provider in Debug
+      appleProvider: kReleaseMode
+          ? AppleProvider.appAttest
+          : AppleProvider.debug,
+      // Web: Use ReCaptcha Enterprise
+      webProvider: ReCaptchaEnterpriseProvider(ApiConstants.recaptchaSiteKey),
+    );
+  } catch (e, stack) {
+    debugPrint('Firebase App Check initialization failed: $e');
+    if (!kIsWeb) {
+      // Record non-fatal error but allow app to continue (unverified)
+      FirebaseCrashlytics.instance.recordError(e, stack, reason: 'App Check Init Failed');
+    }
+  }
 
   // Crashlytics (disabled on Web)
   if (!kIsWeb) {
@@ -176,8 +202,7 @@ void main() async {
           ),
         ),
 
-        // --- Feature: Library ---
-        ChangeNotifierProvider<LibraryProvider>(create: (_) => LibraryProvider()),
+
 
         // --- Feature: Community (Clean Arch) ---
         Provider<CommunityRemoteDataSource>(create: (_) => CommunityRemoteDataSourceImpl()),
@@ -451,6 +476,12 @@ void main() async {
           create: (context) => SearchNotifier(searchAll: context.read<SearchAll>()),
         ),
         
+        // Feature: AI Chat
+        Provider<AiService>(create: (_) => AiService()),
+        ChangeNotifierProvider<AiNotifier>(
+          create: (context) => AiNotifier(context.read<AiService>()),
+        ),
+
         // Notifier
         // ChangeNotifierProvider<GamificationNotifier>(...) // If needed
       ],

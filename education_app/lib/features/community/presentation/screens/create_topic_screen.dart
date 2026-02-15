@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
-import '../providers/community_provider.dart';
+import 'package:sud_qollanma/features/community/presentation/providers/community_provider.dart';
+import '../../domain/entities/discussion_topic.dart';
 
 class CreateTopicScreen extends StatefulWidget {
-  const CreateTopicScreen({super.key});
+  final DiscussionTopic? topic;
+
+  const CreateTopicScreen({super.key, this.topic});
 
   @override
   State<CreateTopicScreen> createState() => _CreateTopicScreenState();
@@ -19,22 +22,30 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
   bool _isLoading = false;
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.topic != null) {
+      _titleController.text = widget.topic!.title;
+      _contentController.text = widget.topic!.content;
+    }
+  }
+
+  @override
   void dispose() {
     _titleController.dispose();
     _contentController.dispose();
     super.dispose();
   }
 
-  Future<void> _createTopic() async {
+  Future<void> _handleSubmit() async {
     if (!_formKey.currentState!.validate()) return;
 
     final l10n = AppLocalizations.of(context);
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
     final user = authNotifier.appUser;
-    final userId = user?.id;
     final firebaseUser = authNotifier.currentUser;
 
-    if (firebaseUser == null || userId == null) {
+    if (firebaseUser == null || user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(l10n?.mustBeLoggedInToCreateTopic ?? 'Login required')),
       );
@@ -44,17 +55,36 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
     setState(() { _isLoading = true; });
 
     try {
-      await Provider.of<CommunityProvider>(context, listen: false).createTopic(
-        title: _titleController.text.trim(),
-        content: _contentController.text.trim(),
-        userId: firebaseUser!.id,
-        userName: user!.name,
-      );
+      final provider = Provider.of<CommunityProvider>(context, listen: false);
+      
+      if (widget.topic != null) {
+        // Update existing
+        await provider.updateTopic(
+          topicId: widget.topic!.id,
+          title: _titleController.text.trim(),
+          content: _contentController.text.trim(),
+        );
+        if (mounted) {
+           ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Topic updated successfully')),
+          );
+        }
+      } else {
+        // Create new
+        await provider.createTopic(
+          title: _titleController.text.trim(),
+          content: _contentController.text.trim(),
+          userId: firebaseUser.id,
+          userName: user.name,
+        );
+         if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(l10n?.topicCreatedSuccess ?? 'Topic created!')),
+          );
+        }
+      }
 
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n?.topicCreatedSuccess ?? 'Topic created!')),
-        );
         Navigator.pop(context);
       }
     } catch (e) {
@@ -71,9 +101,10 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final isEditing = widget.topic != null;
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n?.createTopicScreenTitle ?? 'Start Discussion')),
+      appBar: AppBar(title: Text(isEditing ? 'Edit Topic' : (l10n?.createTopicScreenTitle ?? 'Start Discussion'))),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -102,8 +133,8 @@ class _CreateTopicScreenState extends State<CreateTopicScreen> {
               _isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : ElevatedButton(
-                      onPressed: _createTopic,
-                      child: Text(l10n?.createTopicButtonText ?? 'Create'),
+                      onPressed: _handleSubmit,
+                      child: Text(isEditing ? 'Update' : (l10n?.createTopicButtonText ?? 'Create')),
                     ),
             ],
           ),

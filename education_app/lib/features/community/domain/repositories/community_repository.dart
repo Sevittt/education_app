@@ -11,6 +11,12 @@ abstract class CommunityRepository {
     required String userId, 
     required String userName
   });
+
+  Future<void> updateTopic({
+    required String topicId,
+    required String title,
+    required String content,
+  });
   
   Future<void> deleteTopic(String topicId);
   

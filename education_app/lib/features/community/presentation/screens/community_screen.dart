@@ -45,6 +45,13 @@ class _CommunityScreenState extends State<CommunityScreen> {
   // For now I'm omitting the Edit Logic to focus on Clean Architecture migration of the main list.
   // We can add it back if the Edit Screen is migrated.
   
+  void _navigateToEditTopic(DiscussionTopic topic) {
+     Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CreateTopicScreen(topic: topic)),
+    );
+  }
+
   void _deleteTopic(DiscussionTopic topic) {
      final l10n = AppLocalizations.of(context);
      final provider = Provider.of<CommunityProvider>(context, listen: false);
@@ -103,8 +110,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    // Removed unused colorScheme
     final l10n = AppLocalizations.of(context);
     final authNotifier = Provider.of<AuthNotifier>(context);
     final AppUser? currentAppUser = authNotifier.appUser;
@@ -149,16 +155,12 @@ class _CommunityScreenState extends State<CommunityScreen> {
                   canModify: canModify,
                   onTap: () => _navigateToTopicDetail(topic),
                   onDelete: canModify ? () => _deleteTopic(topic) : null,
-                  onEdit: null, // Placeholder for Edit
+                  onEdit: canModify ? () => _navigateToEditTopic(topic) : null,
                 );
               },
             );
           },
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _navigateToCreateTopic,
-        child: const Icon(Icons.add),
       ),
     );
   }

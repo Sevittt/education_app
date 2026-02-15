@@ -31,12 +31,7 @@ class _FilesTabState extends State<FilesTab> {
     super.dispose();
   }
 
-  Future<void> _handleRefresh() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    if (mounted) {
-      setState(() {});
-    }
-  }
+
 
   Widget _buildResourceTypeIconWidget(ResourceType type, BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -99,8 +94,7 @@ class _FilesTabState extends State<FilesTab> {
         
         return RefreshIndicator(
           onRefresh: () async {
-             // Refresh logic if using Future, but watch is stream.
-             // Maybe explicitly reload
+             // Explicitly reload
              await libraryProvider.loadResources(); 
           },
           color: Theme.of(context).colorScheme.primary,

@@ -48,7 +48,7 @@
       "fields": [
         {
           "fieldPath": "isPinned",
-          "order": "ASCENDING"
+          "order": "DESCENDING"
         },
         {
           "fieldPath": "createdAt",
@@ -79,8 +79,8 @@
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "order",
-          "order": "ASCENDING"
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
         }
       ]
     },
@@ -127,7 +127,7 @@
       ]
     },
     {
-      "collectionGroup": "faqs",
+      "collectionGroup": "faq",
       "queryScope": "COLLECTION",
       "fields": [
         {
@@ -141,7 +141,7 @@
       ]
     },
     {
-      "collectionGroup": "faqs",
+      "collectionGroup": "faq",
       "queryScope": "COLLECTION",
       "fields": [
         {
@@ -155,7 +155,7 @@
       ]
     },
     {
-      "collectionGroup": "faqs",
+      "collectionGroup": "faq",
       "queryScope": "COLLECTION",
       "fields": [
         {
@@ -165,6 +165,20 @@
         {
           "fieldPath": "order",
           "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "resources",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "authorId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
         }
       ]
     },

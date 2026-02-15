@@ -3,7 +3,6 @@ import 'package:sud_qollanma/l10n/app_localizations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sud_qollanma/features/analytics/domain/entities/xapi_statement.dart';
 import 'package:intl/intl.dart';
-import 'package:sud_qollanma/l10n/app_localizations.dart';
 
 class AdminAnalyticsScreen extends StatefulWidget {
   const AdminAnalyticsScreen({super.key});

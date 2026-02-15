@@ -45,6 +45,18 @@ class CommunityProvider extends ChangeNotifier {
     );
   }
 
+  Future<void> updateTopic({
+    required String topicId,
+    required String title,
+    required String content,
+  }) async {
+    await _repository.updateTopic(
+      topicId: topicId,
+      title: title,
+      content: content,
+    );
+  }
+
   Future<void> addComment({
     required String topicId,
     required String content,

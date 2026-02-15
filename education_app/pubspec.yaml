@@ -25,7 +25,7 @@ dependencies:
   flutter_speed_dial: ^7.0.0 # Add this line
   # --- UPDATED FIREBASE PACKAGES ---
   # These versions are new and will contain the 'FlutterFireOptions' class
-  firebase_core: ^4.2.1
+  firebase_core: ^4.4.0
   firebase_auth: ^6.1.2
   cloud_firestore: ^6.1.0
   firebase_storage: ^13.0.4  # PDF upload uchun
@@ -38,6 +38,8 @@ dependencies:
   cached_network_image: ^3.4.1
   google_fonts: ^7.0.2
   animations: ^2.1.1
+  firebase_app_check: ^0.4.1+4
+  firebase_ai: ^3.8.0
   # --- END UPDATED ---
 
 dev_dependencies:

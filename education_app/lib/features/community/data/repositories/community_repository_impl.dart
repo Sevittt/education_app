@@ -31,6 +31,19 @@ class CommunityRepositoryImpl implements CommunityRepository {
   }
 
   @override
+  Future<void> updateTopic({
+    required String topicId,
+    required String title,
+    required String content,
+  }) async {
+    final data = {
+      'title': title,
+      'content': content,
+    };
+    await remoteDataSource.updateTopic(topicId, data);
+  }
+
+  @override
   Future<void> deleteTopic(String topicId) async {
     await remoteDataSource.deleteTopic(topicId);
   }

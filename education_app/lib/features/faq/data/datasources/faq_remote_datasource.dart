@@ -24,7 +24,7 @@ abstract class FaqRemoteDataSource {
 
 class FaqRemoteDataSourceImpl implements FaqRemoteDataSource {
   final CollectionReference<Map<String, dynamic>> _faqsCollection =
-      FirebaseFirestore.instance.collection('faqs');
+      FirebaseFirestore.instance.collection('faq');
 
   @override
   Stream<List<FaqModel>> getAllFaqs() {
