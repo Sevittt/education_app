@@ -799,5 +799,7 @@
       }
     }
   },
-  "changeRoleTooltip": "Change Role"
+  "changeRoleTooltip": "Change Role",
+  "labelVideoGuide": "Video Guide",
+  "labelLoginGuide": "Login Guide"
 }

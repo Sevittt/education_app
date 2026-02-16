@@ -776,5 +776,7 @@
       }
     }
   },
-  "changeRoleTooltip": "Изменить роль"
+  "changeRoleTooltip": "Изменить роль",
+  "labelVideoGuide": "Видео руководство",
+  "labelLoginGuide": "Руководство по входу"
 }

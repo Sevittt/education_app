@@ -40,7 +40,7 @@ import 'package:sud_qollanma/features/library/presentation/providers/library_pro
 import 'package:sud_qollanma/features/library/domain/repositories/library_repository.dart';
 import 'package:sud_qollanma/features/library/data/datasources/library_remote_source.dart';
 import 'package:sud_qollanma/features/library/data/repositories/library_repository_impl.dart';
-import 'package:sud_qollanma/features/faq/domain/repositories/faq_repository.dart';
+
 
 // Feature: Community (Clean Arch)
 import 'package:sud_qollanma/features/community/data/datasources/community_remote_datasource.dart';
@@ -129,15 +129,15 @@ void main() async {
   try {
     await FirebaseAppCheck.instance.activate(
       // Android: Use Play Integrity in Release, Debug Provider in Debug
-      androidProvider: kReleaseMode
-          ? AndroidProvider.playIntegrity
-          : AndroidProvider.debug,
+      providerAndroid: kReleaseMode
+          ? const AndroidPlayIntegrityProvider()
+          : const AndroidDebugProvider(),
       // iOS: Use App Attest in Release, Debug Provider in Debug
-      appleProvider: kReleaseMode
-          ? AppleProvider.appAttest
-          : AppleProvider.debug,
+      providerApple: kReleaseMode
+          ? const AppleAppAttestProvider()
+          : const AppleDebugProvider(),
       // Web: Use ReCaptcha Enterprise
-      webProvider: ReCaptchaEnterpriseProvider(ApiConstants.recaptchaSiteKey),
+      providerWeb: ReCaptchaEnterpriseProvider(ApiConstants.recaptchaSiteKey),
     );
   } catch (e, stack) {
     debugPrint('Firebase App Check initialization failed: $e');

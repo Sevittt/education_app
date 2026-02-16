@@ -86,8 +86,8 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
             ),
             child: Text(
               widget.system.status == SystemStatus.active
-                  ? "Active"
-                  : "Maintenance",
+                  ? l10n.sysStatusActive
+                  : l10n.sysStatusMaintenance,
               style: TextStyle(
                 color: widget.system.status == SystemStatus.active
                     ? Colors.green
@@ -113,13 +113,13 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
               if (widget.system.videoGuideUrl != null && widget.system.videoGuideUrl!.isNotEmpty)
                 ActionChip(
                   avatar: const Icon(Icons.play_circle_fill, size: 20),
-                  label: const Text("Video Guide"),
+                  label: Text(l10n.labelVideoGuide),
                   onPressed: () => _launchUrl(widget.system.videoGuideUrl!),
                 ),
               if (widget.system.loginGuideUrl != null && widget.system.loginGuideUrl!.isNotEmpty)
                 ActionChip(
                   avatar: const Icon(Icons.login, size: 20),
-                  label: const Text("Login Guide"),
+                  label: Text(l10n.labelLoginGuide),
                   onPressed: () => _launchUrl(widget.system.loginGuideUrl!),
                 ),
             ],
@@ -131,7 +131,7 @@ class _SystemDetailScreenState extends State<SystemDetailScreen> {
 
   Widget _buildContent(BuildContext context) {
     final libraryProvider = Provider.of<LibraryProvider>(context, listen: false);
-    final l10n = AppLocalizations.of(context)!;
+    // final l10n = AppLocalizations.of(context)!; // Used in header now, but checking usage here
 
     return FutureBuilder(
       future: Future.wait([

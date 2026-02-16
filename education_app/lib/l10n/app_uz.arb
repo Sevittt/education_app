@@ -800,5 +800,7 @@
       }
     }
   },
-  "changeRoleTooltip": "Rolni o'zgartirish"
+  "changeRoleTooltip": "Rolni o'zgartirish",
+  "labelVideoGuide": "Video Qo'llanma",
+  "labelLoginGuide": "Kirish Qo'llanma"
 }
