@@ -779,5 +779,25 @@
   "labelPdfAvailable": "PDF available",
   "actionOk": "OK",
   "actionGoBack": "Go Back",
-  "searchNoResults": "No results found"
+  "searchNoResults": "No results found",
+  "roleChangedSuccess": "{userName}'s role changed to {role}",
+  "@roleChangedSuccess": {
+    "placeholders": {
+      "userName": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "roleChangeError": "Error changing role: {error}",
+  "@roleChangeError": {
+    "placeholders": {
+      "error": {
+        "type": "Object"
+      }
+    }
+  },
+  "changeRoleTooltip": "Change Role"
 }

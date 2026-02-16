@@ -719,17 +719,30 @@
       }
     }
   },
-  "speedBonus": "СКОРОСТНОЙ БОНУС",
-  "levelBeginner": "Новичок",
-  "levelSpecialist": "Специалист",
-  "levelExpert": "Эксперт",
-  "levelMaster": "Мастер",
-  "totalQuestions": "Всего: {total}",
-  "@totalQuestions": {
+  "labelPass": "ПРОЙДЕН",
+  "labelFail": "НЕ ПРОЙДЕН",
+  "labelPdfAvailable": "PDF доступен",
+  "actionOk": "OK",
+  "actionGoBack": "Назад",
+  "searchNoResults": "Ничего не найдено",
+  "roleChangedSuccess": "Роль {userName} изменена на {role}",
+  "@roleChangedSuccess": {
     "placeholders": {
-      "total": {
+      "userName": {
+        "type": "String"
+      },
+      "role": {
         "type": "String"
       }
     }
-  }
+  },
+  "roleChangeError": "Ошибка изменения роли: {error}",
+  "@roleChangeError": {
+    "placeholders": {
+      "error": {
+        "type": "Object"
+      }
+    }
+  },
+  "changeRoleTooltip": "Изменить роль"
 }

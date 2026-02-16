@@ -73,10 +73,11 @@ class AdminAppUserListScreen extends StatelessWidget {
       try {
         await authRepository.updateUserRole(user.id, result);
         if (context.mounted) {
+          final roleName = _getRoleName(result, l10n) ?? result.name;
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                '${user.name} roli ${_getRoleName(result, l10n)} ga o\'zgartirildi',
+                l10n.roleChangedSuccess(user.name, roleName),
               ),
               backgroundColor: Colors.green,
             ),
@@ -86,7 +87,7 @@ class AdminAppUserListScreen extends StatelessWidget {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Xatolik: $e'),
+              content: Text(l10n.roleChangeError(e.toString())),
               backgroundColor: Theme.of(context).colorScheme.error,
             ),
           );
