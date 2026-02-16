@@ -18,6 +18,7 @@ import 'package:sud_qollanma/features/quiz/domain/entities/quiz.dart';
 import 'package:sud_qollanma/features/library/domain/entities/resource_entity.dart';
 import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
 import 'package:sud_qollanma/features/search/presentation/screens/global_search_screen.dart';
+import 'package:sud_qollanma/features/ai_chat/presentation/screens/ai_chat_screen.dart';
 import 'package:sud_qollanma/features/news/domain/entities/news_entity.dart';
 import 'package:sud_qollanma/features/news/presentation/providers/news_notifier.dart';
 import 'package:sud_qollanma/widgets/quiz_attempt_card.dart';

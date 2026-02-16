@@ -389,33 +389,7 @@ void main() async {
         ),
 
         // Provider<FAQService>(create: (_) => FAQService()), // Replaced by Clean Arch
-        // Feature: Quiz (Clean Arch)
-        Provider<QuizRemoteDataSource>(create: (_) => QuizRemoteDataSourceImpl()),
-        Provider<QuizRepository>(create: (context) => QuizRepositoryImpl(remoteDataSource: context.read<QuizRemoteDataSource>())),
-        // Quiz UseCases
-        Provider<GetQuizzes>(create: (context) => GetQuizzes(context.read<QuizRepository>())),
-        Provider<GetQuizById>(create: (context) => GetQuizById(context.read<QuizRepository>())),
-        Provider<GetQuizzesByResourceId>(create: (context) => GetQuizzesByResourceId(context.read<QuizRepository>())),
-        Provider<SubmitQuizAttempt>(create: (context) => SubmitQuizAttempt(context.read<QuizRepository>())),
-        Provider<GetUserAttempts>(create: (context) => GetUserAttempts(context.read<QuizRepository>())),
-        Provider<GetRecentUserAttempts>(create: (context) => GetRecentUserAttempts(context.read<QuizRepository>())),
-        Provider<DeleteQuiz>(create: (context) => DeleteQuiz(context.read<QuizRepository>())),
-        Provider<CreateQuiz>(create: (context) => CreateQuiz(context.read<QuizRepository>())),
-        Provider<AddQuestionToQuiz>(create: (context) => AddQuestionToQuiz(context.read<QuizRepository>())),
-        // Quiz Provider
-        ChangeNotifierProvider<QuizProvider>(
-          create: (context) => QuizProvider(
-            getQuizzes: context.read<GetQuizzes>(),
-            getQuizById: context.read<GetQuizById>(),
-            submitQuizAttempt: context.read<SubmitQuizAttempt>(),
-            getUserAttempts: context.read<GetUserAttempts>(),
-            getRecentUserAttempts: context.read<GetRecentUserAttempts>(), 
-            getQuizzesByResourceId: context.read<GetQuizzesByResourceId>(),
-            deleteQuizUseCase: context.read<DeleteQuiz>(),
-            createQuizUseCase: context.read<CreateQuiz>(),
-            addQuestionToQuizUseCase: context.read<AddQuestionToQuiz>(),
-          ),
-        ),
+        // NOTE: Quiz providers are registered above (line ~250). Do NOT duplicate here.
 
         // Feature: Notifications (Clean Arch)
         Provider<NotificationRemoteDataSource>(create: (_) => NotificationRemoteDataSourceImpl()),

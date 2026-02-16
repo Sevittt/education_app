@@ -415,3 +415,379 @@ Interpret assessments : Learn how to interpret scores, understand the level of r
 Annotate assessments : Learn how to tune your model by sending the assessment IDs back to reCAPTCHA to confirm results or correct errors.
 Your site protection is limited. Add a billing account today to guarantee uninterrupted, full featured security for your site. You will continue to enjoy 10,000 assessments per month at no cost.
 
+Add reCAPTCHA to your website
+Add reCAPTCHA to your forms and actions you want to protect.
+
+
+On an HTML Button
+
+<head>
+  <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcXt2ksAAAAACBflTwfsXe9yUDY6s9S1pLAqoZB"></script>
+  <!-- Your code -->
+</head>
+
+Use a callback function to handle the response token.
+
+<!-- Replace the variables below. -->
+<script>
+  function onSubmit(token) {
+    document.getElementById("demo-form").submit();
+  }
+</script>
+
+Add attributes to your HTML button:
+
+<button class="g-recaptcha"
+    data-sitekey="6LcXt2ksAAAAACBflTwfsXe9yUDY6s9S1pLAqoZB"
+    data-callback='onSubmit'
+    data-action='submit'>
+  Submit
+</button>
+
+Send the response token to your application backend. The response token expires after two minutes. Get the response token from the g-recaptcha-response POST parameter when the user submits the form on your site.
+
+Second version
+On User Interaction
+
+Load the JavaScript API with your key.
+
+<head>
+  <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcXt2ksAAAAACBflTwfsXe9yUDY6s9S1pLAqoZB"></script>
+  <!-- Your code -->
+</head>
+
+Call grecaptcha.execute for each action you want to protect.
+
+<script>
+  function onClick(e) {
+    e.preventDefault();
+    grecaptcha.enterprise.ready(async () => {
+      const token = await grecaptcha.enterprise.execute('6LcXt2ksAAAAACBflTwfsXe9yUDY6s9S1pLAqoZB', {action: 'LOGIN'});
+    });
+  }
+</script>
+
+Send the response token to your application backend. The response token expires after two minutes.
+
+Create the request body and save it in a file named request.json . Be sure to make the following replacements:
+
+TOKEN: The token returned from the grecaptcha.enterprise.execute() call.
+USER_ACTION: Optional. The user-initiated action specified in the grecaptcha.enterprise.execute() call. Learn more about actions .
+{
+  "event": {
+    "token": "TOKEN",
+    "expectedAction": "USER_ACTION",
+    "siteKey": "6LcXt2ksAAAAACBflTwfsXe9yUDY6s9S1pLAqoZB",
+  }
+}
+Send an HTTP POST request with the saved JSON data to the url below. Be sure to make the following replacements:
+
+API_KEY: The API key associated with the current project. Learn more about authenticating with API keys .
+https://recaptchaenterprise.googleapis.com/v1/projects/educationapp-4780a/assessments?key=API_KEY
+
+3
+Review
+Trigger an event to run reCAPTCHA and confirm that your frontend and backend are configured correctly. Note that it can take a few minutes after your site requests a score for activity to start appearing in the Overview tab.
+
+Build on your basic integration:
+
+Interpret assessments : Learn how to interpret scores, understand the level of risk user interactions pose and take appropriate actions for your site.
+Annotate assessments : Learn how to tune your model by sending the assessment IDs back to reCAPTCHA to confirm results or correct errors.
+Your site protection is limited. Add a billing account today to guarantee uninterrupted, full featured security for your site. You will continue to enjoy 10,000 assessments per month at no cost.
+
+
+
+
+Copying gs://recaptcha-demosite-images/recaptcha-demosite-service.deb...
+| [1 files][ 50.9 MiB/ 50.9 MiB]                                                
+Operation completed over 1 objects/50.9 MiB.                                     
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Note, selecting 'recaptcha-demosite-service' instead of '/tmp/recaptcha-demosite-service/recaptcha-demosite-service.deb'
+The following NEW packages will be installed:
+  recaptcha-demosite-service
+0 upgraded, 1 newly installed, 0 to remove and 2 not upgraded.
+Need to get 0 B/53.3 MB of archives.
+After this operation, 122 MB of additional disk space will be used.
+Get:1 /tmp/recaptcha-demosite-service/recaptcha-demosite-service.deb recaptcha-demosite-service amd64 1.0-839250083 [53.3 MB]
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package recaptcha-demosite-service.
+(Reading database ... 123798 files and directories currently installed.)
+Preparing to unpack .../recaptcha-demosite-service.deb ...
+Unpacking recaptcha-demosite-service (1.0-839250083) ...
+Setting up recaptcha-demosite-service (1.0-839250083) ...
+I0215 07:56:55.516680     917 flag_default_overrides.cc:34] Changing default for rpc_binarylog to false.
+I0215 07:56:55.517233     917 flag_default_overrides.cc:34] Changing default for ecatcher_demangle_stacktrace to false.
+I0215 07:56:55.517261     917 flag_default_overrides.cc:34] Changing default for eventmanager_alarmlist_type to hybrid.
+I0215 07:56:55.517278     917 flag_default_overrides.cc:34] Changing default for rpc_client_enable_deadline_propagation to true.
+I0215 07:56:55.517299     917 flag_default_overrides.cc:34] Changing default for rpc_override_scaffolding_deadline_propagation to true.
+I0215 07:56:55.517356     917 init_google.cc:746] Linux version 6.6.111+ (builder@345085c86a1c) (Chromium OS 17.0_pre498229-r33 clang version 17.0.0 (/var/cache/chromeos-cache/distfiles/egit-src/external/github.com/llvm/llvm-project 14f0776550b5a49e1c42f49a00213f7f3fa047bf), LLD 17.0.0) #1 SMP PREEMPT_DYNAMIC Mon Feb  2 11:16:42 UTC 2026
+I0215 07:56:55.517468     917 init_google.cc:828] Process id 917
+I0215 07:56:55.517499     917 init_google.cc:833] Current working directory /home/samadovubaydullo3
+I0215 07:56:55.517507     917 init_google.cc:835] Current timezone is UTC (currently UTC +00:00)
+I0215 07:56:55.517520     917 init_google.cc:839] Built on Dec 2 2025 07:00:00 (1764687600)
+I0215 07:56:55.517528     917 init_google.cc:840]  at rbex-enqueue-targets@ugcyr4.prod.google.com:/google/src/cloud/buildrabbit-username/buildrabbit-client/google3
+I0215 07:56:55.517547     917 init_google.cc:841]  as //cloud/security/userguard/demosite/service:recaptcha_demosite_service
+I0215 07:56:55.517559     917 init_google.cc:842]  for gcc-4.X.Y-crosstool-v18-llvm-grtev4-k8.k8
+I0215 07:56:55.517567     917 init_google.cc:845]  from changelist 839250083 with baseline 839250083 in a mint client based on //depot/google3
+I0215 07:56:55.517576     917 init_google.cc:849] Build label: recaptcha_demosite_rapid_project_20251202_RC01
+I0215 07:56:55.517584     917 init_google.cc:851] Build tool: Blaze, release blaze-2025.11.16-2 (mainline @832783675)
+I0215 07:56:55.517593     917 init_google.cc:852] Build target: blaze-out/k8-opt/bin/cloud/security/userguard/demosite/service/recaptcha_demosite_service
+I0215 07:56:55.517601     917 init_google.cc:859] Command line arguments:
+I0215 07:56:55.517609     917 init_google.cc:861] argv[0]: '/usr/local/bin/recaptcha_demosite_service'
+I0215 07:56:55.517619     917 init_google.cc:861] argv[1]: '--default_ls_watcher=null'
+I0215 07:56:55.517628     917 init_google.cc:861] argv[2]: '--enable_streamz_rpc_service=false'
+I0215 07:56:55.517637     917 init_google.cc:861] argv[3]: '--enforce_kernel_ipv6_support=false'
+I0215 07:56:55.517654     917 init_google.cc:861] argv[4]: '--noremote_coredump_enabled'
+I0215 07:56:55.517669     917 init_google.cc:861] argv[5]: '--notracelog'
+I0215 07:56:55.517683     917 init_google.cc:861] argv[6]: '--streamz_servers='
+I0215 07:56:55.517691     917 init_google.cc:861] argv[7]: '--uid='
+I0215 07:56:55.517700     917 init_google.cc:861] argv[8]: '--gid='
+I0215 07:56:55.517714     917 init_google.cc:861] argv[9]: '--loas2_securewrapper_enabled=false'
+I0215 07:56:55.517723     917 init_google.cc:861] argv[10]: '--alsologtostderr'
+I0215 07:56:55.518128     917 init.cc:78] Remote crash gathering hook installed.
+I0215 07:56:55.525635     917 cpu-monitor.cc:52] Failed getting Machine CPU Usage through cgroup: Couldn't find mount for subsystem: cpu
+I0215 07:56:55.530522     917 census-init.cc:276] Census enabled
+I0215 07:56:55.533338     917 init_experiments.cc:49] Stubby experiments status: monitoring_experiment: enabled, test_stubby_experiment_debug_wave_and_step: disabled, test_stubby_experiment_default_false: enabled
+I0215 07:56:55.536097     917 registration.cc:61] go/serverthrottler-in-stubby is disabled by configuration.
+I0215 07:56:55.536662     917 add_ptoken_logwriter.cc:82] Registering AddPTokenLogWriter factory
+I0215 07:56:55.537201     917 migration_state_tracking.cc:23] Migration not enabled - not starting notification watcher.
+I0215 07:56:55.537661     917 init-domain.cc:126] Fiber init: default domain = futex, concurrency = 4, prefix = futex-default
+I0215 07:56:55.537911     917 privacy_context_defaults.cc:3717] PrivacyContext default attribute configuration initialization.
+I0215 07:56:55.538324     917 privacy_context_defaults.cc:2191] Post initialization validating PrivacyContextDefaultConfig: go/debugonly   
+I0215 07:56:55.538746     917 privacy_context_defaults.cc:3862] PrivacyContextDefaultConfig has no origin_product_id.
+I0215 07:56:55.538769     917 privacy_context_defaults.cc:3879] PrivacyContext default attribute configuration module initialization complete.
+I0215 07:56:55.538789     917 fireaxe_privacy_context_optout_listener_init.cc:12] FireaxePrivacyContextOptoutListener initialization.
+I0215 07:56:55.538834     917 fireaxe_privacy_context_optout_listener_init.cc:16] FireaxePrivacyContextOptoutListener initialization complete.
+I0215 07:56:55.538857     917 fireaxe_privacy_context_breakglass_watcher_init.cc:12] FireaxePrivacyContextBreakglassWatcher initialization.
+I0215 07:56:55.538892     917 fireaxe_privacy_context_breakglass_watcher_init.cc:16] FireaxePrivacyContextBreakglassWatcher initialization complete.
+I0215 07:56:55.540691     917 eventmanager2.cc:326] Non uniform work stealing is disabled since the machine has a simple CPU topology.
+I0215 07:56:55.541843     917 loas2_securewrapper_multihop_aes_128_gcm_openssl.cc:60] Failed to get registered cross universe signing client. This is only a problem if your binary needs to send RPCs across TPC universes; otherwise, no action is needed. If your binary needs to send RPCs across TPC universes, rebuild your binary with the required LOAS artifacts dependency for TPC: [ //security/loas/l2/public/multihop:loas2_multihop_artifacts ]. This requirement is part of the go/tpc-rpc-integrity-thinmint-direction rollout. 
+I0215 07:56:55.542120     917 chubby_util.cc:217] LOCKSERVICE_LOCALITY env: 
+lockservice_locality flag: 
+machine locality: corp
+BORG_PHYSICAL_CELL env: 
+I0215 07:56:55.542448     917 lockservice_accurate_time.cc:36] Not using TrueTime, fall back to regular impl.
+I0215 07:56:55.542732     917 lockservice_accurate_time.cc:59] AccurateTime was already initialized.
+W0215 07:56:55.542965     917 api.cc:106] Failed to read Network Predicates configuration from /etc/google/network_predicates.cfg (this is expected on non-NodeOS machines) with reason: No such file or directory
+I0215 07:56:55.543243     917 prodhostname_userspace_monitor_impl.cc:196] Not running under a Borglet, disabling ProdHostname userspace monitoring.
+I0215 07:56:55.544391     917 string-registry.cc:32] Registering message 'scaffolding.TempusId ("util/scaffolding/internal/tempus-id.proto")'
+I0215 07:56:55.545518     917 thin_uls_logwriter.cc:192] Registering thin-client logwriter factory
+I0215 07:56:55.545629     917 logger.cc:310] Enabling threaded logging for severity WARNING
+I0215 07:56:55.545718     917 logwriter_uls_init.cc:57] No Envelope. Disabled initialization of LogWriterULS. LogWriter prefixes /sawmill{,-transitional,-dual-logging,-localhost,-dryrun,-devnull,-forwarding-proxy,-lite-test} will be interpreted as Google3 File paths instead of LogWriter implementations, so /sawmill will not use ULS.
+I0215 07:56:55.545806     917 root_defaults.cc:270] [streamz] Unparseable hostname: cs-37861076751-default
+I0215 07:56:55.545967     917 outgoing_rpc_interceptor.cc:17] Adding RPC interception hooks by: scaffolding
+I0215 07:56:55.546000     917 outgoing_rpc_interceptor.cc:27] Adding bidi stream interception hooks by: scaffolding streaming
+I0215 07:56:55.547969     917 mlock.cc:220] mlock()-ed 4096 bytes for BuildID, using 1 syscalls.
+I0215 07:56:55.548429     917 http_handler_registerer.cc:77] Registered DeployHandler to handle /api/deploy at cloud/security/userguard/demosite/service/deploy_handler.cc:161.
+I0215 07:56:55.548475     917 http_handler_registerer.cc:77] Registered StatusHandler to handle /api/status at cloud/security/userguard/demosite/service/status_handler.cc:55.
+I0215 07:56:55.548517     917 http_handler_registerer.cc:77] Registered DebugActionsHandler to handle /debug/actions at util/scaffolding/internal/introspection/debug_handlers.cc:348.
+I0215 07:56:55.548546     917 http_handler_registerer.cc:77] Registered DebugActionsHandler to handle /_/debug/actions at util/scaffolding/internal/introspection/debug_handlers.cc:350.
+I0215 07:56:55.548576     917 http_handler_registerer.cc:77] Registered DebugBackendsHandler to handle /debug/backends at util/scaffolding/internal/introspection/debug_handlers.cc:404.
+I0215 07:56:55.548603     917 http_handler_registerer.cc:77] Registered DebugBackendsHandler to handle /_/debug/backends at util/scaffolding/internal/introspection/debug_handlers.cc:406.
+I0215 07:56:55.548632     917 http_handler_registerer.cc:77] Registered DebugServerHandler to handle /debug/server at util/scaffolding/internal/introspection/debug_handlers.cc:453.
+I0215 07:56:55.548663     917 http_handler_registerer.cc:77] Registered DebugServerHandler to handle /_/debug/server at util/scaffolding/internal/introspection/debug_handlers.cc:455.
+I0215 07:56:55.548702     917 http_handler_registerer.cc:77] Registered DebugRpcBackendHandler to handle /debug/rpc_backend at util/scaffolding/internal/introspection/debug_handlers.cc:488.
+I0215 07:56:55.548733     917 http_handler_registerer.cc:77] Registered DebugRpcBackendHandler to handle /_/debug/rpc_backend at util/scaffolding/internal/introspection/debug_handlers.cc:490.
+I0215 07:56:55.548757     917 http_handler_registerer.cc:77] Registered DebugRpcBackendHandler to handle /debug/stubby_backend at util/scaffolding/internal/introspection/debug_handlers.cc:492.
+I0215 07:56:55.548780     917 http_handler_registerer.cc:77] Registered DebugRpcBackendHandler to handle /_/debug/stubby_backend at util/scaffolding/internal/introspection/debug_handlers.cc:494.
+I0215 07:56:55.548838     917 http_handler_registerer.cc:77] Registered HealthzHandler to handle /healthz at util/scaffolding/internal/introspection/healthz_handler.cc:183.
+I0215 07:56:55.548872     917 http_handler_registerer.cc:77] Registered HelpzHandler to handle /helpz at util/scaffolding/internal/introspection/helpz_handler.cc:105.
+I0215 07:56:55.548898     917 http_handler_registerer.cc:77] Registered ReportcardzHandler to handle /reportcardz at util/scaffolding/internal/introspection/reportcardz.cc:130.
+I0215 07:56:55.548966     917 http_handler_registerer.cc:77] Registered StatuszHandler to handle /statusz_default at util/scaffolding/internal/introspection/statusz_handler.cc:128.
+I0215 07:56:55.549001     917 http_handler_registerer.cc:77] Registered DebugHandlersAndModulesHandler to handle /debug/modules at util/scaffolding/internal/introspection/modules_and_handlers_view.cc:185.
+I0215 07:56:55.549028     917 http_handler_registerer.cc:77] Registered DebugHandlersAndModulesHandler to handle /_/debug/modules at util/scaffolding/internal/introspection/modules_and_handlers_view.cc:187.
+I0215 07:56:55.549226     917 stubby_handler_registerer.cc:167] Registered ReportHandler to handle /tech.env.framework.ErrorReportService.Report at util/scaffolding/internal/introspection/esf_error_report_handlers.cc:262.
+I0215 07:56:55.549314     917 stubby_handler_registerer.cc:167] Registered HealthCheckHandler to handle /tech.frontend.HealthCheckService.HealthCheck at util/scaffolding/internal/introspection/healthz_handler.cc:218.
+I0215 07:56:55.549333     917 server.cc:409] Finished registration of all handlers.
+I0215 07:56:55.549373     917 server.cc:333] Adding port DemositeApp:5000
+I0215 07:56:55.550523     917 psp_machine.cc:613] Local IPs detected: {10.88.0.4, 127.0.0.1, 172.17.0.1}; netns: false
+I0215 07:56:55.551589     917 expvar_global_linux_google.cc:135] [varz] process-gcu-seconds is not defined: Value of BORG_MILLIGCUS_PER_CPU is undefined
+W0215 07:56:55.552370     928 flatbuffer_acl_reader_feature_util_google3.cc:89] Failed to construct FlatbufferAclReader based RealmAclRep. Falling back to FlatFileReader.INTERNAL: failed to open file /etc/security-realms/membership_set_fb.bin
+=== Source Location Trace: ===
+security/loas/lib/internal/inode_change_watcher.cc:50
+security/realms/acl/internal/flatbuffer_acl_reader.cc:103
+W0215 07:56:55.552489     928 thinmint_identity_realm_acl_rep.cc:20] Failed to retrieve RealmAclRep: INTERNAL: Unable to create FlatFileReader: cannot stat mapping file /etc/security-realms/realm_groups.binarypb
+=== Source Location Trace: ===
+security/realms/acl/internal/flat_file_reader.cc:65
+I0215 07:56:55.552566     917 ip_validation.cc:183] Skipping initialization of special IPs, since dirinfo_root does not exist.
+I0215 07:56:55.552854     917 rpc-internals-version.cc:158] RPC_VERSION: Saw use of RPC version 2 server
+I0215 07:56:55.552984     928 cdd_client_impl.cc:174] [rpcacl_(unknown)_(unknown)] no task id found, no canarying available
+I0215 07:56:55.553051     928 cdd_client_impl.cc:227] [rpcacl_(unknown)_(unknown)] monitoring state in /ls/local/config/cdd/(unknown)_(unknown)/rpcacl_(unknown)_(unknown)/state
+I0215 07:56:55.553162     917 rpc-internals-rate-acl.cc:331] Default rate ACL config: # Default rate ACL is OPEN
+0 0 unknown unknown unknown unknown
+I0215 07:56:55.553197     917 rate_acl_impl.cc:972] new rate_acl checksum: 0xc31012a739f03e1b version: -1
+E0215 07:56:55.553431     943 loas_util.cc:531] NOT_FOUND: File '/home/samadovubaydullo3/.loas/samadovubaydullo3.loas2credentials' not found
+=== Source Location Trace: ===
+third_party/tink/integration/cc/secret_data/file.cc:66
+security/loas/l2/internal/handshaker/credentials_store_manager.cc:391
+security/loas/l2/internal/lib/loas_util_loas2_common.cc:56
+security/loas/l2/internal/lib/loas_util_loas2_impl.cc:106
+I0215 07:56:55.553458     917 cdd_client_impl.cc:174] [rpcacl_(unknown)_(unknown)] no task id found, no canarying available
+I0215 07:56:55.553529     917 cdd_client_impl.cc:227] [rpcacl_(unknown)_(unknown)] monitoring state in /ls/local/config/cdd/(unknown)_(unknown)/rpcacl_(unknown)_(unknown)/state
+I0215 07:56:55.553638     917 action_watcher.cc:141] Fireaxe: Not watching Chubby: INVALID_ARGUMENT: Unknown task identity: Not running under Borglet
+=== Source Location Trace: ===
+production/fireaxe/cpp/watcher/identity.cc:144
+I0215 07:56:55.553425     947 cdd_client_impl.cc:394] [rpcacl_(unknown)_(unknown)] while watching /ls/local/config/cdd/(unknown)_(unknown)/rpcacl_(unknown)_(unknown)/state: svelte error 305
+I0215 07:56:55.553799     947 cdd_client_impl.cc:468] [rpcacl_(unknown)_(unknown)] while watching /ls/local/config/cdd/(unknown)_(unknown)/rpcacl_(unknown)_(unknown): svelte error 305
+I0215 07:56:55.554884     917 uberproxy_groups_cpp_dynamic.cc:24] We are running in GDU
+I0215 07:56:55.554965     947 cdd_client_impl.cc:394] [rpcacl_(unknown)_(unknown)] while watching /ls/local/config/cdd/(unknown)_(unknown)/rpcacl_(unknown)_(unknown)/state: svelte error 305
+I0215 07:56:55.555018     947 cdd_client_impl.cc:468] [rpcacl_(unknown)_(unknown)] while watching /ls/local/config/cdd/(unknown)_(unknown)/rpcacl_(unknown)_(unknown): svelte error 305
+I0215 07:56:55.554983     948 privacy_context_defaults.cc:940] Processing default configuration update for source: 2001
+I0215 07:56:55.555073     917 rule_manager_http_server_plugin.cc:40] RPCInjectz2 is currently disabled.
+I0215 07:56:55.555107     917 server_port.cc:428] Server port "DemositeApp" (port 5000) registering handlers.
+I0215 07:56:55.555177     917 server_port.cc:565] Using /statusz_default HTTP handler for /statusz
+I0215 07:56:55.555189     917 server_port.cc:576] Using /statusz HTTP handler for /
+I0215 07:56:55.555219     917 server_port.cc:662] Registering HTTP handler DeployHandler for /api/deploy at cloud/security/userguard/demosite/service/deploy_handler.cc:161 on port "DemositeApp" (port 5000)
+I0215 07:56:55.555272     917 server_port.cc:662] Registering HTTP handler StatusHandler for /api/status at cloud/security/userguard/demosite/service/status_handler.cc:55 on port "DemositeApp" (port 5000)
+I0215 07:56:55.555321     917 server_port.cc:662] Registering HTTP handler DebugActionsHandler for /debug/actions at util/scaffolding/internal/introspection/debug_handlers.cc:348 on port "DemositeApp" (port 5000)
+I0215 07:56:55.555393     917 server_port.cc:662] Registering HTTP handler DebugActionsHandler for /_/debug/actions at util/scaffolding/internal/introspection/debug_handlers.cc:350 on port "DemositeApp" (port 5000)
+I0215 07:56:55.555474     917 server_port.cc:662] Registering HTTP handler DebugBackendsHandler for /debug/backends at util/scaffolding/internal/introspection/debug_handlers.cc:404 on port "DemositeApp" (port 5000)
+I0215 07:56:55.555547     917 server_port.cc:662] Registering HTTP handler DebugBackendsHandler for /_/debug/backends at util/scaffolding/internal/introspection/debug_handlers.cc:406 on port "DemositeApp" (port 5000)
+I0215 07:56:55.555636     917 server_port.cc:662] Registering HTTP handler DebugServerHandler for /debug/server at util/scaffolding/internal/introspection/debug_handlers.cc:453 on port "DemositeApp" (port 5000)
+I0215 07:56:55.555680     948 privacy_context_defaults.cc:940] Processing default configuration update for source: 2001
+I0215 07:56:55.555714     948 privacy_context_defaults.cc:940] Processing default configuration update for source: 2001
+I0215 07:56:55.555743     917 server_port.cc:662] Registering HTTP handler DebugServerHandler for /_/debug/server at util/scaffolding/internal/introspection/debug_handlers.cc:455 on port "DemositeApp" (port 5000)
+I0215 07:56:55.555837     917 server_port.cc:662] Registering HTTP handler DebugRpcBackendHandler for /debug/rpc_backend at util/scaffolding/internal/introspection/debug_handlers.cc:488 on port "DemositeApp" (port 5000)
+I0215 07:56:55.555965     917 server_port.cc:662] Registering HTTP handler DebugRpcBackendHandler for /_/debug/rpc_backend at util/scaffolding/internal/introspection/debug_handlers.cc:490 on port "DemositeApp" (port 5000)
+I0215 07:56:55.556075     917 server_port.cc:662] Registering HTTP handler DebugRpcBackendHandler for /debug/stubby_backend at util/scaffolding/internal/introspection/debug_handlers.cc:492 on port "DemositeApp" (port 5000)
+I0215 07:56:55.556198     917 server_port.cc:662] Registering HTTP handler DebugRpcBackendHandler for /_/debug/stubby_backend at util/scaffolding/internal/introspection/debug_handlers.cc:494 on port "DemositeApp" (port 5000)
+I0215 07:56:55.556332     917 server_port.cc:662] Registering HTTP handler HealthzHandler for /healthz at util/scaffolding/internal/introspection/healthz_handler.cc:183 on port "DemositeApp" (port 5000)
+I0215 07:56:55.556455     917 server_port.cc:662] Registering HTTP handler HelpzHandler for /helpz at util/scaffolding/internal/introspection/helpz_handler.cc:105 on port "DemositeApp" (port 5000)
+I0215 07:56:55.556572     917 server_port.cc:662] Registering HTTP handler DebugHandlersAndModulesHandler for /debug/modules at util/scaffolding/internal/introspection/modules_and_handlers_view.cc:185 on port "DemositeApp" (port 5000)
+I0215 07:56:55.556718     917 server_port.cc:662] Registering HTTP handler DebugHandlersAndModulesHandler for /_/debug/modules at util/scaffolding/internal/introspection/modules_and_handlers_view.cc:187 on port "DemositeApp" (port 5000)
+I0215 07:56:55.556839     917 server_port.cc:662] Registering HTTP handler ReportcardzHandler for /reportcardz at util/scaffolding/internal/introspection/reportcardz.cc:130 on port "DemositeApp" (port 5000)
+W0215 07:56:55.555046     947 sharded_client.cc:1657] (ganpati-team) Marking Chubby as unreachable (no such lockservice cell)
+I0215 07:56:55.557154     917 server_port.cc:662] Registering HTTP handler StatuszHandler for / at util/scaffolding/internal/introspection/statusz_handler.cc:128 on port "DemositeApp" (port 5000)
+I0215 07:56:55.557309     917 server_port.cc:662] Registering HTTP handler StatuszHandler for /statusz at util/scaffolding/internal/introspection/statusz_handler.cc:128 on port "DemositeApp" (port 5000)
+I0215 07:56:55.557483     917 server_port.cc:662] Registering HTTP handler StatuszHandler for /statusz_default at util/scaffolding/internal/introspection/statusz_handler.cc:128 on port "DemositeApp" (port 5000)
+W0215 07:56:55.557599     943 label_acl_impl.cc:674] DATA_UNAVAILABLE
+I0215 07:56:55.557754     917 server.cc:469] Sigterm handler type: 1
+I0215 07:56:55.558590     917 server.cc:858] Scaffolding server "DemositeApp" (port 5000) initialized, now waiting for resources to be ready before starting.
+I0215 07:56:55.558608     917 server.cc:872] Will wait up to 30s for optional resources and indefinitely for critical resources.
+I0215 07:56:55.558620     917 server_port.cc:980] Server port "DemositeApp" (port 5000) ready for startup, all resources ready.
+I0215 07:56:55.558732     917 internals-datagram-socket.cc:154] Cannot set SO_GOOGLE_DERIDEX_ENABLED on fd=14 err=Protocol not available
+I0215 07:56:55.558802     917 server_port.cc:723] Server port "DemositeApp" (port 5000) started and serving requests.
+I0215 07:56:55.558819     917 server.cc:942] 
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* Scaffolding server has started and is serving requests.       *
+*                                                               *
+* Server port "DemositeApp" serving on:                         *
+*     cs-37861076751-default:5000                               *
+*     (http://cs-37861076751-default:5000/statusz)              *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+W0215 07:56:55.578819     928 googleip.cc:115] Cannot find /etc/google/locality/googleip.pb, needed by IsGoogleIP. Please check http://go/xti:googleip_locosto_ki
+I0215 07:56:57.074231     948 system_call_context.cc:102] Error response from daemon: No such container: demosite-livereload
+I0215 07:56:57.075806     948 system_call_context.cc:107] docker rm exited with code 0
+I0215 07:56:57.188765     979 system_call_context.cc:87] time="2026-02-15T07:56:57Z" level=warning msg="/home/samadovubaydullo3/recaptcha/demo/6LfNNWwsAAAAAFK2W-lib2AOWgm5OE7-LLsxqY6d/docker-compose.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+I0215 07:56:57.254442     979 system_call_context.cc:87]  Image demosite-livereload Building 
+I0215 07:56:57.385300     979 system_call_context.cc:87] #1 [internal] load local bake definitions
+I0215 07:56:57.499446     979 system_call_context.cc:87] #1 reading from stdin 810B done
+I0215 07:56:57.499496     979 system_call_context.cc:87] #1 DONE 0.0s
+I0215 07:56:57.692141     979 system_call_context.cc:87] 
+I0215 07:56:57.692171     979 system_call_context.cc:87] #2 [internal] load build definition from Dockerfile
+I0215 07:56:57.692176     979 system_call_context.cc:87] #2 transferring dockerfile: 952B done
+I0215 07:56:57.692186     979 system_call_context.cc:87] #2 DONE 0.0s
+I0215 07:56:57.692200     979 system_call_context.cc:87] 
+I0215 07:56:57.692206     979 system_call_context.cc:87] #3 [internal] load metadata for docker.io/library/node:20-slim
+I0215 07:56:58.898228     979 system_call_context.cc:87] #3 DONE 1.4s
+I0215 07:56:59.048891     979 system_call_context.cc:87] 
+I0215 07:56:59.048962     979 system_call_context.cc:87] #4 [internal] load .dockerignore
+I0215 07:56:59.048969     979 system_call_context.cc:87] #4 transferring context: 2B done
+I0215 07:56:59.048974     979 system_call_context.cc:87] #4 DONE 0.0s
+I0215 07:56:59.048979     979 system_call_context.cc:87] 
+I0215 07:56:59.048984     979 system_call_context.cc:87] #5 [1/4] FROM docker.io/library/node:20-slim@sha256:c6585df72c34172bebd8d36abed961e231d7d3b5cee2e01294c4495e8a03f687
+I0215 07:56:59.048991     979 system_call_context.cc:87] #5 resolve docker.io/library/node:20-slim@sha256:c6585df72c34172bebd8d36abed961e231d7d3b5cee2e01294c4495e8a03f687 0.0s done
+I0215 07:56:59.048996     979 system_call_context.cc:87] #5 DONE 0.1s
+I0215 07:56:59.049000     979 system_call_context.cc:87] 
+I0215 07:56:59.049005     979 system_call_context.cc:87] #6 [internal] load build context
+I0215 07:56:59.213765     979 system_call_context.cc:87] #6 transferring context: 9.36MB 0.1s done
+I0215 07:56:59.213802     979 system_call_context.cc:87] #6 DONE 0.2s
+I0215 07:56:59.213826     979 system_call_context.cc:87] 
+I0215 07:56:59.213831     979 system_call_context.cc:87] #5 [1/4] FROM docker.io/library/node:20-slim@sha256:c6585df72c34172bebd8d36abed961e231d7d3b5cee2e01294c4495e8a03f687
+I0215 07:56:59.213837     979 system_call_context.cc:87] #5 sha256:7aa087727009d9926282b77e9386998f27b6535e550659c7fc1d4ea3b9a973bd 447B / 447B 0.1s done
+I0215 07:56:59.366114     979 system_call_context.cc:87] #5 sha256:786a2dcd5a595e7a3d71eacdb266b1f3057397d8a882e9d5a7e55214ea80a21f 0B / 1.71MB 0.2s
+I0215 07:56:59.366153     979 system_call_context.cc:87] #5 sha256:1a0393491048e0b5148349736f25b7d015e244fee9ab757ef2b0824dc65f3bb9 0B / 40.98MB 0.2s
+I0215 07:56:59.366165     979 system_call_context.cc:87] #5 sha256:9d66d95167c29e1f4d0399617e49250519defda4aa8ea5919064ab3dbd6f0627 3.31kB / 3.31kB 0.1s done
+I0215 07:56:59.366171     979 system_call_context.cc:87] #5 sha256:4831516dd0cb86845f5f902cb9b9d25b5c853152c337eb57e4737a9b7e2a2eb9 0B / 28.23MB 0.2s
+I0215 07:56:59.815750     979 system_call_context.cc:87] #5 sha256:786a2dcd5a595e7a3d71eacdb266b1f3057397d8a882e9d5a7e55214ea80a21f 1.71MB / 1.71MB 0.6s done
+I0215 07:57:00.416323     979 system_call_context.cc:87] #5 sha256:1a0393491048e0b5148349736f25b7d015e244fee9ab757ef2b0824dc65f3bb9 5.24MB / 40.98MB 1.2s
+I0215 07:57:00.716292     979 system_call_context.cc:87] #5 sha256:1a0393491048e0b5148349736f25b7d015e244fee9ab757ef2b0824dc65f3bb9 11.53MB / 40.98MB 1.5s
+I0215 07:57:00.866155     979 system_call_context.cc:87] #5 sha256:1a0393491048e0b5148349736f25b7d015e244fee9ab757ef2b0824dc65f3bb9 15.73MB / 40.98MB 1.7s
+I0215 07:57:01.315770     979 system_call_context.cc:87] #5 sha256:1a0393491048e0b5148349736f25b7d015e244fee9ab757ef2b0824dc65f3bb9 17.83MB / 40.98MB 2.1s
+I0215 07:57:01.616430     979 system_call_context.cc:87] #5 sha256:1a0393491048e0b5148349736f25b7d015e244fee9ab757ef2b0824dc65f3bb9 19.92MB / 40.98MB 2.4s
+I0215 07:57:02.216144     979 system_call_context.cc:87] #5 sha256:1a0393491048e0b5148349736f25b7d015e244fee9ab757ef2b0824dc65f3bb9 22.02MB / 40.98MB 3.0s
+I0215 07:57:02.966374     979 system_call_context.cc:87] #5 sha256:1a0393491048e0b5148349736f25b7d015e244fee9ab757ef2b0824dc65f3bb9 24.12MB / 40.98MB 3.8s
+I0215 07:57:03.566128     979 system_call_context.cc:87] #5 sha256:1a0393491048e0b5148349736f25b7d015e244fee9ab757ef2b0824dc65f3bb9 27.26MB / 40.98MB 4.4s
+I0215 07:57:04.015501     979 system_call_context.cc:87] #5 sha256:1a0393491048e0b5148349736f25b7d015e244fee9ab757ef2b0824dc65f3bb9 29.36MB / 40.98MB 4.8s
+I0215 07:57:04.465414     979 system_call_context.cc:87] #5 sha256:1a0393491048e0b5148349736f25b7d015e244fee9ab757ef2b0824dc65f3bb9 31.46MB / 40.98MB 5.3s
+I0215 07:57:04.465458     979 system_call_context.cc:87] #5 sha256:4831516dd0cb86845f5f902cb9b9d25b5c853152c337eb57e4737a9b7e2a2eb9 0B / 28.23MB 5.3s
+I0215 07:57:04.616191     979 system_call_context.cc:87] #5 sha256:1a0393491048e0b5148349736f25b7d015e244fee9ab757ef2b0824dc65f3bb9 35.65MB / 40.98MB 5.4s
+I0215 07:57:04.766342     979 system_call_context.cc:87] #5 sha256:1a0393491048e0b5148349736f25b7d015e244fee9ab757ef2b0824dc65f3bb9 40.98MB / 40.98MB 5.6s done
+I0215 07:57:09.416237     979 system_call_context.cc:87] #5 sha256:4831516dd0cb86845f5f902cb9b9d25b5c853152c337eb57e4737a9b7e2a2eb9 2.10MB / 28.23MB 10.2s
+I0215 07:57:10.915792     979 system_call_context.cc:87] #5 sha256:4831516dd0cb86845f5f902cb9b9d25b5c853152c337eb57e4737a9b7e2a2eb9 12.58MB / 28.23MB 11.7s
+I0215 07:57:11.066384     979 system_call_context.cc:87] #5 sha256:4831516dd0cb86845f5f902cb9b9d25b5c853152c337eb57e4737a9b7e2a2eb9 14.68MB / 28.23MB 11.9s
+I0215 07:57:11.815833     979 system_call_context.cc:87] #5 sha256:4831516dd0cb86845f5f902cb9b9d25b5c853152c337eb57e4737a9b7e2a2eb9 16.78MB / 28.23MB 12.6s
+I0215 07:57:12.265438     979 system_call_context.cc:87] #5 sha256:4831516dd0cb86845f5f902cb9b9d25b5c853152c337eb57e4737a9b7e2a2eb9 18.87MB / 28.23MB 13.1s
+I0215 07:57:12.415560     979 system_call_context.cc:87] #5 sha256:4831516dd0cb86845f5f902cb9b9d25b5c853152c337eb57e4737a9b7e2a2eb9 26.21MB / 28.23MB 13.2s
+I0215 07:57:12.654355     979 system_call_context.cc:87] #5 sha256:4831516dd0cb86845f5f902cb9b9d25b5c853152c337eb57e4737a9b7e2a2eb9 28.23MB / 28.23MB 13.3s done
+I0215 07:57:12.654509     979 system_call_context.cc:87] #5 extracting sha256:4831516dd0cb86845f5f902cb9b9d25b5c853152c337eb57e4737a9b7e2a2eb9
+I0215 07:57:13.807519     979 system_call_context.cc:87] #5 extracting sha256:4831516dd0cb86845f5f902cb9b9d25b5c853152c337eb57e4737a9b7e2a2eb9 1.3s done
+I0215 07:57:13.807564     979 system_call_context.cc:87] #5 DONE 14.9s
+I0215 07:57:13.974742     979 system_call_context.cc:87] 
+I0215 07:57:13.974997     979 system_call_context.cc:87] #5 [1/4] FROM docker.io/library/node:20-slim@sha256:c6585df72c34172bebd8d36abed961e231d7d3b5cee2e01294c4495e8a03f687
+I0215 07:57:13.975021     979 system_call_context.cc:87] #5 extracting sha256:9d66d95167c29e1f4d0399617e49250519defda4aa8ea5919064ab3dbd6f0627 0.0s done
+I0215 07:57:13.975037     979 system_call_context.cc:87] #5 extracting sha256:1a0393491048e0b5148349736f25b7d015e244fee9ab757ef2b0824dc65f3bb9
+I0215 07:57:15.406013     979 system_call_context.cc:87] #5 extracting sha256:1a0393491048e0b5148349736f25b7d015e244fee9ab757ef2b0824dc65f3bb9 1.6s done
+I0215 07:57:15.406072     979 system_call_context.cc:87] #5 DONE 16.5s
+I0215 07:57:15.654849     979 system_call_context.cc:87] 
+I0215 07:57:15.654900     979 system_call_context.cc:87] #5 [1/4] FROM docker.io/library/node:20-slim@sha256:c6585df72c34172bebd8d36abed961e231d7d3b5cee2e01294c4495e8a03f687
+I0215 07:57:15.654920     979 system_call_context.cc:87] #5 extracting sha256:786a2dcd5a595e7a3d71eacdb266b1f3057397d8a882e9d5a7e55214ea80a21f 0.1s done
+I0215 07:57:15.654961     979 system_call_context.cc:87] #5 extracting sha256:7aa087727009d9926282b77e9386998f27b6535e550659c7fc1d4ea3b9a973bd 0.0s done
+I0215 07:57:15.654966     979 system_call_context.cc:87] #5 DONE 16.6s
+I0215 07:57:15.654971     979 system_call_context.cc:87] 
+I0215 07:57:15.654976     979 system_call_context.cc:87] #7 [2/4] WORKDIR /app
+I0215 07:57:17.430961     979 system_call_context.cc:87] #7 DONE 1.9s
+I0215 07:57:17.643314     979 system_call_context.cc:87] 
+I0215 07:57:17.643351     979 system_call_context.cc:87] #8 [3/4] COPY . ./
+I0215 07:57:17.643364     979 system_call_context.cc:87] #8 DONE 0.1s
+I0215 07:57:17.643376     979 system_call_context.cc:87] 
+I0215 07:57:17.643380     979 system_call_context.cc:87] #9 [4/4] RUN npm install
+I0215 07:57:25.271828     979 system_call_context.cc:87] #9 7.779 
+I0215 07:57:25.272077     979 system_call_context.cc:87] #9 7.779 added 170 packages, and audited 171 packages in 7s
+I0215 07:57:25.272092     979 system_call_context.cc:87] #9 7.779 
+I0215 07:57:25.272098     979 system_call_context.cc:87] #9 7.779 23 packages are looking for funding
+I0215 07:57:25.272103     979 system_call_context.cc:87] #9 7.779   run `npm fund` for details
+I0215 07:57:25.427044     979 system_call_context.cc:87] #9 7.782 
+I0215 07:57:25.427088     979 system_call_context.cc:87] #9 7.782 found 0 vulnerabilities
+I0215 07:57:25.427097     979 system_call_context.cc:87] #9 7.784 npm notice
+I0215 07:57:25.427103     979 system_call_context.cc:87] #9 7.784 npm notice New major version of npm available! 10.8.2 -> 11.10.0
+I0215 07:57:25.427111     979 system_call_context.cc:87] #9 7.784 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.10.0
+I0215 07:57:25.427128     979 system_call_context.cc:87] #9 7.784 npm notice To update run: npm install -g npm@11.10.0
+I0215 07:57:25.427139     979 system_call_context.cc:87] #9 7.784 npm notice
+I0215 07:57:25.507968     979 system_call_context.cc:87] #9 DONE 8.0s
+I0215 07:57:25.663235     979 system_call_context.cc:87] 
+I0215 07:57:25.663278     979 system_call_context.cc:87] #10 exporting to image
+I0215 07:57:25.663285     979 system_call_context.cc:87] #10 exporting layers
+I0215 07:57:28.292513     979 system_call_context.cc:87] #10 exporting layers 2.8s done
+I0215 07:57:28.515234     979 system_call_context.cc:87] #10 exporting manifest sha256:5c525bb4918a01dc4ddf031f823adb34fb7c82dc95b3abdc40e1014de1b418ba 0.0s done
+I0215 07:57:28.515270     979 system_call_context.cc:87] #10 exporting config sha256:15f826c599914864537fca00b9b558ae5ae3a50632e964b8e094d117e87e3c3f 0.0s done
+I0215 07:57:28.515276     979 system_call_context.cc:87] #10 exporting attestation manifest sha256:ba6f11f5acfbb6579a893bd4973b67484986292312c56e4563d3ea4e2b7ff8b1 0.0s done
+I0215 07:57:28.515281     979 system_call_context.cc:87] #10 exporting manifest list sha256:8611d5b5de1da5a01277969c75541385c9e53db4a4694dde2ce49afff5081405 0.0s done
+I0215 07:57:28.515286     979 system_call_context.cc:87] #10 naming to docker.io/library/demosite-livereload:latest done
+I0215 07:57:28.515321     979 system_call_context.cc:87] #10 unpacking to docker.io/library/demosite-livereload:latest
+I0215 07:57:29.863597     979 system_call_context.cc:87] #10 unpacking to docker.io/library/demosite-livereload:latest 1.5s done
+I0215 07:57:29.982279     979 system_call_context.cc:87] #10 DONE 4.4s
+I0215 07:57:29.982334     979 system_call_context.cc:87] 
+I0215 07:57:29.982342     979 system_call_context.cc:87] #11 resolving provenance for metadata file
+I0215 07:57:30.003736     979 system_call_context.cc:87] #11 DONE 0.0s
+I0215 07:57:30.004335     979 system_call_context.cc:87]  Image demosite-livereload Built 
+I0215 07:57:30.006956     979 system_call_context.cc:87]  Network 6lfnnwwsaaaaafk2w-lib2aowgm5oe7-llsxqy6d_default Creating 
+I0215 07:57:30.043607     979 system_call_context.cc:87]  Network 6lfnnwwsaaaaafk2w-lib2aowgm5oe7-llsxqy6d_default Created 
+I0215 07:57:30.046521     979 system_call_context.cc:87]  Container demosite-livereload Creating 
+I0215 07:57:30.953033     979 system_call_context.cc:87]  Container demosite-livereload Created 
+I0215 07:57:30.966279     979 system_call_context.cc:87] Attaching to demosite-livereload
+I0215 07:57:30.983167     979 system_call_context.cc:87]  Container demosite-livereload Starting 
+I0215 07:57:31.303733     979 system_call_context.cc:87]  Container demosite-livereload Started 
+I0215 07:57:31.572987     979 system_call_context.cc:87] demosite-livereload  | reCAPTCHA Demosite app listening on port 8080

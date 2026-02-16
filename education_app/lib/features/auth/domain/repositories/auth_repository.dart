@@ -37,4 +37,6 @@ abstract class AuthRepository {
   Stream<AppUser?> getUserProfileStream(String uid);
 
   Future<void> updateUserXP(String userId, int newXP, String newLevel);
+
+  Future<void> updateUserRole(String userId, UserRole newRole);
 }

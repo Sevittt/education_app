@@ -4,5 +4,5 @@ class ApiConstants {
 
   // Firebase App Check
   // Web: reCAPTCHA Enterprise Site Key
-  static const String recaptchaSiteKey = '6LcXt2ksAAAAACBf1TwfsXe9yUDY6s9S1pLAqoZB';
+  static const String recaptchaSiteKey = '6Ldy9mssAAAAALl3SdhPqZbg9ECknuomCrC5IhMh';
 }

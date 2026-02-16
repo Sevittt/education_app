@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:sud_qollanma/core/services/ai_service.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:typed_data';
 
 class ChatMessage {
   final String text;
   final bool isUser;
   final DateTime timestamp;
+  final Uint8List? imageBytes; // Added for image support
 
   ChatMessage({
     required this.text,
     required this.isUser,
+    this.imageBytes,
     DateTime? timestamp,
   }) : timestamp = timestamp ?? DateTime.now();
 }
 
 class AiNotifier extends ChangeNotifier {
   final AiService _aiService;
+  final ImagePicker _picker = ImagePicker();
   
   AiNotifier(this._aiService);
 
@@ -30,22 +35,52 @@ class AiNotifier extends ChangeNotifier {
   String? _error;
   String? get error => _error;
 
+  Uint8List? _selectedImageBytes;
+  Uint8List? get selectedImageBytes => _selectedImageBytes;
+
+  // Method to pick an image
+  Future<void> pickImage(ImageSource source) async {
+    try {
+      final XFile? image = await _picker.pickImage(source: source);
+      if (image != null) {
+        _selectedImageBytes = await image.readAsBytes();
+        notifyListeners();
+      }
+    } catch (e) {
+      _error = "Rasm yuklashda xatolik: $e";
+      notifyListeners();
+    }
+  }
+
+  void clearSelectedImage() {
+    _selectedImageBytes = null;
+    notifyListeners();
+  }
+
   Future<void> sendMessage(String text) async {
-    if (text.trim().isEmpty) return;
+    if (text.trim().isEmpty && _selectedImageBytes == null) return;
 
     _error = null;
     _isLoading = true;
     
+    // Capture the image bytes to send, then clear selection
+    final imageToSend = _selectedImageBytes;
+    _selectedImageBytes = null; // Clear immediately after sending starts
+    
     // Add user message immediately
-    _messages.add(ChatMessage(text: text, isUser: true));
+    _messages.add(ChatMessage(
+      text: text, 
+      isUser: true,
+      imageBytes: imageToSend,
+    ));
     notifyListeners();
 
     try {
       _currentStreamingMessage = "";
       notifyListeners();
 
-      // Stream response
-      await for (final chunk in _aiService.streamChat(text)) {
+      // Stream response with optional image
+      await for (final chunk in _aiService.streamChat(text, imageBytes: imageToSend)) {
         _currentStreamingMessage = (_currentStreamingMessage ?? "") + chunk;
         notifyListeners();
       }
@@ -71,6 +106,7 @@ class AiNotifier extends ChangeNotifier {
   void clearChat() {
     _messages.clear();
     _error = null;
+    _selectedImageBytes = null;
     notifyListeners();
   }
 }

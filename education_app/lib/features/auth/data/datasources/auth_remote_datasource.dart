@@ -31,6 +31,7 @@ abstract class AuthRemoteDataSource {
   Future<void> updateUserProfile(AppUserModel user);
   Stream<AppUserModel?> getUserProfileStream(String uid);
   Future<void> updateUserXP(String userId, int newXP, String newLevel);
+  Future<void> updateUserRole(String userId, UserRole newRole);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -299,6 +300,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     await _usersCollection.doc(userId).update({
       'xp': newXP,
       'level': newLevel,
+    });
+  }
+
+  @override
+  Future<void> updateUserRole(String userId, UserRole newRole) async {
+    await _usersCollection.doc(userId).update({
+      'role': AppUserModel.userRoleToString(newRole),
     });
   }
 }
