@@ -719,6 +719,34 @@
       }
     }
   },
+  "speedBonus": "СКОРОСТНОЙ БОНУС",
+  "levelBeginner": "Новичок",
+  "levelSpecialist": "Специалист",
+  "levelExpert": "Эксперт",
+  "levelMaster": "Мастер",
+  "totalQuestions": "Всего: {total}",
+  "@totalQuestions": {
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "errorCouldNotOpenLink": "Не удалось открыть ссылку",
+  "errorResourceNotFound": "Ресурс не найден",
+  "errorVideoNotFound": "Видео не найдено",
+  "errorPdfOpen": "Не удалось открыть PDF файл",
+  "errorTelegramOpen": "Не удалось открыть ссылку Telegram",
+  "errorGeneric": "Произошла ошибка: {error}",
+  "@errorGeneric": {
+    "placeholders": {
+      "error": {
+        "type": "Object"
+      }
+    }
+  },
+  "labelTrue": "Верно",
+  "labelFalse": "Неверно",
   "labelPass": "ПРОЙДЕН",
   "labelFail": "НЕ ПРОЙДЕН",
   "labelPdfAvailable": "PDF доступен",
