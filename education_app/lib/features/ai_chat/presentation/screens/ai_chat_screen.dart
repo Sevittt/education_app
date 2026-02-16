@@ -160,12 +160,12 @@ class _AiChatScreenState extends State<AiChatScreen> {
               borderRadius: 16,
               gradient: LinearGradient(
                 colors: isUser 
-                  ? [Colors.blue.withOpacity(0.3), Colors.blue.withOpacity(0.1)]
-                  : [Colors.white.withOpacity(0.2), Colors.white.withOpacity(0.05)],
+                  ? [Colors.blue.withValues(alpha: 0.3), Colors.blue.withValues(alpha: 0.1)]
+                  : [Colors.white.withValues(alpha: 0.2), Colors.white.withValues(alpha: 0.05)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
-              borderColor: isUser ? Colors.blue.withOpacity(0.2) : Colors.white.withOpacity(0.1),
+              borderColor: isUser ? Colors.blue.withValues(alpha: 0.2) : Colors.white.withValues(alpha: 0.1),
               padding: const EdgeInsets.all(12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,7 +179,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                         Text(
                           "Sodiq (AI Mentor)",
                           style: TextStyle(
-                            color: Colors.white.withOpacity(0.7),
+                            color: Colors.white.withValues(alpha: 0.7),
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
                           ),

@@ -21,7 +21,6 @@ class SystemDetailScreen extends StatefulWidget {
 class _SystemDetailScreenState extends State<SystemDetailScreen> {
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
