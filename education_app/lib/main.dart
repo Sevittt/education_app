@@ -11,7 +11,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 // Firebase Core
 import 'package:firebase_core/firebase_core.dart';
 // Systems Feature
-import 'package:firebase_app_check/firebase_app_check.dart'; // Security
 import 'package:sud_qollanma/features/systems/data/datasources/systems_remote_datasource.dart';
 import 'package:sud_qollanma/features/systems/data/repositories/systems_repository_impl.dart';
 import 'package:sud_qollanma/features/systems/domain/repositories/systems_repository.dart';
@@ -125,27 +124,6 @@ void main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  // --- Security: Firebase App Check ---
-  try {
-    await FirebaseAppCheck.instance.activate(
-      // Android: Use Play Integrity in Release, Debug Provider in Debug
-      providerAndroid: kReleaseMode
-          ? const AndroidPlayIntegrityProvider()
-          : const AndroidDebugProvider(),
-      // iOS: Use App Attest in Release, Debug Provider in Debug
-      providerApple: kReleaseMode
-          ? const AppleAppAttestProvider()
-          : const AppleDebugProvider(),
-      // Web: Use ReCaptcha Enterprise
-      providerWeb: ReCaptchaEnterpriseProvider(ApiConstants.recaptchaSiteKey),
-    );
-  } catch (e, stack) {
-    debugPrint('Firebase App Check initialization failed: $e');
-    if (!kIsWeb) {
-      // Record non-fatal error but allow app to continue (unverified)
-      FirebaseCrashlytics.instance.recordError(e, stack, reason: 'App Check Init Failed');
-    }
-  }
 
   // Crashlytics (disabled on Web)
   if (!kIsWeb) {
