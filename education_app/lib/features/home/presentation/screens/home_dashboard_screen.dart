@@ -1,6 +1,5 @@
 // lib/screens/home/home_dashboard_screen.dart
-import 'package:sud_qollanma/features/home/presentation/screens/home_dashboard_screen.dart';
-// import 'package:education_app/l10n/app_localizations.dart';
+// import 'package:education_app/l10n/app_localizations.dart'; // old import removed
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
