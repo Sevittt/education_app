@@ -49,7 +49,7 @@ class _AdminResourceManagementScreenState
       },
     );
 
-    if (confirmed == true && mounted) {
+    if (confirmed == true && context.mounted) {
       try {
         await context.read<LibraryProvider>().deleteResource(resource.id);
         if (!context.mounted) return;

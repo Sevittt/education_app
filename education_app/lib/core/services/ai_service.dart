@@ -1,32 +1,45 @@
 import 'package:firebase_ai/firebase_ai.dart';
 import 'package:flutter/foundation.dart';
-import 'dart:typed_data';
+
 
 class AiService {
-  late final GenerativeModel _model;
-  late final ChatSession _chatSession;
+  GenerativeModel? _model;
+  ChatSession? _chatSession;
+  bool _initialized = false;
 
   AiService() {
-    // Initialize the model with System Instructions for "Sodiq" persona
-    _model = FirebaseAI.googleAI().generativeModel(
-      model: 'gemini-2.5-flash',
-      systemInstruction: Content.system(
-        "Ismingiz Sodiq. Siz sud xodimlarining yaqin hamkasbisiz. "
-        "Sodda tilda gapiring. Agar rasm kelsa, undagi xatolarni tahlil qiling. "
-        "Javoblaringiz qisqa, lo'nda va foydali bo'lsin. "
-        "Texnik atamalarni soddalashtirib tushuntiring."
-      ),
-    );
-    
-    _chatSession = _model.startChat();
-    debugPrint('AiService: Model initialized successfully (gemini-2.5-flash)');
+    try {
+      // Initialize the model with System Instructions for "Sodiq" persona
+      _model = FirebaseAI.googleAI().generativeModel(
+        model: 'gemini-2.5-flash',
+        systemInstruction: Content.system(
+          "Ismingiz Sodiq. Siz sud xodimlarining yaqin hamkasbisiz. "
+          "Sodda tilda gapiring. Agar rasm kelsa, undagi xatolarni tahlil qiling. "
+          "Javoblaringiz qisqa, lo'nda va foydali bo'lsin. "
+          "Texnik atamalarni soddalashtirib tushuntiring."
+        ),
+      );
+      
+      _chatSession = _model!.startChat();
+      _initialized = true;
+      debugPrint('AiService: Model initialized successfully (gemini-2.5-flash)');
+    } catch (e) {
+      debugPrint('AiService: Failed to initialize AI model: $e');
+      _initialized = false;
+    }
   }
+
+  // Whether AI service is available
+  bool get isAvailable => _initialized;
 
   // Wrapper to generate content (single response)
   Future<String?> generateContent(String prompt) async {
+    if (!_initialized || _model == null) {
+      throw Exception('AI xizmati hozirda mavjud emas. Keyinroq urinib ko\'ring.');
+    }
     try {
       final content = [Content.text(prompt)];
-      final response = await _model.generateContent(content);
+      final response = await _model!.generateContent(content);
       return response.text;
     } catch (e) {
       debugPrint('AI Service Error: $e');
@@ -36,6 +49,9 @@ class AiService {
 
   // Wrapper for streaming chat with optional image
   Stream<String> streamChat(String message, {Uint8List? imageBytes}) async* {
+    if (!_initialized || _chatSession == null) {
+      throw Exception('AI xizmati hozirda mavjud emas. Keyinroq urinib ko\'ring.');
+    }
     try {
       Content content;
       if (imageBytes != null) {
@@ -48,7 +64,7 @@ class AiService {
         content = Content.text(message);
       }
 
-      final responseStream = _chatSession.sendMessageStream(content);
+      final responseStream = _chatSession!.sendMessageStream(content);
       
       await for (final chunk in responseStream) {
         if (chunk.text != null) {
@@ -76,7 +92,7 @@ class AiService {
         );
       }
       
-      throw e;
+      rethrow;
     }
   }
 }

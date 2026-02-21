@@ -81,7 +81,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _openTelegram() async {
-    final Uri url = Uri.parse('https://t.me/sudqollanma');
+    final Uri url = Uri.parse('https://t.me/sudqollanma_bot');
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       if (mounted) {
          // Fallback or error message, though usually externalApplication mode handles it gracefully/silently if fails
@@ -279,7 +279,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             context: context,
             icon: Icons.send_rounded, // Telegram icon style
             title: l10n?.contactSupport ?? 'Contact Support',
-            subtitle: '@sudqollanma',
+            subtitle: '@sudqollanma_bot',
             onTap: _openTelegram,
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),

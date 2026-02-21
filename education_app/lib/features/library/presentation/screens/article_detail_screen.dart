@@ -138,11 +138,12 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
     _pointsAwarded = true;
     
     // Use UseCase to log xAPI and trigger Gamification
-    if (mounted) {
-       await context.read<LogXApiStatement>().call(statement);
-
+    if (context.mounted) {
+       final logXApiStatement = context.read<LogXApiStatement>();
        final l10n = AppLocalizations.of(context)!;
-       ScaffoldMessenger.of(context).showSnackBar(
+       final scaffoldMessenger = ScaffoldMessenger.of(context);
+       await logXApiStatement.call(statement);
+       scaffoldMessenger.showSnackBar(
          SnackBar(
            content: Text(l10n.pointsEarned(5)), // 5 points for reading
            backgroundColor: Colors.green,

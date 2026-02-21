@@ -141,7 +141,7 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
       },
     );
 
-    if (confirmed == true) {
+    if (confirmed == true && context.mounted) {
       // Optional: Set a deleting flag if you have one
       // setState(() => _isDeleting = true);
       try {

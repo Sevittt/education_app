@@ -25,12 +25,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
     if (mounted) setState(() {});
   }
 
-  void _navigateToCreateTopic() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const CreateTopicScreen()),
-    );
-  }
+
 
   void _navigateToTopicDetail(DiscussionTopic topic) {
     Navigator.push(

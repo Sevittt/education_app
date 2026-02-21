@@ -38,7 +38,6 @@ dependencies:
   cached_network_image: ^3.4.1
   google_fonts: ^7.0.2
   animations: ^2.1.1
-  firebase_app_check: ^0.4.1+4
   firebase_ai: ^3.8.0
   image_picker: ^1.0.7 # For AI vision features
   # --- END UPDATED ---

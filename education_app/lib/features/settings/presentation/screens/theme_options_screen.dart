@@ -31,27 +31,19 @@ class ThemeOptionsScreen extends StatelessWidget {
         style: textTheme.titleMedium?.copyWith(color: colorScheme.onSurface),
       ),
       value: value,
-      groupValue: context.watch<ThemeNotifier>().themeMode,
-      onChanged: (ThemeMode? mode) {
-        if (mode != null) {
-          context.read<ThemeNotifier>().setThemeMode(mode);
-        }
-      },
       activeColor:
           colorScheme.primary, // Color of the radio button when selected
       contentPadding: const EdgeInsets.symmetric(
         horizontal: 16.0,
         vertical: 8.0,
       ),
-      // For a more custom look, you could build a ListTile and a Radio manually
-      // but RadioListTile is convenient and generally follows Material guidelines.
     );
   }
 
   @override
   Widget build(BuildContext context) {
     // Watch the ThemeNotifier for changes to update the UI of the radio buttons
-    final themeNotifier = context.watch<ThemeNotifier>();
+    final currentThemeMode = context.watch<ThemeNotifier>().themeMode;
     final ThemeData currentTheme = Theme.of(context); // For AppBar styling
 
     return Scaffold(
@@ -61,34 +53,42 @@ class ThemeOptionsScreen extends StatelessWidget {
         backgroundColor: currentTheme.colorScheme.surface, // M3 style appbar
         foregroundColor: currentTheme.colorScheme.onSurface,
       ),
-      body: ListView(
-        children: [
-          const SizedBox(height: 8), // A little space at the top
+      body: RadioGroup<ThemeMode>(
+        groupValue: currentThemeMode,
+        onChanged: (ThemeMode? mode) {
+          if (mode != null) {
+            context.read<ThemeNotifier>().setThemeMode(mode);
+          }
+        },
+        child: ListView(
+          children: [
+            const SizedBox(height: 8), // A little space at the top
 
-          _buildThemeOptionTile(
-            context: context,
-            title: AppLocalizations.of(context)!.themeSystemDefault,
-            value: ThemeMode.system,
-            iconData: Icons.brightness_auto_outlined, // Icon for system default
-          ),
-          const Divider(height: 1, indent: 16, endIndent: 16),
+            _buildThemeOptionTile(
+              context: context,
+              title: AppLocalizations.of(context)!.themeSystemDefault,
+              value: ThemeMode.system,
+              iconData: Icons.brightness_auto_outlined, // Icon for system default
+            ),
+            const Divider(height: 1, indent: 16, endIndent: 16),
 
-          _buildThemeOptionTile(
-            context: context,
-            title: AppLocalizations.of(context)!.themeLight,
-            value: ThemeMode.light,
-            iconData: Icons.light_mode_outlined, // Icon for light mode
-          ),
-          const Divider(height: 1, indent: 16, endIndent: 16),
+            _buildThemeOptionTile(
+              context: context,
+              title: AppLocalizations.of(context)!.themeLight,
+              value: ThemeMode.light,
+              iconData: Icons.light_mode_outlined, // Icon for light mode
+            ),
+            const Divider(height: 1, indent: 16, endIndent: 16),
 
-          _buildThemeOptionTile(
-            context: context,
-            title: AppLocalizations.of(context)!.themeDark,
-            value: ThemeMode.dark,
-            iconData: Icons.dark_mode_outlined, // Icon for dark mode
-          ),
-          const Divider(height: 1, indent: 16, endIndent: 16),
-        ],
+            _buildThemeOptionTile(
+              context: context,
+              title: AppLocalizations.of(context)!.themeDark,
+              value: ThemeMode.dark,
+              iconData: Icons.dark_mode_outlined, // Icon for dark mode
+            ),
+            const Divider(height: 1, indent: 16, endIndent: 16),
+          ],
+        ),
       ),
     );
   }

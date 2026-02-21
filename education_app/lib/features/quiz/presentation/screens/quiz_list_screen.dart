@@ -17,9 +17,9 @@ class _QuizListScreenState extends State<QuizListScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => 
-      context.read<QuizProvider>().fetchQuizzes()
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<QuizProvider>().fetchQuizzes();
+    });
   }
 
   @override

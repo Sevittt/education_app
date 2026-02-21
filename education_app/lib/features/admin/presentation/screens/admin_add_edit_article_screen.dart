@@ -186,7 +186,7 @@ class _AdminAddEditArticleScreenState extends State<AdminAddEditArticleScreen> {
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<String>(
-                      value: _selectedCategory,
+                      initialValue: _selectedCategory,
                       decoration: InputDecoration(
                         labelText: l10n.categoryLabel,
                         border: const OutlineInputBorder(),

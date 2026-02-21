@@ -26,10 +26,9 @@ class _TopicDetailScreenState extends State<TopicDetailScreen> {
 
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
     final user = authNotifier.appUser;
-    final userId = user?.id;
     final firebaseUser = authNotifier.currentUser;
 
-    if (firebaseUser == null || userId == null) return;
+    if (firebaseUser == null || user == null) return;
 
     setState(() { _isPosting = true; });
 
@@ -37,9 +36,9 @@ class _TopicDetailScreenState extends State<TopicDetailScreen> {
       await Provider.of<CommunityProvider>(context, listen: false).addComment(
         topicId: widget.topic.id,
         content: content,
-        userId: user!.id,
-        userName: user!.name,
-        userProfilePic: user!.profilePictureUrl,
+        userId: user.id,
+        userName: user.name,
+        userProfilePic: user.profilePictureUrl,
       );
       _commentController.clear();
       if (mounted) {

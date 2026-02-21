@@ -3126,6 +3126,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No results found'**
   String get searchNoResults;
+
+  /// No description provided for @roleChangedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'{userName}\'s role changed to {role}'**
+  String roleChangedSuccess(String userName, String role);
+
+  /// No description provided for @roleChangeError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error changing role: {error}'**
+  String roleChangeError(Object error);
+
+  /// No description provided for @changeRoleTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Role'**
+  String get changeRoleTooltip;
+
+  /// No description provided for @labelVideoGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Video Guide'**
+  String get labelVideoGuide;
+
+  /// No description provided for @labelLoginGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Login Guide'**
+  String get labelLoginGuide;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

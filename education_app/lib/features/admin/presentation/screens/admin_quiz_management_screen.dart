@@ -47,7 +47,7 @@ class _AdminQuizManagementScreenState extends State<AdminQuizManagementScreen> {
       },
     );
 
-    if (confirmed == true && mounted) {
+    if (confirmed == true && context.mounted) {
       try {
         await context.read<QuizProvider>().deleteQuiz(quiz.id);
         if (!context.mounted) return;

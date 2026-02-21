@@ -1630,4 +1630,23 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get searchNoResults => 'Hech narsa topilmadi';
+
+  @override
+  String roleChangedSuccess(String userName, String role) {
+    return '$userName roli $role ga o\'zgartirildi';
+  }
+
+  @override
+  String roleChangeError(Object error) {
+    return 'Rolni o\'zgartirishda xatolik: $error';
+  }
+
+  @override
+  String get changeRoleTooltip => 'Rolni o\'zgartirish';
+
+  @override
+  String get labelVideoGuide => 'Video Qo\'llanma';
+
+  @override
+  String get labelLoginGuide => 'Kirish Qo\'llanma';
 }

@@ -1,5 +1,4 @@
 import '../entities/video_entity.dart';
-import '../entities/video_entity.dart';
 import '../entities/article_entity.dart';
 import '../entities/resource_entity.dart';
 

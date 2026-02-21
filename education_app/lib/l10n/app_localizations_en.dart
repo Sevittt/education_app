@@ -1630,4 +1630,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get searchNoResults => 'No results found';
+
+  @override
+  String roleChangedSuccess(String userName, String role) {
+    return '$userName\'s role changed to $role';
+  }
+
+  @override
+  String roleChangeError(Object error) {
+    return 'Error changing role: $error';
+  }
+
+  @override
+  String get changeRoleTooltip => 'Change Role';
+
+  @override
+  String get labelVideoGuide => 'Video Guide';
+
+  @override
+  String get labelLoginGuide => 'Login Guide';
 }

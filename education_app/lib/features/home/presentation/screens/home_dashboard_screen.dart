@@ -151,7 +151,7 @@ class HomeDashboardScreen extends StatelessWidget {
                     Icon(Icons.search, color: Colors.white.withValues(alpha: 0.7)),
                     const SizedBox(width: 12),
                     Text(
-                      '${l10n.search}',
+                      l10n.search,
                       style: TextStyle(
                         color: Colors.white.withValues(alpha: 0.6),
                         fontSize: 16,

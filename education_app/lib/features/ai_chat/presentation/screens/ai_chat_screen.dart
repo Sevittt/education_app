@@ -130,7 +130,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
             child: ActionChip(
               avatar: Icon(action['icon'] as IconData, size: 16, color: Colors.white),
               label: Text(action['label'] as String, style: const TextStyle(color: Colors.white)),
-              backgroundColor: Colors.white.withOpacity(0.2),
+              backgroundColor: Colors.white.withValues(alpha: 0.2),
               side: BorderSide.none,
               onPressed: () {
                 notifier.sendMessage(action['query'] as String);
@@ -210,7 +210,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                       child: SizedBox(
                         width: 10,
                         height: 10,
-                        child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white.withOpacity(0.5)),
+                        child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white.withValues(alpha: 0.5)),
                       ),
                     ),
                 ],
@@ -271,7 +271,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: 'Savol bering yoki rasm yuboring...',
-                    hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.5)),
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                   ),
@@ -282,7 +282,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                 icon: Icon(
                   Icons.send,
                   color: (notifier.isLoading || (_controller.text.isEmpty && notifier.selectedImageBytes == null)) 
-                      ? Colors.white.withOpacity(0.3) 
+                      ? Colors.white.withValues(alpha: 0.3) 
                       : Colors.white,
                 ),
                 onPressed: (notifier.isLoading) ? null : () => _sendMessage(notifier),

@@ -1053,13 +1053,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get categoryLabel => 'Категория';
 
   @override
-  String get articleCategoryGeneral => 'General';
+  String get articleCategoryGeneral => 'Общее';
 
   @override
-  String get articleCategoryProcedure => 'Procedure';
+  String get articleCategoryProcedure => 'Процедура';
 
   @override
-  String get articleCategoryLaw => 'Legislation';
+  String get articleCategoryLaw => 'Законодательство';
 
   @override
   String get articleCategoryFaq => 'FAQ';
@@ -1588,46 +1588,65 @@ class AppLocalizationsRu extends AppLocalizations {
   String get levelMaster => 'Мастер';
 
   @override
-  String get errorCouldNotOpenLink => 'Could not open link';
+  String get errorCouldNotOpenLink => 'Не удалось открыть ссылку';
 
   @override
-  String get errorResourceNotFound => 'Resource not found';
+  String get errorResourceNotFound => 'Ресурс не найден';
 
   @override
-  String get errorVideoNotFound => 'Video not found';
+  String get errorVideoNotFound => 'Видео не найдено';
 
   @override
-  String get errorPdfOpen => 'Could not open PDF file';
+  String get errorPdfOpen => 'Не удалось открыть PDF файл';
 
   @override
-  String get errorTelegramOpen => 'Could not open Telegram link';
+  String get errorTelegramOpen => 'Не удалось открыть ссылку Telegram';
 
   @override
   String errorGeneric(Object error) {
-    return 'An error occurred: $error';
+    return 'Произошла ошибка: $error';
   }
 
   @override
-  String get labelTrue => 'True';
+  String get labelTrue => 'Верно';
 
   @override
-  String get labelFalse => 'False';
+  String get labelFalse => 'Неверно';
 
   @override
-  String get labelPass => 'PASS';
+  String get labelPass => 'ПРОЙДЕН';
 
   @override
-  String get labelFail => 'FAIL';
+  String get labelFail => 'НЕ ПРОЙДЕН';
 
   @override
-  String get labelPdfAvailable => 'PDF available';
+  String get labelPdfAvailable => 'PDF доступен';
 
   @override
   String get actionOk => 'OK';
 
   @override
-  String get actionGoBack => 'Go Back';
+  String get actionGoBack => 'Назад';
 
   @override
-  String get searchNoResults => 'No results found';
+  String get searchNoResults => 'Ничего не найдено';
+
+  @override
+  String roleChangedSuccess(String userName, String role) {
+    return 'Роль $userName изменена на $role';
+  }
+
+  @override
+  String roleChangeError(Object error) {
+    return 'Ошибка изменения роли: $error';
+  }
+
+  @override
+  String get changeRoleTooltip => 'Изменить роль';
+
+  @override
+  String get labelVideoGuide => 'Видео руководство';
+
+  @override
+  String get labelLoginGuide => 'Руководство по входу';
 }
