@@ -75,7 +75,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registrationPasswordLabel => 'Password';
 
   @override
-  String get registrationPasswordError => 'Password must be at least 6 characters long';
+  String get registrationPasswordError =>
+      'Password must be at least 6 characters long';
 
   @override
   String get registrationConfirmPasswordLabel => 'Confirm Password';
@@ -111,13 +112,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsReceiveNotifications => 'Receive Notifications';
 
   @override
-  String get settingsReceiveNotificationsSubtitle => 'Get updates about new resources and discussions';
+  String get settingsReceiveNotificationsSubtitle =>
+      'Get updates about new resources and discussions';
 
   @override
   String get settingsAllowLocation => 'Allow Location Access';
 
   @override
-  String get settingsAllowLocationSubtitle => 'For features requiring your location (if any)';
+  String get settingsAllowLocationSubtitle =>
+      'For features requiring your location (if any)';
 
   @override
   String get settingsChangePassword => 'Change Password';
@@ -132,7 +135,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsAppLegalese => '© 2025 Court Handbook Project';
 
   @override
-  String get settingsAppDescription => 'Bridging the IT skills gap through collaborative learning and resource sharing.';
+  String get settingsAppDescription =>
+      'Bridging the IT skills gap through collaborative learning and resource sharing.';
 
   @override
   String get errorPrefix => 'Error: ';
@@ -230,7 +234,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createResourceScreenTitle => 'Create New Guide';
 
   @override
-  String get createResourceFormWillBeHere => 'Resource creation form will be here.';
+  String get createResourceFormWillBeHere =>
+      'Resource creation form will be here.';
 
   @override
   String get saveButtonText => 'Save Changes';
@@ -304,7 +309,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteResourceConfirmTitle => 'Confirm Deletion';
 
   @override
-  String get deleteResourceConfirmMessage => 'Are you sure you want to delete this resource? This action cannot be undone.';
+  String get deleteResourceConfirmMessage =>
+      'Are you sure you want to delete this resource? This action cannot be undone.';
 
   @override
   String get cancelButtonText => 'Cancel';
@@ -446,7 +452,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get relatedQuizzesTitle => 'Related Quizzes';
 
   @override
-  String get noQuizzesAvailable => 'No quizzes available for this resource yet.';
+  String get noQuizzesAvailable =>
+      'No quizzes available for this resource yet.';
 
   @override
   String get errorLoadingQuizzes => 'Error loading quizzes';
@@ -490,7 +497,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createTopicButtonText => 'Create Discussion Topic';
 
   @override
-  String get mustBeLoggedInToCreateTopic => 'You must be logged in to create a topic.';
+  String get mustBeLoggedInToCreateTopic =>
+      'You must be logged in to create a topic.';
 
   @override
   String get topicCreatedSuccess => 'Topic created successfully!';
@@ -516,7 +524,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get errorLoadingData => 'An error occurred while loading resources. Please try again.';
+  String get errorLoadingData =>
+      'An error occurred while loading resources. Please try again.';
 
   @override
   String failedToUpdateTopic(String error, String xato) {
@@ -530,16 +539,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noDiscussionsYet => 'No discussions yet.';
 
   @override
-  String get beTheFirstToStartConversation => 'Be the first to start a conversation!';
+  String get beTheFirstToStartConversation =>
+      'Be the first to start a conversation!';
 
   @override
-  String get mustBeLoggedInToCreateResource => 'You must be logged in to create a resource.';
+  String get mustBeLoggedInToCreateResource =>
+      'You must be logged in to create a resource.';
 
   @override
-  String get profileIncompleteToCreateResource => 'Your profile information is incomplete. Please update your name in your profile.';
+  String get profileIncompleteToCreateResource =>
+      'Your profile information is incomplete. Please update your name in your profile.';
 
   @override
-  String get profileIncompleteToCreateTopic => 'Your profile name is not set. Please update your profile.';
+  String get profileIncompleteToCreateTopic =>
+      'Your profile name is not set. Please update your profile.';
 
   @override
   String get commentCannotBeEmpty => 'Comment cannot be empty.';
@@ -638,7 +651,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get manageResourcesTitle => 'Manage Guides';
 
   @override
-  String get manageResourcesSubtitle => 'Oversee all learning resources (future)';
+  String get manageResourcesSubtitle =>
+      'Oversee all learning resources (future)';
 
   @override
   String get confirmDeleteTitle => 'Confirm Deletion';
@@ -754,13 +768,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pleaseEnterNewsUrl => 'Please enter the article URL.';
 
   @override
-  String get pleaseEnterValidNewsUrl => 'Please enter a valid URL (starting with http or https).';
+  String get pleaseEnterValidNewsUrl =>
+      'Please enter a valid URL (starting with http or https).';
 
   @override
   String get newsImageUrlLabel => 'Image URL (Optional)';
 
   @override
-  String get pleaseEnterValidImageUrl => 'Please enter a valid image URL (starting with http or https), or leave blank.';
+  String get pleaseEnterValidImageUrl =>
+      'Please enter a valid image URL (starting with http or https), or leave blank.';
 
   @override
   String get publicationDateLabel => 'Publication Date';
@@ -816,7 +832,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get manageUsersSubtitleNow => 'View and search registered users';
 
   @override
-  String get manageResourcesSubtitleNow => 'View, edit, or delete any learning resource';
+  String get manageResourcesSubtitleNow =>
+      'View, edit, or delete any learning resource';
 
   @override
   String confirmDeleteResourceMessage(Object resourceTitle) {
@@ -1271,7 +1288,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notificationHistoryTitle => 'Notification History';
 
   @override
-  String get notificationHistoryPlaceholder => 'History of sent notifications will appear here (coming soon).';
+  String get notificationHistoryPlaceholder =>
+      'History of sent notifications will appear here (coming soon).';
 
   @override
   String get sendNewNotificationButton => 'Send New Notification';
@@ -1437,7 +1455,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get landingTitle => 'Professional Platform';
 
   @override
-  String get landingSubtitle => 'Elevate your legal knowledge. Anytime. Anywhere.';
+  String get landingSubtitle =>
+      'Elevate your legal knowledge. Anytime. Anywhere.';
 
   @override
   String get landingLogin => 'Login';
@@ -1449,19 +1468,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get featureKnowledgeBase => 'Knowledge Base';
 
   @override
-  String get featureKnowledgeBaseDesc => 'Access a vast library of legal resources and documents.';
+  String get featureKnowledgeBaseDesc =>
+      'Access a vast library of legal resources and documents.';
 
   @override
   String get featureVideoTutorials => 'Video Tutorials';
 
   @override
-  String get featureVideoTutorialsDesc => 'Learn from expert-led video guides and webinars.';
+  String get featureVideoTutorialsDesc =>
+      'Learn from expert-led video guides and webinars.';
 
   @override
   String get featureGamification => 'Gamification';
 
   @override
-  String get featureGamificationDesc => 'Earn XP, badges, and compete on the leaderboard.';
+  String get featureGamificationDesc =>
+      'Earn XP, badges, and compete on the leaderboard.';
 
   @override
   String get analyticsTitle => 'Learning Analytics (xAPI)';

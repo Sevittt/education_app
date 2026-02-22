@@ -45,7 +45,7 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
   String _getCategoryDisplayName(String category) {
     // Ensure l10n is available, if context is not valid yet, return category
     if (!mounted) return category;
-    
+
     final l10n = AppLocalizations.of(context)!;
     switch (category) {
       case 'general':
@@ -66,34 +66,27 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
     super.initState();
     _currentHelpfulCount = _initialHelpful;
     // Increment views via provider if using entity, else via service
-    if (widget.articleEntity != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        context.read<LibraryProvider>().incrementArticleViews(_articleId);
-      });
-    } else {
-      // Use LibraryProvider for metrics
-      if (mounted) {
-        context.read<LibraryProvider>().incrementArticleViews(_articleId);
-      }
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<LibraryProvider>().incrementArticleViews(_articleId);
+    });
     _scrollController.addListener(_onScroll);
-    
+
     // xAPI Tracking - Experienced (Viewed)
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-       final actor = _getCurrentActor();
-       final statement = XApiStatement(
-         actor: actor,
-         verb: XApiVerbs.experienced,
-         object: XApiObject(
-           id: _articleId,
-           definition: {
-             'type': 'http://adlnet.gov/expapi/activities/article',
-             'name': {'en-US': _articleTitle},
-           },
-         ),
-         timestamp: DateTime.now(),
-       );
-       await XApiService().recordStatement(statement);
+      final actor = _getCurrentActor();
+      final statement = XApiStatement(
+        actor: actor,
+        verb: XApiVerbs.experienced,
+        object: XApiObject(
+          id: _articleId,
+          definition: {
+            'type': 'http://adlnet.gov/expapi/activities/article',
+            'name': {'en-US': _articleTitle},
+          },
+        ),
+        timestamp: DateTime.now(),
+      );
+      await XApiService().recordStatement(statement);
     });
   }
 
@@ -105,9 +98,10 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
 
   void _onScroll() {
     if (_pointsAwarded) return;
-    
+
     // Check if scrolled to bottom
-    if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 50) {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 50) {
       _awardPointsForReading();
     }
   }
@@ -115,9 +109,9 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
   Future<void> _awardPointsForReading() async {
     if (_pointsAwarded) return;
 
-    // We no longer call awardPoints directly here. 
+    // We no longer call awardPoints directly here.
     // Instead, we record the xAPI statement and let GamificationService handle the reward.
-    
+
     // xAPI Tracking - Completed
     final actor = _getCurrentActor();
     final statement = XApiStatement(
@@ -141,13 +135,13 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
     await XApiService().recordStatement(statement);
 
     if (mounted) {
-       final l10n = AppLocalizations.of(context)!;
-       ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(
-           content: Text(l10n.pointsEarned(5)),
-           backgroundColor: Colors.green,
-         ),
-       );
+      final l10n = AppLocalizations.of(context)!;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.pointsEarned(5)),
+          backgroundColor: Colors.green,
+        ),
+      );
     }
   }
 
@@ -187,12 +181,12 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
 
   Future<void> _launchPdfUrl() async {
     if (_pdfUrl == null) return;
-    
+
     final Uri url = Uri.parse(_pdfUrl!);
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-           SnackBar(content: Text(AppLocalizations.of(context)!.errorPdfOpen)),
+          SnackBar(content: Text(AppLocalizations.of(context)!.errorPdfOpen)),
         );
       }
     }
@@ -227,17 +221,22 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                     data: _articleContent,
                     selectable: true,
                     styleSheet: MarkdownStyleSheet(
-                      h1: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                      h2: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      h1: const TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.bold),
+                      h2: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
                       p: const TextStyle(fontSize: 16, height: 1.5),
                       blockquote: TextStyle(
                         color: Colors.grey.shade700,
                         fontStyle: FontStyle.italic,
                       ),
                       blockquoteDecoration: BoxDecoration(
-                        border: Border(left: BorderSide(color: Colors.blue.shade200, width: 4)),
+                        border: Border(
+                            left: BorderSide(
+                                color: Colors.blue.shade200, width: 4)),
                       ),
-                      blockquotePadding: const EdgeInsets.only(left: 16, top: 8, bottom: 8),
+                      blockquotePadding:
+                          const EdgeInsets.only(left: 16, top: 8, bottom: 8),
                     ),
                     onTapLink: (text, href, title) async {
                       if (href != null) {
@@ -283,15 +282,15 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
         Text(
           _articleTitle,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 8),
         Text(
           _articleDescription,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: Colors.grey.shade600,
-          ),
+                color: Colors.grey.shade600,
+              ),
         ),
         const SizedBox(height: 16),
         Row(
@@ -367,7 +366,9 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
               Text(
                 '$_currentHelpfulCount',
                 style: TextStyle(
-                  color: _hasVoted ? Theme.of(context).primaryColor : Colors.grey.shade600,
+                  color: _hasVoted
+                      ? Theme.of(context).primaryColor
+                      : Colors.grey.shade600,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -376,11 +377,13 @@ class _ArticleDetailScreenState extends State<ArticleDetailScreen> {
                 onPressed: _handleVote,
                 icon: Icon(
                   _hasVoted ? Icons.thumb_up : Icons.thumb_up_outlined,
-                  color: _hasVoted ? Theme.of(context).primaryColor : Colors.grey.shade600,
+                  color: _hasVoted
+                      ? Theme.of(context).primaryColor
+                      : Colors.grey.shade600,
                 ),
                 style: IconButton.styleFrom(
-                  backgroundColor: _hasVoted 
-                      ? Theme.of(context).primaryColor.withAlpha(26) 
+                  backgroundColor: _hasVoted
+                      ? Theme.of(context).primaryColor.withAlpha(26)
                       : Colors.transparent,
                 ),
               ),

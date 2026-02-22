@@ -5,7 +5,7 @@ import '../../domain/repositories/library_repository.dart';
 import '../../data/repositories/library_repository_impl.dart';
 
 /// Provider for Library Feature State Management.
-/// 
+///
 /// This class manages state for both Videos and Articles.
 /// It depends on the LibraryRepository interface, not the implementation.
 class LibraryProvider extends ChangeNotifier {
@@ -94,7 +94,7 @@ class LibraryProvider extends ChangeNotifier {
     await _repository.incrementArticleViews(id);
   }
 
-  // --- Search ---
+  // --- Search & Filter ---
 
   Future<List<VideoEntity>> searchVideos(String query) async {
     return _repository.searchVideos(query);
@@ -102,6 +102,16 @@ class LibraryProvider extends ChangeNotifier {
 
   Future<List<ArticleEntity>> searchArticles(String query) async {
     return _repository.searchArticles(query);
+  }
+
+  Future<List<VideoEntity>> getVideosBySystem(String systemId) async {
+    final allVideos = await _repository.getVideos();
+    return allVideos.where((v) => v.systemId == systemId).toList();
+  }
+
+  Future<List<ArticleEntity>> getArticlesBySystem(String systemId) async {
+    final allArticles = await _repository.getArticles();
+    return allArticles.where((a) => a.systemId == systemId).toList();
   }
 
   // --- Video CRUD ---

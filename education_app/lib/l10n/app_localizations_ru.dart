@@ -51,7 +51,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get registrationTitle => 'Создать учётную запись';
 
   @override
-  String get registrationSubtitle => 'Присоединяйтесь к профессиональному сообществу!';
+  String get registrationSubtitle =>
+      'Присоединяйтесь к профессиональному сообществу!';
 
   @override
   String get registrationFullNameLabel => 'ФИО';
@@ -75,7 +76,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get registrationPasswordLabel => 'Пароль';
 
   @override
-  String get registrationPasswordError => 'Пароль должен быть не менее 6 символов';
+  String get registrationPasswordError =>
+      'Пароль должен быть не менее 6 символов';
 
   @override
   String get registrationConfirmPasswordLabel => 'Подтвердить пароль';
@@ -111,13 +113,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsReceiveNotifications => 'Получать уведомления';
 
   @override
-  String get settingsReceiveNotificationsSubtitle => 'Получайте обновления о новых ресурсах и обсуждениях';
+  String get settingsReceiveNotificationsSubtitle =>
+      'Получайте обновления о новых ресурсах и обсуждениях';
 
   @override
   String get settingsAllowLocation => 'Разрешить доступ к местоположению';
 
   @override
-  String get settingsAllowLocationSubtitle => 'Для функций, требующих вашего местоположения (если есть)';
+  String get settingsAllowLocationSubtitle =>
+      'Для функций, требующих вашего местоположения (если есть)';
 
   @override
   String get settingsChangePassword => 'Изменить пароль';
@@ -132,7 +136,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get settingsAppLegalese => '© 2025 Проект Справочник Судьи';
 
   @override
-  String get settingsAppDescription => 'Мобильная платформа для повышения профессиональной компетентности работников суда.';
+  String get settingsAppDescription =>
+      'Мобильная платформа для повышения профессиональной компетентности работников суда.';
 
   @override
   String get errorPrefix => 'Ошибка: ';
@@ -189,7 +194,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get themeOptionsTitle => 'Опции темы';
 
   @override
-  String get logoutConfirmMessage => 'Вы уверены, что хотите выйти из аккаунта?';
+  String get logoutConfirmMessage =>
+      'Вы уверены, что хотите выйти из аккаунта?';
 
   @override
   String get cancelButton => 'Отмена';
@@ -210,7 +216,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get resourcesAllTypes => 'Все типы';
 
   @override
-  String get resourcesNoResourcesMatch => 'Ресурсы, соответствующие вашим критериям, не найдены.';
+  String get resourcesNoResourcesMatch =>
+      'Ресурсы, соответствующие вашим критериям, не найдены.';
 
   @override
   String get resourcesTryAdjusting => 'Попробуйте изменить поиск или фильтр.';
@@ -230,7 +237,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get createResourceScreenTitle => 'Создать Новый Ресурс';
 
   @override
-  String get createResourceFormWillBeHere => 'Форма создания ресурса будет здесь.';
+  String get createResourceFormWillBeHere =>
+      'Форма создания ресурса будет здесь.';
 
   @override
   String get saveButtonText => 'Сохранить';
@@ -266,7 +274,8 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get createResourceValidationInvalidUrl => 'Введите действительный URL-адрес';
+  String get createResourceValidationInvalidUrl =>
+      'Введите действительный URL-адрес';
 
   @override
   String get editButtonTooltip => 'Редактировать ресурс';
@@ -304,7 +313,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get deleteResourceConfirmTitle => 'Подтвердите удаление';
 
   @override
-  String get deleteResourceConfirmMessage => 'Вы уверены, что хотите удалить этот ресурс? Это действие не может быть отменено.';
+  String get deleteResourceConfirmMessage =>
+      'Вы уверены, что хотите удалить этот ресурс? Это действие не может быть отменено.';
 
   @override
   String get cancelButtonText => 'Отмена';
@@ -362,7 +372,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get trueFalse => 'Верно/Неверно';
 
   @override
-  String get pleaseSelectCorrectAnswer => 'Пожалуйста, выберите правильный ответ.';
+  String get pleaseSelectCorrectAnswer =>
+      'Пожалуйста, выберите правильный ответ.';
 
   @override
   String option(Object number) {
@@ -446,7 +457,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get relatedQuizzesTitle => 'Похожие тесты';
 
   @override
-  String get noQuizzesAvailable => 'Пока нет доступных тестов для этого ресурса';
+  String get noQuizzesAvailable =>
+      'Пока нет доступных тестов для этого ресурса';
 
   @override
   String get errorLoadingQuizzes => 'Ошибка загрузки тестов';
@@ -472,7 +484,8 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get titleMinLength => 'Заголовок должен быть не менее 5 символов в длину';
+  String get titleMinLength =>
+      'Заголовок должен быть не менее 5 символов в длину';
 
   @override
   String get titleMaxLength => 'Заголовок не может превышать 100 символов';
@@ -490,7 +503,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get createTopicButtonText => 'Создать тему обсуждения';
 
   @override
-  String get mustBeLoggedInToCreateTopic => 'Чтобы создать тему, вам необходимо войти в систему.';
+  String get mustBeLoggedInToCreateTopic =>
+      'Чтобы создать тему, вам необходимо войти в систему.';
 
   @override
   String get topicCreatedSuccess => 'Тема создана успешно!';
@@ -516,7 +530,8 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get errorLoadingData => 'Произошла ошибка при загрузке ресурсов. Повторите попытку.';
+  String get errorLoadingData =>
+      'Произошла ошибка при загрузке ресурсов. Повторите попытку.';
 
   @override
   String failedToUpdateTopic(String error, String xato) {
@@ -533,19 +548,23 @@ class AppLocalizationsRu extends AppLocalizations {
   String get beTheFirstToStartConversation => 'Начните разговор первым!';
 
   @override
-  String get mustBeLoggedInToCreateResource => 'Вы должны войти в систему, чтобы создать ресурс.';
+  String get mustBeLoggedInToCreateResource =>
+      'Вы должны войти в систему, чтобы создать ресурс.';
 
   @override
-  String get profileIncompleteToCreateResource => 'Информация вашего профиля неполная. Пожалуйста, обновите свое имя в вашем профиле.';
+  String get profileIncompleteToCreateResource =>
+      'Информация вашего профиля неполная. Пожалуйста, обновите свое имя в вашем профиле.';
 
   @override
-  String get profileIncompleteToCreateTopic => 'Имя вашего профиля не установлено. Пожалуйста, обновите свой профиль.';
+  String get profileIncompleteToCreateTopic =>
+      'Имя вашего профиля не установлено. Пожалуйста, обновите свой профиль.';
 
   @override
   String get commentCannotBeEmpty => 'Комментарий не может быть пустым.';
 
   @override
-  String get mustBeLoggedInToComment => 'Вы должны войти в систему, чтобы оставить комментарий.';
+  String get mustBeLoggedInToComment =>
+      'Вы должны войти в систему, чтобы оставить комментарий.';
 
   @override
   String get commentAddedSuccessfully => 'Комментарий успешно добавлен!';
@@ -574,7 +593,8 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get noRepliesYet => 'Пока нет ответов. Станьте первым, кто оставит комментарий!';
+  String get noRepliesYet =>
+      'Пока нет ответов. Станьте первым, кто оставит комментарий!';
 
   @override
   String get writeAReplyHint => 'Напишите ответ...';
@@ -626,19 +646,22 @@ class AppLocalizationsRu extends AppLocalizations {
   String get manageNewsTitle => 'Управление новостями';
 
   @override
-  String get manageNewsSubtitle => 'Добавление, редактирование или удаление новостных статей';
+  String get manageNewsSubtitle =>
+      'Добавление, редактирование или удаление новостных статей';
 
   @override
   String get manageUsersTitle => 'Управление пользователями';
 
   @override
-  String get manageUsersSubtitle => 'Просмотр пользователей и управление ролями (в будущем)';
+  String get manageUsersSubtitle =>
+      'Просмотр пользователей и управление ролями (в будущем)';
 
   @override
   String get manageResourcesTitle => 'Управление ресурсами';
 
   @override
-  String get manageResourcesSubtitle => 'Управление всеми учебными ресурсами (в будущем)';
+  String get manageResourcesSubtitle =>
+      'Управление всеми учебными ресурсами (в будущем)';
 
   @override
   String get confirmDeleteTitle => 'Подтвердить удаление';
@@ -754,13 +777,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get pleaseEnterNewsUrl => 'Введите URL статьи';
 
   @override
-  String get pleaseEnterValidNewsUrl => 'Введите действительный URL (начинающийся с http или https).';
+  String get pleaseEnterValidNewsUrl =>
+      'Введите действительный URL (начинающийся с http или https).';
 
   @override
   String get newsImageUrlLabel => 'URL изображения (необязательно)';
 
   @override
-  String get pleaseEnterValidImageUrl => 'Введите действительный URL изображения (начинающийся с http или https) или оставьте поле пустым.';
+  String get pleaseEnterValidImageUrl =>
+      'Введите действительный URL изображения (начинающийся с http или https) или оставьте поле пустым.';
 
   @override
   String get publicationDateLabel => 'Дата публикации';
@@ -813,10 +838,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get registeredOnLabel => 'Зарегистрирован';
 
   @override
-  String get manageUsersSubtitleNow => 'Просмотр и поиск зарегистрированных пользователей';
+  String get manageUsersSubtitleNow =>
+      'Просмотр и поиск зарегистрированных пользователей';
 
   @override
-  String get manageResourcesSubtitleNow => 'Просмотр, редактирование или удаление любого учебного ресурса';
+  String get manageResourcesSubtitleNow =>
+      'Просмотр, редактирование или удаление любого учебного ресурса';
 
   @override
   String confirmDeleteResourceMessage(Object resourceTitle) {
@@ -887,7 +914,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get manageQuizzesSubtitle => 'Контролировать все тесты и их вопросы';
 
   @override
-  String get registrationEmailError => 'Введите действительный адрес электронной почты';
+  String get registrationEmailError =>
+      'Введите действительный адрес электронной почты';
 
   @override
   String get dashboardXodimTitle => 'Моя активность';
@@ -932,7 +960,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get bioOptionalLabel => 'Био (необязательно)';
 
   @override
-  String get profilePictureUrlLabel => 'URL изображения профиля (необязательно)';
+  String get profilePictureUrlLabel =>
+      'URL изображения профиля (необязательно)';
 
   @override
   String get levelBeginner => 'Новичок';
@@ -1271,7 +1300,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get notificationHistoryTitle => 'История уведомлений';
 
   @override
-  String get notificationHistoryPlaceholder => 'Здесь будет отображаться история отправленных уведомлений (скоро).';
+  String get notificationHistoryPlaceholder =>
+      'Здесь будет отображаться история отправленных уведомлений (скоро).';
 
   @override
   String get sendNewNotificationButton => 'Отправить новое уведомление';
@@ -1388,7 +1418,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get markAllAsReadTooltip => 'Отметить все как прочитанные';
 
   @override
-  String get allNotificationsReadMessage => 'Все уведомления отмечены как прочитанные';
+  String get allNotificationsReadMessage =>
+      'Все уведомления отмечены как прочитанные';
 
   @override
   String get noNotifications => 'Нет уведомлений';
@@ -1437,7 +1468,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get landingTitle => 'Профессиональная Платформа';
 
   @override
-  String get landingSubtitle => 'Повышайте свои правовые знания. В любое время.';
+  String get landingSubtitle =>
+      'Повышайте свои правовые знания. В любое время.';
 
   @override
   String get landingLogin => 'Войти';
@@ -1449,19 +1481,22 @@ class AppLocalizationsRu extends AppLocalizations {
   String get featureKnowledgeBase => 'База Знаний';
 
   @override
-  String get featureKnowledgeBaseDesc => 'Доступ к обширной библиотеке правовых ресурсов.';
+  String get featureKnowledgeBaseDesc =>
+      'Доступ к обширной библиотеке правовых ресурсов.';
 
   @override
   String get featureVideoTutorials => 'Видеоуроки';
 
   @override
-  String get featureVideoTutorialsDesc => 'Учитесь по видео-руководствам от экспертов.';
+  String get featureVideoTutorialsDesc =>
+      'Учитесь по видео-руководствам от экспертов.';
 
   @override
   String get featureGamification => 'Геймификация';
 
   @override
-  String get featureGamificationDesc => 'Зарабатывайте XP, значки и соревнуйтесь в рейтинге.';
+  String get featureGamificationDesc =>
+      'Зарабатывайте XP, значки и соревнуйтесь в рейтинге.';
 
   @override
   String get analyticsTitle => 'Аналитика Обучения (xAPI)';

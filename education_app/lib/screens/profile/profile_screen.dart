@@ -15,7 +15,7 @@ import 'profile_edit_screen.dart'; // Add this import
 
 // --- ADDED ---
 import 'package:sud_qollanma/screens/admin/admin_panel_screen.dart';
-import 'package:sud_qollanma/screens/profile/leaderboard_screen.dart'; 
+import 'package:sud_qollanma/screens/profile/leaderboard_screen.dart';
 import 'package:sud_qollanma/screens/profile/quiz_history_screen.dart'; // --- ADDED ---
 import '../../widgets/quiz_attempt_card.dart';
 import '../../config/gamification_rules.dart'; // Add Gamification Rules
@@ -50,26 +50,23 @@ class ProfileScreen extends StatelessWidget {
             color: enabled ? colorScheme.onSurface : Colors.grey.shade600,
           ),
         ),
-        subtitle:
-            subtitle != null
-                ? Text(
-                  subtitle,
-                  style: textTheme.bodySmall?.copyWith(
-                    color:
-                        enabled
-                            ? colorScheme.onSurfaceVariant
-                            : Colors.grey.shade500,
-                  ),
-                )
-                : null,
-        trailing:
-            onTap != null && enabled
-                ? Icon(
-                  Icons.arrow_forward_ios,
-                  size: 18,
-                  color: colorScheme.onSurfaceVariant,
-                )
-                : null,
+        subtitle: subtitle != null
+            ? Text(
+                subtitle,
+                style: textTheme.bodySmall?.copyWith(
+                  color: enabled
+                      ? colorScheme.onSurfaceVariant
+                      : Colors.grey.shade500,
+                ),
+              )
+            : null,
+        trailing: onTap != null && enabled
+            ? Icon(
+                Icons.arrow_forward_ios,
+                size: 18,
+                color: colorScheme.onSurfaceVariant,
+              )
+            : null,
         onTap: enabled ? onTap : null,
         enabled: enabled,
         contentPadding: const EdgeInsets.symmetric(
@@ -120,7 +117,10 @@ class ProfileScreen extends StatelessWidget {
             final attempt = attempts[index];
 
             return QuizAttemptCard(
-              attempt: attempt,
+              quizTitle: attempt.quizTitle,
+              score: attempt.score,
+              totalQuestions: attempt.totalQuestions,
+              attemptedAt: attempt.attemptedAt.toDate(),
               onTap: () {
                 // Navigate to quiz details if needed
               },
@@ -160,42 +160,43 @@ class ProfileScreen extends StatelessWidget {
   }
 
   // --- NEW: Build Streak Badge ---
-  Widget _buildStreakBadge(BuildContext context, AppUser appUser, AppLocalizations l10n) {
-     if (appUser.currentStreak == 0) return const SizedBox.shrink();
-     
-     return Container(
-       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-       decoration: BoxDecoration(
-         gradient: LinearGradient(
-           colors: [Colors.orange.shade700, Colors.red.shade600],
-           begin: Alignment.topLeft,
-           end: Alignment.bottomRight,
-         ),
-         borderRadius: BorderRadius.circular(20),
-         boxShadow: [
-           BoxShadow(
-             color: Colors.red.withAlpha(50),
-             blurRadius: 8,
-             offset: const Offset(0, 4),
-           ),
-         ],
-       ),
-       child: Row(
-         mainAxisSize: MainAxisSize.min,
-         children: [
-           const Text('🔥', style: TextStyle(fontSize: 18)),
-           const SizedBox(width: 4),
-           Text(
-             '${appUser.currentStreak} ${l10n.days}',
-             style: const TextStyle(
-               color: Colors.white,
-               fontWeight: FontWeight.bold,
-               fontSize: 14,
-             ),
-           ),
-         ],
-       ),
-     );
+  Widget _buildStreakBadge(
+      BuildContext context, AppUser appUser, AppLocalizations l10n) {
+    if (appUser.currentStreak == 0) return const SizedBox.shrink();
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.orange.shade700, Colors.red.shade600],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.red.withAlpha(50),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text('🔥', style: TextStyle(fontSize: 18)),
+          const SizedBox(width: 4),
+          Text(
+            '${appUser.currentStreak} ${l10n.days}',
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   // --- ADDED: Build User Stats Widget ---
@@ -209,7 +210,7 @@ class ProfileScreen extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     int currentXP = appUser.xp;
-    
+
     // Determine Target Level based on current level
     // Logic: Look at current level, decide what's next and what's needed.
     String nextLevelName = '';
@@ -236,22 +237,22 @@ class ProfileScreen extends StatelessWidget {
       isMaxLevel = true;
       xpTarget = GamificationRules.xpThresholdMaster; // Just filter
     } else {
-        // Fallback
+      // Fallback
       nextLevelName = GamificationRules.levelSpecialist;
       xpTarget = GamificationRules.xpThresholdSpecialist;
     }
 
     // Calculate Progress for XP
     double progress = 0.0;
-    
+
     // If calculating progress from 0 to Target
-    // Simple logic: XP / Target. 
+    // Simple logic: XP / Target.
     // If we want relative progress (e.g. from 200 to 800), we need previous threshold.
     // For now simple 0-based progress is easier to understand for users "You have 500/800".
     if (!isMaxLevel) {
-        progress = (currentXP / xpTarget).clamp(0.0, 1.0);
+      progress = (currentXP / xpTarget).clamp(0.0, 1.0);
     } else {
-        progress = 1.0;
+      progress = 1.0;
     }
 
     return Card(
@@ -297,11 +298,12 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            
+
             // --- UPDATED: XP Progress with Animation ---
             Text(
               'XP: $currentXP / $xpTarget',
-              style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+              style:
+                  textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             TweenAnimationBuilder<double>(
@@ -334,79 +336,78 @@ class ProfileScreen extends StatelessWidget {
                 );
               },
             ),
-             const SizedBox(height: 8),
-             
-             // Requirements Checklist
-             if (!isMaxLevel) ...[
-                 // XP Requirement
-                 _buildRequirementRow(
-                     context, 
-                     icon: Icons.star, 
-                     label: '$currentXP / $xpTarget XP', 
-                     isMet: currentXP >= xpTarget
-                 ),
-                  // Quiz Requirement (if exists)
-                  if (quizzesTarget > 0)
-                    _buildRequirementRow(
-                        context, 
-                        icon: Icons.quiz, 
-                        label: '${l10n.quizzes}: ${appUser.quizzesPassed} / $quizzesTarget', 
-                        isMet: appUser.quizzesPassed >= quizzesTarget
-                    ),
-                  
-                  // Aced Quizzes Requirement (Expert level)
-                  if (appUser.level == GamificationRules.levelSpecialist)
-                    _buildRequirementRow(
-                        context, 
-                        icon: Icons.workspace_premium, 
-                        label: 'Aced Quizzes: ${appUser.totalQuizzesAced} / ${GamificationRules.reqQuizzesAcedForExpert}', 
-                        isMet: appUser.totalQuizzesAced >= GamificationRules.reqQuizzesAcedForExpert
-                    ),
+            const SizedBox(height: 8),
 
-                  // Streak Requirement (Master level)
-                  if (appUser.level == GamificationRules.levelExpert)
-                    _buildRequirementRow(
-                        context, 
-                        icon: Icons.local_fire_department, 
-                        label: 'Streak: ${appUser.currentStreak} / ${GamificationRules.reqStreakForMaster} ${l10n.days}', 
-                        isMet: appUser.currentStreak >= GamificationRules.reqStreakForMaster
-                    ),
+            // Requirements Checklist
+            if (!isMaxLevel) ...[
+              // XP Requirement
+              _buildRequirementRow(context,
+                  icon: Icons.star,
+                  label: '$currentXP / $xpTarget XP',
+                  isMet: currentXP >= xpTarget),
+              // Quiz Requirement (if exists)
+              if (quizzesTarget > 0)
+                _buildRequirementRow(context,
+                    icon: Icons.quiz,
+                    label:
+                        '${l10n.quizzes}: ${appUser.quizzesPassed} / $quizzesTarget',
+                    isMet: appUser.quizzesPassed >= quizzesTarget),
 
-                  // Sims Requirement (if exists)
-                  if (simsTarget > 0)
-                    _buildRequirementRow(
-                        context, 
-                        icon: Icons.science, 
-                        label: '${l10n.simulations}: ${appUser.simulationsCompleted} / $simsTarget', 
-                        isMet: appUser.simulationsCompleted >= simsTarget
-                    ),
-             ] else 
-                 Text(
-                   l10n.levelExpert, // Max Message
-                   style: TextStyle(color: colorScheme.primary),
-                 ),
+              // Aced Quizzes Requirement (Expert level)
+              if (appUser.level == GamificationRules.levelSpecialist)
+                _buildRequirementRow(context,
+                    icon: Icons.workspace_premium,
+                    label:
+                        'Aced Quizzes: ${appUser.totalQuizzesAced} / ${GamificationRules.reqQuizzesAcedForExpert}',
+                    isMet: appUser.totalQuizzesAced >=
+                        GamificationRules.reqQuizzesAcedForExpert),
+
+              // Streak Requirement (Master level)
+              if (appUser.level == GamificationRules.levelExpert)
+                _buildRequirementRow(context,
+                    icon: Icons.local_fire_department,
+                    label:
+                        'Streak: ${appUser.currentStreak} / ${GamificationRules.reqStreakForMaster} ${l10n.days}',
+                    isMet: appUser.currentStreak >=
+                        GamificationRules.reqStreakForMaster),
+
+              // Sims Requirement (if exists)
+              if (simsTarget > 0)
+                _buildRequirementRow(context,
+                    icon: Icons.science,
+                    label:
+                        '${l10n.simulations}: ${appUser.simulationsCompleted} / $simsTarget',
+                    isMet: appUser.simulationsCompleted >= simsTarget),
+            ] else
+              Text(
+                l10n.levelExpert, // Max Message
+                style: TextStyle(color: colorScheme.primary),
+              ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildRequirementRow(BuildContext context, {required IconData icon, required String label, required bool isMet}) {
-      final color = isMet ? Colors.green : Colors.grey;
-      return Padding(
-        padding: const EdgeInsets.only(top: 4.0),
-        child: Row(
-            children: [
-                Icon(isMet ? Icons.check_circle : Icons.circle_outlined, size: 16, color: color),
-                const SizedBox(width: 8),
-                Text(label, style: TextStyle(
-                    color: isMet ? Colors.black87 : Colors.grey.shade600,
-                    fontWeight: isMet ? FontWeight.bold : FontWeight.normal,
-                    decoration: isMet ? TextDecoration.none : TextDecoration.none
-                )),
-            ],
-        ),
-      );
+  Widget _buildRequirementRow(BuildContext context,
+      {required IconData icon, required String label, required bool isMet}) {
+    final color = isMet ? Colors.green : Colors.grey;
+    return Padding(
+      padding: const EdgeInsets.only(top: 4.0),
+      child: Row(
+        children: [
+          Icon(isMet ? Icons.check_circle : Icons.circle_outlined,
+              size: 16, color: color),
+          const SizedBox(width: 8),
+          Text(label,
+              style: TextStyle(
+                  color: isMet ? Colors.black87 : Colors.grey.shade600,
+                  fontWeight: isMet ? FontWeight.bold : FontWeight.normal,
+                  decoration:
+                      isMet ? TextDecoration.none : TextDecoration.none)),
+        ],
+      ),
+    );
   }
 
   @override
@@ -443,20 +444,18 @@ class ProfileScreen extends StatelessWidget {
                     backgroundColor: colorScheme.primaryContainer,
                     backgroundImage:
                         (appUser?.profilePictureUrl?.isNotEmpty == true
-                                ? NetworkImage(appUser!.profilePictureUrl!)
-                                : (firebaseUser?.photoURL?.isNotEmpty == true
-                                    ? NetworkImage(firebaseUser!.photoURL!)
-                                    : null))
-                            as ImageProvider<Object>?,
-                    child:
-                        (appUser?.profilePictureUrl?.isEmpty ?? true) &&
-                                (firebaseUser?.photoURL?.isEmpty ?? true)
-                            ? Icon(
-                              Icons.person_rounded,
-                              size: 60,
-                              color: colorScheme.onPrimaryContainer,
-                            )
-                            : null,
+                            ? NetworkImage(appUser!.profilePictureUrl!)
+                            : (firebaseUser?.photoURL?.isNotEmpty == true
+                                ? NetworkImage(firebaseUser!.photoURL!)
+                                : null)) as ImageProvider<Object>?,
+                    child: (appUser?.profilePictureUrl?.isEmpty ?? true) &&
+                            (firebaseUser?.photoURL?.isEmpty ?? true)
+                        ? Icon(
+                            Icons.person_rounded,
+                            size: 60,
+                            color: colorScheme.onPrimaryContainer,
+                          )
+                        : null,
                   ),
                   const SizedBox(height: 16.0),
                   Text(
@@ -531,10 +530,9 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    subtitle:
-                        appUser != null
-                            ? l10n.updateYourInformation
-                            : l10n.loginToEditProfile,
+                    subtitle: appUser != null
+                        ? l10n.updateYourInformation
+                        : l10n.loginToEditProfile,
                   ),
                   _buildProfileOptionCard(
                     context: context,
@@ -572,7 +570,7 @@ class ProfileScreen extends StatelessWidget {
                       title: l10n.adminPanelTitle,
                       subtitle:
                           l10n.manageNewsSubtitle, // Re-using a good subtitle
-                      enabled: true,  // Removed redundant appUser != null check
+                      enabled: true, // Removed redundant appUser != null check
                       onTap: () {
                         Navigator.push(
                           context,
@@ -593,11 +591,10 @@ class ProfileScreen extends StatelessWidget {
                       endIndent: 16,
                       thickness: 0.5,
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                         Text(
+                        Text(
                           l10n.myQuizHistory,
                           style: textTheme.titleLarge?.copyWith(
                             color: colorScheme.onSurface,
@@ -645,19 +642,17 @@ class ProfileScreen extends StatelessWidget {
                               actions: <Widget>[
                                 TextButton(
                                   child: Text(l10n.cancelButton), // Assuming
-                                  onPressed:
-                                      () => Navigator.of(
-                                        dialogContext,
-                                      ).pop(false),
+                                  onPressed: () => Navigator.of(
+                                    dialogContext,
+                                  ).pop(false),
                                 ),
                                 TextButton(
                                   child: Text(
                                     l10n.logoutButton,
                                     style: TextStyle(color: colorScheme.error),
                                   ),
-                                  onPressed:
-                                      () =>
-                                          Navigator.of(dialogContext).pop(true),
+                                  onPressed: () =>
+                                      Navigator.of(dialogContext).pop(true),
                                 ),
                               ],
                             );

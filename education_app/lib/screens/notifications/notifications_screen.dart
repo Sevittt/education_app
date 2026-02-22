@@ -27,7 +27,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   Widget build(BuildContext context) {
     if (_userId == null) {
       return Scaffold(
-        appBar: AppBar(title: Text(AppLocalizations.of(context)!.notificationsTitle)),
+        appBar: AppBar(
+            title: Text(AppLocalizations.of(context)!.notificationsTitle)),
         body: Center(child: Text(AppLocalizations.of(context)!.loginRequired)),
       );
     }
@@ -52,7 +53,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     final messenger = ScaffoldMessenger.of(context);
                     final result = await _service.markAllAsRead(_userId!);
                     if (!mounted) return;
-                    
+
                     if (result['success'] == true) {
                       messenger.showSnackBar(
                         SnackBar(
@@ -61,7 +62,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                       );
                     } else {
                       messenger.showSnackBar(
-                        SnackBar(content: Text(AppLocalizations.of(context)!.errorGeneric(result['error']))),
+                        SnackBar(
+                            content: Text(l10n.errorGeneric(result['error']))),
                       );
                     }
                   },
@@ -71,7 +73,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           body: Builder(
             builder: (context) {
               if (snapshot.hasError) {
-                return Center(child: Text('${AppLocalizations.of(context)!.errorPrefix}${snapshot.error}'));
+                return Center(
+                    child: Text(
+                        '${AppLocalizations.of(context)!.errorPrefix}${snapshot.error}'));
               }
 
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -99,12 +103,16 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   Widget _buildNotificationCard(AppNotification notification) {
     final isRead = notification.isReadBy(_userId!);
     final dateFormat = DateFormat('dd.MM.yyyy HH:mm');
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
-      elevation: isRead ? 1 : 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      color: isRead ? null : Colors.blue.shade50,
+      // Use theme's card theme, but override color for unread
+      color: isRead
+          ? theme.cardTheme.color
+          : colorScheme.primaryContainer.withValues(alpha: 0.1),
+      elevation: isRead ? 1 : 2, // Slight elevation difference
       child: InkWell(
         onTap: () => _handleNotificationTap(notification),
         borderRadius: BorderRadius.circular(12),
@@ -124,9 +132,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         Expanded(
                           child: Text(
                             notification.title,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: isRead ? FontWeight.normal : FontWeight.bold,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight:
+                                  isRead ? FontWeight.normal : FontWeight.bold,
+                              color: isRead
+                                  ? colorScheme.onSurface
+                                  : colorScheme.primary,
                             ),
                           ),
                         ),
@@ -134,8 +145,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                           Container(
                             width: 8,
                             height: 8,
-                            decoration: const BoxDecoration(
-                              color: Colors.blue,
+                            decoration: BoxDecoration(
+                              color: colorScheme.secondary,
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -144,9 +155,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     const SizedBox(height: 4),
                     Text(
                       notification.body,
-                      style: TextStyle(
-                        color: Colors.grey.shade700,
-                        fontSize: 14,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -154,9 +164,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     const SizedBox(height: 8),
                     Text(
                       dateFormat.format(notification.sentAt.toDate()),
-                      style: TextStyle(
-                        color: Colors.grey.shade500,
-                        fontSize: 12,
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color:
+                            colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
                       ),
                     ),
                   ],
@@ -199,29 +209,32 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: color.withAlpha(26),
+        color: color.withValues(alpha: 0.1),
         shape: BoxShape.circle,
-        // ignore: deprecated_member_use
       ),
       child: Icon(iconData, color: color, size: 24),
     );
   }
 
   Widget _buildEmptyState() {
+    final colorScheme = Theme.of(context).colorScheme;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.notifications_none, size: 64, color: Colors.grey.shade400),
+          Icon(Icons.notifications_none, size: 64, color: colorScheme.outline),
           const SizedBox(height: 16),
           Text(
             AppLocalizations.of(context)!.noNotifications,
-            style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
           ),
         ],
       ),
     );
   }
+
   Future<void> _handleNotificationTap(AppNotification notification) async {
     if (!notification.isReadBy(_userId!)) {
       await _service.markAsRead(notification.id, _userId!);
@@ -255,13 +268,14 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${AppLocalizations.of(context)!.errorPrefix}$e')),
+          SnackBar(
+              content: Text('${AppLocalizations.of(context)!.errorPrefix}$e')),
         );
       }
     } finally {
       // Hide loading
       if (mounted) {
-        Navigator.of(context, rootNavigator: true).pop(); 
+        Navigator.of(context, rootNavigator: true).pop();
       }
     }
   }
@@ -272,7 +286,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     if (article != null && mounted) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => ArticleDetailScreen(articleEntity: article)),
+        MaterialPageRoute(
+            builder: (_) => ArticleDetailScreen(articleEntity: article)),
       );
     } else {
       throw 'Maqola topilmadi';
@@ -285,7 +300,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     if (video != null && mounted) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => VideoPlayerScreen(videoEntity: video)),
+        MaterialPageRoute(
+            builder: (_) => VideoPlayerScreen(videoEntity: video)),
       );
     } else {
       throw 'Video topilmadi';

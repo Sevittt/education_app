@@ -66,10 +66,9 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
         id: const Uuid().v4(),
         questionText: _questionController.text,
         questionType: _selectedQuestionType,
-        options:
-            _selectedQuestionType == QuestionType.multipleChoice
-                ? _optionControllers.map((c) => c.text).toList()
-                : ['True', 'False'],
+        options: _selectedQuestionType == QuestionType.multipleChoice
+            ? _optionControllers.map((c) => c.text).toList()
+            : ['True', 'False'],
         correctAnswer: correctAnswer,
       );
 
@@ -115,8 +114,8 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
         title: Text(l10n.addQuestions),
         actions: [
           TextButton(
-            onPressed:
-                () => Navigator.of(context).popUntil((route) => route.isFirst),
+            onPressed: () =>
+                Navigator.of(context).popUntil((route) => route.isFirst),
             child: Text(
               l10n.finish,
               style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
@@ -152,20 +151,19 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<QuestionType>(
-              value: _selectedQuestionType,
-              items:
-                  QuestionType.values
-                      .map(
-                        (type) => DropdownMenuItem(
-                          value: type,
-                          child: Text(
-                            type == QuestionType.multipleChoice
-                                ? l10n.multipleChoice
-                                : l10n.trueFalse,
-                          ),
-                        ),
-                      )
-                      .toList(),
+              initialValue: _selectedQuestionType,
+              items: QuestionType.values
+                  .map(
+                    (type) => DropdownMenuItem(
+                      value: type,
+                      child: Text(
+                        type == QuestionType.multipleChoice
+                            ? l10n.multipleChoice
+                            : l10n.trueFalse,
+                      ),
+                    ),
+                  )
+                  .toList(),
               onChanged: (type) {
                 setState(() {
                   _selectedQuestionType = type!;
@@ -191,7 +189,8 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
             if (_selectedQuestionType == QuestionType.trueFalse)
               RadioGroup<String>(
                 groupValue: _trueFalseCorrectAnswer,
-                onChanged: (value) => setState(() => _trueFalseCorrectAnswer = value),
+                onChanged: (value) =>
+                    setState(() => _trueFalseCorrectAnswer = value),
                 child: Column(
                   children: _buildTrueFalseOptions(),
                 ),
@@ -200,9 +199,9 @@ class _AddQuestionsScreenState extends State<AddQuestionsScreen> {
             _isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : ElevatedButton(
-                  onPressed: _addQuestion,
-                  child: Text(l10n.addQuestion),
-                ),
+                    onPressed: _addQuestion,
+                    child: Text(l10n.addQuestion),
+                  ),
           ],
         ),
       ),

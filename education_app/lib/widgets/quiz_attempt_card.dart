@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../models/quiz_attempt.dart';
 
 class QuizAttemptCard extends StatefulWidget {
-  final QuizAttempt attempt;
+  final String quizTitle;
+  final int score;
+  final int totalQuestions;
+  final DateTime attemptedAt;
   final VoidCallback? onTap;
 
   const QuizAttemptCard({
     super.key,
-    required this.attempt,
+    required this.quizTitle,
+    required this.score,
+    required this.totalQuestions,
+    required this.attemptedAt,
     this.onTap,
   });
 
@@ -63,10 +68,9 @@ class _QuizAttemptCardState extends State<QuizAttemptCard>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final percentage =
-        widget.attempt.totalQuestions > 0
-            ? (widget.attempt.score / widget.attempt.totalQuestions * 100)
-            : 0.0;
+    final percentage = widget.totalQuestions > 0
+        ? (widget.score / widget.totalQuestions * 100)
+        : 0.0;
     final color = _getStatusColor(percentage);
 
     return FadeTransition(
@@ -117,7 +121,7 @@ class _QuizAttemptCardState extends State<QuizAttemptCard>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.attempt.quizTitle,
+                          widget.quizTitle,
                           style: theme.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -135,7 +139,7 @@ class _QuizAttemptCardState extends State<QuizAttemptCard>
                             const SizedBox(width: 4),
                             Text(
                               DateFormat.yMMMd().format(
-                                widget.attempt.attemptedAt.toDate(),
+                                widget.attemptedAt,
                               ),
                               style: theme.textTheme.bodySmall?.copyWith(
                                 color: theme.colorScheme.onSurfaceVariant,

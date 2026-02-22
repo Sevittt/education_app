@@ -72,7 +72,9 @@ class _SystemsDirectoryScreenState extends State<SystemsDirectoryScreen>
       builder: (context, snapshot) {
         final l10n = AppLocalizations.of(context)!;
         if (snapshot.hasError) {
-          return Center(child: Text(l10n.systemsDirectoryError(snapshot.error.toString())));
+          return Center(
+              child:
+                  Text(l10n.systemsDirectoryError(snapshot.error.toString())));
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -86,11 +88,14 @@ class _SystemsDirectoryScreenState extends State<SystemsDirectoryScreen>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.computer, size: 64, color: Colors.grey.shade400),
+                Icon(Icons.computer,
+                    size: 64, color: Theme.of(context).colorScheme.outline),
                 const SizedBox(height: 16),
                 Text(
                   l10n.systemsDirectoryEmpty,
-                  style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                 ),
               ],
             ),
@@ -109,6 +114,9 @@ class _SystemsDirectoryScreenState extends State<SystemsDirectoryScreen>
   }
 
   Widget _buildSystemCard(SudSystem system) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
       elevation: 2,
@@ -131,18 +139,18 @@ class _SystemsDirectoryScreenState extends State<SystemsDirectoryScreen>
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
+                  color: colorScheme.surfaceContainerHighest
+                      .withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(12),
                   image: system.logoUrl != null
                       ? DecorationImage(
-                           image: NetworkImage(system.logoUrl!),
-                           fit: BoxFit.cover,
-                         )
+                          image: NetworkImage(system.logoUrl!),
+                          fit: BoxFit.cover,
+                        )
                       : null,
                 ),
                 child: system.logoUrl == null
-                    ? Icon(Icons.computer,
-                        size: 30, color: Theme.of(context).primaryColor)
+                    ? Icon(Icons.computer, size: 30, color: colorScheme.primary)
                     : null,
               ),
               const SizedBox(width: 16),
@@ -152,17 +160,15 @@ class _SystemsDirectoryScreenState extends State<SystemsDirectoryScreen>
                   children: [
                     Text(
                       system.name,
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       system.fullName,
-                      style: TextStyle(
-                        color: Colors.grey.shade600,
-                        fontSize: 12,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -199,13 +205,14 @@ class _SystemsDirectoryScreenState extends State<SystemsDirectoryScreen>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: color.withAlpha(26),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color),
+        border: Border.all(color: color.withValues(alpha: 0.5)),
       ),
       child: Text(
         status.getDisplayName(l10n),
-        style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.bold),
+        style:
+            TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.bold),
       ),
     );
   }

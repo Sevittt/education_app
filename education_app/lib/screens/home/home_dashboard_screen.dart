@@ -255,14 +255,14 @@ class HomeDashboardScreen extends StatelessWidget {
                                       errorBuilder:
                                           (context, error, stackTrace) =>
                                               Container(
-                                                height: 100,
-                                                color: Colors.grey[300],
-                                                child: Icon(
-                                                  Icons.image_not_supported,
-                                                  color: Colors.grey[600],
-                                                  size: 40,
-                                                ),
-                                              ),
+                                        height: 100,
+                                        color: Colors.grey[300],
+                                        child: Icon(
+                                          Icons.image_not_supported,
+                                          color: Colors.grey[600],
+                                          size: 40,
+                                        ),
+                                      ),
                                       loadingBuilder: (
                                         context,
                                         child,
@@ -275,15 +275,14 @@ class HomeDashboardScreen extends StatelessWidget {
                                           height: 100,
                                           child: Center(
                                             child: CircularProgressIndicator(
-                                              value:
-                                                  loadingProgress
-                                                              .expectedTotalBytes !=
-                                                          null
-                                                      ? loadingProgress
-                                                              .cumulativeBytesLoaded /
-                                                          loadingProgress
-                                                              .expectedTotalBytes!
-                                                      : null,
+                                              value: loadingProgress
+                                                          .expectedTotalBytes !=
+                                                      null
+                                                  ? loadingProgress
+                                                          .cumulativeBytesLoaded /
+                                                      loadingProgress
+                                                          .expectedTotalBytes!
+                                                  : null,
                                             ),
                                           ),
                                         );
@@ -302,11 +301,11 @@ class HomeDashboardScreen extends StatelessWidget {
                                       children: [
                                         Text(
                                           newsItem.title,
-                                          style: textTheme.titleMedium
-                                              ?.copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                height: 1.3,
-                                              ),
+                                          style:
+                                              textTheme.titleMedium?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            height: 1.3,
+                                          ),
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -322,10 +321,9 @@ class HomeDashboardScreen extends StatelessWidget {
                                                 '${l10n.sourceLabel}: ${newsItem.source}',
                                                 style: textTheme.bodySmall
                                                     ?.copyWith(
-                                                      color:
-                                                          colorScheme
-                                                              .onSurfaceVariant,
-                                                    ),
+                                                  color: colorScheme
+                                                      .onSurfaceVariant,
+                                                ),
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
@@ -345,10 +343,9 @@ class HomeDashboardScreen extends StatelessWidget {
                                                   ),
                                                   style: textTheme.bodySmall
                                                       ?.copyWith(
-                                                        color:
-                                                            colorScheme
-                                                                .onSurfaceVariant,
-                                                      ),
+                                                    color: colorScheme
+                                                        .onSurfaceVariant,
+                                                  ),
                                                 ),
                                               ),
                                           ],
@@ -459,7 +456,10 @@ class HomeDashboardScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final attempt = attempts[index];
                 return QuizAttemptCard(
-                  attempt: attempt,
+                  quizTitle: attempt.quizTitle,
+                  score: attempt.score,
+                  totalQuestions: attempt.totalQuestions,
+                  attemptedAt: attempt.attemptedAt.toDate(),
                   onTap: () {
                     // Navigate to quiz details or results if needed
                   },
@@ -546,7 +546,8 @@ class HomeDashboardScreen extends StatelessWidget {
                   elevation: 1,
                   margin: const EdgeInsets.symmetric(vertical: 4.0),
                   child: ListTile(
-                    leading: Icon(Icons.description, color: colorScheme.primary),
+                    leading:
+                        Icon(Icons.description, color: colorScheme.primary),
                     title: Text(
                       resource.title,
                       style: textTheme.titleSmall?.copyWith(
@@ -630,8 +631,8 @@ class HomeDashboardScreen extends StatelessWidget {
               title: l10n.adminStatUsers, // "Users"
               icon: Icons.people_alt_outlined,
               stream: profileService.getAllUsersStream().map(
-                (list) => list.length,
-              ), // Map list to its length
+                    (list) => list.length,
+                  ), // Map list to its length
             ),
             // Total Guides
             _buildStatCard(
@@ -639,8 +640,8 @@ class HomeDashboardScreen extends StatelessWidget {
               title: l10n.adminStatGuides, // "Guides"
               icon: Icons.description_outlined,
               stream: resourceService.getResources().map(
-                (list) => list.length,
-              ), // Map list to its length
+                    (list) => list.length,
+                  ), // Map list to its length
             ),
             // Total Quizzes
             _buildStatCard(
@@ -648,8 +649,8 @@ class HomeDashboardScreen extends StatelessWidget {
               title: l10n.adminStatQuizzes, // "Quizzes"
               icon: Icons.quiz_outlined,
               stream: quizService.getAllQuizzesStream().map(
-                (list) => list.length,
-              ), // Map list to its length
+                    (list) => list.length,
+                  ), // Map list to its length
             ),
           ],
         ),

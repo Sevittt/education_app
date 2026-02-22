@@ -27,13 +27,15 @@ class QuizHistoryScreen extends StatelessWidget {
         title: Text(l10n.quizHistoryTitle),
       ),
       body: StreamBuilder<List<QuizAttempt>>(
-        stream: Provider.of<QuizService>(context, listen: false).getAttemptsForUser(userId),
+        stream: Provider.of<QuizService>(context, listen: false)
+            .getAttemptsForUser(userId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
-            return Center(child: Text('${l10n.errorPrefix}: ${snapshot.error}'));
+            return Center(
+                child: Text('${l10n.errorPrefix}: ${snapshot.error}'));
           }
           final attempts = snapshot.data ?? [];
 
@@ -58,15 +60,18 @@ class QuizHistoryScreen extends StatelessWidget {
                   child: Text(
                     item,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 );
               } else if (item is QuizAttempt) {
                 // Attempt Card
                 return QuizAttemptCard(
-                  attempt: item,
+                  quizTitle: item.quizTitle,
+                  score: item.score,
+                  totalQuestions: item.totalQuestions,
+                  attemptedAt: item.attemptedAt.toDate(),
                   onTap: () {},
                 );
               }
@@ -79,7 +84,8 @@ class QuizHistoryScreen extends StatelessWidget {
   }
 
   // Helper to group attempts by date
-  List<dynamic> _groupAttempts(List<QuizAttempt> attempts, AppLocalizations l10n) {
+  List<dynamic> _groupAttempts(
+      List<QuizAttempt> attempts, AppLocalizations l10n) {
     final List<dynamic> items = [];
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);

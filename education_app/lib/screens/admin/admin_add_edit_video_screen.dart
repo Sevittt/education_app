@@ -13,19 +13,20 @@ class AdminAddEditVideoScreen extends StatefulWidget {
   const AdminAddEditVideoScreen({super.key, this.video});
 
   @override
-  State<AdminAddEditVideoScreen> createState() => _AdminAddEditVideoScreenState();
+  State<AdminAddEditVideoScreen> createState() =>
+      _AdminAddEditVideoScreenState();
 }
 
 class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
   final _formKey = GlobalKey<FormState>();
   final _systemsService = SystemsService();
-  
+
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
   late TextEditingController _youtubeIdController;
   late TextEditingController _durationController;
   late TextEditingController _tagsController;
-  
+
   String _selectedCategory = 'beginner';
   String? _selectedSystemId;
   List<SudSystem> _systems = [];
@@ -44,10 +45,14 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
   void initState() {
     super.initState();
     _titleController = TextEditingController(text: widget.video?.title ?? '');
-    _descriptionController = TextEditingController(text: widget.video?.description ?? '');
-    _youtubeIdController = TextEditingController(text: widget.video?.youtubeId ?? '');
-    _durationController = TextEditingController(text: widget.video?.durationSeconds.toString() ?? '');
-    _tagsController = TextEditingController(text: widget.video?.tags.join(', ') ?? '');
+    _descriptionController =
+        TextEditingController(text: widget.video?.description ?? '');
+    _youtubeIdController =
+        TextEditingController(text: widget.video?.youtubeId ?? '');
+    _durationController = TextEditingController(
+        text: widget.video?.durationSeconds.toString() ?? '');
+    _tagsController =
+        TextEditingController(text: widget.video?.tags.join(', ') ?? '');
     _selectedCategory = widget.video?.category ?? 'beginner';
     _selectedSystemId = widget.video?.systemId;
     _loadSystems();
@@ -159,7 +164,8 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.video == null ? l10n.addVideoTitle : l10n.editVideoTitle),
+        title: Text(
+            widget.video == null ? l10n.addVideoTitle : l10n.editVideoTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.save),
@@ -194,12 +200,13 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
                         border: const OutlineInputBorder(),
                         hintText: l10n.youtubeIdHint,
                       ),
-                      validator: (value) =>
-                          value?.isEmpty ?? true ? l10n.youtubeIdRequired : null,
+                      validator: (value) => value?.isEmpty ?? true
+                          ? l10n.youtubeIdRequired
+                          : null,
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<String>(
-                      value: _selectedCategory,
+                      initialValue: _selectedCategory,
                       decoration: InputDecoration(
                         labelText: l10n.categoryLabel,
                         border: const OutlineInputBorder(),
@@ -218,7 +225,7 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
                     ),
                     const SizedBox(height: 16),
                     DropdownButtonFormField<String>(
-                      value: _selectedSystemId,
+                      initialValue: _selectedSystemId,
                       decoration: InputDecoration(
                         labelText: l10n.systemOptionalLabel,
                         border: const OutlineInputBorder(),
@@ -269,8 +276,9 @@ class _AdminAddEditVideoScreenState extends State<AdminAddEditVideoScreen> {
                         alignLabelWithHint: true,
                       ),
                       maxLines: 5,
-                      validator: (value) =>
-                          value?.isEmpty ?? true ? l10n.descriptionRequired : null,
+                      validator: (value) => value?.isEmpty ?? true
+                          ? l10n.descriptionRequired
+                          : null,
                     ),
                   ],
                 ),

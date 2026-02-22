@@ -57,7 +57,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get registrationFullNameLabel => 'To\'liq Ism (F.I.Sh.)';
 
   @override
-  String get registrationFullNameError => 'Iltimos, to\'liq ismingizni kiriting';
+  String get registrationFullNameError =>
+      'Iltimos, to\'liq ismingizni kiriting';
 
   @override
   String get registrationRoleLabel => 'Sizning Rolingiz';
@@ -75,7 +76,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get registrationPasswordLabel => 'Parol';
 
   @override
-  String get registrationPasswordError => 'Parol kamida 6 belgidan iborat bo\'lishi kerak';
+  String get registrationPasswordError =>
+      'Parol kamida 6 belgidan iborat bo\'lishi kerak';
 
   @override
   String get registrationConfirmPasswordLabel => 'Parolni tasdiqlang';
@@ -111,13 +113,15 @@ class AppLocalizationsUz extends AppLocalizations {
   String get settingsReceiveNotifications => 'Bildirishnomalarni qabul qilish';
 
   @override
-  String get settingsReceiveNotificationsSubtitle => 'Yangi manbalar va muhokamalar haqida yangilanishlarni oling';
+  String get settingsReceiveNotificationsSubtitle =>
+      'Yangi manbalar va muhokamalar haqida yangilanishlarni oling';
 
   @override
   String get settingsAllowLocation => 'Joylashuvga ruxsat berish';
 
   @override
-  String get settingsAllowLocationSubtitle => 'Joylashuvingizni talab qiladigan funksiyalar uchun (agar mavjud bo\'lsa)';
+  String get settingsAllowLocationSubtitle =>
+      'Joylashuvingizni talab qiladigan funksiyalar uchun (agar mavjud bo\'lsa)';
 
   @override
   String get settingsChangePassword => 'Parolni o\'zgartirish';
@@ -132,7 +136,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get settingsAppLegalese => '© 2025 Sud Qo\'llanmasi Loyihasi';
 
   @override
-  String get settingsAppDescription => 'Sud xodimlarining kasbiy kompetentligi uchun mobil platforma.';
+  String get settingsAppDescription =>
+      'Sud xodimlarining kasbiy kompetentligi uchun mobil platforma.';
 
   @override
   String get errorPrefix => 'Xatolik: ';
@@ -210,10 +215,12 @@ class AppLocalizationsUz extends AppLocalizations {
   String get resourcesAllTypes => 'Barcha turlar';
 
   @override
-  String get resourcesNoResourcesMatch => 'Sizning mezonlaringizga mos resurslar topilmadi.';
+  String get resourcesNoResourcesMatch =>
+      'Sizning mezonlaringizga mos resurslar topilmadi.';
 
   @override
-  String get resourcesTryAdjusting => 'Qidiruv yoki filtringizni o\'zgartirib ko\'ring.';
+  String get resourcesTryAdjusting =>
+      'Qidiruv yoki filtringizni o\'zgartirib ko\'ring.';
 
   @override
   String get resourcesCreateButton => 'Yaratish';
@@ -230,7 +237,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get createResourceScreenTitle => 'Yangi Resurs Yaratish';
 
   @override
-  String get createResourceFormWillBeHere => 'Resurs yaratish shakli shu yerda bo\'ladi.';
+  String get createResourceFormWillBeHere =>
+      'Resurs yaratish shakli shu yerda bo\'ladi.';
 
   @override
   String get saveButtonText => 'Saqlash';
@@ -266,7 +274,8 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get createResourceValidationInvalidUrl => 'Yaroqli URL manzilini kiriting';
+  String get createResourceValidationInvalidUrl =>
+      'Yaroqli URL manzilini kiriting';
 
   @override
   String get editButtonTooltip => 'Resurs o\'zgartirish';
@@ -304,7 +313,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get deleteResourceConfirmTitle => 'Oʻchirishni tasdiqlang';
 
   @override
-  String get deleteResourceConfirmMessage => 'Haqiqatan ham bu manbani oʻchirib tashlamoqchimisiz? Bu amalni ortga qaytarib bo\'lmaydi.';
+  String get deleteResourceConfirmMessage =>
+      'Haqiqatan ham bu manbani oʻchirib tashlamoqchimisiz? Bu amalni ortga qaytarib bo\'lmaydi.';
 
   @override
   String get cancelButtonText => 'Bekor qilish';
@@ -431,7 +441,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get myQuizHistory => 'Mening Viktorina Tarixim';
 
   @override
-  String get noQuizAttempts => 'Siz hali hech qanday viktorinada qatnashmadingiz.';
+  String get noQuizAttempts =>
+      'Siz hali hech qanday viktorinada qatnashmadingiz.';
 
   @override
   String get score => 'Bal';
@@ -446,7 +457,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get relatedQuizzesTitle => 'Tegishli testlar';
 
   @override
-  String get noQuizzesAvailable => 'Bu resurs uchun hozircha hech qanday test mavjud emas.';
+  String get noQuizzesAvailable =>
+      'Bu resurs uchun hozircha hech qanday test mavjud emas.';
 
   @override
   String get errorLoadingQuizzes => 'Viktorinalarni yuklashda xatolik';
@@ -472,7 +484,8 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get titleMinLength => 'Sarlavha kamida 5 ta belgidan iborat bo\'lishi kerak';
+  String get titleMinLength =>
+      'Sarlavha kamida 5 ta belgidan iborat bo\'lishi kerak';
 
   @override
   String get titleMaxLength => 'Sarlavha 100 belgidan oshmasligi kerak';
@@ -490,7 +503,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get createTopicButtonText => 'Muhokama mavzusini yaratish';
 
   @override
-  String get mustBeLoggedInToCreateTopic => 'Mavzu yaratish uchun tizimga kirgan bo\'lishingiz kerak.';
+  String get mustBeLoggedInToCreateTopic =>
+      'Mavzu yaratish uchun tizimga kirgan bo\'lishingiz kerak.';
 
   @override
   String get topicCreatedSuccess => 'Mavzu muvaffaqiyatli yaratildi!';
@@ -516,7 +530,8 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get errorLoadingData => 'Resurslarni yuklashda xatolik yuz berdi. Qayta urinib ko\'ring.';
+  String get errorLoadingData =>
+      'Resurslarni yuklashda xatolik yuz berdi. Qayta urinib ko\'ring.';
 
   @override
   String failedToUpdateTopic(String error, String xato) {
@@ -530,22 +545,27 @@ class AppLocalizationsUz extends AppLocalizations {
   String get noDiscussionsYet => 'Hali muhokamalar yo\'q.';
 
   @override
-  String get beTheFirstToStartConversation => 'Birinchi bo\'lib suhbatni boshlang!';
+  String get beTheFirstToStartConversation =>
+      'Birinchi bo\'lib suhbatni boshlang!';
 
   @override
-  String get mustBeLoggedInToCreateResource => 'Resurs yaratish uchun tizimga kirgan bo\'lishingiz kerak.';
+  String get mustBeLoggedInToCreateResource =>
+      'Resurs yaratish uchun tizimga kirgan bo\'lishingiz kerak.';
 
   @override
-  String get profileIncompleteToCreateResource => 'Profilingiz haqidagi ma\'lumotlar to\'liq emas. Iltimos, profilingizda ismingizni yangilang.';
+  String get profileIncompleteToCreateResource =>
+      'Profilingiz haqidagi ma\'lumotlar to\'liq emas. Iltimos, profilingizda ismingizni yangilang.';
 
   @override
-  String get profileIncompleteToCreateTopic => 'Profilingiz nomi belgilanmagan. Iltimos, profilingizni yangilang.';
+  String get profileIncompleteToCreateTopic =>
+      'Profilingiz nomi belgilanmagan. Iltimos, profilingizni yangilang.';
 
   @override
   String get commentCannotBeEmpty => 'Izoh bo\'sh bo\'lishi mumkin emas.';
 
   @override
-  String get mustBeLoggedInToComment => 'Izoh berish uchun tizimga kirgan bo\'lishingiz kerak.';
+  String get mustBeLoggedInToComment =>
+      'Izoh berish uchun tizimga kirgan bo\'lishingiz kerak.';
 
   @override
   String get commentAddedSuccessfully => 'Izoh muvaffaqiyatli qo\'shildi!';
@@ -574,7 +594,8 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get noRepliesYet => 'Hali javob yo\'q. Birinchi bo\'lib fikr bildiring!';
+  String get noRepliesYet =>
+      'Hali javob yo\'q. Birinchi bo\'lib fikr bildiring!';
 
   @override
   String get writeAReplyHint => 'Javob yozing...';
@@ -588,7 +609,8 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get readyToLearnSomethingNew => 'Bugun yangi narsalarni o\'rganishga tayyormisiz?';
+  String get readyToLearnSomethingNew =>
+      'Bugun yangi narsalarni o\'rganishga tayyormisiz?';
 
   @override
   String get quickAccessTitle => 'Tez kirish';
@@ -626,19 +648,22 @@ class AppLocalizationsUz extends AppLocalizations {
   String get manageNewsTitle => 'Yangiliklar Boshqaruvi';
 
   @override
-  String get manageNewsSubtitle => 'Yangilik maqolalarini qo\'shish, tahrirlash yoki o\'chirish';
+  String get manageNewsSubtitle =>
+      'Yangilik maqolalarini qo\'shish, tahrirlash yoki o\'chirish';
 
   @override
   String get manageUsersTitle => 'Foydalanuvchilarni boshqarish';
 
   @override
-  String get manageUsersSubtitle => 'Foydalanuvchilarni ko\'rish va rollarni boshqarish (kelajakda)';
+  String get manageUsersSubtitle =>
+      'Foydalanuvchilarni ko\'rish va rollarni boshqarish (kelajakda)';
 
   @override
   String get manageResourcesTitle => 'Resurslarni boshqarish';
 
   @override
-  String get manageResourcesSubtitle => 'Barcha o\'quv resurslarini nazorat qilish (kelajakda)';
+  String get manageResourcesSubtitle =>
+      'Barcha o\'quv resurslarini nazorat qilish (kelajakda)';
 
   @override
   String get confirmDeleteTitle => 'O\'chirishni tasdiqlang';
@@ -719,7 +744,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get addNewsButton => 'Yangilik qo\'shish';
 
   @override
-  String get noNewsAvailableManager => 'Hech qanday yangilik maqolasi topilmadi. Bittasini qo\'shing!';
+  String get noNewsAvailableManager =>
+      'Hech qanday yangilik maqolasi topilmadi. Bittasini qo\'shing!';
 
   @override
   String get editNewsTitle => 'Yangilikni tahrirlash';
@@ -745,7 +771,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get newsSourceLabel => 'Manba (masalan, Blog nomi)';
 
   @override
-  String get pleaseEnterNewsSource => 'Iltimos, yangiliklar manbasini kiriting.';
+  String get pleaseEnterNewsSource =>
+      'Iltimos, yangiliklar manbasini kiriting.';
 
   @override
   String get newsUrlLabel => 'Maqola URL manzili';
@@ -754,13 +781,15 @@ class AppLocalizationsUz extends AppLocalizations {
   String get pleaseEnterNewsUrl => 'Maqola URL manzilini kiriting.';
 
   @override
-  String get pleaseEnterValidNewsUrl => 'Iltimos, to\'g\'ri URL manzilini kiriting (http yoki https bilan boshlanadi).';
+  String get pleaseEnterValidNewsUrl =>
+      'Iltimos, to\'g\'ri URL manzilini kiriting (http yoki https bilan boshlanadi).';
 
   @override
   String get newsImageUrlLabel => 'Rasm URL manzili (ixtiyoriy)';
 
   @override
-  String get pleaseEnterValidImageUrl => 'Iltimos, haqiqiy rasm URL manzilini kiriting (http yoki https bilan boshlanadi) yoki bo\'sh qoldiring.';
+  String get pleaseEnterValidImageUrl =>
+      'Iltimos, haqiqiy rasm URL manzilini kiriting (http yoki https bilan boshlanadi) yoki bo\'sh qoldiring.';
 
   @override
   String get publicationDateLabel => 'Nashr qilingan sana';
@@ -813,10 +842,12 @@ class AppLocalizationsUz extends AppLocalizations {
   String get registeredOnLabel => 'Ro\'yxatdan o\'tgan';
 
   @override
-  String get manageUsersSubtitleNow => 'Ro\'yxatdan o\'tgan foydalanuvchilarni ko\'rish va qidirish';
+  String get manageUsersSubtitleNow =>
+      'Ro\'yxatdan o\'tgan foydalanuvchilarni ko\'rish va qidirish';
 
   @override
-  String get manageResourcesSubtitleNow => 'Har qanday o\'quv manbasini ko\'rish, tahrirlash yoki o\'chirish';
+  String get manageResourcesSubtitleNow =>
+      'Har qanday o\'quv manbasini ko\'rish, tahrirlash yoki o\'chirish';
 
   @override
   String confirmDeleteResourceMessage(Object resourceTitle) {
@@ -854,7 +885,8 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get noQuizzesFoundManager => 'Hech qanday test topilmadi. Bittasini qo\'shing!';
+  String get noQuizzesFoundManager =>
+      'Hech qanday test topilmadi. Bittasini qo\'shing!';
 
   @override
   String confirmDeleteQuizMessage(Object quizTitle) {
@@ -884,10 +916,12 @@ class AppLocalizationsUz extends AppLocalizations {
   String get addQuizButton => 'Viktorina qo\'shish';
 
   @override
-  String get manageQuizzesSubtitle => 'Barcha testlar va ularning savollarini nazorat qilish';
+  String get manageQuizzesSubtitle =>
+      'Barcha testlar va ularning savollarini nazorat qilish';
 
   @override
-  String get registrationEmailError => 'Yaroqli elektron pochta manzilini kiriting';
+  String get registrationEmailError =>
+      'Yaroqli elektron pochta manzilini kiriting';
 
   @override
   String get dashboardXodimTitle => 'Mening Faoliyatim';
@@ -902,7 +936,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get seeAllButton => 'Barchasini ko\'rish';
 
   @override
-  String get noGuidesAuthored => 'Siz hali hech qanday qo\'llanma yaratmadingiz.';
+  String get noGuidesAuthored =>
+      'Siz hali hech qanday qo\'llanma yaratmadingiz.';
 
   @override
   String get adminStatUsers => 'Foydalanuvchilar';
@@ -1271,7 +1306,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get notificationHistoryTitle => 'Xabarnomalar Tarixi';
 
   @override
-  String get notificationHistoryPlaceholder => 'Bu yerda yuborilgan xabarnomalar tarixi ko\'rinadi (tez orada).';
+  String get notificationHistoryPlaceholder =>
+      'Bu yerda yuborilgan xabarnomalar tarixi ko\'rinadi (tez orada).';
 
   @override
   String get sendNewNotificationButton => 'Yangi Xabarnoma Yuborish';
@@ -1388,7 +1424,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get markAllAsReadTooltip => 'Hammasini o\'qilgan deb belgilash';
 
   @override
-  String get allNotificationsReadMessage => 'Barcha xabarnomalar o\'qilgan deb belgilandi';
+  String get allNotificationsReadMessage =>
+      'Barcha xabarnomalar o\'qilgan deb belgilandi';
 
   @override
   String get noNotifications => 'Xabarnomalar yo\'q';
@@ -1437,7 +1474,8 @@ class AppLocalizationsUz extends AppLocalizations {
   String get landingTitle => 'Professional Platforma';
 
   @override
-  String get landingSubtitle => 'Huquqiy bilimingizni oshiring. Istalgan vaqtda.';
+  String get landingSubtitle =>
+      'Huquqiy bilimingizni oshiring. Istalgan vaqtda.';
 
   @override
   String get landingLogin => 'Kirish';
@@ -1449,19 +1487,22 @@ class AppLocalizationsUz extends AppLocalizations {
   String get featureKnowledgeBase => 'Bilimlar Bazasi';
 
   @override
-  String get featureKnowledgeBaseDesc => 'Keng ko\'lamli huquqiy resurslar va hujjatlar kutubxonasi.';
+  String get featureKnowledgeBaseDesc =>
+      'Keng ko\'lamli huquqiy resurslar va hujjatlar kutubxonasi.';
 
   @override
   String get featureVideoTutorials => 'Video Darsliklar';
 
   @override
-  String get featureVideoTutorialsDesc => 'Mutaxassislar tomonidan tayyorlangan video qo\'llanmalar.';
+  String get featureVideoTutorialsDesc =>
+      'Mutaxassislar tomonidan tayyorlangan video qo\'llanmalar.';
 
   @override
   String get featureGamification => 'Gamifikatsiya';
 
   @override
-  String get featureGamificationDesc => 'XP va nishonlar yig\'ing, reytingda bellashing.';
+  String get featureGamificationDesc =>
+      'XP va nishonlar yig\'ing, reytingda bellashing.';
 
   @override
   String get analyticsTitle => 'O\'quv Tahlili (xAPI)';

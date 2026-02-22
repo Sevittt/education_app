@@ -2,42 +2,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../domain/entities/video_entity.dart';
 
 /// Data Model for Video Tutorials.
-/// 
+///
 /// Extends VideoEntity with Firebase-specific serialization logic.
 class VideoModel extends VideoEntity {
   const VideoModel({
-    required String id,
-    required String title,
-    required String description,
-    required String youtubeId,
-    required int durationSeconds,
-    required String category,
-    String? systemId,
-    required String thumbnailUrl,
-    required List<String> tags,
-    required String authorId,
-    required String authorName,
-    int views = 0,
-    int likes = 0,
-    required DateTime createdAt,
-    int order = 0,
-  }) : super(
-          id: id,
-          title: title,
-          description: description,
-          youtubeId: youtubeId,
-          durationSeconds: durationSeconds,
-          category: category,
-          systemId: systemId,
-          thumbnailUrl: thumbnailUrl,
-          tags: tags,
-          authorId: authorId,
-          authorName: authorName,
-          views: views,
-          likes: likes,
-          createdAt: createdAt,
-          order: order,
-        );
+    required super.id,
+    required super.title,
+    required super.description,
+    required super.youtubeId,
+    required super.durationSeconds,
+    required super.category,
+    super.systemId,
+    required super.thumbnailUrl,
+    required super.tags,
+    required super.authorId,
+    required super.authorName,
+    super.views,
+    super.likes,
+    required super.createdAt,
+    super.order,
+  });
 
   /// Factory constructor from Map.
   factory VideoModel.fromMap(Map<String, dynamic> data, String id) {
@@ -57,7 +41,8 @@ class VideoModel extends VideoEntity {
       likes: (data['likes'] as num?)?.toInt() ?? 0,
       createdAt: (data['createdAt'] is Timestamp)
           ? (data['createdAt'] as Timestamp).toDate()
-          : DateTime.tryParse(data['createdAt']?.toString() ?? '') ?? DateTime.now(),
+          : DateTime.tryParse(data['createdAt']?.toString() ?? '') ??
+              DateTime.now(),
       order: (data['order'] as num?)?.toInt() ?? 0,
     );
   }

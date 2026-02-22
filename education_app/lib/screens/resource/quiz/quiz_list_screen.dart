@@ -15,15 +15,16 @@ class QuizListScreen extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         }
-        
+
         if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         }
 
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-           // We can localize this if needed, but for now simple text or use l10n if available
+          // We can localize this if needed, but for now simple text or use l10n if available
           return Center(
-             child: Text(AppLocalizations.of(context)?.searchNoResults ?? 'No quizzes available'),
+            child: Text(AppLocalizations.of(context)?.searchNoResults ??
+                'No quizzes available'),
           );
         }
 
@@ -36,16 +37,19 @@ class QuizListScreen extends StatelessWidget {
             return Card(
               elevation: 2,
               margin: const EdgeInsets.only(bottom: 12),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
               child: ListTile(
                 contentPadding: const EdgeInsets.all(16),
                 leading: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor.withOpacity(0.1),
+                    color:
+                        Theme.of(context).primaryColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Icon(Icons.quiz, color: Theme.of(context).primaryColor),
+                  child:
+                      Icon(Icons.quiz, color: Theme.of(context).primaryColor),
                 ),
                 title: Text(
                   quiz.title,
@@ -68,12 +72,10 @@ class QuizListScreen extends StatelessWidget {
                 ),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () {
-                    Navigator.push(
-                      context, 
+                  Navigator.push(
+                      context,
                       MaterialPageRoute(
-                        builder: (_) => QuizScreen(quizId: quiz.id)
-                      )
-                    );
+                          builder: (_) => QuizScreen(quizId: quiz.id)));
                 },
               ),
             );
