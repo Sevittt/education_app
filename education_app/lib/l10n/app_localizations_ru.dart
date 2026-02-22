@@ -1082,16 +1082,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String get categoryLabel => 'Категория';
 
   @override
-  String get articleCategoryGeneral => 'General';
+  String get articleCategoryGeneral => 'Общие';
 
   @override
-  String get articleCategoryProcedure => 'Procedure';
+  String get articleCategoryProcedure => 'Процедуры';
 
   @override
-  String get articleCategoryLaw => 'Legislation';
+  String get articleCategoryLaw => 'Законодательство';
 
   @override
-  String get articleCategoryFaq => 'FAQ';
+  String get articleCategoryFaq => 'ЧАВО';
 
   @override
   String get contentLabel => 'Содержание (Markdown)';
@@ -1623,46 +1623,46 @@ class AppLocalizationsRu extends AppLocalizations {
   String get levelMaster => 'Мастер';
 
   @override
-  String get errorCouldNotOpenLink => 'Could not open link';
+  String get errorCouldNotOpenLink => 'Не удалось открыть ссылку';
 
   @override
-  String get errorResourceNotFound => 'Resource not found';
+  String get errorResourceNotFound => 'Ресурс не найден';
 
   @override
-  String get errorVideoNotFound => 'Video not found';
+  String get errorVideoNotFound => 'Видео не найдено';
 
   @override
-  String get errorPdfOpen => 'Could not open PDF file';
+  String get errorPdfOpen => 'Не удалось открыть PDF-файл';
 
   @override
-  String get errorTelegramOpen => 'Could not open Telegram link';
+  String get errorTelegramOpen => 'Не удалось открыть ссылку в Telegram';
 
   @override
   String errorGeneric(Object error) {
-    return 'An error occurred: $error';
+    return 'Произошла ошибка: $error';
   }
 
   @override
-  String get labelTrue => 'True';
+  String get labelTrue => 'Верно';
 
   @override
-  String get labelFalse => 'False';
+  String get labelFalse => 'Неверно';
 
   @override
-  String get labelPass => 'PASS';
+  String get labelPass => 'СДАН';
 
   @override
-  String get labelFail => 'FAIL';
+  String get labelFail => 'НЕ СДАН';
 
   @override
-  String get labelPdfAvailable => 'PDF available';
+  String get labelPdfAvailable => 'Доступен PDF';
 
   @override
-  String get actionOk => 'OK';
+  String get actionOk => 'ОК';
 
   @override
-  String get actionGoBack => 'Go Back';
+  String get actionGoBack => 'Назад';
 
   @override
-  String get searchNoResults => 'No results found';
+  String get searchNoResults => 'Ничего не найдено';
 }

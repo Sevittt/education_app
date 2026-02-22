@@ -731,5 +731,30 @@
         "type": "String"
       }
     }
-  }
+  },
+  "articleCategoryGeneral": "Общие",
+  "articleCategoryProcedure": "Процедуры",
+  "articleCategoryLaw": "Законодательство",
+  "articleCategoryFaq": "ЧАВО",
+  "errorCouldNotOpenLink": "Не удалось открыть ссылку",
+  "errorResourceNotFound": "Ресурс не найден",
+  "errorVideoNotFound": "Видео не найдено",
+  "errorPdfOpen": "Не удалось открыть PDF-файл",
+  "errorTelegramOpen": "Не удалось открыть ссылку в Telegram",
+  "errorGeneric": "Произошла ошибка: {error}",
+  "@errorGeneric": {
+    "placeholders": {
+      "error": {
+        "type": "Object"
+      }
+    }
+  },
+  "labelTrue": "Верно",
+  "labelFalse": "Неверно",
+  "labelPass": "СДАН",
+  "labelFail": "НЕ СДАН",
+  "labelPdfAvailable": "Доступен PDF",
+  "actionOk": "ОК",
+  "actionGoBack": "Назад",
+  "searchNoResults": "Ничего не найдено"
 }
