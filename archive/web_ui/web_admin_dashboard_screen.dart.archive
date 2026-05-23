@@ -1,0 +1,677 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
+import 'package:sud_qollanma/features/auth/domain/entities/app_user.dart';
+import 'package:sud_qollanma/features/auth/domain/repositories/auth_repository.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
+import 'package:sud_qollanma/core/constants/app_colors.dart';
+
+class WebAdminDashboardScreen extends StatelessWidget {
+  const WebAdminDashboardScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return Scaffold(
+      backgroundColor: const Color(0xFFF4F7FE),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header Section
+              _buildHeader(context, l10n),
+              const SizedBox(height: 32),
+
+              // Metrics Grid
+              _buildMetricsGrid(context, l10n),
+              const SizedBox(height: 32),
+
+              // Main Layout (Users + Recent Uploads)
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Left Column: User Management Table
+                  Expanded(
+                    flex: 8,
+                    child: _buildUserManagementCard(context, l10n),
+                  ),
+                  const SizedBox(width: 24),
+
+                  // Right Column: Recent Uploads
+                  Expanded(
+                    flex: 4,
+                    child: _buildRecentUploadsCard(context, l10n),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 40),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context, AppLocalizations l10n) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Pages / Dashboard',
+              style: TextStyle(
+                color: Color(0xFFA3AED0),
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              l10n.adminPanelTitle,
+              style: const TextStyle(
+                color: Color(0xFF1B2559),
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                letterSpacing: -0.5,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              l10n.manageUsersSubtitleNow, // using available string
+              style: const TextStyle(
+                color: Color(0xFFA3AED0),
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+        ElevatedButton.icon(
+          onPressed: () {},
+          icon: const Icon(Icons.add_circle, color: Colors.white, size: 20),
+          label: Text(
+            l10n.actionCreateResource,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+          ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF2C0FBD),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            elevation: 8,
+            shadowColor: const Color(0xFF2C0FBD).withValues(alpha: 0.3),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMetricsGrid(BuildContext context, AppLocalizations l10n) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Wrap(
+          spacing: 20,
+          runSpacing: 20,
+          children: [
+            _buildMetricCard(
+              title: l10n.manageUsersTitle,
+              value: '12,450',
+              icon: Icons.group,
+              trendUp: true,
+              trendValue: '+12%',
+              trendText: 'since last month',
+              width: (constraints.maxWidth - 60) / 4,
+            ),
+            _buildMetricCard(
+              title: l10n.manageQuizzesSubtitle, // 'Pending...' equivalent
+              value: '86',
+              icon: Icons.quiz,
+              trendUp: true,
+              trendValue: '+5%',
+              trendText: 'since last week',
+              width: (constraints.maxWidth - 60) / 4,
+            ),
+            _buildMetricCard(
+              title: 'Reported Comments',
+              value: '24',
+              icon: Icons.report_problem,
+              trendUp: false,
+              trendValue: '-2%',
+              trendText: 'since yesterday',
+              width: (constraints.maxWidth - 60) / 4,
+            ),
+            _buildMetricCard(
+              title: 'Total Revenue',
+              value: '\$45,200',
+              icon: Icons.payments,
+              trendUp: true,
+              trendValue: '+8%',
+              trendText: 'since last month',
+              width: (constraints.maxWidth - 60) / 4,
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildMetricCard({
+    required String title,
+    required String value,
+    required IconData icon,
+    required bool trendUp,
+    required String trendValue,
+    required String trendText,
+    required double width,
+  }) {
+    return Container(
+      width: width,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF7090B0).withValues(alpha: 0.12),
+            blurRadius: 40,
+            offset: const Offset(0, 18),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            height: 56,
+            width: 56,
+            decoration: const BoxDecoration(
+              color: Color(0xFFF4F7FE),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, color: const Color(0xFF2C0FBD), size: 30),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Color(0xFFA3AED0),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  value,
+                  style: const TextStyle(
+                    color: Color(0xFF1B2559),
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Icon(
+                      trendUp ? Icons.trending_up : Icons.trending_down,
+                      color: trendUp ? Colors.green : Colors.red,
+                      size: 14,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      trendValue,
+                      style: TextStyle(
+                        color: trendUp ? Colors.green : Colors.red,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Expanded(
+                      child: Text(
+                        trendText,
+                        style: const TextStyle(
+                          color: Color(0xFFA3AED0),
+                          fontSize: 12,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildUserManagementCard(BuildContext context, AppLocalizations l10n) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF7090B0).withValues(alpha: 0.12),
+            blurRadius: 40,
+            offset: const Offset(0, 18),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  l10n.manageUsersTitle,
+                  style: const TextStyle(
+                    color: Color(0xFF1B2559),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.more_horiz, color: Color(0xFF2C0FBD)),
+                  style: IconButton.styleFrom(
+                    backgroundColor: const Color(0xFFF4F7FE),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            _buildUserTable(context, l10n),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildUserTable(BuildContext context, AppLocalizations l10n) {
+    final authRepository = Provider.of<AuthRepository>(context, listen: false);
+
+    return StreamBuilder<List<AppUser>>(
+      stream: authRepository.getAllUsersStream(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        }
+
+        final users = snapshot.data ?? [];
+        if (users.isEmpty) {
+          return Center(child: Text(l10n.noUsersFound));
+        }
+
+        return DataTable(
+          headingRowColor: WidgetStateProperty.all(Colors.transparent),
+          dividerThickness: 0.5,
+          columns: const [
+            DataColumn(label: Text('USER PROFILE', style: _tableHeaderStyle)),
+            DataColumn(label: Text('ROLE', style: _tableHeaderStyle)),
+            DataColumn(label: Text('STATUS', style: _tableHeaderStyle)),
+            DataColumn(label: Text('REGISTERED', style: _tableHeaderStyle)),
+            DataColumn(label: Text('ACTIONS', style: _tableHeaderStyle)),
+          ],
+          rows: users.take(8).map((user) {
+            return DataRow(
+              cells: [
+                DataCell(
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage:
+                            user.profilePictureUrl != null &&
+                                user.profilePictureUrl!.isNotEmpty
+                            ? NetworkImage(user.profilePictureUrl!)
+                            : null,
+                        backgroundColor: const Color(0xFFE2E8F0),
+                        child:
+                            user.profilePictureUrl == null ||
+                                user.profilePictureUrl!.isEmpty
+                            ? Text(
+                                user.name.isNotEmpty
+                                    ? user.name[0].toUpperCase()
+                                    : 'U',
+                              )
+                            : null,
+                      ),
+                      const SizedBox(width: 12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            user.name,
+                            style: const TextStyle(
+                              color: Color(0xFF1B2559),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            user.email ?? l10n.noEmailProvided,
+                            style: const TextStyle(
+                              color: Color(0xFFA3AED0),
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                DataCell(
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF2C0FBD).withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Text(
+                      user.role.name.toUpperCase(),
+                      style: const TextStyle(
+                        color: Color(0xFF2C0FBD),
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                DataCell(
+                  Row(
+                    children: [
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const BoxDecoration(
+                          color: Colors.green,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      const Text(
+                        'Active',
+                        style: TextStyle(color: Color(0xFF1B2559)),
+                      ),
+                    ],
+                  ),
+                ),
+                DataCell(
+                  Text(
+                    user.registrationDate != null
+                        ? DateFormat.yMMMd(
+                            l10n.localeName,
+                          ).format(user.registrationDate!)
+                        : 'Unknown',
+                    style: const TextStyle(color: Color(0xFFA3AED0)),
+                  ),
+                ),
+                DataCell(
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Edit',
+                      style: TextStyle(
+                        color: Color(0xFFA3AED0),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }).toList(),
+        );
+      },
+    );
+  }
+
+  Widget _buildRecentUploadsCard(BuildContext context, AppLocalizations l10n) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF7090B0).withValues(alpha: 0.12),
+            blurRadius: 40,
+            offset: const Offset(0, 18),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Recent Uploads',
+                  style: TextStyle(
+                    color: Color(0xFF1B2559),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(
+                    backgroundColor: const Color(0xFFF4F7FE),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: const Text(
+                    'See all',
+                    style: TextStyle(
+                      color: Color(0xFF2C0FBD),
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            _buildUploadItem(
+              icon: Icons.description,
+              iconColor: Colors.red,
+              iconBgColor: Colors.red.shade50,
+              title: 'Contract Law Basics.pdf',
+              subtitle: 'Uploaded by J. Doe',
+              status: 'Draft',
+              statusColor: Colors.amber,
+              actionText: 'Review',
+            ),
+            const SizedBox(height: 16),
+            _buildUploadItem(
+              icon: Icons.assignment_turned_in,
+              iconColor: Colors.green,
+              iconBgColor: Colors.green.shade50,
+              title: 'Torts Quiz 101',
+              subtitle: 'Uploaded by A. Smith',
+              status: 'Published',
+              statusColor: Colors.green,
+              actionText: 'Edit',
+            ),
+            const SizedBox(height: 16),
+            _buildUploadItem(
+              icon: Icons.gavel,
+              iconColor: Colors.blue,
+              iconBgColor: Colors.blue.shade50,
+              title: 'Criminal Procedure Video',
+              subtitle: 'Uploaded by D. Kim',
+              status: 'Published',
+              statusColor: Colors.green,
+              actionText: 'Edit',
+            ),
+            const SizedBox(height: 16),
+            _buildUploadItem(
+              icon: Icons.article,
+              iconColor: Colors.purple,
+              iconBgColor: Colors.purple.shade50,
+              title: 'Ethics Case Study',
+              subtitle: 'Uploaded by E. Rodriguez',
+              status: 'Draft',
+              statusColor: Colors.amber,
+              actionText: 'Review',
+            ),
+            const SizedBox(height: 16),
+            _buildUploadItem(
+              icon: Icons.folder_open,
+              iconColor: Colors.orange,
+              iconBgColor: Colors.orange.shade50,
+              title: 'Constitutional Law Notes',
+              subtitle: 'Uploaded by M. Ross',
+              status: 'Published',
+              statusColor: Colors.green,
+              actionText: 'Edit',
+            ),
+
+            const SizedBox(height: 24),
+            const Divider(color: Color(0xFFF4F7FE)),
+            const SizedBox(height: 16),
+            Center(
+              child: TextButton.icon(
+                onPressed: () {},
+                icon: const Text(
+                  'View All Documents',
+                  style: TextStyle(
+                    color: Color(0xFF2C0FBD),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                label: const Icon(
+                  Icons.arrow_forward,
+                  color: Color(0xFF2C0FBD),
+                  size: 16,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildUploadItem({
+    required IconData icon,
+    required Color iconColor,
+    required Color iconBgColor,
+    required String title,
+    required String subtitle,
+    required String status,
+    required Color statusColor,
+    required String actionText,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: Colors.transparent,
+      ),
+      child: Row(
+        children: [
+          Container(
+            height: 48,
+            width: 48,
+            decoration: BoxDecoration(
+              color: iconBgColor,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(icon, color: iconColor),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Color(0xFF1B2559),
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    color: Color(0xFFA3AED0),
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                decoration: BoxDecoration(
+                  color: statusColor.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  status,
+                  style: TextStyle(
+                    color: statusColor,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                actionText,
+                style: const TextStyle(
+                  color: Color(0xFFA3AED0),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+const TextStyle _tableHeaderStyle = TextStyle(
+  color: Color(0xFFA3AED0),
+  fontSize: 12,
+  fontWeight: FontWeight.w500,
+  letterSpacing: 1.0,
+);

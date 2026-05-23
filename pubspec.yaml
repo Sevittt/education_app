@@ -1,0 +1,96 @@
+name: sud_qollanma
+description: "Sud xodimlarining kasbiy kompetentligi uchun mobil platforma."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter_skill: ^0.2.6
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.9
+  url_launcher: ^6.3.1
+  provider: ^6.1.5
+  uuid: ^4.5.1
+  shared_preferences: ^2.5.3
+  path: ^1.9.0
+  intl: ^0.20.2
+  equatable: ^2.0.5
+  google_sign_in: ^7.2.0 
+  path_provider: ^2.0.9 
+  flutter_speed_dial: ^7.0.0
+  firebase_core: ^4.6.0
+  firebase_auth: ^6.3.0
+  cloud_firestore: ^6.2.0
+  firebase_storage: ^13.2.0
+  cloud_functions: ^6.1.0
+  flutter_markdown_plus: ^1.0.1
+  youtube_player_flutter: ^9.0.1
+  file_picker: ^11.0.2
+  confetti: ^0.8.0
+  lottie: ^3.3.3
+  firebase_crashlytics: ^5.1.0
+  firebase_messaging: ^16.2.0
+  flutter_local_notifications: ^18.0.1
+  cached_network_image: ^3.4.1
+  google_fonts: ^8.0.2
+  animations: ^2.1.2
+  image_picker: ^1.1.2
+  firebase_ai: ^3.10.0
+  video_player: ^2.8.3
+  chewie: ^1.8.1
+  csv: ^8.0.0
+  share_plus: ^12.0.2
+  shimmer: ^3.0.0
+  flutter_staggered_animations: ^1.1.1
+  # firebase_app_check: ^0.4.3  # o'chirildi
+  flutter_dotenv: ^6.0.1
+
+  # === OFLAYN-BIRINCHI ARXITEKTURA (Local-first) ===
+  # Drift - SQLite asosidagi reaktiv, type-safe ma'lumotlar bazasi qatlami
+  drift: ^2.26.1
+  sqlite3_flutter_libs: ^0.5.4
+
+  # Tarmoq holatini real-vaqtda kuzatish (SyncWorker uchun)
+  connectivity_plus: ^6.0.5
+
+  # Xavfsiz shifrlash (AES-256) - nozik sud ma'lumotlari uchun
+  flutter_secure_storage: ^9.2.2
+  encrypt: ^5.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+  # Drift sxemalarini generatsiya qilish uchun
+  drift_dev: ^2.26.1
+  build_runner: ^2.4.9
+  
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/images/
+    - assets/docs/
+    - assets/avatars/
+    - .env
+flutter_launcher_icons:
+  android: "sq_icon"
+  ios: true
+  web:
+    generate: true
+    image_path: "assets/images/app_logo.png"
+    background_color: "#1E293B"
+    theme_color: "#1E293B"
+  image_path: "assets/images/app_logo.png"
+  adaptive_icon_background: "#1E293B"
+  adaptive_icon_foreground: "assets/images/app_logo.png"

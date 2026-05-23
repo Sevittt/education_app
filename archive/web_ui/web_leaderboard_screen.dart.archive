@@ -1,0 +1,938 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class WebLeaderboardScreen extends StatefulWidget {
+  const WebLeaderboardScreen({super.key});
+
+  @override
+  State<WebLeaderboardScreen> createState() => _WebLeaderboardScreenState();
+}
+
+class _WebLeaderboardScreenState extends State<WebLeaderboardScreen> {
+  // Theme colors matching HTML
+  static const Color _primary = Color(0xFF2C0FBD);
+  static const Color _backgroundLight = Color(0xFFF4F7FE);
+  static const Color _neutralText = Color(0xFF1B254B);
+  static const Color _gold = Color(0xFFFFD700);
+
+  bool _isThisWeek = true; // Toggle state for the header
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: _backgroundLight,
+      appBar: _buildAppBar(),
+      body: SingleChildScrollView(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 900),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 32.0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _buildHeaderSection(),
+                  const SizedBox(height: 32),
+                  _buildPodiumSection(),
+                  const SizedBox(height: 32),
+                  _buildCurrentUserRankBar(),
+                  const SizedBox(height: 32),
+                  _buildListHeader(),
+                  const SizedBox(height: 12),
+                  _buildLeaderboardList(),
+                  const SizedBox(height: 24),
+                  _buildLoadMoreButton(),
+                  const SizedBox(height: 48),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.white.withValues(alpha: 0.9),
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(1),
+        child: Container(color: Colors.grey[200], height: 1),
+      ),
+      title: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1200),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Logo
+              Row(
+                children: [
+                  Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      color: _primary.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.gavel, color: _primary, size: 20),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    'LegalLeader',
+                    style: GoogleFonts.spaceGrotesk(
+                      color: _neutralText,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: -0.5,
+                    ),
+                  ),
+                ],
+              ),
+              // Navigation Links & Profile
+              if (MediaQuery.of(context).size.width >= 768)
+                Row(
+                  children: [
+                    _buildNavLink('Dashboard', false),
+                    const SizedBox(width: 32),
+                    _buildNavLink('Courses', false),
+                    const SizedBox(width: 32),
+                    _buildNavLink('Community', false),
+                    const SizedBox(width: 32),
+                    _buildNavLink('Leaderboard', true),
+                    const SizedBox(width: 32),
+                    Container(width: 1, height: 24, color: Colors.grey[300]),
+                    const SizedBox(width: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Alex Morgan',
+                          style: GoogleFonts.spaceGrotesk(
+                            color: _neutralText,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'Pro Member',
+                          style: GoogleFonts.spaceGrotesk(
+                            color: Colors.grey[500],
+                            fontSize: 10,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 12),
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: _primary.withValues(alpha: 0.2),
+                          width: 2,
+                        ),
+                        image: const DecorationImage(
+                          image: NetworkImage(
+                            'https://lh3.googleusercontent.com/aida-public/AB6AXuA3wgCu5h__hDJGlgqMfxO-u7F5qvyunpKKOdeLYlArjnXMxKREMDX27J4ve9s3IzoH3l0S7QOKhND8fN_taNyAuZWoqNojgX_NohOp-RQ99TaPFOsxpqhc5KVXnHFp2nbKMQQbr-hLKZr-RK9YUbfMuo2kEye0H4qkSiZ9pmEwucPkW0-pmToGLZr5aPMhsj1d5M_DHABUJ8eHY5gNHuYVrOOdVuWSvqoKKO_FzfmupkQsEQmWAqTca_8CTnE-1JFXjTKuzyUYmPp9',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavLink(String text, bool isActive) {
+    return InkWell(
+      onTap: () {},
+      child: Text(
+        text,
+        style: GoogleFonts.spaceGrotesk(
+          color: isActive ? _primary : Colors.grey[500],
+          fontSize: 14,
+          fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeaderSection() {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isSmall = constraints.maxWidth < 600;
+        return Flex(
+          direction: isSmall ? Axis.vertical : Axis.horizontal,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment:
+              isSmall ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Global Leaderboard',
+                  style: GoogleFonts.spaceGrotesk(
+                    color: _neutralText,
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: -0.5,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Check out the top achievers in the legal community.',
+                  style: GoogleFonts.spaceGrotesk(
+                    color: Colors.grey[500],
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            if (isSmall) const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(32),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 4,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildToggleButton('This Week', true),
+                  _buildToggleButton('All Time', false),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildToggleButton(String label, bool isSelected) {
+    // In a real app, this would update state. For now, we mock the UI.
+    final isActive = _isThisWeek ? label == 'This Week' : label == 'All Time';
+    return InkWell(
+      onTap: () {
+        setState(() {
+          _isThisWeek = label == 'This Week';
+        });
+      },
+      borderRadius: BorderRadius.circular(32),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+        decoration: BoxDecoration(
+          color: isActive ? _primary : Colors.transparent,
+          borderRadius: BorderRadius.circular(32),
+        ),
+        child: Text(
+          label,
+          style: GoogleFonts.spaceGrotesk(
+            color: isActive ? Colors.white : Colors.grey[500],
+            fontSize: 14,
+            fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPodiumSection() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(32),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 25,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.all(32),
+      clipBehavior: Clip.antiAlias,
+      child: Stack(
+        children: [
+          // Background blobs
+          Positioned(
+            top: -100,
+            right: -100,
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                color: _primary.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: -100,
+            left: -100,
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                color: Colors.indigoAccent.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          // Podium Inner
+          SizedBox(
+            height: 320,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Rank 2
+                Expanded(
+                  child: _buildPodiumPlace(
+                    rank: 2,
+                    name: 'Sarah J.',
+                    points: '2,850 pts',
+                    avatarUrl:
+                        'https://lh3.googleusercontent.com/aida-public/AB6AXuD3i-jHSId9na_tgsxYYWb89NaxRA7V2IV5lQj2WMquFEq0JfwB8SUjI-BXNCXvDBLwH1rkxcoTH2zdTdAgAt18EYIZ8Sq1HPPriOdw6ev4_ZwJ_y188nA7udu8Xy17piVg3qkFoDpzDumZ9au6hFZENqyVj6SNUVh8Eb4trXPKNlK1e3VaLCS1dQW3ln7SlMRP05fJfvZNZKDdQk_MEspfQTo4AuXFklVZg1Ijqc3C0QCsbgJCVQbOUiQOab36-fExEpDjatmY1H2l',
+                    heightOffset: 100,
+                    primaryColor: Colors.grey[400]!,
+                    secondaryColor: Colors.grey[200]!,
+                    textColor: Colors.grey[800]!,
+                  ),
+                ),
+                // Rank 1
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 24.0,
+                    ), // Elevate rank 1
+                    child: _buildPodiumPlace(
+                      rank: 1,
+                      name: 'Michael Chen',
+                      points: '3,240 pts',
+                      avatarUrl:
+                          'https://lh3.googleusercontent.com/aida-public/AB6AXuA8lCYFLeucY3aBvkFih9fvZEi7NMu7j9gmA_1yQFFZTArws8YWaGdZ8-PRCuUKDfNI1tQJ8Y9J19irh-Hij4h_IgVutxryFGkB1VW-8HHHuedHMm5TQfUG0HWs0MwOrXpSQ3QdMV8kyxXi7-GxAvZkPW0pMuT6XfEKuyyBjL7OOVabC5_AMBPAXT8Mjad_6oX82tUfHsRtJAU70lemGtPqMWfw92eu64QHcFrXVhWDiYXkyboXq_DMqZbCOefXWT-1wrdxK5_bI7HF',
+                      heightOffset: 140,
+                      primaryColor: _gold,
+                      secondaryColor: Colors.yellow[100]!,
+                      textColor: Colors.white,
+                      isFirst: true,
+                    ),
+                  ),
+                ),
+                // Rank 3
+                Expanded(
+                  child: _buildPodiumPlace(
+                    rank: 3,
+                    name: 'Emma W.',
+                    points: '2,510 pts',
+                    avatarUrl:
+                        'https://lh3.googleusercontent.com/aida-public/AB6AXuCkrfE8nobYePhKR_rD45ZlsHE1yny7GT8OC-lRpJQIgNzr6xf96CjErBX029J7suU-MOp2-0R-yDCW5VnjmcErrZOMAmYoK79hlaeGLabGyzfO4sql8ugKG-9SlRVASD0Z4OzFUURgjYZGSDCMNy9dsOw0EqapUzTBoeo5Zu5qcWeRkb-4A4N7cDuMMCCxUmbCajqRhT1A52dWgLiXLUszngXUEvoz1e73WVpQrRRvJvxCpj0JxjD6MOddOoDVDrHUG2iOjDfAhIWj',
+                    heightOffset: 80,
+                    primaryColor: Colors.orange[300]!,
+                    secondaryColor: Colors.orange[100]!,
+                    textColor: Colors.orange[900]!,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPodiumPlace({
+    required int rank,
+    required String name,
+    required String points,
+    required String avatarUrl,
+    required double heightOffset,
+    required Color primaryColor,
+    required Color secondaryColor,
+    required Color textColor,
+    bool isFirst = false,
+  }) {
+    final avatarSize = isFirst ? 110.0 : 80.0;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Stack(
+          clipBehavior: Clip.none,
+          alignment: Alignment.center,
+          children: [
+            if (isFirst)
+              const Positioned(
+                top: -36,
+                child: Icon(
+                  Icons.star,
+                  color: _gold,
+                  size: 36,
+                ), // fallback crown
+              ),
+            Container(
+              width: avatarSize,
+              height: avatarSize,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: primaryColor.withValues(alpha: 0.5),
+                  width: 4,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: primaryColor.withValues(alpha: 0.3),
+                    blurRadius: 15,
+                    spreadRadius: 2,
+                  ),
+                ],
+                image: DecorationImage(
+                  image: NetworkImage(avatarUrl),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: -12,
+              child: Container(
+                width: isFirst ? 40 : 32,
+                height: isFirst ? 40 : 32,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: isFirst ? _gold : secondaryColor,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 2),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 4,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Text(
+                  rank.toString(),
+                  style: GoogleFonts.spaceGrotesk(
+                    color: textColor,
+                    fontSize: isFirst ? 18 : 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        Text(
+          name,
+          style: GoogleFonts.spaceGrotesk(
+            color: _neutralText,
+            fontSize: isFirst ? 18 : 14,
+            fontWeight: FontWeight.bold,
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          textAlign: TextAlign.center,
+        ),
+        if (isFirst)
+          Container(
+            margin: const EdgeInsets.only(top: 4, bottom: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+            decoration: BoxDecoration(
+              color: Colors.yellow[100],
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              'GRAND MASTER',
+              style: GoogleFonts.spaceGrotesk(
+                color: Colors.yellow[800],
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        Text(
+          points,
+          style: GoogleFonts.spaceGrotesk(
+            color: _primary,
+            fontSize: isFirst ? 18 : 14,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          height: heightOffset,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              colors: [
+                secondaryColor.withValues(alpha: 0.8),
+                secondaryColor.withValues(alpha: 0.0),
+              ],
+            ),
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(16),
+              topRight: Radius.circular(16),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCurrentUserRankBar() {
+    return Container(
+      decoration: BoxDecoration(
+        color: _primary.withValues(alpha: 0.05),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: _primary.withValues(alpha: 0.1)),
+      ),
+      padding: const EdgeInsets.all(16),
+      child: Stack(
+        children: [
+          Positioned(
+            left: -16,
+            top: -16,
+            bottom: -16,
+            child: Container(width: 4, color: _primary),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: const [
+                        BoxShadow(color: Colors.black12, blurRadius: 4),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'RANK',
+                          style: GoogleFonts.spaceGrotesk(
+                            color: Colors.grey[500],
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '14',
+                          style: GoogleFonts.spaceGrotesk(
+                            color: _primary,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'You are doing great!',
+                        style: GoogleFonts.spaceGrotesk(
+                          color: _neutralText,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      RichText(
+                        text: TextSpan(
+                          style: GoogleFonts.spaceGrotesk(
+                            color: Colors.grey[500],
+                            fontSize: 14,
+                          ),
+                          children: [
+                            const TextSpan(text: 'Only '),
+                            TextSpan(
+                              text: '120 points',
+                              style: GoogleFonts.spaceGrotesk(
+                                color: _primary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const TextSpan(text: ' to reach Top 10'),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              if (MediaQuery.of(context).size.width >= 600)
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          'EXPERT LEVEL',
+                          style: GoogleFonts.spaceGrotesk(
+                            color: Colors.grey[500],
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Container(
+                          width: 120,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: FractionallySizedBox(
+                            alignment: Alignment.centerLeft,
+                            widthFactor: 0.75,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: _primary,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 24),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          '1,890',
+                          style: GoogleFonts.spaceGrotesk(
+                            color: _neutralText,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'Total Points',
+                          style: GoogleFonts.spaceGrotesk(
+                            color: Colors.grey[400],
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildListHeader() {
+    if (MediaQuery.of(context).size.width < 768) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 48,
+            child: Text(
+              'RANK',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.spaceGrotesk(
+                color: Colors.grey[400],
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 5,
+            child: Text(
+              'USER',
+              style: GoogleFonts.spaceGrotesk(
+                color: Colors.grey[400],
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Text(
+              'STATUS',
+              style: GoogleFonts.spaceGrotesk(
+                color: Colors.grey[400],
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Text(
+              'POINTS',
+              textAlign: TextAlign.right,
+              style: GoogleFonts.spaceGrotesk(
+                color: Colors.grey[400],
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLeaderboardList() {
+    return Column(
+      children: [
+        _buildListRow(
+          rank: 4,
+          name: 'Jessica Pearson',
+          level: 'Legal Eagle',
+          points: '2,450',
+          avatarUrl:
+              'https://lh3.googleusercontent.com/aida-public/AB6AXuDzmBr4KLvJRwEp0rqME7TuXSakia6jHnCBnjyS9mC_-xlJEuzrdZ0a1dAWGuWqa9t__5jkr-WUZAilGiVxU2rcvgeaJUOZgh1E6TxWJbGsMqxUHu01E_GkWJheW8ZoR-z4Cg2TTko-EeRYlngpHBQa1bHcsJZxfH925JZAXJr769E11UUgwM2yZFcJOtL3hUzlotOnlWXpZt11TH49jE-PXUQm7J9TzbzCM-hAwxdpCZ5EldTGcJxq6c0cneRNoaN3bqepDzmp9lAw',
+          statusColor: Colors.purple,
+          statusBg: Colors.purple[50]!,
+        ),
+        const SizedBox(height: 12),
+        _buildListRow(
+          rank: 5,
+          name: 'David Ross',
+          level: 'Senior Associate',
+          points: '2,320',
+          avatarUrl:
+              'https://lh3.googleusercontent.com/aida-public/AB6AXuD8jwUAg6hxethtYsDkyVBaL6poT62D2vokwdLBDqZ5ozqf4okZFfF33fiOgM28rT2Uuytc_i12UcXbzqajm9OTk-wcT2nY4mp5f8TafYf0xTVNii3DA_JaF1cd2aQpLJokdWu6brB-UijYyaI2aW4D7Tg7yj71I699xlmPBXH8Xj8zO2Z6kDxKzxHEQWY01_ggUtyjeFtm9PEDWTPh_fVPzdL-DKXvQ4MH3cSg4ZL2EPoTe4qOhfcTdxcqP0ieLBJLhMhWPwyjZu-i',
+          statusColor: Colors.blue,
+          statusBg: Colors.blue[50]!,
+        ),
+        const SizedBox(height: 12),
+        _buildListRow(
+          rank: 6,
+          name: 'Rachel Zane',
+          level: 'Litigator',
+          points: '2,210',
+          avatarUrl:
+              'https://lh3.googleusercontent.com/aida-public/AB6AXuCC6fIZYyW0yAKgSYVbKRh9tklKf5uo4XuhvnSghk9CG_yldp6PuG_cwiHJ0vZ_Wft93kNfjgG1hVlQBLHGsAeYoESL-E7LnhuObYW8OzLlZmN0k3wT3tjQhgDHctR7jlaFWUGksFUKRR0vELlyZggv9AjgzUoKylbkDIEZhOVVvJkNqNGOGSiv6u9nn6SLH6-hq2anQfbbvL3rh2aBcokY8xvcieEFViHwdYU9qOalB1A5GuM9mPV05U5uy57b5eSziJm7ZBnfPRnZ',
+          statusColor: Colors.green,
+          statusBg: Colors.green[50]!,
+        ),
+        const SizedBox(height: 12),
+        _buildListRow(
+          rank: 7,
+          name: 'Harvey Specter',
+          level: 'Partner',
+          points: '2,150',
+          avatarUrl:
+              'https://lh3.googleusercontent.com/aida-public/AB6AXuBBglr5vK_orNxWzNVWKdPG5tBGF-7rnlt6BbQ_5Vk9vrnKiIPnxkk28DpZ4RYkh4YOX76Dh8XwD-JEySqUVE-JXpZ1Tv_RiqBP3jo6iiK2_TGGjNHtCduXcCBUwQ-3UU9TVD2gfzgXFNGpRXU03oF_cTBPk4ba6HjWZjjhhwGHG-92WXkYN7IVDLQPmDMHNzU7O60HXWnCvyJi5-bmMt4hoQaQlSuEd0JJb0oAIkfA7FVwg5a13krfF02BEvnqT1umRihuPna1u26I',
+          statusColor: Colors.indigo,
+          statusBg: Colors.indigo[50]!,
+        ),
+        const SizedBox(height: 12),
+        _buildListRow(
+          rank: 8,
+          name: 'Donna Paulsen',
+          level: 'Mediator',
+          points: '2,040',
+          avatarUrl:
+              'https://lh3.googleusercontent.com/aida-public/AB6AXuAoobrZKXdLdAjx2vTYs0JDaVaEUvzXT2QAmCc0nVqT-WXvhVp-J9Jy2ySs2mqaXUhGSZkA176xHTl19M4laKbr2iMC157-0_yY_HVmjgRBz-9jMDnBCULoQ9ZqmMH0s7RS9orgF3TP38VH800aohZX3RUjvnI05QBdKwJo6v9OoaAs156FCqIENLfHI8Pez3RHPDjCtN7fgoRblU9sSPHCWGSDnRZTEweMseS-DyGQKqsNtolK8jg94Y33SylN3ERRBWMpdtgQBtrI',
+          statusColor: Colors.pink,
+          statusBg: Colors.pink[50]!,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildListRow({
+    required int rank,
+    required String name,
+    required String level,
+    required String points,
+    required String avatarUrl,
+    required Color statusColor,
+    required Color statusBg,
+  }) {
+    final isDesktop = MediaQuery.of(context).size.width >= 768;
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: const [
+          BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2)),
+        ],
+        border: Border.all(color: Colors.transparent),
+      ),
+      child: Row(
+        children: [
+          SizedBox(
+            width: isDesktop ? 48 : 32,
+            child: Text(
+              rank.toString(),
+              textAlign: TextAlign.center,
+              style: GoogleFonts.spaceGrotesk(
+                color: Colors.grey[400],
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: isDesktop
+                ? 5
+                : 1, // On mobile, user area takes up full remaining space
+            child: Row(
+              children: [
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: NetworkImage(avatarUrl),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: GoogleFonts.spaceGrotesk(
+                        color: _neutralText,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    if (!isDesktop)
+                      Text(
+                        '$level • $points pts',
+                        style: GoogleFonts.spaceGrotesk(
+                          color: Colors.grey[500],
+                          fontSize: 12,
+                        ),
+                      ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          if (isDesktop)
+            Expanded(
+              flex: 3,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: statusBg,
+                    borderRadius: BorderRadius.circular(16),
+                    border:
+                        Border.all(color: statusColor.withValues(alpha: 0.2)),
+                  ),
+                  child: Text(
+                    level.toUpperCase(),
+                    style: GoogleFonts.spaceGrotesk(
+                      color: statusColor,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          if (isDesktop)
+            Expanded(
+              flex: 3,
+              child: Text(
+                points,
+                textAlign: TextAlign.right,
+                style: GoogleFonts.spaceGrotesk(
+                  color: _primary,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLoadMoreButton() {
+    return Center(
+      child: InkWell(
+        onTap: () {},
+        borderRadius: BorderRadius.circular(32),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(32),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 4,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Load More',
+                style: GoogleFonts.spaceGrotesk(
+                  color: Colors.grey[600],
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Icon(Icons.expand_more, color: Colors.grey[600]),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

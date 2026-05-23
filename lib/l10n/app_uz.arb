@@ -1,0 +1,2946 @@
+{
+  "@@locale": "uz",
+  "appTitle": "Sud qo'llanma",
+  "@appTitle": {
+    "description": "Dasturning sarlavhasi"
+  },
+  "openInYoutube": "YouTube orqali ochish",
+  "@openInYoutube": {
+    "description": "Translation for openInYoutube"
+  },
+  "watchOnYoutube": "YouTube da ko'rish",
+  "@watchOnYoutube": {
+    "description": "Translation for watchOnYoutube"
+  },
+  "loginWelcomeTitle": "Xush kelibsiz!",
+  "@loginWelcomeTitle": {
+    "description": "Kirish ekranidagi sarlavha"
+  },
+  "loginWelcomeSubtitle": "Davom etish uchun kiring",
+  "@loginWelcomeSubtitle": {
+    "description": "Kirish ekranidagi sarlavha osti matni"
+  },
+  "bottomNavHome": "Bosh sahifa",
+  "@bottomNavHome": {
+    "description": "Translation for bottomNavHome"
+  },
+  "bottomNavResources": "Kurslar",
+  "@bottomNavResources": {
+    "description": "Translation for bottomNavResources"
+  },
+  "bottomNavCommunity": "Munozara",
+  "@bottomNavCommunity": {
+    "description": "Translation for bottomNavCommunity"
+  },
+  "bottomNavProfile": "Profil",
+  "@bottomNavProfile": {
+    "description": "Translation for bottomNavProfile"
+  },
+  "resourcesScreenTitle": "Qo'llanmalar va yo'riqnomalar",
+  "@resourcesScreenTitle": {
+    "description": "Qo'llanmalar sahifasi sarlavhasi"
+  },
+  "roleXodim": "Xodim",
+  "@roleXodim": {
+    "description": "Oddiy xodim roli"
+  },
+  "roleEkspert": "Ekspert",
+  "@roleEkspert": {
+    "description": "Kontent yarata oladigan ekspert roli"
+  },
+  "roleAdmin": "Administrator",
+  "@roleAdmin": {
+    "description": "Administrator roli"
+  },
+  "registrationTitle": "Hisob yaratish",
+  "@registrationTitle": {
+    "description": "Translation for registrationTitle"
+  },
+  "registrationSubtitle": "Professional hamjamiyatga qo'shiling!",
+  "@registrationSubtitle": {
+    "description": "Translation for registrationSubtitle"
+  },
+  "registrationFullNameLabel": "To'liq ism (F.I.Sh.)",
+  "@registrationFullNameLabel": {
+    "description": "Ro'yxatdan o'tishda to'liq ism maydoni"
+  },
+  "registrationFullNameError": "Iltimos, to'liq ismingizni kiriting",
+  "@registrationFullNameError": {
+    "description": "Ism bo'sh bo'lganda chiqadigan xatolik"
+  },
+  "registrationRoleLabel": "Sizning rolingiz",
+  "@registrationRoleLabel": {
+    "description": "Ro'yxatdan o'tishda rol tanlash"
+  },
+  "registrationRoleError": "Iltimos, rolni tanlang",
+  "@registrationRoleError": {
+    "description": "Rol tanlanmaganda chiqadigan xatolik"
+  },
+  "registrationRoleXodim": "Oddiy xodim",
+  "@registrationRoleXodim": {
+    "description": "Xodim roli uchun tanlov"
+  },
+  "registrationRoleEkspert": "Ekspert (Qo'llanma yaratuvchi)",
+  "@registrationRoleEkspert": {
+    "description": "Ekspert roli uchun tanlov"
+  },
+  "registrationRoleJudge": "Sudya",
+  "@registrationRoleJudge": {
+    "description": "Translation for registrationRoleJudge"
+  },
+  "registrationRoleAssistant": "Sudya yordamchisi",
+  "@registrationRoleAssistant": {
+    "description": "Translation for registrationRoleAssistant"
+  },
+  "registrationRoleChancellery": "Devonxona xodimi",
+  "@registrationRoleChancellery": {
+    "description": "Translation for registrationRoleChancellery"
+  },
+  "registrationRoleArchive": "Arxiv mudiri",
+  "@registrationRoleArchive": {
+    "description": "Translation for registrationRoleArchive"
+  },
+  "registrationRoleIctSpecialist": "AKT mutaxassisi",
+  "@registrationRoleIctSpecialist": {
+    "description": "Translation for registrationRoleIctSpecialist"
+  },
+  "registrationPasswordLabel": "Parol",
+  "@registrationPasswordLabel": {
+    "description": "Parol maydoni uchun matn"
+  },
+  "registrationPasswordError": "Parol kamida 6 belgidan iborat bo'lishi kerak",
+  "@registrationPasswordError": {
+    "description": "Parol qisqa bo'lganda chiqadigan xatolik"
+  },
+  "registrationConfirmPasswordLabel": "Parolni tasdiqlang",
+  "@registrationConfirmPasswordLabel": {
+    "description": "Parolni tasdiqlash maydoni"
+  },
+  "registrationConfirmPasswordError": "Parollar mos kelmadi",
+  "@registrationConfirmPasswordError": {
+    "description": "Parollar mos kelmaganda chiqadigan xatolik"
+  },
+  "registrationSignUpButton": "Ro'yxatdan o'tish",
+  "@registrationSignUpButton": {
+    "description": "Ro'yxatdan o'tish tugmasi"
+  },
+  "registrationSwitchToLogin": "Hisobingiz bormi? kirish",
+  "@registrationSwitchToLogin": {
+    "description": "Kirish sahifasiga o'tish matni"
+  },
+  "languageEnglish": "Ingliz tili",
+  "@languageEnglish": {
+    "description": "Translation for languageEnglish"
+  },
+  "languageUzbek": "O'zbek tili",
+  "@languageUzbek": {
+    "description": "Translation for languageUzbek"
+  },
+  "languageRussian": "Rus tili",
+  "@languageRussian": {
+    "description": "Translation for languageRussian"
+  },
+  "languageSystemDefault": "Tizim tili",
+  "@languageSystemDefault": {
+    "description": "Translation for languageSystemDefault"
+  },
+  "settingsScreenTitle": "Sozlamalar",
+  "@settingsScreenTitle": {
+    "description": "Translation for settingsScreenTitle"
+  },
+  "settingsLanguage": "Til",
+  "@settingsLanguage": {
+    "description": "Translation for settingsLanguage"
+  },
+  "settingsReceiveNotifications": "Bildirishnomalarni qabul qilish",
+  "@settingsReceiveNotifications": {
+    "description": "Translation for settingsReceiveNotifications"
+  },
+  "settingsReceiveNotificationsSubtitle": "Yangi manbalar va muhokamalar haqida yangilanishlarni oling",
+  "@settingsReceiveNotificationsSubtitle": {
+    "description": "Translation for settingsReceiveNotificationsSubtitle"
+  },
+  "settingsAllowLocation": "Joylashuvga ruxsat berish",
+  "@settingsAllowLocation": {
+    "description": "Translation for settingsAllowLocation"
+  },
+  "settingsAllowLocationSubtitle": "Joylashuvingizni talab qiladigan funksiyalar uchun (agar mavjud bo'lsa)",
+  "@settingsAllowLocationSubtitle": {
+    "description": "Translation for settingsAllowLocationSubtitle"
+  },
+  "settingsChangePassword": "Parolni o'zgartirish",
+  "@settingsChangePassword": {
+    "description": "Translation for settingsChangePassword"
+  },
+  "settingsHelpCenter": "Yordam markazi",
+  "@settingsHelpCenter": {
+    "description": "Translation for settingsHelpCenter"
+  },
+  "settingsAboutApp": "Sud qo'llanma haqida",
+  "@settingsAboutApp": {
+    "description": "Translation for settingsAboutApp"
+  },
+  "settingsAppLegalese": "© 2025 sud qo'llanma loyihasi",
+  "@settingsAppLegalese": {
+    "description": "Translation for settingsAppLegalese"
+  },
+  "settingsAppDescription": "Sud xodimlarining kasbiy kompetentligi uchun mobil platforma.",
+  "@settingsAppDescription": {
+    "description": "Translation for settingsAppDescription"
+  },
+  "errorPrefix": "Xatolik:",
+  "@errorPrefix": {
+    "description": "Translation for errorPrefix"
+  },
+  "days": "kun",
+  "@days": {
+    "description": "Translation for days"
+  },
+  "resourcesNoResourcesFound": "Resurslar topilmadi.",
+  "@resourcesNoResourcesFound": {
+    "description": "Translation for resourcesNoResourcesFound"
+  },
+  "loginButtonText": "Kirish",
+  "@loginButtonText": {
+    "description": "Translation for loginButtonText"
+  },
+  "signUpButtonText": "Ro'yxatdan o'tish",
+  "@signUpButtonText": {
+    "description": "Translation for signUpButtonText"
+  },
+  "loginNoAccount": "Akkauntingiz yo'qmi?",
+  "@loginNoAccount": {
+    "description": "Login screen text asking if user has no account"
+  },
+  "logoutButtonText": "Chiqish",
+  "@logoutButtonText": {
+    "description": "Translation for logoutButtonText"
+  },
+  "logoutConfirmTitle": "Chiqishga ishonchingiz komilmi?",
+  "@logoutConfirmTitle": {
+    "description": "Translation for logoutConfirmTitle"
+  },
+  "emailLabel": "Elektron pochta",
+  "@emailLabel": {
+    "description": "Translation for emailLabel"
+  },
+  "passwordLabel": "Parol",
+  "@passwordLabel": {
+    "description": "Translation for passwordLabel"
+  },
+  "homeDashboardTitle": "Boshqaruv paneli",
+  "@homeDashboardTitle": {
+    "description": "Translation for homeDashboardTitle"
+  },
+  "communityScreenTitle": "Hamjamiyat",
+  "@communityScreenTitle": {
+    "description": "Translation for communityScreenTitle"
+  },
+  "profileScreenTitle": "Profil",
+  "@profileScreenTitle": {
+    "description": "Translation for profileScreenTitle"
+  },
+  "editProfileButtonText": "Profilni tahrirlash",
+  "@editProfileButtonText": {
+    "description": "Translation for editProfileButtonText"
+  },
+  "guestUser": "Mehmon foydalanuvchi",
+  "@guestUser": {
+    "description": "Translation for guestUser"
+  },
+  "updateYourInformation": "Ma'lumotlaringizni yangilang",
+  "@updateYourInformation": {
+    "description": "Translation for updateYourInformation"
+  },
+  "loginToEditProfile": "Profilni tahrirlash uchun tizimga kiring",
+  "@loginToEditProfile": {
+    "description": "Translation for loginToEditProfile"
+  },
+  "settingsTitle": "Sozlamalar",
+  "@settingsTitle": {
+    "description": "Translation for settingsTitle"
+  },
+  "themeOptionsTitle": "Mavzu variantlari",
+  "@themeOptionsTitle": {
+    "description": "Translation for themeOptionsTitle"
+  },
+  "logoutConfirmMessage": "Chiqishni xohlaysizmi?",
+  "@logoutConfirmMessage": {
+    "description": "Translation for logoutConfirmMessage"
+  },
+  "cancelButton": "Bekor qilish",
+  "@cancelButton": {
+    "description": "Translation for cancelButton"
+  },
+  "logoutButton": "Chiqish",
+  "@logoutButton": {
+    "description": "Translation for logoutButton"
+  },
+  "resourcesTitle": "Resurslar",
+  "@resourcesTitle": {
+    "description": "Translation for resourcesTitle"
+  },
+  "resourcesSearchHint": "Resurslarni qidirish...",
+  "@resourcesSearchHint": {
+    "description": "Translation for resourcesSearchHint"
+  },
+  "resourcesFilterByType": "Tur bo'yicha filtrlash",
+  "@resourcesFilterByType": {
+    "description": "Translation for resourcesFilterByType"
+  },
+  "resourcesAllTypes": "Barcha turlar",
+  "@resourcesAllTypes": {
+    "description": "Translation for resourcesAllTypes"
+  },
+  "resourcesNoResourcesMatch": "Sizning mezonlaringizga mos resurslar topilmadi.",
+  "@resourcesNoResourcesMatch": {
+    "description": "Translation for resourcesNoResourcesMatch"
+  },
+  "resourcesTryAdjusting": "Qidiruv yoki filtringizni o'zgartirib ko'ring.",
+  "@resourcesTryAdjusting": {
+    "description": "Translation for resourcesTryAdjusting"
+  },
+  "resourcesCreateButton": "Yaratish",
+  "@resourcesCreateButton": {
+    "description": "Translation for resourcesCreateButton"
+  },
+  "resourceAddedSuccess": "Resurs muvaffaqiyatli qo'shildi!",
+  "@resourceAddedSuccess": {
+    "description": "Translation for resourceAddedSuccess"
+  },
+  "resourceAddedError": "Resurs qo'shishda xatolik: {error}",
+  "@resourceAddedError": {
+    "description": "Resurs qo'shishda xatolik yuz berganda ko'rsatiladigan xabar",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Tarmoqqa ulanishda xatolik"
+      }
+    }
+  },
+  "createResourceScreenTitle": "Yangi resurs yaratish",
+  "@createResourceScreenTitle": {
+    "description": "Translation for createResourceScreenTitle"
+  },
+  "createResourceFormWillBeHere": "Resurs yaratish shakli shu yerda bo'ladi.",
+  "@createResourceFormWillBeHere": {
+    "description": "Translation for createResourceFormWillBeHere"
+  },
+  "saveButtonText": "Saqlash",
+  "@saveButtonText": {
+    "description": "Translation for saveButtonText"
+  },
+  "createResourceTitleLabel": "Sarlavha",
+  "@createResourceTitleLabel": {
+    "description": "Translation for createResourceTitleLabel"
+  },
+  "createResourceDescriptionLabel": "Tavsifi",
+  "@createResourceDescriptionLabel": {
+    "description": "Translation for createResourceDescriptionLabel"
+  },
+  "createResourceAuthorLabel": "Muallif",
+  "@createResourceAuthorLabel": {
+    "description": "Translation for createResourceAuthorLabel"
+  },
+  "createResourceTypeLabel": "Resurs turi",
+  "@createResourceTypeLabel": {
+    "description": "Translation for createResourceTypeLabel"
+  },
+  "createResourceUrlLabel": "URL (Optional)",
+  "@createResourceUrlLabel": {
+    "description": "Translation for createResourceUrlLabel"
+  },
+  "couldNotLaunchUrl": "Could not launch {url}",
+  "@couldNotLaunchUrl": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "createResourceValidationEmpty": "Iltimos kiriting {fieldName}",
+  "@createResourceValidationEmpty": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
+    }
+  },
+  "createResourceValidationSelect": "Iltimos tanlang {fieldName}",
+  "@createResourceValidationSelect": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
+    }
+  },
+  "createResourceValidationInvalidUrl": "Yaroqli URL manzilini kiriting",
+  "@createResourceValidationInvalidUrl": {
+    "description": "Translation for createResourceValidationInvalidUrl"
+  },
+  "editButtonTooltip": "Resurs o'zgartirish",
+  "@editButtonTooltip": {
+    "description": "Translation for editButtonTooltip"
+  },
+  "editResourceScreenTitle": "Resurs o'zgartirish",
+  "@editResourceScreenTitle": {
+    "description": "Translation for editResourceScreenTitle"
+  },
+  "resourceTypeLabel": "Turi",
+  "@resourceTypeLabel": {
+    "description": "Translation for resourceTypeLabel"
+  },
+  "editTopicScreenTitle": "Munozara mavzusini tahrirlash",
+  "@editTopicScreenTitle": {
+    "description": "Munozara mavzusini tahrirlash ekrani uchun sarlavha"
+  },
+  "authorLabel": "Muallif",
+  "@authorLabel": {
+    "description": "Translation for authorLabel"
+  },
+  "dateAddedLabel": "Qo'shilgan",
+  "@dateAddedLabel": {
+    "description": "Translation for dateAddedLabel"
+  },
+  "launchingUrlMessage": "URL ishga tushirilmoqda",
+  "@launchingUrlMessage": {
+    "description": "Translation for launchingUrlMessage"
+  },
+  "descriptionLabel": "Tavsifi",
+  "@descriptionLabel": {
+    "description": "Translation for descriptionLabel"
+  },
+  "resourceUpdatedSuccess": "Resurs muvaffaqiyatli yangilandi!",
+  "@resourceUpdatedSuccess": {
+    "description": "Translation for resourceUpdatedSuccess"
+  },
+  "resourceUpdatedError": "Resursni yangilashda xatolik yuz berdi: {error}",
+  "@resourceUpdatedError": {
+    "description": "Resursni yangilashda xato xabari bajarilmadi",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Maʼlumotlar bazasini yozib boʻlmadi"
+      }
+    }
+  },
+  "deleteResourceConfirmTitle": "Oʻchirishni tasdiqlang",
+  "@deleteResourceConfirmTitle": {
+    "description": "Translation for deleteResourceConfirmTitle"
+  },
+  "deleteResourceConfirmMessage": "Haqiqatan ham bu manbani oʻchirib tashlamoqchimisiz? bu amalni ortga qaytarib bo'lmaydi.",
+  "@deleteResourceConfirmMessage": {
+    "description": "Translation for deleteResourceConfirmMessage"
+  },
+  "cancelButtonText": "Bekor qilish",
+  "@cancelButtonText": {
+    "description": "Translation for cancelButtonText"
+  },
+  "deleteButtonText": "Oʻchirish",
+  "@deleteButtonText": {
+    "description": "Translation for deleteButtonText"
+  },
+  "resourceDeletedSuccess": "\"{resourceTitle}\" resursi muvaffaqiyatli o'chirildi.",
+  "@resourceDeletedSuccess": {
+    "placeholders": {
+      "resourceTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "resourceDeletedError": "Resursni o'chirishda xatolik yuz berdi: {error}",
+  "@resourceDeletedError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteButtonTooltip": "Resursni o'chirish",
+  "@deleteButtonTooltip": {
+    "description": "Translation for deleteButtonTooltip"
+  },
+  "createANewQuiz": "Yangi viktorina yaratish",
+  "@createANewQuiz": {
+    "description": "Translation for createANewQuiz"
+  },
+  "quizTitle": "Viktorina nomi",
+  "@quizTitle": {
+    "description": "Translation for quizTitle"
+  },
+  "quizDescription": "Tavsif",
+  "@quizDescription": {
+    "description": "Translation for quizDescription"
+  },
+  "saveAndAddQuestions": "Saqlash va savollar qo'shish",
+  "@saveAndAddQuestions": {
+    "description": "Translation for saveAndAddQuestions"
+  },
+  "failedToCreateQuiz": "Viktorina yaratib bo'lmadi",
+  "@failedToCreateQuiz": {
+    "description": "Translation for failedToCreateQuiz"
+  },
+  "addQuestions": "Savollar qo'shish",
+  "@addQuestions": {
+    "description": "Translation for addQuestions"
+  },
+  "finish": "Tugatish",
+  "@finish": {
+    "description": "Translation for finish"
+  },
+  "questionText": "Savol matni",
+  "@questionText": {
+    "description": "Translation for questionText"
+  },
+  "pleaseEnterAQuestion": "Iltimos, savol kiriting",
+  "@pleaseEnterAQuestion": {
+    "description": "Translation for pleaseEnterAQuestion"
+  },
+  "questionType": "Savol turi",
+  "@questionType": {
+    "description": "Translation for questionType"
+  },
+  "multipleChoice": "Bir nechta tanlov",
+  "@multipleChoice": {
+    "description": "Translation for multipleChoice"
+  },
+  "trueFalse": "To'g'ri/Noto'g'ri",
+  "@trueFalse": {
+    "description": "Translation for trueFalse"
+  },
+  "pleaseSelectCorrectAnswer": "Iltimos, to'g'ri javobni tanlang.",
+  "@pleaseSelectCorrectAnswer": {
+    "description": "Translation for pleaseSelectCorrectAnswer"
+  },
+  "option": "Variant {number}",
+  "@option": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "pleaseEnterAnOption": "Iltimos, variantni kiriting",
+  "@pleaseEnterAnOption": {
+    "description": "Translation for pleaseEnterAnOption"
+  },
+  "addQuestion": "Savol qo'shish",
+  "@addQuestion": {
+    "description": "Translation for addQuestion"
+  },
+  "questionAddedSuccessfully": "Savol muvaffaqiyatli qo'shildi!",
+  "@questionAddedSuccessfully": {
+    "description": "Translation for questionAddedSuccessfully"
+  },
+  "failedToAddQuestion": "Savol qo'shib bo'lmadi",
+  "@failedToAddQuestion": {
+    "description": "Translation for failedToAddQuestion"
+  },
+  "noQuestionsAddedYet": "Hozircha savollar qo'shilmagan.",
+  "@noQuestionsAddedYet": {
+    "description": "Translation for noQuestionsAddedYet"
+  },
+  "correctAnswer": "To'g'ri javob",
+  "@correctAnswer": {
+    "description": "Translation for correctAnswer"
+  },
+  "quiz": "Viktorina",
+  "@quiz": {
+    "description": "Translation for quiz"
+  },
+  "quizNotFound": "Viktorina topilmadi",
+  "@quizNotFound": {
+    "description": "Translation for quizNotFound"
+  },
+  "failedToLoadQuiz": "Viktorinani yuklab bo'lmadi",
+  "@failedToLoadQuiz": {
+    "description": "Translation for failedToLoadQuiz"
+  },
+  "question": "Savol {index}",
+  "@question": {
+    "placeholders": {
+      "index": {
+        "type": "String"
+      }
+    }
+  },
+  "totalQuestions": "Jami: {total}",
+  "@totalQuestions": {
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "quizCompletionMessage": "Siz viktorinani yakunladingiz!",
+  "@quizCompletionMessage": {
+    "description": "Translation for quizCompletionMessage"
+  },
+  "done": "Bajarildi",
+  "@done": {
+    "description": "Translation for done"
+  },
+  "failedToSaveAttempt": "Natijani saqlashda xatolik",
+  "@failedToSaveAttempt": {
+    "description": "Translation for failedToSaveAttempt"
+  },
+  "myQuizHistory": "Mening viktorina tarixim",
+  "@myQuizHistory": {
+    "description": "Translation for myQuizHistory"
+  },
+  "noQuizAttempts": "Siz hali hech qanday viktorinada qatnashmadingiz.",
+  "@noQuizAttempts": {
+    "description": "Translation for noQuizAttempts"
+  },
+  "score": "Bal",
+  "@score": {
+    "description": "Translation for score"
+  },
+  "role": "Rol",
+  "@role": {
+    "description": "Translation for role"
+  },
+  "loading": "Yuklanmoqda...",
+  "@loading": {
+    "description": "Translation for loading"
+  },
+  "relatedQuizzesTitle": "Tegishli testlar",
+  "@relatedQuizzesTitle": {
+    "description": "Translation for relatedQuizzesTitle"
+  },
+  "noQuizzesAvailable": "Bu resurs uchun hozircha hech qanday test mavjud emas.",
+  "@noQuizzesAvailable": {
+    "description": "Translation for noQuizzesAvailable"
+  },
+  "errorLoadingQuizzes": "Viktorinalarni yuklashda xatolik",
+  "@errorLoadingQuizzes": {
+    "description": "Translation for errorLoadingQuizzes"
+  },
+  "invalidUrlFormat": "URL formati noto'g'ri: {url}",
+  "@invalidUrlFormat": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLaunchingUrl": "URLni ishga tushirishda xatolik yuz berdi: {error}",
+  "@errorLaunchingUrl": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "createResourceValidationMinLength": "{fieldName} kamida {length} belgidan iborat bo'lishi kerak",
+  "@createResourceValidationMinLength": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "createResourceValidationMaxLength": "{fieldName} {length} belgidan oshmasligi kerak",
+  "@createResourceValidationMaxLength": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "titleMinLength": "Sarlavha kamida 5 ta belgidan iborat bo'lishi kerak",
+  "@titleMinLength": {
+    "description": "Translation for titleMinLength"
+  },
+  "titleMaxLength": "Sarlavha 100 belgidan oshmasligi kerak",
+  "@titleMaxLength": {
+    "description": "Translation for titleMaxLength"
+  },
+  "createTopicScreenTitle": "Yangi muhokamani boshlash",
+  "@createTopicScreenTitle": {
+    "description": "Translation for createTopicScreenTitle"
+  },
+  "createTopicTitleLabel": "Mavzu nomi",
+  "@createTopicTitleLabel": {
+    "description": "Translation for createTopicTitleLabel"
+  },
+  "createTopicContentLabel": "Muhokama mazmuni",
+  "@createTopicContentLabel": {
+    "description": "Translation for createTopicContentLabel"
+  },
+  "createTopicButtonText": "Muhokama mavzusini yaratish",
+  "@createTopicButtonText": {
+    "description": "Translation for createTopicButtonText"
+  },
+  "mustBeLoggedInToCreateTopic": "Mavzu yaratish uchun tizimga kirgan bo'lishingiz kerak.",
+  "@mustBeLoggedInToCreateTopic": {
+    "description": "Translation for mustBeLoggedInToCreateTopic"
+  },
+  "topicCreatedSuccess": "Mavzu muvaffaqiyatli yaratildi!",
+  "@topicCreatedSuccess": {
+    "description": "Translation for topicCreatedSuccess"
+  },
+  "failedToCreateTopic": "Mavzu yaratib bo'lmadi: {error}",
+  "@failedToCreateTopic": {
+    "description": "Error message when creating a topic fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "createTopicValidationEmpty": "{fieldName} bo'sh bo'lishi mumkin emas.",
+  "@createTopicValidationEmpty": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
+    }
+  },
+  "createTopicValidationMinLength": "{fieldName} kamida {length} belgidan iborat bo'lishi kerak.",
+  "@createTopicValidationMinLength": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "createTopicValidationMaxLength": "{fieldName} {length} belgidan oshmasligi kerak.",
+  "@createTopicValidationMaxLength": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "errorLoadingData": "Resurslarni yuklashda xatolik yuz berdi. qayta urinib ko'ring.",
+  "@errorLoadingData": {
+    "description": "Translation for errorLoadingData"
+  },
+  "failedToUpdateTopic": "Mavzuni yangilashda xatolik yuz berdi: {error}",
+  "@failedToUpdateTopic": {
+    "description": "Mavzu yangilanmay qolganda xato xabari ko'rsatiladi",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Tarmoq xatosi"
+      }
+    }
+  },
+  "topicUpdatedSuccess": "Mavzu muvaffaqiyatli yangilandi!",
+  "@topicUpdatedSuccess": {
+    "description": "Translation for topicUpdatedSuccess"
+  },
+  "noDiscussionsYet": "Hali muhokamalar yo'q.",
+  "@noDiscussionsYet": {
+    "description": "Translation for noDiscussionsYet"
+  },
+  "beTheFirstToStartConversation": "Birinchi bo'lib suhbatni boshlang!",
+  "@beTheFirstToStartConversation": {
+    "description": "Translation for beTheFirstToStartConversation"
+  },
+  "mustBeLoggedInToCreateResource": "Resurs yaratish uchun tizimga kirgan bo'lishingiz kerak.",
+  "@mustBeLoggedInToCreateResource": {
+    "description": "Translation for mustBeLoggedInToCreateResource"
+  },
+  "profileIncompleteToCreateResource": "Profilingiz haqidagi ma'lumotlar to'liq emas. iltimos, profilingizda ismingizni yangilang.",
+  "@profileIncompleteToCreateResource": {
+    "description": "Translation for profileIncompleteToCreateResource"
+  },
+  "profileIncompleteToCreateTopic": "Profilingiz nomi belgilanmagan. iltimos, profilingizni yangilang.",
+  "@profileIncompleteToCreateTopic": {
+    "description": "Translation for profileIncompleteToCreateTopic"
+  },
+  "commentCannotBeEmpty": "Izoh bo'sh bo'lishi mumkin emas.",
+  "@commentCannotBeEmpty": {
+    "description": "Translation for commentCannotBeEmpty"
+  },
+  "mustBeLoggedInToComment": "Izoh berish uchun tizimga kirgan bo'lishingiz kerak.",
+  "@mustBeLoggedInToComment": {
+    "description": "Translation for mustBeLoggedInToComment"
+  },
+  "commentAddedSuccessfully": "Izoh muvaffaqiyatli qo'shildi!",
+  "@commentAddedSuccessfully": {
+    "description": "Translation for commentAddedSuccessfully"
+  },
+  "failedToAddComment": "Izoh qo'shib bo'lmadi: {error}",
+  "@failedToAddComment": {
+    "description": "Error message when adding a comment fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postedBy": "Muallif: {authorName}",
+  "@postedBy": {
+    "placeholders": {
+      "authorName": {
+        "type": "String"
+      }
+    }
+  },
+  "onDate": "kun {date}",
+  "@onDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "topicTitle": "Mavzu",
+  "@topicTitle": {
+    "description": "Translation for topicTitle"
+  },
+  "vidCategoryBeginner": "Boshlang'ich",
+  "@vidCategoryBeginner": {
+    "description": "Category: Beginner"
+  },
+  "vidCategoryIntermediate": "O'rta",
+  "@vidCategoryIntermediate": {
+    "description": "Category: Intermediate"
+  },
+  "vidCategoryAdvanced": "Yuqori",
+  "@vidCategoryAdvanced": {
+    "description": "Category: Advanced"
+  },
+  "vidCategoryPractical": "Amaliy",
+  "@vidCategoryPractical": {
+    "description": "Category: Practical"
+  },
+  "vidCategoryTheory": "Nazariy",
+  "@vidCategoryTheory": {
+    "description": "Category: Theory"
+  },
+  "repliesTitle": "Javoblar",
+  "@repliesTitle": {
+    "description": "Translation for repliesTitle"
+  },
+  "errorLoadingComments": "Izohlarni yuklashda xatolik yuz berdi: {error}",
+  "@errorLoadingComments": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noRepliesYet": "Hali javob yo'q. birinchi bo'lib fikr bildiring!",
+  "@noRepliesYet": {
+    "description": "Translation for noRepliesYet"
+  },
+  "writeAReplyHint": "Javob yozing...",
+  "@writeAReplyHint": {
+    "description": "Translation for writeAReplyHint"
+  },
+  "sendCommentTooltip": "Izoh yuborish",
+  "@sendCommentTooltip": {
+    "description": "Translation for sendCommentTooltip"
+  },
+  "welcomeBack": "Qaytib xush kelibsiz, {userName}!",
+  "@welcomeBack": {
+    "placeholders": {
+      "userName": {
+        "type": "String"
+      }
+    }
+  },
+  "readyToLearnSomethingNew": "Bugun yangi narsalarni o'rganishga tayyormisiz?",
+  "@readyToLearnSomethingNew": {
+    "description": "Translation for readyToLearnSomethingNew"
+  },
+  "quickAccessTitle": "Tez kirish",
+  "@quickAccessTitle": {
+    "description": "Translation for quickAccessTitle"
+  },
+  "communityTitle": "Hamjamiyat",
+  "@communityTitle": {
+    "description": "Translation for communityTitle"
+  },
+  "profileTitle": "Profil",
+  "@profileTitle": {
+    "description": "Translation for profileTitle"
+  },
+  "latestNewsTitle": "So'nggi yangiliklar",
+  "@latestNewsTitle": {
+    "description": "Translation for latestNewsTitle"
+  },
+  "sourceLabel": "Manba",
+  "@sourceLabel": {
+    "description": "Translation for sourceLabel"
+  },
+  "quizzesTitle": "Viktorinalar",
+  "@quizzesTitle": {
+    "description": "Translation for quizzesTitle"
+  },
+  "urlCannotBeEmpty": "URL bo'sh bo'lishi mumkin emas",
+  "@urlCannotBeEmpty": {
+    "description": "Translation for urlCannotBeEmpty"
+  },
+  "errorLoadingNews": "Yangiliklarni yuklashda xatolik yuz berdi: {error}",
+  "@errorLoadingNews": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noNewsAvailable": "Hozirda hech qanday yangilik mavjud emas.",
+  "@noNewsAvailable": {
+    "description": "Translation for noNewsAvailable"
+  },
+  "adminPanelTitle": "Admin paneli",
+  "@adminPanelTitle": {
+    "description": "Translation for adminPanelTitle"
+  },
+  "manageNewsTitle": "Yangiliklar boshqaruvi",
+  "@manageNewsTitle": {
+    "description": "Translation for manageNewsTitle"
+  },
+  "manageNewsSubtitle": "Yangilik maqolalarini qo'shish, tahrirlash yoki o'chirish",
+  "@manageNewsSubtitle": {
+    "description": "Translation for manageNewsSubtitle"
+  },
+  "manageUsersTitle": "Foydalanuvchilarni boshqarish",
+  "@manageUsersTitle": {
+    "description": "Translation for manageUsersTitle"
+  },
+  "manageUsersSubtitle": "Foydalanuvchilarni ko'rish va rollarni boshqarish (kelajakda)",
+  "@manageUsersSubtitle": {
+    "description": "Translation for manageUsersSubtitle"
+  },
+  "manageResourcesTitle": "Resurslarni boshqarish",
+  "@manageResourcesTitle": {
+    "description": "Translation for manageResourcesTitle"
+  },
+  "manageResourcesSubtitle": "Barcha o'quv resurslarini nazorat qilish (kelajakda)",
+  "@manageResourcesSubtitle": {
+    "description": "Translation for manageResourcesSubtitle"
+  },
+  "confirmDeleteTitle": "O'chirishni tasdiqlang",
+  "@confirmDeleteTitle": {
+    "description": "Translation for confirmDeleteTitle"
+  },
+  "confirmDeleteNewsMessage": "Siz \"{newsTitle}\"ni o'chirib tashlamoqchimisiz?",
+  "@confirmDeleteNewsMessage": {
+    "placeholders": {
+      "newsTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "newsDeletedSuccess": "\"{newsTitle}\" muvaffaqiyatli o'chirildi.",
+  "@newsDeletedSuccess": {
+    "placeholders": {
+      "newsTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToDeleteNews": "\"{newsTitle}\" o'chirilmadi: {error}",
+  "@failedToDeleteNews": {
+    "description": "Error message when deleting news fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "newsTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "addNewsTooltip": "Yangi maqola qo'shish",
+  "@addNewsTooltip": {
+    "description": "Translation for addNewsTooltip"
+  },
+  "editNewsTooltip": "Yangilikni tahrirlash",
+  "@editNewsTooltip": {
+    "description": "Translation for editNewsTooltip"
+  },
+  "deleteNewsTooltip": "Yangilikni o'chirish",
+  "@deleteNewsTooltip": {
+    "description": "Translation for deleteNewsTooltip"
+  },
+  "addNewsButton": "Yangilik qo'shish",
+  "@addNewsButton": {
+    "description": "Translation for addNewsButton"
+  },
+  "noNewsAvailableManager": "Hech qanday yangilik maqolasi topilmadi. bittasini qo'shing!",
+  "@noNewsAvailableManager": {
+    "description": "Translation for noNewsAvailableManager"
+  },
+  "editNewsTitle": "Yangilikni tahrirlash",
+  "@editNewsTitle": {
+    "description": "Translation for editNewsTitle"
+  },
+  "addNewsTitle": "Yangilik maqolasini qo'shish",
+  "@addNewsTitle": {
+    "description": "Translation for addNewsTitle"
+  },
+  "saveNewsTooltip": "Yangilikni saqlash",
+  "@saveNewsTooltip": {
+    "description": "Translation for saveNewsTooltip"
+  },
+  "newsTitleLabel": "Sarlavha",
+  "@newsTitleLabel": {
+    "description": "Translation for newsTitleLabel"
+  },
+  "pleaseEnterNewsTitle": "Iltimos, yangilik sarlavhasini kiriting.",
+  "@pleaseEnterNewsTitle": {
+    "description": "Translation for pleaseEnterNewsTitle"
+  },
+  "newsTitleMinLength": "Yangiliklar nomi kamida {length} belgidan iborat bo'lishi kerak.",
+  "@newsTitleMinLength": {
+    "placeholders": {
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "newsSourceLabel": "Manba (masalan, blog nomi)",
+  "@newsSourceLabel": {
+    "description": "Translation for newsSourceLabel"
+  },
+  "pleaseEnterNewsSource": "Iltimos, yangiliklar manbasini kiriting.",
+  "@pleaseEnterNewsSource": {
+    "description": "Translation for pleaseEnterNewsSource"
+  },
+  "newsUrlLabel": "Maqola URL manzili",
+  "@newsUrlLabel": {
+    "description": "Translation for newsUrlLabel"
+  },
+  "pleaseEnterNewsUrl": "Maqola URL manzilini kiriting.",
+  "@pleaseEnterNewsUrl": {
+    "description": "Translation for pleaseEnterNewsUrl"
+  },
+  "pleaseEnterValidNewsUrl": "Iltimos, to'g'ri URL manzilini kiriting (http yoki https bilan boshlanadi).",
+  "@pleaseEnterValidNewsUrl": {
+    "description": "Translation for pleaseEnterValidNewsUrl"
+  },
+  "newsImageUrlLabel": "Rasm URL manzili (ixtiyoriy)",
+  "@newsImageUrlLabel": {
+    "description": "Translation for newsImageUrlLabel"
+  },
+  "pleaseEnterValidImageUrl": "Iltimos, haqiqiy rasm URL manzilini kiriting (http yoki https bilan boshlanadi) yoki bo'sh qoldiring.",
+  "@pleaseEnterValidImageUrl": {
+    "description": "Translation for pleaseEnterValidImageUrl"
+  },
+  "publicationDateLabel": "Nashr qilingan sana",
+  "@publicationDateLabel": {
+    "description": "Translation for publicationDateLabel"
+  },
+  "pleaseSelectPublicationDate": "Iltimos, nashr sanasini tanlang.",
+  "@pleaseSelectPublicationDate": {
+    "description": "Translation for pleaseSelectPublicationDate"
+  },
+  "noDateSelected": "Sana tanlanmagan",
+  "@noDateSelected": {
+    "description": "Translation for noDateSelected"
+  },
+  "selectDateTooltip": "Sanani tanlang",
+  "@selectDateTooltip": {
+    "description": "Translation for selectDateTooltip"
+  },
+  "updateNewsButton": "Yangiliklarni yangilash",
+  "@updateNewsButton": {
+    "description": "Translation for updateNewsButton"
+  },
+  "addNewsButtonForm": "Yangilik maqolasini qo'shish",
+  "@addNewsButtonForm": {
+    "description": "Translation for addNewsButtonForm"
+  },
+  "newsUpdatedSuccess": "\"{newsTitle}\" muvaffaqiyatli yangilandi.",
+  "@newsUpdatedSuccess": {
+    "placeholders": {
+      "newsTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "newsAddedSuccess": "\"{newsTitle}\" muvaffaqiyatli qo'shildi.",
+  "@newsAddedSuccess": {
+    "placeholders": {
+      "newsTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToSaveNews": "Yangilikni saqlab bo'lmadi: {error}",
+  "@failedToSaveNews": {
+    "description": "Error message when saving news fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLoadingUsers": "Foydalanuvchilarni yuklashda xatolik yuz berdi: {error}",
+  "@errorLoadingUsers": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noUsersFound": "Hech qanday foydalanuvchi topilmadi.",
+  "@noUsersFound": {
+    "description": "Translation for noUsersFound"
+  },
+  "noEmailProvided": "E-pochta taqdim etilmaydi",
+  "@noEmailProvided": {
+    "description": "Translation for noEmailProvided"
+  },
+  "roleLabel": "Rol",
+  "@roleLabel": {
+    "description": "Translation for roleLabel"
+  },
+  "registeredOnLabel": "Ro'yxatdan o'tgan",
+  "@registeredOnLabel": {
+    "description": "Translation for registeredOnLabel"
+  },
+  "manageUsersSubtitleNow": "Ro'yxatdan o'tgan foydalanuvchilarni ko'rish va qidirish",
+  "@manageUsersSubtitleNow": {
+    "description": "Translation for manageUsersSubtitleNow"
+  },
+  "manageResourcesSubtitleNow": "Har qanday o'quv manbasini ko'rish, tahrirlash yoki o'chirish",
+  "@manageResourcesSubtitleNow": {
+    "description": "Translation for manageResourcesSubtitleNow"
+  },
+  "confirmDeleteResourceMessage": "Siz \"{resourceTitle}\" manbasini o'chirib tashlamoqchimisiz?",
+  "@confirmDeleteResourceMessage": {
+    "placeholders": {
+      "resourceTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToDeleteResource": "\"{resourceTitle}\" manbasini o'chirib bo'lmadi: {error}",
+  "@failedToDeleteResource": {
+    "description": "Error message when deleting resource fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "resourceTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLoadingResources": "Resurslarni yuklashda xatolik yuz berdi: {error}",
+  "@errorLoadingResources": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noResourcesFoundManager": "Tizimda hech qanday manba topilmadi.",
+  "@noResourcesFoundManager": {
+    "description": "Translation for noResourcesFoundManager"
+  },
+  "editResourceTooltip": "Resursni tahrirlash",
+  "@editResourceTooltip": {
+    "description": "Translation for editResourceTooltip"
+  },
+  "deleteResourceTooltip": "Resursni o'chirish",
+  "@deleteResourceTooltip": {
+    "description": "Translation for deleteResourceTooltip"
+  },
+  "manageQuizzesTitle": "Viktorinalarni boshqarish",
+  "@manageQuizzesTitle": {
+    "description": "Translation for manageQuizzesTitle"
+  },
+  "addQuizTooltip": "Yangi test qo'shish",
+  "@addQuizTooltip": {
+    "description": "Translation for addQuizTooltip"
+  },
+  "errorLoadingQuizzesAdmin": "Viktorinalarni yuklashda xatolik yuz berdi: {error}",
+  "@errorLoadingQuizzesAdmin": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noQuizzesFoundManager": "Hech qanday test topilmadi. bittasini qo'shing!",
+  "@noQuizzesFoundManager": {
+    "description": "Translation for noQuizzesFoundManager"
+  },
+  "confirmDeleteQuizMessage": "Siz \"{quizTitle}\" testini va uning barcha savollarini o'chirib tashlamoqchimisiz? bu amalni ortga qaytarib bo'lmaydi.",
+  "@confirmDeleteQuizMessage": {
+    "placeholders": {
+      "quizTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "quizDeletedSuccess": "\"{quizTitle}\" testi va uning savollari muvaffaqiyatli o'chirildi.",
+  "@quizDeletedSuccess": {
+    "placeholders": {
+      "quizTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToDeleteQuiz": "\"{quizTitle}\" testini o'chirib bo'lmadi: {error}",
+  "@failedToDeleteQuiz": {
+    "description": "Error message when deleting quiz fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "quizTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "editDetailsButton": "Tafsilotlarni tahrirlash",
+  "@editDetailsButton": {
+    "description": "Translation for editDetailsButton"
+  },
+  "manageQuestionsButton": "Savollar",
+  "@manageQuestionsButton": {
+    "description": "Translation for manageQuestionsButton"
+  },
+  "deleteQuizTooltip": "Viktorina va savollarni o'chirish",
+  "@deleteQuizTooltip": {
+    "description": "Translation for deleteQuizTooltip"
+  },
+  "addQuizButton": "Viktorina qo'shish",
+  "@addQuizButton": {
+    "description": "Translation for addQuizButton"
+  },
+  "manageQuizzesSubtitle": "Barcha testlar va ularning savollarini nazorat qilish",
+  "@manageQuizzesSubtitle": {
+    "description": "Translation for manageQuizzesSubtitle"
+  },
+  "registrationEmailError": "Yaroqli elektron pochta manzilini kiriting",
+  "@registrationEmailError": {
+    "description": "Noto'g'ri e-pochta manzili bo'lganda xato xabari"
+  },
+  "dashboardXodimTitle": "Mening faoliyatim",
+  "@dashboardXodimTitle": {
+    "description": "Oddiy xodimning boshqaruv paneli bo'limi uchun sarlavha"
+  },
+  "dashboardEkspertTitle": "Mening hissam",
+  "@dashboardEkspertTitle": {
+    "description": "Ekspertning boshqaruv paneli bo'limi uchun sarlavha"
+  },
+  "dashboardAdminTitle": "Tizim holati",
+  "@dashboardAdminTitle": {
+    "description": "Administratorning boshqaruv paneli bo'limi uchun sarlavha"
+  },
+  "seeAllButton": "Barchasini ko'rish",
+  "@seeAllButton": {
+    "description": "Ro'yxatdagi barcha elementlarni ko'rish uchun tugma"
+  },
+  "noGuidesAuthored": "Siz hali hech qanday qo'llanma yaratmadingiz.",
+  "@noGuidesAuthored": {
+    "description": "Xabar ekspert hali qo'llanma yaratmaganida ko'rsatiladi."
+  },
+  "adminStatUsers": "Foydalanuvchilar",
+  "@adminStatUsers": {
+    "description": "Administrator panelidagi umumiy foydalanuvchilar statistikasi uchun yorliq."
+  },
+  "adminStatGuides": "Qo'llanmalar",
+  "@adminStatGuides": {
+    "description": "Administrator panelidagi umumiy qo'llanmalar statistikasi uchun yorliq."
+  },
+  "adminStatQuizzes": "Viktorinalar",
+  "@adminStatQuizzes": {
+    "description": "Administrator panelidagi umumiy viktorinalar statistikasi uchun yorliq."
+  },
+  "orDivider": "Yoki",
+  "@orDivider": {
+    "description": "Kirish opsiyalari orasidagi 'Yoki' kabi ajratuvchi matn."
+  },
+  "signInWithGoogle": "Google bilan kirish",
+  "@signInWithGoogle": {
+    "description": "Google hisobi bilan kirish uchun tugma matni."
+  },
+  "themeSystemDefault": "Tizim bo'yicha",
+  "@themeSystemDefault": {
+    "description": "Translation for themeSystemDefault"
+  },
+  "themeLight": "Yorug' rejim",
+  "@themeLight": {
+    "description": "Translation for themeLight"
+  },
+  "themeDark": "Tungi rejim",
+  "@themeDark": {
+    "description": "Translation for themeDark"
+  },
+  "bioOptionalLabel": "Bio (Ixtiyoriy)",
+  "@bioOptionalLabel": {
+    "description": "Translation for bioOptionalLabel"
+  },
+  "profilePictureUrlLabel": "Profil rasmi URL manzili (Ixtiyoriy)",
+  "@profilePictureUrlLabel": {
+    "description": "Translation for profilePictureUrlLabel"
+  },
+  "levelBeginner": "Boshlang'ich",
+  "@levelBeginner": {
+    "description": "Translation for levelBeginner"
+  },
+  "levelIntermediate": "O'rta",
+  "@levelIntermediate": {
+    "description": "Translation for levelIntermediate"
+  },
+  "levelAdvanced": "Ilg'or",
+  "@levelAdvanced": {
+    "description": "Translation for levelAdvanced"
+  },
+  "levelExpert": "Ekspert",
+  "@levelExpert": {
+    "description": "Translation for levelExpert"
+  },
+  "totalPoints": "Jami ballar",
+  "@totalPoints": {
+    "description": "Translation for totalPoints"
+  },
+  "nextLevel": "Keyingi daraja",
+  "@nextLevel": {
+    "description": "Translation for nextLevel"
+  },
+  "pointsToNextLevel": "Keyingi darajaga {points} XP",
+  "@pointsToNextLevel": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "manageArticlesTitle": "Maqolalar boshqaruvi",
+  "@manageArticlesTitle": {
+    "description": "Translation for manageArticlesTitle"
+  },
+  "manageArticlesSubtitle": "Bilimlar bazasini boshqarish",
+  "@manageArticlesSubtitle": {
+    "description": "Translation for manageArticlesSubtitle"
+  },
+  "manageVideosTitle": "Video darsliklar boshqaruvi",
+  "@manageVideosTitle": {
+    "description": "Translation for manageVideosTitle"
+  },
+  "manageVideosSubtitle": "Video darsliklarni boshqarish",
+  "@manageVideosSubtitle": {
+    "description": "Translation for manageVideosSubtitle"
+  },
+  "manageSystemsTitle": "Tizimlar boshqaruvi",
+  "@manageSystemsTitle": {
+    "description": "Translation for manageSystemsTitle"
+  },
+  "manageSystemsSubtitle": "Tizimlar ma'lumotnomasini boshqarish",
+  "@manageSystemsSubtitle": {
+    "description": "Translation for manageSystemsSubtitle"
+  },
+  "manageFaqTitle": "TSS",
+  "@manageFaqTitle": {
+    "description": "Translation for manageFaqTitle"
+  },
+  "manageFaqSubtitle": "TSSni boshqarish",
+  "@manageFaqSubtitle": {
+    "description": "Translation for manageFaqSubtitle"
+  },
+  "manageNotificationsTitle": "Bildirishnomalar",
+  "@manageNotificationsTitle": {
+    "description": "Translation for manageNotificationsTitle"
+  },
+  "manageNotificationsSubtitle": "Bildirishnomalarni yuborish",
+  "@manageNotificationsSubtitle": {
+    "description": "Translation for manageNotificationsSubtitle"
+  },
+  "selectLanguage": "Tilni tanlang",
+  "@selectLanguage": {
+    "description": "Translation for selectLanguage"
+  },
+  "topicDeletedSuccess": "\"{topicTitle}\" muvaffaqiyatli o'chirildi.",
+  "@topicDeletedSuccess": {
+    "placeholders": {
+      "topicTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToDeleteTopic": "Mavzuni o'chirib bo'lmadi: {error}",
+  "@failedToDeleteTopic": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteTopicConfirmMessage": "Siz \"{topicTitle}\" mavzusini o'chirib tashlamoqchimisiz?",
+  "@deleteTopicConfirmMessage": {
+    "placeholders": {
+      "topicTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "editTopicTooltip": "Mavzuni tahrirlash",
+  "@editTopicTooltip": {
+    "description": "Translation for editTopicTooltip"
+  },
+  "deleteTopicConfirmTitle": "Mavzuni o'chirish",
+  "@deleteTopicConfirmTitle": {
+    "description": "Translation for deleteTopicConfirmTitle"
+  },
+  "commentPlural": "Izohlar",
+  "@commentPlural": {
+    "description": "Translation for commentPlural"
+  },
+  "commentSingular": "Izoh",
+  "@commentSingular": {
+    "description": "Translation for commentSingular"
+  },
+  "deleteTopicTooltip": "Mavzuni o'chirish",
+  "@deleteTopicTooltip": {
+    "description": "Translation for deleteTopicTooltip"
+  },
+  "faqCategoryLogin": "Kirish muammolari",
+  "@faqCategoryLogin": {
+    "description": "Translation for faqCategoryLogin"
+  },
+  "faqCategoryPassword": "Parol muammolari",
+  "@faqCategoryPassword": {
+    "description": "Translation for faqCategoryPassword"
+  },
+  "faqCategoryUpload": "Fayl yuklash",
+  "@faqCategoryUpload": {
+    "description": "Translation for faqCategoryUpload"
+  },
+  "faqCategoryAccess": "Kirish huquqlari",
+  "@faqCategoryAccess": {
+    "description": "Translation for faqCategoryAccess"
+  },
+  "faqCategoryGeneral": "Umumiy savollar",
+  "@faqCategoryGeneral": {
+    "description": "Translation for faqCategoryGeneral"
+  },
+  "faqCategoryTechnical": "Texnik muammolar",
+  "@faqCategoryTechnical": {
+    "description": "Translation for faqCategoryTechnical"
+  },
+  "bottomNavKnowledge": "Bilimlar bazasi",
+  "@bottomNavKnowledge": {
+    "description": "Bilimlar bazasi ekrani uchun navigatsiya elementi"
+  },
+  "allCategories": "Barcha toifalar",
+  "@allCategories": {
+    "description": "Barcha kategoriyalarni ko'rsatish uchun filtr"
+  },
+  "noArticlesFound": "Savollar topilmadi",
+  "@noArticlesFound": {
+    "description": "Maqolalar topilmaganda xabar"
+  },
+  "articleDetailTitle": "Maqola tafsilotlari",
+  "@articleDetailTitle": {
+    "description": "Maqola tafsilotlari ekrani uchun sarlavha"
+  },
+  "helpfulFeedback": "Bu foydali bo'ldimi?",
+  "@helpfulFeedback": {
+    "description": "Maqola foydaliligi haqida foydalanuvchi fikri uchun so'rov"
+  },
+  "feedbackThanks": "Fikringiz uchun tashakkur!",
+  "@feedbackThanks": {
+    "description": "Fikr bildirilgandan so'ng ko'rsatiladigan xabar"
+  },
+  "shareArticle": "Maqolani ulashish",
+  "@shareArticle": {
+    "description": "Ulashish tugmasi uchun ko'rsatma"
+  },
+  "downloadPdf": "PDF yuklab olish",
+  "@downloadPdf": {
+    "description": "PDF yuklab olish tugmasi uchun ko'rsatma"
+  },
+  "articlePinned": "Muhim",
+  "@articlePinned": {
+    "description": "Muhim maqola uchun yorliq"
+  },
+  "confirmDeleteArticleMessage": "Siz \"{articleTitle}\" maqolasini o'chirib tashlamoqchimisiz?",
+  "@confirmDeleteArticleMessage": {
+    "placeholders": {
+      "articleTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "addArticleTitle": "Yangi maqola",
+  "@addArticleTitle": {
+    "description": "Translation for addArticleTitle"
+  },
+  "editArticleTitle": "Maqolani tahrirlash",
+  "@editArticleTitle": {
+    "description": "Translation for editArticleTitle"
+  },
+  "categoryLabel": "Kategoriya",
+  "@categoryLabel": {
+    "description": "Translation for categoryLabel"
+  },
+  "articleCategoryGeneral": "Umumiy",
+  "@articleCategoryGeneral": {
+    "description": "Translation for articleCategoryGeneral"
+  },
+  "articleCategoryProcedure": "Protsedura",
+  "@articleCategoryProcedure": {
+    "description": "Translation for articleCategoryProcedure"
+  },
+  "articleCategoryLaw": "Qonunchilik",
+  "@articleCategoryLaw": {
+    "description": "Translation for articleCategoryLaw"
+  },
+  "articleCategoryFaq": "Ko'p so'raladigan",
+  "@articleCategoryFaq": {
+    "description": "Translation for articleCategoryFaq"
+  },
+  "contentLabel": "Mazmuni (Markdown)",
+  "@contentLabel": {
+    "description": "Translation for contentLabel"
+  },
+  "tagsLabel": "Teglar (vergul bilan ajrating)",
+  "@tagsLabel": {
+    "description": "Translation for tagsLabel"
+  },
+  "tagsHint": "masalan: sud, qonun, kodeks",
+  "@tagsHint": {
+    "description": "Translation for tagsHint"
+  },
+  "noPdfSelected": "PDF fayl tanlanmagan",
+  "@noPdfSelected": {
+    "description": "Translation for noPdfSelected"
+  },
+  "uploadPdfTooltip": "PDF yuklash",
+  "@uploadPdfTooltip": {
+    "description": "Translation for uploadPdfTooltip"
+  },
+  "currentFileLabel": "Joriy fayl: {url}",
+  "@currentFileLabel": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "existingPdfFile": "Mavjud PDF fayl",
+  "@existingPdfFile": {
+    "description": "Translation for existingPdfFile"
+  },
+  "articleSavedSuccess": "Maqola saqlandi",
+  "@articleSavedSuccess": {
+    "description": "Translation for articleSavedSuccess"
+  },
+  "titleRequired": "Sarlavha kiritilishi shart",
+  "@titleRequired": {
+    "description": "Translation for titleRequired"
+  },
+  "contentRequired": "Mazmun kiritilishi shart",
+  "@contentRequired": {
+    "description": "Translation for contentRequired"
+  },
+  "confirmDeleteVideoMessage": "Siz \"{videoTitle}\" videosini o'chirib tashlamoqchimisiz?",
+  "@confirmDeleteVideoMessage": {
+    "placeholders": {
+      "videoTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "videoDeletedSuccess": "Video o'chirildi",
+  "@videoDeletedSuccess": {
+    "description": "Translation for videoDeletedSuccess"
+  },
+  "noVideosFound": "Videolar yo'q",
+  "@noVideosFound": {
+    "description": "Translation for noVideosFound"
+  },
+  "addVideoTitle": "Yangi video",
+  "@addVideoTitle": {
+    "description": "Translation for addVideoTitle"
+  },
+  "editVideoTitle": "Videoni tahrirlash",
+  "@editVideoTitle": {
+    "description": "Translation for editVideoTitle"
+  },
+  "videoSavedSuccess": "Video saqlandi",
+  "@videoSavedSuccess": {
+    "description": "Translation for videoSavedSuccess"
+  },
+  "youtubeIdLabel": "YouTube ID",
+  "@youtubeIdLabel": {
+    "description": "Translation for youtubeIdLabel"
+  },
+  "youtubeIdHint": "Masalan: dQw4w9WgXcQ",
+  "@youtubeIdHint": {
+    "description": "Translation for youtubeIdHint"
+  },
+  "youtubeIdRequired": "YouTube ID kiritilishi shart",
+  "@youtubeIdRequired": {
+    "description": "Translation for youtubeIdRequired"
+  },
+  "systemOptionalLabel": "Tizim (ixtiyoriy)",
+  "@systemOptionalLabel": {
+    "description": "Translation for systemOptionalLabel"
+  },
+  "notSelectedLabel": "Tanlanmagan",
+  "@notSelectedLabel": {
+    "description": "Translation for notSelectedLabel"
+  },
+  "durationLabel": "Davomiyligi (soniya)",
+  "@durationLabel": {
+    "description": "Translation for durationLabel"
+  },
+  "durationHint": "Masalan: 600",
+  "@durationHint": {
+    "description": "Translation for durationHint"
+  },
+  "durationRequired": "Davomiylik kiritilishi shart",
+  "@durationRequired": {
+    "description": "Translation for durationRequired"
+  },
+  "videoTagsHint": "masalan: login, xatolik, sozlash",
+  "@videoTagsHint": {
+    "description": "Translation for videoTagsHint"
+  },
+  "descriptionRequired": "Tavsif kiritilishi shart",
+  "@descriptionRequired": {
+    "description": "Translation for descriptionRequired"
+  },
+  "confirmDeleteSystemMessage": "Siz \"{systemName}\" tizimini o'chirib tashlamoqchimisiz?",
+  "@confirmDeleteSystemMessage": {
+    "placeholders": {
+      "systemName": {
+        "type": "String"
+      }
+    }
+  },
+  "systemDeletedSuccess": "Tizim o'chirildi",
+  "@systemDeletedSuccess": {
+    "description": "Translation for systemDeletedSuccess"
+  },
+  "noSystemsFound": "Tizimlar yo'q",
+  "@noSystemsFound": {
+    "description": "Translation for noSystemsFound"
+  },
+  "addSystemTitle": "Yangi tizim",
+  "@addSystemTitle": {
+    "description": "Translation for addSystemTitle"
+  },
+  "editSystemTitle": "Tizimni tahrirlash",
+  "@editSystemTitle": {
+    "description": "Translation for editSystemTitle"
+  },
+  "systemSavedSuccess": "Tizim saqlandi",
+  "@systemSavedSuccess": {
+    "description": "Translation for systemSavedSuccess"
+  },
+  "shortNameLabel": "Qisqa nomi",
+  "@shortNameLabel": {
+    "description": "Translation for shortNameLabel"
+  },
+  "shortNameHint": "Masalan: e-SUD",
+  "@shortNameHint": {
+    "description": "Translation for shortNameHint"
+  },
+  "nameRequired": "Nom kiritilishi shart",
+  "@nameRequired": {
+    "description": "Translation for nameRequired"
+  },
+  "fullNameLabel": "To'liq nomi",
+  "@fullNameLabel": {
+    "description": "Translation for fullNameLabel"
+  },
+  "fullNameRequired": "To'liq nom kiritilishi shart",
+  "@fullNameRequired": {
+    "description": "Translation for fullNameRequired"
+  },
+  "websiteUrlLabel": "Veb-sayt manzili",
+  "@websiteUrlLabel": {
+    "description": "Translation for websiteUrlLabel"
+  },
+  "urlRequired": "URL kiritilishi shart",
+  "@urlRequired": {
+    "description": "Translation for urlRequired"
+  },
+  "logoUrlLabel": "Logo URL",
+  "@logoUrlLabel": {
+    "description": "Translation for logoUrlLabel"
+  },
+  "logoUrlRequired": "Logo URL kiritilishi shart",
+  "@logoUrlRequired": {
+    "description": "Translation for logoUrlRequired"
+  },
+  "statusLabel": "Holati",
+  "@statusLabel": {
+    "description": "Translation for statusLabel"
+  },
+  "loginGuideIdLabel": "Kirish qo'llanmasi ID (ixtiyoriy)",
+  "@loginGuideIdLabel": {
+    "description": "Translation for loginGuideIdLabel"
+  },
+  "videoGuideIdLabel": "Video qo'llanma ID (ixtiyoriy)",
+  "@videoGuideIdLabel": {
+    "description": "Translation for videoGuideIdLabel"
+  },
+  "confirmDeleteFaqMessage": "Siz \"{question}\" savolini o'chirib tashlamoqchimisiz?",
+  "@confirmDeleteFaqMessage": {
+    "placeholders": {
+      "question": {
+        "type": "String"
+      }
+    }
+  },
+  "faqDeletedSuccess": "Savol o'chirildi",
+  "@faqDeletedSuccess": {
+    "description": "Translation for faqDeletedSuccess"
+  },
+  "noFaqsFound": "Savollar yo'q",
+  "@noFaqsFound": {
+    "description": "Translation for noFaqsFound"
+  },
+  "addFaqTitle": "Yangi savol",
+  "@addFaqTitle": {
+    "description": "Translation for addFaqTitle"
+  },
+  "editFaqTitle": "Savolni tahrirlash",
+  "@editFaqTitle": {
+    "description": "Translation for editFaqTitle"
+  },
+  "faqSavedSuccess": "Savol saqlandi",
+  "@faqSavedSuccess": {
+    "description": "Translation for faqSavedSuccess"
+  },
+  "questionLabel": "Savol",
+  "@questionLabel": {
+    "description": "Translation for questionLabel"
+  },
+  "questionRequired": "Savol kiritilishi shart",
+  "@questionRequired": {
+    "description": "Translation for questionRequired"
+  },
+  "answerLabel": "Javob (Markdown)",
+  "@answerLabel": {
+    "description": "Translation for answerLabel"
+  },
+  "answerRequired": "Javob kiritilishi shart",
+  "@answerRequired": {
+    "description": "Translation for answerRequired"
+  },
+  "add": "Qo'shish",
+  "@add": {
+    "description": "Translation for add"
+  },
+  "titleLabel": "Sarlavha",
+  "@titleLabel": {
+    "description": "Translation for titleLabel"
+  },
+  "edit": "Tahrirlash",
+  "@edit": {
+    "description": "Translation for edit"
+  },
+  "delete": "O'chirish",
+  "@delete": {
+    "description": "Translation for delete"
+  },
+  "cancel": "Bekor qilish",
+  "@cancel": {
+    "description": "Translation for cancel"
+  },
+  "search": "Qidirish...",
+  "@search": {
+    "description": "Translation for search"
+  },
+  "fieldRequired": "Maydon to'ldirilishi shart",
+  "@fieldRequired": {
+    "description": "Translation for fieldRequired"
+  },
+  "confirmDelete": "Haqiqatan ham o'chirmoqchimisiz?",
+  "@confirmDelete": {
+    "description": "Translation for confirmDelete"
+  },
+  "successSaved": "Muvaffaqiyatli saqlandi",
+  "@successSaved": {
+    "description": "Translation for successSaved"
+  },
+  "successDeleted": "Muvaffaqiyatli o'chirildi",
+  "@successDeleted": {
+    "description": "Translation for successDeleted"
+  },
+  "notificationManagementTitle": "Xabarnomalar boshqaruvi",
+  "@notificationManagementTitle": {
+    "description": "Translation for notificationManagementTitle"
+  },
+  "notificationHistoryTitle": "Xabarnomalar tarixi",
+  "@notificationHistoryTitle": {
+    "description": "Translation for notificationHistoryTitle"
+  },
+  "notificationHistoryPlaceholder": "Bu yerda yuborilgan xabarnomalar tarixi ko'rinadi (tez orada).",
+  "@notificationHistoryPlaceholder": {
+    "description": "Translation for notificationHistoryPlaceholder"
+  },
+  "sendNewNotificationButton": "Yangi xabarnoma yuborish",
+  "@sendNewNotificationButton": {
+    "description": "Translation for sendNewNotificationButton"
+  },
+  "sendNotificationTitle": "Xabarnoma yuborish",
+  "@sendNotificationTitle": {
+    "description": "Translation for sendNotificationTitle"
+  },
+  "notificationSentSuccess": "Xabarnoma yuborildi",
+  "@notificationSentSuccess": {
+    "description": "Translation for notificationSentSuccess"
+  },
+  "notificationTitleLabel": "Sarlavha",
+  "@notificationTitleLabel": {
+    "description": "Translation for notificationTitleLabel"
+  },
+  "notificationTitleRequired": "Sarlavha kiritilishi shart",
+  "@notificationTitleRequired": {
+    "description": "Translation for notificationTitleRequired"
+  },
+  "notificationBodyLabel": "Xabar matni",
+  "@notificationBodyLabel": {
+    "description": "Translation for notificationBodyLabel"
+  },
+  "notificationBodyRequired": "Matn kiritilishi shart",
+  "@notificationBodyRequired": {
+    "description": "Translation for notificationBodyRequired"
+  },
+  "notificationTypeLabel": "Xabarnoma turi",
+  "@notificationTypeLabel": {
+    "description": "Translation for notificationTypeLabel"
+  },
+  "targetAudienceLabel": "Auditoriya",
+  "@targetAudienceLabel": {
+    "description": "Translation for targetAudienceLabel"
+  },
+  "notificationTypeUpdate": "Yangilanish",
+  "@notificationTypeUpdate": {
+    "description": "Notification type: update"
+  },
+  "notificationTypeNewContent": "Yangi kontent",
+  "@notificationTypeNewContent": {
+    "description": "Notification type: new content"
+  },
+  "notificationTypeAnnouncement": "E'lon",
+  "@notificationTypeAnnouncement": {
+    "description": "Notification type: announcement"
+  },
+  "notificationTypeReminder": "Eslatma",
+  "@notificationTypeReminder": {
+    "description": "Notification type: reminder"
+  },
+  "notificationTypeSystem": "Tizim xabari",
+  "@notificationTypeSystem": {
+    "description": "Notification type: system"
+  },
+  "targetAudienceAll": "Barchaga",
+  "@targetAudienceAll": {
+    "description": "Target audience: all"
+  },
+  "targetAudienceBeginner": "Yangi xodimlarga",
+  "@targetAudienceBeginner": {
+    "description": "Target audience: beginner"
+  },
+  "targetAudienceAkt": "AKT xodimlariga",
+  "@targetAudienceAkt": {
+    "description": "Target audience: AKT"
+  },
+  "targetAudienceSpecific": "Maxsus",
+  "@targetAudienceSpecific": {
+    "description": "Target audience: specific"
+  },
+  "notificationLabelTo": "Kimga: {audience}",
+  "@notificationLabelTo": {
+    "description": "Label for target audience in history",
+    "placeholders": {
+      "audience": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationLabelReadBy": "O'qildi: {count}",
+  "@notificationLabelReadBy": {
+    "description": "Label for read count in history",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "faqTitle": "Ko'p so'raladigan savollar",
+  "@faqTitle": {
+    "description": "Translation for faqTitle"
+  },
+  "searchHelp": "Yordam izlash...",
+  "@searchHelp": {
+    "description": "Translation for searchHelp"
+  },
+  "settingsNotifications": "Xabarnomalar",
+  "@settingsNotifications": {
+    "description": "Translation for settingsNotifications"
+  },
+  "changePasswordTitle": "Parolni o'zgartirish",
+  "@changePasswordTitle": {
+    "description": "Translation for changePasswordTitle"
+  },
+  "helpCenterTitle": "Yordam markazi",
+  "@helpCenterTitle": {
+    "description": "Translation for helpCenterTitle"
+  },
+  "settingsAbout": "Ilova haqida",
+  "@settingsAbout": {
+    "description": "Translation for settingsAbout"
+  },
+  "passwordUpdatedSuccess": "Parol muvaffaqiyatli yangilandi",
+  "@passwordUpdatedSuccess": {
+    "description": "Translation for passwordUpdatedSuccess"
+  },
+  "errorWrongPassword": "Joriy parol noto'g'ri",
+  "@errorWrongPassword": {
+    "description": "Translation for errorWrongPassword"
+  },
+  "currentPassword": "Joriy parol",
+  "@currentPassword": {
+    "description": "Translation for currentPassword"
+  },
+  "newPassword": "Yangi parol",
+  "@newPassword": {
+    "description": "Translation for newPassword"
+  },
+  "confirmPassword": "Parolni tasdiqlang",
+  "@confirmPassword": {
+    "description": "Translation for confirmPassword"
+  },
+  "passwordMismatch": "Parollar mos kelmadi",
+  "@passwordMismatch": {
+    "description": "Translation for passwordMismatch"
+  },
+  "save": "Saqlash",
+  "@save": {
+    "description": "Translation for save"
+  },
+  "resourceTabArticles": "Maqolalar",
+  "@resourceTabArticles": {
+    "description": "Translation for resourceTabArticles"
+  },
+  "resourceTabVideos": "Videolar",
+  "@resourceTabVideos": {
+    "description": "Translation for resourceTabVideos"
+  },
+  "resourceTabFiles": "Fayllar",
+  "@resourceTabFiles": {
+    "description": "Translation for resourceTabFiles"
+  },
+  "systemsDirectoryTitle": "Sud axborot tizimlari",
+  "@systemsDirectoryTitle": {
+    "description": "Translation for systemsDirectoryTitle"
+  },
+  "bookmarkSaveTooltip": "Saqlash",
+  "@bookmarkSaveTooltip": {
+    "description": "Translation for bookmarkSaveTooltip"
+  },
+  "bookmarkRemoveTooltip": "Olib tashlash",
+  "@bookmarkRemoveTooltip": {
+    "description": "Translation for bookmarkRemoveTooltip"
+  },
+  "resourceTypeOther": "Boshqalar",
+  "@resourceTypeOther": {
+    "description": "Translation for resourceTypeOther"
+  },
+  "filesTabTitle": "Fayllar",
+  "@filesTabTitle": {
+    "description": "Translation for filesTabTitle"
+  },
+  "openFile": "Faylni ochish",
+  "@openFile": {
+    "description": "Translation for openFile"
+  },
+  "fileSize": "Fayl hajmi",
+  "@fileSize": {
+    "description": "Translation for fileSize"
+  },
+  "selectFile": "Fayl tanlang",
+  "@selectFile": {
+    "description": "Translation for selectFile"
+  },
+  "upload": "Yuklash",
+  "@upload": {
+    "description": "Translation for upload"
+  },
+  "processing": "Bajarilmoqda...",
+  "@processing": {
+    "description": "Translation for processing"
+  },
+  "urlLabel": "Havola (URL)",
+  "@urlLabel": {
+    "description": "Translation for urlLabel"
+  },
+  "resourceTypePDF": "PDF qo'llanma",
+  "@resourceTypePDF": {
+    "description": "Translation for resourceTypePDF"
+  },
+  "resourceTypeVideo": "Video darslik",
+  "@resourceTypeVideo": {
+    "description": "Translation for resourceTypeVideo"
+  },
+  "resourceTypeLink": "Veb havola",
+  "@resourceTypeLink": {
+    "description": "Translation for resourceTypeLink"
+  },
+  "onlySaved": "Faqat saqlanganlar",
+  "@onlySaved": {
+    "description": "Translation for onlySaved"
+  },
+  "searchArticlesPlaceholder": "Maqolalarni qidirish...",
+  "@searchArticlesPlaceholder": {
+    "description": "Translation for searchArticlesPlaceholder"
+  },
+  "filterAll": "Barchasi",
+  "@filterAll": {
+    "description": "Translation for filterAll"
+  },
+  "noResultsFound": "Hech narsa topilmadi",
+  "@noResultsFound": {
+    "description": "Translation for noResultsFound"
+  },
+  "noArticlesAvailable": "Maqolalar mavjud emas",
+  "@noArticlesAvailable": {
+    "description": "Translation for noArticlesAvailable"
+  },
+  "noVideosAvailable": "Videolar mavjud emas",
+  "@noVideosAvailable": {
+    "description": "Translation for noVideosAvailable"
+  },
+  "actionCreateDiscussion": "Muhokama yaratish",
+  "@actionCreateDiscussion": {
+    "description": "Translation for actionCreateDiscussion"
+  },
+  "actionCreateResource": "Resurs yaratish",
+  "@actionCreateResource": {
+    "description": "Translation for actionCreateResource"
+  },
+  "actionCreateQuiz": "Test yaratish",
+  "@actionCreateQuiz": {
+    "description": "Translation for actionCreateQuiz"
+  },
+  "notificationsTitle": "Xabarnomalar",
+  "@notificationsTitle": {
+    "description": "Translation for notificationsTitle"
+  },
+  "loginRequired": "Tizimga kirish kerak",
+  "@loginRequired": {
+    "description": "Translation for loginRequired"
+  },
+  "markAllAsReadTooltip": "Hammasini o'qilgan deb belgilash",
+  "@markAllAsReadTooltip": {
+    "description": "Translation for markAllAsReadTooltip"
+  },
+  "allNotificationsReadMessage": "Barcha xabarnomalar o'qilgan deb belgilandi",
+  "@allNotificationsReadMessage": {
+    "description": "Translation for allNotificationsReadMessage"
+  },
+  "noNotifications": "Xabarnomalar yo'q",
+  "@noNotifications": {
+    "description": "Translation for noNotifications"
+  },
+  "closeAction": "Yopish",
+  "@closeAction": {
+    "description": "Translation for closeAction"
+  },
+  "leaderboardTitle": "Liderlar jadvali",
+  "@leaderboardTitle": {
+    "description": "Translation for leaderboardTitle"
+  },
+  "pointsEarned": "Siz {points} XP oldingiz!",
+  "@pointsEarned": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "levelUp": "Tabriklaymiz! yangi daraja: {level}",
+  "@levelUp": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "rank": "O'rin",
+  "@rank": {
+    "description": "Translation for rank"
+  },
+  "quizHistoryTitle": "Viktorina tarixi",
+  "@quizHistoryTitle": {
+    "description": "Translation for quizHistoryTitle"
+  },
+  "seeAll": "Barchasini ko'rish",
+  "@seeAll": {
+    "description": "Translation for seeAll"
+  },
+  "today": "Bugun",
+  "@today": {
+    "description": "Translation for today"
+  },
+  "yesterday": "Kecha",
+  "@yesterday": {
+    "description": "Translation for yesterday"
+  },
+  "thisWeek": "Shu hafta",
+  "@thisWeek": {
+    "description": "Translation for thisWeek"
+  },
+  "older": "Eski natijalar",
+  "@older": {
+    "description": "Translation for older"
+  },
+  "contactSupport": "Qo'llab-quvvatlash",
+  "@contactSupport": {
+    "description": "Translation for contactSupport"
+  },
+  "landingTitle": "Professional platforma",
+  "@landingTitle": {
+    "description": "Translation for landingTitle"
+  },
+  "landingSubtitle": "Huquqiy bilimingizni oshiring. istalgan vaqtda.",
+  "@landingSubtitle": {
+    "description": "Translation for landingSubtitle"
+  },
+  "landingLogin": "Kirish",
+  "@landingLogin": {
+    "description": "Translation for landingLogin"
+  },
+  "landingRegister": "Ro'yxatdan o'tish",
+  "@landingRegister": {
+    "description": "Translation for landingRegister"
+  },
+  "featureKnowledgeBase": "Bilimlar bazasi",
+  "@featureKnowledgeBase": {
+    "description": "Translation for featureKnowledgeBase"
+  },
+  "featureKnowledgeBaseDesc": "Keng ko'lamli huquqiy resurslar va hujjatlar kutubxonasi.",
+  "@featureKnowledgeBaseDesc": {
+    "description": "Translation for featureKnowledgeBaseDesc"
+  },
+  "featureVideoTutorials": "Video darsliklar",
+  "@featureVideoTutorials": {
+    "description": "Translation for featureVideoTutorials"
+  },
+  "featureVideoTutorialsDesc": "Mutaxassislar tomonidan tayyorlangan video qo'llanmalar.",
+  "@featureVideoTutorialsDesc": {
+    "description": "Translation for featureVideoTutorialsDesc"
+  },
+  "featureGamification": "Gamifikatsiya",
+  "@featureGamification": {
+    "description": "Translation for featureGamification"
+  },
+  "featureGamificationDesc": "XP va nishonlar yig'ing, reytingda bellashing.",
+  "@featureGamificationDesc": {
+    "description": "Translation for featureGamificationDesc"
+  },
+  "analyticsTitle": "O'quv tahlili (xAPI)",
+  "@analyticsTitle": {
+    "description": "Translation for analyticsTitle"
+  },
+  "analyticsSubtitle": "O'quv yozuvlari",
+  "@analyticsSubtitle": {
+    "description": "Translation for analyticsSubtitle"
+  },
+  "totalRecords": "Jami yozuvlar",
+  "@totalRecords": {
+    "description": "Translation for totalRecords"
+  },
+  "realTime": "Real vaqtda",
+  "@realTime": {
+    "description": "Translation for realTime"
+  },
+  "activityDistribution": "Faoliyat taqsimoti",
+  "@activityDistribution": {
+    "description": "Translation for activityDistribution"
+  },
+  "recentActivityFeed": "So'nggi faoliyatlar",
+  "@recentActivityFeed": {
+    "description": "Translation for recentActivityFeed"
+  },
+  "noRecords": "Hozircha o'quv yozuvlari topilmadi.",
+  "@noRecords": {
+    "description": "Translation for noRecords"
+  },
+  "unknownUser": "Noma'lum foydalanuvchi",
+  "@unknownUser": {
+    "description": "Translation for unknownUser"
+  },
+  "unknownObject": "Noma'lum obyekt",
+  "@unknownObject": {
+    "description": "Translation for unknownObject"
+  },
+  "justNow": "Hozirgina",
+  "@justNow": {
+    "description": "Translation for justNow"
+  },
+  "quizzes": "Viktorinalar",
+  "@quizzes": {
+    "description": "Translation for quizzes"
+  },
+  "simulations": "Simulyatsiyalar",
+  "@simulations": {
+    "description": "Translation for simulations"
+  },
+  "catNewEmployees": "Yangi xodimlar",
+  "@catNewEmployees": {
+    "description": "Translation for catNewEmployees"
+  },
+  "catIctSpecialists": "AKT mutaxassislari",
+  "@catIctSpecialists": {
+    "description": "Translation for catIctSpecialists"
+  },
+  "catSystems": "Tizimlar",
+  "@catSystems": {
+    "description": "Translation for catSystems"
+  },
+  "catAuth": "Kirish/Login",
+  "@catAuth": {
+    "description": "Translation for catAuth"
+  },
+  "catGeneral": "Umumiy",
+  "@catGeneral": {
+    "description": "Translation for catGeneral"
+  },
+  "rankBeginner": "Boshlang'ich",
+  "@rankBeginner": {
+    "description": "Translation for rankBeginner"
+  },
+  "rankIntermediate": "O'rta daraja",
+  "@rankIntermediate": {
+    "description": "Translation for rankIntermediate"
+  },
+  "rankAdvanced": "Ilg'or",
+  "@rankAdvanced": {
+    "description": "Translation for rankAdvanced"
+  },
+  "sysCatPrimary": "Asosiy tizimlar",
+  "@sysCatPrimary": {
+    "description": "Translation for sysCatPrimary"
+  },
+  "sysCatSecondary": "Qo'shimcha tizimlar",
+  "@sysCatSecondary": {
+    "description": "Translation for sysCatSecondary"
+  },
+  "sysCatSupport": "Yordam tizimlari",
+  "@sysCatSupport": {
+    "description": "Translation for sysCatSupport"
+  },
+  "sysStatusActive": "Faol",
+  "@sysStatusActive": {
+    "description": "Translation for sysStatusActive"
+  },
+  "sysStatusMaintenance": "Ta'mirlashda",
+  "@sysStatusMaintenance": {
+    "description": "Translation for sysStatusMaintenance"
+  },
+  "sysStatusInactive": "Nofaol",
+  "@sysStatusInactive": {
+    "description": "Translation for sysStatusInactive"
+  },
+  "videoViews": "{count} ko'rishlar",
+  "@videoViews": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "videoAuthorSubtitle": "Muallif",
+  "@videoAuthorSubtitle": {
+    "description": "Translation for videoAuthorSubtitle"
+  },
+  "videoDescriptionTitle": "Tavsif",
+  "@videoDescriptionTitle": {
+    "description": "Translation for videoDescriptionTitle"
+  },
+  "sysStatusDeprecated": "Eski versiya",
+  "@sysStatusDeprecated": {
+    "description": "Translation for sysStatusDeprecated"
+  },
+  "sysStatusOffline": "O'chirilgan",
+  "@sysStatusOffline": {
+    "description": "Translation for sysStatusOffline"
+  },
+  "systemsDirectoryAll": "Barchasi",
+  "@systemsDirectoryAll": {
+    "description": "Translation for systemsDirectoryAll"
+  },
+  "systemsDirectoryError": "Xatolik yuz berdi: {error}",
+  "@systemsDirectoryError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "systemsDirectoryEmpty": "Tizimlar mavjud emas",
+  "@systemsDirectoryEmpty": {
+    "description": "Translation for systemsDirectoryEmpty"
+  },
+  "backToKnowledgeBase": "Qo'llanmalarga qaytish",
+  "@backToKnowledgeBase": {
+    "description": "Translation for backToKnowledgeBase"
+  },
+  "quizSuccessMessage": "Ajoyib natija!",
+  "@quizSuccessMessage": {
+    "description": "Translation for quizSuccessMessage"
+  },
+  "quizFailureMessage": "Yana bir bor urinib ko'ring!",
+  "@quizFailureMessage": {
+    "description": "Translation for quizFailureMessage"
+  },
+  "speedBonus": "Tezkor bonus",
+  "@speedBonus": {
+    "description": "Translation for speedBonus"
+  },
+  "levelSpecialist": "Mutaxassis",
+  "@levelSpecialist": {
+    "description": "Translation for levelSpecialist"
+  },
+  "levelMaster": "Usta (Master)",
+  "@levelMaster": {
+    "description": "Translation for levelMaster"
+  },
+  "errorCouldNotOpenLink": "Havolani ochib bo'lmadi",
+  "@errorCouldNotOpenLink": {
+    "description": "Translation for errorCouldNotOpenLink"
+  },
+  "errorResourceNotFound": "Qo'llanma topilmadi",
+  "@errorResourceNotFound": {
+    "description": "Translation for errorResourceNotFound"
+  },
+  "errorVideoNotFound": "Video topilmadi",
+  "@errorVideoNotFound": {
+    "description": "Translation for errorVideoNotFound"
+  },
+  "errorPdfOpen": "PDF faylni ochib bo'lmadi",
+  "@errorPdfOpen": {
+    "description": "Translation for errorPdfOpen"
+  },
+  "errorTelegramOpen": "Telegram havolasini ochib bo'lmadi",
+  "@errorTelegramOpen": {
+    "description": "Translation for errorTelegramOpen"
+  },
+  "errorGeneric": "Xatolik yuz berdi: {error}",
+  "@errorGeneric": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "labelTrue": "To'g'ri",
+  "@labelTrue": {
+    "description": "Translation for labelTrue"
+  },
+  "labelFalse": "Noto'g'ri",
+  "@labelFalse": {
+    "description": "Translation for labelFalse"
+  },
+  "labelPass": "O'tdi",
+  "@labelPass": {
+    "description": "Translation for labelPass"
+  },
+  "labelFail": "Yiqildi",
+  "@labelFail": {
+    "description": "Translation for labelFail"
+  },
+  "labelPdfAvailable": "PDF mavjud",
+  "@labelPdfAvailable": {
+    "description": "Translation for labelPdfAvailable"
+  },
+  "actionOk": "OK",
+  "@actionOk": {
+    "description": "Translation for actionOk"
+  },
+  "actionGoBack": "Orqaga qaytish",
+  "@actionGoBack": {
+    "description": "Translation for actionGoBack"
+  },
+  "searchNoResults": "Hech narsa topilmadi",
+  "@searchNoResults": {
+    "description": "Translation for searchNoResults"
+  },
+  "roleChangedSuccess": "{userName} roli {role} ga o'zgartirildi",
+  "@roleChangedSuccess": {
+    "placeholders": {
+      "userName": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "roleChangeError": "Rolni o'zgartirishda xatolik: {error}",
+  "@roleChangeError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "changeRoleTooltip": "Rolni o'zgartirish",
+  "@changeRoleTooltip": {
+    "description": "Translation for changeRoleTooltip"
+  },
+  "labelVideoGuide": "Video qo'llanma",
+  "@labelVideoGuide": {
+    "description": "Translation for labelVideoGuide"
+  },
+  "labelLoginGuide": "Kirish qo'llanma",
+  "@labelLoginGuide": {
+    "description": "Translation for labelLoginGuide"
+  },
+  "changePasswordHint": "Parolni o'zgartirish qismi (tez orada)",
+  "@changePasswordHint": {
+    "description": "Translation for changePasswordHint"
+  },
+  "editTopic": "Mavzuni tahrirlash",
+  "@editTopic": {
+    "description": "Translation for editTopic"
+  },
+  "update": "Yangilash",
+  "@update": {
+    "description": "Translation for update"
+  },
+  "commentAdded": "Izoh qo'shildi!",
+  "@commentAdded": {
+    "description": "Translation for commentAdded"
+  },
+  "updateFeatureMigration": "Yangilash xususiyati ko'chirilmoqda. tez orada!",
+  "@updateFeatureMigration": {
+    "description": "Translation for updateFeatureMigration"
+  },
+  "topicUpdatedSuccessfully": "Mavzu muvaffaqiyatli yangilandi",
+  "@topicUpdatedSuccessfully": {
+    "description": "Translation for topicUpdatedSuccessfully"
+  },
+  "errorDeletingTopicMsg": "Mavzuni o'chirishda xatolik yuz berdi: {error}",
+  "@errorDeletingTopicMsg": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "takeQuizTitle": "Testni yechish",
+  "@takeQuizTitle": {
+    "description": "Translation for takeQuizTitle"
+  },
+  "quizTakingInterface": "Test yechish oynasi (tez orada)",
+  "@quizTakingInterface": {
+    "description": "Translation for quizTakingInterface"
+  },
+  "quizCreatedSuccessfully": "Test muvaffaqiyatli yaratildi",
+  "@quizCreatedSuccessfully": {
+    "description": "Translation for quizCreatedSuccessfully"
+  },
+  "saveQuizAction": "Testni saqlash",
+  "@saveQuizAction": {
+    "description": "Translation for saveQuizAction"
+  },
+  "createQuizTitle": "Test yaratish",
+  "@createQuizTitle": {
+    "description": "Translation for createQuizTitle"
+  },
+  "editQuestionsTitle": "Savollarni tahrirlash: {title}",
+  "@editQuestionsTitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "questionsManagementComingSoon": "Savollarni boshqarish (tez orada)",
+  "@questionsManagementComingSoon": {
+    "description": "Translation for questionsManagementComingSoon"
+  },
+  "aiAssistantName": "AI yordamchi \"Sodiq\"",
+  "@aiAssistantName": {
+    "description": "Translation for aiAssistantName"
+  },
+  "retryAction": "Qayta urinish",
+  "@retryAction": {
+    "description": "Translation for retryAction"
+  },
+  "clearChatTooltip": "Tozalash",
+  "@clearChatTooltip": {
+    "description": "Translation for clearChatTooltip"
+  },
+  "noInternetLabel": "Internet yo'q",
+  "@noInternetLabel": {
+    "description": "Translation for noInternetLabel"
+  },
+  "noInternetQuery": "Internet ishlamayapti, nima qilay?",
+  "@noInternetQuery": {
+    "description": "Translation for noInternetQuery"
+  },
+  "fileNotOpeningLabel": "Fayl ochilmayapti",
+  "@fileNotOpeningLabel": {
+    "description": "Translation for fileNotOpeningLabel"
+  },
+  "fileNotOpeningQuery": "PDF fayl ochilmayapti, yordam bering.",
+  "@fileNotOpeningQuery": {
+    "description": "Translation for fileNotOpeningQuery"
+  },
+  "printerNotWorkingLabel": "Printer ishlamayapti",
+  "@printerNotWorkingLabel": {
+    "description": "Translation for printerNotWorkingLabel"
+  },
+  "printerNotWorkingQuery": "Printer chop etmayapti, nima qilish kerak?",
+  "@printerNotWorkingQuery": {
+    "description": "Translation for printerNotWorkingQuery"
+  },
+  "uploadImageTooltip": "Rasm yuklash",
+  "@uploadImageTooltip": {
+    "description": "Translation for uploadImageTooltip"
+  },
+  "writeMessageHint": "Xabar yozing...",
+  "@writeMessageHint": {
+    "description": "Translation for writeMessageHint"
+  },
+  "aiMentorName": "Sodiq (AI mentor)",
+  "@aiMentorName": {
+    "description": "Translation for aiMentorName"
+  },
+  "trueOption": "To'g'ri",
+  "@trueOption": {
+    "description": "Translation for True option in quizzes"
+  },
+  "falseOption": "Noto'g'ri",
+  "@falseOption": {
+    "description": "Translation for False option in quizzes"
+  },
+  "questionsListTab": "Savollar",
+  "@questionsListTab": {
+    "description": "Tab label for questions list"
+  },
+  "addQuestionTab": "Savol qo'shish",
+  "@addQuestionTab": {
+    "description": "Tab label for adding a question"
+  },
+  "addOptionButton": "Variant qo'shish",
+  "@addOptionButton": {
+    "description": "Button label for adding an option"
+  },
+  "deleteQuestionConfirm": "Bu savolni o'chirmoqchimisiz?",
+  "@deleteQuestionConfirm": {
+    "description": "Confirmation dialog for deleting a question"
+  },
+  "questionDeleted": "Savol o'chirildi",
+  "@questionDeleted": {
+    "description": "Snackbar message after deleting a question"
+  },
+  "startQuiz": "Boshlash",
+  "@startQuiz": {
+    "description": "Button label to start a quiz"
+  },
+  "nextQuestion": "Keyingi",
+  "@nextQuestion": {
+    "description": "Button label to go to next question"
+  },
+  "previousQuestion": "Oldingi",
+  "@previousQuestion": {
+    "description": "Button label to go to previous question"
+  },
+  "submitQuiz": "Yakunlash",
+  "@submitQuiz": {
+    "description": "Button label to submit quiz answers"
+  },
+  "quizResults": "Natijalar",
+  "@quizResults": {
+    "description": "Title for quiz results page"
+  },
+  "yourScore": "Sizning balingiz",
+  "@yourScore": {
+    "description": "Label for the score display"
+  },
+  "questionOfTotal": "{current}-savol / {total} ta",
+  "@questionOfTotal": {
+    "description": "Progress indicator for quiz questions",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "selectAnAnswer": "Iltimos, javobni tanlang",
+  "@selectAnAnswer": {
+    "description": "Prompt to select an answer"
+  },
+  "correctAnswerIs": "To'g'ri javob: {answer}",
+  "@correctAnswerIs": {
+    "description": "Shows the correct answer",
+    "placeholders": {
+      "answer": {
+        "type": "String"
+      }
+    }
+  },
+  "retakeQuiz": "Qayta topshirish",
+  "@retakeQuiz": {
+    "description": "Button to retake a quiz"
+  },
+  "backToQuizList": "Viktorinalarga qaytish",
+  "@backToQuizList": {
+    "description": "Button to go back to quiz list"
+  },
+  "questionsCount": "{count} ta savol",
+  "@questionsCount": {
+    "description": "Number of questions in a quiz",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "excellentScore": "A'lo natija! 🎉",
+  "@excellentScore": {
+    "description": "Message for high quiz score"
+  },
+  "goodScore": "Yaxshi natija! 👍",
+  "@goodScore": {
+    "description": "Message for decent quiz score"
+  },
+  "needsImprovement": "Mashq qiling! 💪",
+  "@needsImprovement": {
+    "description": "Message for low quiz score"
+  },
+  "noQuestionsInQuiz": "Bu viktorinada hali savollar yo'q.",
+  "@noQuestionsInQuiz": {
+    "description": "Message when quiz has no questions"
+  },
+  "resumeLearning": "O'rganishni davom ettirish",
+  "@resumeLearning": {
+    "description": "Button text to resume learning on dashboard"
+  },
+  "recentActivity": "So'nggi faoliyat",
+  "@recentActivity": {
+    "description": "Section title for recent activity on dashboard"
+  },
+  "availableResources": "Mavjud qo'llanmalar",
+  "@availableResources": {
+    "description": "Metric card title for available resources"
+  },
+  "availableQuizzes": "Mavjud viktorinalar",
+  "@availableQuizzes": {
+    "description": "Metric card title for available quizzes"
+  },
+  "activeDiscussions": "Faol munozaralar",
+  "@activeDiscussions": {
+    "description": "Metric card title for active discussions"
+  },
+  "recommendedResources": "Tavsiya etilgan qo'llanmalar",
+  "@recommendedResources": {
+    "description": "Section title for recommended resources"
+  },
+  "pagesPath": "Sahifalar / bosh sahifa",
+  "@pagesPath": {
+    "description": "Breadcrumb path text"
+  },
+  "mainDashboard": "Asosiy boshqaruv paneli",
+  "@mainDashboard": {
+    "description": "Dashboard page title"
+  },
+  "overview": "Umumiy ko'rinish",
+  "@overview": {
+    "description": "Overview label on welcome banner"
+  },
+  "noRecentActivities": "So'nggi faoliyat yo'q.",
+  "@noRecentActivities": {
+    "description": "Empty state for recent activity"
+  },
+  "signInToSeeActivities": "Faoliyatni ko'rish uchun tizimga kiring.",
+  "@signInToSeeActivities": {
+    "description": "Message when user is not signed in"
+  },
+  "noResourcesAvailable": "Mavjud qo'llanmalar yo'q.",
+  "@noResourcesAvailable": {
+    "description": "Empty state for resources"
+  },
+  "quizCompletedPrefix": "Viktorina bajarildi: {quizId}",
+  "@quizCompletedPrefix": {
+    "placeholders": {
+      "quizId": {
+        "type": "String"
+      }
+    }
+  },
+  "loadOlderNotifications": "Eski bildirishnomalarni yuklash",
+  "@loadOlderNotifications": {
+    "description": "Button to load older notifications"
+  },
+  "searchFilterAll": "Barchasi",
+  "@searchFilterAll": {
+    "description": "Filter for all search results"
+  },
+  "searchFilterSystems": "Tizimlar",
+  "@searchFilterSystems": {
+    "description": "Filter for systems"
+  },
+  "searchFilterArticles": "Maqolalar",
+  "@searchFilterArticles": {
+    "description": "Filter for articles"
+  },
+  "searchFilterVideos": "Videolar",
+  "@searchFilterVideos": {
+    "description": "Filter for videos"
+  },
+  "searchFilterFAQ": "FAQ",
+  "@searchFilterFAQ": {
+    "description": "Filter for FAQ"
+  },
+  "searchFilterCourses": "Kurslar",
+  "@searchFilterCourses": {
+    "description": "Filter for Courses"
+  },
+  "searchErrorTitle": "Xatolik yuz berdi",
+  "@searchErrorTitle": {
+    "description": "Error title in search"
+  },
+  "searchNoResultsForQuery": "\"{query}\" bo'yicha natija topilmadi",
+  "@searchNoResultsForQuery": {
+    "description": "No results found for specific query",
+    "placeholders": {
+      "query": {
+        "type": "String",
+        "example": "flutter"
+      }
+    }
+  },
+  "searchResultsHeader": "🔍 natijalar ({count})",
+  "@searchResultsHeader": {
+    "description": "Header for direct search results",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "searchSemanticHeader": "📎 bog'liq materiallar ({count})",
+  "@searchSemanticHeader": {
+    "description": "Header for semantic search results",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "searchSemanticBadge": "📎 bog'liq",
+  "@searchSemanticBadge": {
+    "description": "Badge for semantic search result"
+  },
+  "searchEmptyPromptTitle": "Yagona oyna",
+  "@searchEmptyPromptTitle": {
+    "description": "Title for empty search prompt"
+  },
+  "searchEmptyPromptDesc": "Tizimlar, maqolalar, videolar, kurslar va\nFAQ — hammasini bir joydan toping",
+  "@searchEmptyPromptDesc": {
+    "description": "Description for empty search prompt"
+  },
+  "searchTypeSystem": "Tizim",
+  "@searchTypeSystem": {
+    "description": "System type label"
+  },
+  "searchTypeArticle": "Maqola",
+  "@searchTypeArticle": {
+    "description": "Article type label"
+  },
+  "searchTypeVideo": "Video",
+  "@searchTypeVideo": {
+    "description": "Video type label"
+  },
+  "searchTypeFaq": "FAQ",
+  "@searchTypeFaq": {
+    "description": "FAQ type label"
+  },
+  "searchTypeResource": "Resurs",
+  "@searchTypeResource": {
+    "description": "Resource type label"
+  },
+  "searchTypeCourse": "Kurs",
+  "@searchTypeCourse": {
+    "description": "Course type label in search results"
+  },
+  "leaderboardTabGlobal": "Global",
+  "@leaderboardTabGlobal": {
+    "description": "Global tab in leaderboard"
+  },
+  "leaderboardTabRegion": "Viloyat",
+  "@leaderboardTabRegion": {
+    "description": "Region tab in leaderboard"
+  },
+  "leaderboardTabCourt": "O'z sudim",
+  "@leaderboardTabCourt": {
+    "description": "Court tab in leaderboard"
+  },
+  "noRegionInfo": "Viloyat ma'lumoti yo'q",
+  "@noRegionInfo": {
+    "description": "Displayed when region info is missing"
+  },
+  "noCourtInfo": "Sud ma'lumoti yo'q",
+  "@noCourtInfo": {
+    "description": "Displayed when court info is missing"
+  },
+  "selectYourCourtTitle": "Sudingizni tanlang",
+  "@selectYourCourtTitle": {
+    "description": "Title for court selection modal"
+  },
+  "selectYourCourtSubtitle": "Mintaqaviy statistika va leaderboard uchun\nqaysi sudda ishlashingizni ko'rsating",
+  "@selectYourCourtSubtitle": {
+    "description": "Subtitle for court selection modal"
+  },
+  "selectRegionLabel": "Hududni tanlang",
+  "@selectRegionLabel": {
+    "description": "Label for region selection"
+  },
+  "regionDropdownLabel": "📍 hudud / viloyat",
+  "@regionDropdownLabel": {
+    "description": "Dropdown label for region"
+  },
+  "selectCourtTypeLabel": "Sud turini tanlang",
+  "@selectCourtTypeLabel": {
+    "description": "Label for court type selection"
+  },
+  "courtTypeDropdownLabel": "⚖️ sud turi",
+  "@courtTypeDropdownLabel": {
+    "description": "Dropdown label for court type"
+  },
+  "selectRegionFirst": "Avval hududni tanlang",
+  "@selectRegionFirst": {
+    "description": "Hint when region is not selected"
+  },
+  "selectSpecificCourtLabel": "Aniq sudni tanlang",
+  "@selectSpecificCourtLabel": {
+    "description": "Label for specific court selection"
+  },
+  "specificCourtDropdownLabel": "🏛️ aniq sud",
+  "@specificCourtDropdownLabel": {
+    "description": "Dropdown label for specific court"
+  },
+  "selectCourtTypeFirst": "Avval sud turini tanlang",
+  "@selectCourtTypeFirst": {
+    "description": "Hint when court type is not selected"
+  },
+  "saveAndContinue": "Saqlash va davom etish",
+  "@saveAndContinue": {
+    "description": "Save and continue button text"
+  },
+  "savingInProgress": "Saqlanmoqda...",
+  "@savingInProgress": {
+    "description": "Saving text"
+  },
+  "courtDataHeader": "Sud ma'lumotlari",
+  "@courtDataHeader": {
+    "description": "Header for court data section in registration"
+  },
+  "saveChangesButton": "O'zgarishlarni saqlash",
+  "@saveChangesButton": {
+    "description": "Button text to save changes"
+  },
+  "myCoursesTitle": "Mening kurslarim",
+  "@myCoursesTitle": {
+    "description": "Translation for myCoursesTitle"
+  },
+  "myCoursesEmptyTitle": "Hali hech qanday kursni boshlamadingiz",
+  "@myCoursesEmptyTitle": {
+    "description": "Translation for myCoursesEmptyTitle"
+  },
+  "myCoursesEmptySubtitle": "Yangi bilimlarni o'zlashtirish va XP ishlash uchun kurslarni boshlang.",
+  "@myCoursesEmptySubtitle": {
+    "description": "Translation for myCoursesEmptySubtitle"
+  },
+  "coursesTitle": "Kurslar",
+  "@coursesTitle": {
+    "description": "Title for the courses screen"
+  },
+  "boostYourKnowledge": "Bilimingizni oshiring",
+  "@boostYourKnowledge": {
+    "description": "Subtitle for the courses screen"
+  },
+  "courseFilterAll": "Barchasi",
+  "@courseFilterAll": {
+    "description": "Label for 'All' difficulty filter"
+  },
+  "courseFilterBeginner": "Boshlang'ich",
+  "@courseFilterBeginner": {
+    "description": "Label for 'Beginner' difficulty filter"
+  },
+  "courseFilterIntermediate": "O'rta",
+  "@courseFilterIntermediate": {
+    "description": "Label for 'Intermediate' difficulty filter"
+  },
+  "courseFilterAdvanced": "Yuqori",
+  "@courseFilterAdvanced": {
+    "description": "Label for 'Advanced' difficulty filter"
+  },
+  "coursesNotFound": "Kurslar topilmadi",
+  "@coursesNotFound": {
+    "description": "Message shown when no courses match filters"
+  },
+  "statCourses": "Kurs",
+  "@statCourses": {
+    "description": "Label for total courses statistic"
+  },
+  "statCompleted": "Tugallangan",
+  "@statCompleted": {
+    "description": "Label for completed courses statistic"
+  },
+  "statXpPoints": "XP ball",
+  "@statXpPoints": {
+    "description": "Label for XP points statistic"
+  },
+  "tabAll": "Barchasi",
+  "@tabAll": {
+    "description": "Label for 'All' tab in course list"
+  },
+  "tabCompleted": "✓ Tugallangan",
+  "@tabCompleted": {
+    "description": "Label for 'Completed' tab in course list"
+  },
+  "tabInProgress": "▶ Davom",
+  "@tabInProgress": {
+    "description": "Label for 'In Progress' tab in course list"
+  },
+  "searchCoursesHint": "Kurs qidirish...",
+  "@searchCoursesHint": {
+    "description": "Hint text for the course search bar"
+  },
+  "statusOnline": "ONLINE",
+  "@statusOnline": {
+    "description": "Label for online system status"
+  },
+  "statusOffline": "OFFLINE",
+  "@statusOffline": {
+    "description": "Label for offline system status"
+  },
+  "errorLabel": "Xatolik",
+  "@errorLabel": {
+    "description": "Generic error label"
+  }
+}
+

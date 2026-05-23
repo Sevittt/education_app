@@ -1,0 +1,2944 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Справочник судьи",
+  "@appTitle": {
+    "description": "Название приложения"
+  },
+  "openInYoutube": "Открыть в YouTube",
+  "@openInYoutube": {
+    "description": "Translation for openInYoutube"
+  },
+  "watchOnYoutube": "Смотреть в YouTube",
+  "@watchOnYoutube": {
+    "description": "Translation for watchOnYoutube"
+  },
+  "loginWelcomeTitle": "Добро пожаловать!",
+  "@loginWelcomeTitle": {
+    "description": "Заголовок экрана входа"
+  },
+  "loginWelcomeSubtitle": "Войдите, чтобы продолжить",
+  "@loginWelcomeSubtitle": {
+    "description": "Текст подзаголовка экрана входа"
+  },
+  "bottomNavHome": "Главная",
+  "@bottomNavHome": {
+    "description": "Translation for bottomNavHome"
+  },
+  "bottomNavResources": "Курсы",
+  "@bottomNavResources": {
+    "description": "Translation for bottomNavResources"
+  },
+  "bottomNavCommunity": "Обсуждение",
+  "@bottomNavCommunity": {
+    "description": "Translation for bottomNavCommunity"
+  },
+  "bottomNavProfile": "Профиль",
+  "@bottomNavProfile": {
+    "description": "Translation for bottomNavProfile"
+  },
+  "resourcesScreenTitle": "Руководства и обучающие материалы",
+  "@resourcesScreenTitle": {
+    "description": "Заголовок страницы с руководствами"
+  },
+  "roleXodim": "Сотрудник",
+  "@roleXodim": {
+    "description": "Обычный сотрудник Роль"
+  },
+  "roleEkspert": "Эксперт",
+  "@roleEkspert": {
+    "description": "Роль эксперта, которая может создавать контент"
+  },
+  "roleAdmin": "Администратор",
+  "@roleAdmin": {
+    "description": "Роль администратора"
+  },
+  "registrationTitle": "Создать учётную запись",
+  "@registrationTitle": {
+    "description": "Translation for registrationTitle"
+  },
+  "registrationSubtitle": "Присоединяйтесь к профессиональному сообществу!",
+  "@registrationSubtitle": {
+    "description": "Translation for registrationSubtitle"
+  },
+  "registrationFullNameLabel": "Фио",
+  "@registrationFullNameLabel": {
+    "description": "Поле для ввода имени при регистрации"
+  },
+  "registrationFullNameError": "Пожалуйста, введите своё полное имя",
+  "@registrationFullNameError": {
+    "description": "Ошибка при отсутствии имени"
+  },
+  "registrationRoleLabel": "Ваша роль",
+  "@registrationRoleLabel": {
+    "description": "Выберите роль при регистрация"
+  },
+  "registrationRoleError": "Выберите роль",
+  "@registrationRoleError": {
+    "description": "Ошибка, если роль не выбрана"
+  },
+  "registrationRoleXodim": "Обычный сотрудник",
+  "@registrationRoleXodim": {
+    "description": "Выбор роли сотрудника"
+  },
+  "registrationRoleEkspert": "Эксперт (создатель руководства)",
+  "@registrationRoleEkspert": {
+    "description": "Выбор роли эксперта"
+  },
+  "registrationRoleJudge": "Судья",
+  "@registrationRoleJudge": {
+    "description": "Translation for registrationRoleJudge"
+  },
+  "registrationRoleAssistant": "Помощник судьи",
+  "@registrationRoleAssistant": {
+    "description": "Translation for registrationRoleAssistant"
+  },
+  "registrationRoleChancellery": "Сотрудник канцелярии",
+  "@registrationRoleChancellery": {
+    "description": "Translation for registrationRoleChancellery"
+  },
+  "registrationRoleArchive": "Заведующий архивом",
+  "@registrationRoleArchive": {
+    "description": "Translation for registrationRoleArchive"
+  },
+  "registrationRoleIctSpecialist": "Специалист иКТ",
+  "@registrationRoleIctSpecialist": {
+    "description": "Translation for registrationRoleIctSpecialist"
+  },
+  "registrationPasswordLabel": "Пароль",
+  "@registrationPasswordLabel": {
+    "description": "Текст для поля пароля"
+  },
+  "registrationPasswordError": "Пароль должен быть не менее 6 символов",
+  "@registrationPasswordError": {
+    "description": "Ошибка, если пароль короткий"
+  },
+  "registrationConfirmPasswordLabel": "Подтвердить пароль",
+  "@registrationConfirmPasswordLabel": {
+    "description": "Поле подтверждения пароля"
+  },
+  "registrationConfirmPasswordError": "Пароли не совпали",
+  "@registrationConfirmPasswordError": {
+    "description": "Ошибка при несовпадении паролей"
+  },
+  "registrationSignUpButton": "Зарегистрироваться",
+  "@registrationSignUpButton": {
+    "description": "Кнопка регистрации"
+  },
+  "registrationSwitchToLogin": "У вас есть учётная запись? войти",
+  "@registrationSwitchToLogin": {
+    "description": "Текст для перехода на страницу входа"
+  },
+  "languageEnglish": "Английский",
+  "@languageEnglish": {
+    "description": "Translation for languageEnglish"
+  },
+  "languageUzbek": "Узбекский",
+  "@languageUzbek": {
+    "description": "Translation for languageUzbek"
+  },
+  "languageRussian": "Русский",
+  "@languageRussian": {
+    "description": "Translation for languageRussian"
+  },
+  "languageSystemDefault": "Системный язык",
+  "@languageSystemDefault": {
+    "description": "Translation for languageSystemDefault"
+  },
+  "settingsScreenTitle": "Настройки",
+  "@settingsScreenTitle": {
+    "description": "Translation for settingsScreenTitle"
+  },
+  "settingsLanguage": "Язык",
+  "@settingsLanguage": {
+    "description": "Translation for settingsLanguage"
+  },
+  "settingsReceiveNotifications": "Получать уведомления",
+  "@settingsReceiveNotifications": {
+    "description": "Translation for settingsReceiveNotifications"
+  },
+  "settingsReceiveNotificationsSubtitle": "Получайте обновления о новых ресурсах и обсуждениях",
+  "@settingsReceiveNotificationsSubtitle": {
+    "description": "Translation for settingsReceiveNotificationsSubtitle"
+  },
+  "settingsAllowLocation": "Разрешить доступ к местоположению",
+  "@settingsAllowLocation": {
+    "description": "Translation for settingsAllowLocation"
+  },
+  "settingsAllowLocationSubtitle": "Для функций, требующих вашего местоположения (если есть)",
+  "@settingsAllowLocationSubtitle": {
+    "description": "Translation for settingsAllowLocationSubtitle"
+  },
+  "settingsChangePassword": "Изменить пароль",
+  "@settingsChangePassword": {
+    "description": "Translation for settingsChangePassword"
+  },
+  "settingsHelpCenter": "Центр помощи",
+  "@settingsHelpCenter": {
+    "description": "Translation for settingsHelpCenter"
+  },
+  "settingsAboutApp": "О справочнике судьи",
+  "@settingsAboutApp": {
+    "description": "Translation for settingsAboutApp"
+  },
+  "settingsAppLegalese": "© 2025 проект справочник судьи",
+  "@settingsAppLegalese": {
+    "description": "Translation for settingsAppLegalese"
+  },
+  "settingsAppDescription": "Мобильная платформа для повышения профессиональной компетентности работников суда.",
+  "@settingsAppDescription": {
+    "description": "Translation for settingsAppDescription"
+  },
+  "errorPrefix": "Ошибка: ",
+  "@errorPrefix": {
+    "description": "Translation for errorPrefix"
+  },
+  "days": "дней",
+  "@days": {
+    "description": "Translation for days"
+  },
+  "resourcesNoResourcesFound": "Ресурсы не найдены.",
+  "@resourcesNoResourcesFound": {
+    "description": "Translation for resourcesNoResourcesFound"
+  },
+  "loginButtonText": "Войти",
+  "@loginButtonText": {
+    "description": "Translation for loginButtonText"
+  },
+  "signUpButtonText": "Зарегистрироваться",
+  "@signUpButtonText": {
+    "description": "Translation for signUpButtonText"
+  },
+  "loginNoAccount": "Нет аккаунта?",
+  "@loginNoAccount": {
+    "description": "Login screen text asking if user has no account"
+  },
+  "logoutButtonText": "Выйти",
+  "@logoutButtonText": {
+    "description": "Translation for logoutButtonText"
+  },
+  "logoutConfirmTitle": "Вы уверены, что хотите выйти?",
+  "@logoutConfirmTitle": {
+    "description": "Translation for logoutConfirmTitle"
+  },
+  "emailLabel": "Электронная почта",
+  "@emailLabel": {
+    "description": "Translation for emailLabel"
+  },
+  "passwordLabel": "Пароль",
+  "@passwordLabel": {
+    "description": "Translation for passwordLabel"
+  },
+  "homeDashboardTitle": "Панель управления",
+  "@homeDashboardTitle": {
+    "description": "Translation for homeDashboardTitle"
+  },
+  "communityScreenTitle": "Сообщество",
+  "@communityScreenTitle": {
+    "description": "Translation for communityScreenTitle"
+  },
+  "profileScreenTitle": "Профиль",
+  "@profileScreenTitle": {
+    "description": "Translation for profileScreenTitle"
+  },
+  "editProfileButtonText": "Редактировать профиль",
+  "@editProfileButtonText": {
+    "description": "Translation for editProfileButtonText"
+  },
+  "guestUser": "Гость",
+  "@guestUser": {
+    "description": "Translation for guestUser"
+  },
+  "updateYourInformation": "Обновите вашу информацию",
+  "@updateYourInformation": {
+    "description": "Translation for updateYourInformation"
+  },
+  "loginToEditProfile": "Войдите, чтобы редактировать профиль",
+  "@loginToEditProfile": {
+    "description": "Translation for loginToEditProfile"
+  },
+  "settingsTitle": "Настройки",
+  "@settingsTitle": {
+    "description": "Translation for settingsTitle"
+  },
+  "themeOptionsTitle": "Опции темы",
+  "@themeOptionsTitle": {
+    "description": "Translation for themeOptionsTitle"
+  },
+  "logoutConfirmMessage": "Вы уверены, что хотите выйти из аккаунта?",
+  "@logoutConfirmMessage": {
+    "description": "Translation for logoutConfirmMessage"
+  },
+  "saveChangesButton": "Сохранить",
+  "@saveChangesButton": {
+    "description": "Button text to save changes"
+  },
+  "vidCategoryBeginner": "Начальный",
+  "@vidCategoryBeginner": {
+    "description": "Category: Beginner"
+  },
+  "vidCategoryIntermediate": "Средний",
+  "@vidCategoryIntermediate": {
+    "description": "Category: Intermediate"
+  },
+  "vidCategoryAdvanced": "Продвинутый",
+  "@vidCategoryAdvanced": {
+    "description": "Category: Advanced"
+  },
+  "vidCategoryPractical": "Практический",
+  "@vidCategoryPractical": {
+    "description": "Category: Practical"
+  },
+  "vidCategoryTheory": "Теоретический",
+  "@vidCategoryTheory": {
+    "description": "Category: Theory"
+  },
+  "cancelButton": "Отмена",
+  "@cancelButton": {
+    "description": "Translation for cancelButton"
+  },
+  "logoutButton": "Выйти",
+  "@logoutButton": {
+    "description": "Translation for logoutButton"
+  },
+  "resourcesTitle": "Ресурсы",
+  "@resourcesTitle": {
+    "description": "Translation for resourcesTitle"
+  },
+  "resourcesSearchHint": "Поиск ресурсов...",
+  "@resourcesSearchHint": {
+    "description": "Translation for resourcesSearchHint"
+  },
+  "resourcesFilterByType": "Фильтровать по типу",
+  "@resourcesFilterByType": {
+    "description": "Translation for resourcesFilterByType"
+  },
+  "resourcesAllTypes": "Все типы",
+  "@resourcesAllTypes": {
+    "description": "Translation for resourcesAllTypes"
+  },
+  "resourcesNoResourcesMatch": "Ресурсы, соответствующие вашим критериям, не найдены.",
+  "@resourcesNoResourcesMatch": {
+    "description": "Translation for resourcesNoResourcesMatch"
+  },
+  "resourcesTryAdjusting": "Попробуйте изменить поиск или фильтр.",
+  "@resourcesTryAdjusting": {
+    "description": "Translation for resourcesTryAdjusting"
+  },
+  "resourcesCreateButton": "Создать",
+  "@resourcesCreateButton": {
+    "description": "Translation for resourcesCreateButton"
+  },
+  "resourceAddedSuccess": "Ресурс успешно добавлен!",
+  "@resourceAddedSuccess": {
+    "description": "Translation for resourceAddedSuccess"
+  },
+  "resourceAddedError": "Ошибка при добавлении ресурса: {error}",
+  "@resourceAddedError": {
+    "description": "Сообщение об ошибке при неудачном добавлении ресурса",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Ошибка сетевого подключения"
+      }
+    }
+  },
+  "createResourceScreenTitle": "Создать новый ресурс",
+  "@createResourceScreenTitle": {
+    "description": "Translation for createResourceScreenTitle"
+  },
+  "createResourceFormWillBeHere": "Форма создания ресурса будет здесь.",
+  "@createResourceFormWillBeHere": {
+    "description": "Translation for createResourceFormWillBeHere"
+  },
+  "saveButtonText": "Сохранить",
+  "@saveButtonText": {
+    "description": "Translation for saveButtonText"
+  },
+  "createResourceTitleLabel": "Название",
+  "@createResourceTitleLabel": {
+    "description": "Translation for createResourceTitleLabel"
+  },
+  "createResourceDescriptionLabel": "Описание",
+  "@createResourceDescriptionLabel": {
+    "description": "Translation for createResourceDescriptionLabel"
+  },
+  "createResourceAuthorLabel": "Автор",
+  "@createResourceAuthorLabel": {
+    "description": "Translation for createResourceAuthorLabel"
+  },
+  "createResourceTypeLabel": "Тип ресурса",
+  "@createResourceTypeLabel": {
+    "description": "Translation for createResourceTypeLabel"
+  },
+  "createResourceUrlLabel": "URL (Optional)",
+  "@createResourceUrlLabel": {
+    "description": "Translation for createResourceUrlLabel"
+  },
+  "couldNotLaunchUrl": "Could not launch {url}",
+  "@couldNotLaunchUrl": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "createResourceValidationEmpty": "Пожалуйста, введите {fieldName}",
+  "@createResourceValidationEmpty": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
+    }
+  },
+  "createResourceValidationSelect": "Пожалуйста, выберите {fieldName}",
+  "@createResourceValidationSelect": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
+    }
+  },
+  "createResourceValidationInvalidUrl": "Введите действительный uRL-адрес",
+  "@createResourceValidationInvalidUrl": {
+    "description": "Translation for createResourceValidationInvalidUrl"
+  },
+  "editButtonTooltip": "Редактировать ресурс",
+  "@editButtonTooltip": {
+    "description": "Translation for editButtonTooltip"
+  },
+  "editResourceScreenTitle": "Редактировать ресурс",
+  "@editResourceScreenTitle": {
+    "description": "Translation for editResourceScreenTitle"
+  },
+  "resourceTypeLabel": "Тип",
+  "@resourceTypeLabel": {
+    "description": "Translation for resourceTypeLabel"
+  },
+  "editTopicScreenTitle": "Редактировать тему обсуждения",
+  "@editTopicScreenTitle": {
+    "description": "Translation for editTopicScreenTitle"
+  },
+  "deleteResourceConfirmTitle": "Подтвердите удаление",
+  "@deleteResourceConfirmTitle": {
+    "description": "Translation for deleteResourceConfirmTitle"
+  },
+  "deleteResourceConfirmMessage": "Вы уверены, что хотите удалить этот ресурс? это действие не может быть отменено.",
+  "@deleteResourceConfirmMessage": {
+    "description": "Translation for deleteResourceConfirmMessage"
+  },
+  "cancelButtonText": "Отмена",
+  "@cancelButtonText": {
+    "description": "Translation for cancelButtonText"
+  },
+  "deleteButtonText": "Удалить",
+  "@deleteButtonText": {
+    "description": "Translation for deleteButtonText"
+  },
+  "resourceDeletedSuccess": "Ресурс \"{resourceTitle}\" успешно удален.",
+  "@resourceDeletedSuccess": {
+    "placeholders": {
+      "resourceTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "resourceDeletedError": "Ошибка удаления ресурса: {error}",
+  "@resourceDeletedError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteButtonTooltip": "Удалить ресурс",
+  "@deleteButtonTooltip": {
+    "description": "Translation for deleteButtonTooltip"
+  },
+  "createANewQuiz": "Создать новую викторину",
+  "@createANewQuiz": {
+    "description": "Translation for createANewQuiz"
+  },
+  "quizTitle": "Название викторины",
+  "@quizTitle": {
+    "description": "Translation for quizTitle"
+  },
+  "quizDescription": "Описание",
+  "@quizDescription": {
+    "description": "Translation for quizDescription"
+  },
+  "saveAndAddQuestions": "Сохранить и добавить вопросы",
+  "@saveAndAddQuestions": {
+    "description": "Translation for saveAndAddQuestions"
+  },
+  "failedToCreateQuiz": "Не удалось создать викторину",
+  "@failedToCreateQuiz": {
+    "description": "Translation for failedToCreateQuiz"
+  },
+  "addQuestions": "Добавить вопросы",
+  "@addQuestions": {
+    "description": "Button label for adding questions to a quiz"
+  },
+  "finish": "Завершить",
+  "@finish": {
+    "description": "Translation for finish"
+  },
+  "questionText": "Текст вопроса",
+  "@questionText": {
+    "description": "Translation for questionText"
+  },
+  "pleaseEnterAQuestion": "Пожалуйста, введите вопрос",
+  "@pleaseEnterAQuestion": {
+    "description": "Translation for pleaseEnterAQuestion"
+  },
+  "questionType": "Тип вопроса",
+  "@questionType": {
+    "description": "Translation for questionType"
+  },
+  "multipleChoice": "Множественный выбор",
+  "@multipleChoice": {
+    "description": "Translation for multipleChoice"
+  },
+  "trueFalse": "Верно/Неверно",
+  "@trueFalse": {
+    "description": "Translation for trueFalse"
+  },
+  "pleaseSelectCorrectAnswer": "Пожалуйста, выберите правильный ответ.",
+  "@pleaseSelectCorrectAnswer": {
+    "description": "Translation for pleaseSelectCorrectAnswer"
+  },
+  "option": "Вариант {number}",
+  "@option": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "pleaseEnterAnOption": "Пожалуйста, введите вариант",
+  "@pleaseEnterAnOption": {
+    "description": "Translation for pleaseEnterAnOption"
+  },
+  "addQuestion": "Добавить вопрос",
+  "@addQuestion": {
+    "description": "Translation for addQuestion"
+  },
+  "questionAddedSuccessfully": "Вопрос успешно добавлен!",
+  "@questionAddedSuccessfully": {
+    "description": "Translation for questionAddedSuccessfully"
+  },
+  "failedToAddQuestion": "Не удалось добавить вопрос",
+  "@failedToAddQuestion": {
+    "description": "Translation for failedToAddQuestion"
+  },
+  "noQuestionsAddedYet": "Вопросы еще не добавлены.",
+  "@noQuestionsAddedYet": {
+    "description": "Translation for noQuestionsAddedYet"
+  },
+  "correctAnswer": "Правильный ответ",
+  "@correctAnswer": {
+    "description": "Translation for correctAnswer"
+  },
+  "quiz": "Викторина",
+  "@quiz": {
+    "description": "Translation for quiz"
+  },
+  "quizNotFound": "Тест не найден",
+  "@quizNotFound": {
+    "description": "Translation for quizNotFound"
+  },
+  "failedToLoadQuiz": "Не удалось загрузить тест",
+  "@failedToLoadQuiz": {
+    "description": "Translation for failedToLoadQuiz"
+  },
+  "question": "Вопрос {index}",
+  "@question": {
+    "placeholders": {
+      "index": {
+        "type": "String"
+      }
+    }
+  },
+  "totalQuestions": "Всего: {total}",
+  "@totalQuestions": {
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "quizCompletionMessage": "Вы завершили викторину!",
+  "@quizCompletionMessage": {
+    "description": "Translation for quizCompletionMessage"
+  },
+  "done": "Готово",
+  "@done": {
+    "description": "Translation for done"
+  },
+  "failedToSaveAttempt": "Ошибка при сохранении результата",
+  "@failedToSaveAttempt": {
+    "description": "Translation for failedToSaveAttempt"
+  },
+  "myQuizHistory": "Моя история викторин",
+  "@myQuizHistory": {
+    "description": "Translation for myQuizHistory"
+  },
+  "noQuizAttempts": "Вы еще не проходили ни одной викторины.",
+  "@noQuizAttempts": {
+    "description": "Translation for noQuizAttempts"
+  },
+  "score": "Счет",
+  "@score": {
+    "description": "Translation for score"
+  },
+  "role": "Роль",
+  "@role": {
+    "description": "Translation for role"
+  },
+  "loading": "Загрузка...",
+  "@loading": {
+    "description": "Translation for loading"
+  },
+  "relatedQuizzesTitle": "Похожие тесты",
+  "@relatedQuizzesTitle": {
+    "description": "Translation for relatedQuizzesTitle"
+  },
+  "noQuizzesAvailable": "Пока нет доступных тестов для этого ресурса",
+  "@noQuizzesAvailable": {
+    "description": "Translation for noQuizzesAvailable"
+  },
+  "errorLoadingQuizzes": "Ошибка загрузки тестов",
+  "@errorLoadingQuizzes": {
+    "description": "Translation for errorLoadingQuizzes"
+  },
+  "invalidUrlFormat": "Неверный формат URL: {url}",
+  "@invalidUrlFormat": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLaunchingUrl": "Ошибка запуска URL: {error}",
+  "@errorLaunchingUrl": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "createResourceValidationMinLength": "{fieldName} должно быть не менее {length} символов в длину",
+  "@createResourceValidationMinLength": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "createResourceValidationMaxLength": "{fieldName} не может превышать {length} символов",
+  "@createResourceValidationMaxLength": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "titleMinLength": "Заголовок должен быть не менее 5 символов в длину",
+  "@titleMinLength": {
+    "description": "Translation for titleMinLength"
+  },
+  "titleMaxLength": "Заголовок не может превышать 100 символов",
+  "@titleMaxLength": {
+    "description": "Translation for titleMaxLength"
+  },
+  "createTopicScreenTitle": "Начать новое обсуждение",
+  "@createTopicScreenTitle": {
+    "description": "Translation for createTopicScreenTitle"
+  },
+  "createTopicTitleLabel": "Заголовок темы",
+  "@createTopicTitleLabel": {
+    "description": "Translation for createTopicTitleLabel"
+  },
+  "createTopicContentLabel": "Содержимое обсуждения",
+  "@createTopicContentLabel": {
+    "description": "Translation for createTopicContentLabel"
+  },
+  "createTopicButtonText": "Создать тему обсуждения",
+  "@createTopicButtonText": {
+    "description": "Translation for createTopicButtonText"
+  },
+  "mustBeLoggedInToCreateTopic": "Чтобы создать тему, вам необходимо войти в систему.",
+  "@mustBeLoggedInToCreateTopic": {
+    "description": "Translation for mustBeLoggedInToCreateTopic"
+  },
+  "topicCreatedSuccess": "Тема создана успешно!",
+  "@topicCreatedSuccess": {
+    "description": "Translation for topicCreatedSuccess"
+  },
+  "failedToCreateTopic": "Не удалось создать тему: {error}",
+  "@failedToCreateTopic": {
+    "description": "Error message when creating a topic fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "createTopicValidationEmpty": "{fieldName} не может быть пустым.",
+  "@createTopicValidationEmpty": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
+    }
+  },
+  "createTopicValidationMinLength": "{fieldName} должно быть не менее {length} символов в длину.",
+  "@createTopicValidationMinLength": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "createTopicValidationMaxLength": "{fieldName} не может превышать {length} символов в длину.",
+  "@createTopicValidationMaxLength": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "errorLoadingData": "Произошла ошибка при загрузке ресурсов. повторите попытку.",
+  "@errorLoadingData": {
+    "description": "Translation for errorLoadingData"
+  },
+  "failedToUpdateTopic": "Ошибка обновления темы: {error}",
+  "@failedToUpdateTopic": {
+    "description": "Сообщение об ошибке отображается при сбое обновления темы",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Ошибка сети"
+      }
+    }
+  },
+  "topicUpdatedSuccess": "Тема успешно обновлена!",
+  "@topicUpdatedSuccess": {
+    "description": "Translation for topicUpdatedSuccess"
+  },
+  "noDiscussionsYet": "Пока нет обсуждений.",
+  "@noDiscussionsYet": {
+    "description": "Translation for noDiscussionsYet"
+  },
+  "beTheFirstToStartConversation": "Начните разговор первым!",
+  "@beTheFirstToStartConversation": {
+    "description": "Translation for beTheFirstToStartConversation"
+  },
+  "mustBeLoggedInToCreateResource": "Вы должны войти в систему, чтобы создать ресурс.",
+  "@mustBeLoggedInToCreateResource": {
+    "description": "Translation for mustBeLoggedInToCreateResource"
+  },
+  "profileIncompleteToCreateResource": "Информация вашего профиля неполная. пожалуйста, обновите свое имя в вашем профиле.",
+  "@profileIncompleteToCreateResource": {
+    "description": "Translation for profileIncompleteToCreateResource"
+  },
+  "profileIncompleteToCreateTopic": "Имя вашего профиля не установлено. пожалуйста, обновите свой профиль.",
+  "@profileIncompleteToCreateTopic": {
+    "description": "Translation for profileIncompleteToCreateTopic"
+  },
+  "commentCannotBeEmpty": "Комментарий не может быть пустым.",
+  "@commentCannotBeEmpty": {
+    "description": "Translation for commentCannotBeEmpty"
+  },
+  "mustBeLoggedInToComment": "Вы должны войти в систему, чтобы оставить комментарий.",
+  "@mustBeLoggedInToComment": {
+    "description": "Translation for mustBeLoggedInToComment"
+  },
+  "commentAddedSuccessfully": "Комментарий успешно добавлен!",
+  "@commentAddedSuccessfully": {
+    "description": "Translation for commentAddedSuccessfully"
+  },
+  "failedToAddComment": "Не удалось добавить комментарий: {error}",
+  "@failedToAddComment": {
+    "description": "Error message when adding a comment fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postedBy": "Опубликовано {authorName}",
+  "@postedBy": {
+    "placeholders": {
+      "authorName": {
+        "type": "String"
+      }
+    }
+  },
+  "onDate": "в {date}",
+  "@onDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "repliesTitle": "Ответы",
+  "@repliesTitle": {
+    "description": "Translation for repliesTitle"
+  },
+  "errorLoadingComments": "Ошибка загрузки комментариев: {error}",
+  "@errorLoadingComments": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noRepliesYet": "Пока нет ответов. станьте первым, кто оставит комментарий!",
+  "@noRepliesYet": {
+    "description": "Translation for noRepliesYet"
+  },
+  "writeAReplyHint": "Напишите ответ...",
+  "@writeAReplyHint": {
+    "description": "Translation for writeAReplyHint"
+  },
+  "sendCommentTooltip": "Отправить комментарий",
+  "@sendCommentTooltip": {
+    "description": "Translation for sendCommentTooltip"
+  },
+  "welcomeBack": "С возвращением, {userName}!",
+  "@welcomeBack": {
+    "placeholders": {
+      "userName": {
+        "type": "String"
+      }
+    }
+  },
+  "readyToLearnSomethingNew": "Готовы узнать что-то новое сегодня?",
+  "@readyToLearnSomethingNew": {
+    "description": "Translation for readyToLearnSomethingNew"
+  },
+  "quickAccessTitle": "Быстрый доступ",
+  "@quickAccessTitle": {
+    "description": "Translation for quickAccessTitle"
+  },
+  "communityTitle": "Сообщество",
+  "@communityTitle": {
+    "description": "Translation for communityTitle"
+  },
+  "profileTitle": "Профиль",
+  "@profileTitle": {
+    "description": "Translation for profileTitle"
+  },
+  "latestNewsTitle": "Последние новости",
+  "@latestNewsTitle": {
+    "description": "Translation for latestNewsTitle"
+  },
+  "sourceLabel": "Источник",
+  "@sourceLabel": {
+    "description": "Translation for sourceLabel"
+  },
+  "quizzesTitle": "Тестовые задания",
+  "@quizzesTitle": {
+    "description": "Translation for quizzesTitle"
+  },
+  "urlCannotBeEmpty": "URL не может быть пустым",
+  "@urlCannotBeEmpty": {
+    "description": "Translation for urlCannotBeEmpty"
+  },
+  "errorLoadingNews": "Ошибка загрузки новостей: {error}",
+  "@errorLoadingNews": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noNewsAvailable": "В данный момент новостей нет.",
+  "@noNewsAvailable": {
+    "description": "Translation for noNewsAvailable"
+  },
+  "adminPanelTitle": "Панель администратора",
+  "@adminPanelTitle": {
+    "description": "Translation for adminPanelTitle"
+  },
+  "manageNewsTitle": "Управление новостями",
+  "@manageNewsTitle": {
+    "description": "Translation for manageNewsTitle"
+  },
+  "manageNewsSubtitle": "Добавление, редактирование или удаление новостных статей",
+  "@manageNewsSubtitle": {
+    "description": "Translation for manageNewsSubtitle"
+  },
+  "manageUsersTitle": "Управление пользователями",
+  "@manageUsersTitle": {
+    "description": "Translation for manageUsersTitle"
+  },
+  "manageUsersSubtitle": "Просмотр пользователей и управление ролями (в будущем)",
+  "@manageUsersSubtitle": {
+    "description": "Translation for manageUsersSubtitle"
+  },
+  "manageResourcesTitle": "Управление ресурсами",
+  "@manageResourcesTitle": {
+    "description": "Translation for manageResourcesTitle"
+  },
+  "manageResourcesSubtitle": "Управление всеми учебными ресурсами (в будущем)",
+  "@manageResourcesSubtitle": {
+    "description": "Translation for manageResourcesSubtitle"
+  },
+  "confirmDeleteTitle": "Подтвердить удаление",
+  "@confirmDeleteTitle": {
+    "description": "Translation for confirmDeleteTitle"
+  },
+  "confirmDeleteNewsMessage": "Вы уверены, что хотите удалить \"{newsTitle}\"?",
+  "@confirmDeleteNewsMessage": {
+    "placeholders": {
+      "newsTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "newsDeletedSuccess": "\"{newsTitle}\" успешно удален.",
+  "@newsDeletedSuccess": {
+    "placeholders": {
+      "newsTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToDeleteNews": "Не удалось удалить \"{newsTitle}\": {error}",
+  "@failedToDeleteNews": {
+    "description": "Error message when deleting news fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "newsTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "faqTitle": "FAQ",
+  "@faqTitle": {
+    "description": "Translation for faqTitle"
+  },
+  "searchHelp": "Поиск справки...",
+  "@searchHelp": {
+    "description": "Translation for searchHelp"
+  },
+  "allCategories": "Все категории",
+  "@allCategories": {
+    "description": "Фильтр для отображения всех категорий"
+  },
+  "helpfulFeedback": "Была ли эта статья полезной?",
+  "@helpfulFeedback": {
+    "description": "Запрос обратной связи о полезности статьи"
+  },
+  "noArticlesFound": "Статьи не найдены.",
+  "@noArticlesFound": {
+    "description": "Сообщение при отсутствии статей"
+  },
+  "settingsNotifications": "Уведомления",
+  "@settingsNotifications": {
+    "description": "Translation for settingsNotifications"
+  },
+  "changePasswordTitle": "Изменить пароль",
+  "@changePasswordTitle": {
+    "description": "Translation for changePasswordTitle"
+  },
+  "helpCenterTitle": "Центр помощи",
+  "@helpCenterTitle": {
+    "description": "Translation for helpCenterTitle"
+  },
+  "settingsAbout": "О приложении",
+  "@settingsAbout": {
+    "description": "Translation for settingsAbout"
+  },
+  "passwordUpdatedSuccess": "Пароль успешно обновлен",
+  "@passwordUpdatedSuccess": {
+    "description": "Translation for passwordUpdatedSuccess"
+  },
+  "errorWrongPassword": "Неверный текущий пароль",
+  "@errorWrongPassword": {
+    "description": "Translation for errorWrongPassword"
+  },
+  "currentPassword": "Текущий пароль",
+  "@currentPassword": {
+    "description": "Translation for currentPassword"
+  },
+  "newPassword": "Новый пароль",
+  "@newPassword": {
+    "description": "Translation for newPassword"
+  },
+  "confirmPassword": "Подтвердите пароль",
+  "@confirmPassword": {
+    "description": "Translation for confirmPassword"
+  },
+  "passwordMismatch": "Пароли не совпадают",
+  "@passwordMismatch": {
+    "description": "Translation for passwordMismatch"
+  },
+  "save": "Сохранить",
+  "@save": {
+    "description": "Translation for save"
+  },
+  "addNewsTooltip": "Добавить новую новостную статью",
+  "@addNewsTooltip": {
+    "description": "Translation for addNewsTooltip"
+  },
+  "editNewsTooltip": "Редактировать новость",
+  "@editNewsTooltip": {
+    "description": "Translation for editNewsTooltip"
+  },
+  "deleteNewsTooltip": "Удалить новость",
+  "@deleteNewsTooltip": {
+    "description": "Translation for deleteNewsTooltip"
+  },
+  "addNewsButton": "Добавить новость",
+  "@addNewsButton": {
+    "description": "Translation for addNewsButton"
+  },
+  "noNewsAvailableManager": "Нет новостных статей. добавьте одну!",
+  "@noNewsAvailableManager": {
+    "description": "Translation for noNewsAvailableManager"
+  },
+  "editNewsTitle": "Редактировать новость",
+  "@editNewsTitle": {
+    "description": "Translation for editNewsTitle"
+  },
+  "addNewsTitle": "Добавить новостную статью",
+  "@addNewsTitle": {
+    "description": "Translation for addNewsTitle"
+  },
+  "saveNewsTooltip": "Сохранить новость",
+  "@saveNewsTooltip": {
+    "description": "Translation for saveNewsTooltip"
+  },
+  "newsTitleLabel": "Заголовок",
+  "@newsTitleLabel": {
+    "description": "Translation for newsTitleLabel"
+  },
+  "pleaseEnterNewsTitle": "Введите заголовок новости",
+  "@pleaseEnterNewsTitle": {
+    "description": "Translation for pleaseEnterNewsTitle"
+  },
+  "newsTitleMinLength": "Заголовок новости должен быть не менее {length} символов",
+  "@newsTitleMinLength": {
+    "placeholders": {
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "newsSourceLabel": "Источник (например, название блога)",
+  "@newsSourceLabel": {
+    "description": "Translation for newsSourceLabel"
+  },
+  "pleaseEnterNewsSource": "Введите источник новостей",
+  "@pleaseEnterNewsSource": {
+    "description": "Translation for pleaseEnterNewsSource"
+  },
+  "newsUrlLabel": "URL статьи",
+  "@newsUrlLabel": {
+    "description": "Translation for newsUrlLabel"
+  },
+  "pleaseEnterNewsUrl": "Введите URL статьи",
+  "@pleaseEnterNewsUrl": {
+    "description": "Translation for pleaseEnterNewsUrl"
+  },
+  "pleaseEnterValidNewsUrl": "Введите действительный URL (начинающийся с http или https).",
+  "@pleaseEnterValidNewsUrl": {
+    "description": "Translation for pleaseEnterValidNewsUrl"
+  },
+  "newsImageUrlLabel": "URL изображения (необязательно)",
+  "@newsImageUrlLabel": {
+    "description": "Translation for newsImageUrlLabel"
+  },
+  "pleaseEnterValidImageUrl": "Введите действительный URL изображения (начинающийся с http или https) или оставьте поле пустым.",
+  "@pleaseEnterValidImageUrl": {
+    "description": "Translation for pleaseEnterValidImageUrl"
+  },
+  "publicationDateLabel": "Дата публикации",
+  "@publicationDateLabel": {
+    "description": "Translation for publicationDateLabel"
+  },
+  "pleaseSelectPublicationDate": "Выберите дату публикации.",
+  "@pleaseSelectPublicationDate": {
+    "description": "Translation for pleaseSelectPublicationDate"
+  },
+  "noDateSelected": "Дата не выбрана",
+  "@noDateSelected": {
+    "description": "Translation for noDateSelected"
+  },
+  "selectDateTooltip": "Выберите дату",
+  "@selectDateTooltip": {
+    "description": "Translation for selectDateTooltip"
+  },
+  "updateNewsButton": "Обновить новости",
+  "@updateNewsButton": {
+    "description": "Translation for updateNewsButton"
+  },
+  "addNewsButtonForm": "Добавить новостную статью",
+  "@addNewsButtonForm": {
+    "description": "Translation for addNewsButtonForm"
+  },
+  "newsUpdatedSuccess": "\"{newsTitle}\" успешно обновлено.",
+  "@newsUpdatedSuccess": {
+    "placeholders": {
+      "newsTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "newsAddedSuccess": "\"{newsTitle}\" успешно добавлено.",
+  "@newsAddedSuccess": {
+    "placeholders": {
+      "newsTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToSaveNews": "Не удалось сохранить новости: {error}",
+  "@failedToSaveNews": {
+    "description": "Error message when saving news fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLoadingUsers": "Ошибка загрузки пользователей: {error}",
+  "@errorLoadingUsers": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noUsersFound": "Пользователи не найдены.",
+  "@noUsersFound": {
+    "description": "Translation for noUsersFound"
+  },
+  "noEmailProvided": "Адрес электронной почты не указан",
+  "@noEmailProvided": {
+    "description": "Translation for noEmailProvided"
+  },
+  "roleLabel": "Роль",
+  "@roleLabel": {
+    "description": "Translation for roleLabel"
+  },
+  "registeredOnLabel": "Зарегистрирован",
+  "@registeredOnLabel": {
+    "description": "Translation for registeredOnLabel"
+  },
+  "manageUsersSubtitleNow": "Просмотр и поиск зарегистрированных пользователей",
+  "@manageUsersSubtitleNow": {
+    "description": "Translation for manageUsersSubtitleNow"
+  },
+  "manageResourcesSubtitleNow": "Просмотр, редактирование или удаление любого учебного ресурса",
+  "@manageResourcesSubtitleNow": {
+    "description": "Translation for manageResourcesSubtitleNow"
+  },
+  "confirmDeleteResourceMessage": "Вы уверены, что хотите удалить ресурс \"{resourceTitle}\"?",
+  "@confirmDeleteResourceMessage": {
+    "placeholders": {
+      "resourceTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToDeleteResource": "Не удалось удалить ресурс \"{resourceTitle}\": {error}",
+  "@failedToDeleteResource": {
+    "description": "Error message when deleting resource fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "resourceTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLoadingResources": "Ошибка загрузки ресурсов: {error}",
+  "@errorLoadingResources": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noResourcesFoundManager": "Ресурсы в системе не найдены.",
+  "@noResourcesFoundManager": {
+    "description": "Translation for noResourcesFoundManager"
+  },
+  "editResourceTooltip": "Изменить ресурс",
+  "@editResourceTooltip": {
+    "description": "Translation for editResourceTooltip"
+  },
+  "deleteResourceTooltip": "Удалить ресурс",
+  "@deleteResourceTooltip": {
+    "description": "Translation for deleteResourceTooltip"
+  },
+  "manageQuizzesTitle": "Управление тестами",
+  "@manageQuizzesTitle": {
+    "description": "Translation for manageQuizzesTitle"
+  },
+  "addQuizTooltip": "Добавить новый тест",
+  "@addQuizTooltip": {
+    "description": "Translation for addQuizTooltip"
+  },
+  "errorLoadingQuizzesAdmin": "Ошибка загрузки тестов: {error}",
+  "@errorLoadingQuizzesAdmin": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noQuizzesFoundManager": "Тестов не найдено. добавьте один!",
+  "@noQuizzesFoundManager": {
+    "description": "Translation for noQuizzesFoundManager"
+  },
+  "confirmDeleteQuizMessage": "Вы уверены, что хотите удалить тест \"{quizTitle}\" и все его вопросы? это действие нельзя отменить.",
+  "@confirmDeleteQuizMessage": {
+    "placeholders": {
+      "quizTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "quizDeletedSuccess": "Тест \"{quizTitle}\" и его вопросы успешно удалены.",
+  "@quizDeletedSuccess": {
+    "placeholders": {
+      "quizTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToDeleteQuiz": "Не удалось удалить тест \"{quizTitle}\": {error}",
+  "@failedToDeleteQuiz": {
+    "description": "Error message when deleting quiz fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "quizTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "editDetailsButton": "Изменить сведения",
+  "@editDetailsButton": {
+    "description": "Translation for editDetailsButton"
+  },
+  "manageQuestionsButton": "Вопросы",
+  "@manageQuestionsButton": {
+    "description": "Translation for manageQuestionsButton"
+  },
+  "deleteQuizTooltip": "Удалить тест и вопросы",
+  "@deleteQuizTooltip": {
+    "description": "Translation for deleteQuizTooltip"
+  },
+  "addQuizButton": "Добавить тест",
+  "@addQuizButton": {
+    "description": "Translation for addQuizButton"
+  },
+  "manageQuizzesSubtitle": "Контролировать все тесты и их вопросы",
+  "@manageQuizzesSubtitle": {
+    "description": "Translation for manageQuizzesSubtitle"
+  },
+  "registrationEmailError": "Введите действительный адрес электронной почты",
+  "@registrationEmailError": {
+    "description": "Сообщение об ошибке при неверном адресе электронной почты"
+  },
+  "dashboardXodimTitle": "Моя активность",
+  "@dashboardXodimTitle": {
+    "description": "Заголовок для раздела панели управления обычного сотрудника"
+  },
+  "dashboardEkspertTitle": "Мой вклад",
+  "@dashboardEkspertTitle": {
+    "description": "Заголовок для раздела панели управления эксперта"
+  },
+  "dashboardAdminTitle": "Обзор системы",
+  "@dashboardAdminTitle": {
+    "description": "Заголовок для раздела панели управления администратора"
+  },
+  "seeAllButton": "Посмотреть все",
+  "@seeAllButton": {
+    "description": "Кнопка для просмотра всех элементов в списке"
+  },
+  "noGuidesAuthored": "Вы еще не создали ни одного руководства.",
+  "@noGuidesAuthored": {
+    "description": "Сообщение, отображаемое, когда эксперт еще не создал ни одного руководства."
+  },
+  "adminStatUsers": "Пользователи",
+  "@adminStatUsers": {
+    "description": "Метка для статистики общего числа пользователей в панели администратора."
+  },
+  "adminStatGuides": "Руководства",
+  "@adminStatGuides": {
+    "description": "Метка для статистики общего числа руководств в панели администратора."
+  },
+  "adminStatQuizzes": "Викторины",
+  "@adminStatQuizzes": {
+    "description": "Метка для статистики общего числа викторин в панели администратора."
+  },
+  "orDivider": "Или",
+  "@orDivider": {
+    "description": "Текст-разделитель, например 'ИЛИ', между вариантами входа."
+  },
+  "signInWithGoogle": "Войти через Google",
+  "@signInWithGoogle": {
+    "description": "Текст кнопки для входа с помощью учетной записи Google."
+  },
+  "themeSystemDefault": "Системный",
+  "@themeSystemDefault": {
+    "description": "Translation for themeSystemDefault"
+  },
+  "themeLight": "Светлая тема",
+  "@themeLight": {
+    "description": "Translation for themeLight"
+  },
+  "themeDark": "Темная тема",
+  "@themeDark": {
+    "description": "Translation for themeDark"
+  },
+  "bioOptionalLabel": "Био (необязательно)",
+  "@bioOptionalLabel": {
+    "description": "Translation for bioOptionalLabel"
+  },
+  "profilePictureUrlLabel": "URL изображения профиля (необязательно)",
+  "@profilePictureUrlLabel": {
+    "description": "Translation for profilePictureUrlLabel"
+  },
+  "levelBeginner": "Новичок",
+  "@levelBeginner": {
+    "description": "Translation for levelBeginner"
+  },
+  "levelIntermediate": "Средний",
+  "@levelIntermediate": {
+    "description": "Translation for levelIntermediate"
+  },
+  "levelAdvanced": "Продвинутый",
+  "@levelAdvanced": {
+    "description": "Translation for levelAdvanced"
+  },
+  "levelExpert": "Эксперт",
+  "@levelExpert": {
+    "description": "Translation for levelExpert"
+  },
+  "totalPoints": "Всего очков",
+  "@totalPoints": {
+    "description": "Translation for totalPoints"
+  },
+  "nextLevel": "Следующий уровень",
+  "@nextLevel": {
+    "description": "Translation for nextLevel"
+  },
+  "pointsToNextLevel": "{points} XP до следующего уровня",
+  "@pointsToNextLevel": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "manageArticlesTitle": "Статьи",
+  "@manageArticlesTitle": {
+    "description": "Translation for manageArticlesTitle"
+  },
+  "manageArticlesSubtitle": "Управление базой знаний",
+  "@manageArticlesSubtitle": {
+    "description": "Translation for manageArticlesSubtitle"
+  },
+  "manageVideosTitle": "Видео",
+  "@manageVideosTitle": {
+    "description": "Translation for manageVideosTitle"
+  },
+  "manageVideosSubtitle": "Управление видеоуроками",
+  "@manageVideosSubtitle": {
+    "description": "Translation for manageVideosSubtitle"
+  },
+  "manageSystemsTitle": "Системы",
+  "@manageSystemsTitle": {
+    "description": "Translation for manageSystemsTitle"
+  },
+  "manageSystemsSubtitle": "Управление справочником систем",
+  "@manageSystemsSubtitle": {
+    "description": "Translation for manageSystemsSubtitle"
+  },
+  "manageFaqTitle": "FAQ",
+  "@manageFaqTitle": {
+    "description": "Translation for manageFaqTitle"
+  },
+  "manageFaqSubtitle": "Управление частыми вопросами",
+  "@manageFaqSubtitle": {
+    "description": "Translation for manageFaqSubtitle"
+  },
+  "manageNotificationsTitle": "Уведомления",
+  "@manageNotificationsTitle": {
+    "description": "Translation for manageNotificationsTitle"
+  },
+  "manageNotificationsSubtitle": "Отправить уведомления",
+  "@manageNotificationsSubtitle": {
+    "description": "Translation for manageNotificationsSubtitle"
+  },
+  "selectLanguage": "Выберите язык",
+  "@selectLanguage": {
+    "description": "Translation for selectLanguage"
+  },
+  "topicDeletedSuccess": "Тема \"{topicTitle}\" успешно удалена.",
+  "@topicDeletedSuccess": {
+    "placeholders": {
+      "topicTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToDeleteTopic": "Не удалось удалить тему: {error}",
+  "@failedToDeleteTopic": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteTopicConfirmMessage": "Вы уверены, что хотите удалить тему \"{topicTitle}\"?",
+  "@deleteTopicConfirmMessage": {
+    "placeholders": {
+      "topicTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "editTopicTooltip": "Редактировать тему",
+  "@editTopicTooltip": {
+    "description": "Translation for editTopicTooltip"
+  },
+  "deleteTopicConfirmTitle": "Удалить тему",
+  "@deleteTopicConfirmTitle": {
+    "description": "Translation for deleteTopicConfirmTitle"
+  },
+  "commentPlural": "Комментарии",
+  "@commentPlural": {
+    "description": "Translation for commentPlural"
+  },
+  "commentSingular": "Комментарий",
+  "@commentSingular": {
+    "description": "Translation for commentSingular"
+  },
+  "deleteTopicTooltip": "Удалить тему",
+  "@deleteTopicTooltip": {
+    "description": "Translation for deleteTopicTooltip"
+  },
+  "bottomNavKnowledge": "База знаний",
+  "@bottomNavKnowledge": {
+    "description": "Label for knowledge base tab"
+  },
+  "articleDetailTitle": "Подробности статьи",
+  "@articleDetailTitle": {
+    "description": "Title for article details screen"
+  },
+  "feedbackThanks": "Благодарим за ваш отзыв!",
+  "@feedbackThanks": {
+    "description": "Success message after feedback"
+  },
+  "shareArticle": "Поделиться",
+  "@shareArticle": {
+    "description": "Button to share an article"
+  },
+  "downloadPdf": "Скачать PDF",
+  "@downloadPdf": {
+    "description": "Button to download PDF"
+  },
+  "articlePinned": "Закреплено",
+  "@articlePinned": {
+    "description": "Label for pinned articles"
+  },
+  "confirmDeleteArticleMessage": "Вы уверены, что хотите удалить статью \"{articleTitle}\"?",
+  "@confirmDeleteArticleMessage": {
+    "placeholders": {
+      "articleTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "articleSavedSuccess": "Статья сохранена",
+  "@articleSavedSuccess": {
+    "description": "Translation for articleSavedSuccess"
+  },
+  "addArticleTitle": "Новая статья",
+  "@addArticleTitle": {
+    "description": "Translation for addArticleTitle"
+  },
+  "editArticleTitle": "Редактировать статью",
+  "@editArticleTitle": {
+    "description": "Translation for editArticleTitle"
+  },
+  "categoryLabel": "Категория",
+  "@categoryLabel": {
+    "description": "Translation for categoryLabel"
+  },
+  "contentLabel": "Содержание (Markdown)",
+  "@contentLabel": {
+    "description": "Translation for contentLabel"
+  },
+  "tagsLabel": "Теги (через запятую)",
+  "@tagsLabel": {
+    "description": "Translation for tagsLabel"
+  },
+  "tagsHint": "например: суд, закон, кодекс",
+  "@tagsHint": {
+    "description": "Translation for tagsHint"
+  },
+  "noPdfSelected": "PDF файл не выбран",
+  "@noPdfSelected": {
+    "description": "Translation for noPdfSelected"
+  },
+  "uploadPdfTooltip": "Загрузить PDF",
+  "@uploadPdfTooltip": {
+    "description": "Translation for uploadPdfTooltip"
+  },
+  "currentFileLabel": "Текущий файл: {url}",
+  "@currentFileLabel": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "existingPdfFile": "Существующий PDF файл",
+  "@existingPdfFile": {
+    "description": "Translation for existingPdfFile"
+  },
+  "titleRequired": "Требуется заголовок",
+  "@titleRequired": {
+    "description": "Translation for titleRequired"
+  },
+  "contentRequired": "Требуется содержание",
+  "@contentRequired": {
+    "description": "Translation for contentRequired"
+  },
+  "confirmDeleteVideoMessage": "Вы уверены, что хотите удалить видео \"{videoTitle}\"?",
+  "@confirmDeleteVideoMessage": {
+    "placeholders": {
+      "videoTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "videoDeletedSuccess": "Видео удалено",
+  "@videoDeletedSuccess": {
+    "description": "Translation for videoDeletedSuccess"
+  },
+  "noVideosFound": "Видео не найдено",
+  "@noVideosFound": {
+    "description": "Translation for noVideosFound"
+  },
+  "videoSavedSuccess": "Видео сохранено",
+  "@videoSavedSuccess": {
+    "description": "Translation for videoSavedSuccess"
+  },
+  "addVideoTitle": "Новое видео",
+  "@addVideoTitle": {
+    "description": "Translation for addVideoTitle"
+  },
+  "editVideoTitle": "Редактировать видео",
+  "@editVideoTitle": {
+    "description": "Translation for editVideoTitle"
+  },
+  "youtubeIdLabel": "YouTube ID",
+  "@youtubeIdLabel": {
+    "description": "Translation for youtubeIdLabel"
+  },
+  "youtubeIdHint": "например: dQw4w9WgXcQ",
+  "@youtubeIdHint": {
+    "description": "Translation for youtubeIdHint"
+  },
+  "youtubeIdRequired": "Требуется YouTube ID",
+  "@youtubeIdRequired": {
+    "description": "Translation for youtubeIdRequired"
+  },
+  "systemOptionalLabel": "Система (необязательно)",
+  "@systemOptionalLabel": {
+    "description": "Translation for systemOptionalLabel"
+  },
+  "notSelectedLabel": "Не выбрано",
+  "@notSelectedLabel": {
+    "description": "Translation for notSelectedLabel"
+  },
+  "durationLabel": "Длительность (секунды)",
+  "@durationLabel": {
+    "description": "Translation for durationLabel"
+  },
+  "durationHint": "например: 600",
+  "@durationHint": {
+    "description": "Translation for durationHint"
+  },
+  "durationRequired": "Требуется длительность",
+  "@durationRequired": {
+    "description": "Translation for durationRequired"
+  },
+  "videoTagsHint": "например: вход, ошибка, настройки",
+  "@videoTagsHint": {
+    "description": "Translation for videoTagsHint"
+  },
+  "descriptionLabel": "Описание",
+  "@descriptionLabel": {
+    "description": "Translation for descriptionLabel"
+  },
+  "descriptionRequired": "Требуется описание",
+  "@descriptionRequired": {
+    "description": "Translation for descriptionRequired"
+  },
+  "confirmDeleteSystemMessage": "Вы уверены, что хотите удалить систему \"{systemName}\"?",
+  "@confirmDeleteSystemMessage": {
+    "placeholders": {
+      "systemName": {
+        "type": "String"
+      }
+    }
+  },
+  "systemDeletedSuccess": "Система удалена",
+  "@systemDeletedSuccess": {
+    "description": "Translation for systemDeletedSuccess"
+  },
+  "noSystemsFound": "Системы не найдены",
+  "@noSystemsFound": {
+    "description": "Translation for noSystemsFound"
+  },
+  "systemSavedSuccess": "Система сохранена",
+  "@systemSavedSuccess": {
+    "description": "Translation for systemSavedSuccess"
+  },
+  "addSystemTitle": "Новая система",
+  "@addSystemTitle": {
+    "description": "Translation for addSystemTitle"
+  },
+  "editSystemTitle": "Редактировать систему",
+  "@editSystemTitle": {
+    "description": "Translation for editSystemTitle"
+  },
+  "shortNameLabel": "Короткое название",
+  "@shortNameLabel": {
+    "description": "Translation for shortNameLabel"
+  },
+  "shortNameHint": "например: e-SUD",
+  "@shortNameHint": {
+    "description": "Translation for shortNameHint"
+  },
+  "nameRequired": "Требуется название",
+  "@nameRequired": {
+    "description": "Translation for nameRequired"
+  },
+  "fullNameLabel": "Полное название",
+  "@fullNameLabel": {
+    "description": "Translation for fullNameLabel"
+  },
+  "fullNameRequired": "Требуется полное название",
+  "@fullNameRequired": {
+    "description": "Translation for fullNameRequired"
+  },
+  "websiteUrlLabel": "URL веб-сайта",
+  "@websiteUrlLabel": {
+    "description": "Translation for websiteUrlLabel"
+  },
+  "urlRequired": "Требуется URL",
+  "@urlRequired": {
+    "description": "Translation for urlRequired"
+  },
+  "logoUrlLabel": "URL логотипа",
+  "@logoUrlLabel": {
+    "description": "Translation for logoUrlLabel"
+  },
+  "logoUrlRequired": "Требуется URL логотипа",
+  "@logoUrlRequired": {
+    "description": "Translation for logoUrlRequired"
+  },
+  "statusLabel": "Статус",
+  "@statusLabel": {
+    "description": "Translation for statusLabel"
+  },
+  "loginGuideIdLabel": "ID руководства по входу (необязательно)",
+  "@loginGuideIdLabel": {
+    "description": "Translation for loginGuideIdLabel"
+  },
+  "videoGuideIdLabel": "ID видеоруководства (необязательно)",
+  "@videoGuideIdLabel": {
+    "description": "Translation for videoGuideIdLabel"
+  },
+  "confirmDeleteFaqMessage": "Вы уверены, что хотите удалить вопрос \"{question}\"?",
+  "@confirmDeleteFaqMessage": {
+    "placeholders": {
+      "question": {
+        "type": "String"
+      }
+    }
+  },
+  "faqDeletedSuccess": "Вопрос удален",
+  "@faqDeletedSuccess": {
+    "description": "Translation for faqDeletedSuccess"
+  },
+  "noFaqsFound": "Вопросы не найдены",
+  "@noFaqsFound": {
+    "description": "Translation for noFaqsFound"
+  },
+  "addFaqTitle": "Новый вопрос",
+  "@addFaqTitle": {
+    "description": "Translation for addFaqTitle"
+  },
+  "editFaqTitle": "Редактировать вопрос",
+  "@editFaqTitle": {
+    "description": "Translation for editFaqTitle"
+  },
+  "faqSavedSuccess": "Вопрос сохранен",
+  "@faqSavedSuccess": {
+    "description": "Translation for faqSavedSuccess"
+  },
+  "questionLabel": "Вопрос",
+  "@questionLabel": {
+    "description": "Translation for questionLabel"
+  },
+  "questionRequired": "Требуется вопрос",
+  "@questionRequired": {
+    "description": "Translation for questionRequired"
+  },
+  "answerLabel": "Ответ (Markdown)",
+  "@answerLabel": {
+    "description": "Translation for answerLabel"
+  },
+  "answerRequired": "Требуется ответ",
+  "@answerRequired": {
+    "description": "Translation for answerRequired"
+  },
+  "add": "Добавить",
+  "@add": {
+    "description": "Translation for add"
+  },
+  "titleLabel": "Заголовок",
+  "@titleLabel": {
+    "description": "Translation for titleLabel"
+  },
+  "edit": "Редактировать",
+  "@edit": {
+    "description": "Translation for edit"
+  },
+  "delete": "Удалить",
+  "@delete": {
+    "description": "Translation for delete"
+  },
+  "cancel": "Отмена",
+  "@cancel": {
+    "description": "Translation for cancel"
+  },
+  "search": "Поиск...",
+  "@search": {
+    "description": "Translation for search"
+  },
+  "fieldRequired": "Поле обязательно для заполнения",
+  "@fieldRequired": {
+    "description": "Translation for fieldRequired"
+  },
+  "confirmDelete": "Вы уверены, что хотите удалить?",
+  "@confirmDelete": {
+    "description": "Translation for confirmDelete"
+  },
+  "successSaved": "Успешно сохранено",
+  "@successSaved": {
+    "description": "Translation for successSaved"
+  },
+  "successDeleted": "Успешно удалено",
+  "@successDeleted": {
+    "description": "Translation for successDeleted"
+  },
+  "notificationManagementTitle": "Управление уведомлениями",
+  "@notificationManagementTitle": {
+    "description": "Translation for notificationManagementTitle"
+  },
+  "notificationHistoryTitle": "История уведомлений",
+  "@notificationHistoryTitle": {
+    "description": "Translation for notificationHistoryTitle"
+  },
+  "notificationHistoryPlaceholder": "Здесь будет отображаться история отправленных уведомлений (скоро).",
+  "@notificationHistoryPlaceholder": {
+    "description": "Translation for notificationHistoryPlaceholder"
+  },
+  "sendNewNotificationButton": "Отправить новое уведомление",
+  "@sendNewNotificationButton": {
+    "description": "Translation for sendNewNotificationButton"
+  },
+  "sendNotificationTitle": "Отправить уведомление",
+  "@sendNotificationTitle": {
+    "description": "Translation for sendNotificationTitle"
+  },
+  "notificationSentSuccess": "Уведомление отправлено",
+  "@notificationSentSuccess": {
+    "description": "Translation for notificationSentSuccess"
+  },
+  "notificationTitleLabel": "Заголовок",
+  "@notificationTitleLabel": {
+    "description": "Translation for notificationTitleLabel"
+  },
+  "notificationTitleRequired": "Требуется заголовок",
+  "@notificationTitleRequired": {
+    "description": "Translation for notificationTitleRequired"
+  },
+  "notificationBodyLabel": "Текст сообщения",
+  "@notificationBodyLabel": {
+    "description": "Translation for notificationBodyLabel"
+  },
+  "notificationBodyRequired": "Требуется текст сообщения",
+  "@notificationBodyRequired": {
+    "description": "Translation for notificationBodyRequired"
+  },
+  "notificationTypeLabel": "Тип уведомления",
+  "@notificationTypeLabel": {
+    "description": "Translation for notificationTypeLabel"
+  },
+  "targetAudienceLabel": "Аудитория",
+  "@targetAudienceLabel": {
+    "description": "Translation for targetAudienceLabel"
+  },
+  "resourceTabArticles": "Статьи",
+  "@resourceTabArticles": {
+    "description": "Translation for resourceTabArticles"
+  },
+  "resourceTabVideos": "Видео",
+  "@resourceTabVideos": {
+    "description": "Translation for resourceTabVideos"
+  },
+  "resourceTabFiles": "Файлы",
+  "@resourceTabFiles": {
+    "description": "Translation for resourceTabFiles"
+  },
+  "filesTabTitle": "Файлы",
+  "@filesTabTitle": {
+    "description": "Translation for filesTabTitle"
+  },
+  "systemsDirectoryTitle": "Справочник судебных систем",
+  "@systemsDirectoryTitle": {
+    "description": "Translation for systemsDirectoryTitle"
+  },
+  "bookmarkSaveTooltip": "Сохранить",
+  "@bookmarkSaveTooltip": {
+    "description": "Translation for bookmarkSaveTooltip"
+  },
+  "bookmarkRemoveTooltip": "Удалить из сохраненных",
+  "@bookmarkRemoveTooltip": {
+    "description": "Translation for bookmarkRemoveTooltip"
+  },
+  "resourceTypeOther": "Другое",
+  "@resourceTypeOther": {
+    "description": "Translation for resourceTypeOther"
+  },
+  "openFile": "Открыть файл",
+  "@openFile": {
+    "description": "Translation for openFile"
+  },
+  "fileSize": "Размер файла",
+  "@fileSize": {
+    "description": "Translation for fileSize"
+  },
+  "selectFile": "Выбрать файл",
+  "@selectFile": {
+    "description": "Translation for selectFile"
+  },
+  "upload": "Загрузить",
+  "@upload": {
+    "description": "Translation for upload"
+  },
+  "processing": "Обработка...",
+  "@processing": {
+    "description": "Translation for processing"
+  },
+  "urlLabel": "Ссылка (URL)",
+  "@urlLabel": {
+    "description": "Translation for urlLabel"
+  },
+  "resourceTypePDF": "PDF руководство",
+  "@resourceTypePDF": {
+    "description": "Translation for resourceTypePDF"
+  },
+  "resourceTypeVideo": "Видеоурок",
+  "@resourceTypeVideo": {
+    "description": "Translation for resourceTypeVideo"
+  },
+  "resourceTypeLink": "Веб-ссылка",
+  "@resourceTypeLink": {
+    "description": "Translation for resourceTypeLink"
+  },
+  "faqCategoryLogin": "Проблемы со входом",
+  "@faqCategoryLogin": {
+    "description": "Translation for faqCategoryLogin"
+  },
+  "faqCategoryPassword": "Проблемы с паролем",
+  "@faqCategoryPassword": {
+    "description": "Translation for faqCategoryPassword"
+  },
+  "faqCategoryUpload": "Загрузка файлов",
+  "@faqCategoryUpload": {
+    "description": "Translation for faqCategoryUpload"
+  },
+  "faqCategoryAccess": "Права доступа",
+  "@faqCategoryAccess": {
+    "description": "Translation for faqCategoryAccess"
+  },
+  "faqCategoryGeneral": "Общие вопросы",
+  "@faqCategoryGeneral": {
+    "description": "Translation for faqCategoryGeneral"
+  },
+  "faqCategoryTechnical": "Технические проблемы",
+  "@faqCategoryTechnical": {
+    "description": "Translation for faqCategoryTechnical"
+  },
+  "authorLabel": "Автор",
+  "@authorLabel": {
+    "description": "Translation for authorLabel"
+  },
+  "dateAddedLabel": "Добавлено",
+  "@dateAddedLabel": {
+    "description": "Translation for dateAddedLabel"
+  },
+  "launchingUrlMessage": "Запуск uRL...",
+  "@launchingUrlMessage": {
+    "description": "Translation for launchingUrlMessage"
+  },
+  "resourceUpdatedSuccess": "Ресурс успешно обновлен!",
+  "@resourceUpdatedSuccess": {
+    "description": "Translation for resourceUpdatedSuccess"
+  },
+  "resourceUpdatedError": "Ошибка при обновлении ресурса: {error}",
+  "@resourceUpdatedError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "onlySaved": "Только сохраненные",
+  "@onlySaved": {
+    "description": "Translation for onlySaved"
+  },
+  "searchArticlesPlaceholder": "Поиск статей...",
+  "@searchArticlesPlaceholder": {
+    "description": "Translation for searchArticlesPlaceholder"
+  },
+  "articleCategoryGeneral": "Общее",
+  "@articleCategoryGeneral": {
+    "description": "Translation for articleCategoryGeneral"
+  },
+  "articleCategoryProcedure": "Процедура",
+  "@articleCategoryProcedure": {
+    "description": "Translation for articleCategoryProcedure"
+  },
+  "articleCategoryLaw": "Законодательство",
+  "@articleCategoryLaw": {
+    "description": "Translation for articleCategoryLaw"
+  },
+  "articleCategoryFaq": "FAQ",
+  "@articleCategoryFaq": {
+    "description": "Translation for articleCategoryFaq"
+  },
+  "filterAll": "Все",
+  "@filterAll": {
+    "description": "Translation for filterAll"
+  },
+  "noResultsFound": "Результатов не найдено",
+  "@noResultsFound": {
+    "description": "Translation for noResultsFound"
+  },
+  "noArticlesAvailable": "Статьи недоступны",
+  "@noArticlesAvailable": {
+    "description": "Translation for noArticlesAvailable"
+  },
+  "noVideosAvailable": "Видео недоступны",
+  "@noVideosAvailable": {
+    "description": "Translation for noVideosAvailable"
+  },
+  "actionCreateDiscussion": "Создать обсуждение",
+  "@actionCreateDiscussion": {
+    "description": "Translation for actionCreateDiscussion"
+  },
+  "actionCreateResource": "Создать ресурс",
+  "@actionCreateResource": {
+    "description": "Translation for actionCreateResource"
+  },
+  "actionCreateQuiz": "Создать тест",
+  "@actionCreateQuiz": {
+    "description": "Translation for actionCreateQuiz"
+  },
+  "notificationsTitle": "Уведомления",
+  "@notificationsTitle": {
+    "description": "Translation for notificationsTitle"
+  },
+  "loginRequired": "Требуется вход",
+  "@loginRequired": {
+    "description": "Translation for loginRequired"
+  },
+  "markAllAsReadTooltip": "Отметить все как прочитанные",
+  "@markAllAsReadTooltip": {
+    "description": "Translation for markAllAsReadTooltip"
+  },
+  "allNotificationsReadMessage": "Все уведомления отмечены как прочитанные",
+  "@allNotificationsReadMessage": {
+    "description": "Translation for allNotificationsReadMessage"
+  },
+  "noNotifications": "Нет уведомлений",
+  "@noNotifications": {
+    "description": "Translation for noNotifications"
+  },
+  "closeAction": "Закрыть",
+  "@closeAction": {
+    "description": "Translation for closeAction"
+  },
+  "leaderboardTitle": "Таблица лидеров",
+  "@leaderboardTitle": {
+    "description": "Translation for leaderboardTitle"
+  },
+  "pointsEarned": "Вы заработали {points} XP!",
+  "@pointsEarned": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "levelUp": "Поздравляем! новый уровень: {level}",
+  "@levelUp": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "rank": "Место",
+  "@rank": {
+    "description": "Translation for rank"
+  },
+  "quizHistoryTitle": "История викторин",
+  "@quizHistoryTitle": {
+    "description": "Translation for quizHistoryTitle"
+  },
+  "seeAll": "Показать все",
+  "@seeAll": {
+    "description": "Translation for seeAll"
+  },
+  "today": "Сегодня",
+  "@today": {
+    "description": "Translation for today"
+  },
+  "yesterday": "Вчера",
+  "@yesterday": {
+    "description": "Translation for yesterday"
+  },
+  "thisWeek": "На этой неделе",
+  "@thisWeek": {
+    "description": "Translation for thisWeek"
+  },
+  "older": "Старые результаты",
+  "@older": {
+    "description": "Translation for older"
+  },
+  "contactSupport": "Поддержка",
+  "@contactSupport": {
+    "description": "Translation for contactSupport"
+  },
+  "landingTitle": "Профессиональная платформа",
+  "@landingTitle": {
+    "description": "Translation for landingTitle"
+  },
+  "landingSubtitle": "Повышайте свои правовые знания. в любое время.",
+  "@landingSubtitle": {
+    "description": "Translation for landingSubtitle"
+  },
+  "landingLogin": "Войти",
+  "@landingLogin": {
+    "description": "Translation for landingLogin"
+  },
+  "landingRegister": "Регистрация",
+  "@landingRegister": {
+    "description": "Translation for landingRegister"
+  },
+  "featureKnowledgeBase": "База знаний",
+  "@featureKnowledgeBase": {
+    "description": "Translation for featureKnowledgeBase"
+  },
+  "featureKnowledgeBaseDesc": "Доступ к обширной библиотеке правовых ресурсов.",
+  "@featureKnowledgeBaseDesc": {
+    "description": "Translation for featureKnowledgeBaseDesc"
+  },
+  "featureVideoTutorials": "Видеоуроки",
+  "@featureVideoTutorials": {
+    "description": "Translation for featureVideoTutorials"
+  },
+  "featureVideoTutorialsDesc": "Учитесь по видео-руководствам от экспертов.",
+  "@featureVideoTutorialsDesc": {
+    "description": "Translation for featureVideoTutorialsDesc"
+  },
+  "featureGamification": "Геймификация",
+  "@featureGamification": {
+    "description": "Translation for featureGamification"
+  },
+  "featureGamificationDesc": "Зарабатывайте XP, значки и соревнуйтесь в рейтинге.",
+  "@featureGamificationDesc": {
+    "description": "Translation for featureGamificationDesc"
+  },
+  "analyticsTitle": "Аналитика обучения (xAPI)",
+  "@analyticsTitle": {
+    "description": "Translation for analyticsTitle"
+  },
+  "analyticsSubtitle": "Учебные записи",
+  "@analyticsSubtitle": {
+    "description": "Translation for analyticsSubtitle"
+  },
+  "totalRecords": "Всего записей",
+  "@totalRecords": {
+    "description": "Translation for totalRecords"
+  },
+  "realTime": "В реальном времени",
+  "@realTime": {
+    "description": "Translation for realTime"
+  },
+  "activityDistribution": "Распределение активности",
+  "@activityDistribution": {
+    "description": "Translation for activityDistribution"
+  },
+  "recentActivityFeed": "Лента недавней активности",
+  "@recentActivityFeed": {
+    "description": "Translation for recentActivityFeed"
+  },
+  "noRecords": "Учебные записи пока не найдены.",
+  "@noRecords": {
+    "description": "Translation for noRecords"
+  },
+  "unknownUser": "Неизвестный пользователь",
+  "@unknownUser": {
+    "description": "Translation for unknownUser"
+  },
+  "unknownObject": "Неизвестный объект",
+  "@unknownObject": {
+    "description": "Translation for unknownObject"
+  },
+  "justNow": "Только что",
+  "@justNow": {
+    "description": "Translation for justNow"
+  },
+  "quizzes": "Викторины",
+  "@quizzes": {
+    "description": "Translation for quizzes"
+  },
+  "simulations": "Симуляции",
+  "@simulations": {
+    "description": "Translation for simulations"
+  },
+  "catNewEmployees": "Новые сотрудники",
+  "@catNewEmployees": {
+    "description": "Translation for catNewEmployees"
+  },
+  "catIctSpecialists": "ИКТ специалисты",
+  "@catIctSpecialists": {
+    "description": "Translation for catIctSpecialists"
+  },
+  "catSystems": "Системы",
+  "@catSystems": {
+    "description": "Translation for catSystems"
+  },
+  "catAuth": "Аутентификация",
+  "@catAuth": {
+    "description": "Translation for catAuth"
+  },
+  "catGeneral": "Общее",
+  "@catGeneral": {
+    "description": "Translation for catGeneral"
+  },
+  "rankBeginner": "Начинающий",
+  "@rankBeginner": {
+    "description": "Translation for rankBeginner"
+  },
+  "rankIntermediate": "Средний уровень",
+  "@rankIntermediate": {
+    "description": "Translation for rankIntermediate"
+  },
+  "rankAdvanced": "Продвинутый",
+  "@rankAdvanced": {
+    "description": "Translation for rankAdvanced"
+  },
+  "sysCatPrimary": "Основные системы",
+  "@sysCatPrimary": {
+    "description": "Translation for sysCatPrimary"
+  },
+  "sysCatSecondary": "Дополнительные системы",
+  "@sysCatSecondary": {
+    "description": "Translation for sysCatSecondary"
+  },
+  "sysCatSupport": "Системы поддержки",
+  "@sysCatSupport": {
+    "description": "Translation for sysCatSupport"
+  },
+  "sysStatusActive": "Активно",
+  "@sysStatusActive": {
+    "description": "Translation for sysStatusActive"
+  },
+  "sysStatusMaintenance": "Техподдержка",
+  "@sysStatusMaintenance": {
+    "description": "Translation for sysStatusMaintenance"
+  },
+  "sysStatusInactive": "Неактивно",
+  "@sysStatusInactive": {
+    "description": "Translation for sysStatusInactive"
+  },
+  "videoViews": "{count} просмотров",
+  "@videoViews": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "videoAuthorSubtitle": "Автор",
+  "@videoAuthorSubtitle": {
+    "description": "Translation for videoAuthorSubtitle"
+  },
+  "videoDescriptionTitle": "Описание",
+  "@videoDescriptionTitle": {
+    "description": "Translation for videoDescriptionTitle"
+  },
+  "sysStatusDeprecated": "Устарело",
+  "@sysStatusDeprecated": {
+    "description": "Translation for sysStatusDeprecated"
+  },
+  "sysStatusOffline": "Отключено",
+  "@sysStatusOffline": {
+    "description": "Translation for sysStatusOffline"
+  },
+  "systemsDirectoryAll": "Все",
+  "@systemsDirectoryAll": {
+    "description": "Translation for systemsDirectoryAll"
+  },
+  "systemsDirectoryError": "Произошла ошибка: {error}",
+  "@systemsDirectoryError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "systemsDirectoryEmpty": "Системы отсутствуют",
+  "@systemsDirectoryEmpty": {
+    "description": "Translation for systemsDirectoryEmpty"
+  },
+  "backToKnowledgeBase": "Вернуться к руководствам",
+  "@backToKnowledgeBase": {
+    "description": "Translation for backToKnowledgeBase"
+  },
+  "quizSuccessMessage": "Отличный результат!",
+  "@quizSuccessMessage": {
+    "description": "Translation for quizSuccessMessage"
+  },
+  "quizFailureMessage": "Попробуйте еще раз!",
+  "@quizFailureMessage": {
+    "description": "Translation for quizFailureMessage"
+  },
+  "speedBonus": "Скоростной бонус",
+  "@speedBonus": {
+    "description": "Translation for speedBonus"
+  },
+  "levelSpecialist": "Специалист",
+  "@levelSpecialist": {
+    "description": "Translation for levelSpecialist"
+  },
+  "levelMaster": "Мастер",
+  "@levelMaster": {
+    "description": "Translation for levelMaster"
+  },
+  "errorCouldNotOpenLink": "Не удалось открыть ссылку",
+  "@errorCouldNotOpenLink": {
+    "description": "Translation for errorCouldNotOpenLink"
+  },
+  "errorResourceNotFound": "Ресурс не найден",
+  "@errorResourceNotFound": {
+    "description": "Translation for errorResourceNotFound"
+  },
+  "errorVideoNotFound": "Видео не найдено",
+  "@errorVideoNotFound": {
+    "description": "Translation for errorVideoNotFound"
+  },
+  "errorPdfOpen": "Не удалось открыть PDF файл",
+  "@errorPdfOpen": {
+    "description": "Translation for errorPdfOpen"
+  },
+  "errorTelegramOpen": "Не удалось открыть ссылку telegram",
+  "@errorTelegramOpen": {
+    "description": "Translation for errorTelegramOpen"
+  },
+  "errorGeneric": "Произошла ошибка: {error}",
+  "@errorGeneric": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "labelTrue": "Верно",
+  "@labelTrue": {
+    "description": "Translation for labelTrue"
+  },
+  "labelFalse": "Неверно",
+  "@labelFalse": {
+    "description": "Translation for labelFalse"
+  },
+  "labelPass": "Пройден",
+  "@labelPass": {
+    "description": "Translation for labelPass"
+  },
+  "labelFail": "Не пройден",
+  "@labelFail": {
+    "description": "Translation for labelFail"
+  },
+  "labelPdfAvailable": "PDF доступен",
+  "@labelPdfAvailable": {
+    "description": "Translation for labelPdfAvailable"
+  },
+  "actionOk": "OK",
+  "@actionOk": {
+    "description": "Translation for actionOk"
+  },
+  "actionGoBack": "Назад",
+  "@actionGoBack": {
+    "description": "Translation for actionGoBack"
+  },
+  "searchNoResults": "Ничего не найдено",
+  "@searchNoResults": {
+    "description": "Translation for searchNoResults"
+  },
+  "roleChangedSuccess": "Роль {userName} изменена на {role}",
+  "@roleChangedSuccess": {
+    "placeholders": {
+      "userName": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "roleChangeError": "Ошибка изменения роли: {error}",
+  "@roleChangeError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "changeRoleTooltip": "Изменить роль",
+  "@changeRoleTooltip": {
+    "description": "Translation for changeRoleTooltip"
+  },
+  "labelVideoGuide": "Видео руководство",
+  "@labelVideoGuide": {
+    "description": "Translation for labelVideoGuide"
+  },
+  "labelLoginGuide": "Руководство по входу",
+  "@labelLoginGuide": {
+    "description": "Translation for labelLoginGuide"
+  },
+  "changePasswordHint": "Реализация смены пароля (скоро)",
+  "@changePasswordHint": {
+    "description": "Translation for changePasswordHint"
+  },
+  "editTopic": "Редактировать тему",
+  "@editTopic": {
+    "description": "Translation for editTopic"
+  },
+  "update": "Обновить",
+  "@update": {
+    "description": "Translation for update"
+  },
+  "commentAdded": "Комментарий добавлен!",
+  "@commentAdded": {
+    "description": "Translation for commentAdded"
+  },
+  "updateFeatureMigration": "Функция обновления переносится. скоро!",
+  "@updateFeatureMigration": {
+    "description": "Translation for updateFeatureMigration"
+  },
+  "topicUpdatedSuccessfully": "Тема успешно обновлена",
+  "@topicUpdatedSuccessfully": {
+    "description": "Translation for topicUpdatedSuccessfully"
+  },
+  "errorDeletingTopicMsg": "Ошибка удаления темы: {error}",
+  "@errorDeletingTopicMsg": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "takeQuizTitle": "Пройти тест",
+  "@takeQuizTitle": {
+    "description": "Translation for takeQuizTitle"
+  },
+  "quizTakingInterface": "Интерфейс прохождения теста (скоро)",
+  "@quizTakingInterface": {
+    "description": "Translation for quizTakingInterface"
+  },
+  "quizCreatedSuccessfully": "Тест успешно создан",
+  "@quizCreatedSuccessfully": {
+    "description": "Translation for quizCreatedSuccessfully"
+  },
+  "saveQuizAction": "Сохранить",
+  "@saveQuizAction": {
+    "description": "Translation for saveQuizAction"
+  },
+  "createQuizTitle": "Создать тест",
+  "@createQuizTitle": {
+    "description": "Translation for createQuizTitle"
+  },
+  "editQuestionsTitle": "Редактировать вопросы: {title}",
+  "@editQuestionsTitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "questionsManagementComingSoon": "Управление вопросами (скоро)",
+  "@questionsManagementComingSoon": {
+    "description": "Translation for questionsManagementComingSoon"
+  },
+  "aiAssistantName": "ИИ помощник \"Содик\"",
+  "@aiAssistantName": {
+    "description": "Translation for aiAssistantName"
+  },
+  "clearChatTooltip": "Очистить чат",
+  "@clearChatTooltip": {
+    "description": "Translation for clearChatTooltip"
+  },
+  "noInternetLabel": "Нет интернета",
+  "@noInternetLabel": {
+    "description": "Translation for noInternetLabel"
+  },
+  "noInternetQuery": "Интернет не работает, что мне делать?",
+  "@noInternetQuery": {
+    "description": "Translation for noInternetQuery"
+  },
+  "fileNotOpeningLabel": "Файл не открывается",
+  "@fileNotOpeningLabel": {
+    "description": "Translation for fileNotOpeningLabel"
+  },
+  "fileNotOpeningQuery": "PDF-файл не открывается, помогите.",
+  "@fileNotOpeningQuery": {
+    "description": "Translation for fileNotOpeningQuery"
+  },
+  "printerNotWorkingLabel": "Принтер не работает",
+  "@printerNotWorkingLabel": {
+    "description": "Translation for printerNotWorkingLabel"
+  },
+  "printerNotWorkingQuery": "Принтер не печатает, что делать?",
+  "@printerNotWorkingQuery": {
+    "description": "Translation for printerNotWorkingQuery"
+  },
+  "uploadImageTooltip": "Загрузить изображение",
+  "@uploadImageTooltip": {
+    "description": "Translation for uploadImageTooltip"
+  },
+  "writeMessageHint": "Напишите сообщение...",
+  "@writeMessageHint": {
+    "description": "Translation for writeMessageHint"
+  },
+  "aiMentorName": "Содик (ИИ наставник)",
+  "@aiMentorName": {
+    "description": "Translation for aiMentorName"
+  },
+  "retryAction": "Повторить",
+  "@retryAction": {
+    "description": "Translation for retryAction"
+  },
+  "trueOption": "Правда",
+  "@trueOption": {
+    "description": "Translation for True option in quizzes"
+  },
+  "falseOption": "Ложь",
+  "@falseOption": {
+    "description": "Translation for False option in quizzes"
+  },
+  "questionsListTab": "Вопросы",
+  "@questionsListTab": {
+    "description": "Tab label for questions list"
+  },
+  "addQuestionTab": "Добавить вопрос",
+  "@addQuestionTab": {
+    "description": "Tab label for adding a question"
+  },
+  "addOptionButton": "Добавить вариант",
+  "@addOptionButton": {
+    "description": "Button label for adding an option"
+  },
+  "deleteQuestionConfirm": "Удалить этот вопрос?",
+  "@deleteQuestionConfirm": {
+    "description": "Confirmation dialog for deleting a question"
+  },
+  "questionDeleted": "Вопрос удалён",
+  "@questionDeleted": {
+    "description": "Snackbar message after deleting a question"
+  },
+  "startQuiz": "Начать тест",
+  "@startQuiz": {
+    "description": "Button label to start a quiz"
+  },
+  "nextQuestion": "Далее",
+  "@nextQuestion": {
+    "description": "Button label to go to next question"
+  },
+  "previousQuestion": "Назад",
+  "@previousQuestion": {
+    "description": "Button label to go to previous question"
+  },
+  "submitQuiz": "Завершить",
+  "@submitQuiz": {
+    "description": "Button label to submit quiz answers"
+  },
+  "quizResults": "Результаты",
+  "@quizResults": {
+    "description": "Title for quiz results page"
+  },
+  "yourScore": "Ваш результат",
+  "@yourScore": {
+    "description": "Label for the score display"
+  },
+  "questionOfTotal": "Вопрос {current} из {total}",
+  "@questionOfTotal": {
+    "description": "Progress indicator for quiz questions",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "selectAnAnswer": "Пожалуйста, выберите ответ",
+  "@selectAnAnswer": {
+    "description": "Prompt to select an answer"
+  },
+  "correctAnswerIs": "Правильный ответ: {answer}",
+  "@correctAnswerIs": {
+    "description": "Shows the correct answer",
+    "placeholders": {
+      "answer": {
+        "type": "String"
+      }
+    }
+  },
+  "retakeQuiz": "Пройти заново",
+  "@retakeQuiz": {
+    "description": "Button to retake a quiz"
+  },
+  "backToQuizList": "К списку тестов",
+  "@backToQuizList": {
+    "description": "Button to go back to quiz list"
+  },
+  "questionsCount": "{count} вопросов",
+  "@questionsCount": {
+    "description": "Number of questions in a quiz",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "excellentScore": "Отлично! 🎉",
+  "@excellentScore": {
+    "description": "Message for high quiz score"
+  },
+  "goodScore": "Хороший результат! 👍",
+  "@goodScore": {
+    "description": "Message for decent quiz score"
+  },
+  "needsImprovement": "Продолжайте практику! 💪",
+  "@needsImprovement": {
+    "description": "Message for low quiz score"
+  },
+  "noQuestionsInQuiz": "В этом тесте пока нет вопросов.",
+  "@noQuestionsInQuiz": {
+    "description": "Message when quiz has no questions"
+  },
+  "searchFilterAll": "Все",
+  "@searchFilterAll": {
+    "description": "Filter for all search results"
+  },
+  "searchFilterSystems": "Системы",
+  "@searchFilterSystems": {
+    "description": "Filter for systems"
+  },
+  "searchFilterArticles": "Статьи",
+  "@searchFilterArticles": {
+    "description": "Filter for articles"
+  },
+  "searchFilterVideos": "Видео",
+  "@searchFilterVideos": {
+    "description": "Filter for videos"
+  },
+  "searchFilterFAQ": "ЧаВо",
+  "@searchFilterFAQ": {
+    "description": "Filter for FAQ"
+  },
+  "searchFilterCourses": "Курсы",
+  "@searchFilterCourses": {
+    "description": "Filter for Courses"
+  },
+  "searchErrorTitle": "Произошла ошибка",
+  "@searchErrorTitle": {
+    "description": "Error title in search"
+  },
+  "searchNoResultsForQuery": "Нет результатов по запросу \"{query}\"",
+  "@searchNoResultsForQuery": {
+    "description": "No results found for specific query",
+    "placeholders": {
+      "query": {
+        "type": "String",
+        "example": "flutter"
+      }
+    }
+  },
+  "searchResultsHeader": "🔍 результаты ({count})",
+  "@searchResultsHeader": {
+    "description": "Header for direct search results",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "searchSemanticHeader": "📎 связанные материалы ({count})",
+  "@searchSemanticHeader": {
+    "description": "Header for semantic search results",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "searchSemanticBadge": "📎 связано",
+  "@searchSemanticBadge": {
+    "description": "Badge for semantic search result"
+  },
+  "searchEmptyPromptTitle": "Единый поиск",
+  "@searchEmptyPromptTitle": {
+    "description": "Title for empty search prompt"
+  },
+  "searchEmptyPromptDesc": "Системы, статьи, видео, курсы и\nЧаВо — найдите всё в одном месте",
+  "@searchEmptyPromptDesc": {
+    "description": "Description for empty search prompt"
+  },
+  "searchTypeSystem": "Система",
+  "@searchTypeSystem": {
+    "description": "System type label"
+  },
+  "searchTypeArticle": "Статья",
+  "@searchTypeArticle": {
+    "description": "Article type label"
+  },
+  "searchTypeVideo": "Видео",
+  "@searchTypeVideo": {
+    "description": "Video type label"
+  },
+  "searchTypeFaq": "Чаво",
+  "@searchTypeFaq": {
+    "description": "FAQ type label"
+  },
+  "searchTypeResource": "Ресурс",
+  "@searchTypeResource": {
+    "description": "Resource type label"
+  },
+  "searchTypeCourse": "Курс",
+  "@searchTypeCourse": {
+    "description": "Course type label in search results"
+  },
+  "leaderboardTabGlobal": "Глобальный",
+  "@leaderboardTabGlobal": {
+    "description": "Global tab in leaderboard"
+  },
+  "leaderboardTabRegion": "Регион",
+  "@leaderboardTabRegion": {
+    "description": "Region tab in leaderboard"
+  },
+  "leaderboardTabCourt": "Мой суд",
+  "@leaderboardTabCourt": {
+    "description": "Court tab in leaderboard"
+  },
+  "noRegionInfo": "Нет данных о регионе",
+  "@noRegionInfo": {
+    "description": "Displayed when region info is missing"
+  },
+  "noCourtInfo": "Нет данных о суде",
+  "@noCourtInfo": {
+    "description": "Displayed when court info is missing"
+  },
+  "selectYourCourtTitle": "Выберите ваш суд",
+  "@selectYourCourtTitle": {
+    "description": "Title for court selection modal"
+  },
+  "selectYourCourtSubtitle": "Укажите, в каком суде вы работаете,\nдля региональной статистики и рейтингов",
+  "@selectYourCourtSubtitle": {
+    "description": "Subtitle for court selection modal"
+  },
+  "selectRegionLabel": "Выберите регион",
+  "@selectRegionLabel": {
+    "description": "Label for region selection"
+  },
+  "regionDropdownLabel": "📍 регион / область",
+  "@regionDropdownLabel": {
+    "description": "Dropdown label for region"
+  },
+  "selectCourtTypeLabel": "Выберите тип суда",
+  "@selectCourtTypeLabel": {
+    "description": "Label for court type selection"
+  },
+  "courtTypeDropdownLabel": "⚖️ тип суда",
+  "@courtTypeDropdownLabel": {
+    "description": "Dropdown label for court type"
+  },
+  "selectRegionFirst": "Сначала выберите регион",
+  "@selectRegionFirst": {
+    "description": "Hint when region is not selected"
+  },
+  "selectSpecificCourtLabel": "Выберите конкретный суд",
+  "@selectSpecificCourtLabel": {
+    "description": "Label for specific court selection"
+  },
+  "specificCourtDropdownLabel": "🏛️ конкретный суд",
+  "@specificCourtDropdownLabel": {
+    "description": "Dropdown label for specific court"
+  },
+  "selectCourtTypeFirst": "Сначала выберите тип суда",
+  "@selectCourtTypeFirst": {
+    "description": "Hint when court type is not selected"
+  },
+  "saveAndContinue": "Сохранить и продолжить",
+  "@saveAndContinue": {
+    "description": "Save and continue button text"
+  },
+  "savingInProgress": "Сохранение...",
+  "@savingInProgress": {
+    "description": "Saving text"
+  },
+  "courtDataHeader": "Данные суда",
+  "@courtDataHeader": {
+    "description": "Header for court data section in registration"
+  },
+  "activeDiscussions": "Активные обсуждения",
+  "@activeDiscussions": {
+    "description": "Translation for activeDiscussions"
+  },
+  "availableQuizzes": "Доступные тесты",
+  "@availableQuizzes": {
+    "description": "Translation for availableQuizzes"
+  },
+  "availableResources": "Доступные ресурсы",
+  "@availableResources": {
+    "description": "Translation for availableResources"
+  },
+  "loadOlderNotifications": "Загрузить старые уведомления",
+  "@loadOlderNotifications": {
+    "description": "Translation for loadOlderNotifications"
+  },
+  "mainDashboard": "Главная панель управления",
+  "@mainDashboard": {
+    "description": "Translation for mainDashboard"
+  },
+  "noRecentActivities": "Нет недавних действий.",
+  "@noRecentActivities": {
+    "description": "Translation for noRecentActivities"
+  },
+  "noResourcesAvailable": "Доступные ресурсы отсутствуют.",
+  "@noResourcesAvailable": {
+    "description": "Translation for noResourcesAvailable"
+  },
+  "notificationLabelReadBy": "Прочитано: {count}",
+  "@notificationLabelReadBy": {
+    "description": "Label for read count in history",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationLabelTo": "Кому: {audience}",
+  "@notificationLabelTo": {
+    "description": "Label for target audience in history",
+    "placeholders": {
+      "audience": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationTypeAnnouncement": "Объявление",
+  "@notificationTypeAnnouncement": {
+    "description": "Notification type: announcement"
+  },
+  "notificationTypeNewContent": "Новый контент",
+  "@notificationTypeNewContent": {
+    "description": "Notification type: new content"
+  },
+  "notificationTypeReminder": "Напоминание",
+  "@notificationTypeReminder": {
+    "description": "Notification type: reminder"
+  },
+  "notificationTypeSystem": "Системное сообщение",
+  "@notificationTypeSystem": {
+    "description": "Notification type: system"
+  },
+  "notificationTypeUpdate": "Обновление",
+  "@notificationTypeUpdate": {
+    "description": "Notification type: update"
+  },
+  "overview": "Обзор",
+  "@overview": {
+    "description": "Translation for overview"
+  },
+  "pagesPath": "Страницы / панель",
+  "@pagesPath": {
+    "description": "Translation for pagesPath"
+  },
+  "quizCompletedPrefix": "Тест завершен: {quizId}",
+  "@quizCompletedPrefix": {
+    "description": "Translation for quizCompletedPrefix",
+    "placeholders": {
+      "quizId": {
+        "type": "String"
+      }
+    }
+  },
+  "recentActivity": "Недавние действия",
+  "@recentActivity": {
+    "description": "Translation for recentActivity"
+  },
+  "recommendedResources": "Рекомендуемые ресурсы",
+  "@recommendedResources": {
+    "description": "Translation for recommendedResources"
+  },
+  "resumeLearning": "Продолжить обучение",
+  "@resumeLearning": {
+    "description": "Translation for resumeLearning"
+  },
+  "signInToSeeActivities": "Войдите, чтобы увидеть активность.",
+  "@signInToSeeActivities": {
+    "description": "Translation for signInToSeeActivities"
+  },
+  "targetAudienceAkt": "Сотрудникам иКТ",
+  "@targetAudienceAkt": {
+    "description": "Target audience: AKT"
+  },
+  "targetAudienceAll": "Всем пользователям",
+  "@targetAudienceAll": {
+    "description": "Target audience: all"
+  },
+  "targetAudienceBeginner": "Новым сотрудникам",
+  "@targetAudienceBeginner": {
+    "description": "Target audience: beginner"
+  },
+  "targetAudienceSpecific": "Специальным пользователям",
+  "@targetAudienceSpecific": {
+    "description": "Target audience: specific"
+  },
+  "topicTitle": "Тема",
+  "@topicTitle": {
+    "description": "Label for topic"
+  },
+  "myCoursesTitle": "Мои курсы",
+  "@myCoursesTitle": {
+    "description": "Translation for myCoursesTitle"
+  },
+  "myCoursesEmptyTitle": "Вы еще не начали ни одного курса",
+  "@myCoursesEmptyTitle": {
+    "description": "Translation for myCoursesEmptyTitle"
+  },
+  "myCoursesEmptySubtitle": "Начните курсы, чтобы получить новые знания и заработать XP.",
+  "@myCoursesEmptySubtitle": {
+    "description": "Translation for myCoursesEmptySubtitle"
+  },
+  "coursesTitle": "Курсы",
+  "@coursesTitle": {
+    "description": "Заголовок экрана курсов"
+  },
+  "boostYourKnowledge": "Повысьте свои знания",
+  "@boostYourKnowledge": {
+    "description": "Подзаголовок экрана курсов"
+  },
+  "searchCoursesHint": "Поиск курсов...",
+  "@searchCoursesHint": {
+    "description": "Подсказка поиска курсов"
+  },
+  "courseFilterAll": "Все",
+  "@courseFilterAll": {
+    "description": "Фильтр курсов: все"
+  },
+  "courseFilterBeginner": "Начальный",
+  "@courseFilterBeginner": {
+    "description": "Фильтр курсов: начальный"
+  },
+  "courseFilterIntermediate": "Средний",
+  "@courseFilterIntermediate": {
+    "description": "Фильтр курсов: средний"
+  },
+  "courseFilterAdvanced": "Продвинутый",
+  "@courseFilterAdvanced": {
+    "description": "Фильтр курсов: продвинутый"
+  },
+  "coursesNotFound": "Курсы не найдены",
+  "@coursesNotFound": {
+    "description": "Сообщение об отсутствии курсов"
+  },
+  "errorLabel": "Ошибка",
+  "@errorLabel": {
+    "description": "Общая метка ошибки"
+  },
+  "statCourses": "Курсы",
+  "@statCourses": {
+    "description": "Метка статистики: курсы"
+  },
+  "statCompleted": "Завершено",
+  "@statCompleted": {
+    "description": "Метка статистики: завершено"
+  },
+  "statXpPoints": "XP баллов",
+  "@statXpPoints": {
+    "description": "Метка статистики: XP баллы"
+  },
+  "tabAll": "Все",
+  "@tabAll": {
+    "description": "Вкладка: все"
+  },
+  "tabCompleted": "✓ Завершено",
+  "@tabCompleted": {
+    "description": "Вкладка: завершено"
+  },
+  "tabInProgress": "▶ В процессе",
+  "@tabInProgress": {
+    "description": "Вкладка: в процессе"
+  },
+  "statusOnline": "ONLINE",
+  "@statusOnline": {
+    "description": "Статус онлайн"
+  },
+  "statusOffline": "OFFLINE",
+  "@statusOffline": {
+    "description": "Статус оффлайн"
+  }
+}

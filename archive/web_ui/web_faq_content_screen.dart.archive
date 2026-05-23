@@ -1,0 +1,484 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class WebFAQContentScreen extends StatefulWidget {
+  const WebFAQContentScreen({super.key});
+
+  @override
+  State<WebFAQContentScreen> createState() => _WebFAQContentScreenState();
+}
+
+class _WebFAQContentScreenState extends State<WebFAQContentScreen> {
+  // Theme colors from HTML
+  static const Color _primary = Color(0xFF2C0FBD);
+  static const Color _backgroundLight = Color(0xFFF6F6F8);
+  static const Color _textPrimary = Color(0xFF0F172A); // slate-900
+
+  int _selectedFilterIndex = 0;
+  final List<String> _filters = [
+    'General',
+    'Account',
+    'Billing',
+    'Courses',
+    'Legal Compliance',
+  ];
+
+  int? _expandedIndex = 0; // First item expanded by default
+
+  final List<Map<String, dynamic>> _faqs = [
+    {
+      'question': 'How do I reset my password?',
+      'content': [
+        'To reset your password, navigate to the login page and click on \'Forgot Password\'. You will be prompted to enter the email address associated with your account.',
+        'Follow the instructions sent to your email. If you don\'t receive an email within 5 minutes, please check your spam or junk folder. The link is valid for 24 hours.',
+      ],
+    },
+    {
+      'question': 'Can I access the courses offline?',
+      'content': [
+        'Yes, you can access courses offline by downloading them through our mobile app. Ensure you are connected to Wi-Fi before downloading large video files.',
+      ],
+    },
+    {
+      'question': 'What is the refund policy?',
+      'content': [
+        'We offer a 30-day money-back guarantee for all individual courses. Subscription plans can be canceled at any time, but partial month refunds are not provided.',
+      ],
+    },
+    {
+      'question': 'How do I contact support?',
+      'content': [
+        'You can contact support by clicking the "Contact Support Team" button below, or by emailing support@edulegal.com directly.',
+      ],
+    },
+    {
+      'question': 'Are the legal templates customizable?',
+      'content': [
+        'Absolutely. All legal templates in our resource library are provided in standard formats (DOCX) and can be fully customized for your specific jurisdiction and needs.',
+      ],
+    },
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: _backgroundLight,
+      appBar: _buildAppBar(),
+      body: SingleChildScrollView(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 800),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 48.0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _buildHeroSection(),
+                  const SizedBox(height: 48),
+                  _buildFilterChips(),
+                  const SizedBox(height: 48),
+                  _buildFaqList(),
+                  const SizedBox(height: 64),
+                  _buildContactCta(),
+                  const SizedBox(height: 64),
+                  _buildFooter(),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.white.withValues(alpha: 0.9),
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(1),
+        child: Container(color: Colors.grey[200], height: 1),
+      ),
+      title: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1200),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Logo
+              Row(
+                children: [
+                  Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      color: _primary.withValues(alpha: 0.1),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.school, color: _primary, size: 20),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    'EduLegal',
+                    style: GoogleFonts.spaceGrotesk(
+                      color: _textPrimary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: -0.5,
+                    ),
+                  ),
+                ],
+              ),
+              // Links & Actions
+              Row(
+                children: [
+                  if (MediaQuery.of(context).size.width >= 768) ...[
+                    _buildNavLink('Home', false),
+                    const SizedBox(width: 32),
+                    _buildNavLink('Courses', false),
+                    const SizedBox(width: 32),
+                    _buildNavLink('Legal Resources', false),
+                    const SizedBox(width: 32),
+                    _buildNavLink('Help Center', true),
+                    const SizedBox(width: 32),
+                  ],
+                  // Sign In Button
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _primary,
+                      foregroundColor: Colors.white,
+                      elevation: 4,
+                      shadowColor: _primary.withValues(alpha: 0.5),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 16,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32),
+                      ),
+                    ),
+                    child: Text(
+                      'Sign In',
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavLink(String text, bool isActive) {
+    return InkWell(
+      onTap: () {},
+      child: Text(
+        text,
+        style: GoogleFonts.spaceGrotesk(
+          color: isActive ? _primary : Colors.blueGrey[600],
+          fontSize: 14,
+          fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeroSection() {
+    return Column(
+      children: [
+        Text(
+          'How can we help you?',
+          style: GoogleFonts.spaceGrotesk(
+            color: _textPrimary,
+            fontSize: 48, // matching text-5xl
+            fontWeight: FontWeight.w900,
+            letterSpacing: -1,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 16),
+        Text(
+          'Search our knowledge base or browse frequently asked questions below.',
+          style: GoogleFonts.spaceGrotesk(
+            color: Colors.blueGrey[400],
+            fontSize: 18,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 32),
+        // Search Bar
+        Container(
+          constraints: const BoxConstraints(maxWidth: 560), // max-w-xl roughly
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(32),
+            boxShadow: [
+              BoxShadow(
+                color: _primary.withValues(alpha: 0.05),
+                blurRadius: 20,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: 'Search for questions, topics, or keywords...',
+              hintStyle: GoogleFonts.spaceGrotesk(
+                color: Colors.blueGrey[300],
+                fontSize: 16,
+              ),
+              prefixIcon: Padding(
+                padding: const EdgeInsets.only(left: 16.0, right: 8.0),
+                child: Icon(Icons.search, color: Colors.blueGrey[300]),
+              ),
+              border: InputBorder.none,
+              contentPadding: const EdgeInsets.symmetric(vertical: 20),
+            ),
+            style: GoogleFonts.spaceGrotesk(color: _textPrimary, fontSize: 16),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFilterChips() {
+    return Wrap(
+      spacing: 12,
+      runSpacing: 12,
+      alignment: WrapAlignment.center,
+      children: List.generate(_filters.length, (index) {
+        final isSelected = index == _selectedFilterIndex;
+        return InkWell(
+          onTap: () {
+            setState(() {
+              _selectedFilterIndex = index;
+            });
+          },
+          borderRadius: BorderRadius.circular(32),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            decoration: BoxDecoration(
+              color: isSelected ? _primary : Colors.white,
+              borderRadius: BorderRadius.circular(32),
+              boxShadow: [
+                if (isSelected)
+                  BoxShadow(
+                    color: _primary.withValues(alpha: 0.2),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  )
+                else
+                  const BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 4,
+                    offset: Offset(0, 1),
+                  ),
+              ],
+            ),
+            child: Text(
+              _filters[index],
+              style: GoogleFonts.spaceGrotesk(
+                color: isSelected ? Colors.white : Colors.blueGrey[600],
+                fontSize: 14,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+              ),
+            ),
+          ),
+        );
+      }),
+    );
+  }
+
+  Widget _buildFaqList() {
+    return Column(
+      children: List.generate(_faqs.length, (index) {
+        final isExpanded = index == _expandedIndex;
+        final faq = _faqs[index];
+
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 20.0),
+          child: InkWell(
+            onTap: () {
+              setState(() {
+                _expandedIndex = isExpanded ? null : index;
+              });
+            },
+            borderRadius: BorderRadius.circular(16),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.fastOutSlowIn,
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.transparent),
+                boxShadow: [
+                  BoxShadow(
+                    color: isExpanded
+                        ? _primary.withValues(alpha: 0.1)
+                        : _primary.withValues(alpha: 0.05),
+                    blurRadius: isExpanded ? 25 : 20,
+                    offset: isExpanded
+                        ? const Offset(0, 10)
+                        : const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          faq['question'],
+                          style: GoogleFonts.spaceGrotesk(
+                            color: isExpanded ? _primary : Colors.blueGrey[800],
+                            fontSize: 18,
+                            fontWeight: isExpanded
+                                ? FontWeight.bold
+                                : FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: isExpanded
+                              ? _primary.withValues(alpha: 0.05)
+                              : Colors.blueGrey[50],
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          isExpanded ? Icons.expand_less : Icons.expand_more,
+                          color: isExpanded ? _primary : Colors.blueGrey[400],
+                          size: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  if (isExpanded) ...[
+                    const SizedBox(height: 16),
+                    Divider(color: Colors.grey[100], thickness: 1),
+                    const SizedBox(height: 16),
+                    ...(faq['content'] as List<String>).map(
+                      (paragraph) => Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: Text(
+                          paragraph,
+                          style: GoogleFonts.spaceGrotesk(
+                            color: Colors.blueGrey[500],
+                            fontSize: 15,
+                            height: 1.6,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    // Helpful Feedback
+                    Row(
+                      children: [
+                        Text(
+                          'WAS THIS HELPFUL?',
+                          style: GoogleFonts.spaceGrotesk(
+                            color: Colors.blueGrey[300],
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        _buildFeedbackButton(
+                          Icons.thumb_up_outlined,
+                          Colors.green,
+                        ),
+                        const SizedBox(width: 8),
+                        _buildFeedbackButton(
+                          Icons.thumb_down_outlined,
+                          Colors.red,
+                        ),
+                      ],
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ),
+        );
+      }),
+    );
+  }
+
+  Widget _buildFeedbackButton(IconData icon, Color highlightColor) {
+    return InkWell(
+      onTap: () {},
+      customBorder: const CircleBorder(),
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: const BoxDecoration(shape: BoxShape.circle),
+        child: Icon(icon, color: Colors.blueGrey[300], size: 20),
+      ),
+    );
+  }
+
+  Widget _buildContactCta() {
+    return Column(
+      children: [
+        Text(
+          'Can\'t find what you\'re looking for?',
+          style: GoogleFonts.spaceGrotesk(
+            color: Colors.blueGrey[500],
+            fontSize: 16,
+          ),
+        ),
+        const SizedBox(height: 16),
+        InkWell(
+          onTap: () {},
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.mail, color: _primary, size: 20),
+              const SizedBox(width: 8),
+              Text(
+                'Contact Support Team',
+                style: GoogleFonts.spaceGrotesk(
+                  color: _primary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                  decorationColor: _primary,
+                  decorationThickness: 2,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFooter() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 32.0),
+      child: Text(
+        '© 2024 EduLegal Platform. All rights reserved.',
+        style: GoogleFonts.spaceGrotesk(
+          color: Colors.blueGrey[300],
+          fontSize: 14,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}

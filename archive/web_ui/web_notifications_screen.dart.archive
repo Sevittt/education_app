@@ -1,0 +1,670 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class WebNotificationsScreen extends StatelessWidget {
+  const WebNotificationsScreen({super.key});
+
+  final Color _primaryColor = const Color(0xFF2C0FBD);
+  final Color _primaryLight = const Color(0xFFEAEAEF);
+  final Color _backgroundLight = const Color(0xFFF4F7FE);
+  final Color _backgroundDark = const Color(0xFF131022);
+  final Color _surfaceLight = Colors.white;
+  final Color _surfaceDark = const Color(0xFF1F1B36);
+  final Color _textMain = const Color(0xFF121118);
+  final Color _textMuted = const Color(0xFF686189);
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final Color bgColor = isDark ? _backgroundDark : _backgroundLight;
+    final Color surfaceColor = isDark ? _surfaceDark : _surfaceLight;
+    final Color textColor = isDark ? Colors.white : _textMain;
+    final Color textMutedColor = isDark ? Colors.white70 : _textMuted;
+
+    return Scaffold(
+      backgroundColor: bgColor,
+      body: Column(
+        children: [
+          _buildNavbar(
+            context,
+            isDark,
+            surfaceColor,
+            textColor,
+            textMutedColor,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _buildHeader(textColor, textMutedColor),
+                      const SizedBox(height: 24),
+                      _buildFilters(isDark, surfaceColor, textMutedColor),
+                      const SizedBox(height: 24),
+                      _buildNotificationsList(
+                        isDark,
+                        surfaceColor,
+                        textColor,
+                        textMutedColor,
+                      ),
+                      const SizedBox(height: 32),
+                      Center(
+                        child: TextButton(
+                          onPressed: () {},
+                          style: TextButton.styleFrom(
+                            foregroundColor: textMutedColor,
+                            textStyle: GoogleFonts.notoSans(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          child: const Text('Load older notifications'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavbar(
+    BuildContext context,
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+    Color textMutedColor,
+  ) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      decoration: BoxDecoration(
+        color: surfaceColor.withValues(alpha: 0.9),
+        border: Border(
+          bottom: BorderSide(
+            color: isDark
+                ? Colors.white.withValues(alpha: 0.05)
+                : Colors.grey.shade200,
+          ),
+        ),
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1200),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      color: _primaryColor,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(
+                      Icons.rocket_launch,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    'Antigravity Edu',
+                    style: GoogleFonts.spaceGrotesk(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
+                    ),
+                  ),
+                  if (MediaQuery.of(context).size.width >= 768) ...[
+                    const SizedBox(width: 32),
+                    _buildNavLink('Dashboard', textMutedColor),
+                    const SizedBox(width: 32),
+                    _buildNavLink('Courses', textMutedColor),
+                    const SizedBox(width: 32),
+                    _buildNavLink('Community', textMutedColor),
+                    const SizedBox(width: 32),
+                    _buildNavLink('Profile', textMutedColor),
+                  ],
+                ],
+              ),
+              Row(
+                children: [
+                  if (MediaQuery.of(context).size.width >= 768)
+                    Container(
+                      width: 200,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: isDark
+                            ? _backgroundDark
+                            : _primaryLight.withValues(alpha: 0.5),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Row(
+                        children: [
+                          Icon(Icons.search, size: 20, color: textMutedColor),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Search',
+                                hintStyle: GoogleFonts.notoSans(
+                                  color: textMutedColor,
+                                  fontSize: 14,
+                                ),
+                                border: InputBorder.none,
+                                isDense: true,
+                              ),
+                              style: GoogleFonts.notoSans(
+                                color: textColor,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  const SizedBox(width: 16),
+                  Stack(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.notifications, color: textMutedColor),
+                        onPressed: () {},
+                      ),
+                      Positioned(
+                        right: 8,
+                        top: 8,
+                        child: Container(
+                          width: 10,
+                          height: 10,
+                          decoration: BoxDecoration(
+                            color: Colors.red.shade500,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: surfaceColor, width: 2),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 12),
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: surfaceColor, width: 2),
+                      image: const DecorationImage(
+                        image: NetworkImage(
+                          'https://lh3.googleusercontent.com/aida-public/AB6AXuD19Jtcd-tnvZfG_q4wUqXSwaNJB_rTgjjzLCj8ZgwCdobJ1kc4qOnk8CQLYgmJraIfDGqgZE908PcC-wJ1VcSoOqbDv95qW8bwA7FjCHdCeKJgt9vOG9ULGstual2rA2dU8Zfd18Gm_zUDWGwtuwWoQv7TWaDwjuj9xkJdcNAihBbe2pNG0ntRvho8zhk1e0jRoxsDoB6ioyImERPHqcCheF3d2dbBVYVWXC2fuZgNomK5eo2nGNfn1HEckA1m7xvos3hUxOoFyz2B',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavLink(String text, Color textMutedColor) {
+    return InkWell(
+      onTap: () {},
+      child: Text(
+        text,
+        style: GoogleFonts.notoSans(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: textMutedColor,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeader(Color textColor, Color textMutedColor) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Notifications',
+              style: GoogleFonts.spaceGrotesk(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                color: textColor,
+                letterSpacing: -1,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              'Stay updated with your latest course activities and legal updates.',
+              style: GoogleFonts.notoSans(color: textMutedColor),
+            ),
+          ],
+        ),
+        TextButton.icon(
+          onPressed: () {},
+          icon: const Icon(Icons.done_all, size: 18),
+          label: const Text('Mark all as read'),
+          style: TextButton.styleFrom(
+            foregroundColor: _primaryColor,
+            textStyle: GoogleFonts.notoSans(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFilters(bool isDark, Color surfaceColor, Color textMutedColor) {
+    return Wrap(
+      spacing: 12,
+      runSpacing: 12,
+      children: [
+        _buildFilterChip('All', true, isDark, surfaceColor, textMutedColor, 0),
+        _buildFilterChip(
+          'Unread',
+          false,
+          isDark,
+          surfaceColor,
+          textMutedColor,
+          3,
+        ),
+        _buildFilterChip(
+          'Quizzes',
+          false,
+          isDark,
+          surfaceColor,
+          textMutedColor,
+          0,
+        ),
+        _buildFilterChip(
+          'Forum',
+          false,
+          isDark,
+          surfaceColor,
+          textMutedColor,
+          0,
+        ),
+        _buildFilterChip(
+          'System',
+          false,
+          isDark,
+          surfaceColor,
+          textMutedColor,
+          0,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFilterChip(
+    String label,
+    bool isSelected,
+    bool isDark,
+    Color surfaceColor,
+    Color textMutedColor,
+    int badgeCount,
+  ) {
+    return Container(
+      height: 36,
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+        color: isSelected ? _primaryColor : surfaceColor,
+        borderRadius: BorderRadius.circular(9999),
+        boxShadow: [
+          if (!isDark)
+            BoxShadow(
+              color: isSelected
+                  ? _primaryColor.withValues(alpha: 0.2)
+                  : Colors.black.withValues(alpha: 0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+        ],
+      ),
+      alignment: Alignment.center,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            label,
+            style: GoogleFonts.notoSans(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: isSelected ? Colors.white : textMutedColor,
+            ),
+          ),
+          if (badgeCount > 0) ...[
+            const SizedBox(width: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? Colors.white.withValues(alpha: 0.2)
+                    : _primaryColor.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                badgeCount.toString(),
+                style: GoogleFonts.notoSans(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: isSelected ? Colors.white : _primaryColor,
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNotificationsList(
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+    Color textMutedColor,
+  ) {
+    return Column(
+      children: [
+        _buildNotificationItem(
+          isUnread: true,
+          icon: Icons.edit_document,
+          iconColor: _primaryColor,
+          iconBgColor: isDark
+              ? _primaryColor.withValues(alpha: 0.2)
+              : Colors.indigo.shade50,
+          title: 'New Quiz: Contract Law Basics',
+          description:
+              'A new quiz has been posted in your Contract Law 101 course. It covers the fundamentals of agreements and consideration.',
+          timeText: '2 hours ago • Due Friday',
+          isDark: isDark,
+          surfaceColor: surfaceColor,
+          textColor: textColor,
+          textMutedColor: textMutedColor,
+        ),
+        const SizedBox(height: 12),
+        _buildNotificationItem(
+          isUnread: true,
+          icon: Icons.forum,
+          iconColor: Colors.amber.shade600,
+          iconBgColor: isDark
+              ? Colors.amber.shade900.withValues(alpha: 0.2)
+              : Colors.amber.shade50,
+          title: 'Forum Reply: Sarah mentioned you',
+          description:
+              "Sarah replied to your comment in 'Ethics in Legal Practice' regarding the recent case study on attorney-client privilege.",
+          timeText: '5 hours ago',
+          isDark: isDark,
+          surfaceColor: surfaceColor,
+          textColor: textColor,
+          textMutedColor: textMutedColor,
+        ),
+        const SizedBox(height: 12),
+        _buildNotificationItem(
+          isUnread: true,
+          icon: Icons.verified,
+          iconColor: Colors.green.shade600,
+          iconBgColor: isDark
+              ? Colors.green.shade900.withValues(alpha: 0.2)
+              : Colors.green.shade50,
+          title: 'Assignment Graded: Torts Essay',
+          description:
+              "Your essay on 'Negligence and Liability' has been graded. Great work on the analysis section!",
+          timeText: '1 day ago • Score: 92/100',
+          isDark: isDark,
+          surfaceColor: surfaceColor,
+          textColor: textColor,
+          textMutedColor: textMutedColor,
+        ),
+        const SizedBox(height: 12),
+        _buildNotificationItem(
+          isUnread: false,
+          icon: Icons.campaign,
+          iconColor: isDark ? Colors.grey.shade400 : Colors.grey.shade500,
+          iconBgColor: isDark ? Colors.grey.shade800 : Colors.grey.shade100,
+          title: 'System Maintenance Scheduled',
+          description:
+              'The platform will be undergoing scheduled maintenance on Saturday from 2:00 AM to 4:00 AM EST.',
+          timeText: '2 days ago',
+          isDark: isDark,
+          surfaceColor: surfaceColor,
+          textColor: textColor,
+          textMutedColor: textMutedColor,
+        ),
+        const SizedBox(height: 12),
+        _buildNotificationItem(
+          isUnread: false,
+          icon: Icons.group_add,
+          iconColor: isDark ? Colors.grey.shade400 : Colors.grey.shade500,
+          iconBgColor: isDark ? Colors.grey.shade800 : Colors.grey.shade100,
+          title: 'New Study Group Invitation',
+          description:
+              "Michael invited you to join the 'Advanced Criminal Law' study group.",
+          timeText: '3 days ago',
+          isDark: isDark,
+          surfaceColor: surfaceColor,
+          textColor: textColor,
+          textMutedColor: textMutedColor,
+        ),
+        const SizedBox(height: 12),
+        _buildNotificationItem(
+          isUnread: false,
+          icon: Icons.school,
+          iconColor: isDark ? Colors.grey.shade400 : Colors.grey.shade500,
+          iconBgColor: isDark ? Colors.grey.shade800 : Colors.grey.shade100,
+          title: 'Course Material Updated',
+          description:
+              'Professor Johnson updated the lecture slides for Week 4: Property Rights.',
+          timeText: '4 days ago',
+          isDark: isDark,
+          surfaceColor: surfaceColor,
+          textColor: textColor,
+          textMutedColor: textMutedColor,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildNotificationItem({
+    required bool isUnread,
+    required IconData icon,
+    required Color iconColor,
+    required Color iconBgColor,
+    required String title,
+    required String description,
+    required String timeText,
+    required bool isDark,
+    required Color surfaceColor,
+    required Color textColor,
+    required Color textMutedColor,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: isUnread
+            ? surfaceColor
+            : (isDark
+                ? surfaceColor.withValues(alpha: 0.5)
+                : Colors.white.withValues(alpha: 0.6)),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Stack(
+        children: [
+          if (isUnread)
+            Positioned(
+              left: 0,
+              top: 24,
+              bottom: 24,
+              width: 4,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: _primaryColor,
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(4),
+                    bottomRight: Radius.circular(4),
+                  ),
+                ),
+              ),
+            ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final bool isMobile = constraints.maxWidth < 600;
+
+                final contentWidget = Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        color: iconBgColor,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(icon, color: iconColor),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  title,
+                                  style: GoogleFonts.spaceGrotesk(
+                                    fontSize: 16,
+                                    fontWeight: isUnread
+                                        ? FontWeight.bold
+                                        : FontWeight.w500,
+                                    color: textColor,
+                                  ),
+                                ),
+                              ),
+                              if (isUnread) ...[
+                                const SizedBox(width: 8),
+                                Container(
+                                  width: 8,
+                                  height: 8,
+                                  decoration: BoxDecoration(
+                                    color: _primaryColor,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            description,
+                            style: GoogleFonts.notoSans(
+                              fontSize: 14,
+                              fontWeight: isUnread
+                                  ? FontWeight.w500
+                                  : FontWeight.normal,
+                              color: textMutedColor,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            timeText,
+                            style: GoogleFonts.notoSans(
+                              fontSize: 12,
+                              fontWeight: isUnread
+                                  ? FontWeight.w600
+                                  : FontWeight.normal,
+                              color: isUnread
+                                  ? _primaryColor.withValues(alpha: 0.8)
+                                  : textMutedColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+
+                final buttonWidget = ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: isUnread
+                        ? (isDark ? _backgroundDark : const Color(0xFFF4F7FE))
+                        : Colors.transparent,
+                    foregroundColor: isUnread ? textColor : textMutedColor,
+                    elevation: 0,
+                    side: isUnread
+                        ? BorderSide.none
+                        : BorderSide(
+                            color:
+                                isDark ? Colors.white24 : Colors.grey.shade200,
+                          ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    isUnread ? 'View' : 'Details',
+                    style: GoogleFonts.notoSans(
+                      fontSize: 14,
+                      fontWeight: isUnread ? FontWeight.bold : FontWeight.w500,
+                    ),
+                  ),
+                );
+
+                if (isMobile) {
+                  return Column(
+                    children: [
+                      contentWidget,
+                      const SizedBox(height: 16),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: buttonWidget,
+                      ),
+                    ],
+                  );
+                }
+
+                return Row(
+                  children: [
+                    Expanded(child: contentWidget),
+                    const SizedBox(width: 16),
+                    buttonWidget,
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

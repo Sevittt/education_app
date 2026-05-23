@@ -1,0 +1,702 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class WebCourtProfileScreen extends StatelessWidget {
+  const WebCourtProfileScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF4F7FE),
+      appBar: AppBar(
+        backgroundColor: Colors.white.withValues(alpha: 0.8),
+        elevation: 0,
+        centerTitle: false,
+        title: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: const BoxDecoration(
+                color: Color(0xFF2c0fbd),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.balance, color: Colors.white, size: 20),
+            ),
+            const SizedBox(width: 12),
+            Text(
+              'Legal Platform',
+              style: GoogleFonts.publicSans(
+                color: const Color(0xFF2B3674),
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          Row(
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Directory',
+                  style: GoogleFonts.publicSans(color: const Color(0xFFA3AED0)),
+                ),
+              ),
+              const SizedBox(width: 16),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Courts',
+                  style: GoogleFonts.publicSans(
+                    color: const Color(0xFF2B3674),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Judges',
+                  style: GoogleFonts.publicSans(color: const Color(0xFFA3AED0)),
+                ),
+              ),
+              const SizedBox(width: 16),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Resources',
+                  style: GoogleFonts.publicSans(color: const Color(0xFFA3AED0)),
+                ),
+              ),
+              const SizedBox(width: 32),
+            ],
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+        child: Center(
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 1000),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Breadcrumb
+                InkWell(
+                  onTap: () => Navigator.pop(context),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        Icons.arrow_back,
+                        size: 16,
+                        color: Color(0xFFA3AED0),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Back to Directory',
+                        style: GoogleFonts.publicSans(
+                          color: const Color(0xFFA3AED0),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+                // Court Header Card
+                _buildCourtHeaderCard(),
+                const SizedBox(height: 24),
+
+                // Main Content Grid
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(flex: 3, child: _buildJudgesColumn()),
+                    const SizedBox(width: 24),
+                    Expanded(flex: 2, child: _buildContactColumn()),
+                  ],
+                ),
+                const SizedBox(height: 24),
+
+                // Bottom Card: Recent Publications
+                _buildPublicationsCard(),
+                const SizedBox(height: 40),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCourtHeaderCard() {
+    return Container(
+      padding: const EdgeInsets.all(32),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF7090B0).withValues(alpha: 0.12),
+            blurRadius: 40,
+            offset: const Offset(0, 18),
+          ),
+        ],
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 128,
+            height: 128,
+            decoration: BoxDecoration(
+              color: const Color(0xFFebe7fb),
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: const Center(
+              child: Icon(
+                Icons.account_balance,
+                size: 48,
+                color: Color(0xFF2c0fbd),
+              ),
+            ),
+          ),
+          const SizedBox(width: 32),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.green[50],
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Text(
+                        'ACTIVE',
+                        style: GoogleFonts.publicSans(
+                          color: Colors.green[600],
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF2c0fbd).withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Text(
+                        'CRIMINAL LAW',
+                        style: GoogleFonts.publicSans(
+                          color: const Color(0xFF2c0fbd),
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  'Tashkent City Criminal Court',
+                  style: GoogleFonts.publicSans(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xFF2B3674),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.location_on,
+                      size: 18,
+                      color: Color(0xFFA3AED0),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      '123 Uzbekistan Avenue, Tashkent, 100000',
+                      style: GoogleFonts.publicSans(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xFFA3AED0),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    _buildStatBadge(
+                      Icons.gavel,
+                      Colors.blue,
+                      '12 Active Judges',
+                    ),
+                    const SizedBox(width: 16),
+                    _buildStatBadge(
+                      Icons.folder_open,
+                      Colors.orange,
+                      '1,240 Cases this year',
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          ElevatedButton.icon(
+            onPressed: () {},
+            icon: const Icon(Icons.star, size: 18),
+            label: const Text('Follow Court'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              foregroundColor: const Color(0xFF2B3674),
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+                side: BorderSide(color: Colors.grey[200]!),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatBadge(IconData icon, MaterialColor color, String text) {
+    return Row(
+      children: [
+        CircleAvatar(
+          radius: 16,
+          backgroundColor: color[50],
+          child: Icon(icon, size: 16, color: color[500]),
+        ),
+        const SizedBox(width: 8),
+        Text(
+          text,
+          style: GoogleFonts.publicSans(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: const Color(0xFF2B3674),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildJudgesColumn() {
+    return Container(
+      padding: const EdgeInsets.all(32),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF7090B0).withValues(alpha: 0.12),
+            blurRadius: 40,
+            offset: const Offset(0, 18),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Judges & Leadership',
+                style: GoogleFonts.publicSans(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF2B3674),
+                ),
+              ),
+              Text(
+                'View All',
+                style: GoogleFonts.publicSans(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF2c0fbd),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          _buildJudgeItem('Hon. Alisher Zakirov', 'Chief Justice'),
+          _buildJudgeItem(
+            'Hon. Malika Umarova',
+            'Senior Judge, Criminal Division',
+          ),
+          _buildJudgeItem('Hon. Davron Saidov', 'Associate Judge'),
+          _buildJudgeItem('Hon. Bobur Mirzoev', 'Presiding Judge'),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildJudgeItem(String name, String role) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 24,
+            backgroundColor: Colors.grey[200],
+            child: const Icon(Icons.person, color: Colors.grey),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: GoogleFonts.publicSans(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xFF2B3674),
+                  ),
+                ),
+                Text(
+                  role,
+                  style: GoogleFonts.publicSans(
+                    fontSize: 14,
+                    color: const Color(0xFFA3AED0),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              foregroundColor: const Color(0xFF2c0fbd),
+              elevation: 1,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+            ),
+            child: const Text('Profile'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildContactColumn() {
+    return Container(
+      padding: const EdgeInsets.all(32),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF7090B0).withValues(alpha: 0.12),
+            blurRadius: 40,
+            offset: const Offset(0, 18),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Contact Info',
+            style: GoogleFonts.publicSans(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF2B3674),
+            ),
+          ),
+          const SizedBox(height: 24),
+          _buildContactItem(
+            Icons.call,
+            Colors.purple,
+            'PHONE',
+            '+998 71 123-45-67\nMon-Fri, 9am - 6pm',
+          ),
+          const SizedBox(height: 20),
+          _buildContactItem(
+            Icons.mail,
+            Colors.cyan,
+            'EMAIL',
+            'info@tashkentcourt.uz',
+          ),
+          const SizedBox(height: 20),
+          _buildContactItem(Icons.fax, Colors.pink, 'FAX', '+998 71 123-45-68'),
+          const SizedBox(height: 32),
+          const Divider(),
+          const SizedBox(height: 24),
+          Container(
+            height: 128,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Center(
+              child: Icon(Icons.map, size: 48, color: Colors.grey),
+            ),
+          ),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.directions, size: 18),
+              label: const Text('Get Directions'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF2c0fbd),
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildContactItem(
+    IconData icon,
+    MaterialColor color,
+    String label,
+    String value,
+  ) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CircleAvatar(
+          radius: 20,
+          backgroundColor: color[50],
+          child: Icon(icon, size: 20, color: color[500]),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: GoogleFonts.publicSans(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFFA3AED0),
+                  letterSpacing: 1,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                value,
+                style: GoogleFonts.publicSans(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: const Color(0xFF2B3674),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPublicationsCard() {
+    return Container(
+      padding: const EdgeInsets.all(32),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF7090B0).withValues(alpha: 0.12),
+            blurRadius: 40,
+            offset: const Offset(0, 18),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Colors.teal[50],
+                    child: Icon(Icons.article, color: Colors.teal[600]),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    'Recent Court Publications',
+                    style: GoogleFonts.publicSans(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFF2B3674),
+                    ),
+                  ),
+                ],
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.tune, color: Color(0xFFA3AED0)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          _buildPublicationItem(
+            Icons.picture_as_pdf,
+            Colors.red,
+            'Ruling on Case #2023-884: Property Dispute Resolution',
+            'Civil Law',
+            'Oct 24, 2023',
+          ),
+          _buildPublicationItem(
+            Icons.description,
+            Colors.blue,
+            'Annual Judiciary Report 2023 - Q3',
+            'Administrative',
+            'Oct 15, 2023',
+          ),
+          _buildPublicationItem(
+            Icons.picture_as_pdf,
+            Colors.red,
+            'Updated Scheduling Procedures for Criminal Proceedings',
+            'Procedural',
+            'Oct 10, 2023',
+          ),
+          const SizedBox(height: 24),
+          Center(
+            child: TextButton.icon(
+              onPressed: () {},
+              icon: const Text('View All Publications'),
+              label: const Icon(Icons.expand_more, size: 16),
+              style: TextButton.styleFrom(
+                foregroundColor: const Color(0xFFA3AED0),
+                textStyle: GoogleFonts.publicSans(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPublicationItem(
+    IconData icon,
+    MaterialColor color,
+    String title,
+    String category,
+    String date,
+  ) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF4F7FE),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(icon, color: color[500]),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: GoogleFonts.publicSans(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xFF2B3674),
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        category,
+                        style: GoogleFonts.publicSans(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: const Color(0xFFA3AED0),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      'Published: $date',
+                      style: GoogleFonts.publicSans(
+                        fontSize: 12,
+                        color: const Color(0xFFA3AED0),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          TextButton.icon(
+            onPressed: () {},
+            icon: const Text('Download'),
+            label: const Icon(Icons.download, size: 18),
+            style: TextButton.styleFrom(
+              foregroundColor: const Color(0xFF2c0fbd),
+              textStyle: GoogleFonts.publicSans(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

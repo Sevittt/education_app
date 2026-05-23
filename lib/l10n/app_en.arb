@@ -1,0 +1,2945 @@
+{
+  "@@locale": "en",
+  "appTitle": "Judicial guide",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "openInYoutube": "Open in YouTube",
+  "@openInYoutube": {
+    "description": "Translation for openInYoutube"
+  },
+  "watchOnYoutube": "Watch on YouTube",
+  "@watchOnYoutube": {
+    "description": "Translation for watchOnYoutube"
+  },
+  "loginWelcomeTitle": "Welcome back!",
+  "@loginWelcomeTitle": {
+    "description": "Title on the login screen"
+  },
+  "loginWelcomeSubtitle": "Sign in to continue",
+  "@loginWelcomeSubtitle": {
+    "description": "Subtitle on the login screen"
+  },
+  "bottomNavHome": "Home",
+  "@bottomNavHome": {
+    "description": "Translation for bottomNavHome"
+  },
+  "bottomNavResources": "Courses",
+  "@bottomNavResources": {
+    "description": "Translation for bottomNavResources"
+  },
+  "bottomNavCommunity": "Forum",
+  "@bottomNavCommunity": {
+    "description": "Translation for bottomNavCommunity"
+  },
+  "bottomNavProfile": "Profile",
+  "@bottomNavProfile": {
+    "description": "Translation for bottomNavProfile"
+  },
+  "resourcesScreenTitle": "Guides & manuals",
+  "@resourcesScreenTitle": {
+    "description": "Title for the resources/guides screen"
+  },
+  "roleXodim": "Staff",
+  "@roleXodim": {
+    "description": "User role for a regular staff member"
+  },
+  "roleEkspert": "Expert",
+  "@roleEkspert": {
+    "description": "User role for an expert who can create content"
+  },
+  "roleAdmin": "Administrator",
+  "@roleAdmin": {
+    "description": "User role for an administrator"
+  },
+  "registrationTitle": "Create your account",
+  "@registrationTitle": {
+    "description": "Translation for registrationTitle"
+  },
+  "registrationSubtitle": "Join the professional community!",
+  "@registrationSubtitle": {
+    "description": "Translation for registrationSubtitle"
+  },
+  "registrationFullNameLabel": "Full name",
+  "@registrationFullNameLabel": {
+    "description": "Label for the full name field on registration screen"
+  },
+  "registrationFullNameError": "Please enter your full name",
+  "@registrationFullNameError": {
+    "description": "Error message if full name is empty"
+  },
+  "registrationRoleLabel": "Your role",
+  "@registrationRoleLabel": {
+    "description": "Label for the role selection on registration screen"
+  },
+  "registrationRoleError": "Please select a role",
+  "@registrationRoleError": {
+    "description": "Error message if no role is selected"
+  },
+  "registrationRoleXodim": "Regular staff",
+  "@registrationRoleXodim": {
+    "description": "Option for 'xodim' (staff) role"
+  },
+  "registrationRoleEkspert": "Expert (content creator)",
+  "@registrationRoleEkspert": {
+    "description": "Option for 'ekspert' (expert) role"
+  },
+  "registrationRoleJudge": "Judge",
+  "@registrationRoleJudge": {
+    "description": "Role option: Judge"
+  },
+  "registrationRoleAssistant": "Assistant",
+  "@registrationRoleAssistant": {
+    "description": "Role option: Assistant"
+  },
+  "registrationRoleChancellery": "Chancellery",
+  "@registrationRoleChancellery": {
+    "description": "Role option: Chancellery"
+  },
+  "registrationRoleArchive": "Archive",
+  "@registrationRoleArchive": {
+    "description": "Role option: Archive"
+  },
+  "registrationRoleIctSpecialist": "ICT specialist",
+  "@registrationRoleIctSpecialist": {
+    "description": "Role option: ICT Specialist"
+  },
+  "registrationPasswordLabel": "Password",
+  "@registrationPasswordLabel": {
+    "description": "Label for the password field"
+  },
+  "registrationPasswordError": "Password must be at least 6 characters long",
+  "@registrationPasswordError": {
+    "description": "Error message for short password"
+  },
+  "registrationConfirmPasswordLabel": "Confirm password",
+  "@registrationConfirmPasswordLabel": {
+    "description": "Label for the confirm password field"
+  },
+  "registrationConfirmPasswordError": "Passwords do not match",
+  "@registrationConfirmPasswordError": {
+    "description": "Error message if passwords don't match"
+  },
+  "registrationSignUpButton": "Sign up",
+  "@registrationSignUpButton": {
+    "description": "Text for the sign up button"
+  },
+  "registrationSwitchToLogin": "Already have an account? sign in",
+  "@registrationSwitchToLogin": {
+    "description": "Text to switch to login screen"
+  },
+  "languageEnglish": "English (US)",
+  "@languageEnglish": {
+    "description": "Translation for languageEnglish"
+  },
+  "languageUzbek": "Uzbek (Uzbekistan)",
+  "@languageUzbek": {
+    "description": "Translation for languageUzbek"
+  },
+  "languageRussian": "Russian (Russia)",
+  "@languageRussian": {
+    "description": "Translation for languageRussian"
+  },
+  "languageSystemDefault": "System default",
+  "@languageSystemDefault": {
+    "description": "Translation for languageSystemDefault"
+  },
+  "settingsScreenTitle": "Settings",
+  "@settingsScreenTitle": {
+    "description": "Translation for settingsScreenTitle"
+  },
+  "settingsLanguage": "Language",
+  "@settingsLanguage": {
+    "description": "Translation for settingsLanguage"
+  },
+  "settingsReceiveNotifications": "Receive notifications",
+  "@settingsReceiveNotifications": {
+    "description": "Translation for settingsReceiveNotifications"
+  },
+  "settingsReceiveNotificationsSubtitle": "Get updates about new resources and discussions",
+  "@settingsReceiveNotificationsSubtitle": {
+    "description": "Translation for settingsReceiveNotificationsSubtitle"
+  },
+  "settingsAllowLocation": "Allow location access",
+  "@settingsAllowLocation": {
+    "description": "Translation for settingsAllowLocation"
+  },
+  "settingsAllowLocationSubtitle": "For features requiring your location (if any)",
+  "@settingsAllowLocationSubtitle": {
+    "description": "Translation for settingsAllowLocationSubtitle"
+  },
+  "settingsChangePassword": "Change password",
+  "@settingsChangePassword": {
+    "description": "Translation for settingsChangePassword"
+  },
+  "settingsHelpCenter": "Help center",
+  "@settingsHelpCenter": {
+    "description": "Translation for settingsHelpCenter"
+  },
+  "settingsAboutApp": "About court handbook",
+  "@settingsAboutApp": {
+    "description": "Translation for settingsAboutApp"
+  },
+  "settingsAppLegalese": "© 2025 court handbook project",
+  "@settingsAppLegalese": {
+    "description": "Translation for settingsAppLegalese"
+  },
+  "settingsAppDescription": "Bridging the iT skills gap through collaborative learning and resource sharing.",
+  "@settingsAppDescription": {
+    "description": "Translation for settingsAppDescription"
+  },
+  "errorPrefix": "Error: ",
+  "@errorPrefix": {
+    "description": "Translation for errorPrefix"
+  },
+  "days": "days",
+  "@days": {
+    "description": "Translation for days"
+  },
+  "resourcesNoResourcesFound": "No resources found.",
+  "@resourcesNoResourcesFound": {
+    "description": "Translation for resourcesNoResourcesFound"
+  },
+  "loginButtonText": "Login",
+  "@loginButtonText": {
+    "description": "Translation for loginButtonText"
+  },
+  "signUpButtonText": "Sign up",
+  "@signUpButtonText": {
+    "description": "Translation for signUpButtonText"
+  },
+  "loginNoAccount": "Don't have an account?",
+  "@loginNoAccount": {
+    "description": "Login screen text asking if user has no account"
+  },
+  "logoutButtonText": "Logout",
+  "@logoutButtonText": {
+    "description": "Translation for logoutButtonText"
+  },
+  "logoutConfirmTitle": "Are you sure to logout",
+  "@logoutConfirmTitle": {
+    "description": "Translation for logoutConfirmTitle"
+  },
+  "emailLabel": "Email",
+  "@emailLabel": {
+    "description": "Translation for emailLabel"
+  },
+  "passwordLabel": "Password",
+  "@passwordLabel": {
+    "description": "Translation for passwordLabel"
+  },
+  "homeDashboardTitle": "Dashboard",
+  "@homeDashboardTitle": {
+    "description": "Translation for homeDashboardTitle"
+  },
+  "communityScreenTitle": "Forum",
+  "@communityScreenTitle": {
+    "description": "Translation for communityScreenTitle"
+  },
+  "profileScreenTitle": "Profile",
+  "@profileScreenTitle": {
+    "description": "Translation for profileScreenTitle"
+  },
+  "editProfileButtonText": "Edit profile",
+  "@editProfileButtonText": {
+    "description": "Translation for editProfileButtonText"
+  },
+  "guestUser": "Guest",
+  "@guestUser": {
+    "description": "Translation for guestUser"
+  },
+  "updateYourInformation": "Update your information",
+  "@updateYourInformation": {
+    "description": "Translation for updateYourInformation"
+  },
+  "loginToEditProfile": "Log in to edit your profile",
+  "@loginToEditProfile": {
+    "description": "Translation for loginToEditProfile"
+  },
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Translation for settingsTitle"
+  },
+  "themeOptionsTitle": "Theme options",
+  "@themeOptionsTitle": {
+    "description": "Translation for themeOptionsTitle"
+  },
+  "logoutConfirmMessage": "Are you sure you want to log out?",
+  "@logoutConfirmMessage": {
+    "description": "Translation for logoutConfirmMessage"
+  },
+  "saveChangesButton": "Save changes",
+  "@saveChangesButton": {
+    "description": "Translation for saveChangesButton"
+  },
+  "vidCategoryBeginner": "Beginner",
+  "@vidCategoryBeginner": {
+    "description": "Category: Beginner"
+  },
+  "vidCategoryIntermediate": "Intermediate",
+  "@vidCategoryIntermediate": {
+    "description": "Category: Intermediate"
+  },
+  "vidCategoryAdvanced": "Advanced",
+  "@vidCategoryAdvanced": {
+    "description": "Category: Advanced"
+  },
+  "vidCategoryPractical": "Practical",
+  "@vidCategoryPractical": {
+    "description": "Category: Practical"
+  },
+  "vidCategoryTheory": "Theory",
+  "@vidCategoryTheory": {
+    "description": "Category: Theory"
+  },
+  "cancelButton": "Cancel",
+  "@cancelButton": {
+    "description": "Translation for cancelButton"
+  },
+  "logoutButton": "Log out",
+  "@logoutButton": {
+    "description": "Translation for logoutButton"
+  },
+  "resourcesTitle": "Guides",
+  "@resourcesTitle": {
+    "description": "Translation for resourcesTitle"
+  },
+  "resourcesSearchHint": "Search guides...",
+  "@resourcesSearchHint": {
+    "description": "Translation for resourcesSearchHint"
+  },
+  "resourcesFilterByType": "Filter by type",
+  "@resourcesFilterByType": {
+    "description": "Translation for resourcesFilterByType"
+  },
+  "resourcesAllTypes": "All types",
+  "@resourcesAllTypes": {
+    "description": "Translation for resourcesAllTypes"
+  },
+  "resourcesNoResourcesMatch": "No resources match your criteria.",
+  "@resourcesNoResourcesMatch": {
+    "description": "Translation for resourcesNoResourcesMatch"
+  },
+  "resourcesTryAdjusting": "Try adjusting your search or filter.",
+  "@resourcesTryAdjusting": {
+    "description": "Translation for resourcesTryAdjusting"
+  },
+  "resourcesCreateButton": "Create",
+  "@resourcesCreateButton": {
+    "description": "Translation for resourcesCreateButton"
+  },
+  "resourceAddedSuccess": "Resource added successfully!",
+  "@resourceAddedSuccess": {
+    "description": "Translation for resourceAddedSuccess"
+  },
+  "resourceAddedError": "Error adding resource: {error}",
+  "@resourceAddedError": {
+    "description": "Error message when adding a resource fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network connection failed"
+      }
+    }
+  },
+  "createResourceScreenTitle": "Create new guide",
+  "@createResourceScreenTitle": {
+    "description": "Translation for createResourceScreenTitle"
+  },
+  "createResourceFormWillBeHere": "Resource creation form will be here.",
+  "@createResourceFormWillBeHere": {
+    "description": "Translation for createResourceFormWillBeHere"
+  },
+  "saveButtonText": "Save changes",
+  "@saveButtonText": {
+    "description": "Translation for saveButtonText"
+  },
+  "createResourceTitleLabel": "Title",
+  "@createResourceTitleLabel": {
+    "description": "Translation for createResourceTitleLabel"
+  },
+  "createResourceDescriptionLabel": "Description",
+  "@createResourceDescriptionLabel": {
+    "description": "Translation for createResourceDescriptionLabel"
+  },
+  "createResourceAuthorLabel": "Author",
+  "@createResourceAuthorLabel": {
+    "description": "Translation for createResourceAuthorLabel"
+  },
+  "createResourceTypeLabel": "System type",
+  "@createResourceTypeLabel": {
+    "description": "Translation for createResourceTypeLabel"
+  },
+  "createResourceUrlLabel": "URL (optional)",
+  "@createResourceUrlLabel": {
+    "description": "Translation for createResourceUrlLabel"
+  },
+  "couldNotLaunchUrl": "Could not launch {url}",
+  "@couldNotLaunchUrl": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "createResourceValidationEmpty": "Please enter a {fieldName}",
+  "@createResourceValidationEmpty": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
+    }
+  },
+  "createResourceValidationSelect": "Please select a {fieldName}",
+  "@createResourceValidationSelect": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
+    }
+  },
+  "createResourceValidationInvalidUrl": "Please enter a valid URL",
+  "@createResourceValidationInvalidUrl": {
+    "description": "Translation for createResourceValidationInvalidUrl"
+  },
+  "editButtonTooltip": "Edit resource",
+  "@editButtonTooltip": {
+    "description": "Translation for editButtonTooltip"
+  },
+  "editResourceScreenTitle": "Edit guide",
+  "@editResourceScreenTitle": {
+    "description": "Translation for editResourceScreenTitle"
+  },
+  "resourceTypeLabel": "Type",
+  "@resourceTypeLabel": {
+    "description": "Translation for resourceTypeLabel"
+  },
+  "editTopicScreenTitle": "Edit discussion topic",
+  "@editTopicScreenTitle": {
+    "description": "Title for the screen where users edit a discussion topic"
+  },
+  "authorLabel": "Author",
+  "@authorLabel": {
+    "description": "Translation for authorLabel"
+  },
+  "dateAddedLabel": "Added",
+  "@dateAddedLabel": {
+    "description": "Translation for dateAddedLabel"
+  },
+  "launchingUrlMessage": "Launching URL",
+  "@launchingUrlMessage": {
+    "description": "Translation for launchingUrlMessage"
+  },
+  "descriptionLabel": "Description",
+  "@descriptionLabel": {
+    "description": "Label for description fields"
+  },
+  "resourceUpdatedSuccess": "Resource updated successfully!",
+  "@resourceUpdatedSuccess": {
+    "description": "Translation for resourceUpdatedSuccess"
+  },
+  "resourceUpdatedError": "Error updating resource: {error}",
+  "@resourceUpdatedError": {
+    "description": "Error message when updating a resource fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Database write failed"
+      }
+    }
+  },
+  "deleteResourceConfirmTitle": "Confirm deletion",
+  "@deleteResourceConfirmTitle": {
+    "description": "Translation for deleteResourceConfirmTitle"
+  },
+  "deleteResourceConfirmMessage": "Are you sure you want to delete this resource? this action cannot be undone.",
+  "@deleteResourceConfirmMessage": {
+    "description": "Translation for deleteResourceConfirmMessage"
+  },
+  "cancelButtonText": "Cancel",
+  "@cancelButtonText": {
+    "description": "Translation for cancelButtonText"
+  },
+  "deleteButtonText": "Delete",
+  "@deleteButtonText": {
+    "description": "Translation for deleteButtonText"
+  },
+  "resourceDeletedSuccess": "Resource \"{resourceTitle}\" deleted successfully.",
+  "@resourceDeletedSuccess": {
+    "placeholders": {
+      "resourceTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "resourceDeletedError": "Error deleting resource: {error}",
+  "@resourceDeletedError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteButtonTooltip": "Delete resource",
+  "@deleteButtonTooltip": {
+    "description": "Translation for deleteButtonTooltip"
+  },
+  "createANewQuiz": "Create a new quiz",
+  "@createANewQuiz": {
+    "description": "Translation for createANewQuiz"
+  },
+  "quizTitle": "Quiz title",
+  "@quizTitle": {
+    "description": "Translation for quizTitle"
+  },
+  "quizDescription": "Description",
+  "@quizDescription": {
+    "description": "Translation for quizDescription"
+  },
+  "saveAndAddQuestions": "Save and add questions",
+  "@saveAndAddQuestions": {
+    "description": "Translation for saveAndAddQuestions"
+  },
+  "failedToCreateQuiz": "Failed to create quiz",
+  "@failedToCreateQuiz": {
+    "description": "Translation for failedToCreateQuiz"
+  },
+  "addQuestions": "Add questions",
+  "@addQuestions": {
+    "description": "Translation for addQuestions"
+  },
+  "finish": "Finish",
+  "@finish": {
+    "description": "Translation for finish"
+  },
+  "questionText": "Question text",
+  "@questionText": {
+    "description": "Translation for questionText"
+  },
+  "pleaseEnterAQuestion": "Please enter a question",
+  "@pleaseEnterAQuestion": {
+    "description": "Translation for pleaseEnterAQuestion"
+  },
+  "questionType": "Question type",
+  "@questionType": {
+    "description": "Translation for questionType"
+  },
+  "multipleChoice": "Multiple choice",
+  "@multipleChoice": {
+    "description": "Translation for multipleChoice"
+  },
+  "trueFalse": "True/False",
+  "@trueFalse": {
+    "description": "Translation for trueFalse"
+  },
+  "pleaseSelectCorrectAnswer": "Please select a correct answer.",
+  "@pleaseSelectCorrectAnswer": {
+    "description": "Translation for pleaseSelectCorrectAnswer"
+  },
+  "option": "Option {number}",
+  "@option": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "pleaseEnterAnOption": "Please enter an option",
+  "@pleaseEnterAnOption": {
+    "description": "Translation for pleaseEnterAnOption"
+  },
+  "addQuestion": "Add question",
+  "@addQuestion": {
+    "description": "Translation for addQuestion"
+  },
+  "questionAddedSuccessfully": "Question added successfully!",
+  "@questionAddedSuccessfully": {
+    "description": "Translation for questionAddedSuccessfully"
+  },
+  "failedToAddQuestion": "Failed to add question",
+  "@failedToAddQuestion": {
+    "description": "Translation for failedToAddQuestion"
+  },
+  "noQuestionsAddedYet": "No questions added yet.",
+  "@noQuestionsAddedYet": {
+    "description": "Translation for noQuestionsAddedYet"
+  },
+  "correctAnswer": "Correct",
+  "@correctAnswer": {
+    "description": "Translation for correctAnswer"
+  },
+  "quiz": "Quiz",
+  "@quiz": {
+    "description": "Translation for quiz"
+  },
+  "quizCompletionMessage": "You have completed the quiz!",
+  "@quizCompletionMessage": {
+    "description": "Translation for quizCompletionMessage"
+  },
+  "done": "Done",
+  "@done": {
+    "description": "Translation for done"
+  },
+  "myQuizHistory": "My quiz history",
+  "@myQuizHistory": {
+    "description": "Translation for myQuizHistory"
+  },
+  "noQuizAttempts": "You haven't attempted any quizzes yet.",
+  "@noQuizAttempts": {
+    "description": "Translation for noQuizAttempts"
+  },
+  "score": "Score",
+  "@score": {
+    "description": "Translation for score"
+  },
+  "role": "Role",
+  "@role": {
+    "description": "Translation for role"
+  },
+  "loading": "Loading...",
+  "@loading": {
+    "description": "Translation for loading"
+  },
+  "relatedQuizzesTitle": "Related quizzes",
+  "@relatedQuizzesTitle": {
+    "description": "Translation for relatedQuizzesTitle"
+  },
+  "noQuizzesAvailable": "No quizzes available for this resource yet.",
+  "@noQuizzesAvailable": {
+    "description": "Translation for noQuizzesAvailable"
+  },
+  "errorLoadingQuizzes": "Error loading quizzes",
+  "@errorLoadingQuizzes": {
+    "description": "Translation for errorLoadingQuizzes"
+  },
+  "invalidUrlFormat": "Invalid URL format: {url}",
+  "@invalidUrlFormat": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLaunchingUrl": "Error launching URL: {error}",
+  "@errorLaunchingUrl": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "createResourceValidationMinLength": "{fieldName} must be at least {length} characters long",
+  "@createResourceValidationMinLength": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "createResourceValidationMaxLength": "{fieldName} cannot exceed {length} characters",
+  "@createResourceValidationMaxLength": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "titleMinLength": "Title must be at least 5 characters long",
+  "@titleMinLength": {
+    "description": "Translation for titleMinLength"
+  },
+  "titleMaxLength": "Title cannot exceed 100 characters",
+  "@titleMaxLength": {
+    "description": "Translation for titleMaxLength"
+  },
+  "createTopicScreenTitle": "Start new discussion",
+  "@createTopicScreenTitle": {
+    "description": "Translation for createTopicScreenTitle"
+  },
+  "createTopicTitleLabel": "Topic title",
+  "@createTopicTitleLabel": {
+    "description": "Translation for createTopicTitleLabel"
+  },
+  "createTopicContentLabel": "Discussion content",
+  "@createTopicContentLabel": {
+    "description": "Translation for createTopicContentLabel"
+  },
+  "createTopicButtonText": "Create discussion topic",
+  "@createTopicButtonText": {
+    "description": "Translation for createTopicButtonText"
+  },
+  "mustBeLoggedInToCreateTopic": "You must be logged in to create a topic.",
+  "@mustBeLoggedInToCreateTopic": {
+    "description": "Translation for mustBeLoggedInToCreateTopic"
+  },
+  "topicCreatedSuccess": "Topic created successfully!",
+  "@topicCreatedSuccess": {
+    "description": "Translation for topicCreatedSuccess"
+  },
+  "failedToCreateTopic": "Failed to create topic: {error}",
+  "@failedToCreateTopic": {
+    "description": "Error message when creating a topic fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "createTopicValidationEmpty": "{fieldName} cannot be empty.",
+  "@createTopicValidationEmpty": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      }
+    }
+  },
+  "createTopicValidationMinLength": "{fieldName} must be at least {length} characters long.",
+  "@createTopicValidationMinLength": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "createTopicValidationMaxLength": "{fieldName} cannot exceed {length} characters.",
+  "@createTopicValidationMaxLength": {
+    "placeholders": {
+      "fieldName": {
+        "type": "String"
+      },
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "errorLoadingData": "An error occurred while loading resources. please try again.",
+  "@errorLoadingData": {
+    "description": "Translation for errorLoadingData"
+  },
+  "failedToUpdateTopic": "Error updating topic: {error}",
+  "@failedToUpdateTopic": {
+    "description": "Error message shown when topic update fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+  "topicUpdatedSuccess": "Topic updated successfully!",
+  "@topicUpdatedSuccess": {
+    "description": "Translation for topicUpdatedSuccess"
+  },
+  "noDiscussionsYet": "No discussions yet.",
+  "@noDiscussionsYet": {
+    "description": "Translation for noDiscussionsYet"
+  },
+  "beTheFirstToStartConversation": "Be the first to start a conversation!",
+  "@beTheFirstToStartConversation": {
+    "description": "Translation for beTheFirstToStartConversation"
+  },
+  "mustBeLoggedInToCreateResource": "You must be logged in to create a resource.",
+  "@mustBeLoggedInToCreateResource": {
+    "description": "Translation for mustBeLoggedInToCreateResource"
+  },
+  "profileIncompleteToCreateResource": "Your profile information is incomplete. please update your name in your profile.",
+  "@profileIncompleteToCreateResource": {
+    "description": "Translation for profileIncompleteToCreateResource"
+  },
+  "profileIncompleteToCreateTopic": "Your profile name is not set. please update your profile.",
+  "@profileIncompleteToCreateTopic": {
+    "description": "Translation for profileIncompleteToCreateTopic"
+  },
+  "commentCannotBeEmpty": "Comment cannot be empty.",
+  "@commentCannotBeEmpty": {
+    "description": "Translation for commentCannotBeEmpty"
+  },
+  "mustBeLoggedInToComment": "You must be logged in to comment.",
+  "@mustBeLoggedInToComment": {
+    "description": "Translation for mustBeLoggedInToComment"
+  },
+  "commentAddedSuccessfully": "Comment added successfully!",
+  "@commentAddedSuccessfully": {
+    "description": "Translation for commentAddedSuccessfully"
+  },
+  "failedToAddComment": "Failed to add comment: {error}",
+  "@failedToAddComment": {
+    "description": "Error message when adding a comment fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "postedBy": "Posted by {authorName}",
+  "@postedBy": {
+    "placeholders": {
+      "authorName": {
+        "type": "String"
+      }
+    }
+  },
+  "onDate": "on {date}",
+  "@onDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "repliesTitle": "Replies",
+  "@repliesTitle": {
+    "description": "Translation for repliesTitle"
+  },
+  "errorLoadingComments": "Error loading comments: {error}",
+  "@errorLoadingComments": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noRepliesYet": "No replies yet. be the first to comment!",
+  "@noRepliesYet": {
+    "description": "Translation for noRepliesYet"
+  },
+  "writeAReplyHint": "Write a reply...",
+  "@writeAReplyHint": {
+    "description": "Translation for writeAReplyHint"
+  },
+  "sendCommentTooltip": "Send comment",
+  "@sendCommentTooltip": {
+    "description": "Translation for sendCommentTooltip"
+  },
+  "welcomeBack": "Welcome back, {userName}!",
+  "@welcomeBack": {
+    "placeholders": {
+      "userName": {
+        "type": "String"
+      }
+    }
+  },
+  "readyToLearnSomethingNew": "Ready to learn something new today?",
+  "@readyToLearnSomethingNew": {
+    "description": "Translation for readyToLearnSomethingNew"
+  },
+  "quickAccessTitle": "Quick access",
+  "@quickAccessTitle": {
+    "description": "Translation for quickAccessTitle"
+  },
+  "communityTitle": "Forum",
+  "@communityTitle": {
+    "description": "Translation for communityTitle"
+  },
+  "profileTitle": "Profile",
+  "@profileTitle": {
+    "description": "Translation for profileTitle"
+  },
+  "latestNewsTitle": "Latest news",
+  "@latestNewsTitle": {
+    "description": "Translation for latestNewsTitle"
+  },
+  "sourceLabel": "Source",
+  "@sourceLabel": {
+    "description": "Translation for sourceLabel"
+  },
+  "quizzesTitle": "Quizzes",
+  "@quizzesTitle": {
+    "description": "Translation for quizzesTitle"
+  },
+  "urlCannotBeEmpty": "URL cannot be empty",
+  "@urlCannotBeEmpty": {
+    "description": "Translation for urlCannotBeEmpty"
+  },
+  "errorLoadingNews": "Error loading news: {error}",
+  "@errorLoadingNews": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noNewsAvailable": "No news available at the moment.",
+  "@noNewsAvailable": {
+    "description": "Translation for noNewsAvailable"
+  },
+  "adminPanelTitle": "Admin panel",
+  "@adminPanelTitle": {
+    "description": "Translation for adminPanelTitle"
+  },
+  "manageNewsTitle": "Manage news",
+  "@manageNewsTitle": {
+    "description": "Translation for manageNewsTitle"
+  },
+  "manageNewsSubtitle": "Add, edit, or delete news articles",
+  "@manageNewsSubtitle": {
+    "description": "Translation for manageNewsSubtitle"
+  },
+  "manageUsersTitle": "Manage users",
+  "@manageUsersTitle": {
+    "description": "Translation for manageUsersTitle"
+  },
+  "manageUsersSubtitle": "View users and manage roles (future)",
+  "@manageUsersSubtitle": {
+    "description": "Translation for manageUsersSubtitle"
+  },
+  "manageResourcesTitle": "Manage guides",
+  "@manageResourcesTitle": {
+    "description": "Translation for manageResourcesTitle"
+  },
+  "manageResourcesSubtitle": "Oversee all learning resources (future)",
+  "@manageResourcesSubtitle": {
+    "description": "Translation for manageResourcesSubtitle"
+  },
+  "confirmDeleteTitle": "Confirm deletion",
+  "@confirmDeleteTitle": {
+    "description": "Translation for confirmDeleteTitle"
+  },
+  "confirmDeleteNewsMessage": "Are you sure you want to delete \"{newsTitle}\"?",
+  "@confirmDeleteNewsMessage": {
+    "placeholders": {
+      "newsTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "newsDeletedSuccess": "\"{newsTitle}\" deleted successfully.",
+  "@newsDeletedSuccess": {
+    "placeholders": {
+      "newsTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToDeleteNews": "Failed to delete \"{newsTitle}\": {error}",
+  "@failedToDeleteNews": {
+    "description": "Error message when deleting news fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "newsTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "faqTitle": "FAQ",
+  "@faqTitle": {
+    "description": "Translation for faqTitle"
+  },
+  "searchHelp": "Search help...",
+  "@searchHelp": {
+    "description": "Translation for searchHelp"
+  },
+  "allCategories": "All categories",
+  "@allCategories": {
+    "description": "Translation for allCategories"
+  },
+  "helpfulFeedback": "Was this helpful?",
+  "@helpfulFeedback": {
+    "description": "Translation for helpfulFeedback"
+  },
+  "noArticlesFound": "No fAQs found",
+  "@noArticlesFound": {
+    "description": "Translation for noArticlesFound"
+  },
+  "settingsNotifications": "Notifications",
+  "@settingsNotifications": {
+    "description": "Translation for settingsNotifications"
+  },
+  "changePasswordTitle": "Change password",
+  "@changePasswordTitle": {
+    "description": "Translation for changePasswordTitle"
+  },
+  "helpCenterTitle": "Help center",
+  "@helpCenterTitle": {
+    "description": "Translation for helpCenterTitle"
+  },
+  "settingsAbout": "About app",
+  "@settingsAbout": {
+    "description": "Translation for settingsAbout"
+  },
+  "passwordUpdatedSuccess": "Password updated successfully",
+  "@passwordUpdatedSuccess": {
+    "description": "Translation for passwordUpdatedSuccess"
+  },
+  "errorWrongPassword": "Incorrect current password",
+  "@errorWrongPassword": {
+    "description": "Translation for errorWrongPassword"
+  },
+  "currentPassword": "Current password",
+  "@currentPassword": {
+    "description": "Translation for currentPassword"
+  },
+  "newPassword": "New password",
+  "@newPassword": {
+    "description": "Translation for newPassword"
+  },
+  "confirmPassword": "Confirm password",
+  "@confirmPassword": {
+    "description": "Translation for confirmPassword"
+  },
+  "passwordMismatch": "Passwords do not match",
+  "@passwordMismatch": {
+    "description": "Translation for passwordMismatch"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Translation for save"
+  },
+  "addNewsTooltip": "Add new news article",
+  "@addNewsTooltip": {
+    "description": "Translation for addNewsTooltip"
+  },
+  "editNewsTooltip": "Edit news",
+  "@editNewsTooltip": {
+    "description": "Translation for editNewsTooltip"
+  },
+  "deleteNewsTooltip": "Delete news",
+  "@deleteNewsTooltip": {
+    "description": "Translation for deleteNewsTooltip"
+  },
+  "addNewsButton": "Add news",
+  "@addNewsButton": {
+    "description": "Translation for addNewsButton"
+  },
+  "noNewsAvailableManager": "No news articles found. add one!",
+  "@noNewsAvailableManager": {
+    "description": "Translation for noNewsAvailableManager"
+  },
+  "editNewsTitle": "Edit news",
+  "@editNewsTitle": {
+    "description": "Translation for editNewsTitle"
+  },
+  "addNewsTitle": "Add news article",
+  "@addNewsTitle": {
+    "description": "Translation for addNewsTitle"
+  },
+  "saveNewsTooltip": "Save news",
+  "@saveNewsTooltip": {
+    "description": "Translation for saveNewsTooltip"
+  },
+  "newsTitleLabel": "Title",
+  "@newsTitleLabel": {
+    "description": "Translation for newsTitleLabel"
+  },
+  "pleaseEnterNewsTitle": "Please enter a news title.",
+  "@pleaseEnterNewsTitle": {
+    "description": "Translation for pleaseEnterNewsTitle"
+  },
+  "newsTitleMinLength": "News title must be at least {length} characters.",
+  "@newsTitleMinLength": {
+    "placeholders": {
+      "length": {
+        "type": "int"
+      }
+    }
+  },
+  "newsSourceLabel": "Source (e.g., blog name)",
+  "@newsSourceLabel": {
+    "description": "Translation for newsSourceLabel"
+  },
+  "pleaseEnterNewsSource": "Please enter the news source.",
+  "@pleaseEnterNewsSource": {
+    "description": "Translation for pleaseEnterNewsSource"
+  },
+  "newsUrlLabel": "Article URL",
+  "@newsUrlLabel": {
+    "description": "Translation for newsUrlLabel"
+  },
+  "pleaseEnterNewsUrl": "Please enter the article uRL.",
+  "@pleaseEnterNewsUrl": {
+    "description": "Translation for pleaseEnterNewsUrl"
+  },
+  "pleaseEnterValidNewsUrl": "Please enter a valid URL (starting with http or https).",
+  "@pleaseEnterValidNewsUrl": {
+    "description": "Translation for pleaseEnterValidNewsUrl"
+  },
+  "newsImageUrlLabel": "Image URL (Optional)",
+  "@newsImageUrlLabel": {
+    "description": "Translation for newsImageUrlLabel"
+  },
+  "pleaseEnterValidImageUrl": "Please enter a valid image URL (starting with http or https), or leave blank.",
+  "@pleaseEnterValidImageUrl": {
+    "description": "Translation for pleaseEnterValidImageUrl"
+  },
+  "publicationDateLabel": "Publication date",
+  "@publicationDateLabel": {
+    "description": "Translation for publicationDateLabel"
+  },
+  "pleaseSelectPublicationDate": "Please select a publication date.",
+  "@pleaseSelectPublicationDate": {
+    "description": "Translation for pleaseSelectPublicationDate"
+  },
+  "noDateSelected": "No date selected",
+  "@noDateSelected": {
+    "description": "Translation for noDateSelected"
+  },
+  "selectDateTooltip": "Select date",
+  "@selectDateTooltip": {
+    "description": "Translation for selectDateTooltip"
+  },
+  "updateNewsButton": "Update news",
+  "@updateNewsButton": {
+    "description": "Translation for updateNewsButton"
+  },
+  "addNewsButtonForm": "Add news article",
+  "@addNewsButtonForm": {
+    "description": "Translation for addNewsButtonForm"
+  },
+  "newsUpdatedSuccess": "\"{newsTitle}\" updated successfully.",
+  "@newsUpdatedSuccess": {
+    "placeholders": {
+      "newsTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "newsAddedSuccess": "\"{newsTitle}\" added successfully.",
+  "@newsAddedSuccess": {
+    "placeholders": {
+      "newsTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToSaveNews": "Failed to save news: {error}",
+  "@failedToSaveNews": {
+    "description": "Error message when saving news fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLoadingUsers": "Error loading users: {error}",
+  "@errorLoadingUsers": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noUsersFound": "No users found.",
+  "@noUsersFound": {
+    "description": "Translation for noUsersFound"
+  },
+  "noEmailProvided": "No email provided",
+  "@noEmailProvided": {
+    "description": "Translation for noEmailProvided"
+  },
+  "roleLabel": "Role",
+  "@roleLabel": {
+    "description": "Translation for roleLabel"
+  },
+  "registeredOnLabel": "Registered",
+  "@registeredOnLabel": {
+    "description": "Translation for registeredOnLabel"
+  },
+  "manageUsersSubtitleNow": "View and search registered users",
+  "@manageUsersSubtitleNow": {
+    "description": "Translation for manageUsersSubtitleNow"
+  },
+  "manageResourcesSubtitleNow": "View, edit, or delete any learning resource",
+  "@manageResourcesSubtitleNow": {
+    "description": "Translation for manageResourcesSubtitleNow"
+  },
+  "confirmDeleteResourceMessage": "Are you sure you want to delete resource \"{resourceTitle}\"?",
+  "@confirmDeleteResourceMessage": {
+    "placeholders": {
+      "resourceTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToDeleteResource": "Failed to delete resource \"{resourceTitle}\": {error}",
+  "@failedToDeleteResource": {
+    "description": "Error message when deleting resource fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "resourceTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "errorLoadingResources": "Error loading resources: {error}",
+  "@errorLoadingResources": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noResourcesFoundManager": "No resources found in the system.",
+  "@noResourcesFoundManager": {
+    "description": "Translation for noResourcesFoundManager"
+  },
+  "editResourceTooltip": "Edit resource",
+  "@editResourceTooltip": {
+    "description": "Translation for editResourceTooltip"
+  },
+  "deleteResourceTooltip": "Delete resource",
+  "@deleteResourceTooltip": {
+    "description": "Translation for deleteResourceTooltip"
+  },
+  "manageQuizzesTitle": "Manage quizzes",
+  "@manageQuizzesTitle": {
+    "description": "Translation for manageQuizzesTitle"
+  },
+  "addQuizTooltip": "Add new quiz",
+  "@addQuizTooltip": {
+    "description": "Translation for addQuizTooltip"
+  },
+  "errorLoadingQuizzesAdmin": "Error loading quizzes: {error}",
+  "@errorLoadingQuizzesAdmin": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "noQuizzesFoundManager": "No quizzes found. add one!",
+  "@noQuizzesFoundManager": {
+    "description": "Translation for noQuizzesFoundManager"
+  },
+  "confirmDeleteQuizMessage": "Are you sure you want to delete quiz \"{quizTitle}\" and all its questions? this action cannot be undone.",
+  "@confirmDeleteQuizMessage": {
+    "placeholders": {
+      "quizTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "quizDeletedSuccess": "Quiz \"{quizTitle}\" and its questions deleted successfully.",
+  "@quizDeletedSuccess": {
+    "placeholders": {
+      "quizTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToDeleteQuiz": "Failed to delete quiz \"{quizTitle}\": {error}",
+  "@failedToDeleteQuiz": {
+    "description": "Error message when deleting quiz fails",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      },
+      "quizTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "editDetailsButton": "Edit details",
+  "@editDetailsButton": {
+    "description": "Translation for editDetailsButton"
+  },
+  "manageQuestionsButton": "Questions",
+  "@manageQuestionsButton": {
+    "description": "Translation for manageQuestionsButton"
+  },
+  "deleteQuizTooltip": "Delete quiz and questions",
+  "@deleteQuizTooltip": {
+    "description": "Translation for deleteQuizTooltip"
+  },
+  "addQuizButton": "Add quiz",
+  "@addQuizButton": {
+    "description": "Translation for addQuizButton"
+  },
+  "manageQuizzesSubtitle": "Oversee all quizzes and their questions",
+  "@manageQuizzesSubtitle": {
+    "description": "Translation for manageQuizzesSubtitle"
+  },
+  "registrationEmailError": "Please enter a valid email address",
+  "@registrationEmailError": {
+    "description": "Error message if email is invalid"
+  },
+  "dashboardXodimTitle": "My activity",
+  "@dashboardXodimTitle": {
+    "description": "Title for the regular staff member's dashboard section"
+  },
+  "dashboardEkspertTitle": "My contributions",
+  "@dashboardEkspertTitle": {
+    "description": "Title for the expert's dashboard section"
+  },
+  "dashboardAdminTitle": "System overview",
+  "@dashboardAdminTitle": {
+    "description": "Title for the admin's dashboard section"
+  },
+  "seeAllButton": "See all",
+  "@seeAllButton": {
+    "description": "A button to see all items in a list"
+  },
+  "noGuidesAuthored": "You have not authored any guides yet.",
+  "@noGuidesAuthored": {
+    "description": "Message displayed when an expert has not authored any guides yet."
+  },
+  "adminStatUsers": "Users",
+  "@adminStatUsers": {
+    "description": "Label for the total users statistic in the admin dashboard."
+  },
+  "adminStatGuides": "Guides",
+  "@adminStatGuides": {
+    "description": "Label for the total guides statistic in the admin dashboard."
+  },
+  "adminStatQuizzes": "Quizzes",
+  "@adminStatQuizzes": {
+    "description": "Label for the total quizzes statistic in the admin dashboard."
+  },
+  "nextLevel": "Next level",
+  "@nextLevel": {
+    "description": "Button to go to the next level."
+  },
+  "orDivider": "OR",
+  "@orDivider": {
+    "description": "A divider text, like 'OR', between login options."
+  },
+  "signInWithGoogle": "Sign in with Google",
+  "@signInWithGoogle": {
+    "description": "Button text for signing in with a Google account."
+  },
+  "themeSystemDefault": "System default",
+  "@themeSystemDefault": {
+    "description": "Translation for themeSystemDefault"
+  },
+  "themeLight": "Light mode",
+  "@themeLight": {
+    "description": "Translation for themeLight"
+  },
+  "themeDark": "Dark mode",
+  "@themeDark": {
+    "description": "Translation for themeDark"
+  },
+  "bioOptionalLabel": "Bio (Optional)",
+  "@bioOptionalLabel": {
+    "description": "Translation for bioOptionalLabel"
+  },
+  "profilePictureUrlLabel": "Profile picture URL (Optional)",
+  "@profilePictureUrlLabel": {
+    "description": "Translation for profilePictureUrlLabel"
+  },
+  "levelIntermediate": "Intermediate",
+  "@levelIntermediate": {
+    "description": "Translation for levelIntermediate"
+  },
+  "levelAdvanced": "Advanced",
+  "@levelAdvanced": {
+    "description": "Translation for levelAdvanced"
+  },
+  "totalPoints": "Total points",
+  "@totalPoints": {
+    "description": "Translation for totalPoints"
+  },
+  "pointsToNextLevel": "{points} XP to next level",
+  "@pointsToNextLevel": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "manageArticlesTitle": "Articles",
+  "@manageArticlesTitle": {
+    "description": "Translation for manageArticlesTitle"
+  },
+  "manageArticlesSubtitle": "Manage knowledge base",
+  "@manageArticlesSubtitle": {
+    "description": "Translation for manageArticlesSubtitle"
+  },
+  "manageVideosTitle": "Videos",
+  "@manageVideosTitle": {
+    "description": "Translation for manageVideosTitle"
+  },
+  "manageVideosSubtitle": "Manage video tutorials",
+  "@manageVideosSubtitle": {
+    "description": "Translation for manageVideosSubtitle"
+  },
+  "manageSystemsTitle": "Systems",
+  "@manageSystemsTitle": {
+    "description": "Translation for manageSystemsTitle"
+  },
+  "manageSystemsSubtitle": "Manage systems directory",
+  "@manageSystemsSubtitle": {
+    "description": "Translation for manageSystemsSubtitle"
+  },
+  "manageFaqTitle": "FAQ",
+  "@manageFaqTitle": {
+    "description": "Translation for manageFaqTitle"
+  },
+  "manageFaqSubtitle": "Manage fAQs",
+  "@manageFaqSubtitle": {
+    "description": "Translation for manageFaqSubtitle"
+  },
+  "manageNotificationsTitle": "Notifications",
+  "@manageNotificationsTitle": {
+    "description": "Translation for manageNotificationsTitle"
+  },
+  "manageNotificationsSubtitle": "Send notifications",
+  "@manageNotificationsSubtitle": {
+    "description": "Translation for manageNotificationsSubtitle"
+  },
+  "selectLanguage": "Select language",
+  "@selectLanguage": {
+    "description": "Translation for selectLanguage"
+  },
+  "topicDeletedSuccess": "\"{topicTitle}\" deleted successfully.",
+  "@topicDeletedSuccess": {
+    "placeholders": {
+      "topicTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToDeleteTopic": "Failed to delete topic: {error}",
+  "@failedToDeleteTopic": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteTopicConfirmMessage": "Are you sure you want to delete \"{topicTitle}\"?",
+  "@deleteTopicConfirmMessage": {
+    "placeholders": {
+      "topicTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "editTopicTooltip": "Edit topic",
+  "@editTopicTooltip": {
+    "description": "Translation for editTopicTooltip"
+  },
+  "deleteTopicConfirmTitle": "Delete topic",
+  "@deleteTopicConfirmTitle": {
+    "description": "Translation for deleteTopicConfirmTitle"
+  },
+  "commentPlural": "Comments",
+  "@commentPlural": {
+    "description": "Translation for commentPlural"
+  },
+  "commentSingular": "Comment",
+  "@commentSingular": {
+    "description": "Translation for commentSingular"
+  },
+  "deleteTopicTooltip": "Delete topic",
+  "@deleteTopicTooltip": {
+    "description": "Translation for deleteTopicTooltip"
+  },
+  "faqCategoryLogin": "Login issues",
+  "@faqCategoryLogin": {
+    "description": "Translation for faqCategoryLogin"
+  },
+  "faqCategoryPassword": "Password issues",
+  "@faqCategoryPassword": {
+    "description": "Translation for faqCategoryPassword"
+  },
+  "faqCategoryUpload": "File upload",
+  "@faqCategoryUpload": {
+    "description": "Translation for faqCategoryUpload"
+  },
+  "faqCategoryAccess": "Access rights",
+  "@faqCategoryAccess": {
+    "description": "Translation for faqCategoryAccess"
+  },
+  "faqCategoryGeneral": "General questions",
+  "@faqCategoryGeneral": {
+    "description": "Translation for faqCategoryGeneral"
+  },
+  "faqCategoryTechnical": "Technical issues",
+  "@faqCategoryTechnical": {
+    "description": "Translation for faqCategoryTechnical"
+  },
+  "confirmDeleteArticleMessage": "Are you sure you want to delete the article \"{articleTitle}\"?",
+  "@confirmDeleteArticleMessage": {
+    "placeholders": {
+      "articleTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "addArticleTitle": "New article",
+  "@addArticleTitle": {
+    "description": "Translation for addArticleTitle"
+  },
+  "editArticleTitle": "Edit article",
+  "@editArticleTitle": {
+    "description": "Translation for editArticleTitle"
+  },
+  "categoryLabel": "Category",
+  "@categoryLabel": {
+    "description": "Translation for categoryLabel"
+  },
+  "articleCategoryGeneral": "General",
+  "@articleCategoryGeneral": {
+    "description": "Translation for articleCategoryGeneral"
+  },
+  "articleCategoryProcedure": "Procedure",
+  "@articleCategoryProcedure": {
+    "description": "Translation for articleCategoryProcedure"
+  },
+  "articleCategoryLaw": "Legislation",
+  "@articleCategoryLaw": {
+    "description": "Translation for articleCategoryLaw"
+  },
+  "articleCategoryFaq": "FAQ",
+  "@articleCategoryFaq": {
+    "description": "Translation for articleCategoryFaq"
+  },
+  "contentLabel": "Content (Markdown)",
+  "@contentLabel": {
+    "description": "Translation for contentLabel"
+  },
+  "tagsLabel": "Tags (comma separated)",
+  "@tagsLabel": {
+    "description": "Translation for tagsLabel"
+  },
+  "tagsHint": "e.g. court, law, code",
+  "@tagsHint": {
+    "description": "Translation for tagsHint"
+  },
+  "noPdfSelected": "No PDF file selected",
+  "@noPdfSelected": {
+    "description": "Translation for noPdfSelected"
+  },
+  "uploadPdfTooltip": "Upload PDF",
+  "@uploadPdfTooltip": {
+    "description": "Translation for uploadPdfTooltip"
+  },
+  "currentFileLabel": "Current file: {url}",
+  "@currentFileLabel": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "existingPdfFile": "Existing PDF file",
+  "@existingPdfFile": {
+    "description": "Translation for existingPdfFile"
+  },
+  "articleSavedSuccess": "Article saved",
+  "@articleSavedSuccess": {
+    "description": "Translation for articleSavedSuccess"
+  },
+  "titleRequired": "Title is required",
+  "@titleRequired": {
+    "description": "Translation for titleRequired"
+  },
+  "contentRequired": "Content is required",
+  "@contentRequired": {
+    "description": "Translation for contentRequired"
+  },
+  "confirmDeleteVideoMessage": "Are you sure you want to delete the video \"{videoTitle}\"?",
+  "@confirmDeleteVideoMessage": {
+    "placeholders": {
+      "videoTitle": {
+        "type": "String"
+      }
+    }
+  },
+  "videoDeletedSuccess": "Video deleted",
+  "@videoDeletedSuccess": {
+    "description": "Translation for videoDeletedSuccess"
+  },
+  "noVideosFound": "No videos found",
+  "@noVideosFound": {
+    "description": "Translation for noVideosFound"
+  },
+  "addVideoTitle": "New video",
+  "@addVideoTitle": {
+    "description": "Translation for addVideoTitle"
+  },
+  "editVideoTitle": "Edit video",
+  "@editVideoTitle": {
+    "description": "Translation for editVideoTitle"
+  },
+  "videoSavedSuccess": "Video saved",
+  "@videoSavedSuccess": {
+    "description": "Translation for videoSavedSuccess"
+  },
+  "youtubeIdLabel": "YouTube ID",
+  "@youtubeIdLabel": {
+    "description": "Translation for youtubeIdLabel"
+  },
+  "youtubeIdHint": "e.g. dQw4w9WgXcQ",
+  "@youtubeIdHint": {
+    "description": "Translation for youtubeIdHint"
+  },
+  "youtubeIdRequired": "YouTube ID is required",
+  "@youtubeIdRequired": {
+    "description": "Translation for youtubeIdRequired"
+  },
+  "systemOptionalLabel": "System (Optional)",
+  "@systemOptionalLabel": {
+    "description": "Translation for systemOptionalLabel"
+  },
+  "notSelectedLabel": "Not selected",
+  "@notSelectedLabel": {
+    "description": "Translation for notSelectedLabel"
+  },
+  "durationLabel": "Duration (seconds)",
+  "@durationLabel": {
+    "description": "Translation for durationLabel"
+  },
+  "durationHint": "e.g. 600",
+  "@durationHint": {
+    "description": "Translation for durationHint"
+  },
+  "durationRequired": "Duration is required",
+  "@durationRequired": {
+    "description": "Translation for durationRequired"
+  },
+  "videoTagsHint": "e.g. login, error, settings",
+  "@videoTagsHint": {
+    "description": "Translation for videoTagsHint"
+  },
+  "descriptionRequired": "Description is required",
+  "@descriptionRequired": {
+    "description": "Translation for descriptionRequired"
+  },
+  "confirmDeleteSystemMessage": "Are you sure you want to delete the system \"{systemName}\"?",
+  "@confirmDeleteSystemMessage": {
+    "placeholders": {
+      "systemName": {
+        "type": "String"
+      }
+    }
+  },
+  "systemDeletedSuccess": "System deleted",
+  "@systemDeletedSuccess": {
+    "description": "Translation for systemDeletedSuccess"
+  },
+  "noSystemsFound": "No systems found",
+  "@noSystemsFound": {
+    "description": "Translation for noSystemsFound"
+  },
+  "addSystemTitle": "New system",
+  "@addSystemTitle": {
+    "description": "Translation for addSystemTitle"
+  },
+  "editSystemTitle": "Edit system",
+  "@editSystemTitle": {
+    "description": "Translation for editSystemTitle"
+  },
+  "systemSavedSuccess": "System saved",
+  "@systemSavedSuccess": {
+    "description": "Translation for systemSavedSuccess"
+  },
+  "shortNameLabel": "Short name",
+  "@shortNameLabel": {
+    "description": "Translation for shortNameLabel"
+  },
+  "shortNameHint": "e.g. e-SUD",
+  "@shortNameHint": {
+    "description": "Translation for shortNameHint"
+  },
+  "nameRequired": "Name is required",
+  "@nameRequired": {
+    "description": "Translation for nameRequired"
+  },
+  "fullNameLabel": "Full name",
+  "@fullNameLabel": {
+    "description": "Translation for fullNameLabel"
+  },
+  "fullNameRequired": "Full name is required",
+  "@fullNameRequired": {
+    "description": "Translation for fullNameRequired"
+  },
+  "websiteUrlLabel": "Website URL",
+  "@websiteUrlLabel": {
+    "description": "Translation for websiteUrlLabel"
+  },
+  "urlRequired": "URL is required",
+  "@urlRequired": {
+    "description": "Translation for urlRequired"
+  },
+  "logoUrlLabel": "Logo URL",
+  "@logoUrlLabel": {
+    "description": "Translation for logoUrlLabel"
+  },
+  "logoUrlRequired": "Logo URL is required",
+  "@logoUrlRequired": {
+    "description": "Translation for logoUrlRequired"
+  },
+  "statusLabel": "Status",
+  "@statusLabel": {
+    "description": "Translation for statusLabel"
+  },
+  "loginGuideIdLabel": "Login guide ID (Optional)",
+  "@loginGuideIdLabel": {
+    "description": "Translation for loginGuideIdLabel"
+  },
+  "videoGuideIdLabel": "Video guide ID (Optional)",
+  "@videoGuideIdLabel": {
+    "description": "Translation for videoGuideIdLabel"
+  },
+  "confirmDeleteFaqMessage": "Are you sure you want to delete the question \"{question}\"?",
+  "@confirmDeleteFaqMessage": {
+    "placeholders": {
+      "question": {
+        "type": "String"
+      }
+    }
+  },
+  "faqDeletedSuccess": "Question deleted",
+  "@faqDeletedSuccess": {
+    "description": "Translation for faqDeletedSuccess"
+  },
+  "noFaqsFound": "No questions found",
+  "@noFaqsFound": {
+    "description": "Translation for noFaqsFound"
+  },
+  "addFaqTitle": "New question",
+  "@addFaqTitle": {
+    "description": "Translation for addFaqTitle"
+  },
+  "editFaqTitle": "Edit question",
+  "@editFaqTitle": {
+    "description": "Translation for editFaqTitle"
+  },
+  "faqSavedSuccess": "Question saved",
+  "@faqSavedSuccess": {
+    "description": "Translation for faqSavedSuccess"
+  },
+  "questionLabel": "Question",
+  "@questionLabel": {
+    "description": "Translation for questionLabel"
+  },
+  "questionRequired": "Question is required",
+  "@questionRequired": {
+    "description": "Translation for questionRequired"
+  },
+  "answerLabel": "Answer (Markdown)",
+  "@answerLabel": {
+    "description": "Translation for answerLabel"
+  },
+  "answerRequired": "Answer is required",
+  "@answerRequired": {
+    "description": "Translation for answerRequired"
+  },
+  "add": "Add",
+  "@add": {
+    "description": "Translation for add"
+  },
+  "titleLabel": "Title",
+  "@titleLabel": {
+    "description": "Translation for titleLabel"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Translation for edit"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Translation for delete"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Translation for cancel"
+  },
+  "search": "Search...",
+  "@search": {
+    "description": "Translation for search"
+  },
+  "fieldRequired": "Field is required",
+  "@fieldRequired": {
+    "description": "Translation for fieldRequired"
+  },
+  "confirmDelete": "Are you sure you want to delete?",
+  "@confirmDelete": {
+    "description": "Translation for confirmDelete"
+  },
+  "successSaved": "Saved successfully",
+  "@successSaved": {
+    "description": "Translation for successSaved"
+  },
+  "successDeleted": "Deleted successfully",
+  "@successDeleted": {
+    "description": "Translation for successDeleted"
+  },
+  "notificationManagementTitle": "Notification management",
+  "@notificationManagementTitle": {
+    "description": "Translation for notificationManagementTitle"
+  },
+  "notificationHistoryTitle": "Notification history",
+  "@notificationHistoryTitle": {
+    "description": "Translation for notificationHistoryTitle"
+  },
+  "notificationHistoryPlaceholder": "History of sent notifications will appear here (coming soon).",
+  "@notificationHistoryPlaceholder": {
+    "description": "Translation for notificationHistoryPlaceholder"
+  },
+  "sendNewNotificationButton": "Send new notification",
+  "@sendNewNotificationButton": {
+    "description": "Translation for sendNewNotificationButton"
+  },
+  "sendNotificationTitle": "Send notification",
+  "@sendNotificationTitle": {
+    "description": "Translation for sendNotificationTitle"
+  },
+  "notificationSentSuccess": "Notification sent",
+  "@notificationSentSuccess": {
+    "description": "Translation for notificationSentSuccess"
+  },
+  "notificationTitleLabel": "Title",
+  "@notificationTitleLabel": {
+    "description": "Translation for notificationTitleLabel"
+  },
+  "notificationTitleRequired": "Title is required",
+  "@notificationTitleRequired": {
+    "description": "Translation for notificationTitleRequired"
+  },
+  "notificationBodyLabel": "Message body",
+  "@notificationBodyLabel": {
+    "description": "Translation for notificationBodyLabel"
+  },
+  "notificationBodyRequired": "Message body is required",
+  "@notificationBodyRequired": {
+    "description": "Translation for notificationBodyRequired"
+  },
+  "notificationTypeLabel": "Notification type",
+  "@notificationTypeLabel": {
+    "description": "Translation for notificationTypeLabel"
+  },
+  "targetAudienceLabel": "Audience",
+  "@targetAudienceLabel": {
+    "description": "Translation for targetAudienceLabel"
+  },
+  "notificationTypeUpdate": "Update",
+  "@notificationTypeUpdate": {
+    "description": "Notification type: update"
+  },
+  "notificationTypeNewContent": "New content",
+  "@notificationTypeNewContent": {
+    "description": "Notification type: new content"
+  },
+  "notificationTypeAnnouncement": "Announcement",
+  "@notificationTypeAnnouncement": {
+    "description": "Notification type: announcement"
+  },
+  "notificationTypeReminder": "Reminder",
+  "@notificationTypeReminder": {
+    "description": "Notification type: reminder"
+  },
+  "notificationTypeSystem": "System message",
+  "@notificationTypeSystem": {
+    "description": "Notification type: system"
+  },
+  "targetAudienceAll": "All users",
+  "@targetAudienceAll": {
+    "description": "Target audience: all"
+  },
+  "targetAudienceBeginner": "New staff",
+  "@targetAudienceBeginner": {
+    "description": "Target audience: beginner"
+  },
+  "targetAudienceAkt": "ICT staff",
+  "@targetAudienceAkt": {
+    "description": "Target audience: AKT"
+  },
+  "targetAudienceSpecific": "Specific users",
+  "@targetAudienceSpecific": {
+    "description": "Target audience: specific"
+  },
+  "notificationLabelTo": "To: {audience}",
+  "@notificationLabelTo": {
+    "description": "Label for target audience in history",
+    "placeholders": {
+      "audience": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationLabelReadBy": "Read: {count}",
+  "@notificationLabelReadBy": {
+    "description": "Label for read count in history",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "resourceTabArticles": "Articles",
+  "@resourceTabArticles": {
+    "description": "Translation for resourceTabArticles"
+  },
+  "resourceTabVideos": "Videos",
+  "@resourceTabVideos": {
+    "description": "Translation for resourceTabVideos"
+  },
+  "resourceTabFiles": "Files",
+  "@resourceTabFiles": {
+    "description": "Translation for resourceTabFiles"
+  },
+  "filesTabTitle": "Files",
+  "@filesTabTitle": {
+    "description": "Translation for filesTabTitle"
+  },
+  "systemsDirectoryTitle": "Court information systems",
+  "@systemsDirectoryTitle": {
+    "description": "Translation for systemsDirectoryTitle"
+  },
+  "bookmarkSaveTooltip": "Bookmark",
+  "@bookmarkSaveTooltip": {
+    "description": "Translation for bookmarkSaveTooltip"
+  },
+  "bookmarkRemoveTooltip": "Remove bookmark",
+  "@bookmarkRemoveTooltip": {
+    "description": "Translation for bookmarkRemoveTooltip"
+  },
+  "resourceTypeOther": "Others",
+  "@resourceTypeOther": {
+    "description": "Translation for resourceTypeOther"
+  },
+  "openFile": "Open file",
+  "@openFile": {
+    "description": "Translation for openFile"
+  },
+  "fileSize": "File size",
+  "@fileSize": {
+    "description": "Translation for fileSize"
+  },
+  "selectFile": "Select file",
+  "@selectFile": {
+    "description": "Translation for selectFile"
+  },
+  "upload": "Upload",
+  "@upload": {
+    "description": "Translation for upload"
+  },
+  "processing": "Processing...",
+  "@processing": {
+    "description": "Translation for processing"
+  },
+  "urlLabel": "URL",
+  "@urlLabel": {
+    "description": "Translation for urlLabel"
+  },
+  "resourceTypePDF": "PDF manual",
+  "@resourceTypePDF": {
+    "description": "Translation for resourceTypePDF"
+  },
+  "resourceTypeVideo": "Video tutorial",
+  "@resourceTypeVideo": {
+    "description": "Translation for resourceTypeVideo"
+  },
+  "resourceTypeLink": "Web link",
+  "@resourceTypeLink": {
+    "description": "Translation for resourceTypeLink"
+  },
+  "onlySaved": "Only saved",
+  "@onlySaved": {
+    "description": "Translation for onlySaved"
+  },
+  "searchArticlesPlaceholder": "Search articles...",
+  "@searchArticlesPlaceholder": {
+    "description": "Translation for searchArticlesPlaceholder"
+  },
+  "filterAll": "All",
+  "@filterAll": {
+    "description": "Translation for filterAll"
+  },
+  "noResultsFound": "No results found",
+  "@noResultsFound": {
+    "description": "Translation for noResultsFound"
+  },
+  "noArticlesAvailable": "No articles available",
+  "@noArticlesAvailable": {
+    "description": "Translation for noArticlesAvailable"
+  },
+  "noVideosAvailable": "No videos available",
+  "@noVideosAvailable": {
+    "description": "Translation for noVideosAvailable"
+  },
+  "actionCreateDiscussion": "Create discussion",
+  "@actionCreateDiscussion": {
+    "description": "Translation for actionCreateDiscussion"
+  },
+  "actionCreateResource": "Create resource",
+  "@actionCreateResource": {
+    "description": "Translation for actionCreateResource"
+  },
+  "actionCreateQuiz": "Create quiz",
+  "@actionCreateQuiz": {
+    "description": "Translation for actionCreateQuiz"
+  },
+  "notificationsTitle": "Notifications",
+  "@notificationsTitle": {
+    "description": "Translation for notificationsTitle"
+  },
+  "loginRequired": "Login required",
+  "@loginRequired": {
+    "description": "Translation for loginRequired"
+  },
+  "markAllAsReadTooltip": "Mark all as read",
+  "@markAllAsReadTooltip": {
+    "description": "Translation for markAllAsReadTooltip"
+  },
+  "allNotificationsReadMessage": "All notifications marked as read",
+  "@allNotificationsReadMessage": {
+    "description": "Translation for allNotificationsReadMessage"
+  },
+  "noNotifications": "No notifications",
+  "@noNotifications": {
+    "description": "Translation for noNotifications"
+  },
+  "closeAction": "Close",
+  "@closeAction": {
+    "description": "Translation for closeAction"
+  },
+  "leaderboardTitle": "Leaderboard",
+  "@leaderboardTitle": {
+    "description": "Translation for leaderboardTitle"
+  },
+  "pointsEarned": "You earned {points} XP!",
+  "@pointsEarned": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "levelUp": "Congratulations! new level: {level}",
+  "@levelUp": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "rank": "Rank",
+  "@rank": {
+    "description": "Translation for rank"
+  },
+  "quizHistoryTitle": "Quiz history",
+  "@quizHistoryTitle": {
+    "description": "Translation for quizHistoryTitle"
+  },
+  "seeAll": "See all",
+  "@seeAll": {
+    "description": "Translation for seeAll"
+  },
+  "today": "Today",
+  "@today": {
+    "description": "Translation for today"
+  },
+  "yesterday": "Yesterday",
+  "@yesterday": {
+    "description": "Translation for yesterday"
+  },
+  "thisWeek": "This week",
+  "@thisWeek": {
+    "description": "Translation for thisWeek"
+  },
+  "older": "Older results",
+  "@older": {
+    "description": "Translation for older"
+  },
+  "contactSupport": "Contact support",
+  "@contactSupport": {
+    "description": "Translation for contactSupport"
+  },
+  "landingTitle": "Professional platform",
+  "@landingTitle": {
+    "description": "Translation for landingTitle"
+  },
+  "landingSubtitle": "Elevate your legal knowledge. anytime. anywhere.",
+  "@landingSubtitle": {
+    "description": "Translation for landingSubtitle"
+  },
+  "landingLogin": "Login",
+  "@landingLogin": {
+    "description": "Translation for landingLogin"
+  },
+  "landingRegister": "Register",
+  "@landingRegister": {
+    "description": "Translation for landingRegister"
+  },
+  "featureKnowledgeBase": "Knowledge base",
+  "@featureKnowledgeBase": {
+    "description": "Translation for featureKnowledgeBase"
+  },
+  "featureKnowledgeBaseDesc": "Access a vast library of legal resources and documents.",
+  "@featureKnowledgeBaseDesc": {
+    "description": "Translation for featureKnowledgeBaseDesc"
+  },
+  "featureVideoTutorials": "Video tutorials",
+  "@featureVideoTutorials": {
+    "description": "Translation for featureVideoTutorials"
+  },
+  "featureVideoTutorialsDesc": "Learn from expert-led video guides and webinars.",
+  "@featureVideoTutorialsDesc": {
+    "description": "Translation for featureVideoTutorialsDesc"
+  },
+  "featureGamification": "Gamification",
+  "@featureGamification": {
+    "description": "Translation for featureGamification"
+  },
+  "featureGamificationDesc": "Earn XP, badges, and compete on the leaderboard.",
+  "@featureGamificationDesc": {
+    "description": "Translation for featureGamificationDesc"
+  },
+  "analyticsTitle": "Learning analytics (xAPI)",
+  "@analyticsTitle": {
+    "description": "Translation for analyticsTitle"
+  },
+  "analyticsSubtitle": "Learning records",
+  "@analyticsSubtitle": {
+    "description": "Translation for analyticsSubtitle"
+  },
+  "totalRecords": "Total records",
+  "@totalRecords": {
+    "description": "Translation for totalRecords"
+  },
+  "realTime": "Real-time",
+  "@realTime": {
+    "description": "Translation for realTime"
+  },
+  "activityDistribution": "Activity distribution",
+  "@activityDistribution": {
+    "description": "Translation for activityDistribution"
+  },
+  "recentActivityFeed": "Recent activity feed",
+  "@recentActivityFeed": {
+    "description": "Translation for recentActivityFeed"
+  },
+  "noRecords": "No learning records found yet.",
+  "@noRecords": {
+    "description": "Translation for noRecords"
+  },
+  "unknownUser": "Unknown user",
+  "@unknownUser": {
+    "description": "Translation for unknownUser"
+  },
+  "unknownObject": "Unknown object",
+  "@unknownObject": {
+    "description": "Translation for unknownObject"
+  },
+  "justNow": "Just now",
+  "@justNow": {
+    "description": "Translation for justNow"
+  },
+  "quizzes": "Quizzes",
+  "@quizzes": {
+    "description": "Translation for quizzes"
+  },
+  "simulations": "Simulations",
+  "@simulations": {
+    "description": "Translation for simulations"
+  },
+  "catNewEmployees": "New employees",
+  "@catNewEmployees": {
+    "description": "Translation for catNewEmployees"
+  },
+  "catIctSpecialists": "ICT specialists",
+  "@catIctSpecialists": {
+    "description": "Translation for catIctSpecialists"
+  },
+  "catSystems": "Systems",
+  "@catSystems": {
+    "description": "Translation for catSystems"
+  },
+  "catAuth": "Authentication",
+  "@catAuth": {
+    "description": "Translation for catAuth"
+  },
+  "catGeneral": "General",
+  "@catGeneral": {
+    "description": "Translation for catGeneral"
+  },
+  "rankBeginner": "Beginner",
+  "@rankBeginner": {
+    "description": "Translation for rankBeginner"
+  },
+  "rankIntermediate": "Intermediate",
+  "@rankIntermediate": {
+    "description": "Translation for rankIntermediate"
+  },
+  "rankAdvanced": "Advanced",
+  "@rankAdvanced": {
+    "description": "Translation for rankAdvanced"
+  },
+  "sysCatPrimary": "Primary systems",
+  "@sysCatPrimary": {
+    "description": "Translation for sysCatPrimary"
+  },
+  "sysCatSecondary": "Secondary systems",
+  "@sysCatSecondary": {
+    "description": "Translation for sysCatSecondary"
+  },
+  "sysCatSupport": "Support systems",
+  "@sysCatSupport": {
+    "description": "Translation for sysCatSupport"
+  },
+  "sysStatusActive": "Active",
+  "@sysStatusActive": {
+    "description": "Translation for sysStatusActive"
+  },
+  "sysStatusMaintenance": "Maintenance",
+  "@sysStatusMaintenance": {
+    "description": "Translation for sysStatusMaintenance"
+  },
+  "sysStatusInactive": "Inactive",
+  "@sysStatusInactive": {
+    "description": "Translation for sysStatusInactive"
+  },
+  "videoViews": "{count} views",
+  "@videoViews": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "videoAuthorSubtitle": "Author",
+  "@videoAuthorSubtitle": {
+    "description": "Translation for videoAuthorSubtitle"
+  },
+  "videoDescriptionTitle": "Description",
+  "@videoDescriptionTitle": {
+    "description": "Translation for videoDescriptionTitle"
+  },
+  "sysStatusDeprecated": "Deprecated",
+  "@sysStatusDeprecated": {
+    "description": "Translation for sysStatusDeprecated"
+  },
+  "sysStatusOffline": "Offline",
+  "@sysStatusOffline": {
+    "description": "Translation for sysStatusOffline"
+  },
+  "systemsDirectoryAll": "All",
+  "@systemsDirectoryAll": {
+    "description": "Translation for systemsDirectoryAll"
+  },
+  "systemsDirectoryError": "An error occurred: {error}",
+  "@systemsDirectoryError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "systemsDirectoryEmpty": "No systems available",
+  "@systemsDirectoryEmpty": {
+    "description": "Translation for systemsDirectoryEmpty"
+  },
+  "backToKnowledgeBase": "Back to guides",
+  "@backToKnowledgeBase": {
+    "description": "Translation for backToKnowledgeBase"
+  },
+  "quizSuccessMessage": "Great result!",
+  "@quizSuccessMessage": {
+    "description": "Translation for quizSuccessMessage"
+  },
+  "quizFailureMessage": "Try again!",
+  "@quizFailureMessage": {
+    "description": "Translation for quizFailureMessage"
+  },
+  "failedToLoadQuiz": "Failed to load quiz",
+  "@failedToLoadQuiz": {
+    "description": "Translation for failedToLoadQuiz"
+  },
+  "failedToSaveAttempt": "Failed to save attempt",
+  "@failedToSaveAttempt": {
+    "description": "Translation for failedToSaveAttempt"
+  },
+  "quizNotFound": "Quiz not found",
+  "@quizNotFound": {
+    "description": "Translation for quizNotFound"
+  },
+  "question": "Question {index}",
+  "@question": {
+    "placeholders": {
+      "index": {
+        "type": "String"
+      }
+    }
+  },
+  "speedBonus": "Speed bonus",
+  "@speedBonus": {
+    "description": "Translation for speedBonus"
+  },
+  "levelBeginner": "Newbie",
+  "@levelBeginner": {
+    "description": "Translation for levelBeginner"
+  },
+  "levelSpecialist": "Specialist",
+  "@levelSpecialist": {
+    "description": "Translation for levelSpecialist"
+  },
+  "levelExpert": "Expert",
+  "@levelExpert": {
+    "description": "Translation for levelExpert"
+  },
+  "levelMaster": "Master",
+  "@levelMaster": {
+    "description": "Translation for levelMaster"
+  },
+  "totalQuestions": "Total: {total}",
+  "@totalQuestions": {
+    "placeholders": {
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "errorCouldNotOpenLink": "Could not open link",
+  "@errorCouldNotOpenLink": {
+    "description": "Translation for errorCouldNotOpenLink"
+  },
+  "errorResourceNotFound": "Resource not found",
+  "@errorResourceNotFound": {
+    "description": "Translation for errorResourceNotFound"
+  },
+  "errorVideoNotFound": "Video not found",
+  "@errorVideoNotFound": {
+    "description": "Translation for errorVideoNotFound"
+  },
+  "errorPdfOpen": "Could not open PDF file",
+  "@errorPdfOpen": {
+    "description": "Translation for errorPdfOpen"
+  },
+  "errorTelegramOpen": "Could not open telegram link",
+  "@errorTelegramOpen": {
+    "description": "Translation for errorTelegramOpen"
+  },
+  "errorGeneric": "An error occurred: {error}",
+  "@errorGeneric": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "labelTrue": "True",
+  "@labelTrue": {
+    "description": "Translation for labelTrue"
+  },
+  "labelFalse": "False",
+  "@labelFalse": {
+    "description": "Translation for labelFalse"
+  },
+  "labelPass": "Pass",
+  "@labelPass": {
+    "description": "Translation for labelPass"
+  },
+  "labelFail": "Fail",
+  "@labelFail": {
+    "description": "Translation for labelFail"
+  },
+  "labelPdfAvailable": "PDF available",
+  "@labelPdfAvailable": {
+    "description": "Translation for labelPdfAvailable"
+  },
+  "actionOk": "OK",
+  "@actionOk": {
+    "description": "Translation for actionOk"
+  },
+  "actionGoBack": "Go back",
+  "@actionGoBack": {
+    "description": "Translation for actionGoBack"
+  },
+  "searchNoResults": "No results found",
+  "@searchNoResults": {
+    "description": "Translation for searchNoResults"
+  },
+  "roleChangedSuccess": "{userName}'s role changed to {role}",
+  "@roleChangedSuccess": {
+    "placeholders": {
+      "userName": {
+        "type": "String"
+      },
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "roleChangeError": "Error changing role: {error}",
+  "@roleChangeError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "changeRoleTooltip": "Change role",
+  "@changeRoleTooltip": {
+    "description": "Translation for changeRoleTooltip"
+  },
+  "labelVideoGuide": "Video guide",
+  "@labelVideoGuide": {
+    "description": "Translation for labelVideoGuide"
+  },
+  "labelLoginGuide": "Login guide",
+  "@labelLoginGuide": {
+    "description": "Translation for labelLoginGuide"
+  },
+  "changePasswordHint": "Change password implementation here",
+  "@changePasswordHint": {
+    "description": "Translation for changePasswordHint"
+  },
+  "editTopic": "Edit topic",
+  "@editTopic": {
+    "description": "Translation for editTopic"
+  },
+  "update": "Update",
+  "@update": {
+    "description": "Translation for update"
+  },
+  "commentAdded": "Comment added!",
+  "@commentAdded": {
+    "description": "Translation for commentAdded"
+  },
+  "updateFeatureMigration": "Update feature is under migration. coming soon!",
+  "@updateFeatureMigration": {
+    "description": "Translation for updateFeatureMigration"
+  },
+  "topicUpdatedSuccessfully": "Topic updated successfully",
+  "@topicUpdatedSuccessfully": {
+    "description": "Translation for topicUpdatedSuccessfully"
+  },
+  "errorDeletingTopicMsg": "Error deleting topic: {error}",
+  "@errorDeletingTopicMsg": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "takeQuizTitle": "Take quiz",
+  "@takeQuizTitle": {
+    "description": "Translation for takeQuizTitle"
+  },
+  "quizTakingInterface": "Quiz taking interface (Coming soon)",
+  "@quizTakingInterface": {
+    "description": "Translation for quizTakingInterface"
+  },
+  "quizCreatedSuccessfully": "Quiz created successfully",
+  "@quizCreatedSuccessfully": {
+    "description": "Translation for quizCreatedSuccessfully"
+  },
+  "saveQuizAction": "Save quiz",
+  "@saveQuizAction": {
+    "description": "Translation for saveQuizAction"
+  },
+  "createQuizTitle": "Create quiz",
+  "@createQuizTitle": {
+    "description": "Translation for createQuizTitle"
+  },
+  "editQuestionsTitle": "Edit questions: {title}",
+  "@editQuestionsTitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "questionsManagementComingSoon": "Questions management coming soon",
+  "@questionsManagementComingSoon": {
+    "description": "Translation for questionsManagementComingSoon"
+  },
+  "aiAssistantName": "AI assistant \"Sodiq\"",
+  "@aiAssistantName": {
+    "description": "Translation for aiAssistantName"
+  },
+  "retryAction": "Retry",
+  "@retryAction": {
+    "description": "Translation for retryAction"
+  },
+  "clearChatTooltip": "Clear chat",
+  "@clearChatTooltip": {
+    "description": "Translation for clearChatTooltip"
+  },
+  "noInternetLabel": "No internet",
+  "@noInternetLabel": {
+    "description": "Translation for noInternetLabel"
+  },
+  "noInternetQuery": "Internet is not working, what should i do?",
+  "@noInternetQuery": {
+    "description": "Translation for noInternetQuery"
+  },
+  "fileNotOpeningLabel": "File won't open",
+  "@fileNotOpeningLabel": {
+    "description": "Translation for fileNotOpeningLabel"
+  },
+  "fileNotOpeningQuery": "PDF file won't open, help me.",
+  "@fileNotOpeningQuery": {
+    "description": "Translation for fileNotOpeningQuery"
+  },
+  "printerNotWorkingLabel": "Printer not working",
+  "@printerNotWorkingLabel": {
+    "description": "Translation for printerNotWorkingLabel"
+  },
+  "printerNotWorkingQuery": "Printer is not printing, what should i do?",
+  "@printerNotWorkingQuery": {
+    "description": "Translation for printerNotWorkingQuery"
+  },
+  "uploadImageTooltip": "Upload image",
+  "@uploadImageTooltip": {
+    "description": "Translation for uploadImageTooltip"
+  },
+  "writeMessageHint": "Write a message...",
+  "@writeMessageHint": {
+    "description": "Translation for writeMessageHint"
+  },
+  "aiMentorName": "Sodiq (AI mentor)",
+  "@aiMentorName": {
+    "description": "Translation for aiMentorName"
+  },
+  "trueOption": "True",
+  "@trueOption": {
+    "description": "Translation for True option in quizzes"
+  },
+  "falseOption": "False",
+  "@falseOption": {
+    "description": "Translation for False option in quizzes"
+  },
+  "questionsListTab": "Questions",
+  "@questionsListTab": {
+    "description": "Tab label for questions list"
+  },
+  "addQuestionTab": "Add question",
+  "@addQuestionTab": {
+    "description": "Tab label for adding a question"
+  },
+  "addOptionButton": "Add option",
+  "@addOptionButton": {
+    "description": "Button label for adding an option"
+  },
+  "deleteQuestionConfirm": "Delete this question?",
+  "@deleteQuestionConfirm": {
+    "description": "Confirmation dialog for deleting a question"
+  },
+  "questionDeleted": "Question deleted",
+  "@questionDeleted": {
+    "description": "Snackbar message after deleting a question"
+  },
+  "startQuiz": "Start quiz",
+  "@startQuiz": {
+    "description": "Button label to start a quiz"
+  },
+  "nextQuestion": "Next",
+  "@nextQuestion": {
+    "description": "Button label to go to next question"
+  },
+  "previousQuestion": "Previous",
+  "@previousQuestion": {
+    "description": "Button label to go to previous question"
+  },
+  "submitQuiz": "Submit",
+  "@submitQuiz": {
+    "description": "Button label to submit quiz answers"
+  },
+  "quizResults": "Results",
+  "@quizResults": {
+    "description": "Title for quiz results page"
+  },
+  "yourScore": "Your score",
+  "@yourScore": {
+    "description": "Label for the score display"
+  },
+  "questionOfTotal": "Question {current} of {total}",
+  "@questionOfTotal": {
+    "description": "Progress indicator for quiz questions",
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "selectAnAnswer": "Please select an answer",
+  "@selectAnAnswer": {
+    "description": "Prompt to select an answer"
+  },
+  "correctAnswerIs": "Correct answer: {answer}",
+  "@correctAnswerIs": {
+    "description": "Shows the correct answer",
+    "placeholders": {
+      "answer": {
+        "type": "String"
+      }
+    }
+  },
+  "retakeQuiz": "Retake quiz",
+  "@retakeQuiz": {
+    "description": "Button to retake a quiz"
+  },
+  "backToQuizList": "Back to quizzes",
+  "@backToQuizList": {
+    "description": "Button to go back to quiz list"
+  },
+  "questionsCount": "{count} questions",
+  "@questionsCount": {
+    "description": "Number of questions in a quiz",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "excellentScore": "Excellent! 🎉",
+  "@excellentScore": {
+    "description": "Message for high quiz score"
+  },
+  "goodScore": "Good job! 👍",
+  "@goodScore": {
+    "description": "Message for decent quiz score"
+  },
+  "needsImprovement": "Keep practicing! 💪",
+  "@needsImprovement": {
+    "description": "Message for low quiz score"
+  },
+  "noQuestionsInQuiz": "This quiz has no questions yet.",
+  "@noQuestionsInQuiz": {
+    "description": "Message when quiz has no questions"
+  },
+  "resumeLearning": "Resume learning",
+  "@resumeLearning": {
+    "description": "Button text to resume learning on dashboard"
+  },
+  "recentActivity": "Recent activity",
+  "@recentActivity": {
+    "description": "Section title for recent activity on dashboard"
+  },
+  "availableResources": "Available resources",
+  "@availableResources": {
+    "description": "Metric card title for available resources"
+  },
+  "availableQuizzes": "Available quizzes",
+  "@availableQuizzes": {
+    "description": "Metric card title for available quizzes"
+  },
+  "activeDiscussions": "Active discussions",
+  "@activeDiscussions": {
+    "description": "Metric card title for active discussions"
+  },
+  "recommendedResources": "Recommended resources",
+  "@recommendedResources": {
+    "description": "Section title for recommended resources"
+  },
+  "pagesPath": "Pages / dashboard",
+  "@pagesPath": {
+    "description": "Breadcrumb path text"
+  },
+  "mainDashboard": "Main dashboard",
+  "@mainDashboard": {
+    "description": "Dashboard page title"
+  },
+  "overview": "Overview",
+  "@overview": {
+    "description": "Overview label on welcome banner"
+  },
+  "noRecentActivities": "No recent activities.",
+  "@noRecentActivities": {
+    "description": "Empty state for recent activity"
+  },
+  "signInToSeeActivities": "Sign in to see activities.",
+  "@signInToSeeActivities": {
+    "description": "Message when user is not signed in"
+  },
+  "noResourcesAvailable": "No resources available.",
+  "@noResourcesAvailable": {
+    "description": "Empty state for resources"
+  },
+  "quizCompletedPrefix": "Quiz completed: {quizId}",
+  "@quizCompletedPrefix": {
+    "placeholders": {
+      "quizId": {
+        "type": "String"
+      }
+    }
+  },
+  "loadOlderNotifications": "Load older notifications",
+  "@loadOlderNotifications": {
+    "description": "Button to load older notifications"
+  },
+  "searchFilterAll": "All",
+  "@searchFilterAll": {
+    "description": "Filter for all search results"
+  },
+  "searchFilterSystems": "Systems",
+  "@searchFilterSystems": {
+    "description": "Filter for systems"
+  },
+  "searchFilterArticles": "Articles",
+  "@searchFilterArticles": {
+    "description": "Filter for articles"
+  },
+  "searchFilterVideos": "Videos",
+  "@searchFilterVideos": {
+    "description": "Filter for videos"
+  },
+  "searchFilterFAQ": "FAQ",
+  "@searchFilterFAQ": {
+    "description": "Filter for FAQ"
+  },
+  "searchFilterCourses": "Courses",
+  "@searchFilterCourses": {
+    "description": "Filter for Courses"
+  },
+  "searchErrorTitle": "An error occurred",
+  "@searchErrorTitle": {
+    "description": "Error title in search"
+  },
+  "searchNoResultsForQuery": "No results found for \"{query}\"",
+  "@searchNoResultsForQuery": {
+    "description": "No results found for specific query",
+    "placeholders": {
+      "query": {
+        "type": "String",
+        "example": "flutter"
+      }
+    }
+  },
+  "searchResultsHeader": "🔍 results ({count})",
+  "@searchResultsHeader": {
+    "description": "Header for direct search results",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "searchSemanticHeader": "📎 related materials ({count})",
+  "@searchSemanticHeader": {
+    "description": "Header for semantic search results",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "searchSemanticBadge": "📎 related",
+  "@searchSemanticBadge": {
+    "description": "Badge for semantic search result"
+  },
+  "searchEmptyPromptTitle": "Unified search",
+  "@searchEmptyPromptTitle": {
+    "description": "Title for empty search prompt"
+  },
+  "searchEmptyPromptDesc": "Systems, articles, videos, courses, and\nFAQ — find everything in one place",
+  "@searchEmptyPromptDesc": {
+    "description": "Description for empty search prompt"
+  },
+  "searchTypeSystem": "System",
+  "@searchTypeSystem": {
+    "description": "System type label"
+  },
+  "searchTypeArticle": "Article",
+  "@searchTypeArticle": {
+    "description": "Article type label"
+  },
+  "searchTypeVideo": "Video",
+  "@searchTypeVideo": {
+    "description": "Video type label"
+  },
+  "searchTypeFaq": "FAQ",
+  "@searchTypeFaq": {
+    "description": "FAQ type label"
+  },
+  "searchTypeResource": "Resource",
+  "@searchTypeResource": {
+    "description": "Resource type label"
+  },
+  "searchTypeCourse": "Course",
+  "@searchTypeCourse": {
+    "description": "Course type label in search results"
+  },
+  "leaderboardTabGlobal": "Global",
+  "@leaderboardTabGlobal": {
+    "description": "Global tab in leaderboard"
+  },
+  "leaderboardTabRegion": "Region",
+  "@leaderboardTabRegion": {
+    "description": "Region tab in leaderboard"
+  },
+  "leaderboardTabCourt": "My court",
+  "@leaderboardTabCourt": {
+    "description": "Court tab in leaderboard"
+  },
+  "noRegionInfo": "No region data",
+  "@noRegionInfo": {
+    "description": "Displayed when region info is missing"
+  },
+  "noCourtInfo": "No court data",
+  "@noCourtInfo": {
+    "description": "Displayed when court info is missing"
+  },
+  "selectYourCourtTitle": "Select your court",
+  "@selectYourCourtTitle": {
+    "description": "Title for court selection modal"
+  },
+  "selectYourCourtSubtitle": "Specify the court you work in\nfor regional statistics and leaderboards",
+  "@selectYourCourtSubtitle": {
+    "description": "Subtitle for court selection modal"
+  },
+  "selectRegionLabel": "Select region",
+  "@selectRegionLabel": {
+    "description": "Label for region selection"
+  },
+  "regionDropdownLabel": "📍 region / province",
+  "@regionDropdownLabel": {
+    "description": "Dropdown label for region"
+  },
+  "selectCourtTypeLabel": "Select court type",
+  "@selectCourtTypeLabel": {
+    "description": "Label for court type selection"
+  },
+  "courtTypeDropdownLabel": "⚖️ court type",
+  "@courtTypeDropdownLabel": {
+    "description": "Dropdown label for court type"
+  },
+  "selectRegionFirst": "First select a region",
+  "@selectRegionFirst": {
+    "description": "Hint when region is not selected"
+  },
+  "selectSpecificCourtLabel": "Select specific court",
+  "@selectSpecificCourtLabel": {
+    "description": "Label for specific court selection"
+  },
+  "specificCourtDropdownLabel": "🏛️ specific court",
+  "@specificCourtDropdownLabel": {
+    "description": "Dropdown label for specific court"
+  },
+  "selectCourtTypeFirst": "First select a court type",
+  "@selectCourtTypeFirst": {
+    "description": "Hint when court type is not selected"
+  },
+  "saveAndContinue": "Save and continue",
+  "@saveAndContinue": {
+    "description": "Save and continue button text"
+  },
+  "savingInProgress": "Saving...",
+  "@savingInProgress": {
+    "description": "Saving text"
+  },
+  "courtDataHeader": "Court data",
+  "@courtDataHeader": {
+    "description": "Header for court data section in registration"
+  },
+  "articleDetailTitle": "Article details",
+  "@articleDetailTitle": {
+    "description": "Title for article details screen"
+  },
+  "articlePinned": "Important",
+  "@articlePinned": {
+    "description": "Label for pinned articles"
+  },
+  "bottomNavKnowledge": "Knowledge base",
+  "@bottomNavKnowledge": {
+    "description": "Label for knowledge base tab"
+  },
+  "downloadPdf": "Download PDF",
+  "@downloadPdf": {
+    "description": "Button to download PDF"
+  },
+  "feedbackThanks": "Thank you for your feedback!",
+  "@feedbackThanks": {
+    "description": "Success message after feedback"
+  },
+  "shareArticle": "Share article",
+  "@shareArticle": {
+    "description": "Button to share an article"
+  },
+  "topicTitle": "Topic",
+  "@topicTitle": {
+    "description": "Label for topic"
+  },
+  "myCoursesTitle": "My courses",
+  "@myCoursesTitle": {
+    "description": "Translation for myCoursesTitle"
+  },
+  "myCoursesEmptyTitle": "You haven't started any courses yet",
+  "@myCoursesEmptyTitle": {
+    "description": "Translation for myCoursesEmptyTitle"
+  },
+  "myCoursesEmptySubtitle": "Start courses to learn new skills and earn XP.",
+  "@myCoursesEmptySubtitle": {
+    "description": "Translation for myCoursesEmptySubtitle"
+  },
+  "coursesTitle": "Courses",
+  "@coursesTitle": {
+    "description": "Courses screen title"
+  },
+  "boostYourKnowledge": "Boost your knowledge",
+  "@boostYourKnowledge": {
+    "description": "Courses screen subtitle"
+  },
+  "searchCoursesHint": "Search courses...",
+  "@searchCoursesHint": {
+    "description": "Courses search hint"
+  },
+  "courseFilterAll": "All",
+  "@courseFilterAll": {
+    "description": "Course filter: all"
+  },
+  "courseFilterBeginner": "Beginner",
+  "@courseFilterBeginner": {
+    "description": "Course filter: beginner"
+  },
+  "courseFilterIntermediate": "Intermediate",
+  "@courseFilterIntermediate": {
+    "description": "Course filter: intermediate"
+  },
+  "courseFilterAdvanced": "Advanced",
+  "@courseFilterAdvanced": {
+    "description": "Course filter: advanced"
+  },
+  "coursesNotFound": "No courses found",
+  "@coursesNotFound": {
+    "description": "Empty courses message"
+  },
+  "errorLabel": "Error",
+  "@errorLabel": {
+    "description": "Generic error label"
+  },
+  "statCourses": "Courses",
+  "@statCourses": {
+    "description": "Stat label: courses"
+  },
+  "statCompleted": "Completed",
+  "@statCompleted": {
+    "description": "Stat label: completed"
+  },
+  "statXpPoints": "XP points",
+  "@statXpPoints": {
+    "description": "Stat label: XP points"
+  },
+  "tabAll": "All",
+  "@tabAll": {
+    "description": "Tab: all"
+  },
+  "tabCompleted": "✓ Completed",
+  "@tabCompleted": {
+    "description": "Tab: completed"
+  },
+  "tabInProgress": "▶ In Progress",
+  "@tabInProgress": {
+    "description": "Tab: in progress"
+  },
+  "statusOnline": "ONLINE",
+  "@statusOnline": {
+    "description": "Online status"
+  },
+  "statusOffline": "OFFLINE",
+  "@statusOffline": {
+    "description": "Offline status"
+  }
+}

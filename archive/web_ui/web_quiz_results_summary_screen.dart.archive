@@ -1,0 +1,481 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class WebQuizResultsSummaryScreen extends StatelessWidget {
+  const WebQuizResultsSummaryScreen({super.key});
+
+  final Color _primaryColor = const Color(0xFF2C0FBD);
+  final Color _bgLight = const Color(0xFFF6F6F8);
+  final Color _bgDark = const Color(0xFF131022);
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final Color bgColor = isDark ? _bgDark : _bgLight;
+    final Color textColor =
+        isDark ? Colors.white : const Color(0xFF0F172A); // slate-900
+    final Color subTextColor = isDark
+        ? const Color(0xFF94A3B8)
+        : const Color(0xFF64748B); // slate-400 / 600
+    final Color cardColor =
+        isDark ? const Color(0xFF0F172A) : Colors.white; // slate-900 / white
+
+    return Scaffold(
+      backgroundColor: bgColor,
+      body: Column(
+        children: [
+          _buildHeader(context, isDark, textColor),
+          Expanded(
+            child: Stack(
+              children: [
+                // Abstract background elements
+                Positioned(
+                  top: 80,
+                  left: 40,
+                  child: Container(
+                    width: 256,
+                    height: 256,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: _primaryColor.withValues(alpha: 0.05),
+                      boxShadow: [
+                        BoxShadow(
+                          color: _primaryColor.withValues(alpha: isDark ? 0.3 : 0.1),
+                          blurRadius: 100,
+                          spreadRadius: 50,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 80,
+                  right: 40,
+                  child: Container(
+                    width: 384,
+                    height: 384,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.purple.withValues(alpha: 0.05),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.purple.withValues(alpha: isDark ? 0.2 : 0.1),
+                          blurRadius: 100,
+                          spreadRadius: 50,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Center(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 48,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _buildFloatingCard(
+                          isDark,
+                          cardColor,
+                          textColor,
+                          subTextColor,
+                        ),
+                        const SizedBox(height: 32),
+                        _buildAdditionalDetails(isDark, subTextColor),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context, bool isDark, Color textColor) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+      decoration: BoxDecoration(
+        color: isDark
+            ? const Color(0xFF0F172A).withValues(alpha: 0.8)
+            : Colors.white.withValues(alpha: 0.8),
+        border: Border(
+          bottom: BorderSide(
+            color: isDark ? const Color(0xFF1E293B) : const Color(0xFFE2E8F0),
+          ),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.balance, color: _primaryColor, size: 32),
+              const SizedBox(width: 16),
+              Text(
+                'Legal Platform',
+                style: GoogleFonts.inter(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                  letterSpacing: -0.5,
+                ),
+              ),
+            ],
+          ),
+          if (MediaQuery.of(context).size.width > 768)
+            Row(
+              children: [
+                _buildHeaderLink('Dashboard', false, isDark),
+                const SizedBox(width: 36),
+                _buildHeaderLink('Courses', true, isDark),
+                const SizedBox(width: 36),
+                _buildHeaderLink('Community', false, isDark),
+                const SizedBox(width: 36),
+                _buildHeaderLink('Profile', false, isDark),
+              ],
+            ),
+          Row(
+            children: [
+              if (MediaQuery.of(context).size.width > 768)
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Log Out',
+                    style: GoogleFonts.inter(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: isDark
+                          ? const Color(0xFFCBD5E1)
+                          : const Color(0xFF475569),
+                    ),
+                  ),
+                ),
+              const SizedBox(width: 16),
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: isDark ? const Color(0xFF334155) : Colors.white,
+                    width: 2,
+                  ),
+                  image: const DecorationImage(
+                    image: NetworkImage(
+                      'https://lh3.googleusercontent.com/aida-public/AB6AXuDw4fHH78FK5-BuaYYQ7SQOzbiC_atTb4EVt9pw6u-1gDUs-ocZUh0gExwx-S83ru6ga2LfCCYY_Ng-saIoZdCXqiZVRTqoVqkKBGtmr0vDwHcxCWu9Ey_v4MxpejXk68Nqe_ajwwev35oQtCnBJPzW2YpDV8iN370BYe9reDqjX7UoSpq3qnRXNNVSzWEYDq5JopVAeIzwa_M8qQN8rCQ2w4kDWiVpLaNjTM4VX2PyP0Fq-IQW7Wma5XxGM0ow_SBpeU9buCMdm4uA',
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeaderLink(String text, bool isActive, bool isDark) {
+    return Text(
+      text,
+      style: GoogleFonts.inter(
+        fontSize: 14,
+        fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+        color: isActive
+            ? (isDark ? Colors.white : const Color(0xFF0F172A))
+            : (isDark ? const Color(0xFFCBD5E1) : const Color(0xFF475569)),
+      ),
+    );
+  }
+
+  Widget _buildFloatingCard(
+    bool isDark,
+    Color cardColor,
+    Color textColor,
+    Color subTextColor,
+  ) {
+    return Container(
+      width: double.infinity,
+      constraints: const BoxConstraints(maxWidth: 800),
+      padding: const EdgeInsets.all(48),
+      decoration: BoxDecoration(
+        color: cardColor,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: isDark
+                ? Colors.black.withValues(alpha: 0.2)
+                : Colors.black.withValues(alpha: 0.05),
+            blurRadius: 30,
+            offset: const Offset(0, 10),
+          ),
+          BoxShadow(
+            color: _primaryColor.withValues(alpha: isDark ? 0.3 : 0.1),
+            blurRadius: 40,
+            offset: const Offset(0, 20),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          _buildCircularProgress(isDark, textColor, subTextColor),
+          const SizedBox(height: 32),
+          _buildTextFeedback(textColor, subTextColor),
+          const SizedBox(height: 48),
+          _buildMetricsChips(isDark, textColor),
+          const SizedBox(height: 48),
+          _buildActionButtons(isDark, textColor),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCircularProgress(
+    bool isDark,
+    Color textColor,
+    Color subTextColor,
+  ) {
+    return SizedBox(
+      width: 224,
+      height: 224,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          CircularProgressIndicator(
+            value: 0.8,
+            strokeWidth: 10,
+            backgroundColor: isDark
+                ? const Color(0xFF1E293B)
+                : const Color(0xFFF1F5F9), // slate-800 / 100
+            color: _primaryColor,
+            strokeAlign: CircularProgressIndicator.strokeAlignInside,
+          ),
+          // Need Custom shadow for the progress color in flutter requires custom painter but for simplicity standard indicator used.
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '8/10',
+                  style: GoogleFonts.inter(
+                    fontSize: 60,
+                    fontWeight: FontWeight.bold,
+                    color: textColor,
+                    letterSpacing: -2,
+                    height: 1.0,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'SCORE',
+                  style: GoogleFonts.inter(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: subTextColor,
+                    letterSpacing: 1.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTextFeedback(Color textColor, Color subTextColor) {
+    return Column(
+      children: [
+        Text(
+          'Excellent Work, Admin!',
+          style: GoogleFonts.inter(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: textColor,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 12),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32),
+          child: Text(
+            'You\'ve mastered the basics of Constitutional Law. keep up the great momentum for the next module.',
+            style: GoogleFonts.inter(
+              fontSize: 18,
+              color: subTextColor,
+              height: 1.5,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMetricsChips(bool isDark, Color textColor) {
+    return Wrap(
+      spacing: 16,
+      runSpacing: 16,
+      alignment: WrapAlignment.center,
+      children: [
+        _buildMetricChip(
+          Icons.timer_outlined,
+          'Time Taken',
+          '12m 4s',
+          isDark,
+          textColor,
+        ),
+        _buildMetricChip(
+          Icons.check_circle_outline,
+          'Accuracy',
+          '80%',
+          isDark,
+          textColor,
+        ),
+        _buildMetricChip(
+          Icons.leaderboard_outlined,
+          'Rank',
+          'Top 5%',
+          isDark,
+          textColor,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMetricChip(
+    IconData icon,
+    String label,
+    String value,
+    bool isDark,
+    Color textColor,
+  ) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: isDark
+            ? const Color(0xFF1E293B)
+            : const Color(0xFFF8FAFC), // slate-800 / 50
+        borderRadius: BorderRadius.circular(9999),
+        border: Border.all(
+          color: isDark
+              ? const Color(0xFF334155)
+              : const Color(0xFFF1F5F9), // slate-700 / 100
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: _primaryColor, size: 24),
+          const SizedBox(width: 8),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label.toUpperCase(),
+                style: GoogleFonts.inter(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  color: isDark
+                      ? const Color(0xFF94A3B8)
+                      : const Color(0xFF94A3B8), // slate-400
+                  height: 1.0,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                value,
+                style: GoogleFonts.inter(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                  height: 1.0,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActionButtons(bool isDark, Color textColor) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: OutlinedButton(
+            onPressed: () {},
+            style: OutlinedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              side: BorderSide(
+                color: isDark
+                    ? const Color(0xFF334155)
+                    : const Color(0xFFE2E8F0), // slate-700/200
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+            ),
+            child: Text(
+              'Review Answers',
+              style: GoogleFonts.inter(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color:
+                    isDark ? const Color(0xFFE2E8F0) : const Color(0xFF334155),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: _primaryColor,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              elevation: 0,
+            ),
+            child: Text(
+              'Continue to Next Lesson',
+              style: GoogleFonts.inter(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAdditionalDetails(bool isDark, Color subTextColor) {
+    return Text.rich(
+      TextSpan(
+        text: 'Next up: ',
+        style: GoogleFonts.inter(fontSize: 14, color: subTextColor),
+        children: [
+          TextSpan(
+            text: 'Case Studies in Federal Jurisdiction',
+            style: GoogleFonts.inter(
+              fontWeight: FontWeight.w600,
+              color: isDark ? const Color(0xFFCBD5E1) : const Color(0xFF334155),
+            ),
+          ),
+          const TextSpan(text: ' • 15 mins'),
+        ],
+      ),
+      textAlign: TextAlign.center,
+    );
+  }
+}

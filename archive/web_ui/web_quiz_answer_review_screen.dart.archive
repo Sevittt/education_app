@@ -1,0 +1,563 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class WebQuizAnswerReviewScreen extends StatelessWidget {
+  const WebQuizAnswerReviewScreen({super.key});
+
+  final Color _primaryColor = const Color(0xFF2C0FBD);
+  final Color _bgLight = const Color(0xFFF6F6F8);
+  final Color _bgDark = const Color(0xFF131022);
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final Color bgColor = isDark ? _bgDark : _bgLight;
+    final Color textColor = isDark
+        ? Colors.white
+        : const Color(0xFF0F172A); // slate-900
+    final Color subTextColor = isDark
+        ? const Color(0xFF94A3B8)
+        : const Color(0xFF64748B); // slate-400 / 500
+    final Color cardColor = isDark
+        ? const Color(0xFF1E293B)
+        : Colors.white; // slate-800 / white
+
+    return Scaffold(
+      backgroundColor: bgColor,
+      body: Column(
+        children: [
+          _buildNavBar(context, isDark, textColor),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _buildHeaderSection(textColor, subTextColor, isDark),
+                      const SizedBox(height: 32),
+                      _buildQuestionCard1(
+                        isDark,
+                        cardColor,
+                        textColor,
+                        subTextColor,
+                      ),
+                      const SizedBox(height: 24),
+                      _buildQuestionCard2(
+                        isDark,
+                        cardColor,
+                        textColor,
+                        subTextColor,
+                      ),
+                      const SizedBox(height: 32),
+                      _buildBottomAction(isDark),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavBar(BuildContext context, bool isDark, Color textColor) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      decoration: BoxDecoration(
+        color: isDark
+            ? const Color(0xFF0F172A).withValues(alpha: 0.8)
+            : Colors.white.withValues(alpha: 0.8),
+        border: Border(
+          bottom: BorderSide(
+            color: isDark ? const Color(0xFF1E293B) : const Color(0xFFE2E8F0),
+          ),
+        ),
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 960),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: isDark
+                          ? const Color(0xFF94A3B8)
+                          : const Color(0xFF64748B),
+                    ),
+                    hoverColor: isDark
+                        ? const Color(0xFF1E293B)
+                        : const Color(0xFFF1F5F9),
+                  ),
+                  const SizedBox(width: 8),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Quiz Review',
+                        style: GoogleFonts.inter(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: textColor,
+                          height: 1.2,
+                        ),
+                      ),
+                      Text(
+                        'Legal Principles 101',
+                        style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: isDark
+                              ? const Color(0xFF94A3B8)
+                              : const Color(0xFF64748B),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              if (MediaQuery.of(context).size.width >= 640)
+                OutlinedButton.icon(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.keyboard_return,
+                    color: _primaryColor,
+                    size: 18,
+                  ),
+                  label: Text(
+                    'Back to Results',
+                    style: GoogleFonts.inter(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: _primaryColor,
+                    ),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    backgroundColor: isDark
+                        ? const Color(0xFF1E293B)
+                        : Colors.white,
+                    side: BorderSide(
+                      color: isDark
+                          ? const Color(0xFF334155)
+                          : const Color(0xFFE2E8F0),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeaderSection(Color textColor, Color subTextColor, bool isDark) {
+    return Wrap(
+      alignment: WrapAlignment.spaceBetween,
+      crossAxisAlignment: WrapCrossAlignment.end,
+      runSpacing: 16,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Review Answers',
+              style: GoogleFonts.inter(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                letterSpacing: -0.5,
+                color: textColor,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'You scored 8/10 on this attempt.',
+              style: GoogleFonts.inter(fontSize: 16, color: subTextColor),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildStatBadge(
+              Icons.check_circle,
+              '8 Correct',
+              Colors.green.shade500,
+              isDark
+                  ? Colors.green.shade900.withValues(alpha: 0.2)
+                  : Colors.green.shade50,
+              isDark ? Colors.green.shade400 : Colors.green.shade700,
+            ),
+            const SizedBox(width: 8),
+            _buildStatBadge(
+              Icons.cancel,
+              '2 Incorrect',
+              Colors.red.shade500,
+              isDark
+                  ? Colors.red.shade900.withValues(alpha: 0.2)
+                  : Colors.red.shade50,
+              isDark ? Colors.red.shade400 : Colors.red.shade700,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStatBadge(
+    IconData icon,
+    String text,
+    Color dotColor,
+    Color bgColor,
+    Color textColor,
+  ) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(9999),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(color: dotColor, shape: BoxShape.circle),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            text,
+            style: GoogleFonts.inter(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: textColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuestionCard1(
+    bool isDark,
+    Color cardColor,
+    Color textColor,
+    Color subTextColor,
+  ) {
+    // Correct Answer Card
+    return _buildBaseQuestionCard(
+      isDark: isDark,
+      cardColor: cardColor,
+      textColor: textColor,
+      subTextColor: subTextColor,
+      isCorrect: true,
+      questionNumber: 1,
+      questionText:
+          'What is the primary purpose of a contract in common law jurisdictions?',
+      yourAnswer: 'To legally bind two parties to an agreement.',
+      correctAnswer: null, // Same as your answer since it's correct
+      explanation: null,
+    );
+  }
+
+  Widget _buildQuestionCard2(
+    bool isDark,
+    Color cardColor,
+    Color textColor,
+    Color subTextColor,
+  ) {
+    // Incorrect Answer Card
+    return _buildBaseQuestionCard(
+      isDark: isDark,
+      cardColor: cardColor,
+      textColor: textColor,
+      subTextColor: subTextColor,
+      isCorrect: false,
+      questionNumber: 2,
+      questionText:
+          'Which of the following is NOT a requirement for a valid contract?',
+      yourAnswer: 'Written documentation.',
+      correctAnswer: 'Mutual assent.',
+      explanation:
+          'While many contracts are indeed written, oral contracts can also be valid in many jurisdictions provided they meet other criteria. Mutual assent (often called "meeting of the minds") is absolutely required for any valid contract.',
+    );
+  }
+
+  Widget _buildBaseQuestionCard({
+    required bool isDark,
+    required Color cardColor,
+    required Color textColor,
+    required Color subTextColor,
+    required bool isCorrect,
+    required int questionNumber,
+    required String questionText,
+    required String yourAnswer,
+    String? correctAnswer,
+    String? explanation,
+  }) {
+    final statusColor = isCorrect ? Colors.green.shade500 : Colors.red.shade500;
+
+    return Container(
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        color: cardColor,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 20,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Stack(
+        children: [
+          // Left strip
+          Positioned(
+            left: 0,
+            top: 0,
+            bottom: 0,
+            child: Container(width: 6, color: statusColor),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(24).copyWith(left: 32),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        color: isDark
+                            ? const Color(0xFF334155)
+                            : const Color(0xFFF1F5F9), // slate-700 / 100
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: Text(
+                          '$questionNumber',
+                          style: GoogleFonts.inter(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: isDark
+                                ? const Color(0xFFCBD5E1)
+                                : const Color(0xFF64748B),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Text(
+                        questionText,
+                        style: GoogleFonts.inter(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: textColor,
+                          height: 1.5,
+                        ),
+                      ),
+                    ),
+                    Icon(
+                      isCorrect ? Icons.check_circle : Icons.cancel,
+                      color: isCorrect
+                          ? (isDark
+                                ? Colors.green.shade400
+                                : Colors.green.shade500)
+                          : (isDark
+                                ? Colors.red.shade400
+                                : Colors.red.shade500),
+                      size: 28,
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 48, top: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Your Answer
+                      _buildAnswerBlock(
+                        title: 'Your Answer',
+                        text: yourAnswer,
+                        isCorrect: isCorrect,
+                        isDark: isDark,
+                      ),
+                      if (!isCorrect && correctAnswer != null) ...[
+                        const SizedBox(height: 16),
+                        _buildAnswerBlock(
+                          title: 'Correct Answer',
+                          text: correctAnswer,
+                          isCorrect: true, // It's showing the correct answer
+                          isDark: isDark,
+                        ),
+                      ],
+                      if (!isCorrect && explanation != null) ...[
+                        const SizedBox(height: 16),
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: isDark
+                                ? const Color(0xFF334155).withValues(alpha: 0.5)
+                                : const Color(0xFFF8FAFC),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: isDark
+                                  ? const Color(0xFF334155)
+                                  : const Color(0xFFF1F5F9),
+                            ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.lightbulb_outline,
+                                    size: 20,
+                                    color: subTextColor,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    'EXPLANATION',
+                                    style: GoogleFonts.inter(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0.5,
+                                      color: subTextColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                explanation,
+                                style: GoogleFonts.inter(
+                                  fontSize: 14,
+                                  color: isDark
+                                      ? const Color(0xFFCBD5E1)
+                                      : const Color(0xFF475569),
+                                  height: 1.6,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAnswerBlock({
+    required String title,
+    required String text,
+    required bool isCorrect,
+    required bool isDark,
+  }) {
+    Color bgColor = isCorrect
+        ? (isDark
+              ? Colors.green.shade900.withValues(alpha: 0.2)
+              : Colors.green.shade50)
+        : (isDark ? Colors.red.shade900.withValues(alpha: 0.2) : Colors.red.shade50);
+    Color borderColor = isCorrect
+        ? (isDark
+              ? Colors.green.shade900.withValues(alpha: 0.5)
+              : Colors.green.shade100)
+        : (isDark ? Colors.red.shade900.withValues(alpha: 0.5) : Colors.red.shade100);
+    Color textColor = isCorrect
+        ? (isDark ? Colors.green.shade200 : Colors.green.shade800)
+        : (isDark ? Colors.red.shade200 : Colors.red.shade800);
+    IconData icon = isCorrect ? Icons.check : Icons.close;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title.toUpperCase(),
+          style: GoogleFonts.inter(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 0.5,
+            color: const Color(0xFF94A3B8), // slate-400
+          ),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: bgColor,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: borderColor),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 18, color: textColor),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(
+                  text,
+                  style: GoogleFonts.inter(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: textColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBottomAction(bool isDark) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 64, top: 16),
+      child: Center(
+        child: ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            backgroundColor: _primaryColor,
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(9999),
+            ),
+            elevation: 8,
+            shadowColor: Colors.black.withValues(alpha: 0.2),
+          ),
+          child: Text(
+            'Return to Dashboard',
+            style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,1258 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class WebUserProfileScreen extends StatelessWidget {
+  const WebUserProfileScreen({super.key});
+
+  final Color _primaryColor = const Color(0xFF2C0FBD);
+  final Color _primaryLight = const Color(0xFFEAEAEF);
+  final Color _backgroundLight = const Color(0xFFF4F7FE);
+  final Color _backgroundDark = const Color(0xFF131022);
+  final Color _surfaceLight = Colors.white;
+  final Color _surfaceDark = const Color(0xFF1F1B36);
+  final Color _textMain = const Color(0xFF121118);
+  final Color _textMuted = const Color(0xFF686189);
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final Color bgColor = isDark ? _backgroundDark : _backgroundLight;
+    final Color surfaceColor = isDark ? _surfaceDark : _surfaceLight;
+    final Color textColor = isDark ? Colors.white : _textMain;
+    final Color textMutedColor = isDark ? Colors.white70 : _textMuted;
+
+    return Scaffold(
+      backgroundColor: bgColor,
+      body: CustomScrollView(
+        slivers: [
+          _buildSliverAppBar(
+            context,
+            isDark,
+            surfaceColor,
+            textColor,
+            textMutedColor,
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1200),
+                  child: Column(
+                    children: [
+                      _buildProfileHeader(
+                        isDark,
+                        surfaceColor,
+                        textColor,
+                        textMutedColor,
+                      ),
+                      const SizedBox(height: 24),
+                      _buildStatsRow(
+                        isDark,
+                        surfaceColor,
+                        textColor,
+                        textMutedColor,
+                      ),
+                      const SizedBox(height: 24),
+                      LayoutBuilder(
+                        builder: (context, constraints) {
+                          if (constraints.maxWidth >= 992) {
+                            return Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  flex: 7,
+                                  child: Column(
+                                    children: [
+                                      _buildAboutMe(
+                                        isDark,
+                                        surfaceColor,
+                                        textColor,
+                                        textMutedColor,
+                                      ),
+                                      const SizedBox(height: 24),
+                                      _buildCurrentLearningPath(
+                                        isDark,
+                                        surfaceColor,
+                                        textColor,
+                                        textMutedColor,
+                                      ),
+                                      const SizedBox(height: 24),
+                                      _buildAchievements(
+                                        isDark,
+                                        surfaceColor,
+                                        textColor,
+                                        textMutedColor,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 24),
+                                Expanded(
+                                  flex: 5,
+                                  child: Column(
+                                    children: [
+                                      _buildRecentActivity(
+                                        isDark,
+                                        surfaceColor,
+                                        textColor,
+                                        textMutedColor,
+                                      ),
+                                      const SizedBox(height: 24),
+                                      _buildConnectedAccounts(
+                                        isDark,
+                                        surfaceColor,
+                                        textColor,
+                                        textMutedColor,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          } else {
+                            return Column(
+                              children: [
+                                _buildAboutMe(
+                                  isDark,
+                                  surfaceColor,
+                                  textColor,
+                                  textMutedColor,
+                                ),
+                                const SizedBox(height: 24),
+                                _buildStatsRowGrid(
+                                  isDark,
+                                  surfaceColor,
+                                  textColor,
+                                  textMutedColor,
+                                ),
+                                const SizedBox(height: 24),
+                                _buildCurrentLearningPath(
+                                  isDark,
+                                  surfaceColor,
+                                  textColor,
+                                  textMutedColor,
+                                ),
+                                const SizedBox(height: 24),
+                                _buildAchievements(
+                                  isDark,
+                                  surfaceColor,
+                                  textColor,
+                                  textMutedColor,
+                                ),
+                                const SizedBox(height: 24),
+                                _buildRecentActivity(
+                                  isDark,
+                                  surfaceColor,
+                                  textColor,
+                                  textMutedColor,
+                                ),
+                                const SizedBox(height: 24),
+                                _buildConnectedAccounts(
+                                  isDark,
+                                  surfaceColor,
+                                  textColor,
+                                  textMutedColor,
+                                ),
+                              ],
+                            );
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSliverAppBar(
+    BuildContext context,
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+    Color textMutedColor,
+  ) {
+    return SliverAppBar(
+      backgroundColor: surfaceColor.withValues(alpha: 0.9),
+      pinned: true,
+      elevation: 0,
+      title: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 32,
+            height: 32,
+            decoration: BoxDecoration(
+              color: _primaryColor,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: const Icon(
+              Icons.rocket_launch,
+              color: Colors.white,
+              size: 20,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Text(
+            'Antigravity Edu',
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: textColor,
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        if (MediaQuery.of(context).size.width >= 768) ...[
+          _buildNavLink('Dashboard', textMutedColor),
+          const SizedBox(width: 32),
+          _buildNavLink('Courses', textMutedColor),
+          const SizedBox(width: 32),
+          _buildNavLink('Community', textMutedColor),
+          const SizedBox(width: 32),
+        ],
+        IconButton(
+          icon: Icon(Icons.notifications, color: textMutedColor),
+          onPressed: () {},
+        ),
+        const SizedBox(width: 16),
+        Container(
+          width: 40,
+          height: 40,
+          margin: const EdgeInsets.only(right: 16),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: surfaceColor, width: 2),
+            image: const DecorationImage(
+              image: NetworkImage(
+                'https://lh3.googleusercontent.com/aida-public/AB6AXuD19Jtcd-tnvZfG_q4wUqXSwaNJB_rTgjjzLCj8ZgwCdobJ1kc4qOnk8CQLYgmJraIfDGqgZE908PcC-wJ1VcSoOqbDv95qW8bwA7FjCHdCeKJgt9vOG9ULGstual2rA2dU8Zfd18Gm_zUDWGwtuwWoQv7TWaDwjuj9xkJdcNAihBbe2pNG0ntRvho8zhk1e0jRoxsDoB6ioyImERPHqcCheF3d2dbBVYVWXC2fuZgNomK5eo2nGNfn1HEckA1m7xvos3hUxOoFyz2B',
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ],
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(1),
+        child: Container(
+          color: isDark
+              ? Colors.white.withValues(alpha: 0.05)
+              : Colors.grey.shade200,
+          height: 1,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavLink(String text, Color textMutedColor) {
+    return Center(
+      child: InkWell(
+        onTap: () {},
+        child: Text(
+          text,
+          style: GoogleFonts.notoSans(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: textMutedColor,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProfileHeader(
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+    Color textMutedColor,
+  ) {
+    return Container(
+      decoration: BoxDecoration(
+        color: surfaceColor,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Stack(
+        children: [
+          // Cover image
+          Container(
+            height: 160,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  _primaryColor.withValues(alpha: 0.8),
+                  const Color(0xFF6D28D9).withValues(alpha: 0.8),
+                ],
+              ),
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(24),
+                topRight: Radius.circular(24),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 32,
+              right: 32,
+              top: 120,
+              bottom: 32,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          width: 120,
+                          height: 120,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: surfaceColor, width: 4),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.1),
+                                blurRadius: 10,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                            image: const DecorationImage(
+                              image: NetworkImage(
+                                'https://lh3.googleusercontent.com/aida-public/AB6AXuD19Jtcd-tnvZfG_q4wUqXSwaNJB_rTgjjzLCj8ZgwCdobJ1kc4qOnk8CQLYgmJraIfDGqgZE908PcC-wJ1VcSoOqbDv95qW8bwA7FjCHdCeKJgt9vOG9ULGstual2rA2dU8Zfd18Gm_zUDWGwtuwWoQv7TWaDwjuj9xkJdcNAihBbe2pNG0ntRvho8zhk1e0jRoxsDoB6ioyImERPHqcCheF3d2dbBVYVWXC2fuZgNomK5eo2nGNfn1HEckA1m7xvos3hUxOoFyz2B',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Container(
+                              width: 32,
+                              height: 32,
+                              decoration: BoxDecoration(
+                                color: _primaryColor,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: surfaceColor,
+                                  width: 2,
+                                ),
+                              ),
+                              child: const Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                                size: 16,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 24),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Alex Johnson',
+                              style: GoogleFonts.spaceGrotesk(
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                                color: textColor,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                _buildBadge(
+                                  Icons.school,
+                                  'Law Student',
+                                  _primaryColor.withValues(
+                                      alpha: isDark ? 0.2 : 0.1),
+                                  _primaryColor,
+                                ),
+                                const SizedBox(width: 12),
+                                _buildBadge(
+                                  Icons.location_on,
+                                  'New York, USA',
+                                  isDark
+                                      ? Colors.grey.shade800
+                                      : Colors.grey.shade100,
+                                  textMutedColor,
+                                ),
+                                const SizedBox(width: 12),
+                                _buildBadge(
+                                  Icons.calendar_today,
+                                  'Member since Oct 2023',
+                                  isDark
+                                      ? Colors.grey.shade800
+                                      : Colors.grey.shade100,
+                                  textMutedColor,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    ElevatedButton.icon(
+                      onPressed: () {},
+                      icon: const Icon(Icons.settings, size: 18),
+                      label: const Text('Edit Profile'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: isDark
+                            ? Colors.grey.shade800
+                            : Colors.grey.shade100,
+                        foregroundColor: textColor,
+                        elevation: 0,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 16,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 32),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color:
+                            _primaryColor.withValues(alpha: isDark ? 0.2 : 0.1),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Icon(Icons.trending_up, color: _primaryColor),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Level 12 Scholar',
+                                style: GoogleFonts.spaceGrotesk(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: textColor,
+                                ),
+                              ),
+                              Text(
+                                '8,450 / 10,000 XP',
+                                style: GoogleFonts.notoSans(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: textMutedColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(4),
+                            child: LinearProgressIndicator(
+                              value: 0.845,
+                              minHeight: 8,
+                              backgroundColor: isDark
+                                  ? Colors.grey.shade800
+                                  : Colors.grey.shade200,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                _primaryColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBadge(
+    IconData icon,
+    String text,
+    Color bgColor,
+    Color textColor,
+  ) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(9999),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 14, color: textColor),
+          const SizedBox(width: 6),
+          Text(
+            text,
+            style: GoogleFonts.notoSans(
+              fontSize: 13,
+              fontWeight: FontWeight.w500,
+              color: textColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatsRow(
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+    Color textMutedColor,
+  ) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 600) {
+          return const SizedBox.shrink(); // Hide row on mobile, handled by grid
+        }
+        return Row(
+          children: [
+            Expanded(
+              child: _buildStatCard(
+                'Enrolled Courses',
+                '12',
+                Icons.book,
+                isDark,
+                surfaceColor,
+                textColor,
+                textMutedColor,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: _buildStatCard(
+                'Completed Quizzes',
+                '45',
+                Icons.quiz,
+                isDark,
+                surfaceColor,
+                textColor,
+                textMutedColor,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: _buildStatCard(
+                'Forum Posts',
+                '128',
+                Icons.forum,
+                isDark,
+                surfaceColor,
+                textColor,
+                textMutedColor,
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: _buildStatCard(
+                'Avg. Score',
+                '92%',
+                Icons.grade,
+                isDark,
+                surfaceColor,
+                textColor,
+                textMutedColor,
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildStatsRowGrid(
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+    Color textMutedColor,
+  ) {
+    return GridView.count(
+      crossAxisCount: 2,
+      crossAxisSpacing: 16,
+      mainAxisSpacing: 16,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      childAspectRatio: 1.5,
+      children: [
+        _buildStatCard(
+          'Enrolled Courses',
+          '12',
+          Icons.book,
+          isDark,
+          surfaceColor,
+          textColor,
+          textMutedColor,
+        ),
+        _buildStatCard(
+          'Completed Quizzes',
+          '45',
+          Icons.quiz,
+          isDark,
+          surfaceColor,
+          textColor,
+          textMutedColor,
+        ),
+        _buildStatCard(
+          'Forum Posts',
+          '128',
+          Icons.forum,
+          isDark,
+          surfaceColor,
+          textColor,
+          textMutedColor,
+        ),
+        _buildStatCard(
+          'Avg. Score',
+          '92%',
+          Icons.grade,
+          isDark,
+          surfaceColor,
+          textColor,
+          textMutedColor,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStatCard(
+    String title,
+    String value,
+    IconData icon,
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+    Color textMutedColor,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: surfaceColor,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.notoSans(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: textMutedColor,
+                ),
+              ),
+              Icon(icon, size: 20, color: _primaryColor.withValues(alpha: 0.7)),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            value,
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: textColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAboutMe(
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+    Color textMutedColor,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: surfaceColor,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'About Me',
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: textColor,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            "I'm a second-year law student passionate about corporate law and international human rights. Currently focusing on contract law and legal writing. I enjoy participating in mock trials and am looking to connect with mentors in the field.",
+            style: GoogleFonts.notoSans(
+              fontSize: 15,
+              color: textMutedColor,
+              height: 1.6,
+            ),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            'Interests',
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: textColor,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              _buildTag('Corporate Law', isDark, surfaceColor, textColor),
+              _buildTag('Contract Law', isDark, surfaceColor, textColor),
+              _buildTag('Human Rights', isDark, surfaceColor, textColor),
+              _buildTag('Mock Trials', isDark, surfaceColor, textColor),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTag(
+    String text,
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+  ) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: isDark ? _backgroundDark : _primaryLight.withValues(alpha: 0.5),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Text(
+        text,
+        style: GoogleFonts.notoSans(
+          fontSize: 13,
+          fontWeight: FontWeight.w500,
+          color: textColor,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCurrentLearningPath(
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+    Color textMutedColor,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: surfaceColor,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Current Learning Path',
+                style: GoogleFonts.spaceGrotesk(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                style: TextButton.styleFrom(
+                  foregroundColor: _primaryColor,
+                  textStyle: GoogleFonts.notoSans(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                child: const Text('View All'),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          _buildCourseProgress(
+            'Advanced Contract Law',
+            75,
+            isDark,
+            surfaceColor,
+            textColor,
+            textMutedColor,
+          ),
+          const SizedBox(height: 16),
+          _buildCourseProgress(
+            'Legal Ethics & Professional Responsibility',
+            40,
+            isDark,
+            surfaceColor,
+            textColor,
+            textMutedColor,
+          ),
+          const SizedBox(height: 16),
+          _buildCourseProgress(
+            'Constitutional Law II',
+            15,
+            isDark,
+            surfaceColor,
+            textColor,
+            textMutedColor,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCourseProgress(
+    String title,
+    int progress,
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+    Color textMutedColor,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: GoogleFonts.spaceGrotesk(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: textColor,
+              ),
+            ),
+            Text(
+              '$progress%',
+              style: GoogleFonts.notoSans(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: textMutedColor,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: LinearProgressIndicator(
+            value: progress / 100,
+            minHeight: 8,
+            backgroundColor:
+                isDark ? Colors.grey.shade800 : Colors.grey.shade200,
+            valueColor: AlwaysStoppedAnimation<Color>(_primaryColor),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAchievements(
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+    Color textMutedColor,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: surfaceColor,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Recent Achievements',
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: textColor,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildBadgeItem(
+                'Top Scorer',
+                Icons.emoji_events,
+                Colors.amber.shade500,
+                isDark,
+              ),
+              _buildBadgeItem(
+                'Fast Learner',
+                Icons.bolt,
+                Colors.blue.shade500,
+                isDark,
+              ),
+              _buildBadgeItem(
+                'Helpful',
+                Icons.supervised_user_circle,
+                Colors.green.shade500,
+                isDark,
+              ),
+              _buildBadgeItem(
+                'Consistent',
+                Icons.fireplace,
+                Colors.orange.shade500,
+                isDark,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBadgeItem(
+    String title,
+    IconData icon,
+    Color color,
+    bool isDark,
+  ) {
+    return Column(
+      children: [
+        Container(
+          width: 64,
+          height: 64,
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: isDark ? 0.2 : 0.1),
+            shape: BoxShape.circle,
+            border: Border.all(color: color.withValues(alpha: 0.5), width: 2),
+          ),
+          child: Icon(icon, size: 32, color: color),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          title,
+          style: GoogleFonts.notoSans(
+            fontSize: 13,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRecentActivity(
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+    Color textMutedColor,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: surfaceColor,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Recent Activity',
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: textColor,
+            ),
+          ),
+          const SizedBox(height: 24),
+          _buildActivityTimelineItem(
+            icon: Icons.quiz,
+            iconColor: _primaryColor,
+            title: 'Completed Quiz: Torts Basics',
+            description: 'Scored 95% on the fundamentals of tort law.',
+            time: '2 hours ago',
+            isDark: isDark,
+            textMutedColor: textMutedColor,
+          ),
+          _buildActivityTimelineItem(
+            icon: Icons.forum,
+            iconColor: Colors.amber.shade600,
+            title: 'Replied to a discussion topic',
+            description:
+                'Participated in the debate on "Ethics in Legal Practice".',
+            time: 'yesterday',
+            isDark: isDark,
+            textMutedColor: textMutedColor,
+          ),
+          _buildActivityTimelineItem(
+            icon: Icons.bookmark,
+            iconColor: Colors.green.shade600,
+            title: 'Completed Module 4',
+            description: 'Finished reading materials for "Contracts II".',
+            time: '3 days ago',
+            isDark: isDark,
+            textMutedColor: textMutedColor,
+            isLast: true,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActivityTimelineItem({
+    required IconData icon,
+    required Color iconColor,
+    required String title,
+    required String description,
+    required String time,
+    required bool isDark,
+    required Color textMutedColor,
+    bool isLast = false,
+  }) {
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            children: [
+              Container(
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  color: iconColor.withValues(alpha: isDark ? 0.2 : 0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(icon, size: 16, color: iconColor),
+              ),
+              if (!isLast)
+                Expanded(
+                  child: Container(
+                    width: 2,
+                    color: isDark ? Colors.grey.shade800 : Colors.grey.shade200,
+                    margin: const EdgeInsets.symmetric(vertical: 4),
+                  ),
+                ),
+            ],
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  description,
+                  style: GoogleFonts.notoSans(
+                    fontSize: 14,
+                    color: textMutedColor,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  time,
+                  style: GoogleFonts.notoSans(
+                    fontSize: 12,
+                    color: textMutedColor,
+                  ),
+                ),
+                const SizedBox(height: 24),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildConnectedAccounts(
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+    Color textMutedColor,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: surfaceColor,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Connected Accounts',
+            style: GoogleFonts.spaceGrotesk(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: textColor,
+            ),
+          ),
+          const SizedBox(height: 16),
+          _buildAccountItem(
+            'Google',
+            'alex.j@example.com',
+            true,
+            isDark,
+            textMutedColor,
+          ),
+          const Divider(height: 24),
+          _buildAccountItem(
+            'LinkedIn',
+            'linkedin.com/in/alexj',
+            true,
+            isDark,
+            textMutedColor,
+          ),
+          const Divider(height: 24),
+          _buildAccountItem(
+            'GitHub',
+            'Not connected',
+            false,
+            isDark,
+            textMutedColor,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAccountItem(
+    String provider,
+    String details,
+    bool isConnected,
+    bool isDark,
+    Color textMutedColor,
+  ) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: isDark ? _backgroundDark : Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Icon(Icons.link, size: 20), // Placeholder icon
+            ),
+            const SizedBox(width: 16),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  provider,
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  details,
+                  style: GoogleFonts.notoSans(
+                    fontSize: 13,
+                    color: textMutedColor,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        TextButton(
+          onPressed: () {},
+          style: TextButton.styleFrom(
+            foregroundColor: isConnected ? Colors.red.shade400 : _primaryColor,
+          ),
+          child: Text(isConnected ? 'Disconnect' : 'Connect'),
+        ),
+      ],
+    );
+  }
+}

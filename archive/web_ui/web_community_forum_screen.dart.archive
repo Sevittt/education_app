@@ -1,0 +1,837 @@
+// lib/features/community/presentation/screens/web_community_forum_screen.dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
+import 'package:sud_qollanma/features/auth/domain/entities/app_user.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
+import '../../domain/entities/discussion_topic.dart';
+import '../providers/community_provider.dart';
+import 'create_topic_screen.dart';
+import 'topic_detail_screen.dart';
+import 'package:sud_qollanma/shared/widgets/glass_card.dart';
+
+class WebCommunityForumScreen extends StatefulWidget {
+  const WebCommunityForumScreen({super.key});
+
+  @override
+  State<WebCommunityForumScreen> createState() =>
+      _WebCommunityForumScreenState();
+}
+
+class _WebCommunityForumScreenState extends State<WebCommunityForumScreen> {
+  String _searchQuery = '';
+  String _selectedCategory = 'All Topics';
+
+  void _navigateToTopicDetail(DiscussionTopic topic) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TopicDetailScreen(topic: topic)),
+    );
+  }
+
+  void _navigateToCreateTopic() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const CreateTopicScreen()),
+    );
+  }
+
+  void _deleteTopic(DiscussionTopic topic) {
+    final l10n = AppLocalizations.of(context);
+    final provider = Provider.of<CommunityProvider>(context, listen: false);
+
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text(l10n?.deleteTopicConfirmTitle ?? 'Confirm Delete'),
+          content: Text(
+            l10n?.deleteTopicConfirmMessage(topic.title) ??
+                'Are you sure you want to delete "${topic.title}"?',
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(l10n?.cancelButtonText ?? 'Cancel'),
+              onPressed: () => Navigator.of(dialogContext).pop(),
+            ),
+            TextButton(
+              child: Text(
+                l10n?.deleteButtonText ?? 'Delete',
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              ),
+              onPressed: () async {
+                Navigator.of(dialogContext).pop();
+                try {
+                  await provider.deleteTopic(topic.id);
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          l10n?.topicDeletedSuccess(topic.title) ??
+                              '"${topic.title}" deleted successfully.',
+                        ),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                  }
+                } catch (e) {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          l10n?.errorDeletingTopicMsg(e.toString()) ??
+                              'Error deleting: $e',
+                        ),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final communityProvider = Provider.of<CommunityProvider>(context);
+    final authNotifier = Provider.of<AuthNotifier>(context);
+    final currentAppUser = authNotifier.appUser;
+
+    return Scaffold(
+      backgroundColor: const Color(0xFFF4F7FE),
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24.0,
+                vertical: 32.0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Page Header
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              l10n?.bottomNavCommunity ?? 'Community Forum',
+                              style: GoogleFonts.poppins(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w800,
+                                color: const Color(0xFF121118),
+                                letterSpacing: -0.5,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'Join the conversation with legal experts and students.',
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                color: const Color(0xFF686189),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      ElevatedButton.icon(
+                        onPressed: _navigateToCreateTopic,
+                        icon: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                        label: Text(
+                          l10n?.actionCreateDiscussion ?? 'Start a Discussion',
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF2c0fbd),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 16,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          elevation: 8,
+                          shadowColor: const Color(
+                            0xFF2c0fbd,
+                          ).withValues(alpha: 0.4),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 32),
+
+                  // Search & Filters
+                  GlassCard(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: TextField(
+                            onChanged: (val) {
+                              setState(() {
+                                _searchQuery = val.toLowerCase();
+                              });
+                            },
+                            decoration: InputDecoration(
+                              hintText: 'Search discussions, topics...',
+                              hintStyle: GoogleFonts.poppins(
+                                color: const Color(0xFF686189),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.search,
+                                color: Color(0xFF686189),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide.none,
+                              ),
+                              filled: true,
+                              fillColor: const Color(0xFFF8FAFC),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 14,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          flex: 3,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                _buildFilterTab('All Topics'),
+                                _buildFilterTab('Family Law'),
+                                _buildFilterTab('Corporate'),
+                                _buildFilterTab('Criminal Justice'),
+                                _buildFilterTab('Constitutional'),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+
+                  // Layout Grid
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Left Column: Feed
+                      Expanded(
+                        flex: 8,
+                        child: StreamBuilder<List<DiscussionTopic>>(
+                          stream: communityProvider.topicsStream,
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                    ConnectionState.waiting &&
+                                !snapshot.hasData) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            if (snapshot.hasError) {
+                              return Center(
+                                child: Text('Error: ${snapshot.error}'),
+                              );
+                            }
+                            if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                              return Center(
+                                child: Text(
+                                  l10n?.noDiscussionsYet ??
+                                      'No discussions yet.',
+                                ),
+                              );
+                            }
+
+                            // Filter topics
+                            var topics = snapshot.data!.where((topic) {
+                              final matchesSearch =
+                                  topic.title.toLowerCase().contains(
+                                    _searchQuery,
+                                  ) ||
+                                  topic.content.toLowerCase().contains(
+                                    _searchQuery,
+                                  );
+                              final matchesCategory =
+                                  _selectedCategory == 'All Topics';
+                              // Currently we don't have category field in model to filter properly
+                              return matchesSearch && matchesCategory;
+                            }).toList();
+
+                            if (topics.isEmpty) {
+                              return const Center(
+                                child: Text('No results found.'),
+                              );
+                            }
+
+                            return ListView.separated(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: topics.length,
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(height: 20),
+                              itemBuilder: (context, index) {
+                                final topic = topics[index];
+                                bool canModify = false;
+                                if (currentAppUser != null) {
+                                  if (currentAppUser.role ==
+                                          CourtRole.ict_specialist ||
+                                      currentAppUser.id == topic.authorId) {
+                                    canModify = true;
+                                  }
+                                }
+
+                                return _buildTopicCard(topic, canModify);
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 32),
+
+                      // Right Column: Sidebar
+                      Expanded(
+                        flex: 4,
+                        child: Column(
+                          children: [
+                            _buildTrendingTopicsCard(),
+                            const SizedBox(height: 24),
+                            _buildTopContributorsCard(),
+                            const SizedBox(height: 24),
+                            _buildPromoCard(),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFilterTab(String title) {
+    final isSelected = _selectedCategory == title;
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            setState(() {
+              _selectedCategory = title;
+            });
+          },
+          borderRadius: BorderRadius.circular(30),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? const Color(0xFF2c0fbd)
+                  : const Color(0xFFF8FAFC),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Text(
+              title,
+              style: GoogleFonts.poppins(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: isSelected ? Colors.white : const Color(0xFF686189),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTopicCard(DiscussionTopic topic, bool canModify) {
+    final String authorInitial = topic.authorName.isNotEmpty
+        ? topic.authorName[0].toUpperCase()
+        : '?';
+
+    // Mock category
+    final category = 'Discussion';
+
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () => _navigateToTopicDetail(topic),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.04),
+                blurRadius: 20,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.all(24),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CircleAvatar(
+                radius: 24,
+                backgroundColor: const Color(0xFFebe8fc),
+                child: Text(
+                  authorInitial,
+                  style: GoogleFonts.poppins(
+                    color: const Color(0xFF2c0fbd),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFeef2ff),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            category.toUpperCase(),
+                            style: GoogleFonts.poppins(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF4f46e5),
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          '• Posted by ${topic.authorName}',
+                          style: GoogleFonts.poppins(
+                            fontSize: 12,
+                            color: const Color(0xFF686189),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      topic.title,
+                      style: GoogleFonts.poppins(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF121118),
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      topic.content,
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        color: const Color(0xFF686189),
+                        height: 1.5,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        _buildActionIcon(Icons.thumb_up_alt_outlined, 'Like'),
+                        const SizedBox(width: 24),
+                        _buildActionIcon(
+                          Icons.chat_bubble_outline,
+                          '${topic.commentCount} Comments',
+                        ),
+                        const Spacer(),
+                        if (canModify) ...[
+                          IconButton(
+                            icon: const Icon(
+                              Icons.delete_outline,
+                              color: Colors.redAccent,
+                              size: 20,
+                            ),
+                            onPressed: () => _deleteTopic(topic),
+                          ),
+                        ],
+                        _buildActionIcon(Icons.bookmark_border, 'Save'),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildActionIcon(IconData icon, String label) {
+    return Row(
+      children: [
+        Icon(icon, size: 18, color: const Color(0xFF686189)),
+        const SizedBox(width: 6),
+        Text(
+          label,
+          style: GoogleFonts.poppins(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: const Color(0xFF686189),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTrendingTopicsCard() {
+    return GlassCard(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Trending Topics',
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: const Color(0xFF121118),
+                ),
+              ),
+              const Icon(
+                Icons.local_fire_department,
+                color: Colors.orange,
+                size: 20,
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          _buildTrendingItem(Icons.gavel, 'Bar Exam Prep', '240+'),
+          const SizedBox(height: 16),
+          _buildTrendingItem(Icons.balance, 'Civil Rights', '185+'),
+          const SizedBox(height: 16),
+          _buildTrendingItem(Icons.copyright, 'IP Law', '120+'),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTrendingItem(IconData icon, String title, String count) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            CircleAvatar(
+              radius: 16,
+              backgroundColor: const Color(0xFFF8FAFC),
+              child: Icon(icon, size: 16, color: const Color(0xFF686189)),
+            ),
+            const SizedBox(width: 12),
+            Text(
+              title,
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: const Color(0xFF121118),
+              ),
+            ),
+          ],
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: const Color(0xFFF8FAFC),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Text(
+            count,
+            style: GoogleFonts.poppins(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF94A3B8),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTopContributorsCard() {
+    return GlassCard(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Top Contributors',
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: const Color(0xFF121118),
+                ),
+              ),
+              Text(
+                'View All',
+                style: GoogleFonts.poppins(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF2c0fbd),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          _buildContributorItem(
+            'PD',
+            'Prof. Davis',
+            'Senior Lecturer',
+            '12.5k',
+            1,
+          ),
+          const SizedBox(height: 16),
+          _buildContributorItem('JW', 'James W.', 'Law Student', '8.2k', 2),
+          const SizedBox(height: 16),
+          _buildContributorItem('ER', 'Elena R.', 'Attorney', '6.9k', 3),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            child: TextButton(
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                backgroundColor: const Color(0xFFF8FAFC),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: Text(
+                'See Leaderboard',
+                style: GoogleFonts.poppins(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF686189),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildContributorItem(
+    String initial,
+    String name,
+    String role,
+    String points,
+    int rank,
+  ) {
+    Color rankColor;
+    if (rank == 1) {
+      rankColor = Colors.amber;
+    } else if (rank == 2) {
+      rankColor = Colors.grey[400]!;
+    } else {
+      rankColor = Colors.orange[300]!;
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Stack(
+              children: [
+                CircleAvatar(
+                  radius: 20,
+                  backgroundColor: const Color(0xFFebe8fc),
+                  child: Text(
+                    initial,
+                    style: GoogleFonts.poppins(
+                      color: const Color(0xFF2c0fbd),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Container(
+                    width: 14,
+                    height: 14,
+                    decoration: BoxDecoration(
+                      color: rankColor,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 1.5),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xFF121118),
+                  ),
+                ),
+                Text(
+                  role,
+                  style: GoogleFonts.poppins(
+                    fontSize: 12,
+                    color: const Color(0xFF686189),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              points,
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xFF2c0fbd),
+              ),
+            ),
+            Text(
+              'POINTS',
+              style: GoogleFonts.poppins(
+                fontSize: 10,
+                color: const Color(0xFF686189),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPromoCard() {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        gradient: const LinearGradient(
+          colors: [Color(0xFF2c0fbd), Color(0xFF4f34d6)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF2c0fbd).withValues(alpha: 0.3),
+            blurRadius: 14,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Text(
+              'Pro Access',
+              style: GoogleFonts.poppins(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'Unlock Case Studies',
+            style: GoogleFonts.poppins(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Get access to 500+ premium legal case studies and expert breakdowns.',
+            style: GoogleFonts.poppins(
+              fontSize: 14,
+              color: Colors.white.withValues(alpha: 0.9),
+            ),
+          ),
+          const SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              foregroundColor: const Color(0xFF2c0fbd),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+            ),
+            child: Text(
+              'Upgrade Now',
+              style: GoogleFonts.poppins(
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

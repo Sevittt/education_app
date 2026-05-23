@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "skills": {
+    "xAPI Specification": {
+      "source": "tim80411/ai-agent-extension",
+      "sourceType": "github",
+      "computedHash": "3336c90040db18a4430b08713593915fb8794e4290ebfd3c37c3f93d05cb370d"
+    },
+    "xapi": {
+      "source": "xapi-labs/skills",
+      "sourceType": "github",
+      "computedHash": "86159f874097a670b90c42968ae1024f1c70634566d7bb494efa1ed1d7e5aab2"
+    }
+  }
+}

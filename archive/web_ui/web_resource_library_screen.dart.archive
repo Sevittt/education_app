@@ -1,0 +1,557 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sud_qollanma/core/constants/app_colors.dart';
+import 'package:sud_qollanma/features/library/domain/entities/article_entity.dart';
+import 'package:sud_qollanma/features/library/domain/entities/resource_entity.dart';
+import 'package:sud_qollanma/features/library/domain/entities/video_entity.dart';
+import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
+import 'package:sud_qollanma/features/quiz/domain/entities/quiz.dart';
+import 'package:sud_qollanma/features/quiz/presentation/providers/quiz_provider.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
+import 'package:sud_qollanma/shared/widgets/glass_card.dart';
+import 'package:sud_qollanma/features/library/presentation/screens/article_detail_screen.dart';
+import 'package:sud_qollanma/features/library/presentation/screens/video_player_screen.dart';
+import 'package:sud_qollanma/features/quiz/presentation/screens/quiz_screen.dart';
+import 'package:intl/intl.dart';
+
+class WebResourceLibraryScreen extends StatefulWidget {
+  const WebResourceLibraryScreen({super.key});
+
+  @override
+  State<WebResourceLibraryScreen> createState() =>
+      _WebResourceLibraryScreenState();
+}
+
+class _WebResourceLibraryScreenState extends State<WebResourceLibraryScreen> {
+  String _searchQuery = '';
+  // Filters: 0: All, 1: Articles, 2: Videos, 3: Files, 4: Quizzes
+  int _selectedFilterIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final libraryProvider = context.read<LibraryProvider>();
+      libraryProvider.loadArticles();
+      libraryProvider.loadVideos();
+      libraryProvider.loadResources();
+      context.read<QuizProvider>().fetchQuizzes();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    // Derived filter names
+    final filters = [
+      l10n.filterAll, // generic "All" or we can hardcode for testing
+      l10n.resourceTabArticles,
+      l10n.resourceTabVideos,
+      l10n.resourceTabFiles,
+      l10n.quizTitle,
+    ];
+
+    return Scaffold(
+      backgroundColor:
+          isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 1200),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Hero Section
+                Text(
+                  l10n.resourcesScreenTitle,
+                  style: TextStyle(
+                    fontSize: 48,
+                    fontWeight: FontWeight.w900,
+                    color: isDark ? Colors.white : AppColors.textPrimaryLight,
+                    letterSpacing: -1,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  "Explore our comprehensive collection of legal documents, case studies, and expert articles tailored for your needs.",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: isDark
+                        ? AppColors.textSecondaryDark
+                        : AppColors.textSecondaryLight,
+                    height: 1.6,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 40),
+
+                // Search Bar
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 670),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: isDark ? AppColors.surfaceDark : Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black
+                              .withValues(alpha: isDark ? 0.3 : 0.05),
+                          blurRadius: 20,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      onChanged: (val) {
+                        setState(() {
+                          _searchQuery = val.toLowerCase();
+                        });
+                      },
+                      style: TextStyle(
+                        color:
+                            isDark ? Colors.white : AppColors.textPrimaryLight,
+                      ),
+                      decoration: InputDecoration(
+                        hintText: "Search documents, keywords, or topics...",
+                        hintStyle: TextStyle(
+                          color: isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondaryLight,
+                        ),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: AppColors.primary.withValues(alpha: 0.6),
+                        ),
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.tune, color: AppColors.primary),
+                          onPressed: () {},
+                        ),
+                        border: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 40),
+
+                // Filter Chips
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(filters.length, (index) {
+                      final isSelected = _selectedFilterIndex == index;
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 12),
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              _selectedFilterIndex = index;
+                            });
+                          },
+                          borderRadius: BorderRadius.circular(30),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24,
+                              vertical: 10,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? AppColors.primary
+                                  : (isDark
+                                      ? AppColors.surfaceDark
+                                      : Colors.white),
+                              borderRadius: BorderRadius.circular(30),
+                              boxShadow: [
+                                if (isSelected)
+                                  BoxShadow(
+                                    color: AppColors.primary
+                                        .withValues(alpha: 0.3),
+                                    blurRadius: 10,
+                                    offset: const Offset(0, 4),
+                                  ),
+                              ],
+                            ),
+                            child: Text(
+                              filters[index].toUpperCase(),
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: isSelected
+                                    ? Colors.white
+                                    : (isDark
+                                        ? Colors.white70
+                                        : AppColors.textPrimaryLight),
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+                const SizedBox(height: 48),
+
+                // Grid Content
+                _buildGridContent(context),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGridContent(BuildContext context) {
+    final libraryProvider = context.watch<LibraryProvider>();
+    final quizProvider = context.watch<QuizProvider>();
+
+    if (libraryProvider.isLoading || quizProvider.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    List<dynamic> items = [];
+
+    if (_selectedFilterIndex == 0 || _selectedFilterIndex == 1) {
+      items.addAll(libraryProvider.articles);
+    }
+    if (_selectedFilterIndex == 0 || _selectedFilterIndex == 2) {
+      items.addAll(libraryProvider.videos);
+    }
+    if (_selectedFilterIndex == 0 || _selectedFilterIndex == 3) {
+      items.addAll(libraryProvider.resources);
+    }
+    if (_selectedFilterIndex == 0 || _selectedFilterIndex == 4) {
+      items.addAll(quizProvider.quizzes);
+    }
+
+    if (_searchQuery.isNotEmpty) {
+      items = items.where((item) {
+        if (item is ArticleEntity) {
+          return item.title.toLowerCase().contains(_searchQuery) ||
+              item.content.toLowerCase().contains(_searchQuery);
+        } else if (item is VideoEntity) {
+          return item.title.toLowerCase().contains(_searchQuery) ||
+              item.description.toLowerCase().contains(_searchQuery);
+        } else if (item is ResourceEntity) {
+          return item.title.toLowerCase().contains(_searchQuery) ||
+              item.description.toLowerCase().contains(_searchQuery);
+        } else if (item is Quiz) {
+          return item.title.toLowerCase().contains(_searchQuery) ||
+              item.description.toLowerCase().contains(_searchQuery);
+        }
+        return false;
+      }).toList();
+    }
+
+    // Sort by combined criteria, let's say newest first. Items have different date fields.
+    items.sort((a, b) {
+      DateTime dateA;
+      if (a is ArticleEntity) {
+        dateA = a.createdAt;
+      } else if (a is VideoEntity) {
+        dateA = a.createdAt;
+      } else if (a is ResourceEntity) {
+        dateA = a.createdAt;
+      } else if (a is Quiz) {
+        dateA = DateTime.now();
+      } else {
+        dateA = DateTime.now();
+      }
+
+      DateTime dateB;
+      if (b is ArticleEntity) {
+        dateB = b.createdAt;
+      } else if (b is VideoEntity) {
+        dateB = b.createdAt;
+      } else if (b is ResourceEntity) {
+        dateB = b.createdAt;
+      } else if (b is Quiz) {
+        dateB = DateTime.now();
+      } else {
+        dateB = DateTime.now();
+      }
+
+      return dateB.compareTo(dateA);
+    });
+
+    if (items.isEmpty) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(40.0),
+          child: Column(
+            children: [
+              Icon(
+                Icons.search_off,
+                size: 64,
+                color: AppColors.primary.withValues(alpha: 0.5),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                "No resources found",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return GridView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 350,
+        mainAxisSpacing: 24,
+        crossAxisSpacing: 24,
+        childAspectRatio: 0.75, // Matches the tall cards in HTML
+      ),
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        final item = items[index];
+        return _buildResourceCard(context, item);
+      },
+    );
+  }
+
+  Widget _buildResourceCard(BuildContext context, dynamic item) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    // Determine properties based on type
+    String typeLabel = "";
+    String title = "";
+    String description = "";
+    IconData icon = Icons.description;
+    List<Color> gradientColors = [];
+    String actionLabel = "";
+    String fileTypeLabel = "";
+    IconData fileTypeIcon = Icons.insert_drive_file;
+    VoidCallback onTap = () {};
+
+    if (item is ArticleEntity) {
+      typeLabel = "Article";
+      title = item.title;
+      description = item.content; // Can be long, we'll clamp it
+      icon = Icons.article;
+      gradientColors = [Colors.indigo.shade50, Colors.purple.shade50];
+      if (isDark) {
+        gradientColors = [Colors.indigo.shade900, Colors.purple.shade900];
+      }
+      actionLabel = "Read";
+      fileTypeLabel = "Read";
+      fileTypeIcon = Icons.article;
+      onTap = () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ArticleDetailScreen(articleEntity: item),
+          ),
+        );
+      };
+    } else if (item is VideoEntity) {
+      typeLabel = "Webinar";
+      title = item.title;
+      description = item.description;
+      icon = Icons.play_circle_fill;
+      gradientColors = [Colors.orange.shade50, Colors.amber.shade50];
+      if (isDark) {
+        gradientColors = [Colors.orange.shade900, Colors.amber.shade900];
+      }
+      actionLabel = "Watch";
+      fileTypeLabel = "Video";
+      fileTypeIcon = Icons.play_circle;
+      onTap = () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => VideoPlayerScreen(videoEntity: item),
+          ),
+        );
+      };
+    } else if (item is ResourceEntity) {
+      typeLabel = "Document";
+      title = item.title;
+      description = item.description;
+      icon = Icons.folder;
+      gradientColors = [Colors.blue.shade50, Colors.cyan.shade50];
+      if (isDark) gradientColors = [Colors.blue.shade900, Colors.cyan.shade900];
+      actionLabel = "Open";
+      fileTypeLabel = "File";
+      fileTypeIcon = Icons.description;
+      onTap = () {
+        // View Resource detail logic here
+      };
+    } else if (item is Quiz) {
+      typeLabel = "Quiz";
+      title = item.title;
+      description = item.description;
+      icon = Icons.quiz;
+      gradientColors = [Colors.green.shade50, Colors.teal.shade50];
+      if (isDark) {
+        gradientColors = [Colors.green.shade900, Colors.teal.shade900];
+      }
+      actionLabel = "Start";
+      fileTypeLabel = "Quiz";
+      fileTypeIcon = Icons.quiz;
+      onTap = () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => QuizScreen(quizId: item.id)),
+        );
+      };
+    }
+
+    return GlassCard(
+      padding: EdgeInsets.zero,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(24),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header Icon area
+              Container(
+                height: 120,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  gradient: LinearGradient(
+                    colors: gradientColors,
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: Center(
+                  child: Icon(
+                    icon,
+                    size: 48,
+                    color: AppColors.primary.withValues(alpha: 0.8),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Content
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      typeLabel.toUpperCase(),
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2,
+                        color: AppColors.primary.withValues(alpha: 0.8),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color:
+                            isDark ? Colors.white : AppColors.textPrimaryLight,
+                        height: 1.2,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      description,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: isDark
+                            ? AppColors.textSecondaryDark
+                            : AppColors.textSecondaryLight,
+                        height: 1.5,
+                      ),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+
+              // Bottom Footer
+              const SizedBox(height: 16),
+              const Divider(height: 1),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color:
+                          isDark ? AppColors.surfaceDark : Colors.grey.shade100,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          fileTypeIcon,
+                          size: 14,
+                          color: AppColors.textSecondaryLight,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          fileTypeLabel,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: isDark
+                                ? Colors.white70
+                                : AppColors.textSecondaryLight,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        actionLabel,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Icon(
+                        // Removed const
+                        Icons.arrow_forward,
+                        size: 16,
+                        color: AppColors.primary,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

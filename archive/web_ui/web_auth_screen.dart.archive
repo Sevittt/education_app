@@ -1,0 +1,520 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
+import 'package:sud_qollanma/features/auth/domain/entities/app_user.dart';
+import 'package:sud_qollanma/core/constants/app_colors.dart';
+import 'package:sud_qollanma/shared/widgets/glass_card.dart';
+import 'package:sud_qollanma/shared/widgets/animated_button.dart';
+
+class WebAuthScreen extends StatefulWidget {
+  final bool isLogin;
+  final VoidCallback onToggleMode;
+
+  const WebAuthScreen({
+    super.key,
+    required this.isLogin,
+    required this.onToggleMode,
+  });
+
+  @override
+  State<WebAuthScreen> createState() => _WebAuthScreenState();
+}
+
+class _WebAuthScreenState extends State<WebAuthScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  CourtRole? _selectedRole;
+  bool _isPasswordVisible = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _nameController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submitForm() async {
+    if (!_formKey.currentState!.validate()) return;
+    final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+
+    if (widget.isLogin) {
+      final success = await authNotifier.signIn(
+        _emailController.text.trim(),
+        _passwordController.text,
+      );
+      if (success && mounted) {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      } else if (mounted && authNotifier.errorMessage != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(authNotifier.errorMessage!),
+              backgroundColor: Theme.of(context).colorScheme.error),
+        );
+      }
+    } else {
+      if (_selectedRole == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content:
+                  Text(AppLocalizations.of(context)!.registrationRoleError),
+              backgroundColor: Theme.of(context).colorScheme.error),
+        );
+        return;
+      }
+      final success = await authNotifier.register(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+        name: _nameController.text.trim(),
+        role: _selectedRole!,
+      );
+      if (success && mounted) {
+        Navigator.of(context).popUntil((route) => route.isFirst);
+      } else if (mounted && authNotifier.errorMessage != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(authNotifier.errorMessage!),
+              backgroundColor: Theme.of(context).colorScheme.error),
+        );
+      }
+    }
+  }
+
+  Future<void> _googleSignIn() async {
+    final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+    final success = await authNotifier.signInWithGoogle();
+    if (success && mounted) {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    } else if (mounted && authNotifier.errorMessage != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text(authNotifier.errorMessage!),
+            backgroundColor: Theme.of(context).colorScheme.error),
+      );
+    }
+  }
+
+  Widget _buildBlurCircle(Color color, double size) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: color.withValues(alpha: 0.3),
+        boxShadow: [
+          BoxShadow(
+            color: color.withValues(alpha: 0.3),
+            blurRadius: 100,
+            spreadRadius: 40,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required String label,
+    required String hint,
+    required IconData icon,
+    required TextEditingController controller,
+    bool isPassword = false,
+    String? Function(String?)? validator,
+    TextInputType? keyboardType,
+  }) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 4.0, bottom: 8.0),
+          child: Text(
+            label,
+            style: GoogleFonts.poppins(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: isDark ? const Color(0xFFE2E8F0) : const Color(0xFF2B3674),
+            ),
+          ),
+        ),
+        TextFormField(
+          controller: controller,
+          obscureText: isPassword ? !_isPasswordVisible : false,
+          keyboardType: keyboardType,
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w500,
+            color: isDark ? Colors.white : const Color(0xFF2B3674),
+          ),
+          decoration: InputDecoration(
+            hintText: hint,
+            hintStyle: GoogleFonts.poppins(
+              color: isDark ? const Color(0xFF94A3B8) : const Color(0xFFA3AED0),
+            ),
+            filled: true,
+            fillColor: isDark ? const Color(0xFF0F172A) : const Color(0xFFF8F9FB),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            suffixIcon: isPassword
+                ? IconButton(
+                    icon: Icon(
+                      _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
+                      color: const Color(0xFFA3AED0),
+                    ),
+                    onPressed: () => setState(() => _isPasswordVisible = !_isPasswordVisible),
+                  )
+                : Icon(icon, color: const Color(0xFFA3AED0)),
+          ),
+          validator: validator,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRoleDropdown(AppLocalizations l10n, bool isDark) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 4.0, bottom: 8.0),
+          child: Text(
+            l10n.registrationRoleLabel,
+            style: GoogleFonts.poppins(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: isDark ? const Color(0xFFE2E8F0) : const Color(0xFF2B3674),
+            ),
+          ),
+        ),
+        DropdownButtonFormField<CourtRole>(
+          initialValue: _selectedRole,
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w500,
+            color: isDark ? Colors.white : const Color(0xFF2B3674),
+          ),
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: isDark ? const Color(0xFF0F172A) : const Color(0xFFF8F9FB),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          ),
+          dropdownColor: isDark ? const Color(0xFF1E293B) : Colors.white,
+          items: [
+            DropdownMenuItem(value: CourtRole.judge, child: Text(l10n.registrationRoleJudge)),
+            DropdownMenuItem(value: CourtRole.assistant, child: Text(l10n.registrationRoleAssistant)),
+            DropdownMenuItem(value: CourtRole.chancellery, child: Text(l10n.registrationRoleChancellery)),
+            DropdownMenuItem(value: CourtRole.archive, child: Text(l10n.registrationRoleArchive)),
+            DropdownMenuItem(value: CourtRole.ict_specialist, child: Text(l10n.registrationRoleIctSpecialist)),
+          ],
+          onChanged: (val) => setState(() => _selectedRole = val),
+          validator: (value) => value == null ? l10n.registrationRoleError : null,
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
+    final authNotifier = Provider.of<AuthNotifier>(context);
+
+    final title = widget.isLogin ? l10n.appTitle : l10n.registrationTitle; // Or "Xush kelibsiz" etc, but keeping consistent with the app conventions
+    final subtitle = widget.isLogin ? l10n.loginWelcomeSubtitle : l10n.registrationSubtitle;
+
+    return Scaffold(
+      backgroundColor: isDark ? const Color(0xFF131022) : const Color(0xFFF4F7FE),
+      body: SizedBox.expand(
+        child: Stack(
+          children: [
+            // Decorative elements
+            Positioned(
+              top: -100,
+              left: -100,
+              child: _buildBlurCircle(AppColors.primary, 500),
+            ),
+            Positioned(
+              bottom: -100,
+              right: -100,
+              child: _buildBlurCircle(AppColors.primary, 400),
+            ),
+
+            Center(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(vertical: 40),
+                child: Container(
+                  width: 450,
+                  margin: const EdgeInsets.symmetric(horizontal: 16),
+                  child: GlassCard(
+                    padding: const EdgeInsets.all(40),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Logo Area
+                        Container(
+                          width: 56,
+                          height: 56,
+                          decoration: BoxDecoration(
+                            color: AppColors.primary.withValues(alpha: 0.1),
+                            shape: BoxShape.circle,
+                          ),
+                          alignment: Alignment.center,
+                          child: Icon(
+                            Icons.school_rounded,
+                            color: AppColors.primary,
+                            size: 32,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+
+                        // Headers
+                        Text(
+                          title,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.poppins(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: isDark ? Colors.white : const Color(0xFF2B3674),
+                            letterSpacing: -0.5,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          subtitle,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: isDark ? const Color(0xFF94A3B8) : const Color(0xFFA3AED0),
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+
+                        // Form
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              if (!widget.isLogin) ...[
+                                _buildTextField(
+                                  label: l10n.registrationFullNameLabel,
+                                  hint: '...',
+                                  icon: Icons.person_outline,
+                                  controller: _nameController,
+                                  validator: (v) => (v == null || v.trim().isEmpty) ? l10n.registrationFullNameError : null,
+                                ),
+                                const SizedBox(height: 20),
+                              ],
+
+                              _buildTextField(
+                                label: l10n.emailLabel,
+                                hint: 'mail@simmmple.com',
+                                icon: Icons.mail_outline,
+                                controller: _emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                validator: (v) {
+                                  if (v == null || v.trim().isEmpty) return l10n.registrationEmailError;
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 20),
+
+                              if (!widget.isLogin) ...[
+                                _buildRoleDropdown(l10n, isDark),
+                                const SizedBox(height: 20),
+                              ],
+
+                              _buildTextField(
+                                label: l10n.passwordLabel,
+                                hint: 'Min. 8 ta belgi',
+                                icon: Icons.visibility_off,
+                                controller: _passwordController,
+                                isPassword: true,
+                                validator: (v) => (v == null || v.length < 6) ? l10n.registrationPasswordError : null,
+                              ),
+
+                              if (!widget.isLogin) ...[
+                                const SizedBox(height: 20),
+                                _buildTextField(
+                                  label: l10n.registrationConfirmPasswordLabel,
+                                  hint: 'Tasdiqlash',
+                                  icon: Icons.visibility_off,
+                                  controller: _confirmPasswordController,
+                                  isPassword: true,
+                                  validator: (v) => (v != _passwordController.text) ? l10n.registrationConfirmPasswordError : null,
+                                ),
+                              ],
+
+                              if (widget.isLogin) ...[
+                                const SizedBox(height: 12),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 24,
+                                          height: 24,
+                                          child: Checkbox(
+                                            value: true, 
+                                            onChanged: (v) {},
+                                            activeColor: AppColors.primary,
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                                            side: const BorderSide(color: Color(0xFFD1D5DB)),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          "Meni tizimda qoldirish",
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: isDark ? const Color(0xFF94A3B8) : const Color(0xFFA3AED0),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      "Parolni unutdingizmi?",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.primary,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+
+                              const SizedBox(height: 24),
+
+                              AnimatedButton(
+                                onPressed: authNotifier.isLoading ? null : _submitForm,
+                                child: Container(
+                                  height: 48,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primary,
+                                    borderRadius: BorderRadius.circular(12),
+                                    boxShadow: [
+                                      BoxShadow(color: AppColors.primary.withValues(alpha: 0.3), blurRadius: 10, offset: const Offset(0, 4)),
+                                    ],
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: authNotifier.isLoading
+                                      ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
+                                      : Text(
+                                          widget.isLogin ? l10n.loginButtonText : l10n.registrationSignUpButton,
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        // OR Divider
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 24),
+                          child: Row(
+                            children: [
+                              const Expanded(child: Divider(color: Color(0xFFE2E8F0))),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(
+                                  l10n.orDivider.toUpperCase(),
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xFFA3AED0),
+                                  ),
+                                ),
+                              ),
+                              const Expanded(child: Divider(color: Color(0xFFE2E8F0))),
+                            ],
+                          ),
+                        ),
+
+                        // Google Sign In
+                        AnimatedButton(
+                          onPressed: _googleSignIn,
+                          child: Container(
+                            height: 48,
+                            decoration: BoxDecoration(
+                              color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF8F9FB),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/images/google_logo.png', height: 20),
+                                const SizedBox(width: 12),
+                                Text(
+                                  l10n.signInWithGoogle,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: isDark ? Colors.white : const Color(0xFF2B3674),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        const SizedBox(height: 32),
+
+                        // Footer Toggle
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              widget.isLogin ? "Hisobingiz yo'qmi?" : "Sizda allaqachon hisob bormi?", // Or use l10n if available
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: isDark ? const Color(0xFFE2E8F0) : const Color(0xFF2B3674),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: widget.onToggleMode,
+                              child: Text(
+                                widget.isLogin ? l10n.signUpButtonText : l10n.loginButtonText, // E.g. "Ro'yxatdan o'tish" / "Kirish"
+                                style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.primary,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

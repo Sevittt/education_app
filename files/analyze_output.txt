@@ -1,0 +1,42 @@
+﻿Analyzing education_app...                                      
+
+   info - The import of 'dart:typed_data' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/foundation.dart' - lib\core\services\ai_service.dart:3:8 - unnecessary_import
+   info - Use 'rethrow' to rethrow a caught exception - lib\core\services\ai_service.dart:79:7 - use_rethrow_when_possible
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\admin\presentation\screens\admin_add_edit_article_screen.dart:189:23 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\admin\presentation\screens\admin_add_edit_video_screen.dart:208:23 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\admin\presentation\screens\admin_add_edit_video_screen.dart:227:23 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\features\admin\presentation\screens\admin_quiz_management_screen.dart:52:15 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\features\admin\presentation\screens\admin_resource_management_screen.dart:54:15 - use_build_context_synchronously
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\ai_chat\presentation\screens\ai_chat_screen.dart:133:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\ai_chat\presentation\screens\ai_chat_screen.dart:213:94 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\ai_chat\presentation\screens\ai_chat_screen.dart:274:62 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\features\ai_chat\presentation\screens\ai_chat_screen.dart:285:38 - deprecated_member_use
+warning - The declaration '_navigateToCreateTopic' isn't referenced - lib\features\community\presentation\screens\community_screen.dart:28:8 - unused_element
+warning - The '!' will have no effect because the receiver can't be null - lib\features\community\presentation\screens\topic_detail_screen.dart:41:23 - unnecessary_non_null_assertion
+warning - The '!' will have no effect because the receiver can't be null - lib\features\community\presentation\screens\topic_detail_screen.dart:42:29 - unnecessary_non_null_assertion
+   info - Unnecessary use of string interpolation - lib\features\home\presentation\screens\home_dashboard_screen.dart:154:23 - unnecessary_string_interpolations
+   info - Parameters ''id', 'title', 'description', 'content', 'pdfUrl', 'category', 'systemId', 'tags', 'authorId', 'authorName', 'views', 'helpful', 'createdAt', 'updatedAt', and 'isPinned'' could be super parameters - lib\features\library\data\models\article_model.dart:8:9 - use_super_parameters
+   info - Parameters ''id', 'title', 'description', 'youtubeId', 'durationSeconds', 'category', 'systemId', 'thumbnailUrl', 'tags', 'authorId', 'authorName', 'views', 'likes', 'createdAt', and 'order'' could be super parameters - lib\features\library\data\models\video_model.dart:8:9 - use_super_parameters
+warning - Duplicate import - lib\features\library\domain\repositories\library_repository.dart:2:8 - duplicate_import
+   info - Don't use 'BuildContext's across async gaps - lib\features\library\presentation\screens\article_detail_screen.dart:144:41 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\features\library\presentation\screens\article_detail_screen.dart:145:29 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\features\library\presentation\screens\resource_detail_screen.dart:148:15 - use_build_context_synchronously
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\notifications\presentation\screens\admin_send_notification_screen.dart:126:23 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\features\notifications\presentation\screens\admin_send_notification_screen.dart:145:23 - deprecated_member_use
+warning - The value of the local variable 'l10n' isn't used - lib\features\quiz\presentation\screens\create_quiz_screen.dart:66:11 - unused_local_variable
+   info - Don't use 'BuildContext's across async gaps - lib\features\quiz\presentation\screens\quiz_list_screen.dart:21:7 - use_build_context_synchronously
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\features\settings\presentation\screens\theme_options_screen.dart:34:7 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\features\settings\presentation\screens\theme_options_screen.dart:35:7 - deprecated_member_use
+warning - The value of the local variable 'themeNotifier' isn't used - lib\features\settings\presentation\screens\theme_options_screen.dart:54:11 - unused_local_variable
+
+flutter : 28 issues found. (ran in 4.5s)
+At line:1 char:1
++ flutter analyze 2>&1 | Out-File 
+-FilePath "analyze_output.txt" -Encod ...
++ ~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : 
+NotSpecified:     (28 issues found. (ran 
+in 4.5s):String)     [], RemoteException
+    + FullyQualifiedErrorId : 
+NativeCommandE    rror
+ 

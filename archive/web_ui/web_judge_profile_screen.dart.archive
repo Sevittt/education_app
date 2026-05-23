@@ -1,0 +1,1004 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class WebJudgeProfileScreen extends StatelessWidget {
+  const WebJudgeProfileScreen({super.key});
+
+  final Color _primaryColor = const Color(0xFF2C0FBD);
+  final Color _secondaryColor = const Color(0xFF5D44F2);
+  final Color _backgroundLight = const Color(0xFFF4F7FE);
+  final Color _backgroundDark = const Color(0xFF131022);
+  final Color _surfaceLight = Colors.white;
+  final Color _surfaceDark = const Color(0xFF1E1B2E);
+  final Color _textMain = const Color(0xFF1B2559);
+  final Color _textSecondary = const Color(0xFFA3AED0);
+
+  @override
+  Widget build(BuildContext context) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final Color bgColor = isDark ? _backgroundDark : _backgroundLight;
+    final Color surfaceColor = isDark ? _surfaceDark : _surfaceLight;
+    final Color textColor = isDark ? Colors.white : _textMain;
+
+    return Scaffold(
+      backgroundColor: bgColor,
+      body: Column(
+        children: [
+          _buildNavbar(context, isDark, surfaceColor, textColor),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 960),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _buildBreadcrumb(isDark),
+                      const SizedBox(height: 16),
+                      _buildProfileHeroCard(isDark, surfaceColor, textColor),
+                      const SizedBox(height: 24),
+                      _buildStatsRow(isDark, surfaceColor, textColor),
+                      const SizedBox(height: 32),
+                      _buildMainContent(
+                        context,
+                        isDark,
+                        surfaceColor,
+                        textColor,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavbar(
+    BuildContext context,
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+  ) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      decoration: BoxDecoration(
+        color: surfaceColor.withValues(alpha: 0.9),
+        border: Border(
+          bottom: BorderSide(
+            color: isDark ? const Color(0xFF1F2937) : const Color(0xFFF3F4F6),
+          ),
+        ),
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1200),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.gavel, color: _primaryColor, size: 28),
+                  const SizedBox(width: 12),
+                  Text(
+                    'Legal Platform',
+                    style: GoogleFonts.publicSans(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
+                      letterSpacing: -0.5,
+                    ),
+                  ),
+                  if (MediaQuery.of(context).size.width >= 768) ...[
+                    const SizedBox(width: 40),
+                    _buildNavLink('Dashboard', false, isDark),
+                    const SizedBox(width: 32),
+                    _buildNavLink('Cases', false, isDark),
+                    const SizedBox(width: 32),
+                    _buildNavLink('Judges', true, isDark),
+                    const SizedBox(width: 32),
+                    _buildNavLink('Documents', false, isDark),
+                  ],
+                ],
+              ),
+              Row(
+                children: [
+                  if (MediaQuery.of(context).size.width >= 640)
+                    Container(
+                      width: 256,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: isDark
+                            ? const Color(0xFF1F2937)
+                            : _backgroundLight,
+                        borderRadius: BorderRadius.circular(9999),
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        children: [
+                          Icon(Icons.search, size: 20, color: _textSecondary),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Search cases...',
+                                hintStyle: GoogleFonts.publicSans(
+                                  color: _textSecondary,
+                                  fontSize: 14,
+                                ),
+                                border: InputBorder.none,
+                                isDense: true,
+                              ),
+                              style: GoogleFonts.publicSans(
+                                color: textColor,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  const SizedBox(width: 24),
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        colors: [_primaryColor, _secondaryColor],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: _primaryColor.withValues(alpha: 0.3),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    padding: const EdgeInsets.all(2),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: isDark
+                              ? const Color(0xFF1F2937)
+                              : Colors.white,
+                          width: 2,
+                        ),
+                        image: const DecorationImage(
+                          image: NetworkImage(
+                            'https://lh3.googleusercontent.com/aida-public/AB6AXuBlWlCQtouSBv33gEFvgjjiejr138jSn2isq9OJ8rPduq5Ew0viGaeNmTGXE60klumhKq3MNjuX4yW5f4I_aBu3gB983jvWi_SMkL1UgCctmyABxQZFfE9mf8myp53WpCKY_qWc51Sc1zA-HiBgIa2sh1ARjqqZmoDj8d0lzhUlFE8hCD5RPfiYDQqzkX_GvAb2QRDH0ll1aBLxVhdgO4GbPw_15I0eOEVACncrq0vCP1Vw_DBPzQRgZJgNmhnkjynqgVT3Yqv0GwP4',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavLink(String text, bool isActive, bool isDark) {
+    if (isActive) {
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        decoration: BoxDecoration(
+          color: isDark
+              ? _primaryColor.withValues(alpha: 0.2)
+              : _primaryColor.withValues(alpha: 0.05),
+          borderRadius: BorderRadius.circular(9999),
+        ),
+        child: Text(
+          text,
+          style: GoogleFonts.publicSans(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: isDark ? Colors.white : _primaryColor,
+          ),
+        ),
+      );
+    }
+    return Text(
+      text,
+      style: GoogleFonts.publicSans(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: _textSecondary,
+      ),
+    );
+  }
+
+  Widget _buildBreadcrumb(bool isDark) {
+    return InkWell(
+      onTap: () {},
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.arrow_back, size: 18, color: _textSecondary),
+          const SizedBox(width: 8),
+          Text(
+            'Back to Court Directory',
+            style: GoogleFonts.publicSans(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: _textSecondary,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProfileHeroCard(
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+  ) {
+    return Container(
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        color: surfaceColor,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF7090B0).withValues(alpha: 0.12),
+            blurRadius: 40,
+            offset: const Offset(0, 18),
+          ),
+        ],
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+            top: -80,
+            right: -80,
+            child: Container(
+              width: 256,
+              height: 256,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: _primaryColor.withValues(alpha: 0.05),
+                boxShadow: [
+                  BoxShadow(
+                    color: _primaryColor.withValues(alpha: 0.1),
+                    blurRadius: 100,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(32),
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final bool isMobile = constraints.maxWidth < 600;
+
+                final avatarWidget = SizedBox(
+                  width: isMobile ? 128 : 160,
+                  height: isMobile ? 128 : 160,
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: surfaceColor, width: 4),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.1),
+                              blurRadius: 20,
+                            ),
+                          ],
+                          image: const DecorationImage(
+                            image: NetworkImage(
+                              'https://lh3.googleusercontent.com/aida-public/AB6AXuDOuehQwRuKQRXcsZ_NdyjQ-x6YiLvxg9F4FhvFNJQzfXaFOK5hq16I5cqgFoss7Hfn63g1bh7SnTaVy4l6PRpBxR5zz7KWHvJDx9BlD0yC20yxWQOGZ78yVCbldMkGOtDqMxa8yKRwQX9u4yvNQvWXIpvhyq-71cBcTjX3JOhFlg5wSeGnwyvOViOmE9vZWyDRsClRHK7j-0FBCtCRFrJFqCvtCG6a-n0ssHeTZlaf7eTDMr_DKNkhDZ_6oQwZL2wSr-OtjnI8BMNV',
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 8,
+                        right: 8,
+                        child: Container(
+                          width: 20,
+                          height: 20,
+                          decoration: BoxDecoration(
+                            color: Colors.green.shade500,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: surfaceColor, width: 4),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+
+                final contentWidget = Column(
+                  crossAxisAlignment: isMobile
+                      ? CrossAxisAlignment.center
+                      : CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Hon. Eleanor Vance',
+                      style: GoogleFonts.publicSans(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: textColor,
+                      ),
+                      textAlign: isMobile ? TextAlign.center : TextAlign.left,
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.balance, size: 20, color: _primaryColor),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Senior Judge, District Court of Columbia',
+                          style: GoogleFonts.publicSans(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: _primaryColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Appointed in 2008, Judge Vance has presided over high-profile civil rights and environmental law cases for over 15 years. Known for her meticulous attention to detail and unwavering commitment to fair jurisprudence.',
+                      style: GoogleFonts.publicSans(
+                        fontSize: 14,
+                        color: _textSecondary,
+                        height: 1.6,
+                      ),
+                      textAlign: isMobile ? TextAlign.center : TextAlign.left,
+                    ),
+                    const SizedBox(height: 16),
+                    Wrap(
+                      spacing: 12,
+                      runSpacing: 12,
+                      alignment: isMobile
+                          ? WrapAlignment.center
+                          : WrapAlignment.start,
+                      children: [
+                        ElevatedButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(Icons.mail_outline, size: 18),
+                          label: const Text('Contact Chambers'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: _primaryColor,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24,
+                              vertical: 16,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            shadowColor: _primaryColor.withValues(alpha: 0.5),
+                            elevation: 8,
+                          ),
+                        ),
+                        ElevatedButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(Icons.download, size: 18),
+                          label: const Text('Download CV'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: isDark
+                                ? const Color(0xFF374151)
+                                : _backgroundLight,
+                            foregroundColor: textColor,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24,
+                              vertical: 16,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            elevation: 0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+
+                if (isMobile) {
+                  return Column(
+                    children: [
+                      avatarWidget,
+                      const SizedBox(height: 24),
+                      contentWidget,
+                    ],
+                  );
+                }
+
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    avatarWidget,
+                    const SizedBox(width: 32),
+                    Expanded(child: contentWidget),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatsRow(bool isDark, Color surfaceColor, Color textColor) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final bool isMobile = constraints.maxWidth < 600;
+
+        final stat1 = _buildStatCard(
+          icon: Icons.calendar_month,
+          title: 'Years on Bench',
+          value: '15',
+          iconColor: Colors.blue.shade600,
+          iconBgColor: Colors.blue.shade50,
+          isDark: isDark,
+          surfaceColor: surfaceColor,
+          textColor: textColor,
+        );
+        final stat2 = _buildStatCard(
+          icon: Icons.gavel,
+          title: 'Cases Presided',
+          value: '1,240',
+          iconColor: Colors.purple.shade600,
+          iconBgColor: Colors.purple.shade50,
+          isDark: isDark,
+          surfaceColor: surfaceColor,
+          textColor: textColor,
+        );
+        final stat3 = _buildStatCard(
+          icon: Icons.article_outlined,
+          title: 'Published Articles',
+          value: '32',
+          iconColor: Colors.orange.shade600,
+          iconBgColor: Colors.orange.shade50,
+          isDark: isDark,
+          surfaceColor: surfaceColor,
+          textColor: textColor,
+        );
+
+        if (isMobile) {
+          return Column(
+            children: [
+              stat1,
+              const SizedBox(height: 16),
+              stat2,
+              const SizedBox(height: 16),
+              stat3,
+            ],
+          );
+        }
+
+        return Row(
+          children: [
+            Expanded(child: stat1),
+            const SizedBox(width: 24),
+            Expanded(child: stat2),
+            const SizedBox(width: 24),
+            Expanded(child: stat3),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildStatCard({
+    required IconData icon,
+    required String title,
+    required String value,
+    required Color iconColor,
+    required Color iconBgColor,
+    required bool isDark,
+    required Color surfaceColor,
+    required Color textColor,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: surfaceColor,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 20,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              color: isDark ? iconColor.withValues(alpha: 0.2) : iconBgColor,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              icon,
+              color: isDark ? iconColor.withValues(alpha: 0.8) : iconColor,
+              size: 28,
+            ),
+          ),
+          const SizedBox(width: 20),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.publicSans(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: _textSecondary,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                value,
+                style: GoogleFonts.publicSans(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMainContent(
+    BuildContext context,
+    bool isDark,
+    Color surfaceColor,
+    Color textColor,
+  ) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final bool isDesktop = constraints.maxWidth >= 1024; // lg
+
+        final leftCol = Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Recent Rulings',
+                  style: GoogleFonts.publicSans(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: textColor,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'View all cases',
+                    style: GoogleFonts.publicSans(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: _primaryColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            _buildCaseCard(
+              title: 'Smith v. State of Columbia',
+              subtitle: 'Constitutional Rights • Public Spaces',
+              description:
+                  'Ruling regarding the extent of First Amendment protections in privately owned public spaces, setting a new precedent for mall demonstrations.',
+              status: 'Upheld',
+              statusColor: Colors.green,
+              icon: Icons.balance,
+              isDark: isDark,
+              surfaceColor: surfaceColor,
+              textColor: textColor,
+            ),
+            const SizedBox(height: 24),
+            _buildCaseCard(
+              title: 'Doe v. Environmental Agency',
+              subtitle: 'Environmental Law • Compliance',
+              description:
+                  'Decision on water quality standards enforcement in the Potomac River basin, mandating stricter industrial waste protocols.',
+              status: 'Remanded',
+              statusColor: Colors.blue,
+              icon: Icons.water_drop_outlined,
+              isDark: isDark,
+              surfaceColor: surfaceColor,
+              textColor: textColor,
+            ),
+            const SizedBox(height: 24),
+            _buildCaseCard(
+              title: 'City Council v. Business Assoc.',
+              subtitle: 'Zoning Laws • Commercial Property',
+              description:
+                  'Dispute over zoning laws affecting historic district commercial property development rights and facade preservation.',
+              status: 'Overturned',
+              statusColor: Colors.red,
+              icon: Icons.storefront_outlined,
+              isDark: isDark,
+              surfaceColor: surfaceColor,
+              textColor: textColor,
+            ),
+          ],
+        );
+
+        final rightCol = Column(
+          children: [
+            _buildExpertiseCard(isDark, surfaceColor, textColor),
+            const SizedBox(height: 24),
+            _buildTimelineCard(isDark, surfaceColor, textColor),
+          ],
+        );
+
+        if (isDesktop) {
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(flex: 3, child: leftCol),
+              const SizedBox(width: 32),
+              Expanded(flex: 2, child: rightCol),
+            ],
+          );
+        }
+
+        return Column(
+          children: [leftCol, const SizedBox(height: 32), rightCol],
+        );
+      },
+    );
+  }
+
+  Widget _buildCaseCard({
+    required String title,
+    required String subtitle,
+    required String description,
+    required String status,
+    required MaterialColor statusColor,
+    required IconData icon,
+    required bool isDark,
+    required Color surfaceColor,
+    required Color textColor,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: surfaceColor,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 20,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: isDark ? const Color(0xFF1F2937) : _backgroundLight,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(icon, color: textColor),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: GoogleFonts.publicSans(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: textColor,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      subtitle,
+                      style: GoogleFonts.publicSans(
+                        fontSize: 14,
+                        color: _textSecondary,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      description,
+                      style: GoogleFonts.publicSans(
+                        fontSize: 14,
+                        color: isDark
+                            ? const Color(0xFFD1D5DB)
+                            : _textMain, // gray-300 / text-main
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 16),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? statusColor.shade900.withValues(alpha: 0.3)
+                      : statusColor.shade100,
+                  borderRadius: BorderRadius.circular(9999),
+                ),
+                child: Text(
+                  status,
+                  style: GoogleFonts.publicSans(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: isDark ? statusColor.shade400 : statusColor.shade600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          const Divider(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Text(
+                      'Review Case Details',
+                      style: GoogleFonts.publicSans(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: _textSecondary,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Icon(Icons.arrow_forward, size: 16, color: _textSecondary),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildExpertiseCard(bool isDark, Color surfaceColor, Color textColor) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: surfaceColor,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 20,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.school, color: _primaryColor, size: 24),
+              const SizedBox(width: 8),
+              Text(
+                'Areas of Expertise',
+                style: GoogleFonts.publicSans(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              'Civil Rights',
+              'Environmental Law',
+              'Constitutional Law',
+              'Torts',
+              'Administrative Law',
+            ].map((e) => _buildExpertiseChip(e, isDark)).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildExpertiseChip(String text, bool isDark) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF1F2937) : _backgroundLight,
+        borderRadius: BorderRadius.circular(9999),
+      ),
+      child: Text(
+        text,
+        style: GoogleFonts.publicSans(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: _textSecondary,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTimelineCard(bool isDark, Color surfaceColor, Color textColor) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: surfaceColor,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 20,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.history_edu, color: _primaryColor, size: 24),
+              const SizedBox(width: 8),
+              Text(
+                'Career Timeline',
+                style: GoogleFonts.publicSans(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          _buildTimelineItem(
+            year: '2008 - Present',
+            title: 'Senior Judge',
+            organization: 'District Court of Columbia',
+            isCurrent: true,
+            isDark: isDark,
+            textColor: textColor,
+          ),
+          const SizedBox(height: 32),
+          _buildTimelineItem(
+            year: '2001 - 2008',
+            title: 'Associate Judge',
+            organization: 'Superior Court',
+            isCurrent: false,
+            isDark: isDark,
+            textColor: textColor,
+          ),
+          const SizedBox(height: 32),
+          _buildTimelineItem(
+            year: '1995 - 2001',
+            title: 'Private Practice Partner',
+            organization: 'Vance & Partners LLP',
+            isCurrent: false,
+            isLast: true,
+            isDark: isDark,
+            textColor: textColor,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTimelineItem({
+    required String year,
+    required String title,
+    required String organization,
+    required bool isCurrent,
+    bool isLast = false,
+    required bool isDark,
+    required Color textColor,
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(
+          children: [
+            Container(
+              width: 16,
+              height: 16,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: isDark ? const Color(0xFF1E1B2E) : Colors.white,
+                border: Border.all(
+                  color: isCurrent
+                      ? _primaryColor
+                      : (isCurrent == false && !isLast
+                            ? _primaryColor.withValues(alpha: 0.6)
+                            : _primaryColor.withValues(alpha: 0.3)),
+                  width: 4,
+                ),
+              ),
+            ),
+            if (!isLast)
+              Container(
+                width: 2,
+                height: 48,
+                color: isDark
+                    ? const Color(0xFF374151)
+                    : const Color(0xFFE5E7EB), // gray-700 / 200
+              ),
+          ],
+        ),
+        const SizedBox(width: 16),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              year.toUpperCase(),
+              style: GoogleFonts.publicSans(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: isCurrent ? _primaryColor : _textSecondary,
+                letterSpacing: 0.5,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              title,
+              style: GoogleFonts.publicSans(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: textColor,
+              ),
+            ),
+            Text(
+              organization,
+              style: GoogleFonts.publicSans(
+                fontSize: 12,
+                color: _textSecondary,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}

@@ -1,0 +1,866 @@
+// lib/features/library/presentation/screens/web_create_content_screen.dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
+import 'package:sud_qollanma/features/library/domain/entities/resource_entity.dart';
+import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
+import 'package:sud_qollanma/features/quiz/domain/entities/quiz.dart';
+import 'package:sud_qollanma/features/quiz/domain/entities/question.dart';
+import 'package:sud_qollanma/features/quiz/presentation/providers/quiz_provider.dart';
+import 'package:uuid/uuid.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
+
+class WebCreateContentScreen extends StatefulWidget {
+  const WebCreateContentScreen({super.key});
+
+  @override
+  State<WebCreateContentScreen> createState() => _WebCreateContentScreenState();
+}
+
+class _WebCreateContentScreenState extends State<WebCreateContentScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _titleController = TextEditingController();
+  final _descController = TextEditingController();
+  final _urlController =
+      TextEditingController(); // Used in place of file upload for now
+
+  String _selectedContentType =
+      'Article'; // Options: Article, Video Course, Quiz
+  ResourceType _selectedCategory = ResourceType.eSud;
+
+  // Local state for quiz questions
+  final List<_QuestionBlock> _questions = [];
+
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Default to at least one question if Quiz is selected
+    _questions.add(_QuestionBlock(id: const Uuid().v4()));
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _descController.dispose();
+    _urlController.dispose();
+    for (var q in _questions) {
+      q.dispose();
+    }
+    super.dispose();
+  }
+
+  void _addQuestion() {
+    setState(() {
+      _questions.add(_QuestionBlock(id: const Uuid().v4()));
+    });
+  }
+
+  void _removeQuestion(String id) {
+    setState(() {
+      final idx = _questions.indexWhere((q) => q.id == id);
+      if (idx != -1) {
+        _questions[idx].dispose();
+        _questions.removeAt(idx);
+      }
+    });
+  }
+
+  Future<void> _publishContent() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+    final user = authNotifier.appUser;
+    if (user == null) return;
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      if (_selectedContentType == 'Quiz') {
+        // Save as Quiz
+        final quizQuestions = _questions.map((q) => q.toEntity()).toList();
+        final newQuiz = Quiz(
+          id: const Uuid().v4(),
+          title: _titleController.text.trim(),
+          description: _descController.text.trim(),
+          resourceId: '', // Attach to resource if needed
+          questions: quizQuestions,
+        );
+
+        await context.read<QuizProvider>().createQuiz(newQuiz);
+      } else {
+        // Save as Resource
+        final libraryProvider = Provider.of<LibraryProvider>(
+          context,
+          listen: false,
+        );
+        final newResource = ResourceEntity(
+          id: '',
+          title: _titleController.text.trim(),
+          description: _descController.text.trim(),
+          author: user.name,
+          authorId: user.id,
+          type: _selectedCategory,
+          url: _urlController.text.trim().isEmpty
+              ? null
+              : _urlController.text.trim(),
+          createdAt: DateTime.now(),
+        );
+
+        await libraryProvider.createResource(newResource);
+      }
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Content published successfully!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+        Navigator.pop(context);
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error publishing content: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF4F7FE),
+      appBar: AppBar(
+        title: Text(
+          'Admin Console',
+          style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.black87),
+      ),
+      body: Center(
+        child: Container(
+          width: 960,
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32.0),
+          child: Form(
+            key: _formKey,
+            child: ListView(
+              children: [
+                // Header
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Create New Resource',
+                          style: GoogleFonts.poppins(
+                            fontSize: 32,
+                            fontWeight: FontWeight.w900,
+                            color: const Color(0xFF121118),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Add a new quiz, article, or legal document to the platform.',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16,
+                            color: const Color(0xFF686189),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.green[100],
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Text(
+                        'Draft Mode',
+                        style: GoogleFonts.poppins(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green[800],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 32),
+
+                // Card 1: General Information
+                _buildCardContainer(
+                  icon: Icons.edit_document,
+                  iconBgColor: Colors.blue[50]!,
+                  iconColor: Colors.blue[600]!,
+                  title: 'General Information',
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: _buildTextField(
+                              label: 'Title',
+                              controller: _titleController,
+                              hintText: 'e.g. Introduction to Copyright Law',
+                              validator: (v) => v!.isEmpty ? 'Required' : null,
+                            ),
+                          ),
+                          const SizedBox(width: 24),
+                          Expanded(
+                            child: _buildTextField(
+                              label: 'Slug (Optional)',
+                              hintText: '/resources/intro-copyright-law',
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 24),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: _buildDropdownLabel(
+                              label: 'Category',
+                              value: _selectedCategory,
+                              items: ResourceType.values.map((val) {
+                                return DropdownMenuItem(
+                                  value: val,
+                                  child: Text(_getResourceCategoryName(val)),
+                                );
+                              }).toList(),
+                              onChanged: (val) {
+                                if (val != null) {
+                                  setState(() {
+                                    _selectedCategory = val;
+                                  });
+                                }
+                              },
+                            ),
+                          ),
+                          const SizedBox(width: 24),
+                          Expanded(
+                            child: _buildDropdownLabel<String>(
+                              label: 'Content Type',
+                              value: _selectedContentType,
+                              items: ['Article', 'Video Course', 'Quiz'].map((
+                                val,
+                              ) {
+                                return DropdownMenuItem(
+                                  value: val,
+                                  child: Text(val),
+                                );
+                              }).toList(),
+                              onChanged: (val) {
+                                if (val != null) {
+                                  setState(() {
+                                    _selectedContentType = val;
+                                  });
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 24),
+                      _buildTextField(
+                        label: 'Description',
+                        controller: _descController,
+                        hintText:
+                            'Briefly describe what this resource covers...',
+                        maxLines: 4,
+                        validator: (v) => v!.isEmpty ? 'Required' : null,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 32),
+
+                // Conditional UI based on Content Type
+                if (_selectedContentType != 'Quiz') ...[
+                  // Card 2: Media URL
+                  _buildCardContainer(
+                    icon: Icons.perm_media,
+                    iconBgColor: Colors.purple[50]!,
+                    iconColor: Colors.purple[600]!,
+                    title: 'Media & File Upload',
+                    child: Column(
+                      children: [
+                        _buildFileDropzone(),
+                        const SizedBox(height: 16),
+                        _buildTextField(
+                          label: 'External Link/URL (Optional)',
+                          controller: _urlController,
+                          hintText: 'https://...',
+                          validator: (v) => null,
+                        ),
+                      ],
+                    ),
+                  ),
+                ] else ...[
+                  // Card 3: Questions Builder
+                  _buildCardContainer(
+                    icon: Icons.quiz,
+                    iconBgColor: Colors.orange[50]!,
+                    iconColor: Colors.orange[600]!,
+                    title: 'Questions',
+                    headerAction: IconButton(
+                      icon: const Icon(
+                        Icons.add_circle,
+                        color: Color(0xFF2c0fbd),
+                      ),
+                      onPressed: _addQuestion,
+                      tooltip: 'Add Question',
+                    ),
+                    child: Column(
+                      children: [
+                        for (int i = 0; i < _questions.length; i++)
+                          _buildQuestionBlock(_questions[i], i + 1),
+                        const SizedBox(height: 16),
+                        SizedBox(
+                          width: double.infinity,
+                          child: OutlinedButton.icon(
+                            onPressed: _addQuestion,
+                            icon: const Icon(Icons.add_circle),
+                            label: Text(
+                              'Add Another Question',
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            style: OutlinedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              side: BorderSide(
+                                color: Colors.grey[300]!,
+                                width: 2,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              foregroundColor: const Color(0xFF2c0fbd),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+
+                const SizedBox(height: 100), // Space for fixed footer
+              ],
+            ),
+          ),
+        ),
+      ),
+      bottomSheet: Container(
+        color: Colors.white.withValues(alpha: 0.95),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                'Cancel',
+                style: GoogleFonts.poppins(
+                  color: Colors.grey[600],
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(width: 16),
+            ElevatedButton.icon(
+              onPressed: _isLoading ? null : _publishContent,
+              icon: _isLoading
+                  ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    )
+                  : const Icon(Icons.publish, size: 20),
+              label: Text(
+                'Publish Content',
+                style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF2c0fbd),
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 20,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                elevation: 4,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String _getResourceCategoryName(ResourceType type) {
+    switch (type) {
+      case ResourceType.eSud:
+        return 'E-SUD';
+      case ResourceType.adolat:
+        return 'Adolat';
+      case ResourceType.jibSud:
+        return 'JIB.SUD.UZ';
+      case ResourceType.edoSud:
+        return 'EDO.SUD.UZ';
+      case ResourceType.other:
+        return 'Other';
+    }
+  }
+
+  Widget _buildCardContainer({
+    required IconData icon,
+    required Color iconBgColor,
+    required Color iconColor,
+    required String title,
+    required Widget child,
+    Widget? headerAction,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 27,
+            offset: const Offset(0, 20),
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.all(32),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.only(bottom: 16),
+            decoration: const BoxDecoration(
+              border: Border(
+                bottom: BorderSide(color: Color(0xFFF8FAFC), width: 1.5),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: iconBgColor,
+                      radius: 20,
+                      child: Icon(icon, color: iconColor, size: 20),
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      title,
+                      style: GoogleFonts.poppins(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF121118),
+                      ),
+                    ),
+                  ],
+                ),
+                if (headerAction != null) headerAction,
+              ],
+            ),
+          ),
+          const SizedBox(height: 24),
+          child,
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required String label,
+    required String hintText,
+    TextEditingController? controller,
+    int maxLines = 1,
+    String? Function(String?)? validator,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: GoogleFonts.poppins(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: const Color(0xFF334155),
+          ),
+        ),
+        const SizedBox(height: 8),
+        TextFormField(
+          controller: controller,
+          maxLines: maxLines,
+          validator: validator,
+          decoration: InputDecoration(
+            hintText: hintText,
+            hintStyle: GoogleFonts.poppins(color: const Color(0xFF94A3B8)),
+            filled: true,
+            fillColor: const Color(0xFFF8FAFC),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide.none,
+            ),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 16,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDropdownLabel<T>({
+    required String label,
+    required T value,
+    required List<DropdownMenuItem<T>> items,
+    required void Function(T?) onChanged,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: GoogleFonts.poppins(
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: const Color(0xFF334155),
+          ),
+        ),
+        const SizedBox(height: 8),
+        DropdownButtonFormField<T>(
+          initialValue: value,
+          items: items,
+          onChanged: onChanged,
+          icon: const Icon(Icons.expand_more, color: Color(0xFF94A3B8)),
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: const Color(0xFFF8FAFC),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide.none,
+            ),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 16,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildQuestionBlock(_QuestionBlock qBlock, int index) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 24),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF8FAFC),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+      ),
+      child: Stack(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 64.0, bottom: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'QUESTION $index',
+                      style: GoogleFonts.poppins(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2,
+                        color: const Color(0xFF94A3B8),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    TextFormField(
+                      controller: qBlock.textController,
+                      validator: (v) => v!.isEmpty ? 'Question required' : null,
+                      style: GoogleFonts.poppins(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF121118),
+                      ),
+                      decoration: InputDecoration(
+                        hintText:
+                            'e.g. What is the maximum duration for copyright protection?',
+                        hintStyle: GoogleFonts.poppins(
+                          color: const Color(0xFF94A3B8),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 16,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 16),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    left: BorderSide(color: Color(0xFFE2E8F0), width: 2),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    for (int j = 0; j < qBlock.optionControllers.length; j++)
+                      _buildOptionRow(qBlock, j),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            right: 0,
+            top: 0,
+            child: Row(
+              children: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.drag_indicator,
+                    color: Color(0xFF94A3B8),
+                  ),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: const Icon(Icons.delete, color: Color(0xFF94A3B8)),
+                  hoverColor: Colors.red[50],
+                  onPressed: () => _removeQuestion(qBlock.id),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOptionRow(_QuestionBlock qBlock, int optIndex) {
+    bool isSelected = qBlock.correctOptionIndex == optIndex;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12.0),
+      child: Row(
+        children: [
+          InkWell(
+            onTap: () {
+              setState(() {
+                qBlock.correctOptionIndex = optIndex;
+              });
+            },
+            borderRadius: BorderRadius.circular(16),
+            child: Container(
+              width: 24,
+              height: 24,
+              margin: const EdgeInsets.only(right: 12),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: isSelected ? Colors.green : const Color(0xFFCBD5E1),
+                  width: 2,
+                ),
+              ),
+              child: isSelected
+                  ? const Center(
+                      child: Icon(Icons.check, size: 16, color: Colors.green),
+                    )
+                  : null,
+            ),
+          ),
+          Expanded(
+            child: TextFormField(
+              controller: qBlock.optionControllers[optIndex],
+              validator: (v) => v!.isEmpty ? 'Option required' : null,
+              style: GoogleFonts.poppins(color: const Color(0xFF334155)),
+              decoration: InputDecoration(
+                hintText: 'Answer Option ${optIndex + 1}',
+                hintStyle: GoogleFonts.poppins(color: const Color(0xFF94A3B8)),
+                filled: true,
+                fillColor: Colors.white,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: isSelected
+                      ? BorderSide(
+                          color: Colors.green.withValues(alpha: 0.5),
+                          width: 1,
+                        )
+                      : BorderSide.none,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: isSelected
+                      ? const BorderSide(color: Colors.green, width: 1.5)
+                      : BorderSide(
+                          color: const Color(0xFF2c0fbd).withValues(alpha: 0.2),
+                          width: 1.5,
+                        ),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: Colors.red, width: 1),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: Colors.red, width: 1.5),
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 14,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFileDropzone() {
+    return Container(
+      width: double.infinity,
+      height: 192,
+      decoration: BoxDecoration(
+        color: const Color(0xFFF8FAFC),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: const Color(0xFF2c0fbd).withValues(alpha: 0.2),
+          width: 2,
+          style: BorderStyle.solid,
+        ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () {
+            // TODO: Implement file picker
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                margin: const EdgeInsets.only(bottom: 12),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.05),
+                      blurRadius: 4,
+                      offset: const Offset(0, 1),
+                    ),
+                  ],
+                ),
+                child: const Icon(
+                  Icons.cloud_upload,
+                  color: Color(0xFF2c0fbd),
+                  size: 32,
+                ),
+              ),
+              Text(
+                'Click to upload or drag and drop',
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: const Color(0xFF121118),
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                'SVG, PNG, JPG or GIF (MAX. 800x400px)',
+                style: GoogleFonts.poppins(
+                  fontSize: 12,
+                  color: const Color(0xFF64748B),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _QuestionBlock {
+  final String id;
+  final TextEditingController textController = TextEditingController();
+  final List<TextEditingController> optionControllers = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+  ];
+  int correctOptionIndex = 0;
+
+  _QuestionBlock({required this.id});
+
+  void dispose() {
+    textController.dispose();
+    for (var c in optionControllers) {
+      c.dispose();
+    }
+  }
+
+  Question toEntity() {
+    final opts = optionControllers.map((c) => c.text.trim()).toList();
+    return Question(
+      id: id,
+      questionText: textController.text.trim(),
+      questionType: QuestionType.multipleChoice,
+      options: opts,
+      correctAnswer: opts.isNotEmpty &&
+              correctOptionIndex >= 0 &&
+              correctOptionIndex < opts.length
+          ? opts[correctOptionIndex]
+          : '',
+    );
+  }
+}

@@ -1,0 +1,920 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class WebDocumentReaderScreen extends StatefulWidget {
+  const WebDocumentReaderScreen({super.key});
+
+  @override
+  State<WebDocumentReaderScreen> createState() =>
+      _WebDocumentReaderScreenState();
+}
+
+class _WebDocumentReaderScreenState extends State<WebDocumentReaderScreen> {
+  // Colors from the HTML template
+  static const Color _primary = Color(0xFF2C0FBD);
+  static const Color _backgroundLight = Color(0xFFF4F7FE);
+  static const Color _textPrimary = Color(0xFF121118);
+  static const Color _textSecondary = Color(0xFF686189);
+  static const Color _highlightYellow = Color(0xFFFEF08A);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: _backgroundLight,
+      appBar: _buildAppBar(),
+      body: SingleChildScrollView(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 1200),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24.0,
+                vertical: 24.0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildBreadcrumb(),
+                  const SizedBox(height: 24),
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      final bool isDesktop = constraints.maxWidth >= 1024;
+                      if (isDesktop) {
+                        return Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(flex: 70, child: _buildDocumentViewer()),
+                            const SizedBox(width: 32),
+                            Expanded(flex: 30, child: _buildSidebar()),
+                          ],
+                        );
+                      } else {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _buildDocumentViewer(),
+                            const SizedBox(height: 32),
+                            _buildSidebar(),
+                          ],
+                        );
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 48),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.white.withValues(alpha: 0.9),
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(1),
+        child: Container(color: Colors.grey[100], height: 1),
+      ),
+      title: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1200),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Logo
+              Row(
+                children: [
+                  Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      color: _primary,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(
+                      Icons.gavel,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    'LegalHub',
+                    style: GoogleFonts.inter(
+                      color: _textPrimary,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: -0.5,
+                    ),
+                  ),
+                ],
+              ),
+              // Search Bar (Hidden on small screens)
+              if (MediaQuery.of(context).size.width >= 768)
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: _backgroundLight,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Search documents, cases, or notes...',
+                          hintStyle: GoogleFonts.inter(
+                            color: _textSecondary.withValues(alpha: 0.7),
+                            fontSize: 14,
+                          ),
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: _textSecondary,
+                            size: 20,
+                          ),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10,
+                          ),
+                        ),
+                        style: GoogleFonts.inter(
+                          color: _textPrimary,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              // Navigation Links & Profile
+              Row(
+                children: [
+                  if (MediaQuery.of(context).size.width >= 1024) ...[
+                    _buildNavLink('Documents'),
+                    const SizedBox(width: 24),
+                    _buildNavLink('Library'),
+                    const SizedBox(width: 24),
+                    _buildNavLink('Notes'),
+                    const SizedBox(width: 24),
+                  ],
+                  Container(width: 1, height: 24, color: Colors.grey[200]),
+                  const SizedBox(width: 16),
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      IconButton(
+                        icon: const Icon(
+                          Icons.notifications,
+                          color: _textSecondary,
+                        ),
+                        onPressed: () {},
+                        hoverColor: Colors.grey[100],
+                        splashRadius: 20,
+                      ),
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: Container(
+                          width: 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.white, width: 2),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.settings, color: _textSecondary),
+                    onPressed: () {},
+                    hoverColor: Colors.grey[100],
+                    splashRadius: 20,
+                  ),
+                  const SizedBox(width: 8),
+                  Container(
+                    width: 36,
+                    height: 36,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      shape: BoxShape.circle,
+                      image: const DecorationImage(
+                        image: NetworkImage(
+                          'https://lh3.googleusercontent.com/aida-public/AB6AXuASm3uLLxVew6sOKeseRoFKMybpbootqlj-HdBcme7SKyoekhvN6rcKXMCRH6vYMRHpUx5QwCHmfUYm1A9IfJndD9rO9X-Bo8LN7UpPtsxG7KAjO0U09hUC8fA-sbQohEQRMbtWjMFnvvLAvYNZZ1pSk7AiT8qEt-wiLsRcVBEJNxJXxHOu8Xh5waegxQlHqBkIhV7Hbiy5JXoh186r69xKruXJQC0OoAMvMbOqiVn5scS9kbjuFoZFvvhaal5FG77elkI43uhdwzCL',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavLink(String text) {
+    return InkWell(
+      onTap: () {},
+      child: Text(
+        text,
+        style: GoogleFonts.inter(
+          color: _textSecondary,
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBreadcrumb() {
+    return Row(
+      children: [
+        Icon(Icons.home, size: 18, color: _textSecondary),
+        const SizedBox(width: 4),
+        Text(
+          'Home',
+          style: GoogleFonts.inter(color: _textSecondary, fontSize: 14),
+        ),
+        const SizedBox(width: 8),
+        Icon(Icons.chevron_right, size: 16, color: _textSecondary),
+        const SizedBox(width: 8),
+        Text(
+          'Documents',
+          style: GoogleFonts.inter(color: _textSecondary, fontSize: 14),
+        ),
+        const SizedBox(width: 8),
+        Icon(Icons.chevron_right, size: 16, color: _textSecondary),
+        const SizedBox(width: 8),
+        Text(
+          'Family Code',
+          style: GoogleFonts.inter(
+            color: _textPrimary,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDocumentViewer() {
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(48.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(32), // large radius
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.05),
+                blurRadius: 20,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: _primary.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Text(
+                      'CHAPTER 4',
+                      style: GoogleFonts.inter(
+                        color: _primary,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(
+                          Icons.bookmark_border,
+                          color: _textSecondary,
+                        ),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.download, color: _textSecondary),
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Parental Rights and Responsibilities',
+                style: GoogleFonts.inter(
+                  color: _textPrimary,
+                  fontSize: 36,
+                  fontWeight: FontWeight.bold,
+                  height: 1.1,
+                  letterSpacing: -0.5,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                'Last updated: Oct 24, 2023 • 12 min read',
+                style: GoogleFonts.inter(color: _textSecondary, fontSize: 16),
+              ),
+              const SizedBox(height: 24),
+              Divider(color: Colors.grey[100], thickness: 1),
+              const SizedBox(height: 32),
+
+              // Content Body
+              Text(
+                'Sec. 151.001. Rights and Duties of Parent',
+                style: GoogleFonts.inter(
+                  color: _textPrimary,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                '(a) A parent of a child has the following rights and duties:\n\n'
+                '(1) the right to have physical possession, to direct the moral and religious training, and to designate the residence of the child;\n\n'
+                '(2) the duty of care, control, protection, and reasonable discipline of the child;\n\n'
+                '(3) the duty to support the child, including providing the child with clothing, food, shelter, medical and dental care, and education.',
+                style: GoogleFonts.inter(
+                  color: _textPrimary.withValues(alpha: 0.9),
+                  fontSize: 18,
+                  height: 1.6,
+                ),
+              ),
+              const SizedBox(height: 32),
+
+              Text(
+                'Sec. 160.201. Establishment of Parent-Child Relationship',
+                style: GoogleFonts.inter(
+                  color: _textPrimary,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                '(a) The parent-child relationship may be established between a child and:',
+                style: GoogleFonts.inter(
+                  color: _textPrimary.withValues(alpha: 0.9),
+                  fontSize: 18,
+                  height: 1.6,
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Highlighted text mock
+              RichText(
+                text: TextSpan(
+                  style: GoogleFonts.inter(
+                    color: _textPrimary.withValues(alpha: 0.9),
+                    fontSize: 18,
+                    height: 1.6,
+                  ),
+                  children: [
+                    const TextSpan(text: '(1) the '),
+                    TextSpan(
+                      text:
+                          'biological mother by proof of her having given birth to the child; (2) the biological father as provided by this code; or (3) an adoptive parent',
+                      style: GoogleFonts.inter(
+                        backgroundColor: _highlightYellow,
+                      ),
+                    ),
+                    const TextSpan(text: ' by proof of adoption.'),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              Text(
+                '(b) The parent-child relationship extends equally to every child and to every parent, regardless of the marital status of the parents. This section applies uniformly to all proceedings under this title.',
+                style: GoogleFonts.inter(
+                  color: _textPrimary.withValues(alpha: 0.9),
+                  fontSize: 18,
+                  height: 1.6,
+                ),
+              ),
+              const SizedBox(height: 32),
+
+              // Info Box
+              Container(
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: Colors.blue[50],
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(16),
+                    bottomRight: Radius.circular(16),
+                  ),
+                  border: const Border(
+                    left: BorderSide(color: _primary, width: 4),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.info, color: _primary, size: 24),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Jurisdictional Note',
+                          style: GoogleFonts.inter(
+                            color: _primary,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'The provisions listed here are subject to state-specific interpretations. Always consult the annotated statutes for recent case law regarding "presumed fathers."',
+                      style: GoogleFonts.inter(
+                        color: Colors.blueGrey[800],
+                        fontSize: 14,
+                        height: 1.5,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 32),
+
+              Text(
+                '(c) A donor is not a parent of a child conceived by means of assisted reproduction unless the donor is the husband of the woman who gives birth or has signed a valid acknowledgment of paternity.',
+                style: GoogleFonts.inter(
+                  color: _textPrimary.withValues(alpha: 0.9),
+                  fontSize: 18,
+                  height: 1.6,
+                ),
+              ),
+              const SizedBox(height: 48),
+              Divider(color: Colors.grey[100], thickness: 1),
+              const SizedBox(height: 24),
+
+              // Footer Pagination
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildPaginationLink(
+                    'Previous',
+                    'Chapter 3: Marital Agreements',
+                    Icons.arrow_back,
+                    isNext: false,
+                  ),
+                  _buildPaginationLink(
+                    'Next',
+                    'Chapter 5: Child Custody',
+                    Icons.arrow_forward,
+                    isNext: true,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+
+        // Simulated Floating Action Tooltip
+        Positioned(
+          top: 320,
+          left: 0,
+          right: 0,
+          child: Center(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                color: const Color(0xFF111827), // gray-900
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 40,
+                    offset: Offset(0, 10),
+                  ),
+                ],
+              ),
+              child: Stack(
+                clipBehavior: Clip.none,
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _buildTooltipAction(
+                        Icons.highlight,
+                        'Highlight',
+                        Colors.yellow[300]!,
+                      ),
+                      Container(
+                        width: 1,
+                        height: 12,
+                        margin: const EdgeInsets.symmetric(horizontal: 12),
+                        color: Colors.grey[700],
+                      ),
+                      _buildTooltipAction(
+                        Icons.note_add,
+                        'Add Note',
+                        Colors.white,
+                      ),
+                      Container(
+                        width: 1,
+                        height: 12,
+                        margin: const EdgeInsets.symmetric(horizontal: 12),
+                        color: Colors.grey[700],
+                      ),
+                      _buildTooltipAction(
+                        Icons.content_copy,
+                        'Copy',
+                        Colors.white,
+                      ),
+                    ],
+                  ),
+                  // Bottom triangle pointer
+                  Positioned(
+                    bottom: -12,
+                    child: Transform.rotate(
+                      angle: 0.785398, // 45 degrees in radians
+                      child: Container(
+                        width: 8,
+                        height: 8,
+                        color: const Color(0xFF111827),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPaginationLink(
+    String label,
+    String title,
+    IconData icon, {
+    required bool isNext,
+  }) {
+    return InkWell(
+      onTap: () {},
+      child: Row(
+        children: [
+          if (!isNext) ...[
+            Icon(icon, color: _textSecondary, size: 20),
+            const SizedBox(width: 8),
+          ],
+          Column(
+            crossAxisAlignment:
+                isNext ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: GoogleFonts.inter(color: Colors.grey[400], fontSize: 12),
+              ),
+              Text(
+                title,
+                style: GoogleFonts.inter(
+                  color: _textSecondary,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+          if (isNext) ...[
+            const SizedBox(width: 8),
+            Icon(icon, color: _textSecondary, size: 20),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTooltipAction(IconData icon, String label, Color iconColor) {
+    return InkWell(
+      onTap: () {},
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, color: iconColor, size: 16),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: GoogleFonts.inter(
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSidebar() {
+    return Column(
+      children: [
+        // Table of Contents Card
+        Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.05),
+                blurRadius: 20,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.toc, color: _textSecondary),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Table of Contents',
+                    style: GoogleFonts.inter(
+                      color: _textPrimary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              _buildTocItem('Chapter 1: Definitions', isActive: false),
+              _buildTocItem('Chapter 2: Marriage', isActive: false),
+              _buildTocItem('Chapter 3: Marital Agreements', isActive: false),
+              _buildTocItem('Chapter 4: Parental Rights', isActive: true),
+              _buildTocItem('Chapter 5: Child Custody', isActive: false),
+              _buildTocItem('Chapter 6: Support', isActive: false),
+            ],
+          ),
+        ),
+        const SizedBox(height: 24),
+        // My Notes Card
+        Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.05),
+                blurRadius: 20,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.edit_note, color: _textSecondary),
+                      const SizedBox(width: 8),
+                      Text(
+                        'My Notes',
+                        style: GoogleFonts.inter(
+                          color: _textPrimary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(
+                      '3 Saved',
+                      style: GoogleFonts.inter(
+                        color: _textSecondary,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              _buildNoteItem(
+                title: 'Sec. 160.201',
+                time: '10:42 AM',
+                content:
+                    'Need to cross-reference the biological father clause with the 2022 amendment regarding...',
+                isYellow: true,
+              ),
+              const SizedBox(height: 16),
+              _buildNoteItem(
+                title: 'General',
+                time: 'Yesterday',
+                content:
+                    'Check precedent cases for "Assisted Reproduction" definitions.',
+                isYellow: false,
+              ),
+              const SizedBox(height: 24),
+              // Quick Add Note Input
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey[50],
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Stack(
+                  children: [
+                    TextField(
+                      maxLines: 3,
+                      decoration: InputDecoration(
+                        hintText: 'Type a quick note here...',
+                        hintStyle: GoogleFonts.inter(
+                          color: _textSecondary.withValues(alpha: 0.6),
+                          fontSize: 14,
+                        ),
+                        border: InputBorder.none,
+                        contentPadding: const EdgeInsets.all(12),
+                      ),
+                      style: GoogleFonts.inter(
+                        color: _textPrimary,
+                        fontSize: 14,
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 8,
+                      right: 8,
+                      child: Row(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: const [
+                                BoxShadow(color: Colors.black12, blurRadius: 2),
+                              ],
+                            ),
+                            child: IconButton(
+                              icon: const Icon(Icons.link, size: 16),
+                              color: _textSecondary,
+                              onPressed: () {},
+                              constraints: const BoxConstraints(),
+                              padding: const EdgeInsets.all(6),
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: _primary,
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: const [
+                                BoxShadow(color: Colors.black12, blurRadius: 2),
+                              ],
+                            ),
+                            child: IconButton(
+                              icon: const Icon(Icons.send, size: 16),
+                              color: Colors.white,
+                              onPressed: () {},
+                              constraints: const BoxConstraints(),
+                              padding: const EdgeInsets.all(6),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTocItem(String title, {required bool isActive}) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      decoration: BoxDecoration(
+        color: isActive ? _primary.withValues(alpha: 0.1) : Colors.transparent,
+        borderRadius: BorderRadius.circular(8),
+        border: isActive
+            ? const Border(left: BorderSide(color: _primary, width: 4))
+            : null,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: GoogleFonts.inter(
+              color: isActive ? _primary : _textSecondary,
+              fontSize: 14,
+              fontWeight: isActive ? FontWeight.w500 : FontWeight.normal,
+            ),
+          ),
+          if (isActive)
+            const Icon(Icons.visibility, color: _primary, size: 16)
+          else
+            const Icon(
+              Icons.arrow_outward,
+              color: Colors.transparent,
+              size: 16,
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNoteItem({
+    required String title,
+    required String time,
+    required String content,
+    required bool isYellow,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: isYellow ? Colors.yellow[50] : Colors.grey[50],
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: Colors.transparent, // add hover effect realistically if needed
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                decoration: BoxDecoration(
+                  color: isYellow ? Colors.yellow[100] : Colors.grey[200],
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  title,
+                  style: GoogleFonts.inter(
+                    color: isYellow ? Colors.yellow[800] : Colors.grey[700],
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              Text(
+                time,
+                style: GoogleFonts.inter(color: Colors.grey[400], fontSize: 10),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            content,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: GoogleFonts.inter(
+              color: _textPrimary.withValues(alpha: 0.8),
+              fontSize: 14,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
