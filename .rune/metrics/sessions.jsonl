@@ -1,2 +1,4 @@
 {"id":"s-20260523-131537","date":"2026-05-23","duration_min":30,"tool_calls":24,"tool_distribution":{"Edit":19,"Write":5},"skill_invocations":0,"skills_used":[],"primary_skill":"none","models_used":{}}
 {"id":"s-20260523-131537","date":"2026-05-23","duration_min":32,"tool_calls":25,"tool_distribution":{"Edit":20,"Write":5},"skill_invocations":0,"skills_used":[],"primary_skill":"none","models_used":{}}
+{"id":"s-20260523-131537","date":"2026-05-23","duration_min":95,"tool_calls":25,"tool_distribution":{"Edit":20,"Write":5},"skill_invocations":0,"skills_used":[],"primary_skill":"none","models_used":{}}
+{"id":"s-20260524-123057","date":"2026-05-25","duration_min":1098,"tool_calls":5,"tool_distribution":{"Write":2,"Edit":3},"skill_invocations":0,"skills_used":[],"primary_skill":"none","models_used":{}}

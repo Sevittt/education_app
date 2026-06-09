@@ -1,6 +1,7 @@
 {
   "projects": {
-    "education": "educationapp-4780a"
+    "education": "educationapp-4780a",
+    "default": "educationapp-4780a"
   },
   "targets": {},
   "etags": {}

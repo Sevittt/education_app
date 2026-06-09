@@ -122,6 +122,7 @@ import 'package:sud_qollanma/core/services/fcm_service.dart';
 // Feature: AI Chat
 import 'package:sud_qollanma/core/services/ai_service.dart';
 import 'package:sud_qollanma/core/services/rag_service.dart';
+import 'package:sud_qollanma/core/services/wiki_service.dart';
 import 'package:sud_qollanma/features/ai_chat/presentation/providers/ai_notifier.dart';
 
 // Feature: Courses
@@ -556,9 +557,14 @@ void main() async {
 
         // Feature: AI Chat
         Provider<AiService>(create: (_) => AiService()),
+        Provider<WikiService>(
+          create: (context) => WikiService(context.read<AiService>()),
+        ),
         Provider<RagService>(
-          create: (context) =>
-              RagService(context.read<SearchRemoteDataSource>()),
+          create: (context) => RagService(
+            context.read<SearchRemoteDataSource>(),
+            context.read<WikiService>(),
+          ),
         ),
         ChangeNotifierProvider<AiNotifier>(
           create: (context) => AiNotifier(
