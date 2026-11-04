@@ -5,10 +5,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sud_qollanma/features/quiz/domain/entities/quiz.dart';
 import 'package:sud_qollanma/features/quiz/domain/entities/question.dart';
 import 'package:sud_qollanma/features/quiz/domain/entities/quiz_attempt.dart';
+import 'package:sud_qollanma/features/quiz/domain/entities/quiz_result.dart';
 import 'package:sud_qollanma/features/quiz/presentation/providers/quiz_provider.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
 
 /// Full quiz-taking screen with start page, question stepper, and results.
+/// Yopilganda eng yaxshi [QuizResult] ni qaytaradi; test topshirilmagan bo'lsa null.
 class QuizScreen extends StatefulWidget {
   final String quizId;
 
@@ -26,6 +28,7 @@ class _QuizScreenState extends State<QuizScreen> {
   int _currentIndex = 0;
   final Map<int, String> _answers = {};
   int _score = 0;
+  QuizResult? _bestResult;
   late DateTime _startTime;
   final PageController _pageController = PageController();
 
@@ -112,6 +115,10 @@ class _QuizScreenState extends State<QuizScreen> {
 
     setState(() {
       _score = correct;
+      _bestResult = QuizResult(
+        correct: correct,
+        total: _quiz!.questions.length,
+      ).bestOf(_bestResult);
       _phase = _QuizPhase.results;
     });
 
@@ -152,29 +159,36 @@ class _QuizScreenState extends State<QuizScreen> {
     final l10n = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
 
-    return Scaffold(
-      appBar: _phase == _QuizPhase.playing
-          ? AppBar(
-              title: Text(
-                l10n.questionOfTotal(
-                    _currentIndex + 1, _quiz?.questions.length ?? 0),
-                style: const TextStyle(fontWeight: FontWeight.w600),
-              ),
-              centerTitle: true,
-              bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(4),
-                child: LinearProgressIndicator(
-                  value: (_quiz?.questions.isNotEmpty ?? false)
-                      ? (_currentIndex + 1) / _quiz!.questions.length
-                      : 0,
-                  backgroundColor: theme.colorScheme.surfaceContainerHighest,
-                  valueColor:
-                      AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
+    // Natija bo'lsa, har qanday orqaga qaytish (tizim tugmasi, AppBar) uni qaytaradi
+    return PopScope(
+      canPop: _bestResult == null,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop) Navigator.pop(context, _bestResult);
+      },
+      child: Scaffold(
+        appBar: _phase == _QuizPhase.playing
+            ? AppBar(
+                title: Text(
+                  l10n.questionOfTotal(
+                      _currentIndex + 1, _quiz?.questions.length ?? 0),
+                  style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
-              ),
-            )
-          : null,
-      body: _buildBody(l10n, theme),
+                centerTitle: true,
+                bottom: PreferredSize(
+                  preferredSize: const Size.fromHeight(4),
+                  child: LinearProgressIndicator(
+                    value: (_quiz?.questions.isNotEmpty ?? false)
+                        ? (_currentIndex + 1) / _quiz!.questions.length
+                        : 0,
+                    backgroundColor: theme.colorScheme.surfaceContainerHighest,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        theme.colorScheme.primary),
+                  ),
+                ),
+              )
+            : null,
+        body: _buildBody(l10n, theme),
+      ),
     );
   }
 
@@ -307,7 +321,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
                 // Back button
                 TextButton.icon(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () => Navigator.pop(context, _bestResult),
                   icon: const Icon(Icons.arrow_back_rounded),
                   label: Text(l10n.backToQuizList),
                 ),
@@ -740,7 +754,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: FilledButton.icon(
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => Navigator.pop(context, _bestResult),
                         icon: const Icon(Icons.arrow_back_rounded),
                         label: Text(l10n.backToQuizList),
                         style: FilledButton.styleFrom(

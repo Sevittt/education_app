@@ -194,3 +194,23 @@ Chiqish mezoni: foydalanuvchi kursni xatosiz davom ettiradi; admin haqiqiy, teks
 ## Keyingi ish uchun aniq boshlanish
 
 Birinchi implementation paketi: **role huquq oshirish + kurs progress ruxsatlari + noto‘g‘ri completion + failed quiz XP**, tegishli regression testlari bilan. Katta redesign yoki yangi backend qo‘shishdan oldin shu oqimlarni barqaror qilish kerak. Production qoidalarini o‘zgartirishdan oldin mavjud sxema/rollar va deploy holatini tekshirish, migratsiya va rollback rejasini tayyorlash zarur.
+
+## 1-paket holati (2026-10-31)
+
+Kodda tuzatildi, **deploy qilinmagan**:
+
+- **#1 (P0)**: `isAdmin()` faqat `role == 'admin'`; users create xavfsiz lavozim (admin emas) va nol XP bilan; egasi faqat profil maydonlarini yozadi (`ownerEditableUserFields`). XP/level/hisoblagichlar va streak endi `awardXp` / `updateStreak` callable funksiyalarida hisoblanadi (`functions/src/callables/gamification.ts`), mukofot `users/{uid}/xp_awards` orqali bir kontentga bir marta beriladi.
+- **#2**: progress rules `user_course_progress/{uid}_{courseId}` + `data.userId` sxemasiga moslandi; ishlatilmagan nested yo‘l olib tashlandi. Ma’lumot migratsiyasi kerak emas.
+- **#3**: QuizScreen `QuizResult` qaytaradi, dars faqat `minPassScore` (yoki 70%) dan o‘tilganda yakunlanadi; lesson viewer’dan orqaga qaytish yakunlash emas; video oxirigacha ko‘rilganda yoki “bajarildi” tugmasi bosilganda yakunlanadi.
+- **#4**: yiqilgan quiz XP so‘ramaydi; quiz attempt faqat o‘z nomidan yaratiladi.
+
+Testlar: `functions` — `npm test` (11 ta unit test), Flutter — `flutter test` (17 ta), rules — `rules_tests/` (emulator va Java 11+ kerak; bu muhitda Java yo‘qligi sabab ishga tushirilmadi).
+
+Deploy tartibi (eski client’lar XP’ni to‘g‘ridan-to‘g‘ri yozadi, yangi rules buni rad etadi):
+
+1. `firebase deploy --only functions` (predeploy endi build qiladi).
+2. Yangi client release’ni chiqarish.
+3. `firebase deploy --only firestore:rules` — eski versiyadagi client’larda XP va profilni to‘liq qayta yozish ishlamay qoladi.
+4. Deploy oldidan: production’da `role == 'ict_specialist'` bo‘lib admin vazifasini bajarayotgan hisoblar bo‘lsa, ularni `admin` ga o‘tkazish.
+
+Ochiq qolganlar: ro‘yxatdan o‘tishda `judge`/`ict_specialist` tanlash hamon kontent yozish (`isExpertOrAdmin`) huquqini beradi — lavozim va vakolatni ajratish mahsulot qarori; progress maydonlari (`completedLessonIds`, `percentComplete`) hali client tomonidan hisoblanadi; video darsdagi “Ko‘rdim, bajarildi” tugmasi videoni ko‘rmasdan ham yakunlaydi.

@@ -42,8 +42,6 @@ abstract class AuthRepository {
 
   Stream<AppUser?> getUserProfileStream(String uid);
 
-  Future<void> updateUserXP(String userId, int newXP, String newLevel);
-
   Future<void> updateCourtRole(String userId, CourtRole newRole);
 
   /// Updates the court/region selection for an existing user.

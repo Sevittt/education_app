@@ -17,6 +17,7 @@ import 'package:sud_qollanma/features/notifications/presentation/providers/notif
 import 'package:sud_qollanma/features/notifications/presentation/screens/notifications_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sud_qollanma/shared/layouts/responsive_layout.dart';
+import 'package:sud_qollanma/features/ict_reports/presentation/screens/ict_report_form_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -78,9 +79,26 @@ class _HomePageState extends State<HomePage> {
         ),
       );
 
-      // ACTIONS: Create Resource & Quiz (only for experts and admins)
-      if (user.role == CourtRole.judge ||
-          user.role == CourtRole.ict_specialist) {
+      // AKT xodimi: muammo/yechimni adminga yuborish
+      if (user.role == CourtRole.ict_specialist) {
+        actions.add(
+          SpeedDialChild(
+            child: const Icon(Icons.build_circle_rounded),
+            label: 'Muammo va yechim yuborish',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const IctReportFormScreen(),
+                ),
+              );
+            },
+          ),
+        );
+      }
+
+      // ACTIONS: Create Resource & Quiz — kontentni faqat admin yaratadi
+      if (user.isAdmin) {
         actions.add(
           SpeedDialChild(
             child: const Icon(Icons.description),
@@ -110,9 +128,6 @@ class _HomePageState extends State<HomePage> {
           ),
         );
       }
-
-      // You could add admin-only actions here in the future
-      // if (user.role == UserRole.admin) { ... }
 
       return actions;
     }

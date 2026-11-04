@@ -107,11 +107,6 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> updateUserXP(String userId, int newXP, String newLevel) async {
-    await _remoteDataSource.updateUserXP(userId, newXP, newLevel);
-  }
-
-  @override
   Future<void> updateCourtRole(String userId, CourtRole newRole) async {
     await _remoteDataSource.updateCourtRole(userId, newRole);
   }

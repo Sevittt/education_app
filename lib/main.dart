@@ -141,6 +141,8 @@ import 'package:sud_qollanma/features/library/presentation/screens/knowledge_bas
 import 'package:sud_qollanma/features/library/presentation/screens/video_tutorials_screen.dart';
 import 'package:sud_qollanma/features/systems/presentation/screens/systems_directory_screen.dart';
 import 'package:sud_qollanma/features/faq/presentation/screens/faq_list_screen.dart';
+import 'package:sud_qollanma/features/ict_reports/data/ict_report_remote_source.dart';
+import 'package:sud_qollanma/features/library/data/datasources/video_progress_remote_source.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -575,6 +577,10 @@ void main() async {
 
         // Feature: Courses
         Provider<CourseRemoteSource>(create: (_) => CourseRemoteSource()),
+        // --- AKT xodimlari: muammo va yechimlar ---
+        Provider<IctReportRemoteSource>(create: (_) => IctReportRemoteSource()),
+        Provider<VideoProgressRemoteSource>(
+            create: (_) => VideoProgressRemoteSource()),
         Provider<CourseRepository>(
           create: (context) => CourseRepositoryImpl(
             remoteSource: context.read<CourseRemoteSource>(),

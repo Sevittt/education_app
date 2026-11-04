@@ -1,0 +1,65 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // --- Helper Functions ---
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Role check for Storage requires cross-service rules
+    // Make sure your Firebase project has Firestore enabled and rules configured.
+    function isAdminOrExpert() {
+      return isAuthenticated() && (
+        firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+        firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'ict_specialist' ||
+        firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'ekspert' ||
+        firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'judge'
+      );
+    }
+
+    // --- Profile Images ---
+    // Anyone authenticated can view, only owner can upload/modify
+    match /profile_images/{userId}/{fileName} {
+      allow read: if true;
+      allow write: if isOwner(userId) 
+                   && request.resource.size < 5 * 1024 * 1024 // 5MB limit
+                   && request.resource.contentType.matches('image/.*');
+    }
+
+    // --- Community Discussion Images/Files ---
+    match /discussions/{fileName=**} {
+      allow read: if true;
+      allow create: if isAuthenticated() 
+                    && request.resource.size < 10 * 1024 * 1024; // 10MB limit
+      allow update, delete: if isAdminOrExpert();
+    }
+
+    // --- AI Chat Images ---
+    match /ai_chat/{userId}/{fileName} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // --- Articles PDFs ---
+    match /articles_pdfs/{fileName=**} {
+      allow read: if true;
+      allow write: if isAdminOrExpert() 
+                   && request.resource.contentType.matches('application/pdf');
+    }
+
+    // --- Admin/Expert Managed Content (Videos, Resurslar, etc.) ---
+    match /public/{fileName=**} {
+      allow read: if true;
+      allow write: if isAdminOrExpert();
+    }
+
+    // --- Default Deny ---
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

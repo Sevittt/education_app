@@ -4,11 +4,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:sud_qollanma/core/constants/app_colors.dart';
 import 'package:sud_qollanma/features/courses/domain/entities/course_lesson_entity.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:sud_qollanma/features/library/data/datasources/video_progress_remote_source.dart';
 import 'package:sud_qollanma/features/library/domain/entities/video_entity.dart';
+import 'package:sud_qollanma/features/library/domain/entities/video_watch_progress.dart';
 import 'package:sud_qollanma/features/library/presentation/screens/video_player_screen.dart';
 
 /// Dars kontent ekrani.
 /// [refId] + [sourceCollection] orqali Firestore'dan kontent yuklanadi.
+/// `true` faqat aniq yakunlash amalida qaytariladi: maqola/PDF uchun tugma,
+/// video uchun kamida 90% haqiqatan ko'rilganda. Orqaga qaytish null beradi.
 class LessonViewerScreen extends StatefulWidget {
   final CourseLessonEntity lesson;
 
@@ -57,6 +63,7 @@ class _LessonViewerScreenState extends State<LessonViewerScreen>
       _fadeCtrl.forward();
 
     if (widget.lesson.type == LessonType.video && mounted) {
+      _loadVideoProgress();
       WidgetsBinding.instance.addPostFrameCallback((_) => _openVideoDirectly());
     }
   } catch (e) {
@@ -94,11 +101,41 @@ Future<void> _openVideoDirectly() async {
             .toList() ??
         [],
   );
+  await _playVideo(video);
+}
+
+/// Videoni ochadi; kamida 90% ko'rilgan bo'lsa darsni yakunlab chiqadi,
+/// aks holda foydalanuvchi shu ekranda qoladi va ko'rilgan ulushini ko'radi.
+Future<void> _playVideo(VideoEntity video) async {
+  var watched = false;
   await Navigator.push(
     context,
-    MaterialPageRoute(builder: (_) => VideoPlayerScreen(videoEntity: video)),
+    MaterialPageRoute(
+      builder: (_) => VideoPlayerScreen(
+        videoEntity: video,
+        onWatched: () => watched = true,
+      ),
+    ),
   );
-  if (mounted) Navigator.pop(context, true);
+  if (!mounted) return;
+  if (watched) {
+    Navigator.pop(context, true);
+  } else {
+    await _loadVideoProgress();
+  }
+}
+
+Future<void> _loadVideoProgress() async {
+  final uid = FirebaseAuth.instance.currentUser?.uid;
+  if (uid == null) return;
+  try {
+    await context
+        .read<VideoProgressRemoteSource>()
+        .get(uid, widget.lesson.refId);
+    if (mounted) setState(() {});
+  } catch (e) {
+    debugPrint('Video progress yuklanmadi: $e');
+  }
 }
 
   @override
@@ -297,13 +334,7 @@ Future<void> _openVideoDirectly() async {
     return _LessonShell(
       isDark: isDark,
       lessonType: widget.lesson.type,
-      onVideoOpen: () async {
-        await Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => VideoPlayerScreen(videoEntity: video)),
-        );
-        if (mounted) Navigator.pop(context, true);
-      },
+      onVideoOpen: () => _playVideo(video),
       onComplete: () => Navigator.pop(context, true),
       child: _VideoHero(video: video, isDark: isDark),
     );
@@ -1395,3 +1426,6 @@ class _SkeletonBox extends StatelessWidget {
     );
   }
 }
+
+
+

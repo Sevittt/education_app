@@ -33,11 +33,14 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.onQuizCreated = exports.onNewsCreated = exports.onSystemUpdated = exports.onSystemCreated = exports.dailyStreakReminder = void 0;
+exports.updateStreak = exports.awardXp = exports.onQuizCreated = exports.onNewsCreated = exports.onSystemUpdated = exports.onSystemCreated = exports.testCourseReminder = exports.scheduledCourseReminder = exports.dailyStreakReminder = void 0;
 const admin = __importStar(require("firebase-admin"));
 admin.initializeApp();
 var streakReminder_1 = require("./triggers/streakReminder");
 Object.defineProperty(exports, "dailyStreakReminder", { enumerable: true, get: function () { return streakReminder_1.dailyStreakReminder; } });
+var courseReminder_1 = require("./triggers/courseReminder");
+Object.defineProperty(exports, "scheduledCourseReminder", { enumerable: true, get: function () { return courseReminder_1.scheduledCourseReminder; } });
+Object.defineProperty(exports, "testCourseReminder", { enumerable: true, get: function () { return courseReminder_1.testCourseReminder; } });
 var onSystemCreatedOrUpdated_1 = require("./triggers/onSystemCreatedOrUpdated");
 Object.defineProperty(exports, "onSystemCreated", { enumerable: true, get: function () { return onSystemCreatedOrUpdated_1.onSystemCreated; } });
 Object.defineProperty(exports, "onSystemUpdated", { enumerable: true, get: function () { return onSystemCreatedOrUpdated_1.onSystemUpdated; } });
@@ -45,4 +48,7 @@ var onNewsCreated_1 = require("./triggers/onNewsCreated");
 Object.defineProperty(exports, "onNewsCreated", { enumerable: true, get: function () { return onNewsCreated_1.onNewsCreated; } });
 var onQuizCreated_1 = require("./triggers/onQuizCreated");
 Object.defineProperty(exports, "onQuizCreated", { enumerable: true, get: function () { return onQuizCreated_1.onQuizCreated; } });
+var gamification_1 = require("./callables/gamification");
+Object.defineProperty(exports, "awardXp", { enumerable: true, get: function () { return gamification_1.awardXp; } });
+Object.defineProperty(exports, "updateStreak", { enumerable: true, get: function () { return gamification_1.updateStreak; } });
 //# sourceMappingURL=index.js.map

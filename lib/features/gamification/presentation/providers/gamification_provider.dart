@@ -20,16 +20,16 @@ class GamificationProvider extends ChangeNotifier {
   }
 
   Future<void> awardPoints({
-    required String userId,
-    required int points,
     required String actionType,
-    String? description,
+    required String targetId,
+    String? courseId,
+    bool speedBonus = false,
   }) async {
     await _awardPoints(
-      userId: userId,
-      points: points,
       actionType: actionType,
-      description: description,
+      targetId: targetId,
+      courseId: courseId,
+      speedBonus: speedBonus,
     );
     notifyListeners();
   }

@@ -2,6 +2,7 @@
 import '../entities/quiz_attempt.dart';
 import '../repositories/quiz_repository.dart';
 import '../../../analytics/domain/usecases/analytics_usecases.dart';
+import '../../../../config/gamification_rules.dart';
 
 class SubmitQuizAttempt {
   final QuizRepository repository;
@@ -20,7 +21,7 @@ class SubmitQuizAttempt {
             ? (attempt.score / attempt.totalQuestions) * 100
             : 0.0;
 
-        final bool passed = percentage >= 70.0;
+        final bool passed = percentage >= GamificationRules.quizPassPercent;
 
         await trackQuizCompleted!(
           quizId: attempt.quizId,

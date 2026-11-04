@@ -142,7 +142,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
                 final topic = topics[index];
                 bool canModify = false;
                 if (currentAppUser != null) {
-                  if (currentAppUser.role == CourtRole.ict_specialist ||
+                  // Muallif yoki admin (rules ham shunday tekshiradi)
+                  if (currentAppUser.isAdmin ||
                       currentAppUser.id == topic.authorId) {
                     canModify = true;
                   }

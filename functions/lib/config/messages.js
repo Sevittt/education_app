@@ -88,6 +88,20 @@ exports.MESSAGES = {
             body: 'The quiz "{name}" is ready for you. Give it a try!',
         },
     },
+    courseReminder: {
+        uz: {
+            title: "📚 Kursni tugatishni unutmang!",
+            body: '"{course}" kursida davom eting. Bilimlaringizni mustahkamlang!',
+        },
+        ru: {
+            title: "📚 Не забудьте завершить курс!",
+            body: 'Продолжите курс "{course}". Закрепите свои знания!',
+        },
+        en: {
+            title: "📚 Continue your course!",
+            body: 'Keep going with "{course}". Strengthen your knowledge!',
+        },
+    },
 };
 function getMessage(key, lang, substitutions = {}) {
     const msg = exports.MESSAGES[key][lang];

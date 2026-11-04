@@ -159,6 +159,26 @@ class AppUserModel extends AppUser {
     };
   }
 
+  /// Foydalanuvchi o'z profilida o'zgartira oladigan maydonlar.
+  /// firestore.rules dagi ownerEditableUserFields() bilan mos bo'lishi kerak:
+  /// role, xp, level va hisoblagichlarni faqat admin yoki server yozadi.
+  Map<String, dynamic> toProfileMap() {
+    return {
+      'name': name,
+      'username': username,
+      'profilePictureUrl': profilePictureUrl,
+      'bio': bio,
+      'notificationsEnabled': notificationsEnabled,
+      'regionId': regionId,
+      'regionName': regionName,
+      'courtTypeId': courtTypeId,
+      'courtTypeName': courtTypeName,
+      'courtId': courtId,
+      'courtName': courtName,
+      'position': position,
+    };
+  }
+
   static CourtRole stringToCourtRole(String? roleString) {
     if (roleString == null) {
       return CourtRole.unknown;

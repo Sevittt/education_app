@@ -11,7 +11,10 @@ import 'package:chewie/chewie.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../config/gamification_rules.dart';
 import '../../domain/entities/video_entity.dart';
+import '../../domain/entities/video_watch_progress.dart';
+import '../../data/datasources/video_progress_remote_source.dart';
 import '../providers/library_provider.dart';
+import '../widgets/web_youtube_player.dart';
 
 // Analytics UseCases
 import '../../../analytics/domain/usecases/analytics_usecases.dart';
@@ -19,9 +22,13 @@ import '../../../analytics/domain/usecases/analytics_usecases.dart';
 class VideoPlayerScreen extends StatefulWidget {
   final VideoEntity videoEntity;
 
+  /// Video oxirigacha ko'rilganda bir marta chaqiriladi (kurs darsini yakunlash uchun).
+  final VoidCallback? onWatched;
+
   const VideoPlayerScreen({
     super.key,
     required this.videoEntity,
+    this.onWatched,
   });
 
   @override
@@ -51,45 +58,121 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   DateTime get _createdAt => widget.videoEntity.createdAt;
   List<String> get _tags => widget.videoEntity.tags;
 
+  // ─── Ko'rish holati (90% mezoni va davom ettirish) ──────────────────────
+  VideoWatchTracker _tracker = VideoWatchTracker(const VideoWatchProgress());
+  VideoProgressRemoteSource? _progressSource;
+  String? _uid;
+  bool _progressLoaded = false;
+  int _startAtSeconds = 0;
+  int _shownPercent = -1;
+  bool _wasPlaying = false;
+  DateTime _lastSavedAt = DateTime.now();
+  final _webPlayerKey = GlobalKey<WebYoutubePlayerState>();
+
+  static const _saveInterval = Duration(seconds: 15);
+
   @override
   void initState() {
     super.initState();
     _currentLikes = _initialLikes;
-    
+    _isNativeVideo = _videoUrl != null && _videoUrl!.isNotEmpty;
+    _progressSource = context.read<VideoProgressRemoteSource>();
+    _uid = FirebaseAuth.instance.currentUser?.uid;
+
     // Increment views via provider
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) context.read<LibraryProvider>().incrementVideoViews(_videoId);
     });
 
-    if (_videoUrl != null && _videoUrl!.isNotEmpty) {
-      _isNativeVideo = true;
-      _initNativePlayer();
-    } else if (_youtubeId != null && _youtubeId!.isNotEmpty) {
+    _init();
+  }
+
+  /// Avval saqlangan holat o'qiladi, keyin pleyer o'sha joydan boshlanadi.
+  Future<void> _init() async {
+    await _loadProgress();
+    if (!mounted) return;
+    _startAtSeconds = _tracker.progress.resumePositionSeconds ?? 0;
+
+    if (_isNativeVideo) {
+      await _initNativePlayer();
+    } else if (_youtubeId != null && _youtubeId!.isNotEmpty && !kIsWeb) {
       _youtubeController = YoutubePlayerController(
         initialVideoId: _youtubeId!,
-        flags: const YoutubePlayerFlags(
+        flags: YoutubePlayerFlags(
           autoPlay: true,
           mute: false,
           enableCaption: true,
+          startAt: _startAtSeconds,
         ),
       )..addListener(_youtubeListener);
     }
+    if (!mounted) return;
+    setState(() => _progressLoaded = true);
+
+    if (_tracker.progress.isCompleted) _notifyWatched();
+    if (_startAtSeconds > 0) _showResumeNotice(_startAtSeconds);
+  }
+
+  Future<void> _loadProgress() async {
+    final uid = _uid;
+    if (uid == null) return;
+    try {
+      final progress = await _progressSource!
+          .get(uid, _videoId)
+          .timeout(const Duration(seconds: 3));
+      _tracker = VideoWatchTracker(progress);
+    } catch (e) {
+      // Oflayn yoki sekin tarmoq: boshidan boshlanadi
+      debugPrint('Video progress yuklanmadi: $e');
+    }
+  }
+
+  void _saveProgress() {
+    final uid = _uid;
+    if (uid == null) return;
+    _lastSavedAt = DateTime.now();
+    _progressSource!.save(uid, _videoId, _tracker.progress).catchError((Object e) {
+      debugPrint('Video progress saqlanmadi: $e');
+    });
+  }
+
+  void _showResumeNotice(int seconds) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'Oxirgi marta ${_formatSeconds(seconds)} da to\'xtagansiz — shu joydan davom etmoqda',
+        ),
+        duration: const Duration(seconds: 6),
+        action: SnackBarAction(
+          label: 'Boshidan',
+          onPressed: () => _seekToSeconds(0),
+        ),
+      ),
+    );
+  }
+
+  static String _formatSeconds(int total) {
+    final h = total ~/ 3600, m = (total % 3600) ~/ 60, s = total % 60;
+    final mm = m.toString().padLeft(h > 0 ? 2 : 1, '0');
+    final ss = s.toString().padLeft(2, '0');
+    return h > 0 ? '$h:$mm:$ss' : '$mm:$ss';
   }
 
   Future<void> _initNativePlayer() async {
     _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(_videoUrl!));
     await _videoPlayerController!.initialize();
-    
+
     if (!mounted) return;
-    
+
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController!,
       autoPlay: true,
       looping: false,
+      startAt: _startAtSeconds > 0 ? Duration(seconds: _startAtSeconds) : null,
     );
-    
+
     _videoPlayerController!.addListener(_nativeVideoListener);
-    
+
     setState(() {
       _isPlayerReady = true;
     });
@@ -99,24 +182,61 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     if (_isPlayerReady && mounted && !_youtubeController!.value.isFullScreen) {
       setState(() {});
     }
-    
-    // Check if video finished
-    if (_isPlayerReady && _youtubeController!.value.playerState == PlayerState.ended) {
-      _awardPointsForWatching(_youtubeController!.metadata.duration.inSeconds);
-    }
+    if (!_isPlayerReady) return;
+    final value = _youtubeController!.value;
+    _onPosition(
+      value.position.inMilliseconds / 1000,
+      value.isPlaying,
+      _youtubeController!.metadata.duration.inSeconds,
+    );
   }
 
   void _nativeVideoListener() {
-    if (_videoPlayerController != null && _videoPlayerController!.value.isInitialized) {
-      if (_videoPlayerController!.value.position == _videoPlayerController!.value.duration) {
-         _awardPointsForWatching(_videoPlayerController!.value.duration.inSeconds);
-      }
+    final value = _videoPlayerController?.value;
+    if (value == null || !value.isInitialized) return;
+    _onPosition(
+      value.position.inMilliseconds / 1000,
+      value.isPlaying,
+      value.duration.inSeconds,
+    );
+  }
+
+  /// Barcha pleyerlardan keladigan pozitsiya: ko'rilgan qismni hisoblaydi,
+  /// vaqti-vaqti bilan saqlaydi va 90% ga yetganda darsni yakunlaydi.
+  void _onPosition(double seconds, bool isPlaying, int durationSeconds) {
+    if (!_progressLoaded) return;
+    final reached = _tracker.onPosition(
+      seconds,
+      isPlaying: isPlaying,
+      durationSeconds: durationSeconds,
+    );
+
+    final pausedNow = _wasPlaying && !isPlaying;
+    _wasPlaying = isPlaying;
+    if (reached ||
+        pausedNow ||
+        (isPlaying && DateTime.now().difference(_lastSavedAt) > _saveInterval)) {
+      _saveProgress();
+    }
+    if (reached) _awardPointsForWatching(durationSeconds);
+
+    final percent = (_tracker.progress.watchedRatio * 100).floor();
+    if (percent != _shownPercent && mounted && widget.onWatched != null) {
+      setState(() => _shownPercent = percent);
     }
   }
 
   bool _pointsAwarded = false;
+  bool _watchedNotified = false;
+
+  void _notifyWatched() {
+    if (_watchedNotified) return;
+    _watchedNotified = true;
+    widget.onWatched?.call();
+  }
 
   Future<void> _awardPointsForWatching(int durationSeconds) async {
+    _notifyWatched();
     if (_pointsAwarded) return;
     
     final userId = FirebaseAuth.instance.currentUser?.uid;
@@ -126,8 +246,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     
     // Clean Architecture: Use TrackVideoWatched UseCase
     // This UseCase handles logging to xAPI and triggering Gamification logic internally via LogXApiStatement
+    // Hujjat ID'si: server XP berishdan oldin video_tutorials da mavjudligini tekshiradi
     await context.read<TrackVideoWatched>().call(
-      videoId: _isNativeVideo ? _videoUrl! : _youtubeId!,
+      videoId: _videoId,
       title: _videoTitle,
       duration: Duration(seconds: durationSeconds), 
     );
@@ -150,6 +271,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   void dispose() {
+    // Chiqishda oxirgi joy saqlanadi — keyingi safar shu yerdan davom etadi
+    if (_progressLoaded) _saveProgress();
     _youtubeController?.dispose();
     _videoPlayerController?.dispose();
     _chewieController?.dispose();
@@ -185,6 +308,25 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    const loadingPlayer = AspectRatio(
+      aspectRatio: 16 / 9,
+      child: Center(child: CircularProgressIndicator()),
+    );
+
+    // Web: ilova ichidagi iframe pleyer — ko'rilgan qism shu yerda ham kuzatiladi
+    if (kIsWeb && !_isNativeVideo && (_youtubeId?.isNotEmpty ?? false)) {
+      return _buildMainScaffold(
+        _progressLoaded
+            ? WebYoutubePlayer(
+                key: _webPlayerKey,
+                youtubeId: _youtubeId!,
+                startSeconds: _startAtSeconds,
+                onPosition: _onPosition,
+              )
+            : loadingPlayer,
+      );
+    }
+
     if (kIsWeb && !_isNativeVideo) {
       // Fallback for Web YouTube videos: Show thumbnail and button to open in new tab
       return Scaffold(
@@ -248,10 +390,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         child: Chewie(controller: _chewieController!),
       );
     } else {
-      playerComponent = const AspectRatio(
-        aspectRatio: 16/9,
-        child: Center(child: CircularProgressIndicator()),
-      );
+      playerComponent = loadingPlayer;
     }
 
     return _buildMainScaffold(playerComponent);
@@ -267,6 +406,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       body: Column(
         children: [
           player,
+          // Kurs darsi: qancha ko'rilgani va yakunlash mezoni
+          if (widget.onWatched != null && _progressLoaded)
+            _WatchedProgressBar(ratio: _tracker.progress.watchedRatio),
           // ─── Chapter markers (time codes) ─────────────────────────────
           if (timeCodes.isNotEmpty)
             SizedBox(
@@ -342,10 +484,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   void _seekToSeconds(int seconds) {
     final duration = Duration(seconds: seconds);
+    _tracker.resetSample(); // sakrash ko'rilgan qism hisoblanmaydi
     if (_isNativeVideo && _chewieController != null) {
       _chewieController!.seekTo(duration);
     } else if (!_isNativeVideo && _youtubeController != null) {
       _youtubeController!.seekTo(duration);
+    } else {
+      _webPlayerKey.currentState?.seekTo(seconds);
     }
   }
 
@@ -515,6 +660,44 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         );
       }).toList(),
+    );
+  }
+}
+
+/// Videoning qancha qismi haqiqatan ko'rilgani (kurs darsi uchun).
+class _WatchedProgressBar extends StatelessWidget {
+  final double ratio;
+
+  const _WatchedProgressBar({required this.ratio});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final percent = (ratio * 100).floor();
+    final requiredPercent = (VideoWatchProgress.completionRatio * 100).round();
+    final done = ratio >= VideoWatchProgress.completionRatio;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 10, 16, 4),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          LinearProgressIndicator(
+            value: ratio,
+            minHeight: 6,
+            borderRadius: BorderRadius.circular(3),
+            color: done ? Colors.green.shade600 : theme.colorScheme.primary,
+          ),
+          const SizedBox(height: 6),
+          Text(
+            done
+                ? 'Ko\'rildi: $percent% — dars yakunlandi'
+                : 'Ko\'rildi: $percent% · yakunlash uchun $requiredPercent% kerak '
+                    '(oldinga o\'tkazilgan qism hisoblanmaydi)',
+            style: theme.textTheme.bodySmall,
+          ),
+        ],
+      ),
     );
   }
 }

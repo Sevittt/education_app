@@ -58,4 +58,6 @@ app.*.map.json
 node_modules/
 
 # Firebase
-.firebase/
+.firebase/
+# Codex
+.codex/

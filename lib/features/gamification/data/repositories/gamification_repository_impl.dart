@@ -16,18 +16,16 @@ class GamificationRepositoryImpl implements GamificationRepository {
 
   @override
   Future<void> awardPoints({
-    required String userId,
-    required int points,
     required String actionType,
-    String? description,
-    String? contentId,
+    required String targetId,
+    String? courseId,
+    bool speedBonus = false,
   }) async {
     return _remoteDataSource.awardPoints(
-      userId: userId,
-      points: points,
       actionType: actionType,
-      description: description,
-      contentId: contentId,
+      targetId: targetId,
+      courseId: courseId,
+      speedBonus: speedBonus,
     );
   }
 

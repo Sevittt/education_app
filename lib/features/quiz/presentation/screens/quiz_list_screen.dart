@@ -30,8 +30,8 @@ class _QuizListScreenState extends State<QuizListScreen> {
     final theme = Theme.of(context);
     final quizProvider = Provider.of<QuizProvider>(context);
     final user = context.watch<AuthNotifier>().appUser;
-    final canManage =
-        user?.role == CourtRole.judge || user?.role == CourtRole.ict_specialist;
+    // Testlarni faqat admin yaratadi va boshqaradi
+    final canManage = user?.isAdmin == true;
 
     return Scaffold(
       appBar: AppBar(

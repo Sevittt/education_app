@@ -20,16 +20,16 @@ class AwardPoints {
   AwardPoints(this.repository);
 
   Future<void> call({
-    required String userId,
-    required int points,
     required String actionType,
-    String? description,
+    required String targetId,
+    String? courseId,
+    bool speedBonus = false,
   }) async {
     return repository.awardPoints(
-      userId: userId,
-      points: points,
       actionType: actionType,
-      description: description,
+      targetId: targetId,
+      courseId: courseId,
+      speedBonus: speedBonus,
     );
   }
 }

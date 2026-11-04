@@ -2,12 +2,15 @@ import 'package:sud_qollanma/features/auth/domain/entities/app_user.dart';
 
 abstract class GamificationRepository {
   Future<void> updateStreak(String userId);
+
+  /// XP miqdorini server belgilaydi va bir kontent uchun bir marta beradi.
+  /// [targetId] — kontent ID'si (quiz, video, maqola, dars yoki kurs);
+  /// [courseId] faqat `lesson_completed` uchun kerak.
   Future<void> awardPoints({
-    required String userId,
-    required int points,
     required String actionType,
-    String? description,
-    String? contentId,
+    required String targetId,
+    String? courseId,
+    bool speedBonus = false,
   });
   Future<int> calculateQuizScore({required bool isCorrect, required int timeTakenSeconds});
   Stream<List<AppUser>> getLeaderboard({int limit = 20});

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sud_qollanma/config/gamification_rules.dart';
 import 'package:sud_qollanma/core/constants/app_colors.dart';
 import 'package:sud_qollanma/features/courses/domain/entities/course_entity.dart';
 import 'package:sud_qollanma/features/courses/domain/entities/course_lesson_entity.dart';
@@ -9,6 +10,7 @@ import 'package:sud_qollanma/features/courses/presentation/screens/certificate_s
 import 'package:sud_qollanma/features/courses/presentation/screens/lesson_viewer_screen.dart';
 import 'package:sud_qollanma/features/courses/presentation/widgets/difficulty_badge.dart';
 import 'package:sud_qollanma/features/courses/presentation/widgets/module_expansion_tile.dart';
+import 'package:sud_qollanma/features/quiz/domain/entities/quiz_result.dart';
 import 'package:sud_qollanma/features/quiz/presentation/screens/quiz_screen.dart';
 import 'package:sud_qollanma/shared/widgets/animated_button.dart';
 import 'package:sud_qollanma/shared/widgets/custom_network_image.dart';
@@ -404,10 +406,9 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
       // Oldingi majburiy dars tugallanmagan → bloklash
       if (!progress.isLessonCompleted(prev.id)) return true;
 
-      // Qoida 6: Quiz gating — oldingi quiz `minPassScore` dan o'tmaganmi?
-      // (Bu yerda ball ma'lumoti UserCourseProgress dan olinadi
-      //  — kelajakda quizScores: Map<lessonId, score> kengaytirish mumkin)
-      // Hozircha: quiz tugallangan bo'lsa, o'tgan deb hisoblaymiz
+      // Qoida 6: Quiz gating — quiz dars faqat `minPassScore` (yoki
+      // GamificationRules.quizPassPercent) dan o'tilganda tugallangan deb belgilanadi,
+      // shuning uchun tugallangan quiz o'tilgan hisoblanadi
       break; // Birinchi topilgan majburiy oldingi dars tekshirildi
     }
 
@@ -438,27 +439,49 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     if (!context.mounted) return;
 
     bool didComplete = false;
+    int? quizScore;
 
     if (lesson.type == LessonType.quiz) {
-      // Quiz — to'g'ridan-to'g'ri QuizScreen ga yuborish
-      await Navigator.push(
+      // Quiz — faqat o'tish chegarasidan o'tgan natija darsni yakunlaydi
+      final result = await Navigator.push<QuizResult>(
         context,
         MaterialPageRoute(builder: (_) => QuizScreen(quizId: lesson.refId)),
       );
+      if (result == null || !context.mounted) return; // Test topshirilmadi
+
+      final minScore = lesson.minPassScore ?? GamificationRules.quizPassPercent;
+      if (!result.passes(minScore)) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Test o\'tilmadi: ${result.percent}%. '
+              'Darsni yakunlash uchun kamida $minScore% kerak.',
+            ),
+          ),
+        );
+        return;
+      }
       didComplete = true;
+      quizScore = result.percent;
     } else {
-      // Video, Article, PDF — LessonViewerScreen
+      // Video, Article, PDF — faqat aniq yakunlash amali true qaytaradi;
+      // orqaga qaytish (null) yakunlash emas
       didComplete = await Navigator.push<bool>(
         context,
         MaterialPageRoute(
           builder: (_) => LessonViewerScreen(lesson: lesson),
         ),
-      ) ?? true; // Avtomatik tarzda yakunlangan deb olish (tugmani kutmasdan)
+      ) ?? false;
     }
 
     if (!didComplete || !context.mounted) return;
 
-    await provider.markLessonComplete(courseId, lesson.id, lesson.type.name);
+    await provider.markLessonComplete(
+      courseId,
+      lesson.id,
+      lesson.type.name,
+      score: quizScore,
+    );
 
     if (!context.mounted) return;
 

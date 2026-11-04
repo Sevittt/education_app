@@ -11,27 +11,100 @@ service cloud.firestore {
       return isAuthenticated() && request.auth.uid == userId;
     }
     
-    function isAdmin() {
-      return isAuthenticated() && 
-        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
-         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'ict_specialist');
+    function userRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('role', '');
     }
 
-    function isExpertOrAdmin() {
-      return isAuthenticated() && 
-        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
-         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'ict_specialist' || 
-         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'ekspert' ||
-         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'judge');
+    // Tizim admini faqat role == 'admin'. AKT xodimi (ict_specialist) admin emas —
+    // client'dagi AppUser.isAdmin bilan bir xil.
+    function isAdmin() {
+      return isAuthenticated() && userRole() == 'admin';
+    }
+
+    // Kontentni (kurs, test, resurs, maqola, FAQ) faqat admin yozadi.
+    // Sudyalar va boshqa xodimlar iste'molchi; AKT xodimi muammo/yechimni
+    // ict_reports orqali adminga yuboradi.
+
+    // Ro'yxatdan o'tishda o'zi tanlashi mumkin bo'lgan lavozimlar ('admin' yo'q)
+    function selfAssignableRoles() {
+      return ['judge', 'assistant', 'chancellery', 'archive', 'ict_specialist', 'unknown'];
+    }
+
+    // Egasi o'zgartira oladigan profil maydonlari (AppUserModel.toProfileMap + fcmToken, lastLogin).
+    // role, xp, level va hisoblagichlarni faqat admin yoki Cloud Functions yozadi.
+    function ownerEditableUserFields() {
+      return ['name', 'username', 'profilePictureUrl', 'bio', 'notificationsEnabled',
+              'fcmToken', 'lastLogin', 'regionId', 'regionName', 'courtTypeId',
+              'courtTypeName', 'courtId', 'courtName', 'position'];
+    }
+
+    // Yangi profil: xavfsiz lavozim va nol gamification holati
+    function isValidNewUser(userId) {
+      let d = request.resource.data;
+      return d.get('role', 'unknown') in selfAssignableRoles()
+        && d.get('id', userId) == userId
+        && d.get('xp', 0) == 0
+        && d.get('level', 'levelBeginner') == 'levelBeginner'
+        && d.get('quizzesPassed', 0) == 0
+        && d.get('totalQuizzesAced', 0) == 0
+        && d.get('simulationsCompleted', 0) == 0
+        && d.get('currentStreak', 0) == 0
+        && d.get('lastLoginDate', null) == null
+        && d.get('previousRank', null) == null
+        && d.get('fastestQuizTime', null) == null
+        && !d.keys().hasAny(['lastActivity', 'awardedContentIds']);
     }
 
     // --- Users Collection ---
     // Anyone authenticated can read user profiles (needed for Leaderboard).
-    // Users can only write their own profile.
-    // Admins can read/write all.
+    // Egasi faqat profil maydonlarini yozadi; admin hammasini.
+    // XP/streak: Cloud Functions (awardXp, updateStreak) Admin SDK orqali yozadi.
     match /users/{userId} {
       allow read: if isAuthenticated();
-      allow write: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId) && isValidNewUser(userId);
+      allow update: if isAdmin() || (
+        isOwner(userId) &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(ownerEditableUserFields())
+      );
+      allow delete: if isAdmin();
+
+      // Video ko'rish holati: oxirgi joy va ko'rilgan oraliqlar (davom ettirish, 90% mezoni)
+      match /video_progress/{videoId} {
+        allow read, delete: if isOwner(userId);
+        allow create, update: if isOwner(userId)
+          && request.resource.data.keys().hasOnly([
+               'lastPositionSeconds', 'durationSeconds', 'watchedRanges', 'completed', 'updatedAt'])
+          && request.resource.data.watchedRanges is list
+          && request.resource.data.watchedRanges.size() <= 100;
+      }
+    }
+
+    // --- AKT xodimlari: muammo va yechimlar ---
+    // AKT xodimi yuboradi, admin ko'rib chiqadi va tasdiqlasa FAQ sifatida nashr qiladi.
+    match /ict_reports/{reportId} {
+      allow create: if isAuthenticated() && userRole() == 'ict_specialist'
+        && request.resource.data.authorId == request.auth.uid
+        && request.resource.data.status == 'pending'
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.keys().hasOnly([
+             'authorId', 'authorName', 'courtName', 'regionName', 'systemId', 'systemName',
+             'category', 'problem', 'description', 'solution', 'status', 'createdAt'])
+        && request.resource.data.problem is string
+        && request.resource.data.problem.size() > 0
+        && request.resource.data.problem.size() <= 200
+        && request.resource.data.solution is string
+        && request.resource.data.solution.size() > 0
+        && request.resource.data.solution.size() <= 5000
+        && request.resource.data.get('description', '').size() <= 5000;
+      allow read: if isAdmin() ||
+        (isAuthenticated() && resource.data.authorId == request.auth.uid);
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'adminComment', 'faqId', 'reviewedAt', 'reviewedBy'])
+        && request.resource.data.status in ['approved', 'rejected'];
+      allow delete: if isAdmin() || (isAuthenticated()
+        && resource.data.authorId == request.auth.uid
+        && resource.data.status == 'pending');
     }
 
     // --- Learning Records (xAPI) ---
@@ -45,36 +118,36 @@ service cloud.firestore {
     }
 
     // --- Content Collections ---
-    // PUBLIC READ for all content, Admin/Expert write
+    // PUBLIC READ for all content, Admin write
     // This allows anyone (including unauthenticated users) to read content
     match /resources/{docId} {
       allow read: if true;
-      allow write: if isExpertOrAdmin();
+      allow write: if isAdmin();
     }
 
     match /knowledge_base/{docId} {
       allow read: if true;
-      allow write: if isExpertOrAdmin();
+      allow write: if isAdmin();
     }
     
     match /video_tutorials/{docId} {
       allow read: if true;
-      allow write: if isExpertOrAdmin();
+      allow write: if isAdmin();
     }
     
     match /systems/{docId} {
       allow read: if true;
-      allow write: if isExpertOrAdmin();
+      allow write: if isAdmin();
     }
 
     match /faq/{docId} {
       allow read: if true;
-      allow write: if isExpertOrAdmin();
+      allow write: if isAdmin();
     }
 
     match /faqs/{docId} {
       allow read: if true;
-      allow write: if isExpertOrAdmin();
+      allow write: if isAdmin();
     }
     
     match /app_notifications/{docId} {
@@ -110,64 +183,75 @@ service cloud.firestore {
     // --- Quizzes Collection ---
     match /quizzes/{quizId} {
       allow read: if true;
-      allow write: if isExpertOrAdmin();
+      allow write: if isAdmin();
       
       // Questions Subcollection
       match /questions/{questionId} {
         allow read: if true;
-        allow write: if isExpertOrAdmin();
+        allow write: if isAdmin();
       }
     }
     
     // --- Quiz Attempts ---
     match /quiz_attempts/{attemptId} {
-      allow create: if isAuthenticated();
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
       allow read: if isOwner(resource.data.userId) || isAdmin();
     }
     
     // --- News Collection ---
     match /news/{docId} {
       allow read: if true;
-      allow write: if isExpertOrAdmin();
+      allow write: if isAdmin();
     }
 
     // --- Courses Collection ---
     match /courses/{courseId} {
       allow read: if true;
-      allow write: if isExpertOrAdmin();
+      allow write: if isAdmin();
 
       // Modules subcollection
       match /modules/{moduleId} {
         allow read: if true;
-        allow write: if isExpertOrAdmin();
+        allow write: if isAdmin();
 
         // Lessons nested under modules
         match /lessons/{lessonId} {
           allow read: if true;
-          allow write: if isExpertOrAdmin();
+          allow write: if isAdmin();
         }
       }
 
       // Top-level lessons subcollection (legacy / flat structure)
       match /lessons/{lessonId} {
         allow read: if true;
-        allow write: if isExpertOrAdmin();
+        allow write: if isAdmin();
       }
     }
 
     // --- User Course Progress ---
-    // Users can only read and write their own progress.
-    // Admin can read all for reporting purposes.
-    match /user_course_progress/{userId} {
-      allow read: if isOwner(userId) || isAdmin();
-      allow write: if isOwner(userId);
-
-      // Per-course progress subcollection
-      match /courses/{courseId} {
-        allow read: if isOwner(userId) || isAdmin();
-        // Only increment-based field updates allowed (prevents overwriting others' data)
-        allow write: if isOwner(userId);
-      }
+    // Hujjat: user_course_progress/{uid}_{courseId}, egasi data.userId da.
+    // Foydalanuvchi faqat o'z progressini o'qiydi/yozadi; admin hisobot uchun o'qiydi.
+    match /user_course_progress/{progressId} {
+      // Hali boshlanmagan kurs (hujjat yo'q) uchun get null qaytishi kerak
+      allow get: if isAuthenticated() && (
+        (resource == null && progressId.matches(request.auth.uid + '_.+')) ||
+        (resource != null && resource.data.userId == request.auth.uid) ||
+        isAdmin()
+      );
+      allow list: if isAuthenticated() &&
+        (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated()
+        && request.resource.data.userId == request.auth.uid
+        && progressId == request.auth.uid + '_' + request.resource.data.courseId
+        && request.resource.data.get('completedLessonIds', []).size() == 0
+        && request.resource.data.get('earnedXp', 0) == 0
+        && request.resource.data.get('percentComplete', 0) == 0;
+      allow update: if isAuthenticated()
+        && resource.data.userId == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+             'completedLessonIds', 'percentComplete', 'earnedXp', 'quizScores',
+             'lastAccessedAt', 'completedAt', 'certificateUrl']);
+      allow delete: if isAdmin();
     }
 
     // --- Certificates ---

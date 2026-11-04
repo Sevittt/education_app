@@ -207,21 +207,18 @@ class CourseRepositoryImpl implements CourseRepository {
     );
 
     // 7. ── Gamification: dars XP + kurs bonus ────────────────────────────
+    // Server darsning xpReward ini kurs hujjatidan oladi va progressni tekshiradi.
     if (gamificationRepository != null) {
-      // Har dars uchun uning xpReward ini berish
       await gamificationRepository!.awardPoints(
-        userId: userId,
-        points: lessonXp,
         actionType: 'lesson_completed',
-        description: 'Completed lesson: ${completedLesson?.title ?? lessonId}',
+        targetId: lessonId,
+        courseId: courseId,
       );
 
       if (isCourseComplete) {
         await gamificationRepository!.awardPoints(
-          userId: userId,
-          points: bonusXp,
           actionType: 'course_completed',
-          description: 'Completed course: ${course.title}',
+          targetId: courseId,
         );
       }
     }

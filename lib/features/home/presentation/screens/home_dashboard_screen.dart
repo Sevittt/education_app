@@ -12,8 +12,7 @@ import 'package:sud_qollanma/features/auth/domain/repositories/auth_repository.d
 import 'package:sud_qollanma/features/quiz/domain/entities/quiz_attempt.dart';
 import 'package:sud_qollanma/features/quiz/presentation/providers/quiz_provider.dart';
 import 'package:sud_qollanma/features/quiz/domain/entities/quiz.dart';
-import 'package:sud_qollanma/features/library/domain/entities/resource_entity.dart';
-import 'package:sud_qollanma/features/library/presentation/providers/library_provider.dart';
+import 'package:sud_qollanma/features/ict_reports/presentation/widgets/ict_reports_dashboard_card.dart';
 import 'package:sud_qollanma/features/search/presentation/screens/global_search_screen.dart';
 import 'package:sud_qollanma/features/ai_chat/presentation/screens/ai_chat_screen.dart';
 import 'package:sud_qollanma/features/news/domain/entities/news_entity.dart';
@@ -221,19 +220,24 @@ class HomeDashboardScreen extends StatelessWidget {
   }
 
 
+  /// Kontentni faqat admin yaratadi: sudyalar ham boshqa xodimlar kabi o'quvchi.
+  /// AKT xodimi qo'shimcha ravishda muammo/yechimni adminga yuboradi.
   Widget _buildRoleSpecificDashboard(
     AppUser appUser,
     AppLocalizations l10n,
     ThemeData theme,
     BuildContext context,
   ) {
-    if (appUser.role == CourtRole.ict_specialist) {
-      return _buildAdminDashboard(appUser, l10n, theme, context);
-    } else if (appUser.role == CourtRole.judge) {
-      return _buildEkspertDashboard(appUser, l10n, theme, context);
-    } else {
-      return _buildXodimDashboard(appUser, l10n, theme, context);
-    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (appUser.role == CourtRole.ict_specialist) ...[
+          const IctReportsDashboardCard(),
+          const SizedBox(height: 28),
+        ],
+        _buildXodimDashboard(appUser, l10n, theme, context),
+      ],
+    );
   }
 
   Widget _buildXodimDashboard(
@@ -329,126 +333,5 @@ class HomeDashboardScreen extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  Widget _buildEkspertDashboard(
-    AppUser appUser,
-    AppLocalizations l10n,
-    ThemeData theme,
-    BuildContext context,
-  ) {
-    final libraryProvider = Provider.of<LibraryProvider>(context, listen: false);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: Text(
-                l10n.dashboardEkspertTitle,
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: theme.colorScheme.onSurface,
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () => onTabSelected(1),
-              child: Text(l10n.seeAllButton),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        StreamBuilder<List<ResourceEntity>>(
-          stream: libraryProvider.watchResourcesByAuthor(appUser.id),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (snapshot.hasError) {
-              return Center(
-                child: Text(l10n.errorLoadingResources(snapshot.error.toString())),
-              );
-            }
-            if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return GlassCard(
-                borderRadius: 14,
-                child: Center(child: Text(l10n.noGuidesAuthored)),
-              );
-            }
-
-            final resources = snapshot.data!;
-            return ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: resources.length > 3 ? 3 : resources.length,
-              itemBuilder: (context, index) {
-                final resource = resources[index];
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: GlassCard(
-                    padding: const EdgeInsets.all(12),
-                    borderRadius: 14,
-                    child: Row(
-                      children: [
-                        Builder(builder: (ctx) {
-                          final dark = Theme.of(ctx).brightness == Brightness.dark;
-                          return Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: dark ? AppColors.amberContainer : AppColors.primaryContainer,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Icon(Icons.description,
-                                color: dark ? AppColors.amber : AppColors.primary,
-                                size: 20),
-                          );
-                        }),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                resource.title,
-                                style: theme.textTheme.titleSmall?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: theme.colorScheme.onSurface,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(
-                                resource.type.name[0].toUpperCase() +
-                                    resource.type.name.substring(1).toLowerCase(),
-                                style: theme.textTheme.bodySmall?.copyWith(
-                                  color: theme.colorScheme.onSurfaceVariant,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            );
-          },
-        ),
-      ],
-    );
-  }
-
-  Widget _buildAdminDashboard(
-    AppUser appUser,
-    AppLocalizations l10n,
-    ThemeData theme,
-    BuildContext context,
-  ) {
-    return const SizedBox.shrink(); // Moved to main dashboard
   }
 }

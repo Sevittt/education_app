@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sud_qollanma/core/constants/gamification_rules.dart';
 import '../repositories/analytics_repository.dart';
 import '../entities/xapi_statement.dart';
 import '../entities/xapi_actor.dart';
@@ -36,64 +35,52 @@ class LogXApiStatement {
     
     if (finalUserId == 'guest') return;
 
-    int pointsToAward = 0;
-    String actionType = 'unknown';
-    String description = '';
+    final targetId = statement.object.id;
+    if (targetId.isEmpty) return;
 
-    final verbId = statement.verb.id; 
+    // XP miqdorini server belgilaydi; bu yerda faqat harakat turi aniqlanadi.
+    String? actionType;
+    bool speedBonus = false;
+
+    final verbId = statement.verb.id;
     final activityType = statement.object.definition['type'] as String?;
 
     if (activityType == 'http://adlnet.gov/expapi/activities/video') {
         if (verbId.endsWith('completed') || verbId.endsWith('experienced')) {
-            pointsToAward = GamificationRules.xpVideoComplete;
             actionType = 'video_watched';
-            description = 'Watched video';
         }
     } else if (activityType == 'http://adlnet.gov/expapi/activities/assessment') {
-            pointsToAward = GamificationRules.xpQuizPass;
-            actionType = 'quiz_passed';
-            description = 'Passed quiz';
-            
-            final rawScore = statement.result?.score?['raw'];
-            if (rawScore == 100) {
-                 pointsToAward += GamificationRules.xpQuizPerfect;
-                 actionType = 'quiz_aced';
-                 description += ' (Perfect Score!)';
-            }
-            
+        // Faqat o'tilgan test XP beradi. result.success bo'lsa u hal qiladi,
+        // bo'lmasa xAPI verb (passed/failed) ga qaraladi.
+        final passed = statement.result?.success ?? verbId.endsWith('passed');
+        if (passed) {
+            final rawScore = statement.result?.score?['raw'] as num?;
+            actionType = (rawScore ?? 0) >= 100 ? 'quiz_aced' : 'quiz_passed';
+
             final durationStr = statement.result?.duration;
             if (durationStr != null && durationStr.startsWith('PT')) {
                final secondsStr = durationStr.substring(2).replaceAll('S', '');
                final seconds = int.tryParse(secondsStr);
-               if (seconds != null && seconds <= 5) {
-                   pointsToAward += GamificationRules.xpSpeedBonus;
-                   description += ' (Speed Bonus!)';
-               }
+               speedBonus = seconds != null && seconds <= 5;
             }
+        }
     } else if (activityType == 'http://adlnet.gov/expapi/activities/article') {
         if (verbId.endsWith('completed')) {
-            pointsToAward = GamificationRules.xpArticleScroll;
             actionType = 'article_read';
-            description = 'Read article';
         }
     } else if (activityType == 'http://adlnet.gov/expapi/activities/simulation') {
         if (verbId.endsWith('performed') || verbId.endsWith('completed')) {
-             pointsToAward = GamificationRules.xpSimComplete;
              actionType = 'simulation_completed';
-             description = 'Completed simulation';
         } else if (verbId.endsWith('interacted')) {
-             pointsToAward = GamificationRules.xpSimInteraction;
              actionType = 'simulation_interaction';
-             description = 'Simulation interaction';
         }
     }
 
-    if (pointsToAward > 0) {
+    if (actionType != null) {
         await gamificationRepository.awardPoints(
-            userId: finalUserId,
-            points: pointsToAward,
             actionType: actionType,
-            description: description,
+            targetId: targetId,
+            speedBonus: speedBonus,
         );
     }
   }

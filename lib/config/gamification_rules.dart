@@ -11,6 +11,7 @@ class GamificationRules {
   static const int xpQuizPerfect = 50; // Bonus for 100% score
   static const int xpSpeedBonus = 5; // Updated to 5 per BMI_LM.txt
   static const int xpLoginStreak = 5; // Per day (Duolingo style)
+  static const int quizPassPercent = 70; // Test o'tilgan hisoblanadigan minimal foiz
 
   // Tier 3: Practical (Simulation)
   static const int xpSimInteraction = 50;

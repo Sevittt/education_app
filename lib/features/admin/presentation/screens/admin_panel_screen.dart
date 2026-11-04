@@ -11,6 +11,7 @@ import 'admin_video_management_screen.dart';
 import 'admin_system_management_screen.dart';
 import 'package:sud_qollanma/features/faq/presentation/screens/admin_faq_management_screen.dart';
 import 'package:sud_qollanma/features/notifications/presentation/screens/admin_notification_management_screen.dart';
+import 'package:sud_qollanma/features/ict_reports/presentation/screens/admin_ict_reports_screen.dart';
 import 'admin_analytics_screen.dart';
 import 'admin_course_management_screen.dart';
 
@@ -64,6 +65,12 @@ class AdminPanelScreen extends StatelessWidget {
         title: l10n.manageFaqTitle,
         subtitle: l10n.manageFaqSubtitle,
         destination: const AdminFAQManagementScreen(),
+      ),
+      _AdminItem(
+        icon: Icons.build_circle_rounded,
+        title: 'AKT takliflari',
+        subtitle: 'Muammo va yechimlarni ko\'rib chiqish, FAQ\'ga nashr',
+        destination: const AdminIctReportsScreen(),
       ),
       _AdminItem(
         icon: Icons.notifications_rounded,

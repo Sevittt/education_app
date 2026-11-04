@@ -220,15 +220,15 @@ class _ResourceDetailScreenState extends State<ResourceDetailScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    final CourtRole? userRole = authNotifier.appUser?.role;
+    // Resursni faqat admin tahrirlaydi/o'chiradi
+    final canManage = authNotifier.appUser?.isAdmin == true;
     // ResourceService removed. Use context.read<LibraryProvider>() where needed.
 
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.resource.title), // Use widget.resource
         actions: [
-          if (userRole == CourtRole.judge ||
-              userRole == CourtRole.ict_specialist) ...[
+          if (canManage) ...[
             IconButton(
               icon: const Icon(Icons.edit),
               tooltip: l10n.editButtonTooltip,

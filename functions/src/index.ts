@@ -7,3 +7,4 @@ export { scheduledCourseReminder, testCourseReminder } from "./triggers/courseRe
 export { onSystemCreated, onSystemUpdated } from "./triggers/onSystemCreatedOrUpdated";
 export { onNewsCreated } from "./triggers/onNewsCreated";
 export { onQuizCreated } from "./triggers/onQuizCreated";
+export { awardXp, updateStreak } from "./callables/gamification";
