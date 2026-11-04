@@ -17,10 +17,17 @@
   "storage": {
     "rules": "storage.rules"
   },
-  "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  },
+  "firestore": [
+    {
+      "database": "(default)",
+      "rules": "firestore.rules",
+      "indexes": "firestore.indexes.json"
+    },
+    {
+      "database": "ai-studio-b34af305-a5e0-46d4-b17e-017e46a4ad7b",
+      "rules": "firestore.rules"
+    }
+  ],
   "hosting": {
     "public": "build/web",
     "ignore": [
