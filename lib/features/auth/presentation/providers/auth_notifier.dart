@@ -102,7 +102,14 @@ class AuthNotifier with ChangeNotifier {
       _setLoading(false);
       return false;
     } catch (e) {
-      _setErrorMessage(e.toString());
+      final msg = e.toString();
+      if (msg.contains('popup-closed-by-user')) {
+        _setErrorMessage('Google orqali kirish oynasi yopildi yoki bekor qilindi.');
+      } else if (msg.contains('popup-blocked')) {
+        _setErrorMessage('Brauzer oyna (popup) ochilishini blokladi. Iltimos, brauzerda pop-up larga ruxsat bering.');
+      } else {
+        _setErrorMessage(msg);
+      }
       _setLoading(false);
       return false;
     }

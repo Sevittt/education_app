@@ -58,13 +58,20 @@ class _AnimatedButtonState extends State<AnimatedButton> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: _onTapDown,
-      onTapUp: _onTapUp,
-      onTapCancel: _onTapCancel,
-      child: ScaleTransition(
-        scale: _scaleAnimation,
-        child: widget.child,
+    return MouseRegion(
+      cursor: widget.onPressed != null ? SystemMouseCursors.click : SystemMouseCursors.basic,
+      child: Semantics(
+        button: true,
+        enabled: widget.onPressed != null,
+        child: GestureDetector(
+          onTapDown: _onTapDown,
+          onTapUp: _onTapUp,
+          onTapCancel: _onTapCancel,
+          child: ScaleTransition(
+            scale: _scaleAnimation,
+            child: widget.child,
+          ),
+        ),
       ),
     );
   }

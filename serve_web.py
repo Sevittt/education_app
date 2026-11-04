@@ -12,8 +12,9 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
 
     def end_headers(self):
         self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Cross-Origin-Opener-Policy', 'same-origin')
-        self.send_header('Cross-Origin-Embedder-Policy', 'credentialless')
+        # same-origin-allow-popups allows Firebase Auth / Google OAuth popups
+        # to communicate credentials back to window.opener without being blocked.
+        self.send_header('Cross-Origin-Opener-Policy', 'same-origin-allow-popups')
         super().end_headers()
 
     def guess_type(self, path):
@@ -27,7 +28,7 @@ if __name__ == '__main__':
     print(f"Serving Flutter Web at http://localhost:{PORT} from {DIRECTORY}")
     socketserver.TCPServer.allow_reuse_address = True
     try:
-        with socketserver.TCPServer(('127.0.0.1', PORT), CustomHandler) as httpd:
+        with socketserver.TCPServer(('0.0.0.0', PORT), CustomHandler) as httpd:
             httpd.serve_forever()
     except Exception as e:
         print(f"Server error: {e}", file=sys.stderr)

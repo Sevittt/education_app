@@ -161,6 +161,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       if (kIsWeb) {
         final GoogleAuthProvider googleProvider = GoogleAuthProvider();
+        googleProvider.setCustomParameters({'prompt': 'select_account'});
         userCredential = await _firebaseAuth.signInWithPopup(googleProvider);
       } else {
         final googleUser = await _googleSignIn.authenticate();
