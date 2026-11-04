@@ -43,16 +43,48 @@ class OutboxActionsTable extends Table {
   TextColumn get lastError => text().nullable()();
 }
 
+/// RAG (Retrieval-Augmented Generation) uchun mahalliy bilimlar bo'lagi jadvali.
+///
+/// Barcha darslar, qo'llanmalar va yo'riqnomalar `embeddinggemma-2` orqali
+/// olingan 256/768 o'lchamli vektorlari bilan saqlanadi.
+class RagChunksTable extends Table {
+  TextColumn get id => text()();
+  TextColumn get title => text()();
+  TextColumn get module => text()();
+  TextColumn get category => text()();
+  TextColumn get content => text()();
+
+  /// JSON massiv: `List<double>` (masalan 256 o'lchamli float massivi).
+  TextColumn get vectorJson => text()();
+  TextColumn get sourcePath => text().nullable()();
+  DateTimeColumn get updatedAt => dateTime()();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 /// Ilovaning lokal SQLite ma'lumotlar bazasi (Drift orqali boshqariladi).
 ///
 /// Yangi jadval qo'shilganda [DriftDatabase] ro'yxatiga va kerak bo'lsa
 /// [schemaVersion] / [migration] ga ham qo'shilishi lozim.
-@DriftDatabase(tables: [NewsTable, OutboxActionsTable])
+@DriftDatabase(tables: [NewsTable, OutboxActionsTable, RagChunksTable])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        onCreate: (m) async {
+          await m.createAll();
+        },
+        onUpgrade: (m, from, to) async {
+          if (from < 2) {
+            await m.createTable(ragChunksTable);
+          }
+        },
+      );
 
   // --- News so'rovlari ---
 
@@ -138,6 +170,35 @@ class AppDatabase extends _$AppDatabase {
     return (update(outboxActionsTable)
           ..where((t) => t.id.equals(action.id.value)))
         .write(action);
+  }
+
+  // --- RAG so'rovlari ---
+
+  /// RAG bo'laklarini ommaviy saqlaydi (mavjudlari yangilanadi, yangilari qo'shiladi).
+  Future<void> saveRagChunks(List<RagChunksTableCompanion> chunks) {
+    if (chunks.isEmpty) return Future.value();
+    return transaction(() async {
+      for (final chunk in chunks) {
+        await into(ragChunksTable).insertOnConflictUpdate(chunk);
+      }
+    });
+  }
+
+  /// Barcha RAG bo'laklarini olish.
+  Future<List<RagChunksTableData>> getAllRagChunks({int? limit}) {
+    final query = select(ragChunksTable);
+    if (limit != null) {
+      query.limit(limit);
+    }
+    return query.get();
+  }
+
+  /// Umumiy RAG bo'laklari soni.
+  Future<int> getRagChunksCount() async {
+    final countExp = ragChunksTable.id.count();
+    final query = selectOnly(ragChunksTable)..addColumns([countExp]);
+    final result = await query.map((row) => row.read(countExp)).getSingle();
+    return result ?? 0;
   }
 }
 

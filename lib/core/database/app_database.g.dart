@@ -792,18 +792,448 @@ class OutboxActionsTableCompanion
   }
 }
 
+class $RagChunksTableTable extends RagChunksTable
+    with TableInfo<$RagChunksTableTable, RagChunksTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $RagChunksTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  @override
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+      'title', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _moduleMeta = const VerificationMeta('module');
+  @override
+  late final GeneratedColumn<String> module = GeneratedColumn<String>(
+      'module', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _categoryMeta =
+      const VerificationMeta('category');
+  @override
+  late final GeneratedColumn<String> category = GeneratedColumn<String>(
+      'category', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _contentMeta =
+      const VerificationMeta('content');
+  @override
+  late final GeneratedColumn<String> content = GeneratedColumn<String>(
+      'content', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _vectorJsonMeta =
+      const VerificationMeta('vectorJson');
+  @override
+  late final GeneratedColumn<String> vectorJson = GeneratedColumn<String>(
+      'vector_json', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _sourcePathMeta =
+      const VerificationMeta('sourcePath');
+  @override
+  late final GeneratedColumn<String> sourcePath = GeneratedColumn<String>(
+      'source_path', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, title, module, category, content, vectorJson, sourcePath, updatedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'rag_chunks_table';
+  @override
+  VerificationContext validateIntegrity(Insertable<RagChunksTableData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
+    } else if (isInserting) {
+      context.missing(_titleMeta);
+    }
+    if (data.containsKey('module')) {
+      context.handle(_moduleMeta,
+          module.isAcceptableOrUnknown(data['module']!, _moduleMeta));
+    } else if (isInserting) {
+      context.missing(_moduleMeta);
+    }
+    if (data.containsKey('category')) {
+      context.handle(_categoryMeta,
+          category.isAcceptableOrUnknown(data['category']!, _categoryMeta));
+    } else if (isInserting) {
+      context.missing(_categoryMeta);
+    }
+    if (data.containsKey('content')) {
+      context.handle(_contentMeta,
+          content.isAcceptableOrUnknown(data['content']!, _contentMeta));
+    } else if (isInserting) {
+      context.missing(_contentMeta);
+    }
+    if (data.containsKey('vector_json')) {
+      context.handle(
+          _vectorJsonMeta,
+          vectorJson.isAcceptableOrUnknown(
+              data['vector_json']!, _vectorJsonMeta));
+    } else if (isInserting) {
+      context.missing(_vectorJsonMeta);
+    }
+    if (data.containsKey('source_path')) {
+      context.handle(
+          _sourcePathMeta,
+          sourcePath.isAcceptableOrUnknown(
+              data['source_path']!, _sourcePathMeta));
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  RagChunksTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return RagChunksTableData(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      title: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
+      module: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}module'])!,
+      category: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}category'])!,
+      content: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}content'])!,
+      vectorJson: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}vector_json'])!,
+      sourcePath: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}source_path']),
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+    );
+  }
+
+  @override
+  $RagChunksTableTable createAlias(String alias) {
+    return $RagChunksTableTable(attachedDatabase, alias);
+  }
+}
+
+class RagChunksTableData extends DataClass
+    implements Insertable<RagChunksTableData> {
+  final String id;
+  final String title;
+  final String module;
+  final String category;
+  final String content;
+
+  /// JSON massiv: List<double> (masalan 256 o'lchamli float massivi).
+  final String vectorJson;
+  final String? sourcePath;
+  final DateTime updatedAt;
+  const RagChunksTableData(
+      {required this.id,
+      required this.title,
+      required this.module,
+      required this.category,
+      required this.content,
+      required this.vectorJson,
+      this.sourcePath,
+      required this.updatedAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['title'] = Variable<String>(title);
+    map['module'] = Variable<String>(module);
+    map['category'] = Variable<String>(category);
+    map['content'] = Variable<String>(content);
+    map['vector_json'] = Variable<String>(vectorJson);
+    if (!nullToAbsent || sourcePath != null) {
+      map['source_path'] = Variable<String>(sourcePath);
+    }
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    return map;
+  }
+
+  RagChunksTableCompanion toCompanion(bool nullToAbsent) {
+    return RagChunksTableCompanion(
+      id: Value(id),
+      title: Value(title),
+      module: Value(module),
+      category: Value(category),
+      content: Value(content),
+      vectorJson: Value(vectorJson),
+      sourcePath: sourcePath == null && nullToAbsent
+          ? const Value.absent()
+          : Value(sourcePath),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory RagChunksTableData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return RagChunksTableData(
+      id: serializer.fromJson<String>(json['id']),
+      title: serializer.fromJson<String>(json['title']),
+      module: serializer.fromJson<String>(json['module']),
+      category: serializer.fromJson<String>(json['category']),
+      content: serializer.fromJson<String>(json['content']),
+      vectorJson: serializer.fromJson<String>(json['vectorJson']),
+      sourcePath: serializer.fromJson<String?>(json['sourcePath']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'title': serializer.toJson<String>(title),
+      'module': serializer.toJson<String>(module),
+      'category': serializer.toJson<String>(category),
+      'content': serializer.toJson<String>(content),
+      'vectorJson': serializer.toJson<String>(vectorJson),
+      'sourcePath': serializer.toJson<String?>(sourcePath),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+    };
+  }
+
+  RagChunksTableData copyWith(
+          {String? id,
+          String? title,
+          String? module,
+          String? category,
+          String? content,
+          String? vectorJson,
+          Value<String?> sourcePath = const Value.absent(),
+          DateTime? updatedAt}) =>
+      RagChunksTableData(
+        id: id ?? this.id,
+        title: title ?? this.title,
+        module: module ?? this.module,
+        category: category ?? this.category,
+        content: content ?? this.content,
+        vectorJson: vectorJson ?? this.vectorJson,
+        sourcePath: sourcePath.present ? sourcePath.value : this.sourcePath,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
+  RagChunksTableData copyWithCompanion(RagChunksTableCompanion data) {
+    return RagChunksTableData(
+      id: data.id.present ? data.id.value : this.id,
+      title: data.title.present ? data.title.value : this.title,
+      module: data.module.present ? data.module.value : this.module,
+      category: data.category.present ? data.category.value : this.category,
+      content: data.content.present ? data.content.value : this.content,
+      vectorJson:
+          data.vectorJson.present ? data.vectorJson.value : this.vectorJson,
+      sourcePath:
+          data.sourcePath.present ? data.sourcePath.value : this.sourcePath,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RagChunksTableData(')
+          ..write('id: $id, ')
+          ..write('title: $title, ')
+          ..write('module: $module, ')
+          ..write('category: $category, ')
+          ..write('content: $content, ')
+          ..write('vectorJson: $vectorJson, ')
+          ..write('sourcePath: $sourcePath, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id, title, module, category, content, vectorJson, sourcePath, updatedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is RagChunksTableData &&
+          other.id == this.id &&
+          other.title == this.title &&
+          other.module == this.module &&
+          other.category == this.category &&
+          other.content == this.content &&
+          other.vectorJson == this.vectorJson &&
+          other.sourcePath == this.sourcePath &&
+          other.updatedAt == this.updatedAt);
+}
+
+class RagChunksTableCompanion extends UpdateCompanion<RagChunksTableData> {
+  final Value<String> id;
+  final Value<String> title;
+  final Value<String> module;
+  final Value<String> category;
+  final Value<String> content;
+  final Value<String> vectorJson;
+  final Value<String?> sourcePath;
+  final Value<DateTime> updatedAt;
+  final Value<int> rowid;
+  const RagChunksTableCompanion({
+    this.id = const Value.absent(),
+    this.title = const Value.absent(),
+    this.module = const Value.absent(),
+    this.category = const Value.absent(),
+    this.content = const Value.absent(),
+    this.vectorJson = const Value.absent(),
+    this.sourcePath = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  RagChunksTableCompanion.insert({
+    required String id,
+    required String title,
+    required String module,
+    required String category,
+    required String content,
+    required String vectorJson,
+    this.sourcePath = const Value.absent(),
+    required DateTime updatedAt,
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        title = Value(title),
+        module = Value(module),
+        category = Value(category),
+        content = Value(content),
+        vectorJson = Value(vectorJson),
+        updatedAt = Value(updatedAt);
+  static Insertable<RagChunksTableData> custom({
+    Expression<String>? id,
+    Expression<String>? title,
+    Expression<String>? module,
+    Expression<String>? category,
+    Expression<String>? content,
+    Expression<String>? vectorJson,
+    Expression<String>? sourcePath,
+    Expression<DateTime>? updatedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (title != null) 'title': title,
+      if (module != null) 'module': module,
+      if (category != null) 'category': category,
+      if (content != null) 'content': content,
+      if (vectorJson != null) 'vector_json': vectorJson,
+      if (sourcePath != null) 'source_path': sourcePath,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  RagChunksTableCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? title,
+      Value<String>? module,
+      Value<String>? category,
+      Value<String>? content,
+      Value<String>? vectorJson,
+      Value<String?>? sourcePath,
+      Value<DateTime>? updatedAt,
+      Value<int>? rowid}) {
+    return RagChunksTableCompanion(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      module: module ?? this.module,
+      category: category ?? this.category,
+      content: content ?? this.content,
+      vectorJson: vectorJson ?? this.vectorJson,
+      sourcePath: sourcePath ?? this.sourcePath,
+      updatedAt: updatedAt ?? this.updatedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (module.present) {
+      map['module'] = Variable<String>(module.value);
+    }
+    if (category.present) {
+      map['category'] = Variable<String>(category.value);
+    }
+    if (content.present) {
+      map['content'] = Variable<String>(content.value);
+    }
+    if (vectorJson.present) {
+      map['vector_json'] = Variable<String>(vectorJson.value);
+    }
+    if (sourcePath.present) {
+      map['source_path'] = Variable<String>(sourcePath.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RagChunksTableCompanion(')
+          ..write('id: $id, ')
+          ..write('title: $title, ')
+          ..write('module: $module, ')
+          ..write('category: $category, ')
+          ..write('content: $content, ')
+          ..write('vectorJson: $vectorJson, ')
+          ..write('sourcePath: $sourcePath, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $NewsTableTable newsTable = $NewsTableTable(this);
   late final $OutboxActionsTableTable outboxActionsTable =
       $OutboxActionsTableTable(this);
+  late final $RagChunksTableTable ragChunksTable = $RagChunksTableTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [newsTable, outboxActionsTable];
+      [newsTable, outboxActionsTable, ragChunksTable];
 }
 
 typedef $$NewsTableTableCreateCompanionBuilder = NewsTableCompanion Function({
@@ -1212,6 +1642,225 @@ typedef $$OutboxActionsTableTableProcessedTableManager = ProcessedTableManager<
     ),
     OutboxActionsTableData,
     PrefetchHooks Function()>;
+typedef $$RagChunksTableTableCreateCompanionBuilder = RagChunksTableCompanion
+    Function({
+  required String id,
+  required String title,
+  required String module,
+  required String category,
+  required String content,
+  required String vectorJson,
+  Value<String?> sourcePath,
+  required DateTime updatedAt,
+  Value<int> rowid,
+});
+typedef $$RagChunksTableTableUpdateCompanionBuilder = RagChunksTableCompanion
+    Function({
+  Value<String> id,
+  Value<String> title,
+  Value<String> module,
+  Value<String> category,
+  Value<String> content,
+  Value<String> vectorJson,
+  Value<String?> sourcePath,
+  Value<DateTime> updatedAt,
+  Value<int> rowid,
+});
+
+class $$RagChunksTableTableFilterComposer
+    extends Composer<_$AppDatabase, $RagChunksTableTable> {
+  $$RagChunksTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get module => $composableBuilder(
+      column: $table.module, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get category => $composableBuilder(
+      column: $table.category, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get content => $composableBuilder(
+      column: $table.content, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get vectorJson => $composableBuilder(
+      column: $table.vectorJson, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get sourcePath => $composableBuilder(
+      column: $table.sourcePath, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
+}
+
+class $$RagChunksTableTableOrderingComposer
+    extends Composer<_$AppDatabase, $RagChunksTableTable> {
+  $$RagChunksTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get module => $composableBuilder(
+      column: $table.module, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get category => $composableBuilder(
+      column: $table.category, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get content => $composableBuilder(
+      column: $table.content, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get vectorJson => $composableBuilder(
+      column: $table.vectorJson, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get sourcePath => $composableBuilder(
+      column: $table.sourcePath, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $$RagChunksTableTableAnnotationComposer
+    extends Composer<_$AppDatabase, $RagChunksTableTable> {
+  $$RagChunksTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  GeneratedColumn<String> get module =>
+      $composableBuilder(column: $table.module, builder: (column) => column);
+
+  GeneratedColumn<String> get category =>
+      $composableBuilder(column: $table.category, builder: (column) => column);
+
+  GeneratedColumn<String> get content =>
+      $composableBuilder(column: $table.content, builder: (column) => column);
+
+  GeneratedColumn<String> get vectorJson => $composableBuilder(
+      column: $table.vectorJson, builder: (column) => column);
+
+  GeneratedColumn<String> get sourcePath => $composableBuilder(
+      column: $table.sourcePath, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+}
+
+class $$RagChunksTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $RagChunksTableTable,
+    RagChunksTableData,
+    $$RagChunksTableTableFilterComposer,
+    $$RagChunksTableTableOrderingComposer,
+    $$RagChunksTableTableAnnotationComposer,
+    $$RagChunksTableTableCreateCompanionBuilder,
+    $$RagChunksTableTableUpdateCompanionBuilder,
+    (
+      RagChunksTableData,
+      BaseReferences<_$AppDatabase, $RagChunksTableTable, RagChunksTableData>
+    ),
+    RagChunksTableData,
+    PrefetchHooks Function()> {
+  $$RagChunksTableTableTableManager(
+      _$AppDatabase db, $RagChunksTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$RagChunksTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$RagChunksTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$RagChunksTableTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> title = const Value.absent(),
+            Value<String> module = const Value.absent(),
+            Value<String> category = const Value.absent(),
+            Value<String> content = const Value.absent(),
+            Value<String> vectorJson = const Value.absent(),
+            Value<String?> sourcePath = const Value.absent(),
+            Value<DateTime> updatedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              RagChunksTableCompanion(
+            id: id,
+            title: title,
+            module: module,
+            category: category,
+            content: content,
+            vectorJson: vectorJson,
+            sourcePath: sourcePath,
+            updatedAt: updatedAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String title,
+            required String module,
+            required String category,
+            required String content,
+            required String vectorJson,
+            Value<String?> sourcePath = const Value.absent(),
+            required DateTime updatedAt,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              RagChunksTableCompanion.insert(
+            id: id,
+            title: title,
+            module: module,
+            category: category,
+            content: content,
+            vectorJson: vectorJson,
+            sourcePath: sourcePath,
+            updatedAt: updatedAt,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$RagChunksTableTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $RagChunksTableTable,
+    RagChunksTableData,
+    $$RagChunksTableTableFilterComposer,
+    $$RagChunksTableTableOrderingComposer,
+    $$RagChunksTableTableAnnotationComposer,
+    $$RagChunksTableTableCreateCompanionBuilder,
+    $$RagChunksTableTableUpdateCompanionBuilder,
+    (
+      RagChunksTableData,
+      BaseReferences<_$AppDatabase, $RagChunksTableTable, RagChunksTableData>
+    ),
+    RagChunksTableData,
+    PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -1220,4 +1869,6 @@ class $AppDatabaseManager {
       $$NewsTableTableTableManager(_db, _db.newsTable);
   $$OutboxActionsTableTableTableManager get outboxActionsTable =>
       $$OutboxActionsTableTableTableManager(_db, _db.outboxActionsTable);
+  $$RagChunksTableTableTableManager get ragChunksTable =>
+      $$RagChunksTableTableTableManager(_db, _db.ragChunksTable);
 }

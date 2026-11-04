@@ -27,6 +27,7 @@ import 'package:sud_qollanma/l10n/app_localizations.dart';
 // Core Layer
 import 'package:sud_qollanma/core/constants/api_constants.dart';
 import 'package:sud_qollanma/core/theme/app_theme.dart';
+import 'package:sud_qollanma/core/services/local_rag_service.dart';
 
 // Feature: Auth
 import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
@@ -562,10 +563,18 @@ void main() async {
         Provider<WikiService>(
           create: (context) => WikiService(context.read<AiService>()),
         ),
+        Provider<LocalRagService>(
+          create: (_) {
+            final service = LocalRagService(DriftDatabaseService.instance.db);
+            service.ensureSeeded();
+            return service;
+          },
+        ),
         Provider<RagService>(
           create: (context) => RagService(
             context.read<SearchRemoteDataSource>(),
             context.read<WikiService>(),
+            context.read<LocalRagService>(),
           ),
         ),
         ChangeNotifierProvider<AiNotifier>(

@@ -84,6 +84,7 @@ flutter:
     - assets/images/
     - assets/docs/
     - assets/avatars/
+    - assets/data/
     - .env
 flutter_launcher_icons:
   android: "sq_icon"
