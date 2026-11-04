@@ -160,8 +160,17 @@ void main() async {
   // AES-256 shifrlash xizmati ishga tushiriladi (qurilma xavfsiz chipida kalit saqlanadi)
   await EncryptionHelper.instance.init();
 
-  await GoogleSignIn.instance.initialize();
-  await FcmService.instance.initialize();
+  try {
+    await GoogleSignIn.instance.initialize();
+  } catch (e) {
+    debugPrint('GoogleSignIn initialize warning: ');
+  }
+
+  try {
+    await FcmService.instance.initialize();
+  } catch (e) {
+    debugPrint('FcmService initialize warning: ');
+  }
 
   // Crashlytics (disabled on Web)
   if (!kIsWeb) {

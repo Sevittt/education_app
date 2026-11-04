@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:drift/drift.dart';
-import 'package:drift/native.dart';
-import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
+
+import 'connection/connection.dart' as impl;
 
 part 'app_database.g.dart';
 
@@ -69,7 +66,7 @@ class RagChunksTable extends Table {
 /// [schemaVersion] / [migration] ga ham qo'shilishi lozim.
 @DriftDatabase(tables: [NewsTable, OutboxActionsTable, RagChunksTable])
 class AppDatabase extends _$AppDatabase {
-  AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
+  AppDatabase([QueryExecutor? executor]) : super(executor ?? impl.connect());
 
   @override
   int get schemaVersion => 2;
@@ -202,10 +199,4 @@ class AppDatabase extends _$AppDatabase {
   }
 }
 
-LazyDatabase _openConnection() {
-  return LazyDatabase(() async {
-    final dir = await getApplicationDocumentsDirectory();
-    final file = File(p.join(dir.path, 'sud_qollanma_local.db'));
-    return NativeDatabase.createInBackground(file);
-  });
-}
+

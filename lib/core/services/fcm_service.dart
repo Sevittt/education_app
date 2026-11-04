@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -73,7 +75,13 @@ class FcmService {
 
   Future<void> initialize() async {
     if (kIsWeb) {
-      await _messaging.requestPermission();
+      unawaited(() async {
+        try {
+          await _messaging.requestPermission();
+        } catch (e) {
+          debugPrint('FCM Web permission error: ');
+        }
+      }());
       FirebaseMessaging.onMessage.listen(_handleForegroundMessage);
       return;
     }
