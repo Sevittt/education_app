@@ -6,9 +6,7 @@ worktree `D:\dasturlar\sudqollanma_bot-xp-fix`). Tartib muhim — har qadamdan k
 ## 0. Tayyorgarlik
 
 1. Ikkala repodagi oʻzgarishlarni commit qiling.
-2. Botda `fix/role-xp-rules` ni `main` ga birlashtiring. Lokal `main` GitHub'dagidan ajralgan
-   (lokalda `c937485`, GitHub'da `61181b4`): avval `git pull`, keyin branch merge.
-3. Bot testlari: `python -m unittest discover -s tests -t .` (aiogram va firebase-admin oʻrnatilgan muhitda).
+2. Bot testlari: `python -m unittest discover -s tests -t .` (aiogram va firebase-admin oʻrnatilgan muhitda).
 
 ## 1. Server funksiyalari (ilova reposi)
 
@@ -21,14 +19,28 @@ ular yangi qoidalardan oldin chiqishi kerak (eski ilova ishlashda davom etadi).
 
 ## 2. Bot (Cloud Run)
 
-Botning asosiy papkasidan (`serviceAccountKey.json` va `.env` shu yerda), branch birlashtirilgandan keyin.
-Buyruqlar: `.agent/skills/gcloud/SKILL.md`, «Stable Deploy» — avval `gcloud builds submit`, keyin `gcloud run deploy`.
+Deploy avtomatik: Cloud Build trigger GitHub `Sevittt/sudqollanma_bot` reposining `main` branchiga
+push'da image yigʻadi (tag = commit SHA) va `sudqollanmabot` xizmatini yangilaydi (`europe-west4`,
+mavjud env va secret'lar saqlanadi). Qoʻlda `gcloud builds submit` / `gcloud run deploy` kerak emas.
+
+1. Lokal `main` ni GitHub bilan tenglashtiring: `git pull` (lokalda `c937485`, GitHub'da `61181b4`).
+2. `fix/role-xp-rules` ni `main` ga birlashtiring va testlarni ishga tushiring.
+3. `main` ni push qiling — **bu production deploy**.
+4. Build tugashini kuting va yangi revision Ready boʻlganini tekshiring:
+
+```bash
+gcloud builds list --project educationapp-4780a --limit 3 --format="table(createTime,status,substitutions.SHORT_SHA)"
+gcloud run services describe sudqollanmabot --region europe-west4 --project educationapp-4780a --format="value(status.latestReadyRevisionName)"
+```
+
+Image GitHub'dan yigʻiladi: `.env`, `serviceAccountKey.json`, `data/` unga tushmaydi; bot Firestore'ga
+xizmat hisobi (ADC) bilan ulanadi. Deploydan oldingi holat: revision `sudqollanmabot-00041-m5z`, commit `61181b4`.
 
 Tekshiruv:
 - `/start` — eski foydalanuvchi profili topiladi (eski yozuvlar hali avto-ID da).
 - Test yechish: 70% dan past — XP berilmaydi; oʻtganda +20; aynan shu testni qayta yechish — «avval olingan».
 - `/profile`, `/stats` — daraja nomi bilan chiqadi, xato yoʻq.
-- Loglar: `gcloud run services logs read sudqollanmabot --region europe-west4 --limit 20`.
+- Loglar: `gcloud run services logs read sudqollanmabot --region europe-west4 --project educationapp-4780a --limit 30`.
 
 ## 3. Profil migratsiyasi (bot deploydan KEYIN)
 
@@ -63,5 +75,6 @@ ilovada band «Ulangan» boʻladi; botda test yechilsa, natija ilovadagi test ta
 
 ## Eslatma
 
-Deploy buyrugʻi `BOT_TOKEN` va `GEMINI_API_KEY` ni ochiq muhit oʻzgaruvchisi sifatida beradi.
-Keyinchalik ularni Secret Manager'ga oʻtkazish tavsiya etiladi.
+`BOT_TOKEN` va `GEMINI_API_KEY` Cloud Run'da allaqachon Secret Manager orqali beriladi.
+Botning `.agent/skills/gcloud/SKILL.md` dagi qoʻlda deploy buyrugʻi ularni ochiq env sifatida
+beradi — undan foydalanmang (avtomatik deploy secret'larni saqlaydi).
