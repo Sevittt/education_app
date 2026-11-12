@@ -44,6 +44,9 @@ class AppUser extends Equatable {
   final String? courtName;     // e.g. 'Andijon tuman sudi'
   final String? position;      // e.g. 'Sudya', 'Devonxona mudiri'
 
+  /// Ulangan Telegram ID. Faqat bot yozadi (telegram_links orqali); ilova o'qiydi.
+  final String? telegramId;
+
   /// Returns true if the user has already selected their court.
   bool get hasCourtSelected => courtId != null && courtId!.isNotEmpty;
 
@@ -79,6 +82,7 @@ class AppUser extends Equatable {
     this.courtId,
     this.courtName,
     this.position,
+    this.telegramId,
   });
 
   AppUser copyWith({
@@ -109,6 +113,7 @@ class AppUser extends Equatable {
     String? courtId,
     String? courtName,
     String? position,
+    String? telegramId,
   }) {
     return AppUser(
       id: id ?? this.id,
@@ -138,6 +143,7 @@ class AppUser extends Equatable {
       courtId: courtId ?? this.courtId,
       courtName: courtName ?? this.courtName,
       position: position ?? this.position,
+      telegramId: telegramId ?? this.telegramId,
     );
   }
 
@@ -170,6 +176,7 @@ class AppUser extends Equatable {
         courtId,
         courtName,
         position,
+        telegramId,
       ];
   /// XP thresholds for each level:
   ///   0–99    → Boshlang'ich (Beginner)

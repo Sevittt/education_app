@@ -30,6 +30,7 @@ class AppUserModel extends AppUser {
     super.courtId,
     super.courtName,
     super.position,
+    super.telegramId,
   });
 
   factory AppUserModel.fromEntity(AppUser user) {
@@ -61,6 +62,7 @@ class AppUserModel extends AppUser {
       courtId: user.courtId,
       courtName: user.courtName,
       position: user.position,
+      telegramId: user.telegramId,
     );
   }
 
@@ -93,6 +95,8 @@ class AppUserModel extends AppUser {
       courtId: map['courtId'] as String?,
       courtName: map['courtName'] as String?,
       position: map['position'] as String?,
+      // Faqat o'qiladi: toMap/toProfileMap ga kirmaydi, uni bot yozadi.
+      telegramId: map['telegram_id']?.toString(),
     );
   }
 

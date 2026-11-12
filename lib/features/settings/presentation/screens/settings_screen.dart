@@ -11,6 +11,7 @@ import 'package:sud_qollanma/features/auth/domain/entities/app_user.dart';
 
 import 'package:provider/provider.dart';
 import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
+import 'package:sud_qollanma/features/auth/data/datasources/telegram_link_remote_datasource.dart';
 
 import 'package:sud_qollanma/core/providers/locale_provider.dart';
 import 'package:sud_qollanma/features/profile/presentation/screens/language_screen.dart';
@@ -26,6 +27,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _receiveNotifications = true;
+  bool _linkingTelegram = false;
 
   static const String _notificationsKey = 'settings_receive_notifications';
 
@@ -89,6 +91,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
           }
         }
       }
+    }
+  }
+
+  /// Bir martalik kod bilan botni ochadi; bot kodni qabul qilgach
+  /// profil oqimi telegramId ni yangilaydi.
+  Future<void> _linkTelegram() async {
+    setState(() => _linkingTelegram = true);
+    try {
+      final url = await TelegramLinkRemoteDataSource().createLinkUrl();
+      if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+        await launchUrl(url);
+      }
+    } catch (e) {
+      debugPrint('Telegram link error: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context)!.telegramLinkError)),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _linkingTelegram = false);
     }
   }
 
@@ -170,10 +193,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  String _getLanguageName(String localeCode) {
-    switch (localeCode) {
+  String _getLanguageName(Locale? locale) {
+    if (locale == LocaleProvider.uzNewAlphabet) return 'Özbekça (yangi alifbo)';
+    switch (locale?.languageCode ?? 'en') {
       case 'uz':
-        return 'O\'zbekcha';
+        return 'Oʻzbekcha';
       case 'ru':
         return 'Русский';
       case 'en':
@@ -187,8 +211,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     // Get AppLocalizations instance
     final AppLocalizations? l10n = AppLocalizations.of(context);
     final localeProvider = Provider.of<LocaleProvider>(context);
-    final currentLanguage =
-        _getLanguageName(localeProvider.appLocale?.languageCode ?? 'en');
+    final currentLanguage = _getLanguageName(localeProvider.appLocale);
 
     return Scaffold(
       appBar: AppBar(
@@ -273,6 +296,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onTap: _openTelegram,
           ),
           const Divider(height: 1, indent: 16, endIndent: 16),
+
+          if (context.watch<AuthNotifier>().appUser case final user?) ...[
+            _buildSettingsItem(
+              context: context,
+              icon: user.telegramId != null
+                  ? Icons.link_rounded
+                  : Icons.add_link_rounded,
+              title: l10n?.telegramLinkTitle ?? 'Connect Telegram',
+              subtitle: user.telegramId != null
+                  ? l10n?.telegramLinkedSubtitle
+                  : l10n?.telegramLinkSubtitle,
+              trailing: _linkingTelegram
+                  ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : null,
+              onTap: user.telegramId != null || _linkingTelegram
+                  ? null
+                  : _linkTelegram,
+            ),
+            const Divider(height: 1, indent: 16, endIndent: 16),
+          ],
 
           _buildSettingsItem(
             context: context,
