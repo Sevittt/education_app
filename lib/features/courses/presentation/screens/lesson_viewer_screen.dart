@@ -29,6 +29,7 @@ class _LessonViewerScreenState extends State<LessonViewerScreen>
   bool _loading = true;
   String? _error;
   Map<String, dynamic>? _data;
+  VideoWatchProgress _videoProgress = const VideoWatchProgress();
   late AnimationController _fadeCtrl;
   late Animation<double> _fadeAnim;
 
@@ -129,10 +130,10 @@ Future<void> _loadVideoProgress() async {
   final uid = FirebaseAuth.instance.currentUser?.uid;
   if (uid == null) return;
   try {
-    await context
+    final progress = await context
         .read<VideoProgressRemoteSource>()
         .get(uid, widget.lesson.refId);
-    if (mounted) setState(() {});
+    if (mounted) setState(() => _videoProgress = progress);
   } catch (e) {
     debugPrint('Video progress yuklanmadi: $e');
   }
@@ -335,7 +336,11 @@ Future<void> _loadVideoProgress() async {
       isDark: isDark,
       lessonType: widget.lesson.type,
       onVideoOpen: () => _playVideo(video),
-      onComplete: () => Navigator.pop(context, true),
+      // Qat'iy: video kamida 90% haqiqatan ko'rilmaguncha dars yakunlanmaydi
+      onComplete: _videoProgress.isCompleted
+          ? () => Navigator.pop(context, true)
+          : null,
+      videoWatchedRatio: _videoProgress.watchedRatio,
       child: _VideoHero(video: video, isDark: isDark),
     );
   }
@@ -428,8 +433,10 @@ class _LessonShell extends StatelessWidget {
   final Widget child;
   final bool isDark;
   final LessonType lessonType;
-  final VoidCallback onComplete;
+  /// null — hali yakunlab bo'lmaydi (video yetarli ko'rilmagan)
+  final VoidCallback? onComplete;
   final VoidCallback? onVideoOpen;
+  final double? videoWatchedRatio;
 
   const _LessonShell({
     required this.child,
@@ -437,6 +444,7 @@ class _LessonShell extends StatelessWidget {
     required this.lessonType,
     required this.onComplete,
     this.onVideoOpen,
+    this.videoWatchedRatio,
   });
 
   @override
@@ -453,6 +461,7 @@ class _LessonShell extends StatelessWidget {
           typeColor: tc.color,
           onVideoOpen: onVideoOpen,
           onComplete: onComplete,
+          videoWatchedRatio: videoWatchedRatio,
         ),
       ],
     );
@@ -466,7 +475,8 @@ class _BottomActionBar extends StatelessWidget {
   final bool isVideo;
   final Color typeColor;
   final VoidCallback? onVideoOpen;
-  final VoidCallback onComplete;
+  final VoidCallback? onComplete;
+  final double? videoWatchedRatio;
 
   const _BottomActionBar({
     required this.isDark,
@@ -474,6 +484,7 @@ class _BottomActionBar extends StatelessWidget {
     required this.typeColor,
     this.onVideoOpen,
     required this.onComplete,
+    this.videoWatchedRatio,
   });
 
   @override
@@ -512,7 +523,7 @@ class _BottomActionBar extends StatelessWidget {
             ),
           ),
           if (isVideo && onVideoOpen != null) ...[
-            // Primary: Watch video
+            // Primary: Watch video (oldin boshlangan bo'lsa — davom ettirish)
             _ActionButton(
               onTap: onVideoOpen!,
               gradient: LinearGradient(
@@ -521,13 +532,21 @@ class _BottomActionBar extends StatelessWidget {
                 end: Alignment.centerRight,
               ),
               icon: Icons.play_arrow_rounded,
-              label: 'Videoni ko\'rish',
+              label: (videoWatchedRatio ?? 0) > 0 && onComplete == null
+                  ? 'Davom ettirish'
+                  : 'Videoni ko\'rish',
               iconBg: Colors.white.withValues(alpha: 0.18),
             ),
             const SizedBox(height: 10),
-            // Secondary: Mark complete
+            // Secondary: yakunlash faqat 90% ko'rilgandan keyin; ungacha ko'rilgan ulush
+            if (onComplete == null)
+              _VideoWatchedInfo(
+                ratio: videoWatchedRatio ?? 0,
+                isDark: isDark,
+              )
+            else
             _ActionButton(
-              onTap: onComplete,
+              onTap: onComplete!,
               gradient: isDark
                   ? const LinearGradient(
                       colors: [Color(0xFF1C2D42), Color(0xFF253545)])
@@ -536,7 +555,7 @@ class _BottomActionBar extends StatelessWidget {
                       AppColors.primaryContainer,
                     ]),
               icon: Icons.check_circle_rounded,
-              label: 'Ko\'rdim, bajarildi',
+              label: 'Darsni yakunlash',
               iconBg: isDark
                   ? AppColors.primary.withValues(alpha: 0.3)
                   : AppColors.primary.withValues(alpha: 0.12),
@@ -547,18 +566,54 @@ class _BottomActionBar extends StatelessWidget {
                   ? AppColors.primary.withValues(alpha: 0.3)
                   : AppColors.primary.withValues(alpha: 0.3),
             ),
-          ] else
+          ] else if (onComplete != null)
             _ActionButton(
-              onTap: onComplete,
+              onTap: onComplete!,
               gradient: LinearGradient(
                 colors: [AppColors.primary, AppColors.primaryLight],
               ),
               icon: Icons.check_circle_rounded,
-              label: isVideo ? 'Ko\'rdim, bajarildi' : 'O\'qidim, bajarildi',
+              label: isVideo ? 'Darsni yakunlash' : 'O\'qidim, bajarildi',
               iconBg: Colors.white.withValues(alpha: 0.18),
             ),
         ],
       ),
+    );
+  }
+}
+
+/// Video yetarli ko'rilmaguncha yakunlash tugmasi o'rnida ko'rinadi.
+class _VideoWatchedInfo extends StatelessWidget {
+  final double ratio;
+  final bool isDark;
+
+  const _VideoWatchedInfo({required this.ratio, required this.isDark});
+
+  @override
+  Widget build(BuildContext context) {
+    final percent = (ratio * 100).floor();
+    final requiredPercent = (VideoWatchProgress.completionRatio * 100).round();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        LinearProgressIndicator(
+          value: ratio,
+          minHeight: 6,
+          borderRadius: BorderRadius.circular(3),
+          color: AppColors.primary,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Ko\'rildi: $percent%. Dars videoning kamida $requiredPercent% qismi '
+          'ko\'rilganda yakunlanadi — oldinga o\'tkazilgan qism hisoblanmaydi.',
+          style: TextStyle(
+            fontSize: 12.5,
+            height: 1.4,
+            color: isDark ? AppColors.textSecondary : AppColors.textSecondaryLight,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -213,4 +213,9 @@ Deploy tartibi (eski client’lar XP’ni to‘g‘ridan-to‘g‘ri yozadi, yan
 3. `firebase deploy --only firestore:rules` — eski versiyadagi client’larda XP va profilni to‘liq qayta yozish ishlamay qoladi.
 4. Deploy oldidan: production’da `role == 'ict_specialist'` bo‘lib admin vazifasini bajarayotgan hisoblar bo‘lsa, ularni `admin` ga o‘tkazish.
 
-Ochiq qolganlar: ro‘yxatdan o‘tishda `judge`/`ict_specialist` tanlash hamon kontent yozish (`isExpertOrAdmin`) huquqini beradi — lavozim va vakolatni ajratish mahsulot qarori; progress maydonlari (`completedLessonIds`, `percentComplete`) hali client tomonidan hisoblanadi; video darsdagi “Ko‘rdim, bajarildi” tugmasi videoni ko‘rmasdan ham yakunlaydi.
+Keyingi qarorlar (2026-10-31, kodda):
+
+- **Vakolat**: kontentni (kurs, test, resurs, maqola, FAQ) faqat `admin` yozadi; `isExpertOrAdmin` olib tashlandi. Sudyalar boshqa xodimlar kabi iste’molchi. AKT xodimi muammo va yechimni `ict_reports` orqali adminga yuboradi; admin tahrirlab FAQ’ga nashr qiladi yoki izoh bilan rad etadi (`lib/features/ict_reports/`).
+- **Video**: dars faqat videoning kamida 90% qismi haqiqatan ko‘rilganda yakunlanadi (oldinga o‘tkazilgan qism hisoblanmaydi). Ko‘rilgan oraliqlar va oxirgi joy `users/{uid}/video_progress/{videoId}` da saqlanadi; qayta ochilganda shu joydan davom etadi va “Boshidan” tanlovi bilan xabar chiqadi. Web’da ilova ichidagi pleyer (`youtube_player_iframe`) ishlatiladi.
+
+Ochiq qolganlar: progress maydonlari (`completedLessonIds`, `percentComplete`) va video holati hali client tomonidan hisoblanadi; ko‘rishlar/layklar hisoblagichini oddiy foydalanuvchi yoza olmaydi (rules faqat admin) — alohida hisoblagich qoidasi kerak; yangi ekran matnlari hozircha faqat o‘zbekcha (l10n’ga ko‘chirilmagan).
