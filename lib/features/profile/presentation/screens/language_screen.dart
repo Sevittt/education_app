@@ -66,12 +66,25 @@ class LanguageScreen extends StatelessWidget {
               _buildLanguageCard(
                 context: context,
                 title: l10n?.languageUzbek ?? "Uzbek",
-                subtitle: "O'zbekcha (O'zbekiston)",
+                subtitle: "Oʻzbekcha (amaldagi lotin alifbosi)",
                 flag: "🇺🇿",
-                isSelected: currentLocale?.languageCode == 'uz',
+                isSelected: currentLocale?.languageCode == 'uz' &&
+                    currentLocale != LocaleProvider.uzNewAlphabet,
                 onTap: () {
                   localeProvider.setLocale(const Locale('uz'));
-                  _showConfirmation(context, "O'zbek tili tanlandi");
+                  _showConfirmation(context, "Oʻzbek tili tanlandi");
+                },
+              ),
+              const SizedBox(height: 16),
+              _buildLanguageCard(
+                context: context,
+                title: "Özbekça — yangi alifbo",
+                subtitle: "Ö, Ğ, Ş, Ç harflari (2026-yilgi qonun)",
+                flag: "Ö",
+                isSelected: currentLocale == LocaleProvider.uzNewAlphabet,
+                onTap: () {
+                  localeProvider.setLocale(LocaleProvider.uzNewAlphabet);
+                  _showConfirmation(context, "Yangi alifbo tanlandi");
                 },
               ),
               const SizedBox(height: 16),

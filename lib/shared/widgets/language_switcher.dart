@@ -7,7 +7,7 @@ class LanguageSwitcher extends StatelessWidget {
   const LanguageSwitcher({super.key});
 
   static const List<Map<String, String>> _languages = [
-    {'code': 'uz', 'label': "O'z", 'flag': '🇺🇿'},
+    {'code': 'uz', 'label': 'Oʻz', 'flag': '🇺🇿'},
     {'code': 'ru', 'label': 'Ру', 'flag': '🇷🇺'},
     {'code': 'en', 'label': 'En', 'flag': '🇬🇧'},
   ];

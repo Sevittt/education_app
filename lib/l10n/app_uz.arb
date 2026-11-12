@@ -1,6 +1,6 @@
 {
   "@@locale": "uz",
-  "appTitle": "Sud qo'llanma",
+  "appTitle": "Sud qoʻllanma",
   "@appTitle": {
     "description": "Dasturning sarlavhasi"
   },
@@ -8,7 +8,7 @@
   "@openInYoutube": {
     "description": "Translation for openInYoutube"
   },
-  "watchOnYoutube": "YouTube da ko'rish",
+  "watchOnYoutube": "YouTube da koʻrish",
   "@watchOnYoutube": {
     "description": "Translation for watchOnYoutube"
   },
@@ -36,7 +36,7 @@
   "@bottomNavProfile": {
     "description": "Translation for bottomNavProfile"
   },
-  "resourcesScreenTitle": "Qo'llanmalar va yo'riqnomalar",
+  "resourcesScreenTitle": "Qoʻllanmalar va yoʻriqnomalar",
   "@resourcesScreenTitle": {
     "description": "Qo'llanmalar sahifasi sarlavhasi"
   },
@@ -56,15 +56,15 @@
   "@registrationTitle": {
     "description": "Translation for registrationTitle"
   },
-  "registrationSubtitle": "Professional hamjamiyatga qo'shiling!",
+  "registrationSubtitle": "Professional hamjamiyatga qoʻshiling!",
   "@registrationSubtitle": {
     "description": "Translation for registrationSubtitle"
   },
-  "registrationFullNameLabel": "To'liq ism (F.I.Sh.)",
+  "registrationFullNameLabel": "Toʻliq ism (F.I.Sh.)",
   "@registrationFullNameLabel": {
     "description": "Ro'yxatdan o'tishda to'liq ism maydoni"
   },
-  "registrationFullNameError": "Iltimos, to'liq ismingizni kiriting",
+  "registrationFullNameError": "Iltimos, toʻliq ismingizni kiriting",
   "@registrationFullNameError": {
     "description": "Ism bo'sh bo'lganda chiqadigan xatolik"
   },
@@ -80,7 +80,7 @@
   "@registrationRoleXodim": {
     "description": "Xodim roli uchun tanlov"
   },
-  "registrationRoleEkspert": "Ekspert (Qo'llanma yaratuvchi)",
+  "registrationRoleEkspert": "Ekspert (Qoʻllanma yaratuvchi)",
   "@registrationRoleEkspert": {
     "description": "Ekspert roli uchun tanlov"
   },
@@ -108,7 +108,7 @@
   "@registrationPasswordLabel": {
     "description": "Parol maydoni uchun matn"
   },
-  "registrationPasswordError": "Parol kamida 6 belgidan iborat bo'lishi kerak",
+  "registrationPasswordError": "Parol kamida 6 belgidan iborat boʻlishi kerak",
   "@registrationPasswordError": {
     "description": "Parol qisqa bo'lganda chiqadigan xatolik"
   },
@@ -120,7 +120,7 @@
   "@registrationConfirmPasswordError": {
     "description": "Parollar mos kelmaganda chiqadigan xatolik"
   },
-  "registrationSignUpButton": "Ro'yxatdan o'tish",
+  "registrationSignUpButton": "Roʻyxatdan oʻtish",
   "@registrationSignUpButton": {
     "description": "Ro'yxatdan o'tish tugmasi"
   },
@@ -132,7 +132,7 @@
   "@languageEnglish": {
     "description": "Translation for languageEnglish"
   },
-  "languageUzbek": "O'zbek tili",
+  "languageUzbek": "Oʻzbek tili",
   "@languageUzbek": {
     "description": "Translation for languageUzbek"
   },
@@ -164,11 +164,11 @@
   "@settingsAllowLocation": {
     "description": "Translation for settingsAllowLocation"
   },
-  "settingsAllowLocationSubtitle": "Joylashuvingizni talab qiladigan funksiyalar uchun (agar mavjud bo'lsa)",
+  "settingsAllowLocationSubtitle": "Joylashuvingizni talab qiladigan funksiyalar uchun (agar mavjud boʻlsa)",
   "@settingsAllowLocationSubtitle": {
     "description": "Translation for settingsAllowLocationSubtitle"
   },
-  "settingsChangePassword": "Parolni o'zgartirish",
+  "settingsChangePassword": "Parolni oʻzgartirish",
   "@settingsChangePassword": {
     "description": "Translation for settingsChangePassword"
   },
@@ -176,11 +176,11 @@
   "@settingsHelpCenter": {
     "description": "Translation for settingsHelpCenter"
   },
-  "settingsAboutApp": "Sud qo'llanma haqida",
+  "settingsAboutApp": "Sud qoʻllanma haqida",
   "@settingsAboutApp": {
     "description": "Translation for settingsAboutApp"
   },
-  "settingsAppLegalese": "© 2025 sud qo'llanma loyihasi",
+  "settingsAppLegalese": "© 2025 sud qoʻllanma loyihasi",
   "@settingsAppLegalese": {
     "description": "Translation for settingsAppLegalese"
   },
@@ -204,11 +204,11 @@
   "@loginButtonText": {
     "description": "Translation for loginButtonText"
   },
-  "signUpButtonText": "Ro'yxatdan o'tish",
+  "signUpButtonText": "Roʻyxatdan oʻtish",
   "@signUpButtonText": {
     "description": "Translation for signUpButtonText"
   },
-  "loginNoAccount": "Akkauntingiz yo'qmi?",
+  "loginNoAccount": "Akkauntingiz yoʻqmi?",
   "@loginNoAccount": {
     "description": "Login screen text asking if user has no account"
   },
@@ -248,7 +248,7 @@
   "@guestUser": {
     "description": "Translation for guestUser"
   },
-  "updateYourInformation": "Ma'lumotlaringizni yangilang",
+  "updateYourInformation": "Maʼlumotlaringizni yangilang",
   "@updateYourInformation": {
     "description": "Translation for updateYourInformation"
   },
@@ -284,7 +284,7 @@
   "@resourcesSearchHint": {
     "description": "Translation for resourcesSearchHint"
   },
-  "resourcesFilterByType": "Tur bo'yicha filtrlash",
+  "resourcesFilterByType": "Tur boʻyicha filtrlash",
   "@resourcesFilterByType": {
     "description": "Translation for resourcesFilterByType"
   },
@@ -296,7 +296,7 @@
   "@resourcesNoResourcesMatch": {
     "description": "Translation for resourcesNoResourcesMatch"
   },
-  "resourcesTryAdjusting": "Qidiruv yoki filtringizni o'zgartirib ko'ring.",
+  "resourcesTryAdjusting": "Qidiruv yoki filtringizni oʻzgartirib koʻring.",
   "@resourcesTryAdjusting": {
     "description": "Translation for resourcesTryAdjusting"
   },
@@ -304,11 +304,11 @@
   "@resourcesCreateButton": {
     "description": "Translation for resourcesCreateButton"
   },
-  "resourceAddedSuccess": "Resurs muvaffaqiyatli qo'shildi!",
+  "resourceAddedSuccess": "Resurs muvaffaqiyatli qoʻshildi!",
   "@resourceAddedSuccess": {
     "description": "Translation for resourceAddedSuccess"
   },
-  "resourceAddedError": "Resurs qo'shishda xatolik: {error}",
+  "resourceAddedError": "Resurs qoʻshishda xatolik: {error}",
   "@resourceAddedError": {
     "description": "Resurs qo'shishda xatolik yuz berganda ko'rsatiladigan xabar",
     "placeholders": {
@@ -322,7 +322,7 @@
   "@createResourceScreenTitle": {
     "description": "Translation for createResourceScreenTitle"
   },
-  "createResourceFormWillBeHere": "Resurs yaratish shakli shu yerda bo'ladi.",
+  "createResourceFormWillBeHere": "Resurs yaratish shakli shu yerda boʻladi.",
   "@createResourceFormWillBeHere": {
     "description": "Translation for createResourceFormWillBeHere"
   },
@@ -350,7 +350,7 @@
   "@createResourceUrlLabel": {
     "description": "Translation for createResourceUrlLabel"
   },
-  "couldNotLaunchUrl": "Could not launch {url}",
+  "couldNotLaunchUrl": "{url} manzilini ochib boʻlmadi",
   "@couldNotLaunchUrl": {
     "placeholders": {
       "url": {
@@ -378,11 +378,11 @@
   "@createResourceValidationInvalidUrl": {
     "description": "Translation for createResourceValidationInvalidUrl"
   },
-  "editButtonTooltip": "Resurs o'zgartirish",
+  "editButtonTooltip": "Resurs oʻzgartirish",
   "@editButtonTooltip": {
     "description": "Translation for editButtonTooltip"
   },
-  "editResourceScreenTitle": "Resurs o'zgartirish",
+  "editResourceScreenTitle": "Resurs oʻzgartirish",
   "@editResourceScreenTitle": {
     "description": "Translation for editResourceScreenTitle"
   },
@@ -398,7 +398,7 @@
   "@authorLabel": {
     "description": "Translation for authorLabel"
   },
-  "dateAddedLabel": "Qo'shilgan",
+  "dateAddedLabel": "Qoʻshilgan",
   "@dateAddedLabel": {
     "description": "Translation for dateAddedLabel"
   },
@@ -428,7 +428,7 @@
   "@deleteResourceConfirmTitle": {
     "description": "Translation for deleteResourceConfirmTitle"
   },
-  "deleteResourceConfirmMessage": "Haqiqatan ham bu manbani oʻchirib tashlamoqchimisiz? bu amalni ortga qaytarib bo'lmaydi.",
+  "deleteResourceConfirmMessage": "Haqiqatan ham bu manbani oʻchirib tashlamoqchimisiz? bu amalni ortga qaytarib boʻlmaydi.",
   "@deleteResourceConfirmMessage": {
     "description": "Translation for deleteResourceConfirmMessage"
   },
@@ -440,7 +440,7 @@
   "@deleteButtonText": {
     "description": "Translation for deleteButtonText"
   },
-  "resourceDeletedSuccess": "\"{resourceTitle}\" resursi muvaffaqiyatli o'chirildi.",
+  "resourceDeletedSuccess": "\"{resourceTitle}\" resursi muvaffaqiyatli oʻchirildi.",
   "@resourceDeletedSuccess": {
     "placeholders": {
       "resourceTitle": {
@@ -448,7 +448,7 @@
       }
     }
   },
-  "resourceDeletedError": "Resursni o'chirishda xatolik yuz berdi: {error}",
+  "resourceDeletedError": "Resursni oʻchirishda xatolik yuz berdi: {error}",
   "@resourceDeletedError": {
     "placeholders": {
       "error": {
@@ -456,7 +456,7 @@
       }
     }
   },
-  "deleteButtonTooltip": "Resursni o'chirish",
+  "deleteButtonTooltip": "Resursni oʻchirish",
   "@deleteButtonTooltip": {
     "description": "Translation for deleteButtonTooltip"
   },
@@ -472,15 +472,15 @@
   "@quizDescription": {
     "description": "Translation for quizDescription"
   },
-  "saveAndAddQuestions": "Saqlash va savollar qo'shish",
+  "saveAndAddQuestions": "Saqlash va savollar qoʻshish",
   "@saveAndAddQuestions": {
     "description": "Translation for saveAndAddQuestions"
   },
-  "failedToCreateQuiz": "Viktorina yaratib bo'lmadi",
+  "failedToCreateQuiz": "Viktorina yaratib boʻlmadi",
   "@failedToCreateQuiz": {
     "description": "Translation for failedToCreateQuiz"
   },
-  "addQuestions": "Savollar qo'shish",
+  "addQuestions": "Savollar qoʻshish",
   "@addQuestions": {
     "description": "Translation for addQuestions"
   },
@@ -504,11 +504,11 @@
   "@multipleChoice": {
     "description": "Translation for multipleChoice"
   },
-  "trueFalse": "To'g'ri/Noto'g'ri",
+  "trueFalse": "Toʻgʻri/Notoʻgʻri",
   "@trueFalse": {
     "description": "Translation for trueFalse"
   },
-  "pleaseSelectCorrectAnswer": "Iltimos, to'g'ri javobni tanlang.",
+  "pleaseSelectCorrectAnswer": "Iltimos, toʻgʻri javobni tanlang.",
   "@pleaseSelectCorrectAnswer": {
     "description": "Translation for pleaseSelectCorrectAnswer"
   },
@@ -524,23 +524,23 @@
   "@pleaseEnterAnOption": {
     "description": "Translation for pleaseEnterAnOption"
   },
-  "addQuestion": "Savol qo'shish",
+  "addQuestion": "Savol qoʻshish",
   "@addQuestion": {
     "description": "Translation for addQuestion"
   },
-  "questionAddedSuccessfully": "Savol muvaffaqiyatli qo'shildi!",
+  "questionAddedSuccessfully": "Savol muvaffaqiyatli qoʻshildi!",
   "@questionAddedSuccessfully": {
     "description": "Translation for questionAddedSuccessfully"
   },
-  "failedToAddQuestion": "Savol qo'shib bo'lmadi",
+  "failedToAddQuestion": "Savol qoʻshib boʻlmadi",
   "@failedToAddQuestion": {
     "description": "Translation for failedToAddQuestion"
   },
-  "noQuestionsAddedYet": "Hozircha savollar qo'shilmagan.",
+  "noQuestionsAddedYet": "Hozircha savollar qoʻshilmagan.",
   "@noQuestionsAddedYet": {
     "description": "Translation for noQuestionsAddedYet"
   },
-  "correctAnswer": "To'g'ri javob",
+  "correctAnswer": "Toʻgʻri javob",
   "@correctAnswer": {
     "description": "Translation for correctAnswer"
   },
@@ -552,7 +552,7 @@
   "@quizNotFound": {
     "description": "Translation for quizNotFound"
   },
-  "failedToLoadQuiz": "Viktorinani yuklab bo'lmadi",
+  "failedToLoadQuiz": "Viktorinani yuklab boʻlmadi",
   "@failedToLoadQuiz": {
     "description": "Translation for failedToLoadQuiz"
   },
@@ -616,7 +616,7 @@
   "@errorLoadingQuizzes": {
     "description": "Translation for errorLoadingQuizzes"
   },
-  "invalidUrlFormat": "URL formati noto'g'ri: {url}",
+  "invalidUrlFormat": "URL formati notoʻgʻri: {url}",
   "@invalidUrlFormat": {
     "placeholders": {
       "url": {
@@ -632,7 +632,7 @@
       }
     }
   },
-  "createResourceValidationMinLength": "{fieldName} kamida {length} belgidan iborat bo'lishi kerak",
+  "createResourceValidationMinLength": "{fieldName} kamida {length} belgidan iborat boʻlishi kerak",
   "@createResourceValidationMinLength": {
     "placeholders": {
       "fieldName": {
@@ -654,7 +654,7 @@
       }
     }
   },
-  "titleMinLength": "Sarlavha kamida 5 ta belgidan iborat bo'lishi kerak",
+  "titleMinLength": "Sarlavha kamida 5 ta belgidan iborat boʻlishi kerak",
   "@titleMinLength": {
     "description": "Translation for titleMinLength"
   },
@@ -678,7 +678,7 @@
   "@createTopicButtonText": {
     "description": "Translation for createTopicButtonText"
   },
-  "mustBeLoggedInToCreateTopic": "Mavzu yaratish uchun tizimga kirgan bo'lishingiz kerak.",
+  "mustBeLoggedInToCreateTopic": "Mavzu yaratish uchun tizimga kirgan boʻlishingiz kerak.",
   "@mustBeLoggedInToCreateTopic": {
     "description": "Translation for mustBeLoggedInToCreateTopic"
   },
@@ -686,7 +686,7 @@
   "@topicCreatedSuccess": {
     "description": "Translation for topicCreatedSuccess"
   },
-  "failedToCreateTopic": "Mavzu yaratib bo'lmadi: {error}",
+  "failedToCreateTopic": "Mavzu yaratib boʻlmadi: {error}",
   "@failedToCreateTopic": {
     "description": "Error message when creating a topic fails",
     "placeholders": {
@@ -695,7 +695,7 @@
       }
     }
   },
-  "createTopicValidationEmpty": "{fieldName} bo'sh bo'lishi mumkin emas.",
+  "createTopicValidationEmpty": "{fieldName} boʻsh boʻlishi mumkin emas.",
   "@createTopicValidationEmpty": {
     "placeholders": {
       "fieldName": {
@@ -703,7 +703,7 @@
       }
     }
   },
-  "createTopicValidationMinLength": "{fieldName} kamida {length} belgidan iborat bo'lishi kerak.",
+  "createTopicValidationMinLength": "{fieldName} kamida {length} belgidan iborat boʻlishi kerak.",
   "@createTopicValidationMinLength": {
     "placeholders": {
       "fieldName": {
@@ -725,7 +725,7 @@
       }
     }
   },
-  "errorLoadingData": "Resurslarni yuklashda xatolik yuz berdi. qayta urinib ko'ring.",
+  "errorLoadingData": "Resurslarni yuklashda xatolik yuz berdi. qayta urinib koʻring.",
   "@errorLoadingData": {
     "description": "Translation for errorLoadingData"
   },
@@ -743,19 +743,19 @@
   "@topicUpdatedSuccess": {
     "description": "Translation for topicUpdatedSuccess"
   },
-  "noDiscussionsYet": "Hali muhokamalar yo'q.",
+  "noDiscussionsYet": "Hali muhokamalar yoʻq.",
   "@noDiscussionsYet": {
     "description": "Translation for noDiscussionsYet"
   },
-  "beTheFirstToStartConversation": "Birinchi bo'lib suhbatni boshlang!",
+  "beTheFirstToStartConversation": "Birinchi boʻlib suhbatni boshlang!",
   "@beTheFirstToStartConversation": {
     "description": "Translation for beTheFirstToStartConversation"
   },
-  "mustBeLoggedInToCreateResource": "Resurs yaratish uchun tizimga kirgan bo'lishingiz kerak.",
+  "mustBeLoggedInToCreateResource": "Resurs yaratish uchun tizimga kirgan boʻlishingiz kerak.",
   "@mustBeLoggedInToCreateResource": {
     "description": "Translation for mustBeLoggedInToCreateResource"
   },
-  "profileIncompleteToCreateResource": "Profilingiz haqidagi ma'lumotlar to'liq emas. iltimos, profilingizda ismingizni yangilang.",
+  "profileIncompleteToCreateResource": "Profilingiz haqidagi maʼlumotlar toʻliq emas. iltimos, profilingizda ismingizni yangilang.",
   "@profileIncompleteToCreateResource": {
     "description": "Translation for profileIncompleteToCreateResource"
   },
@@ -763,19 +763,19 @@
   "@profileIncompleteToCreateTopic": {
     "description": "Translation for profileIncompleteToCreateTopic"
   },
-  "commentCannotBeEmpty": "Izoh bo'sh bo'lishi mumkin emas.",
+  "commentCannotBeEmpty": "Izoh boʻsh boʻlishi mumkin emas.",
   "@commentCannotBeEmpty": {
     "description": "Translation for commentCannotBeEmpty"
   },
-  "mustBeLoggedInToComment": "Izoh berish uchun tizimga kirgan bo'lishingiz kerak.",
+  "mustBeLoggedInToComment": "Izoh berish uchun tizimga kirgan boʻlishingiz kerak.",
   "@mustBeLoggedInToComment": {
     "description": "Translation for mustBeLoggedInToComment"
   },
-  "commentAddedSuccessfully": "Izoh muvaffaqiyatli qo'shildi!",
+  "commentAddedSuccessfully": "Izoh muvaffaqiyatli qoʻshildi!",
   "@commentAddedSuccessfully": {
     "description": "Translation for commentAddedSuccessfully"
   },
-  "failedToAddComment": "Izoh qo'shib bo'lmadi: {error}",
+  "failedToAddComment": "Izoh qoʻshib boʻlmadi: {error}",
   "@failedToAddComment": {
     "description": "Error message when adding a comment fails",
     "placeholders": {
@@ -804,11 +804,11 @@
   "@topicTitle": {
     "description": "Translation for topicTitle"
   },
-  "vidCategoryBeginner": "Boshlang'ich",
+  "vidCategoryBeginner": "Boshlangʻich",
   "@vidCategoryBeginner": {
     "description": "Category: Beginner"
   },
-  "vidCategoryIntermediate": "O'rta",
+  "vidCategoryIntermediate": "Oʻrta",
   "@vidCategoryIntermediate": {
     "description": "Category: Intermediate"
   },
@@ -836,7 +836,7 @@
       }
     }
   },
-  "noRepliesYet": "Hali javob yo'q. birinchi bo'lib fikr bildiring!",
+  "noRepliesYet": "Hali javob yoʻq. birinchi boʻlib fikr bildiring!",
   "@noRepliesYet": {
     "description": "Translation for noRepliesYet"
   },
@@ -856,7 +856,7 @@
       }
     }
   },
-  "readyToLearnSomethingNew": "Bugun yangi narsalarni o'rganishga tayyormisiz?",
+  "readyToLearnSomethingNew": "Bugun yangi narsalarni oʻrganishga tayyormisiz?",
   "@readyToLearnSomethingNew": {
     "description": "Translation for readyToLearnSomethingNew"
   },
@@ -872,7 +872,7 @@
   "@profileTitle": {
     "description": "Translation for profileTitle"
   },
-  "latestNewsTitle": "So'nggi yangiliklar",
+  "latestNewsTitle": "Soʻnggi yangiliklar",
   "@latestNewsTitle": {
     "description": "Translation for latestNewsTitle"
   },
@@ -884,7 +884,7 @@
   "@quizzesTitle": {
     "description": "Translation for quizzesTitle"
   },
-  "urlCannotBeEmpty": "URL bo'sh bo'lishi mumkin emas",
+  "urlCannotBeEmpty": "URL boʻsh boʻlishi mumkin emas",
   "@urlCannotBeEmpty": {
     "description": "Translation for urlCannotBeEmpty"
   },
@@ -908,7 +908,7 @@
   "@manageNewsTitle": {
     "description": "Translation for manageNewsTitle"
   },
-  "manageNewsSubtitle": "Yangilik maqolalarini qo'shish, tahrirlash yoki o'chirish",
+  "manageNewsSubtitle": "Yangilik maqolalarini qoʻshish, tahrirlash yoki oʻchirish",
   "@manageNewsSubtitle": {
     "description": "Translation for manageNewsSubtitle"
   },
@@ -916,7 +916,7 @@
   "@manageUsersTitle": {
     "description": "Translation for manageUsersTitle"
   },
-  "manageUsersSubtitle": "Foydalanuvchilarni ko'rish va rollarni boshqarish (kelajakda)",
+  "manageUsersSubtitle": "Foydalanuvchilarni koʻrish va rollarni boshqarish (kelajakda)",
   "@manageUsersSubtitle": {
     "description": "Translation for manageUsersSubtitle"
   },
@@ -924,15 +924,15 @@
   "@manageResourcesTitle": {
     "description": "Translation for manageResourcesTitle"
   },
-  "manageResourcesSubtitle": "Barcha o'quv resurslarini nazorat qilish (kelajakda)",
+  "manageResourcesSubtitle": "Barcha oʻquv resurslarini nazorat qilish (kelajakda)",
   "@manageResourcesSubtitle": {
     "description": "Translation for manageResourcesSubtitle"
   },
-  "confirmDeleteTitle": "O'chirishni tasdiqlang",
+  "confirmDeleteTitle": "Oʻchirishni tasdiqlang",
   "@confirmDeleteTitle": {
     "description": "Translation for confirmDeleteTitle"
   },
-  "confirmDeleteNewsMessage": "Siz \"{newsTitle}\"ni o'chirib tashlamoqchimisiz?",
+  "confirmDeleteNewsMessage": "Siz \"{newsTitle}\"ni oʻchirib tashlamoqchimisiz?",
   "@confirmDeleteNewsMessage": {
     "placeholders": {
       "newsTitle": {
@@ -940,7 +940,7 @@
       }
     }
   },
-  "newsDeletedSuccess": "\"{newsTitle}\" muvaffaqiyatli o'chirildi.",
+  "newsDeletedSuccess": "\"{newsTitle}\" muvaffaqiyatli oʻchirildi.",
   "@newsDeletedSuccess": {
     "placeholders": {
       "newsTitle": {
@@ -948,7 +948,7 @@
       }
     }
   },
-  "failedToDeleteNews": "\"{newsTitle}\" o'chirilmadi: {error}",
+  "failedToDeleteNews": "\"{newsTitle}\" oʻchirilmadi: {error}",
   "@failedToDeleteNews": {
     "description": "Error message when deleting news fails",
     "placeholders": {
@@ -960,7 +960,7 @@
       }
     }
   },
-  "addNewsTooltip": "Yangi maqola qo'shish",
+  "addNewsTooltip": "Yangi maqola qoʻshish",
   "@addNewsTooltip": {
     "description": "Translation for addNewsTooltip"
   },
@@ -968,15 +968,15 @@
   "@editNewsTooltip": {
     "description": "Translation for editNewsTooltip"
   },
-  "deleteNewsTooltip": "Yangilikni o'chirish",
+  "deleteNewsTooltip": "Yangilikni oʻchirish",
   "@deleteNewsTooltip": {
     "description": "Translation for deleteNewsTooltip"
   },
-  "addNewsButton": "Yangilik qo'shish",
+  "addNewsButton": "Yangilik qoʻshish",
   "@addNewsButton": {
     "description": "Translation for addNewsButton"
   },
-  "noNewsAvailableManager": "Hech qanday yangilik maqolasi topilmadi. bittasini qo'shing!",
+  "noNewsAvailableManager": "Hech qanday yangilik maqolasi topilmadi. bittasini qoʻshing!",
   "@noNewsAvailableManager": {
     "description": "Translation for noNewsAvailableManager"
   },
@@ -984,7 +984,7 @@
   "@editNewsTitle": {
     "description": "Translation for editNewsTitle"
   },
-  "addNewsTitle": "Yangilik maqolasini qo'shish",
+  "addNewsTitle": "Yangilik maqolasini qoʻshish",
   "@addNewsTitle": {
     "description": "Translation for addNewsTitle"
   },
@@ -1000,7 +1000,7 @@
   "@pleaseEnterNewsTitle": {
     "description": "Translation for pleaseEnterNewsTitle"
   },
-  "newsTitleMinLength": "Yangiliklar nomi kamida {length} belgidan iborat bo'lishi kerak.",
+  "newsTitleMinLength": "Yangiliklar nomi kamida {length} belgidan iborat boʻlishi kerak.",
   "@newsTitleMinLength": {
     "placeholders": {
       "length": {
@@ -1024,7 +1024,7 @@
   "@pleaseEnterNewsUrl": {
     "description": "Translation for pleaseEnterNewsUrl"
   },
-  "pleaseEnterValidNewsUrl": "Iltimos, to'g'ri URL manzilini kiriting (http yoki https bilan boshlanadi).",
+  "pleaseEnterValidNewsUrl": "Iltimos, toʻgʻri URL manzilini kiriting (http yoki https bilan boshlanadi).",
   "@pleaseEnterValidNewsUrl": {
     "description": "Translation for pleaseEnterValidNewsUrl"
   },
@@ -1032,7 +1032,7 @@
   "@newsImageUrlLabel": {
     "description": "Translation for newsImageUrlLabel"
   },
-  "pleaseEnterValidImageUrl": "Iltimos, haqiqiy rasm URL manzilini kiriting (http yoki https bilan boshlanadi) yoki bo'sh qoldiring.",
+  "pleaseEnterValidImageUrl": "Iltimos, haqiqiy rasm URL manzilini kiriting (http yoki https bilan boshlanadi) yoki boʻsh qoldiring.",
   "@pleaseEnterValidImageUrl": {
     "description": "Translation for pleaseEnterValidImageUrl"
   },
@@ -1056,7 +1056,7 @@
   "@updateNewsButton": {
     "description": "Translation for updateNewsButton"
   },
-  "addNewsButtonForm": "Yangilik maqolasini qo'shish",
+  "addNewsButtonForm": "Yangilik maqolasini qoʻshish",
   "@addNewsButtonForm": {
     "description": "Translation for addNewsButtonForm"
   },
@@ -1068,7 +1068,7 @@
       }
     }
   },
-  "newsAddedSuccess": "\"{newsTitle}\" muvaffaqiyatli qo'shildi.",
+  "newsAddedSuccess": "\"{newsTitle}\" muvaffaqiyatli qoʻshildi.",
   "@newsAddedSuccess": {
     "placeholders": {
       "newsTitle": {
@@ -1076,7 +1076,7 @@
       }
     }
   },
-  "failedToSaveNews": "Yangilikni saqlab bo'lmadi: {error}",
+  "failedToSaveNews": "Yangilikni saqlab boʻlmadi: {error}",
   "@failedToSaveNews": {
     "description": "Error message when saving news fails",
     "placeholders": {
@@ -1105,19 +1105,19 @@
   "@roleLabel": {
     "description": "Translation for roleLabel"
   },
-  "registeredOnLabel": "Ro'yxatdan o'tgan",
+  "registeredOnLabel": "Roʻyxatdan oʻtgan",
   "@registeredOnLabel": {
     "description": "Translation for registeredOnLabel"
   },
-  "manageUsersSubtitleNow": "Ro'yxatdan o'tgan foydalanuvchilarni ko'rish va qidirish",
+  "manageUsersSubtitleNow": "Roʻyxatdan oʻtgan foydalanuvchilarni koʻrish va qidirish",
   "@manageUsersSubtitleNow": {
     "description": "Translation for manageUsersSubtitleNow"
   },
-  "manageResourcesSubtitleNow": "Har qanday o'quv manbasini ko'rish, tahrirlash yoki o'chirish",
+  "manageResourcesSubtitleNow": "Har qanday oʻquv manbasini koʻrish, tahrirlash yoki oʻchirish",
   "@manageResourcesSubtitleNow": {
     "description": "Translation for manageResourcesSubtitleNow"
   },
-  "confirmDeleteResourceMessage": "Siz \"{resourceTitle}\" manbasini o'chirib tashlamoqchimisiz?",
+  "confirmDeleteResourceMessage": "Siz \"{resourceTitle}\" manbasini oʻchirib tashlamoqchimisiz?",
   "@confirmDeleteResourceMessage": {
     "placeholders": {
       "resourceTitle": {
@@ -1125,7 +1125,7 @@
       }
     }
   },
-  "failedToDeleteResource": "\"{resourceTitle}\" manbasini o'chirib bo'lmadi: {error}",
+  "failedToDeleteResource": "\"{resourceTitle}\" manbasini oʻchirib boʻlmadi: {error}",
   "@failedToDeleteResource": {
     "description": "Error message when deleting resource fails",
     "placeholders": {
@@ -1153,7 +1153,7 @@
   "@editResourceTooltip": {
     "description": "Translation for editResourceTooltip"
   },
-  "deleteResourceTooltip": "Resursni o'chirish",
+  "deleteResourceTooltip": "Resursni oʻchirish",
   "@deleteResourceTooltip": {
     "description": "Translation for deleteResourceTooltip"
   },
@@ -1161,7 +1161,7 @@
   "@manageQuizzesTitle": {
     "description": "Translation for manageQuizzesTitle"
   },
-  "addQuizTooltip": "Yangi test qo'shish",
+  "addQuizTooltip": "Yangi test qoʻshish",
   "@addQuizTooltip": {
     "description": "Translation for addQuizTooltip"
   },
@@ -1173,11 +1173,11 @@
       }
     }
   },
-  "noQuizzesFoundManager": "Hech qanday test topilmadi. bittasini qo'shing!",
+  "noQuizzesFoundManager": "Hech qanday test topilmadi. bittasini qoʻshing!",
   "@noQuizzesFoundManager": {
     "description": "Translation for noQuizzesFoundManager"
   },
-  "confirmDeleteQuizMessage": "Siz \"{quizTitle}\" testini va uning barcha savollarini o'chirib tashlamoqchimisiz? bu amalni ortga qaytarib bo'lmaydi.",
+  "confirmDeleteQuizMessage": "Siz \"{quizTitle}\" testini va uning barcha savollarini oʻchirib tashlamoqchimisiz? bu amalni ortga qaytarib boʻlmaydi.",
   "@confirmDeleteQuizMessage": {
     "placeholders": {
       "quizTitle": {
@@ -1185,7 +1185,7 @@
       }
     }
   },
-  "quizDeletedSuccess": "\"{quizTitle}\" testi va uning savollari muvaffaqiyatli o'chirildi.",
+  "quizDeletedSuccess": "\"{quizTitle}\" testi va uning savollari muvaffaqiyatli oʻchirildi.",
   "@quizDeletedSuccess": {
     "placeholders": {
       "quizTitle": {
@@ -1193,7 +1193,7 @@
       }
     }
   },
-  "failedToDeleteQuiz": "\"{quizTitle}\" testini o'chirib bo'lmadi: {error}",
+  "failedToDeleteQuiz": "\"{quizTitle}\" testini oʻchirib boʻlmadi: {error}",
   "@failedToDeleteQuiz": {
     "description": "Error message when deleting quiz fails",
     "placeholders": {
@@ -1213,11 +1213,11 @@
   "@manageQuestionsButton": {
     "description": "Translation for manageQuestionsButton"
   },
-  "deleteQuizTooltip": "Viktorina va savollarni o'chirish",
+  "deleteQuizTooltip": "Viktorina va savollarni oʻchirish",
   "@deleteQuizTooltip": {
     "description": "Translation for deleteQuizTooltip"
   },
-  "addQuizButton": "Viktorina qo'shish",
+  "addQuizButton": "Viktorina qoʻshish",
   "@addQuizButton": {
     "description": "Translation for addQuizButton"
   },
@@ -1241,11 +1241,11 @@
   "@dashboardAdminTitle": {
     "description": "Administratorning boshqaruv paneli bo'limi uchun sarlavha"
   },
-  "seeAllButton": "Barchasini ko'rish",
+  "seeAllButton": "Barchasini koʻrish",
   "@seeAllButton": {
     "description": "Ro'yxatdagi barcha elementlarni ko'rish uchun tugma"
   },
-  "noGuidesAuthored": "Siz hali hech qanday qo'llanma yaratmadingiz.",
+  "noGuidesAuthored": "Siz hali hech qanday qoʻllanma yaratmadingiz.",
   "@noGuidesAuthored": {
     "description": "Xabar ekspert hali qo'llanma yaratmaganida ko'rsatiladi."
   },
@@ -1253,7 +1253,7 @@
   "@adminStatUsers": {
     "description": "Administrator panelidagi umumiy foydalanuvchilar statistikasi uchun yorliq."
   },
-  "adminStatGuides": "Qo'llanmalar",
+  "adminStatGuides": "Qoʻllanmalar",
   "@adminStatGuides": {
     "description": "Administrator panelidagi umumiy qo'llanmalar statistikasi uchun yorliq."
   },
@@ -1269,11 +1269,11 @@
   "@signInWithGoogle": {
     "description": "Google hisobi bilan kirish uchun tugma matni."
   },
-  "themeSystemDefault": "Tizim bo'yicha",
+  "themeSystemDefault": "Tizim boʻyicha",
   "@themeSystemDefault": {
     "description": "Translation for themeSystemDefault"
   },
-  "themeLight": "Yorug' rejim",
+  "themeLight": "Yorugʻ rejim",
   "@themeLight": {
     "description": "Translation for themeLight"
   },
@@ -1289,15 +1289,15 @@
   "@profilePictureUrlLabel": {
     "description": "Translation for profilePictureUrlLabel"
   },
-  "levelBeginner": "Boshlang'ich",
+  "levelBeginner": "Boshlangʻich",
   "@levelBeginner": {
     "description": "Translation for levelBeginner"
   },
-  "levelIntermediate": "O'rta",
+  "levelIntermediate": "Oʻrta",
   "@levelIntermediate": {
     "description": "Translation for levelIntermediate"
   },
-  "levelAdvanced": "Ilg'or",
+  "levelAdvanced": "Ilgʻor",
   "@levelAdvanced": {
     "description": "Translation for levelAdvanced"
   },
@@ -1341,7 +1341,7 @@
   "@manageSystemsTitle": {
     "description": "Translation for manageSystemsTitle"
   },
-  "manageSystemsSubtitle": "Tizimlar ma'lumotnomasini boshqarish",
+  "manageSystemsSubtitle": "Tizimlar maʼlumotnomasini boshqarish",
   "@manageSystemsSubtitle": {
     "description": "Translation for manageSystemsSubtitle"
   },
@@ -1365,7 +1365,7 @@
   "@selectLanguage": {
     "description": "Translation for selectLanguage"
   },
-  "topicDeletedSuccess": "\"{topicTitle}\" muvaffaqiyatli o'chirildi.",
+  "topicDeletedSuccess": "\"{topicTitle}\" muvaffaqiyatli oʻchirildi.",
   "@topicDeletedSuccess": {
     "placeholders": {
       "topicTitle": {
@@ -1373,7 +1373,7 @@
       }
     }
   },
-  "failedToDeleteTopic": "Mavzuni o'chirib bo'lmadi: {error}",
+  "failedToDeleteTopic": "Mavzuni oʻchirib boʻlmadi: {error}",
   "@failedToDeleteTopic": {
     "placeholders": {
       "error": {
@@ -1381,7 +1381,7 @@
       }
     }
   },
-  "deleteTopicConfirmMessage": "Siz \"{topicTitle}\" mavzusini o'chirib tashlamoqchimisiz?",
+  "deleteTopicConfirmMessage": "Siz \"{topicTitle}\" mavzusini oʻchirib tashlamoqchimisiz?",
   "@deleteTopicConfirmMessage": {
     "placeholders": {
       "topicTitle": {
@@ -1393,7 +1393,7 @@
   "@editTopicTooltip": {
     "description": "Translation for editTopicTooltip"
   },
-  "deleteTopicConfirmTitle": "Mavzuni o'chirish",
+  "deleteTopicConfirmTitle": "Mavzuni oʻchirish",
   "@deleteTopicConfirmTitle": {
     "description": "Translation for deleteTopicConfirmTitle"
   },
@@ -1405,7 +1405,7 @@
   "@commentSingular": {
     "description": "Translation for commentSingular"
   },
-  "deleteTopicTooltip": "Mavzuni o'chirish",
+  "deleteTopicTooltip": "Mavzuni oʻchirish",
   "@deleteTopicTooltip": {
     "description": "Translation for deleteTopicTooltip"
   },
@@ -1449,7 +1449,7 @@
   "@articleDetailTitle": {
     "description": "Maqola tafsilotlari ekrani uchun sarlavha"
   },
-  "helpfulFeedback": "Bu foydali bo'ldimi?",
+  "helpfulFeedback": "Bu foydali boʻldimi?",
   "@helpfulFeedback": {
     "description": "Maqola foydaliligi haqida foydalanuvchi fikri uchun so'rov"
   },
@@ -1469,7 +1469,7 @@
   "@articlePinned": {
     "description": "Muhim maqola uchun yorliq"
   },
-  "confirmDeleteArticleMessage": "Siz \"{articleTitle}\" maqolasini o'chirib tashlamoqchimisiz?",
+  "confirmDeleteArticleMessage": "Siz \"{articleTitle}\" maqolasini oʻchirib tashlamoqchimisiz?",
   "@confirmDeleteArticleMessage": {
     "placeholders": {
       "articleTitle": {
@@ -1501,7 +1501,7 @@
   "@articleCategoryLaw": {
     "description": "Translation for articleCategoryLaw"
   },
-  "articleCategoryFaq": "Ko'p so'raladigan",
+  "articleCategoryFaq": "Koʻp soʻraladigan",
   "@articleCategoryFaq": {
     "description": "Translation for articleCategoryFaq"
   },
@@ -1549,7 +1549,7 @@
   "@contentRequired": {
     "description": "Translation for contentRequired"
   },
-  "confirmDeleteVideoMessage": "Siz \"{videoTitle}\" videosini o'chirib tashlamoqchimisiz?",
+  "confirmDeleteVideoMessage": "Siz \"{videoTitle}\" videosini oʻchirib tashlamoqchimisiz?",
   "@confirmDeleteVideoMessage": {
     "placeholders": {
       "videoTitle": {
@@ -1557,11 +1557,11 @@
       }
     }
   },
-  "videoDeletedSuccess": "Video o'chirildi",
+  "videoDeletedSuccess": "Video oʻchirildi",
   "@videoDeletedSuccess": {
     "description": "Translation for videoDeletedSuccess"
   },
-  "noVideosFound": "Videolar yo'q",
+  "noVideosFound": "Videolar yoʻq",
   "@noVideosFound": {
     "description": "Translation for noVideosFound"
   },
@@ -1617,7 +1617,7 @@
   "@descriptionRequired": {
     "description": "Translation for descriptionRequired"
   },
-  "confirmDeleteSystemMessage": "Siz \"{systemName}\" tizimini o'chirib tashlamoqchimisiz?",
+  "confirmDeleteSystemMessage": "Siz \"{systemName}\" tizimini oʻchirib tashlamoqchimisiz?",
   "@confirmDeleteSystemMessage": {
     "placeholders": {
       "systemName": {
@@ -1625,11 +1625,11 @@
       }
     }
   },
-  "systemDeletedSuccess": "Tizim o'chirildi",
+  "systemDeletedSuccess": "Tizim oʻchirildi",
   "@systemDeletedSuccess": {
     "description": "Translation for systemDeletedSuccess"
   },
-  "noSystemsFound": "Tizimlar yo'q",
+  "noSystemsFound": "Tizimlar yoʻq",
   "@noSystemsFound": {
     "description": "Translation for noSystemsFound"
   },
@@ -1657,11 +1657,11 @@
   "@nameRequired": {
     "description": "Translation for nameRequired"
   },
-  "fullNameLabel": "To'liq nomi",
+  "fullNameLabel": "Toʻliq nomi",
   "@fullNameLabel": {
     "description": "Translation for fullNameLabel"
   },
-  "fullNameRequired": "To'liq nom kiritilishi shart",
+  "fullNameRequired": "Toʻliq nom kiritilishi shart",
   "@fullNameRequired": {
     "description": "Translation for fullNameRequired"
   },
@@ -1685,15 +1685,15 @@
   "@statusLabel": {
     "description": "Translation for statusLabel"
   },
-  "loginGuideIdLabel": "Kirish qo'llanmasi ID (ixtiyoriy)",
+  "loginGuideIdLabel": "Kirish qoʻllanmasi ID (ixtiyoriy)",
   "@loginGuideIdLabel": {
     "description": "Translation for loginGuideIdLabel"
   },
-  "videoGuideIdLabel": "Video qo'llanma ID (ixtiyoriy)",
+  "videoGuideIdLabel": "Video qoʻllanma ID (ixtiyoriy)",
   "@videoGuideIdLabel": {
     "description": "Translation for videoGuideIdLabel"
   },
-  "confirmDeleteFaqMessage": "Siz \"{question}\" savolini o'chirib tashlamoqchimisiz?",
+  "confirmDeleteFaqMessage": "Siz \"{question}\" savolini oʻchirib tashlamoqchimisiz?",
   "@confirmDeleteFaqMessage": {
     "placeholders": {
       "question": {
@@ -1701,11 +1701,11 @@
       }
     }
   },
-  "faqDeletedSuccess": "Savol o'chirildi",
+  "faqDeletedSuccess": "Savol oʻchirildi",
   "@faqDeletedSuccess": {
     "description": "Translation for faqDeletedSuccess"
   },
-  "noFaqsFound": "Savollar yo'q",
+  "noFaqsFound": "Savollar yoʻq",
   "@noFaqsFound": {
     "description": "Translation for noFaqsFound"
   },
@@ -1737,7 +1737,7 @@
   "@answerRequired": {
     "description": "Translation for answerRequired"
   },
-  "add": "Qo'shish",
+  "add": "Qoʻshish",
   "@add": {
     "description": "Translation for add"
   },
@@ -1749,7 +1749,7 @@
   "@edit": {
     "description": "Translation for edit"
   },
-  "delete": "O'chirish",
+  "delete": "Oʻchirish",
   "@delete": {
     "description": "Translation for delete"
   },
@@ -1761,11 +1761,11 @@
   "@search": {
     "description": "Translation for search"
   },
-  "fieldRequired": "Maydon to'ldirilishi shart",
+  "fieldRequired": "Maydon toʻldirilishi shart",
   "@fieldRequired": {
     "description": "Translation for fieldRequired"
   },
-  "confirmDelete": "Haqiqatan ham o'chirmoqchimisiz?",
+  "confirmDelete": "Haqiqatan ham oʻchirmoqchimisiz?",
   "@confirmDelete": {
     "description": "Translation for confirmDelete"
   },
@@ -1773,7 +1773,7 @@
   "@successSaved": {
     "description": "Translation for successSaved"
   },
-  "successDeleted": "Muvaffaqiyatli o'chirildi",
+  "successDeleted": "Muvaffaqiyatli oʻchirildi",
   "@successDeleted": {
     "description": "Translation for successDeleted"
   },
@@ -1785,7 +1785,7 @@
   "@notificationHistoryTitle": {
     "description": "Translation for notificationHistoryTitle"
   },
-  "notificationHistoryPlaceholder": "Bu yerda yuborilgan xabarnomalar tarixi ko'rinadi (tez orada).",
+  "notificationHistoryPlaceholder": "Bu yerda yuborilgan xabarnomalar tarixi koʻrinadi (tez orada).",
   "@notificationHistoryPlaceholder": {
     "description": "Translation for notificationHistoryPlaceholder"
   },
@@ -1833,7 +1833,7 @@
   "@notificationTypeNewContent": {
     "description": "Notification type: new content"
   },
-  "notificationTypeAnnouncement": "E'lon",
+  "notificationTypeAnnouncement": "Eʼlon",
   "@notificationTypeAnnouncement": {
     "description": "Notification type: announcement"
   },
@@ -1870,7 +1870,7 @@
       }
     }
   },
-  "notificationLabelReadBy": "O'qildi: {count}",
+  "notificationLabelReadBy": "Oʻqildi: {count}",
   "@notificationLabelReadBy": {
     "description": "Label for read count in history",
     "placeholders": {
@@ -1879,7 +1879,7 @@
       }
     }
   },
-  "faqTitle": "Ko'p so'raladigan savollar",
+  "faqTitle": "Koʻp soʻraladigan savollar",
   "@faqTitle": {
     "description": "Translation for faqTitle"
   },
@@ -1891,7 +1891,7 @@
   "@settingsNotifications": {
     "description": "Translation for settingsNotifications"
   },
-  "changePasswordTitle": "Parolni o'zgartirish",
+  "changePasswordTitle": "Parolni oʻzgartirish",
   "@changePasswordTitle": {
     "description": "Translation for changePasswordTitle"
   },
@@ -1907,7 +1907,7 @@
   "@passwordUpdatedSuccess": {
     "description": "Translation for passwordUpdatedSuccess"
   },
-  "errorWrongPassword": "Joriy parol noto'g'ri",
+  "errorWrongPassword": "Joriy parol notoʻgʻri",
   "@errorWrongPassword": {
     "description": "Translation for errorWrongPassword"
   },
@@ -1987,7 +1987,7 @@
   "@urlLabel": {
     "description": "Translation for urlLabel"
   },
-  "resourceTypePDF": "PDF qo'llanma",
+  "resourceTypePDF": "PDF qoʻllanma",
   "@resourceTypePDF": {
     "description": "Translation for resourceTypePDF"
   },
@@ -2043,15 +2043,15 @@
   "@loginRequired": {
     "description": "Translation for loginRequired"
   },
-  "markAllAsReadTooltip": "Hammasini o'qilgan deb belgilash",
+  "markAllAsReadTooltip": "Hammasini oʻqilgan deb belgilash",
   "@markAllAsReadTooltip": {
     "description": "Translation for markAllAsReadTooltip"
   },
-  "allNotificationsReadMessage": "Barcha xabarnomalar o'qilgan deb belgilandi",
+  "allNotificationsReadMessage": "Barcha xabarnomalar oʻqilgan deb belgilandi",
   "@allNotificationsReadMessage": {
     "description": "Translation for allNotificationsReadMessage"
   },
-  "noNotifications": "Xabarnomalar yo'q",
+  "noNotifications": "Xabarnomalar yoʻq",
   "@noNotifications": {
     "description": "Translation for noNotifications"
   },
@@ -2079,7 +2079,7 @@
       }
     }
   },
-  "rank": "O'rin",
+  "rank": "Oʻrin",
   "@rank": {
     "description": "Translation for rank"
   },
@@ -2087,7 +2087,7 @@
   "@quizHistoryTitle": {
     "description": "Translation for quizHistoryTitle"
   },
-  "seeAll": "Barchasini ko'rish",
+  "seeAll": "Barchasini koʻrish",
   "@seeAll": {
     "description": "Translation for seeAll"
   },
@@ -2107,7 +2107,7 @@
   "@older": {
     "description": "Translation for older"
   },
-  "contactSupport": "Qo'llab-quvvatlash",
+  "contactSupport": "Qoʻllab-quvvatlash",
   "@contactSupport": {
     "description": "Translation for contactSupport"
   },
@@ -2123,7 +2123,7 @@
   "@landingLogin": {
     "description": "Translation for landingLogin"
   },
-  "landingRegister": "Ro'yxatdan o'tish",
+  "landingRegister": "Roʻyxatdan oʻtish",
   "@landingRegister": {
     "description": "Translation for landingRegister"
   },
@@ -2131,7 +2131,7 @@
   "@featureKnowledgeBase": {
     "description": "Translation for featureKnowledgeBase"
   },
-  "featureKnowledgeBaseDesc": "Keng ko'lamli huquqiy resurslar va hujjatlar kutubxonasi.",
+  "featureKnowledgeBaseDesc": "Keng koʻlamli huquqiy resurslar va hujjatlar kutubxonasi.",
   "@featureKnowledgeBaseDesc": {
     "description": "Translation for featureKnowledgeBaseDesc"
   },
@@ -2139,7 +2139,7 @@
   "@featureVideoTutorials": {
     "description": "Translation for featureVideoTutorials"
   },
-  "featureVideoTutorialsDesc": "Mutaxassislar tomonidan tayyorlangan video qo'llanmalar.",
+  "featureVideoTutorialsDesc": "Mutaxassislar tomonidan tayyorlangan video qoʻllanmalar.",
   "@featureVideoTutorialsDesc": {
     "description": "Translation for featureVideoTutorialsDesc"
   },
@@ -2147,15 +2147,15 @@
   "@featureGamification": {
     "description": "Translation for featureGamification"
   },
-  "featureGamificationDesc": "XP va nishonlar yig'ing, reytingda bellashing.",
+  "featureGamificationDesc": "XP va nishonlar yigʻing, reytingda bellashing.",
   "@featureGamificationDesc": {
     "description": "Translation for featureGamificationDesc"
   },
-  "analyticsTitle": "O'quv tahlili (xAPI)",
+  "analyticsTitle": "Oʻquv tahlili (xAPI)",
   "@analyticsTitle": {
     "description": "Translation for analyticsTitle"
   },
-  "analyticsSubtitle": "O'quv yozuvlari",
+  "analyticsSubtitle": "Oʻquv yozuvlari",
   "@analyticsSubtitle": {
     "description": "Translation for analyticsSubtitle"
   },
@@ -2171,19 +2171,19 @@
   "@activityDistribution": {
     "description": "Translation for activityDistribution"
   },
-  "recentActivityFeed": "So'nggi faoliyatlar",
+  "recentActivityFeed": "Soʻnggi faoliyatlar",
   "@recentActivityFeed": {
     "description": "Translation for recentActivityFeed"
   },
-  "noRecords": "Hozircha o'quv yozuvlari topilmadi.",
+  "noRecords": "Hozircha oʻquv yozuvlari topilmadi.",
   "@noRecords": {
     "description": "Translation for noRecords"
   },
-  "unknownUser": "Noma'lum foydalanuvchi",
+  "unknownUser": "Nomaʼlum foydalanuvchi",
   "@unknownUser": {
     "description": "Translation for unknownUser"
   },
-  "unknownObject": "Noma'lum obyekt",
+  "unknownObject": "Nomaʼlum obyekt",
   "@unknownObject": {
     "description": "Translation for unknownObject"
   },
@@ -2219,15 +2219,15 @@
   "@catGeneral": {
     "description": "Translation for catGeneral"
   },
-  "rankBeginner": "Boshlang'ich",
+  "rankBeginner": "Boshlangʻich",
   "@rankBeginner": {
     "description": "Translation for rankBeginner"
   },
-  "rankIntermediate": "O'rta daraja",
+  "rankIntermediate": "Oʻrta daraja",
   "@rankIntermediate": {
     "description": "Translation for rankIntermediate"
   },
-  "rankAdvanced": "Ilg'or",
+  "rankAdvanced": "Ilgʻor",
   "@rankAdvanced": {
     "description": "Translation for rankAdvanced"
   },
@@ -2235,7 +2235,7 @@
   "@sysCatPrimary": {
     "description": "Translation for sysCatPrimary"
   },
-  "sysCatSecondary": "Qo'shimcha tizimlar",
+  "sysCatSecondary": "Qoʻshimcha tizimlar",
   "@sysCatSecondary": {
     "description": "Translation for sysCatSecondary"
   },
@@ -2247,7 +2247,7 @@
   "@sysStatusActive": {
     "description": "Translation for sysStatusActive"
   },
-  "sysStatusMaintenance": "Ta'mirlashda",
+  "sysStatusMaintenance": "Taʼmirlashda",
   "@sysStatusMaintenance": {
     "description": "Translation for sysStatusMaintenance"
   },
@@ -2255,7 +2255,7 @@
   "@sysStatusInactive": {
     "description": "Translation for sysStatusInactive"
   },
-  "videoViews": "{count} ko'rishlar",
+  "videoViews": "{count} koʻrishlar",
   "@videoViews": {
     "placeholders": {
       "count": {
@@ -2275,7 +2275,7 @@
   "@sysStatusDeprecated": {
     "description": "Translation for sysStatusDeprecated"
   },
-  "sysStatusOffline": "O'chirilgan",
+  "sysStatusOffline": "Oʻchirilgan",
   "@sysStatusOffline": {
     "description": "Translation for sysStatusOffline"
   },
@@ -2295,7 +2295,7 @@
   "@systemsDirectoryEmpty": {
     "description": "Translation for systemsDirectoryEmpty"
   },
-  "backToKnowledgeBase": "Qo'llanmalarga qaytish",
+  "backToKnowledgeBase": "Qoʻllanmalarga qaytish",
   "@backToKnowledgeBase": {
     "description": "Translation for backToKnowledgeBase"
   },
@@ -2303,7 +2303,7 @@
   "@quizSuccessMessage": {
     "description": "Translation for quizSuccessMessage"
   },
-  "quizFailureMessage": "Yana bir bor urinib ko'ring!",
+  "quizFailureMessage": "Yana bir bor urinib koʻring!",
   "@quizFailureMessage": {
     "description": "Translation for quizFailureMessage"
   },
@@ -2319,11 +2319,11 @@
   "@levelMaster": {
     "description": "Translation for levelMaster"
   },
-  "errorCouldNotOpenLink": "Havolani ochib bo'lmadi",
+  "errorCouldNotOpenLink": "Havolani ochib boʻlmadi",
   "@errorCouldNotOpenLink": {
     "description": "Translation for errorCouldNotOpenLink"
   },
-  "errorResourceNotFound": "Qo'llanma topilmadi",
+  "errorResourceNotFound": "Qoʻllanma topilmadi",
   "@errorResourceNotFound": {
     "description": "Translation for errorResourceNotFound"
   },
@@ -2331,14 +2331,18 @@
   "@errorVideoNotFound": {
     "description": "Translation for errorVideoNotFound"
   },
-  "errorPdfOpen": "PDF faylni ochib bo'lmadi",
+  "errorPdfOpen": "PDF faylni ochib boʻlmadi",
   "@errorPdfOpen": {
     "description": "Translation for errorPdfOpen"
   },
-  "errorTelegramOpen": "Telegram havolasini ochib bo'lmadi",
+  "errorTelegramOpen": "Telegram havolasini ochib boʻlmadi",
   "@errorTelegramOpen": {
     "description": "Translation for errorTelegramOpen"
   },
+  "telegramLinkTitle": "Telegramʼni ulash",
+  "telegramLinkSubtitle": "Botdagi test natijalari va XP shu profilga yoziladi",
+  "telegramLinkedSubtitle": "Ulangan",
+  "telegramLinkError": "Havola yaratib boʻlmadi. Qayta urinib koʻring.",
   "errorGeneric": "Xatolik yuz berdi: {error}",
   "@errorGeneric": {
     "placeholders": {
@@ -2347,15 +2351,15 @@
       }
     }
   },
-  "labelTrue": "To'g'ri",
+  "labelTrue": "Toʻgʻri",
   "@labelTrue": {
     "description": "Translation for labelTrue"
   },
-  "labelFalse": "Noto'g'ri",
+  "labelFalse": "Notoʻgʻri",
   "@labelFalse": {
     "description": "Translation for labelFalse"
   },
-  "labelPass": "O'tdi",
+  "labelPass": "Oʻtdi",
   "@labelPass": {
     "description": "Translation for labelPass"
   },
@@ -2379,7 +2383,7 @@
   "@searchNoResults": {
     "description": "Translation for searchNoResults"
   },
-  "roleChangedSuccess": "{userName} roli {role} ga o'zgartirildi",
+  "roleChangedSuccess": "{userName} roli {role} ga oʻzgartirildi",
   "@roleChangedSuccess": {
     "placeholders": {
       "userName": {
@@ -2390,7 +2394,7 @@
       }
     }
   },
-  "roleChangeError": "Rolni o'zgartirishda xatolik: {error}",
+  "roleChangeError": "Rolni oʻzgartirishda xatolik: {error}",
   "@roleChangeError": {
     "placeholders": {
       "error": {
@@ -2398,19 +2402,19 @@
       }
     }
   },
-  "changeRoleTooltip": "Rolni o'zgartirish",
+  "changeRoleTooltip": "Rolni oʻzgartirish",
   "@changeRoleTooltip": {
     "description": "Translation for changeRoleTooltip"
   },
-  "labelVideoGuide": "Video qo'llanma",
+  "labelVideoGuide": "Video qoʻllanma",
   "@labelVideoGuide": {
     "description": "Translation for labelVideoGuide"
   },
-  "labelLoginGuide": "Kirish qo'llanma",
+  "labelLoginGuide": "Kirish qoʻllanma",
   "@labelLoginGuide": {
     "description": "Translation for labelLoginGuide"
   },
-  "changePasswordHint": "Parolni o'zgartirish qismi (tez orada)",
+  "changePasswordHint": "Parolni oʻzgartirish qismi (tez orada)",
   "@changePasswordHint": {
     "description": "Translation for changePasswordHint"
   },
@@ -2422,11 +2426,11 @@
   "@update": {
     "description": "Translation for update"
   },
-  "commentAdded": "Izoh qo'shildi!",
+  "commentAdded": "Izoh qoʻshildi!",
   "@commentAdded": {
     "description": "Translation for commentAdded"
   },
-  "updateFeatureMigration": "Yangilash xususiyati ko'chirilmoqda. tez orada!",
+  "updateFeatureMigration": "Yangilash xususiyati koʻchirilmoqda. tez orada!",
   "@updateFeatureMigration": {
     "description": "Translation for updateFeatureMigration"
   },
@@ -2434,7 +2438,7 @@
   "@topicUpdatedSuccessfully": {
     "description": "Translation for topicUpdatedSuccessfully"
   },
-  "errorDeletingTopicMsg": "Mavzuni o'chirishda xatolik yuz berdi: {error}",
+  "errorDeletingTopicMsg": "Mavzuni oʻchirishda xatolik yuz berdi: {error}",
   "@errorDeletingTopicMsg": {
     "placeholders": {
       "error": {
@@ -2486,7 +2490,7 @@
   "@clearChatTooltip": {
     "description": "Translation for clearChatTooltip"
   },
-  "noInternetLabel": "Internet yo'q",
+  "noInternetLabel": "Internet yoʻq",
   "@noInternetLabel": {
     "description": "Translation for noInternetLabel"
   },
@@ -2522,11 +2526,11 @@
   "@aiMentorName": {
     "description": "Translation for aiMentorName"
   },
-  "trueOption": "To'g'ri",
+  "trueOption": "Toʻgʻri",
   "@trueOption": {
     "description": "Translation for True option in quizzes"
   },
-  "falseOption": "Noto'g'ri",
+  "falseOption": "Notoʻgʻri",
   "@falseOption": {
     "description": "Translation for False option in quizzes"
   },
@@ -2534,19 +2538,19 @@
   "@questionsListTab": {
     "description": "Tab label for questions list"
   },
-  "addQuestionTab": "Savol qo'shish",
+  "addQuestionTab": "Savol qoʻshish",
   "@addQuestionTab": {
     "description": "Tab label for adding a question"
   },
-  "addOptionButton": "Variant qo'shish",
+  "addOptionButton": "Variant qoʻshish",
   "@addOptionButton": {
     "description": "Button label for adding an option"
   },
-  "deleteQuestionConfirm": "Bu savolni o'chirmoqchimisiz?",
+  "deleteQuestionConfirm": "Bu savolni oʻchirmoqchimisiz?",
   "@deleteQuestionConfirm": {
     "description": "Confirmation dialog for deleting a question"
   },
-  "questionDeleted": "Savol o'chirildi",
+  "questionDeleted": "Savol oʻchirildi",
   "@questionDeleted": {
     "description": "Snackbar message after deleting a question"
   },
@@ -2590,7 +2594,7 @@
   "@selectAnAnswer": {
     "description": "Prompt to select an answer"
   },
-  "correctAnswerIs": "To'g'ri javob: {answer}",
+  "correctAnswerIs": "Toʻgʻri javob: {answer}",
   "@correctAnswerIs": {
     "description": "Shows the correct answer",
     "placeholders": {
@@ -2616,7 +2620,7 @@
       }
     }
   },
-  "excellentScore": "A'lo natija! 🎉",
+  "excellentScore": "Aʼlo natija! 🎉",
   "@excellentScore": {
     "description": "Message for high quiz score"
   },
@@ -2628,19 +2632,19 @@
   "@needsImprovement": {
     "description": "Message for low quiz score"
   },
-  "noQuestionsInQuiz": "Bu viktorinada hali savollar yo'q.",
+  "noQuestionsInQuiz": "Bu viktorinada hali savollar yoʻq.",
   "@noQuestionsInQuiz": {
     "description": "Message when quiz has no questions"
   },
-  "resumeLearning": "O'rganishni davom ettirish",
+  "resumeLearning": "Oʻrganishni davom ettirish",
   "@resumeLearning": {
     "description": "Button text to resume learning on dashboard"
   },
-  "recentActivity": "So'nggi faoliyat",
+  "recentActivity": "Soʻnggi faoliyat",
   "@recentActivity": {
     "description": "Section title for recent activity on dashboard"
   },
-  "availableResources": "Mavjud qo'llanmalar",
+  "availableResources": "Mavjud qoʻllanmalar",
   "@availableResources": {
     "description": "Metric card title for available resources"
   },
@@ -2652,7 +2656,7 @@
   "@activeDiscussions": {
     "description": "Metric card title for active discussions"
   },
-  "recommendedResources": "Tavsiya etilgan qo'llanmalar",
+  "recommendedResources": "Tavsiya etilgan qoʻllanmalar",
   "@recommendedResources": {
     "description": "Section title for recommended resources"
   },
@@ -2664,19 +2668,19 @@
   "@mainDashboard": {
     "description": "Dashboard page title"
   },
-  "overview": "Umumiy ko'rinish",
+  "overview": "Umumiy koʻrinish",
   "@overview": {
     "description": "Overview label on welcome banner"
   },
-  "noRecentActivities": "So'nggi faoliyat yo'q.",
+  "noRecentActivities": "Soʻnggi faoliyat yoʻq.",
   "@noRecentActivities": {
     "description": "Empty state for recent activity"
   },
-  "signInToSeeActivities": "Faoliyatni ko'rish uchun tizimga kiring.",
+  "signInToSeeActivities": "Faoliyatni koʻrish uchun tizimga kiring.",
   "@signInToSeeActivities": {
     "description": "Message when user is not signed in"
   },
-  "noResourcesAvailable": "Mavjud qo'llanmalar yo'q.",
+  "noResourcesAvailable": "Mavjud qoʻllanmalar yoʻq.",
   "@noResourcesAvailable": {
     "description": "Empty state for resources"
   },
@@ -2720,7 +2724,7 @@
   "@searchErrorTitle": {
     "description": "Error title in search"
   },
-  "searchNoResultsForQuery": "\"{query}\" bo'yicha natija topilmadi",
+  "searchNoResultsForQuery": "\"{query}\" boʻyicha natija topilmadi",
   "@searchNoResultsForQuery": {
     "description": "No results found for specific query",
     "placeholders": {
@@ -2740,7 +2744,7 @@
       }
     }
   },
-  "searchSemanticHeader": "📎 bog'liq materiallar ({count})",
+  "searchSemanticHeader": "📎 bogʻliq materiallar ({count})",
   "@searchSemanticHeader": {
     "description": "Header for semantic search results",
     "placeholders": {
@@ -2750,7 +2754,7 @@
       }
     }
   },
-  "searchSemanticBadge": "📎 bog'liq",
+  "searchSemanticBadge": "📎 bogʻliq",
   "@searchSemanticBadge": {
     "description": "Badge for semantic search result"
   },
@@ -2794,15 +2798,15 @@
   "@leaderboardTabRegion": {
     "description": "Region tab in leaderboard"
   },
-  "leaderboardTabCourt": "O'z sudim",
+  "leaderboardTabCourt": "Oʻz sudim",
   "@leaderboardTabCourt": {
     "description": "Court tab in leaderboard"
   },
-  "noRegionInfo": "Viloyat ma'lumoti yo'q",
+  "noRegionInfo": "Viloyat maʼlumoti yoʻq",
   "@noRegionInfo": {
     "description": "Displayed when region info is missing"
   },
-  "noCourtInfo": "Sud ma'lumoti yo'q",
+  "noCourtInfo": "Sud maʼlumoti yoʻq",
   "@noCourtInfo": {
     "description": "Displayed when court info is missing"
   },
@@ -2810,7 +2814,7 @@
   "@selectYourCourtTitle": {
     "description": "Title for court selection modal"
   },
-  "selectYourCourtSubtitle": "Mintaqaviy statistika va leaderboard uchun\nqaysi sudda ishlashingizni ko'rsating",
+  "selectYourCourtSubtitle": "Mintaqaviy statistika va leaderboard uchun\nqaysi sudda ishlashingizni koʻrsating",
   "@selectYourCourtSubtitle": {
     "description": "Subtitle for court selection modal"
   },
@@ -2854,11 +2858,11 @@
   "@savingInProgress": {
     "description": "Saving text"
   },
-  "courtDataHeader": "Sud ma'lumotlari",
+  "courtDataHeader": "Sud maʼlumotlari",
   "@courtDataHeader": {
     "description": "Header for court data section in registration"
   },
-  "saveChangesButton": "O'zgarishlarni saqlash",
+  "saveChangesButton": "Oʻzgarishlarni saqlash",
   "@saveChangesButton": {
     "description": "Button text to save changes"
   },
@@ -2870,7 +2874,7 @@
   "@myCoursesEmptyTitle": {
     "description": "Translation for myCoursesEmptyTitle"
   },
-  "myCoursesEmptySubtitle": "Yangi bilimlarni o'zlashtirish va XP ishlash uchun kurslarni boshlang.",
+  "myCoursesEmptySubtitle": "Yangi bilimlarni oʻzlashtirish va XP ishlash uchun kurslarni boshlang.",
   "@myCoursesEmptySubtitle": {
     "description": "Translation for myCoursesEmptySubtitle"
   },
@@ -2886,11 +2890,11 @@
   "@courseFilterAll": {
     "description": "Label for 'All' difficulty filter"
   },
-  "courseFilterBeginner": "Boshlang'ich",
+  "courseFilterBeginner": "Boshlangʻich",
   "@courseFilterBeginner": {
     "description": "Label for 'Beginner' difficulty filter"
   },
-  "courseFilterIntermediate": "O'rta",
+  "courseFilterIntermediate": "Oʻrta",
   "@courseFilterIntermediate": {
     "description": "Label for 'Intermediate' difficulty filter"
   },

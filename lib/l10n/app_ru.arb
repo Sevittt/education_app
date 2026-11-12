@@ -2283,6 +2283,10 @@
   "@errorTelegramOpen": {
     "description": "Translation for errorTelegramOpen"
   },
+  "telegramLinkTitle": "Подключить Telegram",
+  "telegramLinkSubtitle": "Результаты тестов и XP из бота будут записаны в этот профиль",
+  "telegramLinkedSubtitle": "Подключено",
+  "telegramLinkError": "Не удалось создать ссылку. Попробуйте ещё раз.",
   "errorGeneric": "Произошла ошибка: {error}",
   "@errorGeneric": {
     "placeholders": {

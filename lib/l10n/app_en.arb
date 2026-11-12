@@ -2315,6 +2315,22 @@
   "@errorTelegramOpen": {
     "description": "Translation for errorTelegramOpen"
   },
+  "telegramLinkTitle": "Connect Telegram",
+  "@telegramLinkTitle": {
+    "description": "Settings item that links the user's Telegram account to this profile"
+  },
+  "telegramLinkSubtitle": "Bot quiz results and XP will go to this profile",
+  "@telegramLinkSubtitle": {
+    "description": "Subtitle shown while Telegram is not linked"
+  },
+  "telegramLinkedSubtitle": "Connected",
+  "@telegramLinkedSubtitle": {
+    "description": "Subtitle shown when Telegram is already linked"
+  },
+  "telegramLinkError": "Could not create the link. Try again.",
+  "@telegramLinkError": {
+    "description": "Error when the link code could not be created"
+  },
   "errorGeneric": "An error occurred: {error}",
   "@errorGeneric": {
     "placeholders": {

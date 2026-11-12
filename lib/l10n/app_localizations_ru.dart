@@ -1664,6 +1664,18 @@ class AppLocalizationsRu extends AppLocalizations {
   String get errorTelegramOpen => 'Не удалось открыть ссылку telegram';
 
   @override
+  String get telegramLinkTitle => 'Подключить Telegram';
+
+  @override
+  String get telegramLinkSubtitle => 'Результаты тестов и XP из бота будут записаны в этот профиль';
+
+  @override
+  String get telegramLinkedSubtitle => 'Подключено';
+
+  @override
+  String get telegramLinkError => 'Не удалось создать ссылку. Попробуйте ещё раз.';
+
+  @override
   String errorGeneric(String error) {
     return 'Произошла ошибка: $error';
   }

@@ -1,11 +1,18 @@
 import 'package:flutter/widgets.dart';
 import 'package:sud_qollanma/core/data/uzbekistan_courts.dart';
 import 'package:sud_qollanma/l10n/app_localizations.dart';
+import 'package:sud_qollanma/core/utils/uzbek_orthography.dart';
+
+/// Yangi alifbo (`uz_Latn`) tanlangan boʻlsa, oʻzbekcha nomni oʻgiradi.
+String _uz(BuildContext context, String text) =>
+    Localizations.localeOf(context).scriptCode == 'Latn'
+        ? toUzbekNewAlphabet(text)
+        : text;
 
 extension RegionInfoL10n on RegionInfo {
   String localizedName(BuildContext context) {
     final locale = Localizations.localeOf(context).languageCode;
-    if (locale == 'uz') return name;
+    if (locale == 'uz') return _uz(context, name);
 
     if (locale == 'ru') {
       return _translateRegionToRu(name);
@@ -22,7 +29,7 @@ extension RegionInfoL10n on RegionInfo {
 extension CourtInfoL10n on CourtInfo {
   String localizedName(BuildContext context) {
     final locale = Localizations.localeOf(context).languageCode;
-    if (locale == 'uz') return name;
+    if (locale == 'uz') return _uz(context, name);
 
     if (locale == 'ru') {
       return _translateCourtToRu(name);
@@ -39,7 +46,7 @@ extension CourtInfoL10n on CourtInfo {
 extension CourtTypeL10n on CourtType {
   String localizedDisplayName(BuildContext context) {
     final locale = Localizations.localeOf(context).languageCode;
-    if (locale == 'uz') return displayName;
+    if (locale == 'uz') return _uz(context, displayName);
 
     if (locale == 'ru') {
       switch (this) {

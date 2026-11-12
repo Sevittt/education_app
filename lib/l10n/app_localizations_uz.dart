@@ -9,13 +9,13 @@ class AppLocalizationsUz extends AppLocalizations {
   AppLocalizationsUz([String locale = 'uz']) : super(locale);
 
   @override
-  String get appTitle => 'Sud qo\'llanma';
+  String get appTitle => 'Sud qoʻllanma';
 
   @override
   String get openInYoutube => 'YouTube orqali ochish';
 
   @override
-  String get watchOnYoutube => 'YouTube da ko\'rish';
+  String get watchOnYoutube => 'YouTube da koʻrish';
 
   @override
   String get loginWelcomeTitle => 'Xush kelibsiz!';
@@ -36,7 +36,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get bottomNavProfile => 'Profil';
 
   @override
-  String get resourcesScreenTitle => 'Qo\'llanmalar va yo\'riqnomalar';
+  String get resourcesScreenTitle => 'Qoʻllanmalar va yoʻriqnomalar';
 
   @override
   String get roleXodim => 'Xodim';
@@ -51,13 +51,13 @@ class AppLocalizationsUz extends AppLocalizations {
   String get registrationTitle => 'Hisob yaratish';
 
   @override
-  String get registrationSubtitle => 'Professional hamjamiyatga qo\'shiling!';
+  String get registrationSubtitle => 'Professional hamjamiyatga qoʻshiling!';
 
   @override
-  String get registrationFullNameLabel => 'To\'liq ism (F.I.Sh.)';
+  String get registrationFullNameLabel => 'Toʻliq ism (F.I.Sh.)';
 
   @override
-  String get registrationFullNameError => 'Iltimos, to\'liq ismingizni kiriting';
+  String get registrationFullNameError => 'Iltimos, toʻliq ismingizni kiriting';
 
   @override
   String get registrationRoleLabel => 'Sizning rolingiz';
@@ -69,7 +69,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get registrationRoleXodim => 'Oddiy xodim';
 
   @override
-  String get registrationRoleEkspert => 'Ekspert (Qo\'llanma yaratuvchi)';
+  String get registrationRoleEkspert => 'Ekspert (Qoʻllanma yaratuvchi)';
 
   @override
   String get registrationRoleJudge => 'Sudya';
@@ -90,7 +90,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get registrationPasswordLabel => 'Parol';
 
   @override
-  String get registrationPasswordError => 'Parol kamida 6 belgidan iborat bo\'lishi kerak';
+  String get registrationPasswordError => 'Parol kamida 6 belgidan iborat boʻlishi kerak';
 
   @override
   String get registrationConfirmPasswordLabel => 'Parolni tasdiqlang';
@@ -99,7 +99,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get registrationConfirmPasswordError => 'Parollar mos kelmadi';
 
   @override
-  String get registrationSignUpButton => 'Ro\'yxatdan o\'tish';
+  String get registrationSignUpButton => 'Roʻyxatdan oʻtish';
 
   @override
   String get registrationSwitchToLogin => 'Hisobingiz bormi? kirish';
@@ -108,7 +108,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get languageEnglish => 'Ingliz tili';
 
   @override
-  String get languageUzbek => 'O\'zbek tili';
+  String get languageUzbek => 'Oʻzbek tili';
 
   @override
   String get languageRussian => 'Rus tili';
@@ -132,19 +132,19 @@ class AppLocalizationsUz extends AppLocalizations {
   String get settingsAllowLocation => 'Joylashuvga ruxsat berish';
 
   @override
-  String get settingsAllowLocationSubtitle => 'Joylashuvingizni talab qiladigan funksiyalar uchun (agar mavjud bo\'lsa)';
+  String get settingsAllowLocationSubtitle => 'Joylashuvingizni talab qiladigan funksiyalar uchun (agar mavjud boʻlsa)';
 
   @override
-  String get settingsChangePassword => 'Parolni o\'zgartirish';
+  String get settingsChangePassword => 'Parolni oʻzgartirish';
 
   @override
   String get settingsHelpCenter => 'Yordam markazi';
 
   @override
-  String get settingsAboutApp => 'Sud qo\'llanma haqida';
+  String get settingsAboutApp => 'Sud qoʻllanma haqida';
 
   @override
-  String get settingsAppLegalese => '© 2025 sud qo\'llanma loyihasi';
+  String get settingsAppLegalese => '© 2025 sud qoʻllanma loyihasi';
 
   @override
   String get settingsAppDescription => 'Sud xodimlarining kasbiy kompetentligi uchun mobil platforma.';
@@ -162,10 +162,10 @@ class AppLocalizationsUz extends AppLocalizations {
   String get loginButtonText => 'Kirish';
 
   @override
-  String get signUpButtonText => 'Ro\'yxatdan o\'tish';
+  String get signUpButtonText => 'Roʻyxatdan oʻtish';
 
   @override
-  String get loginNoAccount => 'Akkauntingiz yo\'qmi?';
+  String get loginNoAccount => 'Akkauntingiz yoʻqmi?';
 
   @override
   String get logoutButtonText => 'Chiqish';
@@ -195,7 +195,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get guestUser => 'Mehmon foydalanuvchi';
 
   @override
-  String get updateYourInformation => 'Ma\'lumotlaringizni yangilang';
+  String get updateYourInformation => 'Maʼlumotlaringizni yangilang';
 
   @override
   String get loginToEditProfile => 'Profilni tahrirlash uchun tizimga kiring';
@@ -210,13 +210,13 @@ class AppLocalizationsUz extends AppLocalizations {
   String get logoutConfirmMessage => 'Chiqishni xohlaysizmi?';
 
   @override
-  String get saveChangesButton => 'O\'zgarishlarni saqlash';
+  String get saveChangesButton => 'Oʻzgarishlarni saqlash';
 
   @override
-  String get vidCategoryBeginner => 'Boshlang\'ich';
+  String get vidCategoryBeginner => 'Boshlangʻich';
 
   @override
-  String get vidCategoryIntermediate => 'O\'rta';
+  String get vidCategoryIntermediate => 'Oʻrta';
 
   @override
   String get vidCategoryAdvanced => 'Yuqori';
@@ -240,7 +240,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get resourcesSearchHint => 'Resurslarni qidirish...';
 
   @override
-  String get resourcesFilterByType => 'Tur bo\'yicha filtrlash';
+  String get resourcesFilterByType => 'Tur boʻyicha filtrlash';
 
   @override
   String get resourcesAllTypes => 'Barcha turlar';
@@ -249,24 +249,24 @@ class AppLocalizationsUz extends AppLocalizations {
   String get resourcesNoResourcesMatch => 'Sizning mezonlaringizga mos resurslar topilmadi.';
 
   @override
-  String get resourcesTryAdjusting => 'Qidiruv yoki filtringizni o\'zgartirib ko\'ring.';
+  String get resourcesTryAdjusting => 'Qidiruv yoki filtringizni oʻzgartirib koʻring.';
 
   @override
   String get resourcesCreateButton => 'Yaratish';
 
   @override
-  String get resourceAddedSuccess => 'Resurs muvaffaqiyatli qo\'shildi!';
+  String get resourceAddedSuccess => 'Resurs muvaffaqiyatli qoʻshildi!';
 
   @override
   String resourceAddedError(String error) {
-    return 'Resurs qo\'shishda xatolik: $error';
+    return 'Resurs qoʻshishda xatolik: $error';
   }
 
   @override
   String get createResourceScreenTitle => 'Yangi resurs yaratish';
 
   @override
-  String get createResourceFormWillBeHere => 'Resurs yaratish shakli shu yerda bo\'ladi.';
+  String get createResourceFormWillBeHere => 'Resurs yaratish shakli shu yerda boʻladi.';
 
   @override
   String get saveButtonText => 'Saqlash';
@@ -288,7 +288,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String couldNotLaunchUrl(String url) {
-    return 'Could not launch $url';
+    return '$url manzilini ochib boʻlmadi';
   }
 
   @override
@@ -305,10 +305,10 @@ class AppLocalizationsUz extends AppLocalizations {
   String get createResourceValidationInvalidUrl => 'Yaroqli URL manzilini kiriting';
 
   @override
-  String get editButtonTooltip => 'Resurs o\'zgartirish';
+  String get editButtonTooltip => 'Resurs oʻzgartirish';
 
   @override
-  String get editResourceScreenTitle => 'Resurs o\'zgartirish';
+  String get editResourceScreenTitle => 'Resurs oʻzgartirish';
 
   @override
   String get resourceTypeLabel => 'Turi';
@@ -320,7 +320,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get authorLabel => 'Muallif';
 
   @override
-  String get dateAddedLabel => 'Qo\'shilgan';
+  String get dateAddedLabel => 'Qoʻshilgan';
 
   @override
   String get launchingUrlMessage => 'URL ishga tushirilmoqda';
@@ -340,7 +340,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get deleteResourceConfirmTitle => 'Oʻchirishni tasdiqlang';
 
   @override
-  String get deleteResourceConfirmMessage => 'Haqiqatan ham bu manbani oʻchirib tashlamoqchimisiz? bu amalni ortga qaytarib bo\'lmaydi.';
+  String get deleteResourceConfirmMessage => 'Haqiqatan ham bu manbani oʻchirib tashlamoqchimisiz? bu amalni ortga qaytarib boʻlmaydi.';
 
   @override
   String get cancelButtonText => 'Bekor qilish';
@@ -350,16 +350,16 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String resourceDeletedSuccess(String resourceTitle) {
-    return '\"$resourceTitle\" resursi muvaffaqiyatli o\'chirildi.';
+    return '\"$resourceTitle\" resursi muvaffaqiyatli oʻchirildi.';
   }
 
   @override
   String resourceDeletedError(String error) {
-    return 'Resursni o\'chirishda xatolik yuz berdi: $error';
+    return 'Resursni oʻchirishda xatolik yuz berdi: $error';
   }
 
   @override
-  String get deleteButtonTooltip => 'Resursni o\'chirish';
+  String get deleteButtonTooltip => 'Resursni oʻchirish';
 
   @override
   String get createANewQuiz => 'Yangi viktorina yaratish';
@@ -371,13 +371,13 @@ class AppLocalizationsUz extends AppLocalizations {
   String get quizDescription => 'Tavsif';
 
   @override
-  String get saveAndAddQuestions => 'Saqlash va savollar qo\'shish';
+  String get saveAndAddQuestions => 'Saqlash va savollar qoʻshish';
 
   @override
-  String get failedToCreateQuiz => 'Viktorina yaratib bo\'lmadi';
+  String get failedToCreateQuiz => 'Viktorina yaratib boʻlmadi';
 
   @override
-  String get addQuestions => 'Savollar qo\'shish';
+  String get addQuestions => 'Savollar qoʻshish';
 
   @override
   String get finish => 'Tugatish';
@@ -395,10 +395,10 @@ class AppLocalizationsUz extends AppLocalizations {
   String get multipleChoice => 'Bir nechta tanlov';
 
   @override
-  String get trueFalse => 'To\'g\'ri/Noto\'g\'ri';
+  String get trueFalse => 'Toʻgʻri/Notoʻgʻri';
 
   @override
-  String get pleaseSelectCorrectAnswer => 'Iltimos, to\'g\'ri javobni tanlang.';
+  String get pleaseSelectCorrectAnswer => 'Iltimos, toʻgʻri javobni tanlang.';
 
   @override
   String option(int number) {
@@ -409,19 +409,19 @@ class AppLocalizationsUz extends AppLocalizations {
   String get pleaseEnterAnOption => 'Iltimos, variantni kiriting';
 
   @override
-  String get addQuestion => 'Savol qo\'shish';
+  String get addQuestion => 'Savol qoʻshish';
 
   @override
-  String get questionAddedSuccessfully => 'Savol muvaffaqiyatli qo\'shildi!';
+  String get questionAddedSuccessfully => 'Savol muvaffaqiyatli qoʻshildi!';
 
   @override
-  String get failedToAddQuestion => 'Savol qo\'shib bo\'lmadi';
+  String get failedToAddQuestion => 'Savol qoʻshib boʻlmadi';
 
   @override
-  String get noQuestionsAddedYet => 'Hozircha savollar qo\'shilmagan.';
+  String get noQuestionsAddedYet => 'Hozircha savollar qoʻshilmagan.';
 
   @override
-  String get correctAnswer => 'To\'g\'ri javob';
+  String get correctAnswer => 'Toʻgʻri javob';
 
   @override
   String get quiz => 'Viktorina';
@@ -458,7 +458,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String invalidUrlFormat(String url) {
-    return 'URL formati noto\'g\'ri: $url';
+    return 'URL formati notoʻgʻri: $url';
   }
 
   @override
@@ -468,7 +468,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String createResourceValidationMinLength(String fieldName, int length) {
-    return '$fieldName kamida $length belgidan iborat bo\'lishi kerak';
+    return '$fieldName kamida $length belgidan iborat boʻlishi kerak';
   }
 
   @override
@@ -477,7 +477,7 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get titleMinLength => 'Sarlavha kamida 5 ta belgidan iborat bo\'lishi kerak';
+  String get titleMinLength => 'Sarlavha kamida 5 ta belgidan iborat boʻlishi kerak';
 
   @override
   String get titleMaxLength => 'Sarlavha 100 belgidan oshmasligi kerak';
@@ -495,24 +495,24 @@ class AppLocalizationsUz extends AppLocalizations {
   String get createTopicButtonText => 'Muhokama mavzusini yaratish';
 
   @override
-  String get mustBeLoggedInToCreateTopic => 'Mavzu yaratish uchun tizimga kirgan bo\'lishingiz kerak.';
+  String get mustBeLoggedInToCreateTopic => 'Mavzu yaratish uchun tizimga kirgan boʻlishingiz kerak.';
 
   @override
   String get topicCreatedSuccess => 'Mavzu muvaffaqiyatli yaratildi!';
 
   @override
   String failedToCreateTopic(String error) {
-    return 'Mavzu yaratib bo\'lmadi: $error';
+    return 'Mavzu yaratib boʻlmadi: $error';
   }
 
   @override
   String createTopicValidationEmpty(String fieldName) {
-    return '$fieldName bo\'sh bo\'lishi mumkin emas.';
+    return '$fieldName boʻsh boʻlishi mumkin emas.';
   }
 
   @override
   String createTopicValidationMinLength(String fieldName, int length) {
-    return '$fieldName kamida $length belgidan iborat bo\'lishi kerak.';
+    return '$fieldName kamida $length belgidan iborat boʻlishi kerak.';
   }
 
   @override
@@ -521,7 +521,7 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get errorLoadingData => 'Resurslarni yuklashda xatolik yuz berdi. qayta urinib ko\'ring.';
+  String get errorLoadingData => 'Resurslarni yuklashda xatolik yuz berdi. qayta urinib koʻring.';
 
   @override
   String failedToUpdateTopic(String error) {
@@ -532,32 +532,32 @@ class AppLocalizationsUz extends AppLocalizations {
   String get topicUpdatedSuccess => 'Mavzu muvaffaqiyatli yangilandi!';
 
   @override
-  String get noDiscussionsYet => 'Hali muhokamalar yo\'q.';
+  String get noDiscussionsYet => 'Hali muhokamalar yoʻq.';
 
   @override
-  String get beTheFirstToStartConversation => 'Birinchi bo\'lib suhbatni boshlang!';
+  String get beTheFirstToStartConversation => 'Birinchi boʻlib suhbatni boshlang!';
 
   @override
-  String get mustBeLoggedInToCreateResource => 'Resurs yaratish uchun tizimga kirgan bo\'lishingiz kerak.';
+  String get mustBeLoggedInToCreateResource => 'Resurs yaratish uchun tizimga kirgan boʻlishingiz kerak.';
 
   @override
-  String get profileIncompleteToCreateResource => 'Profilingiz haqidagi ma\'lumotlar to\'liq emas. iltimos, profilingizda ismingizni yangilang.';
+  String get profileIncompleteToCreateResource => 'Profilingiz haqidagi maʼlumotlar toʻliq emas. iltimos, profilingizda ismingizni yangilang.';
 
   @override
   String get profileIncompleteToCreateTopic => 'Profilingiz nomi belgilanmagan. iltimos, profilingizni yangilang.';
 
   @override
-  String get commentCannotBeEmpty => 'Izoh bo\'sh bo\'lishi mumkin emas.';
+  String get commentCannotBeEmpty => 'Izoh boʻsh boʻlishi mumkin emas.';
 
   @override
-  String get mustBeLoggedInToComment => 'Izoh berish uchun tizimga kirgan bo\'lishingiz kerak.';
+  String get mustBeLoggedInToComment => 'Izoh berish uchun tizimga kirgan boʻlishingiz kerak.';
 
   @override
-  String get commentAddedSuccessfully => 'Izoh muvaffaqiyatli qo\'shildi!';
+  String get commentAddedSuccessfully => 'Izoh muvaffaqiyatli qoʻshildi!';
 
   @override
   String failedToAddComment(String error) {
-    return 'Izoh qo\'shib bo\'lmadi: $error';
+    return 'Izoh qoʻshib boʻlmadi: $error';
   }
 
   @override
@@ -579,7 +579,7 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get noRepliesYet => 'Hali javob yo\'q. birinchi bo\'lib fikr bildiring!';
+  String get noRepliesYet => 'Hali javob yoʻq. birinchi boʻlib fikr bildiring!';
 
   @override
   String get writeAReplyHint => 'Javob yozing...';
@@ -593,7 +593,7 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get readyToLearnSomethingNew => 'Bugun yangi narsalarni o\'rganishga tayyormisiz?';
+  String get readyToLearnSomethingNew => 'Bugun yangi narsalarni oʻrganishga tayyormisiz?';
 
   @override
   String get quickAccessTitle => 'Tez kirish';
@@ -605,7 +605,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get profileTitle => 'Profil';
 
   @override
-  String get latestNewsTitle => 'So\'nggi yangiliklar';
+  String get latestNewsTitle => 'Soʻnggi yangiliklar';
 
   @override
   String get sourceLabel => 'Manba';
@@ -614,7 +614,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get quizzesTitle => 'Viktorinalar';
 
   @override
-  String get urlCannotBeEmpty => 'URL bo\'sh bo\'lishi mumkin emas';
+  String get urlCannotBeEmpty => 'URL boʻsh boʻlishi mumkin emas';
 
   @override
   String errorLoadingNews(String error) {
@@ -631,40 +631,40 @@ class AppLocalizationsUz extends AppLocalizations {
   String get manageNewsTitle => 'Yangiliklar boshqaruvi';
 
   @override
-  String get manageNewsSubtitle => 'Yangilik maqolalarini qo\'shish, tahrirlash yoki o\'chirish';
+  String get manageNewsSubtitle => 'Yangilik maqolalarini qoʻshish, tahrirlash yoki oʻchirish';
 
   @override
   String get manageUsersTitle => 'Foydalanuvchilarni boshqarish';
 
   @override
-  String get manageUsersSubtitle => 'Foydalanuvchilarni ko\'rish va rollarni boshqarish (kelajakda)';
+  String get manageUsersSubtitle => 'Foydalanuvchilarni koʻrish va rollarni boshqarish (kelajakda)';
 
   @override
   String get manageResourcesTitle => 'Resurslarni boshqarish';
 
   @override
-  String get manageResourcesSubtitle => 'Barcha o\'quv resurslarini nazorat qilish (kelajakda)';
+  String get manageResourcesSubtitle => 'Barcha oʻquv resurslarini nazorat qilish (kelajakda)';
 
   @override
-  String get confirmDeleteTitle => 'O\'chirishni tasdiqlang';
+  String get confirmDeleteTitle => 'Oʻchirishni tasdiqlang';
 
   @override
   String confirmDeleteNewsMessage(String newsTitle) {
-    return 'Siz \"$newsTitle\"ni o\'chirib tashlamoqchimisiz?';
+    return 'Siz \"$newsTitle\"ni oʻchirib tashlamoqchimisiz?';
   }
 
   @override
   String newsDeletedSuccess(String newsTitle) {
-    return '\"$newsTitle\" muvaffaqiyatli o\'chirildi.';
+    return '\"$newsTitle\" muvaffaqiyatli oʻchirildi.';
   }
 
   @override
   String failedToDeleteNews(String error, String newsTitle) {
-    return '\"$newsTitle\" o\'chirilmadi: $error';
+    return '\"$newsTitle\" oʻchirilmadi: $error';
   }
 
   @override
-  String get faqTitle => 'Ko\'p so\'raladigan savollar';
+  String get faqTitle => 'Koʻp soʻraladigan savollar';
 
   @override
   String get searchHelp => 'Yordam izlash...';
@@ -673,7 +673,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get allCategories => 'Barcha toifalar';
 
   @override
-  String get helpfulFeedback => 'Bu foydali bo\'ldimi?';
+  String get helpfulFeedback => 'Bu foydali boʻldimi?';
 
   @override
   String get noArticlesFound => 'Savollar topilmadi';
@@ -682,7 +682,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get settingsNotifications => 'Xabarnomalar';
 
   @override
-  String get changePasswordTitle => 'Parolni o\'zgartirish';
+  String get changePasswordTitle => 'Parolni oʻzgartirish';
 
   @override
   String get helpCenterTitle => 'Yordam markazi';
@@ -694,7 +694,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get passwordUpdatedSuccess => 'Parol muvaffaqiyatli yangilandi';
 
   @override
-  String get errorWrongPassword => 'Joriy parol noto\'g\'ri';
+  String get errorWrongPassword => 'Joriy parol notoʻgʻri';
 
   @override
   String get currentPassword => 'Joriy parol';
@@ -712,25 +712,25 @@ class AppLocalizationsUz extends AppLocalizations {
   String get save => 'Saqlash';
 
   @override
-  String get addNewsTooltip => 'Yangi maqola qo\'shish';
+  String get addNewsTooltip => 'Yangi maqola qoʻshish';
 
   @override
   String get editNewsTooltip => 'Yangilikni tahrirlash';
 
   @override
-  String get deleteNewsTooltip => 'Yangilikni o\'chirish';
+  String get deleteNewsTooltip => 'Yangilikni oʻchirish';
 
   @override
-  String get addNewsButton => 'Yangilik qo\'shish';
+  String get addNewsButton => 'Yangilik qoʻshish';
 
   @override
-  String get noNewsAvailableManager => 'Hech qanday yangilik maqolasi topilmadi. bittasini qo\'shing!';
+  String get noNewsAvailableManager => 'Hech qanday yangilik maqolasi topilmadi. bittasini qoʻshing!';
 
   @override
   String get editNewsTitle => 'Yangilikni tahrirlash';
 
   @override
-  String get addNewsTitle => 'Yangilik maqolasini qo\'shish';
+  String get addNewsTitle => 'Yangilik maqolasini qoʻshish';
 
   @override
   String get saveNewsTooltip => 'Yangilikni saqlash';
@@ -743,7 +743,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String newsTitleMinLength(int length) {
-    return 'Yangiliklar nomi kamida $length belgidan iborat bo\'lishi kerak.';
+    return 'Yangiliklar nomi kamida $length belgidan iborat boʻlishi kerak.';
   }
 
   @override
@@ -759,13 +759,13 @@ class AppLocalizationsUz extends AppLocalizations {
   String get pleaseEnterNewsUrl => 'Maqola URL manzilini kiriting.';
 
   @override
-  String get pleaseEnterValidNewsUrl => 'Iltimos, to\'g\'ri URL manzilini kiriting (http yoki https bilan boshlanadi).';
+  String get pleaseEnterValidNewsUrl => 'Iltimos, toʻgʻri URL manzilini kiriting (http yoki https bilan boshlanadi).';
 
   @override
   String get newsImageUrlLabel => 'Rasm URL manzili (ixtiyoriy)';
 
   @override
-  String get pleaseEnterValidImageUrl => 'Iltimos, haqiqiy rasm URL manzilini kiriting (http yoki https bilan boshlanadi) yoki bo\'sh qoldiring.';
+  String get pleaseEnterValidImageUrl => 'Iltimos, haqiqiy rasm URL manzilini kiriting (http yoki https bilan boshlanadi) yoki boʻsh qoldiring.';
 
   @override
   String get publicationDateLabel => 'Nashr qilingan sana';
@@ -783,7 +783,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get updateNewsButton => 'Yangiliklarni yangilash';
 
   @override
-  String get addNewsButtonForm => 'Yangilik maqolasini qo\'shish';
+  String get addNewsButtonForm => 'Yangilik maqolasini qoʻshish';
 
   @override
   String newsUpdatedSuccess(String newsTitle) {
@@ -792,12 +792,12 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String newsAddedSuccess(String newsTitle) {
-    return '\"$newsTitle\" muvaffaqiyatli qo\'shildi.';
+    return '\"$newsTitle\" muvaffaqiyatli qoʻshildi.';
   }
 
   @override
   String failedToSaveNews(String error) {
-    return 'Yangilikni saqlab bo\'lmadi: $error';
+    return 'Yangilikni saqlab boʻlmadi: $error';
   }
 
   @override
@@ -815,22 +815,22 @@ class AppLocalizationsUz extends AppLocalizations {
   String get roleLabel => 'Rol';
 
   @override
-  String get registeredOnLabel => 'Ro\'yxatdan o\'tgan';
+  String get registeredOnLabel => 'Roʻyxatdan oʻtgan';
 
   @override
-  String get manageUsersSubtitleNow => 'Ro\'yxatdan o\'tgan foydalanuvchilarni ko\'rish va qidirish';
+  String get manageUsersSubtitleNow => 'Roʻyxatdan oʻtgan foydalanuvchilarni koʻrish va qidirish';
 
   @override
-  String get manageResourcesSubtitleNow => 'Har qanday o\'quv manbasini ko\'rish, tahrirlash yoki o\'chirish';
+  String get manageResourcesSubtitleNow => 'Har qanday oʻquv manbasini koʻrish, tahrirlash yoki oʻchirish';
 
   @override
   String confirmDeleteResourceMessage(String resourceTitle) {
-    return 'Siz \"$resourceTitle\" manbasini o\'chirib tashlamoqchimisiz?';
+    return 'Siz \"$resourceTitle\" manbasini oʻchirib tashlamoqchimisiz?';
   }
 
   @override
   String failedToDeleteResource(String error, String resourceTitle) {
-    return '\"$resourceTitle\" manbasini o\'chirib bo\'lmadi: $error';
+    return '\"$resourceTitle\" manbasini oʻchirib boʻlmadi: $error';
   }
 
   @override
@@ -845,13 +845,13 @@ class AppLocalizationsUz extends AppLocalizations {
   String get editResourceTooltip => 'Resursni tahrirlash';
 
   @override
-  String get deleteResourceTooltip => 'Resursni o\'chirish';
+  String get deleteResourceTooltip => 'Resursni oʻchirish';
 
   @override
   String get manageQuizzesTitle => 'Viktorinalarni boshqarish';
 
   @override
-  String get addQuizTooltip => 'Yangi test qo\'shish';
+  String get addQuizTooltip => 'Yangi test qoʻshish';
 
   @override
   String errorLoadingQuizzesAdmin(String error) {
@@ -859,21 +859,21 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get noQuizzesFoundManager => 'Hech qanday test topilmadi. bittasini qo\'shing!';
+  String get noQuizzesFoundManager => 'Hech qanday test topilmadi. bittasini qoʻshing!';
 
   @override
   String confirmDeleteQuizMessage(String quizTitle) {
-    return 'Siz \"$quizTitle\" testini va uning barcha savollarini o\'chirib tashlamoqchimisiz? bu amalni ortga qaytarib bo\'lmaydi.';
+    return 'Siz \"$quizTitle\" testini va uning barcha savollarini oʻchirib tashlamoqchimisiz? bu amalni ortga qaytarib boʻlmaydi.';
   }
 
   @override
   String quizDeletedSuccess(String quizTitle) {
-    return '\"$quizTitle\" testi va uning savollari muvaffaqiyatli o\'chirildi.';
+    return '\"$quizTitle\" testi va uning savollari muvaffaqiyatli oʻchirildi.';
   }
 
   @override
   String failedToDeleteQuiz(String error, String quizTitle) {
-    return '\"$quizTitle\" testini o\'chirib bo\'lmadi: $error';
+    return '\"$quizTitle\" testini oʻchirib boʻlmadi: $error';
   }
 
   @override
@@ -883,10 +883,10 @@ class AppLocalizationsUz extends AppLocalizations {
   String get manageQuestionsButton => 'Savollar';
 
   @override
-  String get deleteQuizTooltip => 'Viktorina va savollarni o\'chirish';
+  String get deleteQuizTooltip => 'Viktorina va savollarni oʻchirish';
 
   @override
-  String get addQuizButton => 'Viktorina qo\'shish';
+  String get addQuizButton => 'Viktorina qoʻshish';
 
   @override
   String get manageQuizzesSubtitle => 'Barcha testlar va ularning savollarini nazorat qilish';
@@ -904,16 +904,16 @@ class AppLocalizationsUz extends AppLocalizations {
   String get dashboardAdminTitle => 'Tizim holati';
 
   @override
-  String get seeAllButton => 'Barchasini ko\'rish';
+  String get seeAllButton => 'Barchasini koʻrish';
 
   @override
-  String get noGuidesAuthored => 'Siz hali hech qanday qo\'llanma yaratmadingiz.';
+  String get noGuidesAuthored => 'Siz hali hech qanday qoʻllanma yaratmadingiz.';
 
   @override
   String get adminStatUsers => 'Foydalanuvchilar';
 
   @override
-  String get adminStatGuides => 'Qo\'llanmalar';
+  String get adminStatGuides => 'Qoʻllanmalar';
 
   @override
   String get adminStatQuizzes => 'Viktorinalar';
@@ -928,10 +928,10 @@ class AppLocalizationsUz extends AppLocalizations {
   String get signInWithGoogle => 'Google bilan kirish';
 
   @override
-  String get themeSystemDefault => 'Tizim bo\'yicha';
+  String get themeSystemDefault => 'Tizim boʻyicha';
 
   @override
-  String get themeLight => 'Yorug\' rejim';
+  String get themeLight => 'Yorugʻ rejim';
 
   @override
   String get themeDark => 'Tungi rejim';
@@ -943,10 +943,10 @@ class AppLocalizationsUz extends AppLocalizations {
   String get profilePictureUrlLabel => 'Profil rasmi URL manzili (Ixtiyoriy)';
 
   @override
-  String get levelIntermediate => 'O\'rta';
+  String get levelIntermediate => 'Oʻrta';
 
   @override
-  String get levelAdvanced => 'Ilg\'or';
+  String get levelAdvanced => 'Ilgʻor';
 
   @override
   String get totalPoints => 'Jami ballar';
@@ -972,7 +972,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get manageSystemsTitle => 'Tizimlar boshqaruvi';
 
   @override
-  String get manageSystemsSubtitle => 'Tizimlar ma\'lumotnomasini boshqarish';
+  String get manageSystemsSubtitle => 'Tizimlar maʼlumotnomasini boshqarish';
 
   @override
   String get manageFaqTitle => 'TSS';
@@ -991,24 +991,24 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String topicDeletedSuccess(String topicTitle) {
-    return '\"$topicTitle\" muvaffaqiyatli o\'chirildi.';
+    return '\"$topicTitle\" muvaffaqiyatli oʻchirildi.';
   }
 
   @override
   String failedToDeleteTopic(String error) {
-    return 'Mavzuni o\'chirib bo\'lmadi: $error';
+    return 'Mavzuni oʻchirib boʻlmadi: $error';
   }
 
   @override
   String deleteTopicConfirmMessage(String topicTitle) {
-    return 'Siz \"$topicTitle\" mavzusini o\'chirib tashlamoqchimisiz?';
+    return 'Siz \"$topicTitle\" mavzusini oʻchirib tashlamoqchimisiz?';
   }
 
   @override
   String get editTopicTooltip => 'Mavzuni tahrirlash';
 
   @override
-  String get deleteTopicConfirmTitle => 'Mavzuni o\'chirish';
+  String get deleteTopicConfirmTitle => 'Mavzuni oʻchirish';
 
   @override
   String get commentPlural => 'Izohlar';
@@ -1017,7 +1017,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get commentSingular => 'Izoh';
 
   @override
-  String get deleteTopicTooltip => 'Mavzuni o\'chirish';
+  String get deleteTopicTooltip => 'Mavzuni oʻchirish';
 
   @override
   String get faqCategoryLogin => 'Kirish muammolari';
@@ -1039,7 +1039,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String confirmDeleteArticleMessage(String articleTitle) {
-    return 'Siz \"$articleTitle\" maqolasini o\'chirib tashlamoqchimisiz?';
+    return 'Siz \"$articleTitle\" maqolasini oʻchirib tashlamoqchimisiz?';
   }
 
   @override
@@ -1061,7 +1061,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get articleCategoryLaw => 'Qonunchilik';
 
   @override
-  String get articleCategoryFaq => 'Ko\'p so\'raladigan';
+  String get articleCategoryFaq => 'Koʻp soʻraladigan';
 
   @override
   String get contentLabel => 'Mazmuni (Markdown)';
@@ -1097,14 +1097,14 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String confirmDeleteVideoMessage(String videoTitle) {
-    return 'Siz \"$videoTitle\" videosini o\'chirib tashlamoqchimisiz?';
+    return 'Siz \"$videoTitle\" videosini oʻchirib tashlamoqchimisiz?';
   }
 
   @override
-  String get videoDeletedSuccess => 'Video o\'chirildi';
+  String get videoDeletedSuccess => 'Video oʻchirildi';
 
   @override
-  String get noVideosFound => 'Videolar yo\'q';
+  String get noVideosFound => 'Videolar yoʻq';
 
   @override
   String get addVideoTitle => 'Yangi video';
@@ -1147,14 +1147,14 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String confirmDeleteSystemMessage(String systemName) {
-    return 'Siz \"$systemName\" tizimini o\'chirib tashlamoqchimisiz?';
+    return 'Siz \"$systemName\" tizimini oʻchirib tashlamoqchimisiz?';
   }
 
   @override
-  String get systemDeletedSuccess => 'Tizim o\'chirildi';
+  String get systemDeletedSuccess => 'Tizim oʻchirildi';
 
   @override
-  String get noSystemsFound => 'Tizimlar yo\'q';
+  String get noSystemsFound => 'Tizimlar yoʻq';
 
   @override
   String get addSystemTitle => 'Yangi tizim';
@@ -1175,10 +1175,10 @@ class AppLocalizationsUz extends AppLocalizations {
   String get nameRequired => 'Nom kiritilishi shart';
 
   @override
-  String get fullNameLabel => 'To\'liq nomi';
+  String get fullNameLabel => 'Toʻliq nomi';
 
   @override
-  String get fullNameRequired => 'To\'liq nom kiritilishi shart';
+  String get fullNameRequired => 'Toʻliq nom kiritilishi shart';
 
   @override
   String get websiteUrlLabel => 'Veb-sayt manzili';
@@ -1196,21 +1196,21 @@ class AppLocalizationsUz extends AppLocalizations {
   String get statusLabel => 'Holati';
 
   @override
-  String get loginGuideIdLabel => 'Kirish qo\'llanmasi ID (ixtiyoriy)';
+  String get loginGuideIdLabel => 'Kirish qoʻllanmasi ID (ixtiyoriy)';
 
   @override
-  String get videoGuideIdLabel => 'Video qo\'llanma ID (ixtiyoriy)';
+  String get videoGuideIdLabel => 'Video qoʻllanma ID (ixtiyoriy)';
 
   @override
   String confirmDeleteFaqMessage(String question) {
-    return 'Siz \"$question\" savolini o\'chirib tashlamoqchimisiz?';
+    return 'Siz \"$question\" savolini oʻchirib tashlamoqchimisiz?';
   }
 
   @override
-  String get faqDeletedSuccess => 'Savol o\'chirildi';
+  String get faqDeletedSuccess => 'Savol oʻchirildi';
 
   @override
-  String get noFaqsFound => 'Savollar yo\'q';
+  String get noFaqsFound => 'Savollar yoʻq';
 
   @override
   String get addFaqTitle => 'Yangi savol';
@@ -1234,7 +1234,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get answerRequired => 'Javob kiritilishi shart';
 
   @override
-  String get add => 'Qo\'shish';
+  String get add => 'Qoʻshish';
 
   @override
   String get titleLabel => 'Sarlavha';
@@ -1243,7 +1243,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get edit => 'Tahrirlash';
 
   @override
-  String get delete => 'O\'chirish';
+  String get delete => 'Oʻchirish';
 
   @override
   String get cancel => 'Bekor qilish';
@@ -1252,16 +1252,16 @@ class AppLocalizationsUz extends AppLocalizations {
   String get search => 'Qidirish...';
 
   @override
-  String get fieldRequired => 'Maydon to\'ldirilishi shart';
+  String get fieldRequired => 'Maydon toʻldirilishi shart';
 
   @override
-  String get confirmDelete => 'Haqiqatan ham o\'chirmoqchimisiz?';
+  String get confirmDelete => 'Haqiqatan ham oʻchirmoqchimisiz?';
 
   @override
   String get successSaved => 'Muvaffaqiyatli saqlandi';
 
   @override
-  String get successDeleted => 'Muvaffaqiyatli o\'chirildi';
+  String get successDeleted => 'Muvaffaqiyatli oʻchirildi';
 
   @override
   String get notificationManagementTitle => 'Xabarnomalar boshqaruvi';
@@ -1270,7 +1270,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get notificationHistoryTitle => 'Xabarnomalar tarixi';
 
   @override
-  String get notificationHistoryPlaceholder => 'Bu yerda yuborilgan xabarnomalar tarixi ko\'rinadi (tez orada).';
+  String get notificationHistoryPlaceholder => 'Bu yerda yuborilgan xabarnomalar tarixi koʻrinadi (tez orada).';
 
   @override
   String get sendNewNotificationButton => 'Yangi xabarnoma yuborish';
@@ -1306,7 +1306,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get notificationTypeNewContent => 'Yangi kontent';
 
   @override
-  String get notificationTypeAnnouncement => 'E\'lon';
+  String get notificationTypeAnnouncement => 'Eʼlon';
 
   @override
   String get notificationTypeReminder => 'Eslatma';
@@ -1333,7 +1333,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String notificationLabelReadBy(int count) {
-    return 'O\'qildi: $count';
+    return 'Oʻqildi: $count';
   }
 
   @override
@@ -1379,7 +1379,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get urlLabel => 'Havola (URL)';
 
   @override
-  String get resourceTypePDF => 'PDF qo\'llanma';
+  String get resourceTypePDF => 'PDF qoʻllanma';
 
   @override
   String get resourceTypeVideo => 'Video darslik';
@@ -1421,13 +1421,13 @@ class AppLocalizationsUz extends AppLocalizations {
   String get loginRequired => 'Tizimga kirish kerak';
 
   @override
-  String get markAllAsReadTooltip => 'Hammasini o\'qilgan deb belgilash';
+  String get markAllAsReadTooltip => 'Hammasini oʻqilgan deb belgilash';
 
   @override
-  String get allNotificationsReadMessage => 'Barcha xabarnomalar o\'qilgan deb belgilandi';
+  String get allNotificationsReadMessage => 'Barcha xabarnomalar oʻqilgan deb belgilandi';
 
   @override
-  String get noNotifications => 'Xabarnomalar yo\'q';
+  String get noNotifications => 'Xabarnomalar yoʻq';
 
   @override
   String get closeAction => 'Yopish';
@@ -1446,13 +1446,13 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get rank => 'O\'rin';
+  String get rank => 'Oʻrin';
 
   @override
   String get quizHistoryTitle => 'Viktorina tarixi';
 
   @override
-  String get seeAll => 'Barchasini ko\'rish';
+  String get seeAll => 'Barchasini koʻrish';
 
   @override
   String get today => 'Bugun';
@@ -1467,7 +1467,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get older => 'Eski natijalar';
 
   @override
-  String get contactSupport => 'Qo\'llab-quvvatlash';
+  String get contactSupport => 'Qoʻllab-quvvatlash';
 
   @override
   String get landingTitle => 'Professional platforma';
@@ -1479,31 +1479,31 @@ class AppLocalizationsUz extends AppLocalizations {
   String get landingLogin => 'Kirish';
 
   @override
-  String get landingRegister => 'Ro\'yxatdan o\'tish';
+  String get landingRegister => 'Roʻyxatdan oʻtish';
 
   @override
   String get featureKnowledgeBase => 'Bilimlar bazasi';
 
   @override
-  String get featureKnowledgeBaseDesc => 'Keng ko\'lamli huquqiy resurslar va hujjatlar kutubxonasi.';
+  String get featureKnowledgeBaseDesc => 'Keng koʻlamli huquqiy resurslar va hujjatlar kutubxonasi.';
 
   @override
   String get featureVideoTutorials => 'Video darsliklar';
 
   @override
-  String get featureVideoTutorialsDesc => 'Mutaxassislar tomonidan tayyorlangan video qo\'llanmalar.';
+  String get featureVideoTutorialsDesc => 'Mutaxassislar tomonidan tayyorlangan video qoʻllanmalar.';
 
   @override
   String get featureGamification => 'Gamifikatsiya';
 
   @override
-  String get featureGamificationDesc => 'XP va nishonlar yig\'ing, reytingda bellashing.';
+  String get featureGamificationDesc => 'XP va nishonlar yigʻing, reytingda bellashing.';
 
   @override
-  String get analyticsTitle => 'O\'quv tahlili (xAPI)';
+  String get analyticsTitle => 'Oʻquv tahlili (xAPI)';
 
   @override
-  String get analyticsSubtitle => 'O\'quv yozuvlari';
+  String get analyticsSubtitle => 'Oʻquv yozuvlari';
 
   @override
   String get totalRecords => 'Jami yozuvlar';
@@ -1515,16 +1515,16 @@ class AppLocalizationsUz extends AppLocalizations {
   String get activityDistribution => 'Faoliyat taqsimoti';
 
   @override
-  String get recentActivityFeed => 'So\'nggi faoliyatlar';
+  String get recentActivityFeed => 'Soʻnggi faoliyatlar';
 
   @override
-  String get noRecords => 'Hozircha o\'quv yozuvlari topilmadi.';
+  String get noRecords => 'Hozircha oʻquv yozuvlari topilmadi.';
 
   @override
-  String get unknownUser => 'Noma\'lum foydalanuvchi';
+  String get unknownUser => 'Nomaʼlum foydalanuvchi';
 
   @override
-  String get unknownObject => 'Noma\'lum obyekt';
+  String get unknownObject => 'Nomaʼlum obyekt';
 
   @override
   String get justNow => 'Hozirgina';
@@ -1551,19 +1551,19 @@ class AppLocalizationsUz extends AppLocalizations {
   String get catGeneral => 'Umumiy';
 
   @override
-  String get rankBeginner => 'Boshlang\'ich';
+  String get rankBeginner => 'Boshlangʻich';
 
   @override
-  String get rankIntermediate => 'O\'rta daraja';
+  String get rankIntermediate => 'Oʻrta daraja';
 
   @override
-  String get rankAdvanced => 'Ilg\'or';
+  String get rankAdvanced => 'Ilgʻor';
 
   @override
   String get sysCatPrimary => 'Asosiy tizimlar';
 
   @override
-  String get sysCatSecondary => 'Qo\'shimcha tizimlar';
+  String get sysCatSecondary => 'Qoʻshimcha tizimlar';
 
   @override
   String get sysCatSupport => 'Yordam tizimlari';
@@ -1572,14 +1572,14 @@ class AppLocalizationsUz extends AppLocalizations {
   String get sysStatusActive => 'Faol';
 
   @override
-  String get sysStatusMaintenance => 'Ta\'mirlashda';
+  String get sysStatusMaintenance => 'Taʼmirlashda';
 
   @override
   String get sysStatusInactive => 'Nofaol';
 
   @override
   String videoViews(int count) {
-    return '$count ko\'rishlar';
+    return '$count koʻrishlar';
   }
 
   @override
@@ -1592,7 +1592,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get sysStatusDeprecated => 'Eski versiya';
 
   @override
-  String get sysStatusOffline => 'O\'chirilgan';
+  String get sysStatusOffline => 'Oʻchirilgan';
 
   @override
   String get systemsDirectoryAll => 'Barchasi';
@@ -1606,16 +1606,16 @@ class AppLocalizationsUz extends AppLocalizations {
   String get systemsDirectoryEmpty => 'Tizimlar mavjud emas';
 
   @override
-  String get backToKnowledgeBase => 'Qo\'llanmalarga qaytish';
+  String get backToKnowledgeBase => 'Qoʻllanmalarga qaytish';
 
   @override
   String get quizSuccessMessage => 'Ajoyib natija!';
 
   @override
-  String get quizFailureMessage => 'Yana bir bor urinib ko\'ring!';
+  String get quizFailureMessage => 'Yana bir bor urinib koʻring!';
 
   @override
-  String get failedToLoadQuiz => 'Viktorinani yuklab bo\'lmadi';
+  String get failedToLoadQuiz => 'Viktorinani yuklab boʻlmadi';
 
   @override
   String get failedToSaveAttempt => 'Natijani saqlashda xatolik';
@@ -1632,7 +1632,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get speedBonus => 'Tezkor bonus';
 
   @override
-  String get levelBeginner => 'Boshlang\'ich';
+  String get levelBeginner => 'Boshlangʻich';
 
   @override
   String get levelSpecialist => 'Mutaxassis';
@@ -1649,19 +1649,31 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get errorCouldNotOpenLink => 'Havolani ochib bo\'lmadi';
+  String get errorCouldNotOpenLink => 'Havolani ochib boʻlmadi';
 
   @override
-  String get errorResourceNotFound => 'Qo\'llanma topilmadi';
+  String get errorResourceNotFound => 'Qoʻllanma topilmadi';
 
   @override
   String get errorVideoNotFound => 'Video topilmadi';
 
   @override
-  String get errorPdfOpen => 'PDF faylni ochib bo\'lmadi';
+  String get errorPdfOpen => 'PDF faylni ochib boʻlmadi';
 
   @override
-  String get errorTelegramOpen => 'Telegram havolasini ochib bo\'lmadi';
+  String get errorTelegramOpen => 'Telegram havolasini ochib boʻlmadi';
+
+  @override
+  String get telegramLinkTitle => 'Telegramʼni ulash';
+
+  @override
+  String get telegramLinkSubtitle => 'Botdagi test natijalari va XP shu profilga yoziladi';
+
+  @override
+  String get telegramLinkedSubtitle => 'Ulangan';
+
+  @override
+  String get telegramLinkError => 'Havola yaratib boʻlmadi. Qayta urinib koʻring.';
 
   @override
   String errorGeneric(String error) {
@@ -1669,13 +1681,13 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get labelTrue => 'To\'g\'ri';
+  String get labelTrue => 'Toʻgʻri';
 
   @override
-  String get labelFalse => 'Noto\'g\'ri';
+  String get labelFalse => 'Notoʻgʻri';
 
   @override
-  String get labelPass => 'O\'tdi';
+  String get labelPass => 'Oʻtdi';
 
   @override
   String get labelFail => 'Yiqildi';
@@ -1694,25 +1706,25 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String roleChangedSuccess(String userName, String role) {
-    return '$userName roli $role ga o\'zgartirildi';
+    return '$userName roli $role ga oʻzgartirildi';
   }
 
   @override
   String roleChangeError(String error) {
-    return 'Rolni o\'zgartirishda xatolik: $error';
+    return 'Rolni oʻzgartirishda xatolik: $error';
   }
 
   @override
-  String get changeRoleTooltip => 'Rolni o\'zgartirish';
+  String get changeRoleTooltip => 'Rolni oʻzgartirish';
 
   @override
-  String get labelVideoGuide => 'Video qo\'llanma';
+  String get labelVideoGuide => 'Video qoʻllanma';
 
   @override
-  String get labelLoginGuide => 'Kirish qo\'llanma';
+  String get labelLoginGuide => 'Kirish qoʻllanma';
 
   @override
-  String get changePasswordHint => 'Parolni o\'zgartirish qismi (tez orada)';
+  String get changePasswordHint => 'Parolni oʻzgartirish qismi (tez orada)';
 
   @override
   String get editTopic => 'Mavzuni tahrirlash';
@@ -1721,17 +1733,17 @@ class AppLocalizationsUz extends AppLocalizations {
   String get update => 'Yangilash';
 
   @override
-  String get commentAdded => 'Izoh qo\'shildi!';
+  String get commentAdded => 'Izoh qoʻshildi!';
 
   @override
-  String get updateFeatureMigration => 'Yangilash xususiyati ko\'chirilmoqda. tez orada!';
+  String get updateFeatureMigration => 'Yangilash xususiyati koʻchirilmoqda. tez orada!';
 
   @override
   String get topicUpdatedSuccessfully => 'Mavzu muvaffaqiyatli yangilandi';
 
   @override
   String errorDeletingTopicMsg(String error) {
-    return 'Mavzuni o\'chirishda xatolik yuz berdi: $error';
+    return 'Mavzuni oʻchirishda xatolik yuz berdi: $error';
   }
 
   @override
@@ -1767,7 +1779,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get clearChatTooltip => 'Tozalash';
 
   @override
-  String get noInternetLabel => 'Internet yo\'q';
+  String get noInternetLabel => 'Internet yoʻq';
 
   @override
   String get noInternetQuery => 'Internet ishlamayapti, nima qilay?';
@@ -1794,25 +1806,25 @@ class AppLocalizationsUz extends AppLocalizations {
   String get aiMentorName => 'Sodiq (AI mentor)';
 
   @override
-  String get trueOption => 'To\'g\'ri';
+  String get trueOption => 'Toʻgʻri';
 
   @override
-  String get falseOption => 'Noto\'g\'ri';
+  String get falseOption => 'Notoʻgʻri';
 
   @override
   String get questionsListTab => 'Savollar';
 
   @override
-  String get addQuestionTab => 'Savol qo\'shish';
+  String get addQuestionTab => 'Savol qoʻshish';
 
   @override
-  String get addOptionButton => 'Variant qo\'shish';
+  String get addOptionButton => 'Variant qoʻshish';
 
   @override
-  String get deleteQuestionConfirm => 'Bu savolni o\'chirmoqchimisiz?';
+  String get deleteQuestionConfirm => 'Bu savolni oʻchirmoqchimisiz?';
 
   @override
-  String get questionDeleted => 'Savol o\'chirildi';
+  String get questionDeleted => 'Savol oʻchirildi';
 
   @override
   String get startQuiz => 'Boshlash';
@@ -1842,7 +1854,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String correctAnswerIs(String answer) {
-    return 'To\'g\'ri javob: $answer';
+    return 'Toʻgʻri javob: $answer';
   }
 
   @override
@@ -1857,7 +1869,7 @@ class AppLocalizationsUz extends AppLocalizations {
   }
 
   @override
-  String get excellentScore => 'A\'lo natija! 🎉';
+  String get excellentScore => 'Aʼlo natija! 🎉';
 
   @override
   String get goodScore => 'Yaxshi natija! 👍';
@@ -1866,16 +1878,16 @@ class AppLocalizationsUz extends AppLocalizations {
   String get needsImprovement => 'Mashq qiling! 💪';
 
   @override
-  String get noQuestionsInQuiz => 'Bu viktorinada hali savollar yo\'q.';
+  String get noQuestionsInQuiz => 'Bu viktorinada hali savollar yoʻq.';
 
   @override
-  String get resumeLearning => 'O\'rganishni davom ettirish';
+  String get resumeLearning => 'Oʻrganishni davom ettirish';
 
   @override
-  String get recentActivity => 'So\'nggi faoliyat';
+  String get recentActivity => 'Soʻnggi faoliyat';
 
   @override
-  String get availableResources => 'Mavjud qo\'llanmalar';
+  String get availableResources => 'Mavjud qoʻllanmalar';
 
   @override
   String get availableQuizzes => 'Mavjud viktorinalar';
@@ -1884,7 +1896,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get activeDiscussions => 'Faol munozaralar';
 
   @override
-  String get recommendedResources => 'Tavsiya etilgan qo\'llanmalar';
+  String get recommendedResources => 'Tavsiya etilgan qoʻllanmalar';
 
   @override
   String get pagesPath => 'Sahifalar / bosh sahifa';
@@ -1893,16 +1905,16 @@ class AppLocalizationsUz extends AppLocalizations {
   String get mainDashboard => 'Asosiy boshqaruv paneli';
 
   @override
-  String get overview => 'Umumiy ko\'rinish';
+  String get overview => 'Umumiy koʻrinish';
 
   @override
-  String get noRecentActivities => 'So\'nggi faoliyat yo\'q.';
+  String get noRecentActivities => 'Soʻnggi faoliyat yoʻq.';
 
   @override
-  String get signInToSeeActivities => 'Faoliyatni ko\'rish uchun tizimga kiring.';
+  String get signInToSeeActivities => 'Faoliyatni koʻrish uchun tizimga kiring.';
 
   @override
-  String get noResourcesAvailable => 'Mavjud qo\'llanmalar yo\'q.';
+  String get noResourcesAvailable => 'Mavjud qoʻllanmalar yoʻq.';
 
   @override
   String quizCompletedPrefix(String quizId) {
@@ -1935,7 +1947,7 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String searchNoResultsForQuery(String query) {
-    return '\"$query\" bo\'yicha natija topilmadi';
+    return '\"$query\" boʻyicha natija topilmadi';
   }
 
   @override
@@ -1945,11 +1957,11 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String searchSemanticHeader(int count) {
-    return '📎 bog\'liq materiallar ($count)';
+    return '📎 bogʻliq materiallar ($count)';
   }
 
   @override
-  String get searchSemanticBadge => '📎 bog\'liq';
+  String get searchSemanticBadge => '📎 bogʻliq';
 
   @override
   String get searchEmptyPromptTitle => 'Yagona oyna';
@@ -1982,19 +1994,19 @@ class AppLocalizationsUz extends AppLocalizations {
   String get leaderboardTabRegion => 'Viloyat';
 
   @override
-  String get leaderboardTabCourt => 'O\'z sudim';
+  String get leaderboardTabCourt => 'Oʻz sudim';
 
   @override
-  String get noRegionInfo => 'Viloyat ma\'lumoti yo\'q';
+  String get noRegionInfo => 'Viloyat maʼlumoti yoʻq';
 
   @override
-  String get noCourtInfo => 'Sud ma\'lumoti yo\'q';
+  String get noCourtInfo => 'Sud maʼlumoti yoʻq';
 
   @override
   String get selectYourCourtTitle => 'Sudingizni tanlang';
 
   @override
-  String get selectYourCourtSubtitle => 'Mintaqaviy statistika va leaderboard uchun\nqaysi sudda ishlashingizni ko\'rsating';
+  String get selectYourCourtSubtitle => 'Mintaqaviy statistika va leaderboard uchun\nqaysi sudda ishlashingizni koʻrsating';
 
   @override
   String get selectRegionLabel => 'Hududni tanlang';
@@ -2027,7 +2039,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get savingInProgress => 'Saqlanmoqda...';
 
   @override
-  String get courtDataHeader => 'Sud ma\'lumotlari';
+  String get courtDataHeader => 'Sud maʼlumotlari';
 
   @override
   String get articleDetailTitle => 'Maqola tafsilotlari';
@@ -2057,7 +2069,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get myCoursesEmptyTitle => 'Hali hech qanday kursni boshlamadingiz';
 
   @override
-  String get myCoursesEmptySubtitle => 'Yangi bilimlarni o\'zlashtirish va XP ishlash uchun kurslarni boshlang.';
+  String get myCoursesEmptySubtitle => 'Yangi bilimlarni oʻzlashtirish va XP ishlash uchun kurslarni boshlang.';
 
   @override
   String get coursesTitle => 'Kurslar';
@@ -2072,10 +2084,10 @@ class AppLocalizationsUz extends AppLocalizations {
   String get courseFilterAll => 'Barchasi';
 
   @override
-  String get courseFilterBeginner => 'Boshlang\'ich';
+  String get courseFilterBeginner => 'Boshlangʻich';
 
   @override
-  String get courseFilterIntermediate => 'O\'rta';
+  String get courseFilterIntermediate => 'Oʻrta';
 
   @override
   String get courseFilterAdvanced => 'Yuqori';
@@ -2097,6 +2109,2125 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get tabAll => 'Barchasi';
+
+  @override
+  String get tabCompleted => '✓ Tugallangan';
+
+  @override
+  String get tabInProgress => '▶ Davom';
+
+  @override
+  String get statusOnline => 'ONLINE';
+
+  @override
+  String get statusOffline => 'OFFLINE';
+}
+
+/// The translations for Uzbek, using the Latin script (`uz_Latn`).
+class AppLocalizationsUzLatn extends AppLocalizationsUz {
+  AppLocalizationsUzLatn(): super('uz_Latn');
+
+  @override
+  String get appTitle => 'Sud qöllanma';
+
+  @override
+  String get openInYoutube => 'YouTube orqali oçiş';
+
+  @override
+  String get watchOnYoutube => 'YouTube da köriş';
+
+  @override
+  String get loginWelcomeTitle => 'Xuş kelibsiz!';
+
+  @override
+  String get loginWelcomeSubtitle => 'Davom etiş uçun kiring';
+
+  @override
+  String get bottomNavHome => 'Boş sahifa';
+
+  @override
+  String get bottomNavResources => 'Kurslar';
+
+  @override
+  String get bottomNavCommunity => 'Munozara';
+
+  @override
+  String get bottomNavProfile => 'Profil';
+
+  @override
+  String get resourcesScreenTitle => 'Qöllanmalar va yöriqnomalar';
+
+  @override
+  String get roleXodim => 'Xodim';
+
+  @override
+  String get roleEkspert => 'Ekspert';
+
+  @override
+  String get roleAdmin => 'Administrator';
+
+  @override
+  String get registrationTitle => 'Hisob yaratiş';
+
+  @override
+  String get registrationSubtitle => 'Professional hamjamiyatga qöşiling!';
+
+  @override
+  String get registrationFullNameLabel => 'Töliq ism (F.I.Ş.)';
+
+  @override
+  String get registrationFullNameError => 'Iltimos, töliq ismingizni kiriting';
+
+  @override
+  String get registrationRoleLabel => 'Sizning rolingiz';
+
+  @override
+  String get registrationRoleError => 'Iltimos, rolni tanlang';
+
+  @override
+  String get registrationRoleXodim => 'Oddiy xodim';
+
+  @override
+  String get registrationRoleEkspert => 'Ekspert (Qöllanma yaratuvçi)';
+
+  @override
+  String get registrationRoleJudge => 'Sudya';
+
+  @override
+  String get registrationRoleAssistant => 'Sudya yordamçisi';
+
+  @override
+  String get registrationRoleChancellery => 'Devonxona xodimi';
+
+  @override
+  String get registrationRoleArchive => 'Arxiv mudiri';
+
+  @override
+  String get registrationRoleIctSpecialist => 'AKT mutaxassisi';
+
+  @override
+  String get registrationPasswordLabel => 'Parol';
+
+  @override
+  String get registrationPasswordError => 'Parol kamida 6 belgidan iborat bölişi kerak';
+
+  @override
+  String get registrationConfirmPasswordLabel => 'Parolni tasdiqlang';
+
+  @override
+  String get registrationConfirmPasswordError => 'Parollar mos kelmadi';
+
+  @override
+  String get registrationSignUpButton => 'Röyxatdan ötiş';
+
+  @override
+  String get registrationSwitchToLogin => 'Hisobingiz bormi? kiriş';
+
+  @override
+  String get languageEnglish => 'Ingliz tili';
+
+  @override
+  String get languageUzbek => 'Özbek tili';
+
+  @override
+  String get languageRussian => 'Rus tili';
+
+  @override
+  String get languageSystemDefault => 'Tizim tili';
+
+  @override
+  String get settingsScreenTitle => 'Sozlamalar';
+
+  @override
+  String get settingsLanguage => 'Til';
+
+  @override
+  String get settingsReceiveNotifications => 'Bildirişnomalarni qabul qiliş';
+
+  @override
+  String get settingsReceiveNotificationsSubtitle => 'Yangi manbalar va muhokamalar haqida yangilanişlarni oling';
+
+  @override
+  String get settingsAllowLocation => 'Joylaşuvga ruxsat beriş';
+
+  @override
+  String get settingsAllowLocationSubtitle => 'Joylaşuvingizni talab qiladigan funksiyalar uçun (agar mavjud bölsa)';
+
+  @override
+  String get settingsChangePassword => 'Parolni özgartiriş';
+
+  @override
+  String get settingsHelpCenter => 'Yordam markazi';
+
+  @override
+  String get settingsAboutApp => 'Sud qöllanma haqida';
+
+  @override
+  String get settingsAppLegalese => '© 2025 sud qöllanma loyihasi';
+
+  @override
+  String get settingsAppDescription => 'Sud xodimlarining kasbiy kompetentligi uçun mobil platforma.';
+
+  @override
+  String get errorPrefix => 'Xatolik:';
+
+  @override
+  String get days => 'kun';
+
+  @override
+  String get resourcesNoResourcesFound => 'Resurslar topilmadi.';
+
+  @override
+  String get loginButtonText => 'Kiriş';
+
+  @override
+  String get signUpButtonText => 'Röyxatdan ötiş';
+
+  @override
+  String get loginNoAccount => 'Akkauntingiz yöqmi?';
+
+  @override
+  String get logoutButtonText => 'Çiqiş';
+
+  @override
+  String get logoutConfirmTitle => 'Çiqişga işonçingiz komilmi?';
+
+  @override
+  String get emailLabel => 'Elektron poçta';
+
+  @override
+  String get passwordLabel => 'Parol';
+
+  @override
+  String get homeDashboardTitle => 'Boşqaruv paneli';
+
+  @override
+  String get communityScreenTitle => 'Hamjamiyat';
+
+  @override
+  String get profileScreenTitle => 'Profil';
+
+  @override
+  String get editProfileButtonText => 'Profilni tahrirlaş';
+
+  @override
+  String get guestUser => 'Mehmon foydalanuvçi';
+
+  @override
+  String get updateYourInformation => 'Maʼlumotlaringizni yangilang';
+
+  @override
+  String get loginToEditProfile => 'Profilni tahrirlaş uçun tizimga kiring';
+
+  @override
+  String get settingsTitle => 'Sozlamalar';
+
+  @override
+  String get themeOptionsTitle => 'Mavzu variantlari';
+
+  @override
+  String get logoutConfirmMessage => 'Çiqişni xohlaysizmi?';
+
+  @override
+  String get saveChangesButton => 'Özgarişlarni saqlaş';
+
+  @override
+  String get vidCategoryBeginner => 'Boşlanğiç';
+
+  @override
+  String get vidCategoryIntermediate => 'Örta';
+
+  @override
+  String get vidCategoryAdvanced => 'Yuqori';
+
+  @override
+  String get vidCategoryPractical => 'Amaliy';
+
+  @override
+  String get vidCategoryTheory => 'Nazariy';
+
+  @override
+  String get cancelButton => 'Bekor qiliş';
+
+  @override
+  String get logoutButton => 'Çiqiş';
+
+  @override
+  String get resourcesTitle => 'Resurslar';
+
+  @override
+  String get resourcesSearchHint => 'Resurslarni qidiriş...';
+
+  @override
+  String get resourcesFilterByType => 'Tur böyiça filtrlaş';
+
+  @override
+  String get resourcesAllTypes => 'Barça turlar';
+
+  @override
+  String get resourcesNoResourcesMatch => 'Sizning mezonlaringizga mos resurslar topilmadi.';
+
+  @override
+  String get resourcesTryAdjusting => 'Qidiruv yoki filtringizni özgartirib köring.';
+
+  @override
+  String get resourcesCreateButton => 'Yaratiş';
+
+  @override
+  String get resourceAddedSuccess => 'Resurs muvaffaqiyatli qöşildi!';
+
+  @override
+  String resourceAddedError(String error) {
+    return 'Resurs qöşişda xatolik: $error';
+  }
+
+  @override
+  String get createResourceScreenTitle => 'Yangi resurs yaratiş';
+
+  @override
+  String get createResourceFormWillBeHere => 'Resurs yaratiş şakli şu yerda böladi.';
+
+  @override
+  String get saveButtonText => 'Saqlaş';
+
+  @override
+  String get createResourceTitleLabel => 'Sarlavha';
+
+  @override
+  String get createResourceDescriptionLabel => 'Tavsifi';
+
+  @override
+  String get createResourceAuthorLabel => 'Muallif';
+
+  @override
+  String get createResourceTypeLabel => 'Resurs turi';
+
+  @override
+  String get createResourceUrlLabel => 'URL (Optional)';
+
+  @override
+  String couldNotLaunchUrl(String url) {
+    return '$url manzilini oçib bölmadi';
+  }
+
+  @override
+  String createResourceValidationEmpty(String fieldName) {
+    return 'Iltimos kiriting $fieldName';
+  }
+
+  @override
+  String createResourceValidationSelect(String fieldName) {
+    return 'Iltimos tanlang $fieldName';
+  }
+
+  @override
+  String get createResourceValidationInvalidUrl => 'Yaroqli URL manzilini kiriting';
+
+  @override
+  String get editButtonTooltip => 'Resurs özgartiriş';
+
+  @override
+  String get editResourceScreenTitle => 'Resurs özgartiriş';
+
+  @override
+  String get resourceTypeLabel => 'Turi';
+
+  @override
+  String get editTopicScreenTitle => 'Munozara mavzusini tahrirlaş';
+
+  @override
+  String get authorLabel => 'Muallif';
+
+  @override
+  String get dateAddedLabel => 'Qöşilgan';
+
+  @override
+  String get launchingUrlMessage => 'URL işga tuşirilmoqda';
+
+  @override
+  String get descriptionLabel => 'Tavsifi';
+
+  @override
+  String get resourceUpdatedSuccess => 'Resurs muvaffaqiyatli yangilandi!';
+
+  @override
+  String resourceUpdatedError(String error) {
+    return 'Resursni yangilaşda xatolik yuz berdi: $error';
+  }
+
+  @override
+  String get deleteResourceConfirmTitle => 'Öçirişni tasdiqlang';
+
+  @override
+  String get deleteResourceConfirmMessage => 'Haqiqatan ham bu manbani öçirib taşlamoqçimisiz? bu amalni ortga qaytarib bölmaydi.';
+
+  @override
+  String get cancelButtonText => 'Bekor qiliş';
+
+  @override
+  String get deleteButtonText => 'Öçiriş';
+
+  @override
+  String resourceDeletedSuccess(String resourceTitle) {
+    return '\"$resourceTitle\" resursi muvaffaqiyatli öçirildi.';
+  }
+
+  @override
+  String resourceDeletedError(String error) {
+    return 'Resursni öçirişda xatolik yuz berdi: $error';
+  }
+
+  @override
+  String get deleteButtonTooltip => 'Resursni öçiriş';
+
+  @override
+  String get createANewQuiz => 'Yangi viktorina yaratiş';
+
+  @override
+  String get quizTitle => 'Viktorina nomi';
+
+  @override
+  String get quizDescription => 'Tavsif';
+
+  @override
+  String get saveAndAddQuestions => 'Saqlaş va savollar qöşiş';
+
+  @override
+  String get failedToCreateQuiz => 'Viktorina yaratib bölmadi';
+
+  @override
+  String get addQuestions => 'Savollar qöşiş';
+
+  @override
+  String get finish => 'Tugatiş';
+
+  @override
+  String get questionText => 'Savol matni';
+
+  @override
+  String get pleaseEnterAQuestion => 'Iltimos, savol kiriting';
+
+  @override
+  String get questionType => 'Savol turi';
+
+  @override
+  String get multipleChoice => 'Bir neçta tanlov';
+
+  @override
+  String get trueFalse => 'Töğri/Notöğri';
+
+  @override
+  String get pleaseSelectCorrectAnswer => 'Iltimos, töğri javobni tanlang.';
+
+  @override
+  String option(int number) {
+    return 'Variant $number';
+  }
+
+  @override
+  String get pleaseEnterAnOption => 'Iltimos, variantni kiriting';
+
+  @override
+  String get addQuestion => 'Savol qöşiş';
+
+  @override
+  String get questionAddedSuccessfully => 'Savol muvaffaqiyatli qöşildi!';
+
+  @override
+  String get failedToAddQuestion => 'Savol qöşib bölmadi';
+
+  @override
+  String get noQuestionsAddedYet => 'Hozirça savollar qöşilmagan.';
+
+  @override
+  String get correctAnswer => 'Töğri javob';
+
+  @override
+  String get quiz => 'Viktorina';
+
+  @override
+  String get quizCompletionMessage => 'Siz viktorinani yakunladingiz!';
+
+  @override
+  String get done => 'Bajarildi';
+
+  @override
+  String get myQuizHistory => 'Mening viktorina tarixim';
+
+  @override
+  String get noQuizAttempts => 'Siz hali heç qanday viktorinada qatnaşmadingiz.';
+
+  @override
+  String get score => 'Bal';
+
+  @override
+  String get role => 'Rol';
+
+  @override
+  String get loading => 'Yuklanmoqda...';
+
+  @override
+  String get relatedQuizzesTitle => 'Tegişli testlar';
+
+  @override
+  String get noQuizzesAvailable => 'Bu resurs uçun hozirça heç qanday test mavjud emas.';
+
+  @override
+  String get errorLoadingQuizzes => 'Viktorinalarni yuklaşda xatolik';
+
+  @override
+  String invalidUrlFormat(String url) {
+    return 'URL formati notöğri: $url';
+  }
+
+  @override
+  String errorLaunchingUrl(String error) {
+    return 'URLni işga tuşirişda xatolik yuz berdi: $error';
+  }
+
+  @override
+  String createResourceValidationMinLength(String fieldName, int length) {
+    return '$fieldName kamida $length belgidan iborat bölişi kerak';
+  }
+
+  @override
+  String createResourceValidationMaxLength(String fieldName, int length) {
+    return '$fieldName $length belgidan oşmasligi kerak';
+  }
+
+  @override
+  String get titleMinLength => 'Sarlavha kamida 5 ta belgidan iborat bölişi kerak';
+
+  @override
+  String get titleMaxLength => 'Sarlavha 100 belgidan oşmasligi kerak';
+
+  @override
+  String get createTopicScreenTitle => 'Yangi muhokamani boşlaş';
+
+  @override
+  String get createTopicTitleLabel => 'Mavzu nomi';
+
+  @override
+  String get createTopicContentLabel => 'Muhokama mazmuni';
+
+  @override
+  String get createTopicButtonText => 'Muhokama mavzusini yaratiş';
+
+  @override
+  String get mustBeLoggedInToCreateTopic => 'Mavzu yaratiş uçun tizimga kirgan bölişingiz kerak.';
+
+  @override
+  String get topicCreatedSuccess => 'Mavzu muvaffaqiyatli yaratildi!';
+
+  @override
+  String failedToCreateTopic(String error) {
+    return 'Mavzu yaratib bölmadi: $error';
+  }
+
+  @override
+  String createTopicValidationEmpty(String fieldName) {
+    return '$fieldName böş bölişi mumkin emas.';
+  }
+
+  @override
+  String createTopicValidationMinLength(String fieldName, int length) {
+    return '$fieldName kamida $length belgidan iborat bölişi kerak.';
+  }
+
+  @override
+  String createTopicValidationMaxLength(String fieldName, int length) {
+    return '$fieldName $length belgidan oşmasligi kerak.';
+  }
+
+  @override
+  String get errorLoadingData => 'Resurslarni yuklaşda xatolik yuz berdi. qayta urinib köring.';
+
+  @override
+  String failedToUpdateTopic(String error) {
+    return 'Mavzuni yangilaşda xatolik yuz berdi: $error';
+  }
+
+  @override
+  String get topicUpdatedSuccess => 'Mavzu muvaffaqiyatli yangilandi!';
+
+  @override
+  String get noDiscussionsYet => 'Hali muhokamalar yöq.';
+
+  @override
+  String get beTheFirstToStartConversation => 'Birinçi bölib suhbatni boşlang!';
+
+  @override
+  String get mustBeLoggedInToCreateResource => 'Resurs yaratiş uçun tizimga kirgan bölişingiz kerak.';
+
+  @override
+  String get profileIncompleteToCreateResource => 'Profilingiz haqidagi maʼlumotlar töliq emas. iltimos, profilingizda ismingizni yangilang.';
+
+  @override
+  String get profileIncompleteToCreateTopic => 'Profilingiz nomi belgilanmagan. iltimos, profilingizni yangilang.';
+
+  @override
+  String get commentCannotBeEmpty => 'Izoh böş bölişi mumkin emas.';
+
+  @override
+  String get mustBeLoggedInToComment => 'Izoh beriş uçun tizimga kirgan bölişingiz kerak.';
+
+  @override
+  String get commentAddedSuccessfully => 'Izoh muvaffaqiyatli qöşildi!';
+
+  @override
+  String failedToAddComment(String error) {
+    return 'Izoh qöşib bölmadi: $error';
+  }
+
+  @override
+  String postedBy(String authorName) {
+    return 'Muallif: $authorName';
+  }
+
+  @override
+  String onDate(String date) {
+    return 'kun $date';
+  }
+
+  @override
+  String get repliesTitle => 'Javoblar';
+
+  @override
+  String errorLoadingComments(String error) {
+    return 'Izohlarni yuklaşda xatolik yuz berdi: $error';
+  }
+
+  @override
+  String get noRepliesYet => 'Hali javob yöq. birinçi bölib fikr bildiring!';
+
+  @override
+  String get writeAReplyHint => 'Javob yozing...';
+
+  @override
+  String get sendCommentTooltip => 'Izoh yuboriş';
+
+  @override
+  String welcomeBack(String userName) {
+    return 'Qaytib xuş kelibsiz, $userName!';
+  }
+
+  @override
+  String get readyToLearnSomethingNew => 'Bugun yangi narsalarni örganişga tayyormisiz?';
+
+  @override
+  String get quickAccessTitle => 'Tez kiriş';
+
+  @override
+  String get communityTitle => 'Hamjamiyat';
+
+  @override
+  String get profileTitle => 'Profil';
+
+  @override
+  String get latestNewsTitle => 'Sönggi yangiliklar';
+
+  @override
+  String get sourceLabel => 'Manba';
+
+  @override
+  String get quizzesTitle => 'Viktorinalar';
+
+  @override
+  String get urlCannotBeEmpty => 'URL böş bölişi mumkin emas';
+
+  @override
+  String errorLoadingNews(String error) {
+    return 'Yangiliklarni yuklaşda xatolik yuz berdi: $error';
+  }
+
+  @override
+  String get noNewsAvailable => 'Hozirda heç qanday yangilik mavjud emas.';
+
+  @override
+  String get adminPanelTitle => 'Admin paneli';
+
+  @override
+  String get manageNewsTitle => 'Yangiliklar boşqaruvi';
+
+  @override
+  String get manageNewsSubtitle => 'Yangilik maqolalarini qöşiş, tahrirlaş yoki öçiriş';
+
+  @override
+  String get manageUsersTitle => 'Foydalanuvçilarni boşqariş';
+
+  @override
+  String get manageUsersSubtitle => 'Foydalanuvçilarni köriş va rollarni boşqariş (kelajakda)';
+
+  @override
+  String get manageResourcesTitle => 'Resurslarni boşqariş';
+
+  @override
+  String get manageResourcesSubtitle => 'Barça öquv resurslarini nazorat qiliş (kelajakda)';
+
+  @override
+  String get confirmDeleteTitle => 'Öçirişni tasdiqlang';
+
+  @override
+  String confirmDeleteNewsMessage(String newsTitle) {
+    return 'Siz \"$newsTitle\"ni öçirib taşlamoqçimisiz?';
+  }
+
+  @override
+  String newsDeletedSuccess(String newsTitle) {
+    return '\"$newsTitle\" muvaffaqiyatli öçirildi.';
+  }
+
+  @override
+  String failedToDeleteNews(String error, String newsTitle) {
+    return '\"$newsTitle\" öçirilmadi: $error';
+  }
+
+  @override
+  String get faqTitle => 'Köp söraladigan savollar';
+
+  @override
+  String get searchHelp => 'Yordam izlaş...';
+
+  @override
+  String get allCategories => 'Barça toifalar';
+
+  @override
+  String get helpfulFeedback => 'Bu foydali böldimi?';
+
+  @override
+  String get noArticlesFound => 'Savollar topilmadi';
+
+  @override
+  String get settingsNotifications => 'Xabarnomalar';
+
+  @override
+  String get changePasswordTitle => 'Parolni özgartiriş';
+
+  @override
+  String get helpCenterTitle => 'Yordam markazi';
+
+  @override
+  String get settingsAbout => 'Ilova haqida';
+
+  @override
+  String get passwordUpdatedSuccess => 'Parol muvaffaqiyatli yangilandi';
+
+  @override
+  String get errorWrongPassword => 'Joriy parol notöğri';
+
+  @override
+  String get currentPassword => 'Joriy parol';
+
+  @override
+  String get newPassword => 'Yangi parol';
+
+  @override
+  String get confirmPassword => 'Parolni tasdiqlang';
+
+  @override
+  String get passwordMismatch => 'Parollar mos kelmadi';
+
+  @override
+  String get save => 'Saqlaş';
+
+  @override
+  String get addNewsTooltip => 'Yangi maqola qöşiş';
+
+  @override
+  String get editNewsTooltip => 'Yangilikni tahrirlaş';
+
+  @override
+  String get deleteNewsTooltip => 'Yangilikni öçiriş';
+
+  @override
+  String get addNewsButton => 'Yangilik qöşiş';
+
+  @override
+  String get noNewsAvailableManager => 'Heç qanday yangilik maqolasi topilmadi. bittasini qöşing!';
+
+  @override
+  String get editNewsTitle => 'Yangilikni tahrirlaş';
+
+  @override
+  String get addNewsTitle => 'Yangilik maqolasini qöşiş';
+
+  @override
+  String get saveNewsTooltip => 'Yangilikni saqlaş';
+
+  @override
+  String get newsTitleLabel => 'Sarlavha';
+
+  @override
+  String get pleaseEnterNewsTitle => 'Iltimos, yangilik sarlavhasini kiriting.';
+
+  @override
+  String newsTitleMinLength(int length) {
+    return 'Yangiliklar nomi kamida $length belgidan iborat bölişi kerak.';
+  }
+
+  @override
+  String get newsSourceLabel => 'Manba (masalan, blog nomi)';
+
+  @override
+  String get pleaseEnterNewsSource => 'Iltimos, yangiliklar manbasini kiriting.';
+
+  @override
+  String get newsUrlLabel => 'Maqola URL manzili';
+
+  @override
+  String get pleaseEnterNewsUrl => 'Maqola URL manzilini kiriting.';
+
+  @override
+  String get pleaseEnterValidNewsUrl => 'Iltimos, töğri URL manzilini kiriting (http yoki https bilan boşlanadi).';
+
+  @override
+  String get newsImageUrlLabel => 'Rasm URL manzili (ixtiyoriy)';
+
+  @override
+  String get pleaseEnterValidImageUrl => 'Iltimos, haqiqiy rasm URL manzilini kiriting (http yoki https bilan boşlanadi) yoki böş qoldiring.';
+
+  @override
+  String get publicationDateLabel => 'Naşr qilingan sana';
+
+  @override
+  String get pleaseSelectPublicationDate => 'Iltimos, naşr sanasini tanlang.';
+
+  @override
+  String get noDateSelected => 'Sana tanlanmagan';
+
+  @override
+  String get selectDateTooltip => 'Sanani tanlang';
+
+  @override
+  String get updateNewsButton => 'Yangiliklarni yangilaş';
+
+  @override
+  String get addNewsButtonForm => 'Yangilik maqolasini qöşiş';
+
+  @override
+  String newsUpdatedSuccess(String newsTitle) {
+    return '\"$newsTitle\" muvaffaqiyatli yangilandi.';
+  }
+
+  @override
+  String newsAddedSuccess(String newsTitle) {
+    return '\"$newsTitle\" muvaffaqiyatli qöşildi.';
+  }
+
+  @override
+  String failedToSaveNews(String error) {
+    return 'Yangilikni saqlab bölmadi: $error';
+  }
+
+  @override
+  String errorLoadingUsers(String error) {
+    return 'Foydalanuvçilarni yuklaşda xatolik yuz berdi: $error';
+  }
+
+  @override
+  String get noUsersFound => 'Heç qanday foydalanuvçi topilmadi.';
+
+  @override
+  String get noEmailProvided => 'E-poçta taqdim etilmaydi';
+
+  @override
+  String get roleLabel => 'Rol';
+
+  @override
+  String get registeredOnLabel => 'Röyxatdan ötgan';
+
+  @override
+  String get manageUsersSubtitleNow => 'Röyxatdan ötgan foydalanuvçilarni köriş va qidiriş';
+
+  @override
+  String get manageResourcesSubtitleNow => 'Har qanday öquv manbasini köriş, tahrirlaş yoki öçiriş';
+
+  @override
+  String confirmDeleteResourceMessage(String resourceTitle) {
+    return 'Siz \"$resourceTitle\" manbasini öçirib taşlamoqçimisiz?';
+  }
+
+  @override
+  String failedToDeleteResource(String error, String resourceTitle) {
+    return '\"$resourceTitle\" manbasini öçirib bölmadi: $error';
+  }
+
+  @override
+  String errorLoadingResources(String error) {
+    return 'Resurslarni yuklaşda xatolik yuz berdi: $error';
+  }
+
+  @override
+  String get noResourcesFoundManager => 'Tizimda heç qanday manba topilmadi.';
+
+  @override
+  String get editResourceTooltip => 'Resursni tahrirlaş';
+
+  @override
+  String get deleteResourceTooltip => 'Resursni öçiriş';
+
+  @override
+  String get manageQuizzesTitle => 'Viktorinalarni boşqariş';
+
+  @override
+  String get addQuizTooltip => 'Yangi test qöşiş';
+
+  @override
+  String errorLoadingQuizzesAdmin(String error) {
+    return 'Viktorinalarni yuklaşda xatolik yuz berdi: $error';
+  }
+
+  @override
+  String get noQuizzesFoundManager => 'Heç qanday test topilmadi. bittasini qöşing!';
+
+  @override
+  String confirmDeleteQuizMessage(String quizTitle) {
+    return 'Siz \"$quizTitle\" testini va uning barça savollarini öçirib taşlamoqçimisiz? bu amalni ortga qaytarib bölmaydi.';
+  }
+
+  @override
+  String quizDeletedSuccess(String quizTitle) {
+    return '\"$quizTitle\" testi va uning savollari muvaffaqiyatli öçirildi.';
+  }
+
+  @override
+  String failedToDeleteQuiz(String error, String quizTitle) {
+    return '\"$quizTitle\" testini öçirib bölmadi: $error';
+  }
+
+  @override
+  String get editDetailsButton => 'Tafsilotlarni tahrirlaş';
+
+  @override
+  String get manageQuestionsButton => 'Savollar';
+
+  @override
+  String get deleteQuizTooltip => 'Viktorina va savollarni öçiriş';
+
+  @override
+  String get addQuizButton => 'Viktorina qöşiş';
+
+  @override
+  String get manageQuizzesSubtitle => 'Barça testlar va ularning savollarini nazorat qiliş';
+
+  @override
+  String get registrationEmailError => 'Yaroqli elektron poçta manzilini kiriting';
+
+  @override
+  String get dashboardXodimTitle => 'Mening faoliyatim';
+
+  @override
+  String get dashboardEkspertTitle => 'Mening hissam';
+
+  @override
+  String get dashboardAdminTitle => 'Tizim holati';
+
+  @override
+  String get seeAllButton => 'Barçasini köriş';
+
+  @override
+  String get noGuidesAuthored => 'Siz hali heç qanday qöllanma yaratmadingiz.';
+
+  @override
+  String get adminStatUsers => 'Foydalanuvçilar';
+
+  @override
+  String get adminStatGuides => 'Qöllanmalar';
+
+  @override
+  String get adminStatQuizzes => 'Viktorinalar';
+
+  @override
+  String get nextLevel => 'Keyingi daraja';
+
+  @override
+  String get orDivider => 'Yoki';
+
+  @override
+  String get signInWithGoogle => 'Google bilan kiriş';
+
+  @override
+  String get themeSystemDefault => 'Tizim böyiça';
+
+  @override
+  String get themeLight => 'Yoruğ rejim';
+
+  @override
+  String get themeDark => 'Tungi rejim';
+
+  @override
+  String get bioOptionalLabel => 'Bio (Ixtiyoriy)';
+
+  @override
+  String get profilePictureUrlLabel => 'Profil rasmi URL manzili (Ixtiyoriy)';
+
+  @override
+  String get levelIntermediate => 'Örta';
+
+  @override
+  String get levelAdvanced => 'Ilğor';
+
+  @override
+  String get totalPoints => 'Jami ballar';
+
+  @override
+  String pointsToNextLevel(int points) {
+    return 'Keyingi darajaga $points XP';
+  }
+
+  @override
+  String get manageArticlesTitle => 'Maqolalar boşqaruvi';
+
+  @override
+  String get manageArticlesSubtitle => 'Bilimlar bazasini boşqariş';
+
+  @override
+  String get manageVideosTitle => 'Video darsliklar boşqaruvi';
+
+  @override
+  String get manageVideosSubtitle => 'Video darsliklarni boşqariş';
+
+  @override
+  String get manageSystemsTitle => 'Tizimlar boşqaruvi';
+
+  @override
+  String get manageSystemsSubtitle => 'Tizimlar maʼlumotnomasini boşqariş';
+
+  @override
+  String get manageFaqTitle => 'TSS';
+
+  @override
+  String get manageFaqSubtitle => 'TSSni boşqariş';
+
+  @override
+  String get manageNotificationsTitle => 'Bildirişnomalar';
+
+  @override
+  String get manageNotificationsSubtitle => 'Bildirişnomalarni yuboriş';
+
+  @override
+  String get selectLanguage => 'Tilni tanlang';
+
+  @override
+  String topicDeletedSuccess(String topicTitle) {
+    return '\"$topicTitle\" muvaffaqiyatli öçirildi.';
+  }
+
+  @override
+  String failedToDeleteTopic(String error) {
+    return 'Mavzuni öçirib bölmadi: $error';
+  }
+
+  @override
+  String deleteTopicConfirmMessage(String topicTitle) {
+    return 'Siz \"$topicTitle\" mavzusini öçirib taşlamoqçimisiz?';
+  }
+
+  @override
+  String get editTopicTooltip => 'Mavzuni tahrirlaş';
+
+  @override
+  String get deleteTopicConfirmTitle => 'Mavzuni öçiriş';
+
+  @override
+  String get commentPlural => 'Izohlar';
+
+  @override
+  String get commentSingular => 'Izoh';
+
+  @override
+  String get deleteTopicTooltip => 'Mavzuni öçiriş';
+
+  @override
+  String get faqCategoryLogin => 'Kiriş muammolari';
+
+  @override
+  String get faqCategoryPassword => 'Parol muammolari';
+
+  @override
+  String get faqCategoryUpload => 'Fayl yuklaş';
+
+  @override
+  String get faqCategoryAccess => 'Kiriş huquqlari';
+
+  @override
+  String get faqCategoryGeneral => 'Umumiy savollar';
+
+  @override
+  String get faqCategoryTechnical => 'Texnik muammolar';
+
+  @override
+  String confirmDeleteArticleMessage(String articleTitle) {
+    return 'Siz \"$articleTitle\" maqolasini öçirib taşlamoqçimisiz?';
+  }
+
+  @override
+  String get addArticleTitle => 'Yangi maqola';
+
+  @override
+  String get editArticleTitle => 'Maqolani tahrirlaş';
+
+  @override
+  String get categoryLabel => 'Kategoriya';
+
+  @override
+  String get articleCategoryGeneral => 'Umumiy';
+
+  @override
+  String get articleCategoryProcedure => 'Protsedura';
+
+  @override
+  String get articleCategoryLaw => 'Qonunçilik';
+
+  @override
+  String get articleCategoryFaq => 'Köp söraladigan';
+
+  @override
+  String get contentLabel => 'Mazmuni (Markdown)';
+
+  @override
+  String get tagsLabel => 'Teglar (vergul bilan ajrating)';
+
+  @override
+  String get tagsHint => 'masalan: sud, qonun, kodeks';
+
+  @override
+  String get noPdfSelected => 'PDF fayl tanlanmagan';
+
+  @override
+  String get uploadPdfTooltip => 'PDF yuklaş';
+
+  @override
+  String currentFileLabel(String url) {
+    return 'Joriy fayl: $url';
+  }
+
+  @override
+  String get existingPdfFile => 'Mavjud PDF fayl';
+
+  @override
+  String get articleSavedSuccess => 'Maqola saqlandi';
+
+  @override
+  String get titleRequired => 'Sarlavha kiritilişi şart';
+
+  @override
+  String get contentRequired => 'Mazmun kiritilişi şart';
+
+  @override
+  String confirmDeleteVideoMessage(String videoTitle) {
+    return 'Siz \"$videoTitle\" videosini öçirib taşlamoqçimisiz?';
+  }
+
+  @override
+  String get videoDeletedSuccess => 'Video öçirildi';
+
+  @override
+  String get noVideosFound => 'Videolar yöq';
+
+  @override
+  String get addVideoTitle => 'Yangi video';
+
+  @override
+  String get editVideoTitle => 'Videoni tahrirlaş';
+
+  @override
+  String get videoSavedSuccess => 'Video saqlandi';
+
+  @override
+  String get youtubeIdLabel => 'YouTube ID';
+
+  @override
+  String get youtubeIdHint => 'Masalan: dQw4w9WgXcQ';
+
+  @override
+  String get youtubeIdRequired => 'YouTube ID kiritilişi şart';
+
+  @override
+  String get systemOptionalLabel => 'Tizim (ixtiyoriy)';
+
+  @override
+  String get notSelectedLabel => 'Tanlanmagan';
+
+  @override
+  String get durationLabel => 'Davomiyligi (soniya)';
+
+  @override
+  String get durationHint => 'Masalan: 600';
+
+  @override
+  String get durationRequired => 'Davomiylik kiritilişi şart';
+
+  @override
+  String get videoTagsHint => 'masalan: login, xatolik, sozlaş';
+
+  @override
+  String get descriptionRequired => 'Tavsif kiritilişi şart';
+
+  @override
+  String confirmDeleteSystemMessage(String systemName) {
+    return 'Siz \"$systemName\" tizimini öçirib taşlamoqçimisiz?';
+  }
+
+  @override
+  String get systemDeletedSuccess => 'Tizim öçirildi';
+
+  @override
+  String get noSystemsFound => 'Tizimlar yöq';
+
+  @override
+  String get addSystemTitle => 'Yangi tizim';
+
+  @override
+  String get editSystemTitle => 'Tizimni tahrirlaş';
+
+  @override
+  String get systemSavedSuccess => 'Tizim saqlandi';
+
+  @override
+  String get shortNameLabel => 'Qisqa nomi';
+
+  @override
+  String get shortNameHint => 'Masalan: e-SUD';
+
+  @override
+  String get nameRequired => 'Nom kiritilişi şart';
+
+  @override
+  String get fullNameLabel => 'Töliq nomi';
+
+  @override
+  String get fullNameRequired => 'Töliq nom kiritilişi şart';
+
+  @override
+  String get websiteUrlLabel => 'Veb-sayt manzili';
+
+  @override
+  String get urlRequired => 'URL kiritilişi şart';
+
+  @override
+  String get logoUrlLabel => 'Logo URL';
+
+  @override
+  String get logoUrlRequired => 'Logo URL kiritilişi şart';
+
+  @override
+  String get statusLabel => 'Holati';
+
+  @override
+  String get loginGuideIdLabel => 'Kiriş qöllanmasi ID (ixtiyoriy)';
+
+  @override
+  String get videoGuideIdLabel => 'Video qöllanma ID (ixtiyoriy)';
+
+  @override
+  String confirmDeleteFaqMessage(String question) {
+    return 'Siz \"$question\" savolini öçirib taşlamoqçimisiz?';
+  }
+
+  @override
+  String get faqDeletedSuccess => 'Savol öçirildi';
+
+  @override
+  String get noFaqsFound => 'Savollar yöq';
+
+  @override
+  String get addFaqTitle => 'Yangi savol';
+
+  @override
+  String get editFaqTitle => 'Savolni tahrirlaş';
+
+  @override
+  String get faqSavedSuccess => 'Savol saqlandi';
+
+  @override
+  String get questionLabel => 'Savol';
+
+  @override
+  String get questionRequired => 'Savol kiritilişi şart';
+
+  @override
+  String get answerLabel => 'Javob (Markdown)';
+
+  @override
+  String get answerRequired => 'Javob kiritilişi şart';
+
+  @override
+  String get add => 'Qöşiş';
+
+  @override
+  String get titleLabel => 'Sarlavha';
+
+  @override
+  String get edit => 'Tahrirlaş';
+
+  @override
+  String get delete => 'Öçiriş';
+
+  @override
+  String get cancel => 'Bekor qiliş';
+
+  @override
+  String get search => 'Qidiriş...';
+
+  @override
+  String get fieldRequired => 'Maydon töldirilişi şart';
+
+  @override
+  String get confirmDelete => 'Haqiqatan ham öçirmoqçimisiz?';
+
+  @override
+  String get successSaved => 'Muvaffaqiyatli saqlandi';
+
+  @override
+  String get successDeleted => 'Muvaffaqiyatli öçirildi';
+
+  @override
+  String get notificationManagementTitle => 'Xabarnomalar boşqaruvi';
+
+  @override
+  String get notificationHistoryTitle => 'Xabarnomalar tarixi';
+
+  @override
+  String get notificationHistoryPlaceholder => 'Bu yerda yuborilgan xabarnomalar tarixi körinadi (tez orada).';
+
+  @override
+  String get sendNewNotificationButton => 'Yangi xabarnoma yuboriş';
+
+  @override
+  String get sendNotificationTitle => 'Xabarnoma yuboriş';
+
+  @override
+  String get notificationSentSuccess => 'Xabarnoma yuborildi';
+
+  @override
+  String get notificationTitleLabel => 'Sarlavha';
+
+  @override
+  String get notificationTitleRequired => 'Sarlavha kiritilişi şart';
+
+  @override
+  String get notificationBodyLabel => 'Xabar matni';
+
+  @override
+  String get notificationBodyRequired => 'Matn kiritilişi şart';
+
+  @override
+  String get notificationTypeLabel => 'Xabarnoma turi';
+
+  @override
+  String get targetAudienceLabel => 'Auditoriya';
+
+  @override
+  String get notificationTypeUpdate => 'Yangilaniş';
+
+  @override
+  String get notificationTypeNewContent => 'Yangi kontent';
+
+  @override
+  String get notificationTypeAnnouncement => 'Eʼlon';
+
+  @override
+  String get notificationTypeReminder => 'Eslatma';
+
+  @override
+  String get notificationTypeSystem => 'Tizim xabari';
+
+  @override
+  String get targetAudienceAll => 'Barçaga';
+
+  @override
+  String get targetAudienceBeginner => 'Yangi xodimlarga';
+
+  @override
+  String get targetAudienceAkt => 'AKT xodimlariga';
+
+  @override
+  String get targetAudienceSpecific => 'Maxsus';
+
+  @override
+  String notificationLabelTo(String audience) {
+    return 'Kimga: $audience';
+  }
+
+  @override
+  String notificationLabelReadBy(int count) {
+    return 'Öqildi: $count';
+  }
+
+  @override
+  String get resourceTabArticles => 'Maqolalar';
+
+  @override
+  String get resourceTabVideos => 'Videolar';
+
+  @override
+  String get resourceTabFiles => 'Fayllar';
+
+  @override
+  String get filesTabTitle => 'Fayllar';
+
+  @override
+  String get systemsDirectoryTitle => 'Sud axborot tizimlari';
+
+  @override
+  String get bookmarkSaveTooltip => 'Saqlaş';
+
+  @override
+  String get bookmarkRemoveTooltip => 'Olib taşlaş';
+
+  @override
+  String get resourceTypeOther => 'Boşqalar';
+
+  @override
+  String get openFile => 'Faylni oçiş';
+
+  @override
+  String get fileSize => 'Fayl hajmi';
+
+  @override
+  String get selectFile => 'Fayl tanlang';
+
+  @override
+  String get upload => 'Yuklaş';
+
+  @override
+  String get processing => 'Bajarilmoqda...';
+
+  @override
+  String get urlLabel => 'Havola (URL)';
+
+  @override
+  String get resourceTypePDF => 'PDF qöllanma';
+
+  @override
+  String get resourceTypeVideo => 'Video darslik';
+
+  @override
+  String get resourceTypeLink => 'Veb havola';
+
+  @override
+  String get onlySaved => 'Faqat saqlanganlar';
+
+  @override
+  String get searchArticlesPlaceholder => 'Maqolalarni qidiriş...';
+
+  @override
+  String get filterAll => 'Barçasi';
+
+  @override
+  String get noResultsFound => 'Heç narsa topilmadi';
+
+  @override
+  String get noArticlesAvailable => 'Maqolalar mavjud emas';
+
+  @override
+  String get noVideosAvailable => 'Videolar mavjud emas';
+
+  @override
+  String get actionCreateDiscussion => 'Muhokama yaratiş';
+
+  @override
+  String get actionCreateResource => 'Resurs yaratiş';
+
+  @override
+  String get actionCreateQuiz => 'Test yaratiş';
+
+  @override
+  String get notificationsTitle => 'Xabarnomalar';
+
+  @override
+  String get loginRequired => 'Tizimga kiriş kerak';
+
+  @override
+  String get markAllAsReadTooltip => 'Hammasini öqilgan deb belgilaş';
+
+  @override
+  String get allNotificationsReadMessage => 'Barça xabarnomalar öqilgan deb belgilandi';
+
+  @override
+  String get noNotifications => 'Xabarnomalar yöq';
+
+  @override
+  String get closeAction => 'Yopiş';
+
+  @override
+  String get leaderboardTitle => 'Liderlar jadvali';
+
+  @override
+  String pointsEarned(int points) {
+    return 'Siz $points XP oldingiz!';
+  }
+
+  @override
+  String levelUp(int level) {
+    return 'Tabriklaymiz! yangi daraja: $level';
+  }
+
+  @override
+  String get rank => 'Örin';
+
+  @override
+  String get quizHistoryTitle => 'Viktorina tarixi';
+
+  @override
+  String get seeAll => 'Barçasini köriş';
+
+  @override
+  String get today => 'Bugun';
+
+  @override
+  String get yesterday => 'Keça';
+
+  @override
+  String get thisWeek => 'Şu hafta';
+
+  @override
+  String get older => 'Eski natijalar';
+
+  @override
+  String get contactSupport => 'Qöllab-quvvatlaş';
+
+  @override
+  String get landingTitle => 'Professional platforma';
+
+  @override
+  String get landingSubtitle => 'Huquqiy bilimingizni oşiring. istalgan vaqtda.';
+
+  @override
+  String get landingLogin => 'Kiriş';
+
+  @override
+  String get landingRegister => 'Röyxatdan ötiş';
+
+  @override
+  String get featureKnowledgeBase => 'Bilimlar bazasi';
+
+  @override
+  String get featureKnowledgeBaseDesc => 'Keng kölamli huquqiy resurslar va hujjatlar kutubxonasi.';
+
+  @override
+  String get featureVideoTutorials => 'Video darsliklar';
+
+  @override
+  String get featureVideoTutorialsDesc => 'Mutaxassislar tomonidan tayyorlangan video qöllanmalar.';
+
+  @override
+  String get featureGamification => 'Gamifikatsiya';
+
+  @override
+  String get featureGamificationDesc => 'XP va nişonlar yiğing, reytingda bellaşing.';
+
+  @override
+  String get analyticsTitle => 'Öquv tahlili (xAPI)';
+
+  @override
+  String get analyticsSubtitle => 'Öquv yozuvlari';
+
+  @override
+  String get totalRecords => 'Jami yozuvlar';
+
+  @override
+  String get realTime => 'Real vaqtda';
+
+  @override
+  String get activityDistribution => 'Faoliyat taqsimoti';
+
+  @override
+  String get recentActivityFeed => 'Sönggi faoliyatlar';
+
+  @override
+  String get noRecords => 'Hozirça öquv yozuvlari topilmadi.';
+
+  @override
+  String get unknownUser => 'Nomaʼlum foydalanuvçi';
+
+  @override
+  String get unknownObject => 'Nomaʼlum obyekt';
+
+  @override
+  String get justNow => 'Hozirgina';
+
+  @override
+  String get quizzes => 'Viktorinalar';
+
+  @override
+  String get simulations => 'Simulyatsiyalar';
+
+  @override
+  String get catNewEmployees => 'Yangi xodimlar';
+
+  @override
+  String get catIctSpecialists => 'AKT mutaxassislari';
+
+  @override
+  String get catSystems => 'Tizimlar';
+
+  @override
+  String get catAuth => 'Kiriş/Login';
+
+  @override
+  String get catGeneral => 'Umumiy';
+
+  @override
+  String get rankBeginner => 'Boşlanğiç';
+
+  @override
+  String get rankIntermediate => 'Örta daraja';
+
+  @override
+  String get rankAdvanced => 'Ilğor';
+
+  @override
+  String get sysCatPrimary => 'Asosiy tizimlar';
+
+  @override
+  String get sysCatSecondary => 'Qöşimça tizimlar';
+
+  @override
+  String get sysCatSupport => 'Yordam tizimlari';
+
+  @override
+  String get sysStatusActive => 'Faol';
+
+  @override
+  String get sysStatusMaintenance => 'Taʼmirlaşda';
+
+  @override
+  String get sysStatusInactive => 'Nofaol';
+
+  @override
+  String videoViews(int count) {
+    return '$count körişlar';
+  }
+
+  @override
+  String get videoAuthorSubtitle => 'Muallif';
+
+  @override
+  String get videoDescriptionTitle => 'Tavsif';
+
+  @override
+  String get sysStatusDeprecated => 'Eski versiya';
+
+  @override
+  String get sysStatusOffline => 'Öçirilgan';
+
+  @override
+  String get systemsDirectoryAll => 'Barçasi';
+
+  @override
+  String systemsDirectoryError(String error) {
+    return 'Xatolik yuz berdi: $error';
+  }
+
+  @override
+  String get systemsDirectoryEmpty => 'Tizimlar mavjud emas';
+
+  @override
+  String get backToKnowledgeBase => 'Qöllanmalarga qaytiş';
+
+  @override
+  String get quizSuccessMessage => 'Ajoyib natija!';
+
+  @override
+  String get quizFailureMessage => 'Yana bir bor urinib köring!';
+
+  @override
+  String get failedToLoadQuiz => 'Viktorinani yuklab bölmadi';
+
+  @override
+  String get failedToSaveAttempt => 'Natijani saqlaşda xatolik';
+
+  @override
+  String get quizNotFound => 'Viktorina topilmadi';
+
+  @override
+  String question(String index) {
+    return 'Savol $index';
+  }
+
+  @override
+  String get speedBonus => 'Tezkor bonus';
+
+  @override
+  String get levelBeginner => 'Boşlanğiç';
+
+  @override
+  String get levelSpecialist => 'Mutaxassis';
+
+  @override
+  String get levelExpert => 'Ekspert';
+
+  @override
+  String get levelMaster => 'Usta (Master)';
+
+  @override
+  String totalQuestions(String total) {
+    return 'Jami: $total';
+  }
+
+  @override
+  String get errorCouldNotOpenLink => 'Havolani oçib bölmadi';
+
+  @override
+  String get errorResourceNotFound => 'Qöllanma topilmadi';
+
+  @override
+  String get errorVideoNotFound => 'Video topilmadi';
+
+  @override
+  String get errorPdfOpen => 'PDF faylni oçib bölmadi';
+
+  @override
+  String get errorTelegramOpen => 'Telegram havolasini oçib bölmadi';
+
+  @override
+  String get telegramLinkTitle => 'Telegramʼni ulaş';
+
+  @override
+  String get telegramLinkSubtitle => 'Botdagi test natijalari va XP şu profilga yoziladi';
+
+  @override
+  String get telegramLinkedSubtitle => 'Ulangan';
+
+  @override
+  String get telegramLinkError => 'Havola yaratib bölmadi. Qayta urinib köring.';
+
+  @override
+  String errorGeneric(String error) {
+    return 'Xatolik yuz berdi: $error';
+  }
+
+  @override
+  String get labelTrue => 'Töğri';
+
+  @override
+  String get labelFalse => 'Notöğri';
+
+  @override
+  String get labelPass => 'Ötdi';
+
+  @override
+  String get labelFail => 'Yiqildi';
+
+  @override
+  String get labelPdfAvailable => 'PDF mavjud';
+
+  @override
+  String get actionOk => 'OK';
+
+  @override
+  String get actionGoBack => 'Orqaga qaytiş';
+
+  @override
+  String get searchNoResults => 'Heç narsa topilmadi';
+
+  @override
+  String roleChangedSuccess(String userName, String role) {
+    return '$userName roli $role ga özgartirildi';
+  }
+
+  @override
+  String roleChangeError(String error) {
+    return 'Rolni özgartirişda xatolik: $error';
+  }
+
+  @override
+  String get changeRoleTooltip => 'Rolni özgartiriş';
+
+  @override
+  String get labelVideoGuide => 'Video qöllanma';
+
+  @override
+  String get labelLoginGuide => 'Kiriş qöllanma';
+
+  @override
+  String get changePasswordHint => 'Parolni özgartiriş qismi (tez orada)';
+
+  @override
+  String get editTopic => 'Mavzuni tahrirlaş';
+
+  @override
+  String get update => 'Yangilaş';
+
+  @override
+  String get commentAdded => 'Izoh qöşildi!';
+
+  @override
+  String get updateFeatureMigration => 'Yangilaş xususiyati köçirilmoqda. tez orada!';
+
+  @override
+  String get topicUpdatedSuccessfully => 'Mavzu muvaffaqiyatli yangilandi';
+
+  @override
+  String errorDeletingTopicMsg(String error) {
+    return 'Mavzuni öçirişda xatolik yuz berdi: $error';
+  }
+
+  @override
+  String get takeQuizTitle => 'Testni yeçiş';
+
+  @override
+  String get quizTakingInterface => 'Test yeçiş oynasi (tez orada)';
+
+  @override
+  String get quizCreatedSuccessfully => 'Test muvaffaqiyatli yaratildi';
+
+  @override
+  String get saveQuizAction => 'Testni saqlaş';
+
+  @override
+  String get createQuizTitle => 'Test yaratiş';
+
+  @override
+  String editQuestionsTitle(String title) {
+    return 'Savollarni tahrirlaş: $title';
+  }
+
+  @override
+  String get questionsManagementComingSoon => 'Savollarni boşqariş (tez orada)';
+
+  @override
+  String get aiAssistantName => 'AI yordamçi \"Sodiq\"';
+
+  @override
+  String get retryAction => 'Qayta uriniş';
+
+  @override
+  String get clearChatTooltip => 'Tozalaş';
+
+  @override
+  String get noInternetLabel => 'Internet yöq';
+
+  @override
+  String get noInternetQuery => 'Internet işlamayapti, nima qilay?';
+
+  @override
+  String get fileNotOpeningLabel => 'Fayl oçilmayapti';
+
+  @override
+  String get fileNotOpeningQuery => 'PDF fayl oçilmayapti, yordam bering.';
+
+  @override
+  String get printerNotWorkingLabel => 'Printer işlamayapti';
+
+  @override
+  String get printerNotWorkingQuery => 'Printer çop etmayapti, nima qiliş kerak?';
+
+  @override
+  String get uploadImageTooltip => 'Rasm yuklaş';
+
+  @override
+  String get writeMessageHint => 'Xabar yozing...';
+
+  @override
+  String get aiMentorName => 'Sodiq (AI mentor)';
+
+  @override
+  String get trueOption => 'Töğri';
+
+  @override
+  String get falseOption => 'Notöğri';
+
+  @override
+  String get questionsListTab => 'Savollar';
+
+  @override
+  String get addQuestionTab => 'Savol qöşiş';
+
+  @override
+  String get addOptionButton => 'Variant qöşiş';
+
+  @override
+  String get deleteQuestionConfirm => 'Bu savolni öçirmoqçimisiz?';
+
+  @override
+  String get questionDeleted => 'Savol öçirildi';
+
+  @override
+  String get startQuiz => 'Boşlaş';
+
+  @override
+  String get nextQuestion => 'Keyingi';
+
+  @override
+  String get previousQuestion => 'Oldingi';
+
+  @override
+  String get submitQuiz => 'Yakunlaş';
+
+  @override
+  String get quizResults => 'Natijalar';
+
+  @override
+  String get yourScore => 'Sizning balingiz';
+
+  @override
+  String questionOfTotal(int current, int total) {
+    return '$current-savol / $total ta';
+  }
+
+  @override
+  String get selectAnAnswer => 'Iltimos, javobni tanlang';
+
+  @override
+  String correctAnswerIs(String answer) {
+    return 'Töğri javob: $answer';
+  }
+
+  @override
+  String get retakeQuiz => 'Qayta topşiriş';
+
+  @override
+  String get backToQuizList => 'Viktorinalarga qaytiş';
+
+  @override
+  String questionsCount(int count) {
+    return '$count ta savol';
+  }
+
+  @override
+  String get excellentScore => 'Aʼlo natija! 🎉';
+
+  @override
+  String get goodScore => 'Yaxşi natija! 👍';
+
+  @override
+  String get needsImprovement => 'Maşq qiling! 💪';
+
+  @override
+  String get noQuestionsInQuiz => 'Bu viktorinada hali savollar yöq.';
+
+  @override
+  String get resumeLearning => 'Örganişni davom ettiriş';
+
+  @override
+  String get recentActivity => 'Sönggi faoliyat';
+
+  @override
+  String get availableResources => 'Mavjud qöllanmalar';
+
+  @override
+  String get availableQuizzes => 'Mavjud viktorinalar';
+
+  @override
+  String get activeDiscussions => 'Faol munozaralar';
+
+  @override
+  String get recommendedResources => 'Tavsiya etilgan qöllanmalar';
+
+  @override
+  String get pagesPath => 'Sahifalar / boş sahifa';
+
+  @override
+  String get mainDashboard => 'Asosiy boşqaruv paneli';
+
+  @override
+  String get overview => 'Umumiy köriniş';
+
+  @override
+  String get noRecentActivities => 'Sönggi faoliyat yöq.';
+
+  @override
+  String get signInToSeeActivities => 'Faoliyatni köriş uçun tizimga kiring.';
+
+  @override
+  String get noResourcesAvailable => 'Mavjud qöllanmalar yöq.';
+
+  @override
+  String quizCompletedPrefix(String quizId) {
+    return 'Viktorina bajarildi: $quizId';
+  }
+
+  @override
+  String get loadOlderNotifications => 'Eski bildirişnomalarni yuklaş';
+
+  @override
+  String get searchFilterAll => 'Barçasi';
+
+  @override
+  String get searchFilterSystems => 'Tizimlar';
+
+  @override
+  String get searchFilterArticles => 'Maqolalar';
+
+  @override
+  String get searchFilterVideos => 'Videolar';
+
+  @override
+  String get searchFilterFAQ => 'FAQ';
+
+  @override
+  String get searchFilterCourses => 'Kurslar';
+
+  @override
+  String get searchErrorTitle => 'Xatolik yuz berdi';
+
+  @override
+  String searchNoResultsForQuery(String query) {
+    return '\"$query\" böyiça natija topilmadi';
+  }
+
+  @override
+  String searchResultsHeader(int count) {
+    return '🔍 natijalar ($count)';
+  }
+
+  @override
+  String searchSemanticHeader(int count) {
+    return '📎 boğliq materiallar ($count)';
+  }
+
+  @override
+  String get searchSemanticBadge => '📎 boğliq';
+
+  @override
+  String get searchEmptyPromptTitle => 'Yagona oyna';
+
+  @override
+  String get searchEmptyPromptDesc => 'Tizimlar, maqolalar, videolar, kurslar va\nFAQ — hammasini bir joydan toping';
+
+  @override
+  String get searchTypeSystem => 'Tizim';
+
+  @override
+  String get searchTypeArticle => 'Maqola';
+
+  @override
+  String get searchTypeVideo => 'Video';
+
+  @override
+  String get searchTypeFaq => 'FAQ';
+
+  @override
+  String get searchTypeResource => 'Resurs';
+
+  @override
+  String get searchTypeCourse => 'Kurs';
+
+  @override
+  String get leaderboardTabGlobal => 'Global';
+
+  @override
+  String get leaderboardTabRegion => 'Viloyat';
+
+  @override
+  String get leaderboardTabCourt => 'Öz sudim';
+
+  @override
+  String get noRegionInfo => 'Viloyat maʼlumoti yöq';
+
+  @override
+  String get noCourtInfo => 'Sud maʼlumoti yöq';
+
+  @override
+  String get selectYourCourtTitle => 'Sudingizni tanlang';
+
+  @override
+  String get selectYourCourtSubtitle => 'Mintaqaviy statistika va leaderboard uçun\nqaysi sudda işlaşingizni körsating';
+
+  @override
+  String get selectRegionLabel => 'Hududni tanlang';
+
+  @override
+  String get regionDropdownLabel => '📍 hudud / viloyat';
+
+  @override
+  String get selectCourtTypeLabel => 'Sud turini tanlang';
+
+  @override
+  String get courtTypeDropdownLabel => '⚖️ sud turi';
+
+  @override
+  String get selectRegionFirst => 'Avval hududni tanlang';
+
+  @override
+  String get selectSpecificCourtLabel => 'Aniq sudni tanlang';
+
+  @override
+  String get specificCourtDropdownLabel => '🏛️ aniq sud';
+
+  @override
+  String get selectCourtTypeFirst => 'Avval sud turini tanlang';
+
+  @override
+  String get saveAndContinue => 'Saqlaş va davom etiş';
+
+  @override
+  String get savingInProgress => 'Saqlanmoqda...';
+
+  @override
+  String get courtDataHeader => 'Sud maʼlumotlari';
+
+  @override
+  String get articleDetailTitle => 'Maqola tafsilotlari';
+
+  @override
+  String get articlePinned => 'Muhim';
+
+  @override
+  String get bottomNavKnowledge => 'Bilimlar bazasi';
+
+  @override
+  String get downloadPdf => 'PDF yuklab oliş';
+
+  @override
+  String get feedbackThanks => 'Fikringiz uçun taşakkur!';
+
+  @override
+  String get shareArticle => 'Maqolani ulaşiş';
+
+  @override
+  String get topicTitle => 'Mavzu';
+
+  @override
+  String get myCoursesTitle => 'Mening kurslarim';
+
+  @override
+  String get myCoursesEmptyTitle => 'Hali heç qanday kursni boşlamadingiz';
+
+  @override
+  String get myCoursesEmptySubtitle => 'Yangi bilimlarni özlaştiriş va XP işlaş uçun kurslarni boşlang.';
+
+  @override
+  String get coursesTitle => 'Kurslar';
+
+  @override
+  String get boostYourKnowledge => 'Bilimingizni oşiring';
+
+  @override
+  String get searchCoursesHint => 'Kurs qidiriş...';
+
+  @override
+  String get courseFilterAll => 'Barçasi';
+
+  @override
+  String get courseFilterBeginner => 'Boşlanğiç';
+
+  @override
+  String get courseFilterIntermediate => 'Örta';
+
+  @override
+  String get courseFilterAdvanced => 'Yuqori';
+
+  @override
+  String get coursesNotFound => 'Kurslar topilmadi';
+
+  @override
+  String get errorLabel => 'Xatolik';
+
+  @override
+  String get statCourses => 'Kurs';
+
+  @override
+  String get statCompleted => 'Tugallangan';
+
+  @override
+  String get statXpPoints => 'XP ball';
+
+  @override
+  String get tabAll => 'Barçasi';
 
   @override
   String get tabCompleted => '✓ Tugallangan';

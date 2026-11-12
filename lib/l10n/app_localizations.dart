@@ -94,7 +94,8 @@ abstract class AppLocalizations {
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('ru'),
-    Locale('uz')
+    Locale('uz'),
+    Locale.fromSubtags(languageCode: 'uz', scriptCode: 'Latn')
   ];
 
   /// The title of the application
@@ -3187,6 +3188,30 @@ abstract class AppLocalizations {
   /// **'Could not open telegram link'**
   String get errorTelegramOpen;
 
+  /// Settings item that links the user's Telegram account to this profile
+  ///
+  /// In en, this message translates to:
+  /// **'Connect Telegram'**
+  String get telegramLinkTitle;
+
+  /// Subtitle shown while Telegram is not linked
+  ///
+  /// In en, this message translates to:
+  /// **'Bot quiz results and XP will go to this profile'**
+  String get telegramLinkSubtitle;
+
+  /// Subtitle shown when Telegram is already linked
+  ///
+  /// In en, this message translates to:
+  /// **'Connected'**
+  String get telegramLinkedSubtitle;
+
+  /// Error when the link code could not be created
+  ///
+  /// In en, this message translates to:
+  /// **'Could not create the link. Try again.'**
+  String get telegramLinkError;
+
   /// No description provided for @errorGeneric.
   ///
   /// In en, this message translates to:
@@ -4051,6 +4076,15 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
 
+  // Lookup logic when language+script codes are specified.
+  switch (locale.languageCode) {
+    case 'uz': {
+  switch (locale.scriptCode) {
+    case 'Latn': return AppLocalizationsUzLatn();
+   }
+  break;
+   }
+  }
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
