@@ -3,6 +3,13 @@
 Ikki repo: ilova (`b-v22`) va bot (`sudqollanma_bot`, branch `fix/role-xp-rules`,
 worktree `D:\dasturlar\sudqollanma_bot-xp-fix`). Tartib muhim — har qadamdan keyin tekshiring.
 
+## Holat (2026-11-12)
+
+- [x] 1. Functions deploy: `createTelegramLinkCode` yaratildi, qolgan 9 ta funksiya yangilandi.
+- [x] 2. Bot: `main` push (`61215de`), Cloud Build SUCCESS, revision `sudqollanmabot-00042-g5j` Ready, startup loglari toza.
+- [x] 3. Migratsiya `--apply`: 9 profil → `tg_<id>`, 4 test natijasi, 15 daraja; takror sinov — 0 oʻzgarish.
+- [ ] 4. Ilova versiyasini chiqarish, keyin `firebase deploy --only firestore:rules`.
+
 ## 0. Tayyorgarlik
 
 1. Ikkala repodagi oʻzgarishlarni commit qiling.
