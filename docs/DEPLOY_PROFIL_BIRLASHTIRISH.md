@@ -8,7 +8,7 @@ worktree `D:\dasturlar\sudqollanma_bot-xp-fix`). Tartib muhim — har qadamdan k
 - [x] 1. Functions deploy: `createTelegramLinkCode` yaratildi, qolgan 9 ta funksiya yangilandi.
 - [x] 2. Bot: `main` push (`61215de`), Cloud Build SUCCESS, revision `sudqollanmabot-00042-g5j` Ready, startup loglari toza.
 - [x] 3. Migratsiya `--apply`: 9 profil → `tg_<id>`, 4 test natijasi, 15 daraja; takror sinov — 0 oʻzgarish.
-- [ ] 4. Ilova versiyasini chiqarish, keyin `firebase deploy --only firestore:rules`.
+- [x] 4. Ilova versiyasini chiqarish (Web `1.1.0+2` → `https://educationapp-4780a.web.app`), keyin `firebase deploy --only firestore:rules` (ikkala bazaga ham chiqarildi). *(Android APK uchun lokal mashinada JDK/`JAVA_HOME` oʻrnatilmagan.)*
 
 ## 0. Tayyorgarlik
 

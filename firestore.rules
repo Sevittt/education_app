@@ -34,8 +34,8 @@ service cloud.firestore {
     // role, xp, level va hisoblagichlarni faqat admin yoki Cloud Functions yozadi.
     function ownerEditableUserFields() {
       return ['name', 'username', 'profilePictureUrl', 'bio', 'notificationsEnabled',
-              'fcmToken', 'lastLogin', 'regionId', 'regionName', 'courtTypeId',
-              'courtTypeName', 'courtId', 'courtName', 'position'];
+              'fcmToken', 'lastLogin', 'preferredLanguage', 'regionId', 'regionName',
+              'courtTypeId', 'courtTypeName', 'courtId', 'courtName', 'position'];
     }
 
     // Yangi profil: xavfsiz lavozim va nol gamification holati
@@ -52,7 +52,7 @@ service cloud.firestore {
         && d.get('lastLoginDate', null) == null
         && d.get('previousRank', null) == null
         && d.get('fastestQuizTime', null) == null
-        && !d.keys().hasAny(['lastActivity', 'awardedContentIds']);
+        && !d.keys().hasAny(['lastActivity', 'awardedContentIds', 'telegram_id']);
     }
 
     // --- Users Collection ---

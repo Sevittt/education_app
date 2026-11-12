@@ -18,6 +18,7 @@ import {
   getDoc,
   getDocs,
   query,
+  serverTimestamp,
   setDoc,
   updateDoc,
   where,
@@ -114,7 +115,17 @@ describe("users: huquq oshirish", () => {
     const ref = doc(as("alice"), "users/alice");
     await assertSucceeds(updateDoc(ref, { name: "Alisa", bio: "sudya", position: "Sudya" }));
     await assertSucceeds(updateDoc(ref, { fcmToken: "t1" }));
+    await assertSucceeds(updateDoc(ref, { preferredLanguage: "uz" }));
     await assertSucceeds(updateDoc(ref, { courtId: "c", courtName: "Sud", regionId: "r" }));
+  });
+
+  test("egasi telegram_id ni to'g'ridan-to'g'ri yoza olmaydi (2ta profil oldini olish)", async () => {
+    const ref = doc(as("alice"), "users/alice");
+    await assertFails(updateDoc(ref, { telegram_id: "123456" }));
+    await assertFails(setDoc(doc(as("carol"), "users/carol"), {
+      ...profile("carol", "judge"),
+      telegram_id: "123456",
+    }));
   });
 
   test("ruxsatli va himoyalangan maydon aralash yozuv rad etiladi", async () => {
@@ -196,6 +207,122 @@ describe("quiz_attempts: egasi", () => {
     const col = collection(as("alice"), "quiz_attempts");
     await assertSucceeds(addDoc(col, { userId: "alice", quizId: "q1", score: 7, totalQuestions: 10 }));
     await assertFails(addDoc(col, { userId: "bob", quizId: "q1", score: 10, totalQuestions: 10 }));
+  });
+});
+
+describe("kontent: faqat admin yozadi", () => {
+  test("sudya va AKT xodimi kurs, test, resurs va FAQ yoza olmaydi", async () => {
+    await assertFails(setDoc(doc(as("alice"), "courses/c9"), { title: "x" }));
+    await assertFails(setDoc(doc(as("ict"), "quizzes/q9"), { title: "x" }));
+    await assertFails(setDoc(doc(as("ict"), "resources/r9"), { title: "x" }));
+    await assertFails(setDoc(doc(as("alice"), "faqs/f9"), { question: "x" }));
+  });
+
+  test("admin kontent yozadi", async () => {
+    await assertSucceeds(setDoc(doc(as("admin"), "courses/c9"), { title: "x" }));
+    await assertSucceeds(setDoc(doc(as("admin"), "faqs/f9"), { question: "x" }));
+  });
+});
+
+describe("ict_reports: AKT xodimi → admin → FAQ", () => {
+  const report = (authorId, extra = {}) => ({
+    authorId,
+    authorName: authorId,
+    category: "technical",
+    problem: "E-SUD sertifikat xatosi",
+    description: "",
+    solution: "Sertifikatni qayta o'rnatish",
+    status: "pending",
+    createdAt: serverTimestamp(),
+    ...extra,
+  });
+
+  beforeEach(async () => {
+    await env.withSecurityRulesDisabled(async (ctx) => {
+      const db = ctx.firestore();
+      await setDoc(doc(db, "ict_reports/pending1"), { ...report("ict"), createdAt: new Date() });
+      await setDoc(doc(db, "ict_reports/approved1"), {
+        ...report("ict"),
+        status: "approved",
+        createdAt: new Date(),
+      });
+    });
+  });
+
+  test("AKT xodimi o'z nomidan muammo/yechim yuboradi", async () => {
+    await assertSucceeds(addDoc(collection(as("ict"), "ict_reports"), report("ict")));
+  });
+
+  test("boshqa lavozim yoki boshqa user nomidan yuborib bo'lmaydi", async () => {
+    await assertFails(addDoc(collection(as("alice"), "ict_reports"), report("alice")));
+    await assertFails(addDoc(collection(as("ict"), "ict_reports"), report("bob")));
+  });
+
+  test("tasdiqlangan holatda yoki ortiqcha maydon bilan yaratib bo'lmaydi", async () => {
+    const col = collection(as("ict"), "ict_reports");
+    await assertFails(addDoc(col, report("ict", { status: "approved" })));
+    await assertFails(addDoc(col, report("ict", { faqId: "f1" })));
+    await assertFails(addDoc(col, report("ict", { solution: "" })));
+  });
+
+  test("muallif va admin o'qiydi, boshqalar o'qiy olmaydi", async () => {
+    await assertSucceeds(getDoc(doc(as("ict"), "ict_reports/pending1")));
+    await assertSucceeds(getDoc(doc(as("admin"), "ict_reports/pending1")));
+    await assertFails(getDoc(doc(as("bob"), "ict_reports/pending1")));
+    await assertSucceeds(
+      getDocs(query(collection(as("ict"), "ict_reports"), where("authorId", "==", "ict")))
+    );
+  });
+
+  test("AKT xodimi o'z yozuvini tasdiqlay olmaydi; admin tasdiqlaydi", async () => {
+    await assertFails(updateDoc(doc(as("ict"), "ict_reports/pending1"), { status: "approved" }));
+    await assertSucceeds(
+      updateDoc(doc(as("admin"), "ict_reports/pending1"), {
+        status: "approved",
+        faqId: "f1",
+        reviewedAt: serverTimestamp(),
+        reviewedBy: "admin",
+      })
+    );
+  });
+
+  test("admin ham muallif matnini o'zgartira olmaydi", async () => {
+    await assertFails(
+      updateDoc(doc(as("admin"), "ict_reports/pending1"), { status: "rejected", solution: "x" })
+    );
+  });
+
+  test("muallif faqat ko'rib chiqilmagan yozuvni o'chiradi", async () => {
+    await assertSucceeds(deleteDoc(doc(as("ict"), "ict_reports/pending1")));
+    await assertFails(deleteDoc(doc(as("ict"), "ict_reports/approved1")));
+  });
+});
+
+describe("users/{uid}/video_progress: faqat egasi", () => {
+  const progress = {
+    lastPositionSeconds: 125,
+    durationSeconds: 300,
+    watchedRanges: [{ start: 0, end: 125 }],
+    completed: false,
+    updatedAt: serverTimestamp(),
+  };
+
+  test("egasi o'z video holatini yozadi va o'qiydi", async () => {
+    const ref = doc(as("alice"), "users/alice/video_progress/v1");
+    await assertSucceeds(setDoc(ref, progress));
+    await assertSucceeds(getDoc(ref));
+  });
+
+  test("boshqa user o'qiy ham, yoza ham olmaydi", async () => {
+    await assertFails(setDoc(doc(as("bob"), "users/alice/video_progress/v1"), progress));
+    await assertFails(getDoc(doc(as("bob"), "users/alice/video_progress/v1")));
+  });
+
+  test("ortiqcha maydon yoki juda ko'p oraliq rad etiladi", async () => {
+    const ref = doc(as("alice"), "users/alice/video_progress/v1");
+    await assertFails(setDoc(ref, { ...progress, xp: 100 }));
+    const ranges = Array.from({ length: 101 }, (_, i) => ({ start: i * 2, end: i * 2 + 1 }));
+    await assertFails(setDoc(ref, { ...progress, watchedRanges: ranges }));
   });
 });
 
