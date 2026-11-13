@@ -1,21 +1,26 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sud_qollanma/config/gamification_rules.dart';
-import 'package:sud_qollanma/core/constants/app_colors.dart';
+import 'package:sud_qollanma/core/theme/app_tokens.dart';
 import 'package:sud_qollanma/features/courses/domain/entities/course_entity.dart';
 import 'package:sud_qollanma/features/courses/domain/entities/course_lesson_entity.dart';
+import 'package:sud_qollanma/features/courses/domain/entities/course_module_entity.dart';
 import 'package:sud_qollanma/features/courses/domain/entities/user_course_progress_entity.dart';
 import 'package:sud_qollanma/features/courses/presentation/providers/course_provider.dart';
 import 'package:sud_qollanma/features/courses/presentation/screens/certificate_screen.dart';
 import 'package:sud_qollanma/features/courses/presentation/screens/lesson_viewer_screen.dart';
-import 'package:sud_qollanma/features/courses/presentation/widgets/difficulty_badge.dart';
-import 'package:sud_qollanma/features/courses/presentation/widgets/module_expansion_tile.dart';
+import 'package:sud_qollanma/features/courses/presentation/widgets/course_visuals.dart';
+import 'package:sud_qollanma/features/library/data/datasources/video_progress_remote_source.dart';
+import 'package:sud_qollanma/features/library/domain/entities/video_watch_progress.dart';
 import 'package:sud_qollanma/features/quiz/domain/entities/quiz_result.dart';
 import 'package:sud_qollanma/features/quiz/presentation/screens/quiz_screen.dart';
-import 'package:sud_qollanma/shared/widgets/animated_button.dart';
-import 'package:sud_qollanma/shared/widgets/custom_network_image.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
+import 'package:sud_qollanma/shared/widgets/design_system.dart';
 import 'package:sud_qollanma/shared/widgets/xp_toast_overlay.dart';
 
+/// Kurs tafsiloti (Figma "03 · Kurs tafsiloti"): progress, modullar, qulf sababi
+/// va pastdagi yagona asosiy tugma.
 class CourseDetailScreen extends StatefulWidget {
   final String courseId;
 
@@ -39,105 +44,67 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
+    final text = Theme.of(context).textTheme;
+    final t = context.tokens;
 
     return Consumer<CourseProvider>(
       builder: (context, provider, _) {
         final courseIndex = provider.courses.indexWhere((c) => c.id == widget.courseId);
         if (courseIndex == -1) {
-          return Scaffold(
-            backgroundColor: isDark ? AppColors.scaffoldDark : AppColors.backgroundLight,
-            body: const Center(child: CircularProgressIndicator()),
-          );
+          return const Scaffold(body: Center(child: CircularProgressIndicator()));
         }
         final course = provider.courses[courseIndex];
         final progress = provider.getUserProgress(course.id);
+        final lessons = course.allLessons;
+        final next = lessons.where((l) => !(progress?.isLessonCompleted(l.id) ?? false)).firstOrNull;
+        final activeModule = next == null ? -1 : course.modules.indexWhere((m) => m.lessons.any((l) => l.id == next.id));
 
         return Scaffold(
-          backgroundColor: isDark ? AppColors.scaffoldDark : AppColors.backgroundLight,
-          body: SelectionArea(
-            child: CustomScrollView(
-              slivers: [
-                // ─── Hero SliverAppBar ────────────────────────────────────
-                _buildSliverAppBar(course, isDark),
-
-                // ─── Sticky Progress Header ───────────────────────────────
-                if (progress != null)
-                  SliverPersistentHeader(
-                    pinned: true,
-                    delegate: _StickyProgressDelegate(
-                      progress: progress,
-                      totalLessons: course.requiredLessonsCount,
-                      isDark: isDark,
-                    ),
-                  ),
-
-                // ─── Kontent ─────────────────────────────────────────────
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+          body: SafeArea(
+            bottom: false,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(AppSpace.s16, AppSpace.s8, AppSpace.s16, AppSpace.s8),
+                  child: Row(children: [
+                    CircleIconButton(Icons.arrow_back_rounded,
+                        tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+                        onPressed: () => Navigator.maybePop(context)),
+                  ]),
+                ),
+                Expanded(
+                  child: SelectionArea(
+                    child: ListView(
+                      padding: const EdgeInsets.fromLTRB(AppSpace.s16, AppSpace.s8, AppSpace.s16, AppSpace.s24),
                       children: [
-                        _buildCourseHeader(course, isDark),
-                        const SizedBox(height: 20),
-
-                        // Boshlash / Davom tugmasi
-                        _buildActionButton(course, progress, isDark, provider),
-                        const SizedBox(height: 28),
-
-                        // Kurs haqida
-                        _buildAboutSection(course, isDark),
-                        const SizedBox(height: 28),
-
-                        // Modullar sarlavhasi
-                        Text(
-                          'Darslar rejasi',
-                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: isDark ? AppColors.textPrimary : AppColors.textPrimaryLight,
+                        _CourseHeader(course: course),
+                        const SizedBox(height: AppSpace.s20),
+                        if (progress != null) ...[
+                          _ProgressCard(course: course, progress: progress),
+                          const SizedBox(height: AppSpace.s20),
+                        ],
+                        SectionHeader(l10n.dsCurriculum),
+                        const SizedBox(height: AppSpace.s12),
+                        for (var i = 0; i < course.modules.length; i++) ...[
+                          _ModuleCard(
+                            key: ValueKey(course.modules[i].id),
+                            module: course.modules[i],
+                            index: i,
+                            initiallyExpanded: i == (activeModule < 0 ? 0 : activeModule),
+                            progress: progress,
+                            currentLessonId: next?.id,
+                            lessonNumber: (l) => _lessonNumber(course, l),
+                            lockReason: (l) => _lockReason(l, course, progress, l10n),
+                            onLessonTap: (l) => _navigateToLesson(context, l, course.id, provider),
                           ),
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          '${course.totalLessonsCount} ta dars · ${course.modules.length} ta modul',
-                          style: TextStyle(
-                            color: isDark ? AppColors.textSecondary : AppColors.textSecondaryLight,
-                            fontSize: 13,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-
-                        // Modullar
-                        ...List.generate(course.modules.length, (i) {
-                          final module = course.modules[i];
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 12.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
-                                borderRadius: BorderRadius.circular(16),
-                                border: Border.all(
-                                  color: isDark ? AppColors.borderDark : AppColors.borderLight,
-                                ),
-                              ),
-                              child: ModuleExpansionTile(
-                                module: module,
-                                moduleIndex: i,
-                                initiallyExpanded: i == 0,
-                                isLessonCompleted: (id) => progress?.isLessonCompleted(id) ?? false,
-                                isLessonLocked: (id) => _isLessonLocked(id, course, progress),
-                                onLessonTap: (lesson) =>
-                                    _navigateToLesson(context, lesson, course.id, provider),
-                              ),
-                            ),
-                          );
-                        }),
-                        const SizedBox(height: 60),
+                          const SizedBox(height: AppSpace.s12),
+                        ],
                       ],
                     ),
                   ),
                 ),
+                StickyActionBar(children: [_buildAction(course, progress, next, provider, l10n, t, text)]),
               ],
             ),
           ),
@@ -146,220 +113,70 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     );
   }
 
-  // ─── SliverAppBar (Hero thumbnail) ────────────────────────────────────────
-
-  Widget _buildSliverAppBar(CourseEntity course, bool isDark) {
-    return SliverAppBar(
-      expandedHeight: 240,
-      pinned: true,
-      stretch: true,
-      backgroundColor: isDark ? AppColors.surfaceDark : AppColors.primary,
-      flexibleSpace: FlexibleSpaceBar(
-        stretchModes: const [StretchMode.zoomBackground, StretchMode.fadeTitle],
-        background: Stack(
-          fit: StackFit.expand,
-          children: [
-            // Hero animatsiya thumbnail uchun
-            Hero(
-              tag: 'course_thumb_${course.id}',
-              child: (course.thumbnailUrl?.isNotEmpty ?? false)
-                  ? CustomNetworkImage(
-                      imageUrl: course.thumbnailUrl!,
-                      fit: BoxFit.cover,
-                      errorWidget: _buildThumbPlaceholder(isDark),
-                    )
-                  : _buildThumbPlaceholder(isDark),
-            ),
-            // Gradient overlay
-            Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.black.withValues(alpha: 0.5),
-                    Colors.transparent,
-                    isDark
-                        ? AppColors.scaffoldDark
-                        : AppColors.backgroundLight.withValues(alpha: 0.95),
-                  ],
-                  stops: const [0, 0.4, 1],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildThumbPlaceholder(bool isDark) {
-    return Container(
-      color: isDark ? AppColors.surfaceDark : AppColors.primaryContainer,
-      child: Center(
-        child: Icon(
-          Icons.school_rounded,
-          size: 80,
-          color: isDark
-              ? AppColors.amber.withValues(alpha: 0.4)
-              : Colors.white.withValues(alpha: 0.4),
-        ),
-      ),
-    );
-  }
-
-  // ─── Kurs sarlavhasi ──────────────────────────────────────────────────────
-
-  Widget _buildCourseHeader(CourseEntity course, bool isDark) {
-    final theme = Theme.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Meta row
-        Row(
-          children: [
-            DifficultyBadge(difficulty: course.difficulty),
-            const SizedBox(width: 10),
-            _MetaChip(icon: Icons.timer_outlined, label: '${course.estimatedMinutes} daq', isDark: isDark),
-            const SizedBox(width: 10),
-            _MetaChip(icon: Icons.layers_rounded, label: '${course.modules.length} modul', isDark: isDark),
-          ],
-        ),
-        const SizedBox(height: 12),
-        Text(
-          course.title,
-          style: theme.textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.w800,
-            color: isDark ? AppColors.textPrimary : AppColors.textPrimaryLight,
-            height: 1.25,
-          ),
-        ),
-      ],
-    );
-  }
-
-  // ─── Harakatlar tugmasi ────────────────────────────────────────────────────
-
-  Widget _buildActionButton(
-    CourseEntity course,
-    UserCourseProgressEntity? progress,
-    bool isDark,
-    CourseProvider provider,
-  ) {
-    final isNotStarted = progress == null;
-    final isCompleted = progress?.isCompleted ?? false;
-
-    if (isCompleted) {
+  Widget _buildAction(CourseEntity course, UserCourseProgressEntity? progress, CourseLessonEntity? next,
+      CourseProvider provider, AppLocalizations l10n, AppTokens t, TextTheme text) {
+    if (progress?.isCompleted ?? false) {
+      if (course.hasCertificate) {
+        return FilledButton.icon(
+          onPressed: () => Navigator.push(context,
+              MaterialPageRoute(builder: (_) => CertificateScreen(course: course, progress: progress!))),
+          icon: const Icon(Icons.workspace_premium_outlined),
+          label: Text(l10n.dsViewCertificate),
+        );
+      }
       return Container(
-        width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 14),
-        decoration: BoxDecoration(
-          color: AppColors.success.withValues(alpha: 0.12),
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: AppColors.success.withValues(alpha: 0.4)),
-        ),
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.verified_rounded, color: AppColors.success, size: 22),
-            SizedBox(width: 10),
-            Text(
-              'Kurs muvaffaqiyatli tugallandi!',
-              style: TextStyle(
-                color: AppColors.success,
-                fontWeight: FontWeight.bold,
-                fontSize: 15,
-              ),
-            ),
-          ],
-        ),
+        decoration: BoxDecoration(color: t.successContainer, borderRadius: BorderRadius.circular(AppRadius.md)),
+        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Icon(Icons.verified_rounded, color: t.successSolid),
+          const SizedBox(width: AppSpace.s8),
+          Text(l10n.dsCourseCompleted, style: text.titleSmall?.copyWith(color: t.successSolid)),
+        ]),
       );
     }
 
-    return AnimatedButton(
-      onPressed: _isNavigating ? null : () async {
-        if (isNotStarted) {
-          await provider.startCourse(course.id);
-        }
-        final updatedProgress = provider.getUserProgress(course.id);
-        
-        CourseLessonEntity? targetLesson;
-        for (final l in course.allLessons) {
-           if (updatedProgress == null || !updatedProgress.isLessonCompleted(l.id)) {
-             targetLesson = l;
-             break;
-           }
-        }
-        if (targetLesson == null && course.allLessons.isNotEmpty) {
-           targetLesson = course.allLessons.first;
-        }
-
-        if (targetLesson != null && mounted) {
-           _navigateToLesson(context, targetLesson, course.id, provider);
-        }
-      },
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        decoration: BoxDecoration(
-          gradient: isDark ? AppColors.amberGradient : AppColors.primaryGradient,
-          borderRadius: BorderRadius.circular(14),
-          boxShadow: [
-            BoxShadow(
-              color: (isDark ? AppColors.amber : AppColors.primary).withValues(alpha: 0.35),
-              blurRadius: 16,
-              offset: const Offset(0, 5),
-            ),
-          ],
-        ),
-        child: Center(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                isNotStarted ? Icons.rocket_launch_rounded : Icons.play_arrow_rounded,
-                color: isDark ? Colors.black : Colors.white,
-                size: 22,
-              ),
-              const SizedBox(width: 10),
-              Text(
-                isNotStarted ? 'Kursni boshlash' : 'Davom etish',
-                style: TextStyle(
-                  color: isDark ? Colors.black : Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+    final notStarted = progress == null;
+    return FilledButton.icon(
+      onPressed: _isNavigating
+          ? null
+          : () async {
+              if (notStarted) await provider.startCourse(course.id);
+              final updated = provider.getUserProgress(course.id);
+              final target = course.allLessons
+                      .where((l) => updated == null || !updated.isLessonCompleted(l.id))
+                      .firstOrNull ??
+                  course.allLessons.firstOrNull;
+              if (target != null && mounted) {
+                _navigateToLesson(context, target, course.id, provider);
+              }
+            },
+      icon: Icon(notStarted ? Icons.rocket_launch_outlined : Icons.play_arrow_rounded),
+      label: Text(notStarted || next == null
+          ? l10n.dsStartCourse
+          : l10n.dsContinueLesson(_lessonNumber(course, next))),
     );
   }
 
-  // ─── Kurs tavsifi ────────────────────────────────────────────────────────
+  /// "2.3" — modul va dars tartib raqami.
+  String _lessonNumber(CourseEntity course, CourseLessonEntity lesson) {
+    for (var m = 0; m < course.modules.length; m++) {
+      final i = course.modules[m].lessons.indexWhere((l) => l.id == lesson.id);
+      if (i >= 0) return '${m + 1}.${i + 1}';
+    }
+    return '';
+  }
 
-  Widget _buildAboutSection(CourseEntity course, bool isDark) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Kurs haqida',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: isDark ? AppColors.textPrimary : AppColors.textPrimaryLight,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          course.description,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: isDark ? AppColors.textSecondary : AppColors.textSecondaryLight,
-            height: 1.6,
-          ),
-        ),
-      ],
-    );
+  /// Qulflangan dars uchun sabab (qulflanmagan boʻlsa null) — [_isLessonLocked] qoidalari bilan.
+  String? _lockReason(CourseLessonEntity lesson, CourseEntity course, UserCourseProgressEntity? progress,
+      AppLocalizations l10n) {
+    if (!_isLessonLocked(lesson.id, course, progress)) return null;
+    if (progress == null) return l10n.dsLessonLockedStart;
+    final all = course.allLessons;
+    final index = all.indexWhere((l) => l.id == lesson.id);
+    for (var i = index - 1; i >= 0; i--) {
+      if (all[i].isRequired) return l10n.dsLessonLockedFinish(_lessonNumber(course, all[i]));
+    }
+    return l10n.dsLessonLockedStart;
   }
 
   // ─── Lesson locked logic ──────────────────────────────────────────────────
@@ -424,7 +241,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     CourseProvider provider,
   ) async {
     if (_isNavigating) return;
-    
+
     setState(() {
       _isNavigating = true;
     });
@@ -453,10 +270,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
       if (!result.passes(minScore)) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              'Test o\'tilmadi: ${result.percent}%. '
-              'Darsni yakunlash uchun kamida $minScore% kerak.',
-            ),
+            content: Text(AppLocalizations.of(context)!.dsQuizNotPassed(result.percent, minScore)),
           ),
         );
         return;
@@ -489,7 +303,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     XpToastOverlay.show(
       context,
       xpAmount: lesson.xpReward,
-      message: '${lesson.title} bajarildi!',
+      message: AppLocalizations.of(context)!.dsLessonDoneToast(lesson.title),
     );
 
     // Kurs to'liq tugallanganmi?
@@ -521,129 +335,327 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
   }
 }
 
-// ─── Sticky Progress Delegate ─────────────────────────────────────────────────
+// ─── Kurs haqida ──────────────────────────────────────────────────────────────
 
-class _StickyProgressDelegate extends SliverPersistentHeaderDelegate {
-  final UserCourseProgressEntity progress;
-  final int totalLessons;
-  final bool isDark;
+class _CourseHeader extends StatelessWidget {
+  final CourseEntity course;
 
-  _StickyProgressDelegate({
-    required this.progress,
-    required this.totalLessons,
-    required this.isDark,
-  });
-
-  @override
-  double get minExtent => 68;
-  @override
-  double get maxExtent => 68;
-
-  @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    final percent = progress.percentComplete;
-    final isCompleted = progress.isCompleted;
-    final activeColor = isCompleted ? AppColors.success : (isDark ? AppColors.amber : AppColors.primary);
-
-    return Container(
-      color: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    isCompleted ? Icons.check_circle_rounded : Icons.play_circle_outline_rounded,
-                    size: 16,
-                    color: activeColor,
-                  ),
-                  const SizedBox(width: 6),
-                  Text(
-                    isCompleted ? 'Tugallandi' : 'Jarayon',
-                    style: TextStyle(
-                      color: activeColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                    ),
-                  ),
-              ],
-            ),
-            Row(
-                children: [
-                  Text(
-                    '${progress.completedLessonIds.length} / $totalLessons dars',
-                    style: TextStyle(
-                      color: isDark ? AppColors.textSecondary : AppColors.textSecondaryLight,
-                      fontSize: 12,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    '${(percent * 100).toInt()}%',
-                    style: TextStyle(
-                      color: activeColor,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          TweenAnimationBuilder<double>(
-            key: ValueKey(percent),
-            tween: Tween(begin: 0, end: percent),
-            duration: const Duration(milliseconds: 900),
-            curve: Curves.easeOutCubic,
-            builder: (ctx, val, _) => ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: LinearProgressIndicator(
-                value: val,
-                minHeight: 8,
-                backgroundColor: isDark ? AppColors.borderDark : AppColors.dividerLight,
-                valueColor: AlwaysStoppedAnimation<Color>(activeColor),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  bool shouldRebuild(_StickyProgressDelegate oldDelegate) =>
-      oldDelegate.progress != progress ||
-      oldDelegate.totalLessons != totalLessons ||
-      oldDelegate.isDark != isDark;
-}
-
-// ─── MetaChip ─────────────────────────────────────────────────────────────────
-
-class _MetaChip extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool isDark;
-
-  const _MetaChip({required this.icon, required this.label, required this.isDark});
+  const _CourseHeader({required this.course});
 
   @override
   Widget build(BuildContext context) {
-    final color = isDark ? AppColors.amber : AppColors.primary;
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, size: 15, color: color),
-        const SizedBox(width: 5),
-        Text(
-          label,
-          style: TextStyle(color: color, fontWeight: FontWeight.w600, fontSize: 13),
-        ),
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
+
+    Widget meta(IconData icon, String label) => Row(mainAxisSize: MainAxisSize.min, children: [
+          Icon(icon, size: 16, color: t.textTertiary),
+          const SizedBox(width: 4),
+          Text(label, style: text.labelMedium?.copyWith(color: t.textSecondary)),
+        ]);
+
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Wrap(spacing: 6, runSpacing: 6, children: [
+        StatusBadge(difficultyLabel(l10n, course.difficulty)),
+        if (course.hasCertificate)
+          StatusBadge(l10n.dsCertificate, tone: BadgeTone.gold, icon: Icons.workspace_premium_outlined),
+      ]),
+      const SizedBox(height: AppSpace.s12),
+      Text(course.title, style: text.displayMedium),
+      if (course.description.isNotEmpty) ...[
+        const SizedBox(height: AppSpace.s12),
+        Text(course.description, style: text.bodyMedium?.copyWith(color: t.textSecondary)),
       ],
+      const SizedBox(height: AppSpace.s12),
+      Wrap(spacing: 14, runSpacing: 4, children: [
+        meta(Icons.layers_outlined, l10n.dsModules(course.modules.length)),
+        meta(Icons.play_arrow_rounded, l10n.dsLessons(course.totalLessonsCount)),
+        meta(Icons.schedule_rounded, formatDuration(l10n, course.estimatedMinutes)),
+      ]),
+    ]);
+  }
+}
+
+class _ProgressCard extends StatelessWidget {
+  final CourseEntity course;
+  final UserCourseProgressEntity progress;
+
+  const _ProgressCard({required this.course, required this.progress});
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
+    final done = course.allLessons.where((l) => progress.isLessonCompleted(l.id)).length;
+    final percent = progress.percentComplete;
+
+    return AppCard(
+      child: Column(children: [
+        Row(children: [
+          ProgressRing(
+            value: percent,
+            color: progress.isCompleted ? t.successSolid : t.brandPrimary,
+            child: Text('${(percent * 100).round()}%', style: text.titleSmall),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(l10n.dsYourProgress, style: text.titleSmall),
+              Text(l10n.dsLessonsDone(done, course.totalLessonsCount),
+                  style: text.bodySmall?.copyWith(color: t.textSecondary)),
+              const SizedBox(height: 2),
+              Row(children: [
+                Icon(Icons.bolt_rounded, size: 14, color: t.goldSolid),
+                const SizedBox(width: 4),
+                Text(l10n.dsXpEarned(progress.earnedXp), style: text.labelMedium?.copyWith(color: t.goldInk)),
+              ]),
+            ]),
+          ),
+        ]),
+        if (course.hasCertificate && !progress.isCompleted) ...[
+          const SizedBox(height: 14),
+          Divider(color: t.borderDefault),
+          const SizedBox(height: 14),
+          Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Icon(Icons.workspace_premium_outlined, size: 20, color: t.goldSolid),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(l10n.dsCertificateCondition, style: text.bodySmall?.copyWith(color: t.textSecondary)),
+            ),
+          ]),
+        ],
+      ]),
+    );
+  }
+}
+
+// ─── Modul va darslar ─────────────────────────────────────────────────────────
+
+class _ModuleCard extends StatefulWidget {
+  final CourseModuleEntity module;
+  final int index;
+  final bool initiallyExpanded;
+  final UserCourseProgressEntity? progress;
+  final String? currentLessonId;
+  final String Function(CourseLessonEntity) lessonNumber;
+  final String? Function(CourseLessonEntity) lockReason;
+  final ValueChanged<CourseLessonEntity> onLessonTap;
+
+  const _ModuleCard({
+    super.key,
+    required this.module,
+    required this.index,
+    required this.initiallyExpanded,
+    required this.progress,
+    required this.currentLessonId,
+    required this.lessonNumber,
+    required this.lockReason,
+    required this.onLessonTap,
+  });
+
+  @override
+  State<_ModuleCard> createState() => _ModuleCardState();
+}
+
+class _ModuleCardState extends State<_ModuleCard> {
+  late bool _expanded = widget.initiallyExpanded;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
+    final lessons = widget.module.lessons;
+    final done = lessons.where((l) => widget.progress?.isLessonCompleted(l.id) ?? false).length;
+    final allDone = lessons.isNotEmpty && done == lessons.length;
+    final locked = lessons.isNotEmpty && lessons.every((l) => widget.lockReason(l) != null);
+    final active = !allDone && !locked;
+
+    final String meta;
+    final Color metaColor;
+    if (allDone) {
+      meta = '${l10n.dsModuleProgress(done, lessons.length)} · ${l10n.dsCompleted.toLowerCase()}';
+      metaColor = t.successSolid;
+    } else if (locked) {
+      meta = l10n.dsModuleLockedUntil(widget.index);
+      metaColor = t.textTertiary;
+    } else {
+      meta = l10n.dsModuleProgress(done, lessons.length);
+      metaColor = t.textSecondary;
+    }
+
+    return AppCard(
+      padding: EdgeInsets.zero,
+      child: Column(children: [
+        InkWell(
+          onTap: () => setState(() => _expanded = !_expanded),
+          child: Padding(
+            padding: const EdgeInsets.all(AppSpace.s16),
+            child: Row(children: [
+              Container(
+                width: 32,
+                height: 32,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: allDone ? t.successContainer : active ? t.brandPrimary : t.bgSubtle,
+                ),
+                child: allDone
+                    ? Icon(Icons.check_rounded, size: 16, color: t.successSolid)
+                    : active
+                        ? Text('${widget.index + 1}', style: text.titleSmall?.copyWith(color: t.textOnBrand))
+                        : Icon(Icons.lock_outline_rounded, size: 16, color: t.textTertiary),
+              ),
+              const SizedBox(width: AppSpace.s12),
+              Expanded(
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text(l10n.dsModuleLabel(widget.index + 1),
+                      style: text.labelSmall?.copyWith(color: locked ? t.textTertiary : t.textSecondary)),
+                  Text(widget.module.title,
+                      style: text.titleSmall?.copyWith(color: locked ? t.textTertiary : t.textPrimary)),
+                  Text(meta, style: text.bodySmall?.copyWith(color: metaColor)),
+                ]),
+              ),
+              AnimatedRotation(
+                turns: _expanded ? 0.5 : 0,
+                duration: const Duration(milliseconds: 200),
+                child: Icon(Icons.keyboard_arrow_down_rounded, color: t.textTertiary),
+              ),
+            ]),
+          ),
+        ),
+        if (_expanded && lessons.isNotEmpty) ...[
+          Divider(height: 1, color: t.borderDefault),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: AppSpace.s4),
+            child: Column(children: [
+              for (final lesson in lessons)
+                _LessonRow(
+                  lesson: lesson,
+                  number: widget.lessonNumber(lesson),
+                  completed: widget.progress?.isLessonCompleted(lesson.id) ?? false,
+                  current: lesson.id == widget.currentLessonId,
+                  lockReason: widget.lockReason(lesson),
+                  onTap: () => widget.onLessonTap(lesson),
+                ),
+            ]),
+          ),
+        ],
+      ]),
+    );
+  }
+}
+
+/// Figma "Dars qatori": Tugallangan / Jarayonda / Ochiq / Qulflangan.
+class _LessonRow extends StatelessWidget {
+  final CourseLessonEntity lesson;
+  final String number;
+  final bool completed;
+  final bool current;
+  final String? lockReason;
+  final VoidCallback onTap;
+
+  const _LessonRow({
+    required this.lesson,
+    required this.number,
+    required this.completed,
+    required this.current,
+    required this.lockReason,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
+    final locked = lockReason != null;
+    final active = current && !locked;
+
+    final (Color circle, IconData icon, Color iconColor) = completed
+        ? (t.successContainer, Icons.check_rounded, t.successSolid)
+        : locked
+            ? (t.bgSubtle, Icons.lock_outline_rounded, t.textTertiary)
+            : active
+                ? (t.brandPrimary, Icons.play_arrow_rounded, t.textOnBrand)
+                : (t.bgSubtle, lessonTypeIcon(lesson.type), t.textSecondary);
+
+    final meta = [
+      lessonTypeLabel(l10n, lesson.type),
+      if (lesson.estimatedMinutes != null) l10n.dsMinutes(lesson.estimatedMinutes!),
+      if (!lesson.isRequired) l10n.dsOptional,
+    ].join(' · ');
+
+    return InkWell(
+      onTap: locked ? null : onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: AppSpace.s16, vertical: AppSpace.s12),
+        child: Row(children: [
+          IconTile(icon, background: circle, foreground: iconColor, circle: true),
+          const SizedBox(width: AppSpace.s12),
+          Expanded(
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text('$number ${lesson.title}',
+                  style: text.titleSmall?.copyWith(color: locked ? t.textTertiary : t.textPrimary)),
+              const SizedBox(height: 2),
+              if (active && lesson.type == LessonType.video)
+                _VideoWatchLine(videoId: lesson.refId, fallback: meta)
+              else
+                Text(locked ? lockReason! : meta,
+                    style: text.bodySmall?.copyWith(color: locked ? t.textTertiary : t.textSecondary)),
+            ]),
+          ),
+          const SizedBox(width: AppSpace.s8),
+          if (completed && lesson.xpReward > 0)
+            Text('+${lesson.xpReward} XP', style: text.labelMedium?.copyWith(color: t.successSolid))
+          else if (!locked)
+            Icon(Icons.chevron_right_rounded, color: active ? t.brandPrimary : t.textTertiary),
+        ]),
+      ),
+    );
+  }
+}
+
+/// Joriy video dars uchun koʻrilgan qism: progress va "12:40 / 18:05".
+class _VideoWatchLine extends StatefulWidget {
+  final String videoId;
+  final String fallback;
+
+  const _VideoWatchLine({required this.videoId, required this.fallback});
+
+  @override
+  State<_VideoWatchLine> createState() => _VideoWatchLineState();
+}
+
+class _VideoWatchLineState extends State<_VideoWatchLine> {
+  Future<VideoWatchProgress>? _future;
+
+  @override
+  void initState() {
+    super.initState();
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid != null) _future = VideoProgressRemoteSource().get(uid, widget.videoId);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    return FutureBuilder<VideoWatchProgress>(
+      future: _future,
+      builder: (context, snap) {
+        final p = snap.data;
+        if (p == null || p.durationSeconds <= 0 || p.lastPositionSeconds <= 0) {
+          return Text(widget.fallback, style: text.bodySmall?.copyWith(color: t.textSecondary));
+        }
+        return Row(children: [
+          Expanded(child: ProgressLine(value: p.watchedRatio)),
+          const SizedBox(width: AppSpace.s8),
+          Text('${formatClock(p.lastPositionSeconds)} / ${formatClock(p.durationSeconds)}',
+              style: text.labelMedium?.copyWith(color: t.brandPrimary)),
+        ]);
+      },
     );
   }
 }

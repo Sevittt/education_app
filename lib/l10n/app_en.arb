@@ -2957,5 +2957,337 @@
   "statusOffline": "OFFLINE",
   "@statusOffline": {
     "description": "Offline status"
+  },
+  "dsLessonTypeVideo": "Video",
+  "@dsLessonTypeVideo": {
+    "description": "Redesign: dsLessonTypeVideo"
+  },
+  "dsLessonTypeArticle": "Article",
+  "@dsLessonTypeArticle": {
+    "description": "Redesign: dsLessonTypeArticle"
+  },
+  "dsLessonTypePdf": "PDF",
+  "@dsLessonTypePdf": {
+    "description": "Redesign: dsLessonTypePdf"
+  },
+  "dsLessonTypeQuiz": "Quiz",
+  "@dsLessonTypeQuiz": {
+    "description": "Redesign: dsLessonTypeQuiz"
+  },
+  "dsHours": "{count} h",
+  "@dsHours": {
+    "description": "Redesign: dsHours",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dsMinutes": "{count} min",
+  "@dsMinutes": {
+    "description": "Redesign: dsMinutes",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dsModules": "{count} modules",
+  "@dsModules": {
+    "description": "Redesign: dsModules",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dsLessons": "{count} lessons",
+  "@dsLessons": {
+    "description": "Redesign: dsLessons",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dsCertificate": "Certificate",
+  "@dsCertificate": {
+    "description": "Redesign: dsCertificate"
+  },
+  "dsCompleted": "Completed",
+  "@dsCompleted": {
+    "description": "Redesign: dsCompleted"
+  },
+  "dsStart": "Start",
+  "@dsStart": {
+    "description": "Redesign: dsStart"
+  },
+  "dsUpToXp": "Up to +{xp} XP",
+  "@dsUpToXp": {
+    "description": "Redesign: dsUpToXp",
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "dsGreetingMorning": "Good morning,",
+  "@dsGreetingMorning": {
+    "description": "Redesign: dsGreetingMorning"
+  },
+  "dsGreetingDay": "Good afternoon,",
+  "@dsGreetingDay": {
+    "description": "Redesign: dsGreetingDay"
+  },
+  "dsGreetingEvening": "Good evening,",
+  "@dsGreetingEvening": {
+    "description": "Redesign: dsGreetingEvening"
+  },
+  "dsContinueLabel": "CONTINUE",
+  "@dsContinueLabel": {
+    "description": "Redesign: dsContinueLabel"
+  },
+  "dsContinueButton": "Continue",
+  "@dsContinueButton": {
+    "description": "Redesign: dsContinueButton"
+  },
+  "dsResumeAt": "Resume from {time}",
+  "@dsResumeAt": {
+    "description": "Redesign: dsResumeAt",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "dsResumeRemaining": "{minutes} min of video left",
+  "@dsResumeRemaining": {
+    "description": "Redesign: dsResumeRemaining",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "dsNextLesson": "Next lesson",
+  "@dsNextLesson": {
+    "description": "Redesign: dsNextLesson"
+  },
+  "dsLessonsDone": "{done} / {total} lessons completed",
+  "@dsLessonsDone": {
+    "description": "Redesign: dsLessonsDone",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "dsStartFirstCourseTitle": "Start your first course",
+  "@dsStartFirstCourseTitle": {
+    "description": "Redesign: dsStartFirstCourseTitle"
+  },
+  "dsStartFirstCourseBody": "Courses for your position are waiting",
+  "@dsStartFirstCourseBody": {
+    "description": "Redesign: dsStartFirstCourseBody"
+  },
+  "dsBrowseCourses": "Browse courses",
+  "@dsBrowseCourses": {
+    "description": "Redesign: dsBrowseCourses"
+  },
+  "dsStreakDays": "{count} days",
+  "@dsStreakDays": {
+    "description": "Redesign: dsStreakDays",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dsStreakLabel": "Day streak",
+  "@dsStreakLabel": {
+    "description": "Redesign: dsStreakLabel"
+  },
+  "dsXpValue": "{xp} XP",
+  "@dsXpValue": {
+    "description": "Redesign: dsXpValue",
+    "placeholders": {
+      "xp": {
+        "type": "String"
+      }
+    }
+  },
+  "dsXpTotal": "Total points",
+  "@dsXpTotal": {
+    "description": "Redesign: dsXpTotal"
+  },
+  "dsXpToLevel": "{xp} XP to {level}",
+  "@dsXpToLevel": {
+    "description": "Redesign: dsXpToLevel",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "dsMaxLevel": "Top level",
+  "@dsMaxLevel": {
+    "description": "Redesign: dsMaxLevel"
+  },
+  "dsRecommended": "Recommended for you",
+  "@dsRecommended": {
+    "description": "Redesign: dsRecommended"
+  },
+  "dsAnnouncements": "Announcements",
+  "@dsAnnouncements": {
+    "description": "Redesign: dsAnnouncements"
+  },
+  "dsAiAssistant": "AI assistant",
+  "@dsAiAssistant": {
+    "description": "Redesign: dsAiAssistant"
+  },
+  "dsNotifications": "Notifications",
+  "@dsNotifications": {
+    "description": "Redesign: dsNotifications"
+  },
+  "dsSeeAll": "See all",
+  "@dsSeeAll": {
+    "description": "Redesign: dsSeeAll"
+  },
+  "dsLevelMaster": "Master",
+  "@dsLevelMaster": {
+    "description": "Redesign: dsLevelMaster"
+  },
+  "dsInProgress": "In progress",
+  "@dsInProgress": {
+    "description": "Redesign: dsInProgress"
+  },
+  "dsAllCourses": "All courses · {count}",
+  "@dsAllCourses": {
+    "description": "Redesign: dsAllCourses",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dsYourProgress": "Your progress",
+  "@dsYourProgress": {
+    "description": "Redesign: dsYourProgress"
+  },
+  "dsXpEarned": "{xp} XP earned",
+  "@dsXpEarned": {
+    "description": "Redesign: dsXpEarned",
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "dsCertificateCondition": "Complete all required lessons and quizzes to receive the certificate automatically",
+  "@dsCertificateCondition": {
+    "description": "Redesign: dsCertificateCondition"
+  },
+  "dsCurriculum": "Curriculum",
+  "@dsCurriculum": {
+    "description": "Redesign: dsCurriculum"
+  },
+  "dsModuleLabel": "MODULE {number}",
+  "@dsModuleLabel": {
+    "description": "Redesign: dsModuleLabel",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "dsModuleProgress": "{done} / {total} lessons",
+  "@dsModuleProgress": {
+    "description": "Redesign: dsModuleProgress",
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "dsModuleLockedUntil": "Unlocks after module {number}",
+  "@dsModuleLockedUntil": {
+    "description": "Redesign: dsModuleLockedUntil",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "dsLessonLockedFinish": "Finish lesson {lesson} first",
+  "@dsLessonLockedFinish": {
+    "description": "Redesign: dsLessonLockedFinish",
+    "placeholders": {
+      "lesson": {
+        "type": "String"
+      }
+    }
+  },
+  "dsLessonLockedStart": "Start the course first",
+  "@dsLessonLockedStart": {
+    "description": "Redesign: dsLessonLockedStart"
+  },
+  "dsOptional": "optional",
+  "@dsOptional": {
+    "description": "Redesign: dsOptional"
+  },
+  "dsMandatory": "Required",
+  "@dsMandatory": {
+    "description": "Redesign: dsMandatory"
+  },
+  "dsStartCourse": "Start course",
+  "@dsStartCourse": {
+    "description": "Redesign: dsStartCourse"
+  },
+  "dsContinueLesson": "Continue · lesson {lesson}",
+  "@dsContinueLesson": {
+    "description": "Redesign: dsContinueLesson",
+    "placeholders": {
+      "lesson": {
+        "type": "String"
+      }
+    }
+  },
+  "dsCourseCompleted": "Course completed",
+  "@dsCourseCompleted": {
+    "description": "Redesign: dsCourseCompleted"
+  },
+  "dsViewCertificate": "View certificate",
+  "@dsViewCertificate": {
+    "description": "Redesign: dsViewCertificate"
+  },
+  "dsQuizNotPassed": "Quiz not passed: {percent}%. At least {min}% is required to complete the lesson.",
+  "@dsQuizNotPassed": {
+    "description": "Redesign: dsQuizNotPassed",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "dsLessonDoneToast": "{title} completed!",
+  "@dsLessonDoneToast": {
+    "description": "Redesign: dsLessonDoneToast",
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
   }
 }

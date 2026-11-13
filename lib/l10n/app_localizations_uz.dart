@@ -2121,6 +2121,211 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get statusOffline => 'OFFLINE';
+
+  @override
+  String get dsLessonTypeVideo => 'Video';
+
+  @override
+  String get dsLessonTypeArticle => 'Maqola';
+
+  @override
+  String get dsLessonTypePdf => 'PDF';
+
+  @override
+  String get dsLessonTypeQuiz => 'Test';
+
+  @override
+  String dsHours(int count) {
+    return '$count soat';
+  }
+
+  @override
+  String dsMinutes(int count) {
+    return '$count daq';
+  }
+
+  @override
+  String dsModules(int count) {
+    return '$count modul';
+  }
+
+  @override
+  String dsLessons(int count) {
+    return '$count dars';
+  }
+
+  @override
+  String get dsCertificate => 'Sertifikat';
+
+  @override
+  String get dsCompleted => 'Tugallangan';
+
+  @override
+  String get dsStart => 'Boshlash';
+
+  @override
+  String dsUpToXp(int xp) {
+    return '+$xp XP gacha';
+  }
+
+  @override
+  String get dsGreetingMorning => 'Xayrli tong,';
+
+  @override
+  String get dsGreetingDay => 'Xayrli kun,';
+
+  @override
+  String get dsGreetingEvening => 'Xayrli kech,';
+
+  @override
+  String get dsContinueLabel => 'DAVOM ETTIRISH';
+
+  @override
+  String get dsContinueButton => 'Davom ettirish';
+
+  @override
+  String dsResumeAt(String time) {
+    return '$time dan davom etasiz';
+  }
+
+  @override
+  String dsResumeRemaining(int minutes) {
+    return 'Videoning $minutes daqiqasi qoldi';
+  }
+
+  @override
+  String get dsNextLesson => 'Keyingi dars';
+
+  @override
+  String dsLessonsDone(int done, int total) {
+    return '$done / $total dars tugallangan';
+  }
+
+  @override
+  String get dsStartFirstCourseTitle => 'Birinchi kursingizni boshlang';
+
+  @override
+  String get dsStartFirstCourseBody => 'Lavozimingizga mos kurslar sizni kutmoqda';
+
+  @override
+  String get dsBrowseCourses => 'Kurslarni koʻrish';
+
+  @override
+  String dsStreakDays(int count) {
+    return '$count kun';
+  }
+
+  @override
+  String get dsStreakLabel => 'Ketma-ket seriya';
+
+  @override
+  String dsXpValue(String xp) {
+    return '$xp XP';
+  }
+
+  @override
+  String get dsXpTotal => 'Jami ball';
+
+  @override
+  String dsXpToLevel(String level, int xp) {
+    return '${level}gacha $xp XP';
+  }
+
+  @override
+  String get dsMaxLevel => 'Eng yuqori daraja';
+
+  @override
+  String get dsRecommended => 'Siz uchun tavsiya';
+
+  @override
+  String get dsAnnouncements => 'Eʼlonlar';
+
+  @override
+  String get dsAiAssistant => 'AI yordamchi';
+
+  @override
+  String get dsNotifications => 'Bildirishnomalar';
+
+  @override
+  String get dsSeeAll => 'Barchasi';
+
+  @override
+  String get dsLevelMaster => 'Usta';
+
+  @override
+  String get dsInProgress => 'Davom etayotgan';
+
+  @override
+  String dsAllCourses(int count) {
+    return 'Barcha kurslar · $count';
+  }
+
+  @override
+  String get dsYourProgress => 'Sizning progressingiz';
+
+  @override
+  String dsXpEarned(int xp) {
+    return '$xp XP toʻplandi';
+  }
+
+  @override
+  String get dsCertificateCondition => 'Barcha majburiy dars va testlarni yakunlang — sertifikat avtomatik beriladi';
+
+  @override
+  String get dsCurriculum => 'Darslar rejasi';
+
+  @override
+  String dsModuleLabel(int number) {
+    return '$number-MODUL';
+  }
+
+  @override
+  String dsModuleProgress(int done, int total) {
+    return '$done / $total dars';
+  }
+
+  @override
+  String dsModuleLockedUntil(int number) {
+    return '$number-modul yakunlangach ochiladi';
+  }
+
+  @override
+  String dsLessonLockedFinish(String lesson) {
+    return 'Avval $lesson-darsni tugating';
+  }
+
+  @override
+  String get dsLessonLockedStart => 'Avval kursni boshlang';
+
+  @override
+  String get dsOptional => 'ixtiyoriy';
+
+  @override
+  String get dsMandatory => 'Majburiy';
+
+  @override
+  String get dsStartCourse => 'Kursni boshlash';
+
+  @override
+  String dsContinueLesson(String lesson) {
+    return 'Davom ettirish · $lesson-dars';
+  }
+
+  @override
+  String get dsCourseCompleted => 'Kurs muvaffaqiyatli tugallandi';
+
+  @override
+  String get dsViewCertificate => 'Sertifikatni koʻrish';
+
+  @override
+  String dsQuizNotPassed(int percent, int min) {
+    return 'Test oʻtilmadi: $percent%. Darsni yakunlash uchun kamida $min% kerak.';
+  }
+
+  @override
+  String dsLessonDoneToast(String title) {
+    return '$title bajarildi!';
+  }
 }
 
 /// The translations for Uzbek, using the Latin script (`uz_Latn`).
@@ -4240,4 +4445,209 @@ class AppLocalizationsUzLatn extends AppLocalizationsUz {
 
   @override
   String get statusOffline => 'OFFLINE';
+
+  @override
+  String get dsLessonTypeVideo => 'Video';
+
+  @override
+  String get dsLessonTypeArticle => 'Maqola';
+
+  @override
+  String get dsLessonTypePdf => 'PDF';
+
+  @override
+  String get dsLessonTypeQuiz => 'Test';
+
+  @override
+  String dsHours(int count) {
+    return '$count soat';
+  }
+
+  @override
+  String dsMinutes(int count) {
+    return '$count daq';
+  }
+
+  @override
+  String dsModules(int count) {
+    return '$count modul';
+  }
+
+  @override
+  String dsLessons(int count) {
+    return '$count dars';
+  }
+
+  @override
+  String get dsCertificate => 'Sertifikat';
+
+  @override
+  String get dsCompleted => 'Tugallangan';
+
+  @override
+  String get dsStart => 'Boşlaş';
+
+  @override
+  String dsUpToXp(int xp) {
+    return '+$xp XP gaça';
+  }
+
+  @override
+  String get dsGreetingMorning => 'Xayrli tong,';
+
+  @override
+  String get dsGreetingDay => 'Xayrli kun,';
+
+  @override
+  String get dsGreetingEvening => 'Xayrli keç,';
+
+  @override
+  String get dsContinueLabel => 'DAVOM ETTIRIŞ';
+
+  @override
+  String get dsContinueButton => 'Davom ettiriş';
+
+  @override
+  String dsResumeAt(String time) {
+    return '$time dan davom etasiz';
+  }
+
+  @override
+  String dsResumeRemaining(int minutes) {
+    return 'Videoning $minutes daqiqasi qoldi';
+  }
+
+  @override
+  String get dsNextLesson => 'Keyingi dars';
+
+  @override
+  String dsLessonsDone(int done, int total) {
+    return '$done / $total dars tugallangan';
+  }
+
+  @override
+  String get dsStartFirstCourseTitle => 'Birinçi kursingizni boşlang';
+
+  @override
+  String get dsStartFirstCourseBody => 'Lavozimingizga mos kurslar sizni kutmoqda';
+
+  @override
+  String get dsBrowseCourses => 'Kurslarni köriş';
+
+  @override
+  String dsStreakDays(int count) {
+    return '$count kun';
+  }
+
+  @override
+  String get dsStreakLabel => 'Ketma-ket seriya';
+
+  @override
+  String dsXpValue(String xp) {
+    return '$xp XP';
+  }
+
+  @override
+  String get dsXpTotal => 'Jami ball';
+
+  @override
+  String dsXpToLevel(String level, int xp) {
+    return '${level}gaça $xp XP';
+  }
+
+  @override
+  String get dsMaxLevel => 'Eng yuqori daraja';
+
+  @override
+  String get dsRecommended => 'Siz uçun tavsiya';
+
+  @override
+  String get dsAnnouncements => 'Eʼlonlar';
+
+  @override
+  String get dsAiAssistant => 'AI yordamçi';
+
+  @override
+  String get dsNotifications => 'Bildirişnomalar';
+
+  @override
+  String get dsSeeAll => 'Barçasi';
+
+  @override
+  String get dsLevelMaster => 'Usta';
+
+  @override
+  String get dsInProgress => 'Davom etayotgan';
+
+  @override
+  String dsAllCourses(int count) {
+    return 'Barça kurslar · $count';
+  }
+
+  @override
+  String get dsYourProgress => 'Sizning progressingiz';
+
+  @override
+  String dsXpEarned(int xp) {
+    return '$xp XP töplandi';
+  }
+
+  @override
+  String get dsCertificateCondition => 'Barça majburiy dars va testlarni yakunlang — sertifikat avtomatik beriladi';
+
+  @override
+  String get dsCurriculum => 'Darslar rejasi';
+
+  @override
+  String dsModuleLabel(int number) {
+    return '$number-MODUL';
+  }
+
+  @override
+  String dsModuleProgress(int done, int total) {
+    return '$done / $total dars';
+  }
+
+  @override
+  String dsModuleLockedUntil(int number) {
+    return '$number-modul yakunlangaç oçiladi';
+  }
+
+  @override
+  String dsLessonLockedFinish(String lesson) {
+    return 'Avval $lesson-darsni tugating';
+  }
+
+  @override
+  String get dsLessonLockedStart => 'Avval kursni boşlang';
+
+  @override
+  String get dsOptional => 'ixtiyoriy';
+
+  @override
+  String get dsMandatory => 'Majburiy';
+
+  @override
+  String get dsStartCourse => 'Kursni boşlaş';
+
+  @override
+  String dsContinueLesson(String lesson) {
+    return 'Davom ettiriş · $lesson-dars';
+  }
+
+  @override
+  String get dsCourseCompleted => 'Kurs muvaffaqiyatli tugallandi';
+
+  @override
+  String get dsViewCertificate => 'Sertifikatni köriş';
+
+  @override
+  String dsQuizNotPassed(int percent, int min) {
+    return 'Test ötilmadi: $percent%. Darsni yakunlaş uçun kamida $min% kerak.';
+  }
+
+  @override
+  String dsLessonDoneToast(String title) {
+    return '$title bajarildi!';
+  }
 }

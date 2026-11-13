@@ -1,106 +1,114 @@
 import 'package:flutter/material.dart';
+import 'package:sud_qollanma/core/theme/app_tokens.dart';
 
-/// Mizan Design System — "Judicial Authority Dark"
+/// Sud Qoʻllanma ranglari — Figma "Yangi dizayn" palitrasi (AppTokens).
 ///
-/// Two-mode palette:
-///   Light:  Indigo primary (#3B4FCC) + white surfaces  (trustworthy, clean)
-///   Dark:   Deep navy (#0C1520) + amber gold (#C9A84C)  (authoritative, premium)
-///
-/// The amber accent evokes official court seals and judicial prestige.
+/// Yangi kodda `context.tokens` dan foydalaning: u yorugʻ/qorongʻi rejimni
+/// oʻzi tanlaydi. Bu klassdagi nomlar eski ekranlar uchun saqlangan, qiymatlari
+/// esa yangi palitraga moslangan:
+///   * `primary…` — yorugʻ rejimdagi brend (toʻq koʻk)
+///   * `amber…`   — qorongʻi rejimdagi brend (och koʻk). Nomi tarixiy:
+///     avval qorongʻi rejim oltin urgʻuda edi. Oltin endi faqat yutuqlar
+///     uchun — `gold…` ga qarang.
 class AppColors {
   AppColors._();
 
-  // ── PRIMARY BRAND (light mode header, light buttons) ─────────────────────
-  static const Color primary          = Color(0xFF3B4FCC); // Royal Indigo
-  static const Color primaryDark      = Color(0xFF2A3A9E);
-  static const Color primaryLight     = Color(0xFF6B7DE8);
-  static const Color primaryContainer = Color(0xFFE8EBFF);
+  static const AppTokens _l = AppTokens.light;
+  static const AppTokens _d = AppTokens.dark;
+
+  // ── BREND (yorugʻ rejim) ──────────────────────────────────────────────────
+  static const Color primary          = Color(0xFF1B3B6F);
+  static const Color primaryDark      = Color(0xFF142D56);
+  static const Color primaryLight     = Color(0xFF3A5888);
+  static const Color primaryContainer = Color(0xFFE5ECF7);
   static const Color onPrimary        = Color(0xFFFFFFFF);
 
-  // ── AMBER ACCENT (dark mode primary, CTAs, active states) ────────────────
-  static const Color amber          = Color(0xFFC9A84C); // Judicial gold
-  static const Color amberLight     = Color(0xFFE8C96E); // Hover / pressed
-  static const Color amberContainer = Color(0xFF2A2210); // Amber tint bg (icon boxes, badges)
+  // ── BREND (qorongʻi rejim; tarixiy nom "amber") ───────────────────────────
+  static const Color amber          = Color(0xFF8EB1EE);
+  static const Color amberLight     = Color(0xFFA9C4F3);
+  static const Color amberContainer = Color(0xFF1B2C49);
 
-  // ── SEMANTIC ──────────────────────────────────────────────────────────────
-  static const Color success  = Color(0xFF27AE7A); // Emerald
-  static const Color error    = Color(0xFFE05050); // Red
-  static const Color warning  = Color(0xFFE8A020); // Amber-orange
-  static const Color info     = Color(0xFF0284C7); // Sky 600
+  // ── OLTIN — faqat yutuq, sertifikat, XP ───────────────────────────────────
+  static const Color gold          = Color(0xFFC8962E);
+  static const Color goldInk       = Color(0xFF8A5F0E);
+  static const Color goldContainer = Color(0xFFF7EEDB);
 
-  // ── GAMIFICATION ──────────────────────────────────────────────────────────
-  static const Color streakAccent = Color(0xFFFF7043); // Streak fire orange
-  // Leaderboard — real metals
-  static const Color goldPodium   = Color(0xFFFBBF24); // Amber 400
-  static const Color goldText     = Color(0xFF78350F); // Amber 900
-  static const Color silverPodium = Color(0xFFCBD5E1); // Slate 300
-  static const Color silverText   = Color(0xFF334155); // Slate 700
-  static const Color bronzePodium = Color(0xFFCD853F); // Peru / bronze
-  static const Color bronzeText   = Color(0xFF7C2D12); // Orange 900
+  // ── SEMANTIK ──────────────────────────────────────────────────────────────
+  static const Color success  = Color(0xFF1E7F55);
+  static const Color error    = Color(0xFFB93A32);
+  static const Color warning  = Color(0xFFC2610F);
+  static const Color info     = Color(0xFF1B3B6F);
 
-  // ── LIGHT MODE SURFACES ───────────────────────────────────────────────────
-  static const Color backgroundLight     = Color(0xFFF0F2FA); // Cool grey-blue tint
+  // ── GAMIFIKATSIYA ─────────────────────────────────────────────────────────
+  static const Color streakAccent = Color(0xFFC2610F);
+  static const Color goldPodium   = Color(0xFFC8962E);
+  static const Color goldText     = Color(0xFF8A5F0E);
+  static const Color silverPodium = Color(0xFFC9D0DA);
+  static const Color silverText   = Color(0xFF556274);
+  static const Color bronzePodium = Color(0xFFC2610F);
+  static const Color bronzeText   = Color(0xFF7C3D0A);
+
+  // ── YORUGʻ SIRTLAR ────────────────────────────────────────────────────────
+  static const Color backgroundLight     = Color(0xFFF5F6F8);
   static const Color surfaceLight        = Color(0xFFFFFFFF);
-  static const Color surfaceVariantLight = Color(0xFFF7F8FC);
-  static const Color textPrimaryLight    = Color(0xFF111827); // Grey 900
-  static const Color textSecondaryLight  = Color(0xFF6B7280); // Grey 500
-  static const Color borderLight         = Color(0xFFE5E7EB); // Grey 200
-  static const Color dividerLight        = Color(0xFFF3F4F6); // Grey 100
+  static const Color surfaceVariantLight = Color(0xFFEEF1F5);
+  static const Color textPrimaryLight    = Color(0xFF0F1B2D);
+  static const Color textSecondaryLight  = Color(0xFF556274);
+  static const Color borderLight         = Color(0xFFE2E6EC);
+  static const Color dividerLight        = Color(0xFFEEF1F5);
 
-  // ── DARK MODE SURFACES — "Judicial Authority" ─────────────────────────────
-  static const Color scaffoldDark      = Color(0xFF0C1520); // App bg (deepest navy)
-  static const Color surfaceDark       = Color(0xFF152032); // Card / sheet surfaces
-  static const Color surfaceElevated   = Color(0xFF1C2D42); // Elevated cards, dialogs
-  static const Color borderDark        = Color(0xFF253545); // Card borders, dividers
-  static const Color dividerDark       = Color(0xFF1C2D42); // Subtle dividers
+  // ── QORONGʻI SIRTLAR ──────────────────────────────────────────────────────
+  static const Color scaffoldDark    = Color(0xFF0A111E);
+  static const Color surfaceDark     = Color(0xFF121B2B);
+  static const Color surfaceElevated = Color(0xFF1A2536);
+  static const Color borderDark      = Color(0xFF253247);
+  static const Color dividerDark     = Color(0xFF1A2536);
 
-  // Legacy aliases (used in light theme ColorScheme)
-  static const Color backgroundDark    = scaffoldDark;
+  static const Color backgroundDark     = scaffoldDark;
   static const Color surfaceVariantDark = surfaceElevated;
 
-  // ── DARK MODE TEXT ────────────────────────────────────────────────────────
-  static const Color textPrimary    = Color(0xFFEFF4FA); // Near-white
-  static const Color textSecondary  = Color(0xFF7A9BBE); // Muted blue-grey
+  // ── QORONGʻI MATN ─────────────────────────────────────────────────────────
+  static const Color textPrimary   = Color(0xFFEDF1F7);
+  static const Color textSecondary = Color(0xFFA3AEC0);
 
-  // Legacy aliases kept for backward compat
   static const Color textPrimaryDark   = textPrimary;
   static const Color textSecondaryDark = textSecondary;
 
-  // ── GRADIENTS ─────────────────────────────────────────────────────────────
-  /// Used for light-mode header strips and hero sections
+  // ── GRADIENTLAR ───────────────────────────────────────────────────────────
+  // Yangi dizaynda gradient yoʻq: eski ekranlar uchun bir xil rangli "gradient".
   static const LinearGradient primaryGradient = LinearGradient(
-    colors: [Color(0xFF3B4FCC), Color(0xFF5B6EE8)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
+    colors: [Color(0xFF1B3B6F), Color(0xFF1B3B6F)],
   );
-
-  /// Amber gradient for dark-mode hero accents
   static const LinearGradient amberGradient = LinearGradient(
-    colors: [Color(0xFFC9A84C), Color(0xFFE8C96E)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
+    colors: [Color(0xFF8EB1EE), Color(0xFF8EB1EE)],
   );
 
-  // ── BACKWARD COMPAT ───────────────────────────────────────────────────────
-  // Kept so stale imports compile; not used in new screens
-  static const Color accent      = Color(0xFF0EA5E9);
-  static const Color accentDark  = Color(0xFF0369A1);
-  static const Color accentLight = Color(0xFFBAE6FD);
+  // ── ESKI NOMLAR ───────────────────────────────────────────────────────────
+  static const Color accent      = Color(0xFF1B3B6F);
+  static const Color accentDark  = Color(0xFF142D56);
+  static const Color accentLight = Color(0xFFE5ECF7);
   static const Color streakGradientStart = streakAccent;
-  static const Color streakGradientEnd   = Color(0xFFFFB300);
+  static const Color streakGradientEnd   = Color(0xFFC8962E);
   static const LinearGradient glassGradient = LinearGradient(
-    colors: [Color(0x99FFFFFF), Color(0x66FFFFFF)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
+    colors: [Color(0xFFFFFFFF), Color(0xFFFFFFFF)],
   );
   static const LinearGradient darkGlassGradient = LinearGradient(
-    colors: [Color(0x99161B22), Color(0x66161B22)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
+    colors: [Color(0xFF121B2B), Color(0xFF121B2B)],
   );
   static const LinearGradient accentGradient = LinearGradient(
-    colors: [Color(0xFF4F63D2), Color(0xFF7C8FF5)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
+    colors: [Color(0xFF1B3B6F), Color(0xFF1B3B6F)],
   );
+
+  /// Tokenlar bilan bir xil boʻlishini tekshirish uchun (test).
+  static List<(Color, Color)> get tokenPairs => [
+        (primary, _l.brandPrimary),
+        (amber, _d.brandPrimary),
+        (backgroundLight, _l.bgCanvas),
+        (scaffoldDark, _d.bgCanvas),
+        (surfaceDark, _d.bgSurface),
+        (textPrimaryLight, _l.textPrimary),
+        (textPrimary, _d.textPrimary),
+        (borderLight, _l.borderDefault),
+        (borderDark, _d.borderDefault),
+      ];
 }

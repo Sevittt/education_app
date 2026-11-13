@@ -185,47 +185,45 @@ class _HomePageState extends State<HomePage> {
       actions: [_buildNotificationBell()],
     );
 
-    // Mobile Body (Existing Logic)
+    final l10n = AppLocalizations.of(context)!;
+    final borderColor = Theme.of(context).colorScheme.outlineVariant;
+
+    // Bosh sahifa, Kurslar va Profil oʻz sarlavhasini chizadi (Figma); umumiy
+    // yuqori panel faqat Hamjamiyat boʻlimida qoladi.
     Widget mobileBody = Scaffold(
-      appBar: appBar,
+      appBar: _selectedIndex == 2 ? appBar : null,
       body: IndexedStack(index: _selectedIndex, children: _mobileWidgetOptions),
       floatingActionButton: (_selectedIndex == 1 || _selectedIndex == 2)
           ? _buildSpeedDial()
           : null,
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(_selectedIndex == 0 ? Icons.home : Icons.home_outlined),
-            label: AppLocalizations.of(context)!.bottomNavHome,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              _selectedIndex == 1 ? Icons.school_rounded : Icons.school_outlined,
+      bottomNavigationBar: DecoratedBox(
+        decoration: BoxDecoration(border: Border(top: BorderSide(color: borderColor))),
+        child: NavigationBar(
+          selectedIndex: _selectedIndex,
+          onDestinationSelected: _onItemTapped,
+          destinations: [
+            NavigationDestination(
+              icon: const Icon(Icons.home_outlined),
+              selectedIcon: const Icon(Icons.home_rounded),
+              label: l10n.bottomNavHome,
             ),
-            label: AppLocalizations.of(context)!.bottomNavResources,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              _selectedIndex == 2 ? Icons.people : Icons.people_outline,
+            NavigationDestination(
+              icon: const Icon(Icons.menu_book_outlined),
+              selectedIcon: const Icon(Icons.menu_book_rounded),
+              label: l10n.bottomNavResources,
             ),
-            label: AppLocalizations.of(context)!.bottomNavCommunity,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              _selectedIndex == 3 ? Icons.person : Icons.person_outline,
+            NavigationDestination(
+              icon: const Icon(Icons.people_outline_rounded),
+              selectedIcon: const Icon(Icons.people_rounded),
+              label: l10n.bottomNavCommunity,
             ),
-            label: AppLocalizations.of(context)!.bottomNavProfile,
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        selectedItemColor: Theme.of(
-          context,
-        ).bottomNavigationBarTheme.selectedItemColor,
-        unselectedItemColor: Theme.of(
-          context,
-        ).bottomNavigationBarTheme.unselectedItemColor,
-        type: Theme.of(context).bottomNavigationBarTheme.type,
+            NavigationDestination(
+              icon: const Icon(Icons.person_outline_rounded),
+              selectedIcon: const Icon(Icons.person_rounded),
+              label: l10n.bottomNavProfile,
+            ),
+          ],
+        ),
       ),
     );
 

@@ -4057,6 +4057,336 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'OFFLINE'**
   String get statusOffline;
+
+  /// Redesign: dsLessonTypeVideo
+  ///
+  /// In en, this message translates to:
+  /// **'Video'**
+  String get dsLessonTypeVideo;
+
+  /// Redesign: dsLessonTypeArticle
+  ///
+  /// In en, this message translates to:
+  /// **'Article'**
+  String get dsLessonTypeArticle;
+
+  /// Redesign: dsLessonTypePdf
+  ///
+  /// In en, this message translates to:
+  /// **'PDF'**
+  String get dsLessonTypePdf;
+
+  /// Redesign: dsLessonTypeQuiz
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz'**
+  String get dsLessonTypeQuiz;
+
+  /// Redesign: dsHours
+  ///
+  /// In en, this message translates to:
+  /// **'{count} h'**
+  String dsHours(int count);
+
+  /// Redesign: dsMinutes
+  ///
+  /// In en, this message translates to:
+  /// **'{count} min'**
+  String dsMinutes(int count);
+
+  /// Redesign: dsModules
+  ///
+  /// In en, this message translates to:
+  /// **'{count} modules'**
+  String dsModules(int count);
+
+  /// Redesign: dsLessons
+  ///
+  /// In en, this message translates to:
+  /// **'{count} lessons'**
+  String dsLessons(int count);
+
+  /// Redesign: dsCertificate
+  ///
+  /// In en, this message translates to:
+  /// **'Certificate'**
+  String get dsCertificate;
+
+  /// Redesign: dsCompleted
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get dsCompleted;
+
+  /// Redesign: dsStart
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get dsStart;
+
+  /// Redesign: dsUpToXp
+  ///
+  /// In en, this message translates to:
+  /// **'Up to +{xp} XP'**
+  String dsUpToXp(int xp);
+
+  /// Redesign: dsGreetingMorning
+  ///
+  /// In en, this message translates to:
+  /// **'Good morning,'**
+  String get dsGreetingMorning;
+
+  /// Redesign: dsGreetingDay
+  ///
+  /// In en, this message translates to:
+  /// **'Good afternoon,'**
+  String get dsGreetingDay;
+
+  /// Redesign: dsGreetingEvening
+  ///
+  /// In en, this message translates to:
+  /// **'Good evening,'**
+  String get dsGreetingEvening;
+
+  /// Redesign: dsContinueLabel
+  ///
+  /// In en, this message translates to:
+  /// **'CONTINUE'**
+  String get dsContinueLabel;
+
+  /// Redesign: dsContinueButton
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get dsContinueButton;
+
+  /// Redesign: dsResumeAt
+  ///
+  /// In en, this message translates to:
+  /// **'Resume from {time}'**
+  String dsResumeAt(String time);
+
+  /// Redesign: dsResumeRemaining
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min of video left'**
+  String dsResumeRemaining(int minutes);
+
+  /// Redesign: dsNextLesson
+  ///
+  /// In en, this message translates to:
+  /// **'Next lesson'**
+  String get dsNextLesson;
+
+  /// Redesign: dsLessonsDone
+  ///
+  /// In en, this message translates to:
+  /// **'{done} / {total} lessons completed'**
+  String dsLessonsDone(int done, int total);
+
+  /// Redesign: dsStartFirstCourseTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Start your first course'**
+  String get dsStartFirstCourseTitle;
+
+  /// Redesign: dsStartFirstCourseBody
+  ///
+  /// In en, this message translates to:
+  /// **'Courses for your position are waiting'**
+  String get dsStartFirstCourseBody;
+
+  /// Redesign: dsBrowseCourses
+  ///
+  /// In en, this message translates to:
+  /// **'Browse courses'**
+  String get dsBrowseCourses;
+
+  /// Redesign: dsStreakDays
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days'**
+  String dsStreakDays(int count);
+
+  /// Redesign: dsStreakLabel
+  ///
+  /// In en, this message translates to:
+  /// **'Day streak'**
+  String get dsStreakLabel;
+
+  /// Redesign: dsXpValue
+  ///
+  /// In en, this message translates to:
+  /// **'{xp} XP'**
+  String dsXpValue(String xp);
+
+  /// Redesign: dsXpTotal
+  ///
+  /// In en, this message translates to:
+  /// **'Total points'**
+  String get dsXpTotal;
+
+  /// Redesign: dsXpToLevel
+  ///
+  /// In en, this message translates to:
+  /// **'{xp} XP to {level}'**
+  String dsXpToLevel(String level, int xp);
+
+  /// Redesign: dsMaxLevel
+  ///
+  /// In en, this message translates to:
+  /// **'Top level'**
+  String get dsMaxLevel;
+
+  /// Redesign: dsRecommended
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended for you'**
+  String get dsRecommended;
+
+  /// Redesign: dsAnnouncements
+  ///
+  /// In en, this message translates to:
+  /// **'Announcements'**
+  String get dsAnnouncements;
+
+  /// Redesign: dsAiAssistant
+  ///
+  /// In en, this message translates to:
+  /// **'AI assistant'**
+  String get dsAiAssistant;
+
+  /// Redesign: dsNotifications
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get dsNotifications;
+
+  /// Redesign: dsSeeAll
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get dsSeeAll;
+
+  /// Redesign: dsLevelMaster
+  ///
+  /// In en, this message translates to:
+  /// **'Master'**
+  String get dsLevelMaster;
+
+  /// Redesign: dsInProgress
+  ///
+  /// In en, this message translates to:
+  /// **'In progress'**
+  String get dsInProgress;
+
+  /// Redesign: dsAllCourses
+  ///
+  /// In en, this message translates to:
+  /// **'All courses · {count}'**
+  String dsAllCourses(int count);
+
+  /// Redesign: dsYourProgress
+  ///
+  /// In en, this message translates to:
+  /// **'Your progress'**
+  String get dsYourProgress;
+
+  /// Redesign: dsXpEarned
+  ///
+  /// In en, this message translates to:
+  /// **'{xp} XP earned'**
+  String dsXpEarned(int xp);
+
+  /// Redesign: dsCertificateCondition
+  ///
+  /// In en, this message translates to:
+  /// **'Complete all required lessons and quizzes to receive the certificate automatically'**
+  String get dsCertificateCondition;
+
+  /// Redesign: dsCurriculum
+  ///
+  /// In en, this message translates to:
+  /// **'Curriculum'**
+  String get dsCurriculum;
+
+  /// Redesign: dsModuleLabel
+  ///
+  /// In en, this message translates to:
+  /// **'MODULE {number}'**
+  String dsModuleLabel(int number);
+
+  /// Redesign: dsModuleProgress
+  ///
+  /// In en, this message translates to:
+  /// **'{done} / {total} lessons'**
+  String dsModuleProgress(int done, int total);
+
+  /// Redesign: dsModuleLockedUntil
+  ///
+  /// In en, this message translates to:
+  /// **'Unlocks after module {number}'**
+  String dsModuleLockedUntil(int number);
+
+  /// Redesign: dsLessonLockedFinish
+  ///
+  /// In en, this message translates to:
+  /// **'Finish lesson {lesson} first'**
+  String dsLessonLockedFinish(String lesson);
+
+  /// Redesign: dsLessonLockedStart
+  ///
+  /// In en, this message translates to:
+  /// **'Start the course first'**
+  String get dsLessonLockedStart;
+
+  /// Redesign: dsOptional
+  ///
+  /// In en, this message translates to:
+  /// **'optional'**
+  String get dsOptional;
+
+  /// Redesign: dsMandatory
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get dsMandatory;
+
+  /// Redesign: dsStartCourse
+  ///
+  /// In en, this message translates to:
+  /// **'Start course'**
+  String get dsStartCourse;
+
+  /// Redesign: dsContinueLesson
+  ///
+  /// In en, this message translates to:
+  /// **'Continue · lesson {lesson}'**
+  String dsContinueLesson(String lesson);
+
+  /// Redesign: dsCourseCompleted
+  ///
+  /// In en, this message translates to:
+  /// **'Course completed'**
+  String get dsCourseCompleted;
+
+  /// Redesign: dsViewCertificate
+  ///
+  /// In en, this message translates to:
+  /// **'View certificate'**
+  String get dsViewCertificate;
+
+  /// Redesign: dsQuizNotPassed
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz not passed: {percent}%. At least {min}% is required to complete the lesson.'**
+  String dsQuizNotPassed(int percent, int min);
+
+  /// Redesign: dsLessonDoneToast
+  ///
+  /// In en, this message translates to:
+  /// **'{title} completed!'**
+  String dsLessonDoneToast(String title);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

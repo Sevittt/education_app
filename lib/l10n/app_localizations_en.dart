@@ -2121,4 +2121,209 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statusOffline => 'OFFLINE';
+
+  @override
+  String get dsLessonTypeVideo => 'Video';
+
+  @override
+  String get dsLessonTypeArticle => 'Article';
+
+  @override
+  String get dsLessonTypePdf => 'PDF';
+
+  @override
+  String get dsLessonTypeQuiz => 'Quiz';
+
+  @override
+  String dsHours(int count) {
+    return '$count h';
+  }
+
+  @override
+  String dsMinutes(int count) {
+    return '$count min';
+  }
+
+  @override
+  String dsModules(int count) {
+    return '$count modules';
+  }
+
+  @override
+  String dsLessons(int count) {
+    return '$count lessons';
+  }
+
+  @override
+  String get dsCertificate => 'Certificate';
+
+  @override
+  String get dsCompleted => 'Completed';
+
+  @override
+  String get dsStart => 'Start';
+
+  @override
+  String dsUpToXp(int xp) {
+    return 'Up to +$xp XP';
+  }
+
+  @override
+  String get dsGreetingMorning => 'Good morning,';
+
+  @override
+  String get dsGreetingDay => 'Good afternoon,';
+
+  @override
+  String get dsGreetingEvening => 'Good evening,';
+
+  @override
+  String get dsContinueLabel => 'CONTINUE';
+
+  @override
+  String get dsContinueButton => 'Continue';
+
+  @override
+  String dsResumeAt(String time) {
+    return 'Resume from $time';
+  }
+
+  @override
+  String dsResumeRemaining(int minutes) {
+    return '$minutes min of video left';
+  }
+
+  @override
+  String get dsNextLesson => 'Next lesson';
+
+  @override
+  String dsLessonsDone(int done, int total) {
+    return '$done / $total lessons completed';
+  }
+
+  @override
+  String get dsStartFirstCourseTitle => 'Start your first course';
+
+  @override
+  String get dsStartFirstCourseBody => 'Courses for your position are waiting';
+
+  @override
+  String get dsBrowseCourses => 'Browse courses';
+
+  @override
+  String dsStreakDays(int count) {
+    return '$count days';
+  }
+
+  @override
+  String get dsStreakLabel => 'Day streak';
+
+  @override
+  String dsXpValue(String xp) {
+    return '$xp XP';
+  }
+
+  @override
+  String get dsXpTotal => 'Total points';
+
+  @override
+  String dsXpToLevel(String level, int xp) {
+    return '$xp XP to $level';
+  }
+
+  @override
+  String get dsMaxLevel => 'Top level';
+
+  @override
+  String get dsRecommended => 'Recommended for you';
+
+  @override
+  String get dsAnnouncements => 'Announcements';
+
+  @override
+  String get dsAiAssistant => 'AI assistant';
+
+  @override
+  String get dsNotifications => 'Notifications';
+
+  @override
+  String get dsSeeAll => 'See all';
+
+  @override
+  String get dsLevelMaster => 'Master';
+
+  @override
+  String get dsInProgress => 'In progress';
+
+  @override
+  String dsAllCourses(int count) {
+    return 'All courses · $count';
+  }
+
+  @override
+  String get dsYourProgress => 'Your progress';
+
+  @override
+  String dsXpEarned(int xp) {
+    return '$xp XP earned';
+  }
+
+  @override
+  String get dsCertificateCondition => 'Complete all required lessons and quizzes to receive the certificate automatically';
+
+  @override
+  String get dsCurriculum => 'Curriculum';
+
+  @override
+  String dsModuleLabel(int number) {
+    return 'MODULE $number';
+  }
+
+  @override
+  String dsModuleProgress(int done, int total) {
+    return '$done / $total lessons';
+  }
+
+  @override
+  String dsModuleLockedUntil(int number) {
+    return 'Unlocks after module $number';
+  }
+
+  @override
+  String dsLessonLockedFinish(String lesson) {
+    return 'Finish lesson $lesson first';
+  }
+
+  @override
+  String get dsLessonLockedStart => 'Start the course first';
+
+  @override
+  String get dsOptional => 'optional';
+
+  @override
+  String get dsMandatory => 'Required';
+
+  @override
+  String get dsStartCourse => 'Start course';
+
+  @override
+  String dsContinueLesson(String lesson) {
+    return 'Continue · lesson $lesson';
+  }
+
+  @override
+  String get dsCourseCompleted => 'Course completed';
+
+  @override
+  String get dsViewCertificate => 'View certificate';
+
+  @override
+  String dsQuizNotPassed(int percent, int min) {
+    return 'Quiz not passed: $percent%. At least $min% is required to complete the lesson.';
+  }
+
+  @override
+  String dsLessonDoneToast(String title) {
+    return '$title completed!';
+  }
 }
