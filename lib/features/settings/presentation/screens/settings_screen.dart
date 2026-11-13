@@ -195,14 +195,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   String _getLanguageName(Locale? locale) {
     if (locale == LocaleProvider.uzNewAlphabet) return 'Özbekça (yangi alifbo)';
-    switch (locale?.languageCode ?? 'en') {
+    switch (locale?.languageCode ?? 'uz') {
       case 'uz':
         return 'Oʻzbekcha';
       case 'ru':
         return 'Русский';
       case 'en':
-      default:
         return 'English (US)';
+      default:
+        return 'Oʻzbekcha';
     }
   }
 
@@ -211,7 +212,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     // Get AppLocalizations instance
     final AppLocalizations? l10n = AppLocalizations.of(context);
     final localeProvider = Provider.of<LocaleProvider>(context);
-    final currentLanguage = _getLanguageName(localeProvider.appLocale);
+    final activeLocale = localeProvider.appLocale ?? Localizations.maybeLocaleOf(context);
+    final currentLanguage = _getLanguageName(activeLocale);
 
     return Scaffold(
       appBar: AppBar(
@@ -344,7 +346,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               showAboutDialog(
                 context: context,
                 applicationName: l10n?.appTitle ?? 'Court handbook',
-                applicationVersion: '1.0.2',
+                applicationVersion: '1.1.0',
                 applicationIcon: Image.asset(
                   'assets/images/app_logo.png',
                   width: 60,

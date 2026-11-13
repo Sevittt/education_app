@@ -14,7 +14,7 @@ class ResponsiveLayout extends StatelessWidget {
 
   // Breakpoints
   static const double mobileLimit = 600;
-  static const double tabletLimit = 1100;
+  static const double tabletLimit = 900;
 
   static bool isMobile(BuildContext context) =>
       MediaQuery.of(context).size.width < mobileLimit;

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:sud_qollanma/core/services/drift_database_service.dart';
 import 'package:sud_qollanma/core/theme/app_tokens.dart';
+import 'package:sud_qollanma/features/courses/data/seeds/dars_courses_seed.dart';
 import 'package:sud_qollanma/features/courses/domain/entities/course_lesson_entity.dart';
 import 'package:sud_qollanma/features/courses/presentation/widgets/course_visuals.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,21 +35,99 @@ class _LessonViewerScreenState extends State<LessonViewerScreen> {
   Map<String, dynamic>? _data;
   VideoWatchProgress _videoProgress = const VideoWatchProgress();
 
+  String get _resolvedRefId {
+    final raw = widget.lesson.refId.trim();
+    if (raw.isNotEmpty) return raw;
+    for (final c in DarsCurriculumSeed.getOfficialCourses()) {
+      for (final m in c.modules) {
+        for (final l in m.lessons) {
+          if (l.id == widget.lesson.id && l.refId.isNotEmpty) {
+            return l.refId;
+          }
+        }
+      }
+    }
+    return '';
+  }
+
+  String get _resolvedCollection {
+    final raw = widget.lesson.sourceCollection.trim();
+    if (raw.isNotEmpty) return raw;
+    return widget.lesson.type == LessonType.video ? 'video_tutorials' : 'knowledge_base';
+  }
+
   @override
   void initState() {
     super.initState();
     _loadContent();
   }
 
+  Future<Map<String, dynamic>?> _loadOfflineOrRagArticle(String refId) async {
+    final basePrefix = refId.replaceFirst(RegExp(r'_\d+$'), '');
+    try {
+      final chunks = await DriftDatabaseService.instance.db.getAllRagChunks();
+      final exact = chunks.where((c) => c.id == refId).firstOrNull;
+      final related = chunks
+          .where((c) => c.id == refId || (basePrefix.isNotEmpty && c.id.startsWith('${basePrefix}_')))
+          .toList();
+      if (related.isNotEmpty) {
+        final combined = related.map((c) {
+          final body = c.content.trim();
+          if (body.startsWith('#') || body.toLowerCase().startsWith(c.title.trim().toLowerCase())) {
+            return body;
+          }
+          return '### ${c.title}\n\n$body';
+        }).join('\n\n---\n\n');
+        return {
+          'title': widget.lesson.title.isNotEmpty
+              ? widget.lesson.title
+              : (exact?.title ?? related.first.title),
+          'content': combined,
+        };
+      }
+    } catch (_) {}
+
+    try {
+      final ragDoc = await FirebaseFirestore.instance.collection('rag_chunks').doc(refId).get();
+      if (ragDoc.exists && ragDoc.data() != null) {
+        final d = ragDoc.data()!;
+        return {
+          'title': widget.lesson.title.isNotEmpty
+              ? widget.lesson.title
+              : (d['title'] as String? ?? ''),
+          'content': d['text'] as String? ?? d['content'] as String? ?? '',
+        };
+      }
+    } catch (_) {}
+    return null;
+  }
+
   Future<void> _loadContent() async {
     try {
-      final doc = await FirebaseFirestore.instance
-          .collection(widget.lesson.sourceCollection)
-          .doc(widget.lesson.refId)
-          .get();
-      if (!doc.exists) throw Exception('Kontent topilmadi');
+      final refId = _resolvedRefId;
+      final col = _resolvedCollection;
+      Map<String, dynamic>? loadedData;
+
+      if (refId.isNotEmpty) {
+        try {
+          final doc = await FirebaseFirestore.instance.collection(col).doc(refId).get();
+          if (doc.exists && doc.data() != null) {
+            loadedData = doc.data();
+          }
+        } catch (_) {}
+
+        if (loadedData == null && widget.lesson.type == LessonType.article) {
+          loadedData = await _loadOfflineOrRagArticle(refId);
+        }
+      }
+
+      if (loadedData == null) {
+        throw Exception('Kontent topilmadi');
+      }
+
+      if (!mounted) return;
       setState(() {
-        _data = doc.data();
+        _data = loadedData;
         _loading = false;
       });
 
@@ -55,6 +136,7 @@ class _LessonViewerScreenState extends State<LessonViewerScreen> {
         WidgetsBinding.instance.addPostFrameCallback((_) => _openVideoDirectly());
       }
     } catch (e) {
+      if (!mounted) return;
       setState(() {
         _error = e.toString();
         _loading = false;
@@ -63,7 +145,7 @@ class _LessonViewerScreenState extends State<LessonViewerScreen> {
   }
 
   VideoEntity _videoFromData(Map<String, dynamic> data) => VideoEntity(
-        id: widget.lesson.refId,
+        id: _resolvedRefId,
         title: data['title'] as String? ?? widget.lesson.title,
         description: data['description'] as String? ?? '',
         youtubeId: data['youtubeId'] as String?,
@@ -119,7 +201,7 @@ class _LessonViewerScreenState extends State<LessonViewerScreen> {
     try {
       final progress = await context
           .read<VideoProgressRemoteSource>()
-          .get(uid, widget.lesson.refId);
+          .get(uid, _resolvedRefId);
       if (mounted) setState(() => _videoProgress = progress);
     } catch (e) {
       debugPrint('Video progress yuklanmadi: $e');
@@ -482,17 +564,39 @@ class _ArticleBody extends StatelessWidget {
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
     final l10n = AppLocalizations.of(context)!;
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(AppSpace.s16, AppSpace.s8, AppSpace.s16, AppSpace.s24),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        _LessonBadges(lesson: lesson, typeLabel: l10n.dsLessonTypeArticle, icon: Icons.article_outlined),
-        const SizedBox(height: AppSpace.s12),
-        Text(title, style: text.displayMedium),
-        const SizedBox(height: AppSpace.s16),
-        Divider(color: t.borderDefault),
-        const SizedBox(height: AppSpace.s16),
-        Text(content, style: text.bodyLarge?.copyWith(color: t.textPrimary, height: 1.7)),
-      ]),
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 760),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(AppSpace.s16, AppSpace.s8, AppSpace.s16, AppSpace.s24),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            _LessonBadges(lesson: lesson, typeLabel: l10n.dsLessonTypeArticle, icon: Icons.article_outlined),
+            const SizedBox(height: AppSpace.s12),
+            Text(title, style: text.displayMedium),
+            const SizedBox(height: AppSpace.s16),
+            Divider(color: t.borderDefault),
+            const SizedBox(height: AppSpace.s16),
+            MarkdownBody(
+              data: content,
+              styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+                p: text.bodyLarge?.copyWith(color: t.textPrimary, height: 1.7),
+                h1: text.headlineMedium?.copyWith(color: t.textPrimary, fontWeight: FontWeight.w700),
+                h2: text.titleLarge?.copyWith(color: t.textPrimary, fontWeight: FontWeight.w700),
+                h3: text.titleMedium?.copyWith(color: t.brandPrimary, fontWeight: FontWeight.w700),
+                listBullet: text.bodyLarge?.copyWith(color: t.brandPrimary),
+                blockquoteDecoration: BoxDecoration(
+                  color: t.bgSubtle,
+                  borderRadius: BorderRadius.circular(AppRadius.md),
+                  border: Border(left: BorderSide(color: t.brandPrimary, width: 4)),
+                ),
+                horizontalRuleDecoration: BoxDecoration(
+                  border: Border(top: BorderSide(color: t.borderDefault, width: 1)),
+                ),
+              ),
+            ),
+          ]),
+        ),
+      ),
     );
   }
 }

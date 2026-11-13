@@ -18,6 +18,9 @@ import 'package:sud_qollanma/features/notifications/presentation/screens/notific
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sud_qollanma/shared/layouts/responsive_layout.dart';
 import 'package:sud_qollanma/features/ict_reports/presentation/screens/ict_report_form_screen.dart';
+import 'package:sud_qollanma/core/theme/app_tokens.dart';
+import 'package:sud_qollanma/features/ai_chat/presentation/screens/ai_chat_screen.dart';
+import 'package:sud_qollanma/shared/widgets/design_system.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -132,11 +135,12 @@ class _HomePageState extends State<HomePage> {
       return actions;
     }
 
+    final t = context.tokens;
     return SpeedDial(
       icon: Icons.add,
       activeIcon: Icons.close,
-      backgroundColor: Theme.of(context).primaryColor,
-      foregroundColor: Colors.white,
+      backgroundColor: t.brandPrimary,
+      foregroundColor: t.textOnBrand,
       animationCurve: Curves.bounceIn,
       shape: const CircleBorder(), // Pure circle shape
       overlayColor: Colors.black,
@@ -186,16 +190,16 @@ class _HomePageState extends State<HomePage> {
     );
 
     final l10n = AppLocalizations.of(context)!;
+    final t = context.tokens;
     final borderColor = Theme.of(context).colorScheme.outlineVariant;
+    final fab = (_selectedIndex == 1 || _selectedIndex == 2) ? _buildSpeedDial() : null;
 
     // Bosh sahifa, Kurslar va Profil oʻz sarlavhasini chizadi (Figma); umumiy
     // yuqori panel faqat Hamjamiyat boʻlimida qoladi.
-    Widget mobileBody = Scaffold(
+    final Widget mobileBody = Scaffold(
       appBar: _selectedIndex == 2 ? appBar : null,
       body: IndexedStack(index: _selectedIndex, children: _mobileWidgetOptions),
-      floatingActionButton: (_selectedIndex == 1 || _selectedIndex == 2)
-          ? _buildSpeedDial()
-          : null,
+      floatingActionButton: fab,
       bottomNavigationBar: DecoratedBox(
         decoration: BoxDecoration(border: Border(top: BorderSide(color: borderColor))),
         child: NavigationBar(
@@ -227,10 +231,106 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
+    final Widget desktopBody = Scaffold(
+      floatingActionButton: fab,
+      body: Row(
+        children: [
+          DecoratedBox(
+            decoration: BoxDecoration(
+              color: t.bgSurface,
+              border: Border(right: BorderSide(color: t.borderDefault)),
+            ),
+            child: NavigationRail(
+              backgroundColor: Colors.transparent,
+              selectedIndex: _selectedIndex,
+              onDestinationSelected: _onItemTapped,
+              labelType: NavigationRailLabelType.all,
+              leading: Padding(
+                padding: const EdgeInsets.only(top: AppSpace.s12, bottom: AppSpace.s16),
+                child: Column(
+                  children: [
+                    Image.asset(
+                      'assets/images/app_logo.png',
+                      width: 36,
+                      height: 36,
+                      errorBuilder: (_, __, ___) => IconTile(
+                        Icons.balance_rounded,
+                        size: 36,
+                        background: t.brandContainer,
+                        foreground: t.brandPrimary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              trailing: Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: AppSpace.s20),
+                    child: CircleIconButton(
+                      Icons.auto_awesome_outlined,
+                      tooltip: l10n.dsAiAssistant,
+                      iconColor: t.brandPrimary,
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const AiChatScreen()),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              destinations: [
+                NavigationRailDestination(
+                  icon: const Icon(Icons.home_outlined),
+                  selectedIcon: const Icon(Icons.home_rounded),
+                  label: Text(l10n.bottomNavHome),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.menu_book_outlined),
+                  selectedIcon: const Icon(Icons.menu_book_rounded),
+                  label: Text(l10n.bottomNavResources),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.people_outline_rounded),
+                  selectedIcon: const Icon(Icons.people_rounded),
+                  label: Text(l10n.bottomNavCommunity),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.person_outline_rounded),
+                  selectedIcon: const Icon(Icons.person_rounded),
+                  label: Text(l10n.bottomNavProfile),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                if (_selectedIndex == 2) appBar,
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 1040),
+                      child: IndexedStack(
+                        index: _selectedIndex,
+                        children: _mobileWidgetOptions,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+
     return ResponsiveLayout(
       mobileBody: mobileBody,
       tabletBody: mobileBody,
-      desktopBody: mobileBody,
+      desktopBody: desktopBody,
     );
   }
 }

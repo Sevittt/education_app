@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LocaleProvider with ChangeNotifier {
-  Locale? _appLocale;
+  Locale? _appLocale = const Locale('uz');
 
   static const String _languageCodeKey = 'app_language_code';
   static const String _scriptCodeKey = 'app_script_code';

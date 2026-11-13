@@ -62,59 +62,184 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
 
     return SafeArea(
       bottom: false,
-      child: ListView(
-        padding: const EdgeInsets.fromLTRB(AppSpace.s16, AppSpace.s8, AppSpace.s16, AppSpace.s24),
-        children: [
-          _Header(user: user, unread: _unread),
-          const SizedBox(height: AppSpace.s16),
-          if (started.isNotEmpty)
-            _ContinueCard(course: started.first.$1, progress: started.first.$2, onOpen: _openCourse)
-          else
-            _StartCard(onBrowse: () => widget.onTabSelected(1)),
-          if (user != null) ...[
-            const SizedBox(height: AppSpace.s24),
-            _StatsCard(user: user),
-          ],
-          if (user?.isAdmin == true) ...[
-            const SizedBox(height: AppSpace.s24),
-            const AdminStatSection(),
-          ],
-          if (started.length > 1) ...[
-            const SizedBox(height: AppSpace.s24),
-            SectionHeader(AppLocalizations.of(context)!.myCoursesTitle,
-                actionLabel: AppLocalizations.of(context)!.dsSeeAll, onAction: () => widget.onTabSelected(1)),
-            const SizedBox(height: AppSpace.s12),
-            for (final (c, p) in started.skip(1).take(2)) ...[
-              CourseListCard(course: c, progress: p, onTap: () => _openCourse(c.id)),
-              const SizedBox(height: AppSpace.s12),
-            ],
-          ],
-          if (notStarted.isNotEmpty) ...[
-            const SizedBox(height: AppSpace.s24),
-            SectionHeader(AppLocalizations.of(context)!.dsRecommended,
-                actionLabel: AppLocalizations.of(context)!.dsSeeAll, onAction: () => widget.onTabSelected(1)),
-            const SizedBox(height: AppSpace.s12),
-            SizedBox(
-              height: 168,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                clipBehavior: Clip.none,
-                itemCount: notStarted.length,
-                separatorBuilder: (_, __) => const SizedBox(width: AppSpace.s12),
-                itemBuilder: (_, i) => _RecommendedTile(course: notStarted[i], onTap: () => _openCourse(notStarted[i].id)),
-              ),
-            ),
-          ],
-          StreamBuilder<List<NewsEntity>>(
-            stream: _news,
-            builder: (context, snap) {
-              final latest = snap.data?.firstOrNull;
-              if (latest == null) return const SizedBox.shrink();
-              return Padding(
-                padding: const EdgeInsets.only(top: AppSpace.s24),
-                child: _NewsTile(news: latest),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1040),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final isWide = constraints.maxWidth >= 720;
+              final heroWidget = started.isNotEmpty
+                  ? _ContinueCard(
+                      course: started.first.$1,
+                      progress: started.first.$2,
+                      onOpen: _openCourse,
+                    )
+                  : _StartCard(onBrowse: () => widget.onTabSelected(1));
+
+              return ListView(
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpace.s16,
+                  AppSpace.s12,
+                  AppSpace.s16,
+                  AppSpace.s24,
+                ),
+                children: [
+                  _Header(user: user, unread: _unread),
+                  const SizedBox(height: AppSpace.s16),
+                  const _CommandBar(),
+                  const SizedBox(height: AppSpace.s16),
+                  if (isWide && user != null)
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(flex: 3, child: heroWidget),
+                        const SizedBox(width: AppSpace.s16),
+                        Expanded(flex: 2, child: _StatsCard(user: user)),
+                      ],
+                    )
+                  else ...[
+                    heroWidget,
+                    if (user != null) ...[
+                      const SizedBox(height: AppSpace.s20),
+                      _StatsCard(user: user),
+                    ],
+                  ],
+                  const SizedBox(height: AppSpace.s24),
+                  const AdminStatSection(),
+                  if (started.length > 1) ...[
+                    const SizedBox(height: AppSpace.s24),
+                    SectionHeader(
+                      AppLocalizations.of(context)!.myCoursesTitle,
+                      actionLabel: AppLocalizations.of(context)!.dsSeeAll,
+                      onAction: () => widget.onTabSelected(1),
+                    ),
+                    const SizedBox(height: AppSpace.s12),
+                    if (isWide)
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          for (final (idx, (c, p)) in started.skip(1).take(2).indexed) ...[
+                            if (idx > 0) const SizedBox(width: AppSpace.s12),
+                            Expanded(
+                              child: CourseListCard(
+                                course: c,
+                                progress: p,
+                                onTap: () => _openCourse(c.id),
+                              ),
+                            ),
+                          ],
+                        ],
+                      )
+                    else
+                      for (final (c, p) in started.skip(1).take(2)) ...[
+                        CourseListCard(
+                          course: c,
+                          progress: p,
+                          onTap: () => _openCourse(c.id),
+                        ),
+                        const SizedBox(height: AppSpace.s12),
+                      ],
+                  ],
+                  if (notStarted.isNotEmpty) ...[
+                    const SizedBox(height: AppSpace.s24),
+                    SectionHeader(
+                      AppLocalizations.of(context)!.dsRecommended,
+                      actionLabel: AppLocalizations.of(context)!.dsSeeAll,
+                      onAction: () => widget.onTabSelected(1),
+                    ),
+                    const SizedBox(height: AppSpace.s12),
+                    SizedBox(
+                      height: 168,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        clipBehavior: Clip.none,
+                        itemCount: notStarted.length,
+                        separatorBuilder: (_, __) => const SizedBox(width: AppSpace.s12),
+                        itemBuilder: (_, i) => _RecommendedTile(
+                          course: notStarted[i],
+                          onTap: () => _openCourse(notStarted[i].id),
+                        ),
+                      ),
+                    ),
+                  ],
+                  StreamBuilder<List<NewsEntity>>(
+                    stream: _news,
+                    builder: (context, snap) {
+                      final latest = snap.data?.firstOrNull;
+                      if (latest == null) return const SizedBox.shrink();
+                      return Padding(
+                        padding: const EdgeInsets.only(top: AppSpace.s24),
+                        child: _NewsTile(news: latest),
+                      );
+                    },
+                  ),
+                ],
               );
             },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Tezkor qidiruv va Sodiq AI yordamchisi paneli (Command Bar).
+class _CommandBar extends StatelessWidget {
+  const _CommandBar();
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
+
+    return AppCard(
+      padding: const EdgeInsets.symmetric(horizontal: AppSpace.s16, vertical: 10),
+      radius: AppRadius.lg,
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const GlobalSearchScreen()),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.search_rounded, size: 20, color: t.brandPrimary),
+          const SizedBox(width: AppSpace.s12),
+          Expanded(
+            child: Text(
+              l10n.searchCoursesHint,
+              style: text.bodyMedium?.copyWith(color: t.textSecondary),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          const SizedBox(width: AppSpace.s8),
+          Material(
+            color: t.brandContainer,
+            borderRadius: BorderRadius.circular(AppRadius.full),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(AppRadius.full),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const AiChatScreen()),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.auto_awesome_rounded, size: 15, color: t.brandOnContainer),
+                    const SizedBox(width: 6),
+                    Text(
+                      'Sodiq AI',
+                      style: text.labelMedium?.copyWith(
+                        color: t.brandOnContainer,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ],
       ),
