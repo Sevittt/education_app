@@ -3289,5 +3289,174 @@
         "type": "String"
       }
     }
+  },
+  "dsContentLoadFailed": "Content failed to load",
+  "@dsContentLoadFailed": {
+    "description": "Redesign: dsContentLoadFailed"
+  },
+  "dsRetry": "Try again",
+  "@dsRetry": {
+    "description": "Redesign: dsRetry"
+  },
+  "dsFinishLesson": "Complete lesson",
+  "@dsFinishLesson": {
+    "description": "Redesign: dsFinishLesson"
+  },
+  "dsWatchVideo": "Watch video",
+  "@dsWatchVideo": {
+    "description": "Redesign: dsWatchVideo"
+  },
+  "dsContinueVideo": "Resume · {time}",
+  "@dsContinueVideo": {
+    "description": "Redesign: dsContinueVideo",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "dsReadDone": "I've read it, complete",
+  "@dsReadDone": {
+    "description": "Redesign: dsReadDone"
+  },
+  "dsLastStoppedAt": "You stopped at {time} last time",
+  "@dsLastStoppedAt": {
+    "description": "Redesign: dsLastStoppedAt",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "dsResumeHint": "The video will resume from here",
+  "@dsResumeHint": {
+    "description": "Redesign: dsResumeHint"
+  },
+  "dsVideoWatchedReady": "Video watched — you can complete the lesson",
+  "@dsVideoWatchedReady": {
+    "description": "Redesign: dsVideoWatchedReady"
+  },
+  "dsAutoCompleteTitle": "The lesson completes automatically",
+  "@dsAutoCompleteTitle": {
+    "description": "Redesign: dsAutoCompleteTitle"
+  },
+  "dsAutoCompleteBody": "Watch at least {percent}% of the video to complete the lesson. Skipped parts don't count; your position is saved if you leave.",
+  "@dsAutoCompleteBody": {
+    "description": "Redesign: dsAutoCompleteBody",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "dsWatched": "Watched",
+  "@dsWatched": {
+    "description": "Redesign: dsWatched"
+  },
+  "dsResumeChip": "Resumes where you left off",
+  "@dsResumeChip": {
+    "description": "Redesign: dsResumeChip"
+  },
+  "dsOpenDocument": "Open document",
+  "@dsOpenDocument": {
+    "description": "Redesign: dsOpenDocument"
+  },
+  "dsNoFileLink": "No file link available",
+  "@dsNoFileLink": {
+    "description": "Redesign: dsNoFileLink"
+  },
+  "dsQuizTitle": "Quiz",
+  "@dsQuizTitle": {
+    "description": "Redesign: dsQuizTitle"
+  },
+  "dsPassThreshold": "Pass mark: {percent}%",
+  "@dsPassThreshold": {
+    "description": "Redesign: dsPassThreshold",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "dsQuizResultTitle": "Quiz result",
+  "@dsQuizResultTitle": {
+    "description": "Redesign: dsQuizResultTitle"
+  },
+  "dsCorrectOfTotal": "{correct} / {total} correct",
+  "@dsCorrectOfTotal": {
+    "description": "Redesign: dsCorrectOfTotal",
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "dsPassed": "Passed",
+  "@dsPassed": {
+    "description": "Redesign: dsPassed"
+  },
+  "dsNotPassed": "Not passed",
+  "@dsNotPassed": {
+    "description": "Redesign: dsNotPassed"
+  },
+  "dsQuizPassedTitle": "Quiz passed!",
+  "@dsQuizPassedTitle": {
+    "description": "Redesign: dsQuizPassedTitle"
+  },
+  "dsQuizFailedTitle": "Not passed this time",
+  "@dsQuizFailedTitle": {
+    "description": "Redesign: dsQuizFailedTitle"
+  },
+  "dsQuizPassedBody": "The pass mark was {percent}% — your result is saved.",
+  "@dsQuizPassedBody": {
+    "description": "Redesign: dsQuizPassedBody",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "dsQuizFailedBody": "At least {percent}% is needed — {needed} more correct answers were required.",
+  "@dsQuizFailedBody": {
+    "description": "Redesign: dsQuizFailedBody",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "needed": {
+        "type": "int"
+      }
+    }
+  },
+  "dsNoXpThisAttempt": "No XP for this attempt",
+  "@dsNoXpThisAttempt": {
+    "description": "Redesign: dsNoXpThisAttempt"
+  },
+  "dsNoXpThisAttemptBody": "Pass the quiz to earn XP and complete the lesson.",
+  "@dsNoXpThisAttemptBody": {
+    "description": "Redesign: dsNoXpThisAttemptBody"
+  },
+  "dsQuestions": "Questions",
+  "@dsQuestions": {
+    "description": "Redesign: dsQuestions"
+  },
+  "dsCorrectWrong": "{correct} correct · {wrong} wrong",
+  "@dsCorrectWrong": {
+    "description": "Redesign: dsCorrectWrong",
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "wrong": {
+        "type": "int"
+      }
+    }
+  },
+  "dsReviewAnswers": "Review mistakes",
+  "@dsReviewAnswers": {
+    "description": "Redesign: dsReviewAnswers"
   }
 }

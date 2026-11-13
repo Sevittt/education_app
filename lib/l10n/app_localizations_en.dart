@@ -2326,4 +2326,110 @@ class AppLocalizationsEn extends AppLocalizations {
   String dsLessonDoneToast(String title) {
     return '$title completed!';
   }
+
+  @override
+  String get dsContentLoadFailed => 'Content failed to load';
+
+  @override
+  String get dsRetry => 'Try again';
+
+  @override
+  String get dsFinishLesson => 'Complete lesson';
+
+  @override
+  String get dsWatchVideo => 'Watch video';
+
+  @override
+  String dsContinueVideo(String time) {
+    return 'Resume · $time';
+  }
+
+  @override
+  String get dsReadDone => 'I\'ve read it, complete';
+
+  @override
+  String dsLastStoppedAt(String time) {
+    return 'You stopped at $time last time';
+  }
+
+  @override
+  String get dsResumeHint => 'The video will resume from here';
+
+  @override
+  String get dsVideoWatchedReady => 'Video watched — you can complete the lesson';
+
+  @override
+  String get dsAutoCompleteTitle => 'The lesson completes automatically';
+
+  @override
+  String dsAutoCompleteBody(int percent) {
+    return 'Watch at least $percent% of the video to complete the lesson. Skipped parts don\'t count; your position is saved if you leave.';
+  }
+
+  @override
+  String get dsWatched => 'Watched';
+
+  @override
+  String get dsResumeChip => 'Resumes where you left off';
+
+  @override
+  String get dsOpenDocument => 'Open document';
+
+  @override
+  String get dsNoFileLink => 'No file link available';
+
+  @override
+  String get dsQuizTitle => 'Quiz';
+
+  @override
+  String dsPassThreshold(int percent) {
+    return 'Pass mark: $percent%';
+  }
+
+  @override
+  String get dsQuizResultTitle => 'Quiz result';
+
+  @override
+  String dsCorrectOfTotal(int correct, int total) {
+    return '$correct / $total correct';
+  }
+
+  @override
+  String get dsPassed => 'Passed';
+
+  @override
+  String get dsNotPassed => 'Not passed';
+
+  @override
+  String get dsQuizPassedTitle => 'Quiz passed!';
+
+  @override
+  String get dsQuizFailedTitle => 'Not passed this time';
+
+  @override
+  String dsQuizPassedBody(int percent) {
+    return 'The pass mark was $percent% — your result is saved.';
+  }
+
+  @override
+  String dsQuizFailedBody(int percent, int needed) {
+    return 'At least $percent% is needed — $needed more correct answers were required.';
+  }
+
+  @override
+  String get dsNoXpThisAttempt => 'No XP for this attempt';
+
+  @override
+  String get dsNoXpThisAttemptBody => 'Pass the quiz to earn XP and complete the lesson.';
+
+  @override
+  String get dsQuestions => 'Questions';
+
+  @override
+  String dsCorrectWrong(int correct, int wrong) {
+    return '$correct correct · $wrong wrong';
+  }
+
+  @override
+  String get dsReviewAnswers => 'Review mistakes';
 }

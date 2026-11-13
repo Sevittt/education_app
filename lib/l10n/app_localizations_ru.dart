@@ -2326,4 +2326,110 @@ class AppLocalizationsRu extends AppLocalizations {
   String dsLessonDoneToast(String title) {
     return '«$title» выполнено!';
   }
+
+  @override
+  String get dsContentLoadFailed => 'Не удалось загрузить материал';
+
+  @override
+  String get dsRetry => 'Повторить';
+
+  @override
+  String get dsFinishLesson => 'Завершить урок';
+
+  @override
+  String get dsWatchVideo => 'Смотреть видео';
+
+  @override
+  String dsContinueVideo(String time) {
+    return 'Продолжить · $time';
+  }
+
+  @override
+  String get dsReadDone => 'Прочитано, завершить';
+
+  @override
+  String dsLastStoppedAt(String time) {
+    return 'В прошлый раз вы остановились на $time';
+  }
+
+  @override
+  String get dsResumeHint => 'Видео продолжится с этого места';
+
+  @override
+  String get dsVideoWatchedReady => 'Видео просмотрено — можно завершить урок';
+
+  @override
+  String get dsAutoCompleteTitle => 'Урок завершится автоматически';
+
+  @override
+  String dsAutoCompleteBody(int percent) {
+    return 'Урок засчитывается после просмотра не менее $percent% видео. Перемотанные части не учитываются, место просмотра сохраняется.';
+  }
+
+  @override
+  String get dsWatched => 'Просмотрено';
+
+  @override
+  String get dsResumeChip => 'Продолжится с места остановки';
+
+  @override
+  String get dsOpenDocument => 'Открыть документ';
+
+  @override
+  String get dsNoFileLink => 'Ссылка на файл отсутствует';
+
+  @override
+  String get dsQuizTitle => 'Тест';
+
+  @override
+  String dsPassThreshold(int percent) {
+    return 'Проходной балл: $percent%';
+  }
+
+  @override
+  String get dsQuizResultTitle => 'Результат теста';
+
+  @override
+  String dsCorrectOfTotal(int correct, int total) {
+    return 'Верно: $correct из $total';
+  }
+
+  @override
+  String get dsPassed => 'Пройден';
+
+  @override
+  String get dsNotPassed => 'Не пройден';
+
+  @override
+  String get dsQuizPassedTitle => 'Тест пройден!';
+
+  @override
+  String get dsQuizFailedTitle => 'В этот раз не пройден';
+
+  @override
+  String dsQuizPassedBody(int percent) {
+    return 'Проходной балл — $percent%. Результат сохранён.';
+  }
+
+  @override
+  String dsQuizFailedBody(int percent, int needed) {
+    return 'Нужно не менее $percent% — не хватило правильных ответов: $needed.';
+  }
+
+  @override
+  String get dsNoXpThisAttempt => 'За эту попытку XP не начисляется';
+
+  @override
+  String get dsNoXpThisAttemptBody => 'XP начисляется после прохождения теста, урок будет засчитан.';
+
+  @override
+  String get dsQuestions => 'Вопросы';
+
+  @override
+  String dsCorrectWrong(int correct, int wrong) {
+    return 'Верно: $correct · ошибок: $wrong';
+  }
+
+  @override
+  String get dsReviewAnswers => 'Посмотреть ошибки';
 }

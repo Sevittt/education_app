@@ -4387,6 +4387,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{title} completed!'**
   String dsLessonDoneToast(String title);
+
+  /// Redesign: dsContentLoadFailed
+  ///
+  /// In en, this message translates to:
+  /// **'Content failed to load'**
+  String get dsContentLoadFailed;
+
+  /// Redesign: dsRetry
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get dsRetry;
+
+  /// Redesign: dsFinishLesson
+  ///
+  /// In en, this message translates to:
+  /// **'Complete lesson'**
+  String get dsFinishLesson;
+
+  /// Redesign: dsWatchVideo
+  ///
+  /// In en, this message translates to:
+  /// **'Watch video'**
+  String get dsWatchVideo;
+
+  /// Redesign: dsContinueVideo
+  ///
+  /// In en, this message translates to:
+  /// **'Resume · {time}'**
+  String dsContinueVideo(String time);
+
+  /// Redesign: dsReadDone
+  ///
+  /// In en, this message translates to:
+  /// **'I\'ve read it, complete'**
+  String get dsReadDone;
+
+  /// Redesign: dsLastStoppedAt
+  ///
+  /// In en, this message translates to:
+  /// **'You stopped at {time} last time'**
+  String dsLastStoppedAt(String time);
+
+  /// Redesign: dsResumeHint
+  ///
+  /// In en, this message translates to:
+  /// **'The video will resume from here'**
+  String get dsResumeHint;
+
+  /// Redesign: dsVideoWatchedReady
+  ///
+  /// In en, this message translates to:
+  /// **'Video watched — you can complete the lesson'**
+  String get dsVideoWatchedReady;
+
+  /// Redesign: dsAutoCompleteTitle
+  ///
+  /// In en, this message translates to:
+  /// **'The lesson completes automatically'**
+  String get dsAutoCompleteTitle;
+
+  /// Redesign: dsAutoCompleteBody
+  ///
+  /// In en, this message translates to:
+  /// **'Watch at least {percent}% of the video to complete the lesson. Skipped parts don\'t count; your position is saved if you leave.'**
+  String dsAutoCompleteBody(int percent);
+
+  /// Redesign: dsWatched
+  ///
+  /// In en, this message translates to:
+  /// **'Watched'**
+  String get dsWatched;
+
+  /// Redesign: dsResumeChip
+  ///
+  /// In en, this message translates to:
+  /// **'Resumes where you left off'**
+  String get dsResumeChip;
+
+  /// Redesign: dsOpenDocument
+  ///
+  /// In en, this message translates to:
+  /// **'Open document'**
+  String get dsOpenDocument;
+
+  /// Redesign: dsNoFileLink
+  ///
+  /// In en, this message translates to:
+  /// **'No file link available'**
+  String get dsNoFileLink;
+
+  /// Redesign: dsQuizTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz'**
+  String get dsQuizTitle;
+
+  /// Redesign: dsPassThreshold
+  ///
+  /// In en, this message translates to:
+  /// **'Pass mark: {percent}%'**
+  String dsPassThreshold(int percent);
+
+  /// Redesign: dsQuizResultTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz result'**
+  String get dsQuizResultTitle;
+
+  /// Redesign: dsCorrectOfTotal
+  ///
+  /// In en, this message translates to:
+  /// **'{correct} / {total} correct'**
+  String dsCorrectOfTotal(int correct, int total);
+
+  /// Redesign: dsPassed
+  ///
+  /// In en, this message translates to:
+  /// **'Passed'**
+  String get dsPassed;
+
+  /// Redesign: dsNotPassed
+  ///
+  /// In en, this message translates to:
+  /// **'Not passed'**
+  String get dsNotPassed;
+
+  /// Redesign: dsQuizPassedTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz passed!'**
+  String get dsQuizPassedTitle;
+
+  /// Redesign: dsQuizFailedTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Not passed this time'**
+  String get dsQuizFailedTitle;
+
+  /// Redesign: dsQuizPassedBody
+  ///
+  /// In en, this message translates to:
+  /// **'The pass mark was {percent}% — your result is saved.'**
+  String dsQuizPassedBody(int percent);
+
+  /// Redesign: dsQuizFailedBody
+  ///
+  /// In en, this message translates to:
+  /// **'At least {percent}% is needed — {needed} more correct answers were required.'**
+  String dsQuizFailedBody(int percent, int needed);
+
+  /// Redesign: dsNoXpThisAttempt
+  ///
+  /// In en, this message translates to:
+  /// **'No XP for this attempt'**
+  String get dsNoXpThisAttempt;
+
+  /// Redesign: dsNoXpThisAttemptBody
+  ///
+  /// In en, this message translates to:
+  /// **'Pass the quiz to earn XP and complete the lesson.'**
+  String get dsNoXpThisAttemptBody;
+
+  /// Redesign: dsQuestions
+  ///
+  /// In en, this message translates to:
+  /// **'Questions'**
+  String get dsQuestions;
+
+  /// Redesign: dsCorrectWrong
+  ///
+  /// In en, this message translates to:
+  /// **'{correct} correct · {wrong} wrong'**
+  String dsCorrectWrong(int correct, int wrong);
+
+  /// Redesign: dsReviewAnswers
+  ///
+  /// In en, this message translates to:
+  /// **'Review mistakes'**
+  String get dsReviewAnswers;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

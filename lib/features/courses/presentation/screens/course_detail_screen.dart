@@ -262,7 +262,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
       // Quiz — faqat o'tish chegarasidan o'tgan natija darsni yakunlaydi
       final result = await Navigator.push<QuizResult>(
         context,
-        MaterialPageRoute(builder: (_) => QuizScreen(quizId: lesson.refId)),
+        MaterialPageRoute(builder: (_) => QuizScreen(quizId: lesson.refId, minPassPercent: lesson.minPassScore)),
       );
       if (result == null || !context.mounted) return; // Test topshirilmadi
 

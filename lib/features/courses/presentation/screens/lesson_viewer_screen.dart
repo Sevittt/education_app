@@ -1,17 +1,19 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:sud_qollanma/core/constants/app_colors.dart';
+import 'package:sud_qollanma/core/theme/app_tokens.dart';
 import 'package:sud_qollanma/features/courses/domain/entities/course_lesson_entity.dart';
+import 'package:sud_qollanma/features/courses/presentation/widgets/course_visuals.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:sud_qollanma/features/library/data/datasources/video_progress_remote_source.dart';
 import 'package:sud_qollanma/features/library/domain/entities/video_entity.dart';
 import 'package:sud_qollanma/features/library/domain/entities/video_watch_progress.dart';
 import 'package:sud_qollanma/features/library/presentation/screens/video_player_screen.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
+import 'package:sud_qollanma/shared/widgets/design_system.dart';
 
-/// Dars kontent ekrani.
+/// Dars kontent ekrani (Figma "04 · Dars — video").
 /// [refId] + [sourceCollection] orqali Firestore'dan kontent yuklanadi.
 /// `true` faqat aniq yakunlash amalida qaytariladi: maqola/PDF uchun tugma,
 /// video uchun kamida 90% haqiqatan ko'rilganda. Orqaga qaytish null beradi.
@@ -24,30 +26,16 @@ class LessonViewerScreen extends StatefulWidget {
   State<LessonViewerScreen> createState() => _LessonViewerScreenState();
 }
 
-class _LessonViewerScreenState extends State<LessonViewerScreen>
-    with SingleTickerProviderStateMixin {
+class _LessonViewerScreenState extends State<LessonViewerScreen> {
   bool _loading = true;
   String? _error;
   Map<String, dynamic>? _data;
   VideoWatchProgress _videoProgress = const VideoWatchProgress();
-  late AnimationController _fadeCtrl;
-  late Animation<double> _fadeAnim;
 
   @override
   void initState() {
     super.initState();
-    _fadeCtrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 480),
-    );
-    _fadeAnim = CurvedAnimation(parent: _fadeCtrl, curve: Curves.easeOut);
     _loadContent();
-  }
-
-  @override
-  void dispose() {
-    _fadeCtrl.dispose();
-    super.dispose();
   }
 
   Future<void> _loadContent() async {
@@ -61,327 +49,215 @@ class _LessonViewerScreenState extends State<LessonViewerScreen>
         _data = doc.data();
         _loading = false;
       });
-      _fadeCtrl.forward();
 
-    if (widget.lesson.type == LessonType.video && mounted) {
-      _loadVideoProgress();
-      WidgetsBinding.instance.addPostFrameCallback((_) => _openVideoDirectly());
+      if (widget.lesson.type == LessonType.video && mounted) {
+        _loadVideoProgress();
+        WidgetsBinding.instance.addPostFrameCallback((_) => _openVideoDirectly());
+      }
+    } catch (e) {
+      setState(() {
+        _error = e.toString();
+        _loading = false;
+      });
     }
-  } catch (e) {
-    setState(() {
-      _error = e.toString();
-      _loading = false;
-    });
   }
-}
 
-Future<void> _openVideoDirectly() async {
-  if (!mounted || _data == null) return;
-  final data = _data!;
-  final video = VideoEntity(
-    id: widget.lesson.refId,
-    title: data['title'] as String? ?? widget.lesson.title,
-    description: data['description'] as String? ?? '',
-    youtubeId: data['youtubeId'] as String?,
-    videoUrl: data['videoUrl'] as String?,
-    durationSeconds: (data['duration'] as num?)?.toInt() ??
-        (data['durationSeconds'] as num?)?.toInt() ??
-        0,
-    category: data['category'] as String? ?? 'beginner',
-    systemId: data['systemId'] as String?,
-    thumbnailUrl: data['thumbnailUrl'] as String? ?? '',
-    tags: List<String>.from(data['tags'] as List? ?? []),
-    authorId: data['authorId'] as String? ?? '',
-    authorName: data['authorName'] as String? ?? '',
-    views: (data['views'] as num?)?.toInt() ?? 0,
-    likes: (data['likes'] as num?)?.toInt() ?? 0,
-    createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
-    order: (data['order'] as num?)?.toInt() ?? 0,
-    timeCodes: (data['timeCodes'] as List?)
-            ?.map((e) => VideoTimeCode.fromMap(e as Map<String, dynamic>))
-            .toList() ??
-        [],
-  );
-  await _playVideo(video);
-}
+  VideoEntity _videoFromData(Map<String, dynamic> data) => VideoEntity(
+        id: widget.lesson.refId,
+        title: data['title'] as String? ?? widget.lesson.title,
+        description: data['description'] as String? ?? '',
+        youtubeId: data['youtubeId'] as String?,
+        videoUrl: data['videoUrl'] as String?,
+        durationSeconds: (data['duration'] as num?)?.toInt() ??
+            (data['durationSeconds'] as num?)?.toInt() ??
+            0,
+        category: data['category'] as String? ?? 'beginner',
+        systemId: data['systemId'] as String?,
+        thumbnailUrl: data['thumbnailUrl'] as String? ?? '',
+        tags: List<String>.from(data['tags'] as List? ?? []),
+        authorId: data['authorId'] as String? ?? '',
+        authorName: data['authorName'] as String? ?? '',
+        views: (data['views'] as num?)?.toInt() ?? 0,
+        likes: (data['likes'] as num?)?.toInt() ?? 0,
+        createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+        order: (data['order'] as num?)?.toInt() ?? 0,
+        timeCodes: (data['timeCodes'] as List?)
+                ?.map((e) => VideoTimeCode.fromMap(e as Map<String, dynamic>))
+                .toList() ??
+            [],
+      );
 
-/// Videoni ochadi; kamida 90% ko'rilgan bo'lsa darsni yakunlab chiqadi,
-/// aks holda foydalanuvchi shu ekranda qoladi va ko'rilgan ulushini ko'radi.
-Future<void> _playVideo(VideoEntity video) async {
-  var watched = false;
-  await Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (_) => VideoPlayerScreen(
-        videoEntity: video,
-        onWatched: () => watched = true,
+  Future<void> _openVideoDirectly() async {
+    if (!mounted || _data == null) return;
+    await _playVideo(_videoFromData(_data!));
+  }
+
+  /// Videoni ochadi; kamida 90% ko'rilgan bo'lsa darsni yakunlab chiqadi,
+  /// aks holda foydalanuvchi shu ekranda qoladi va ko'rilgan ulushini ko'radi.
+  Future<void> _playVideo(VideoEntity video) async {
+    var watched = false;
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => VideoPlayerScreen(
+          videoEntity: video,
+          onWatched: () => watched = true,
+        ),
       ),
-    ),
-  );
-  if (!mounted) return;
-  if (watched) {
-    Navigator.pop(context, true);
-  } else {
-    await _loadVideoProgress();
+    );
+    if (!mounted) return;
+    if (watched) {
+      Navigator.pop(context, true);
+    } else {
+      await _loadVideoProgress();
+    }
   }
-}
 
-Future<void> _loadVideoProgress() async {
-  final uid = FirebaseAuth.instance.currentUser?.uid;
-  if (uid == null) return;
-  try {
-    final progress = await context
-        .read<VideoProgressRemoteSource>()
-        .get(uid, widget.lesson.refId);
-    if (mounted) setState(() => _videoProgress = progress);
-  } catch (e) {
-    debugPrint('Video progress yuklanmadi: $e');
+  Future<void> _loadVideoProgress() async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return;
+    try {
+      final progress = await context
+          .read<VideoProgressRemoteSource>()
+          .get(uid, widget.lesson.refId);
+      if (mounted) setState(() => _videoProgress = progress);
+    } catch (e) {
+      debugPrint('Video progress yuklanmadi: $e');
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final typeConfig = _typeConfig(widget.lesson.type);
+    final l10n = AppLocalizations.of(context)!;
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
 
     return Scaffold(
-      backgroundColor:
-          isDark ? AppColors.scaffoldDark : AppColors.backgroundLight,
-      appBar: AppBar(
-        backgroundColor: isDark ? AppColors.surfaceDark : AppColors.primary,
-        foregroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              decoration: BoxDecoration(
-                color: typeConfig.color.withValues(alpha: isDark ? 0.25 : 0.18),
-                borderRadius: BorderRadius.circular(6),
+      body: SafeArea(
+        bottom: false,
+        child: Column(children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(AppSpace.s16, AppSpace.s8, AppSpace.s16, AppSpace.s8),
+            child: Row(children: [
+              CircleIconButton(Icons.arrow_back_rounded,
+                  tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+                  onPressed: () => Navigator.pop(context)),
+              const SizedBox(width: AppSpace.s12),
+              Expanded(
+                child: Column(children: [
+                  Text(lessonTypeLabel(l10n, widget.lesson.type),
+                      style: text.labelMedium?.copyWith(color: t.textTertiary)),
+                  Text(widget.lesson.title,
+                      style: text.titleSmall, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center),
+                ]),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(typeConfig.icon, size: 12, color: typeConfig.color),
-                  const SizedBox(width: 4),
-                  Text(
-                    typeConfig.label,
-                    style: TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w700,
-                      color: typeConfig.color,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Text(
-                widget.lesson.title,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                    fontSize: 15, fontWeight: FontWeight.w600),
-              ),
-            ),
-          ],
-        ),
-      ),
-      body: _loading
-          ? _buildSkeleton(isDark)
-          : _error != null
-              ? _buildError(isDark)
-              : FadeTransition(
-                  opacity: _fadeAnim,
-                  child: _buildContent(isDark),
-                ),
-    );
-  }
-
-  // ─── Skeleton ─────────────────────────────────────────────────────────────
-
-  Widget _buildSkeleton(bool isDark) {
-    return _Shimmer(
-      isDark: isDark,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _SkeletonBox(
-              height: 220, borderRadius: 0, isDark: isDark, margin: EdgeInsets.zero),
-          const SizedBox(height: 20),
-          _SkeletonBox(height: 14, isDark: isDark, widthFraction: 0.7),
-          const SizedBox(height: 10),
-          _SkeletonBox(height: 12, isDark: isDark, widthFraction: 0.9),
-          const SizedBox(height: 6),
-          _SkeletonBox(height: 12, isDark: isDark, widthFraction: 0.6),
-        ],
+              const SizedBox(width: 52),
+            ]),
+          ),
+          Expanded(
+            child: _loading
+                ? const Center(child: CircularProgressIndicator())
+                : _error != null
+                    ? _buildError(l10n, t, text)
+                    : _buildContent(l10n),
+          ),
+        ]),
       ),
     );
   }
 
-  // ─── Error ────────────────────────────────────────────────────────────────
-
-  Widget _buildError(bool isDark) {
+  Widget _buildError(AppLocalizations l10n, AppTokens t, TextTheme text) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: AppColors.error.withValues(alpha: 0.08),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.wifi_off_rounded,
-                  size: 48, color: AppColors.error),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              'Kontent yuklanmadi',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: isDark
-                    ? AppColors.textPrimary
-                    : AppColors.textPrimaryLight,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              _error ?? '',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 13,
-                color: isDark
-                    ? AppColors.textSecondary
-                    : AppColors.textSecondaryLight,
-              ),
-            ),
-            const SizedBox(height: 28),
-            FilledButton.icon(
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
-              ),
-              onPressed: () {
-                setState(() {
-                  _loading = true;
-                  _error = null;
-                });
-                _loadContent();
-              },
-              icon: const Icon(Icons.refresh_rounded, size: 18),
-              label: const Text('Qayta urinish'),
-            ),
-          ],
-        ),
+        padding: const EdgeInsets.all(AppSpace.s32),
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          IconTile(Icons.wifi_off_rounded, size: 72, circle: true, background: t.dangerContainer, foreground: t.dangerSolid),
+          const SizedBox(height: AppSpace.s20),
+          Text(l10n.dsContentLoadFailed, style: text.titleLarge),
+          const SizedBox(height: AppSpace.s8),
+          Text(_error ?? '', textAlign: TextAlign.center, style: text.bodySmall?.copyWith(color: t.textSecondary)),
+          const SizedBox(height: AppSpace.s24),
+          FilledButton.icon(
+            onPressed: () {
+              setState(() {
+                _loading = true;
+                _error = null;
+              });
+              _loadContent();
+            },
+            icon: const Icon(Icons.refresh_rounded),
+            label: Text(l10n.dsRetry),
+          ),
+        ]),
       ),
     );
   }
 
-  // ─── Content router ───────────────────────────────────────────────────────
-
-  Widget _buildContent(bool isDark) {
+  Widget _buildContent(AppLocalizations l10n) {
+    final data = _data!;
     switch (widget.lesson.type) {
       case LessonType.video:
-        return _buildVideoContent(isDark);
+        final video = _videoFromData(data);
+        final completed = _videoProgress.isCompleted;
+        final resumeAt = _videoProgress.resumePositionSeconds;
+        return _LessonLayout(
+          actions: [
+            if (completed)
+              FilledButton.icon(
+                onPressed: () => Navigator.pop(context, true),
+                icon: const Icon(Icons.check_circle_outline_rounded),
+                label: Text(l10n.dsFinishLesson),
+              )
+            else
+              FilledButton.icon(
+                onPressed: () => _playVideo(video),
+                icon: const Icon(Icons.play_arrow_rounded),
+                label: Text(resumeAt == null ? l10n.dsWatchVideo : l10n.dsContinueVideo(formatClock(resumeAt))),
+              ),
+          ],
+          child: _VideoBody(
+            lesson: widget.lesson,
+            video: video,
+            progress: _videoProgress,
+            onPlay: () => _playVideo(video),
+          ),
+        );
       case LessonType.article:
-        return _buildArticleContent(isDark);
+        return _LessonLayout(
+          actions: [
+            FilledButton.icon(
+              onPressed: () => Navigator.pop(context, true),
+              icon: const Icon(Icons.check_circle_outline_rounded),
+              label: Text(l10n.dsReadDone),
+            ),
+          ],
+          child: _ArticleBody(
+            lesson: widget.lesson,
+            title: data['title'] as String? ?? widget.lesson.title,
+            content: data['content'] as String? ?? data['text'] as String? ?? '',
+          ),
+        );
       case LessonType.pdf:
-        return _buildPdfContent(isDark);
+        final url = data['url'] as String? ?? data['pdfUrl'] as String?;
+        return _LessonLayout(
+          actions: [
+            FilledButton.icon(
+              onPressed: () => Navigator.pop(context, true),
+              icon: const Icon(Icons.check_circle_outline_rounded),
+              label: Text(l10n.dsFinishLesson),
+            ),
+          ],
+          child: _PdfBody(
+            lesson: widget.lesson,
+            title: data['title'] as String? ?? widget.lesson.title,
+            description: data['description'] as String? ?? '',
+            url: url,
+            onOpen: () => _openUrl(url!),
+          ),
+        );
       case LessonType.quiz:
         return const SizedBox.shrink();
     }
-  }
-
-  // ─── Video ────────────────────────────────────────────────────────────────
-
-  Widget _buildVideoContent(bool isDark) {
-    final data = _data!;
-    final video = VideoEntity(
-      id: widget.lesson.refId,
-      title: data['title'] as String? ?? widget.lesson.title,
-      description: data['description'] as String? ?? '',
-      youtubeId: data['youtubeId'] as String?,
-      videoUrl: data['videoUrl'] as String?,
-      durationSeconds: (data['duration'] as num?)?.toInt() ??
-          (data['durationSeconds'] as num?)?.toInt() ??
-          0,
-      category: data['category'] as String? ?? 'beginner',
-      systemId: data['systemId'] as String?,
-      thumbnailUrl: data['thumbnailUrl'] as String? ?? '',
-      tags: List<String>.from(data['tags'] as List? ?? []),
-      authorId: data['authorId'] as String? ?? '',
-      authorName: data['authorName'] as String? ?? '',
-      views: (data['views'] as num?)?.toInt() ?? 0,
-      likes: (data['likes'] as num?)?.toInt() ?? 0,
-      createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
-      order: (data['order'] as num?)?.toInt() ?? 0,
-      timeCodes: (data['timeCodes'] as List?)
-              ?.map((e) => VideoTimeCode.fromMap(e as Map<String, dynamic>))
-              .toList() ??
-          [],
-    );
-
-    return _LessonShell(
-      isDark: isDark,
-      lessonType: widget.lesson.type,
-      onVideoOpen: () => _playVideo(video),
-      // Qat'iy: video kamida 90% haqiqatan ko'rilmaguncha dars yakunlanmaydi
-      onComplete: _videoProgress.isCompleted
-          ? () => Navigator.pop(context, true)
-          : null,
-      videoWatchedRatio: _videoProgress.watchedRatio,
-      child: _VideoHero(video: video, isDark: isDark),
-    );
-  }
-
-  // ─── Article ──────────────────────────────────────────────────────────────
-
-  Widget _buildArticleContent(bool isDark) {
-    final data = _data!;
-    final title = data['title'] as String? ?? widget.lesson.title;
-    final content =
-        data['content'] as String? ?? data['text'] as String? ?? '';
-
-    return _LessonShell(
-      isDark: isDark,
-      lessonType: widget.lesson.type,
-      onComplete: () => Navigator.pop(context, true),
-      child: _ArticleBody(
-          title: title, content: content, isDark: isDark),
-    );
-  }
-
-  // ─── PDF ──────────────────────────────────────────────────────────────────
-
-  Widget _buildPdfContent(bool isDark) {
-    final data = _data!;
-    final title = data['title'] as String? ?? widget.lesson.title;
-    final description = data['description'] as String? ?? '';
-    final url = data['url'] as String? ?? data['pdfUrl'] as String?;
-
-    return _LessonShell(
-      isDark: isDark,
-      lessonType: widget.lesson.type,
-      onComplete: () => Navigator.pop(context, true),
-      child: _PdfBody(
-        title: title,
-        description: description,
-        url: url,
-        isDark: isDark,
-        onOpen: () => _openUrl(url!),
-      ),
-    );
   }
 
   Future<void> _openUrl(String url) async {
@@ -393,1094 +269,281 @@ Future<void> _loadVideoProgress() async {
   }
 }
 
-// ─── Type config helper ───────────────────────────────────────────────────────
+// ─── Umumiy tuzilma ───────────────────────────────────────────────────────────
 
-class _TypeConfig {
-  final IconData icon;
-  final Color color;
-  final String label;
-  const _TypeConfig({required this.icon, required this.color, required this.label});
-}
-
-_TypeConfig _typeConfig(LessonType type) {
-  switch (type) {
-    case LessonType.video:
-      return _TypeConfig(
-          icon: Icons.play_circle_filled_rounded,
-          color: const Color(0xFF3B82F6),
-          label: 'Video');
-    case LessonType.article:
-      return _TypeConfig(
-          icon: Icons.article_rounded,
-          color: AppColors.success,
-          label: 'Maqola');
-    case LessonType.pdf:
-      return _TypeConfig(
-          icon: Icons.picture_as_pdf_rounded,
-          color: AppColors.error,
-          label: 'PDF');
-    case LessonType.quiz:
-      return _TypeConfig(
-          icon: Icons.quiz_rounded,
-          color: AppColors.warning,
-          label: 'Test');
-  }
-}
-
-// ─── Lesson Shell (layout + bottom actions) ───────────────────────────────────
-
-class _LessonShell extends StatelessWidget {
+class _LessonLayout extends StatelessWidget {
   final Widget child;
-  final bool isDark;
-  final LessonType lessonType;
-  /// null — hali yakunlab bo'lmaydi (video yetarli ko'rilmagan)
-  final VoidCallback? onComplete;
-  final VoidCallback? onVideoOpen;
-  final double? videoWatchedRatio;
+  final List<Widget> actions;
 
-  const _LessonShell({
-    required this.child,
-    required this.isDark,
-    required this.lessonType,
-    required this.onComplete,
-    this.onVideoOpen,
-    this.videoWatchedRatio,
-  });
+  const _LessonLayout({required this.child, required this.actions});
 
   @override
   Widget build(BuildContext context) {
-    final isVideo = lessonType == LessonType.video;
-    final tc = _typeConfig(lessonType);
-
-    return Column(
-      children: [
-        Expanded(child: SingleChildScrollView(child: child)),
-        _BottomActionBar(
-          isDark: isDark,
-          isVideo: isVideo,
-          typeColor: tc.color,
-          onVideoOpen: onVideoOpen,
-          onComplete: onComplete,
-          videoWatchedRatio: videoWatchedRatio,
-        ),
-      ],
-    );
+    return Column(children: [
+      Expanded(child: SelectionArea(child: SingleChildScrollView(child: child))),
+      StickyActionBar(children: actions),
+    ]);
   }
 }
 
-// ─── Bottom Action Bar ────────────────────────────────────────────────────────
-
-class _BottomActionBar extends StatelessWidget {
-  final bool isDark;
-  final bool isVideo;
-  final Color typeColor;
-  final VoidCallback? onVideoOpen;
-  final VoidCallback? onComplete;
-  final double? videoWatchedRatio;
-
-  const _BottomActionBar({
-    required this.isDark,
-    required this.isVideo,
-    required this.typeColor,
-    this.onVideoOpen,
-    required this.onComplete,
-    this.videoWatchedRatio,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final surfaceColor =
-        isDark ? AppColors.surfaceDark : AppColors.surfaceLight;
-    final borderColor =
-        isDark ? AppColors.borderDark : AppColors.borderLight;
-
-    return Container(
-      decoration: BoxDecoration(
-        color: surfaceColor,
-        border: Border(
-          top: BorderSide(color: borderColor, width: 1),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: isDark ? 0.3 : 0.06),
-            blurRadius: 16,
-            offset: const Offset(0, -4),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Handle bar
-          Container(
-            width: 36,
-            height: 4,
-            margin: const EdgeInsets.only(bottom: 14),
-            decoration: BoxDecoration(
-              color: borderColor,
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
-          if (isVideo && onVideoOpen != null) ...[
-            // Primary: Watch video (oldin boshlangan bo'lsa — davom ettirish)
-            _ActionButton(
-              onTap: onVideoOpen!,
-              gradient: LinearGradient(
-                colors: [typeColor, typeColor.withValues(alpha: 0.8)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
-              icon: Icons.play_arrow_rounded,
-              label: (videoWatchedRatio ?? 0) > 0 && onComplete == null
-                  ? 'Davom ettirish'
-                  : 'Videoni ko\'rish',
-              iconBg: Colors.white.withValues(alpha: 0.18),
-            ),
-            const SizedBox(height: 10),
-            // Secondary: yakunlash faqat 90% ko'rilgandan keyin; ungacha ko'rilgan ulush
-            if (onComplete == null)
-              _VideoWatchedInfo(
-                ratio: videoWatchedRatio ?? 0,
-                isDark: isDark,
-              )
-            else
-            _ActionButton(
-              onTap: onComplete!,
-              gradient: isDark
-                  ? const LinearGradient(
-                      colors: [Color(0xFF1C2D42), Color(0xFF253545)])
-                  : LinearGradient(colors: [
-                      AppColors.primaryContainer,
-                      AppColors.primaryContainer,
-                    ]),
-              icon: Icons.check_circle_rounded,
-              label: 'Darsni yakunlash',
-              iconBg: isDark
-                  ? AppColors.primary.withValues(alpha: 0.3)
-                  : AppColors.primary.withValues(alpha: 0.12),
-              labelColor: isDark ? AppColors.textPrimary : AppColors.primary,
-              iconColor: AppColors.primary,
-              hasBorder: true,
-              borderColor: isDark
-                  ? AppColors.primary.withValues(alpha: 0.3)
-                  : AppColors.primary.withValues(alpha: 0.3),
-            ),
-          ] else if (onComplete != null)
-            _ActionButton(
-              onTap: onComplete!,
-              gradient: LinearGradient(
-                colors: [AppColors.primary, AppColors.primaryLight],
-              ),
-              icon: Icons.check_circle_rounded,
-              label: isVideo ? 'Darsni yakunlash' : 'O\'qidim, bajarildi',
-              iconBg: Colors.white.withValues(alpha: 0.18),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-/// Video yetarli ko'rilmaguncha yakunlash tugmasi o'rnida ko'rinadi.
-class _VideoWatchedInfo extends StatelessWidget {
-  final double ratio;
-  final bool isDark;
-
-  const _VideoWatchedInfo({required this.ratio, required this.isDark});
-
-  @override
-  Widget build(BuildContext context) {
-    final percent = (ratio * 100).floor();
-    final requiredPercent = (VideoWatchProgress.completionRatio * 100).round();
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        LinearProgressIndicator(
-          value: ratio,
-          minHeight: 6,
-          borderRadius: BorderRadius.circular(3),
-          color: AppColors.primary,
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Ko\'rildi: $percent%. Dars videoning kamida $requiredPercent% qismi '
-          'ko\'rilganda yakunlanadi — oldinga o\'tkazilgan qism hisoblanmaydi.',
-          style: TextStyle(
-            fontSize: 12.5,
-            height: 1.4,
-            color: isDark ? AppColors.textSecondary : AppColors.textSecondaryLight,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _ActionButton extends StatefulWidget {
-  final VoidCallback onTap;
-  final Gradient gradient;
+class _LessonBadges extends StatelessWidget {
+  final CourseLessonEntity lesson;
+  final String typeLabel;
   final IconData icon;
-  final String label;
-  final Color iconBg;
-  final Color? labelColor;
-  final Color? iconColor;
-  final bool hasBorder;
-  final Color? borderColor;
 
-  const _ActionButton({
-    required this.onTap,
-    required this.gradient,
-    required this.icon,
-    required this.label,
-    required this.iconBg,
-    this.labelColor,
-    this.iconColor,
-    this.hasBorder = false,
-    this.borderColor,
-  });
-
-  @override
-  State<_ActionButton> createState() => _ActionButtonState();
-}
-
-class _ActionButtonState extends State<_ActionButton> {
-  bool _pressed = false;
+  const _LessonBadges({required this.lesson, required this.typeLabel, required this.icon});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (_) => setState(() => _pressed = true),
-      onTapUp: (_) {
-        setState(() => _pressed = false);
-        widget.onTap();
-      },
-      onTapCancel: () => setState(() => _pressed = false),
-      child: AnimatedScale(
-        scale: _pressed ? 0.972 : 1.0,
-        duration: const Duration(milliseconds: 100),
-        child: Container(
-          width: double.infinity,
-          height: 52,
-          decoration: BoxDecoration(
-            gradient: widget.gradient,
-            borderRadius: BorderRadius.circular(14),
-            border: widget.hasBorder && widget.borderColor != null
-                ? Border.all(color: widget.borderColor!, width: 1.5)
-                : null,
-            boxShadow: _pressed
-                ? []
-                : [
-                    BoxShadow(
-                      color:
-                          Colors.black.withValues(alpha: 0.12),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: widget.iconBg,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Icon(
-                  widget.icon,
-                  size: 18,
-                  color: widget.iconColor ?? Colors.white,
-                ),
-              ),
-              const SizedBox(width: 10),
-              Text(
-                widget.label,
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700,
-                  color: widget.labelColor ?? Colors.white,
-                  letterSpacing: 0.2,
-                ),
-              ),
-            ],
-          ),
-        ),
+    final l10n = AppLocalizations.of(context)!;
+    return Wrap(spacing: 6, runSpacing: 6, children: [
+      StatusBadge(
+        [typeLabel, if (lesson.estimatedMinutes != null) l10n.dsMinutes(lesson.estimatedMinutes!)].join(' · '),
+        tone: BadgeTone.neutral,
+        icon: icon,
       ),
-    );
+      if (lesson.isRequired) StatusBadge(l10n.dsMandatory, tone: BadgeTone.danger),
+      if (lesson.xpReward > 0) StatusBadge('+${lesson.xpReward} XP', tone: BadgeTone.gold, icon: Icons.bolt_rounded),
+    ]);
   }
 }
 
-// ─── Cinematic Video Hero ─────────────────────────────────────────────────────
+// ─── Video ────────────────────────────────────────────────────────────────────
 
-class _VideoHero extends StatefulWidget {
+class _VideoBody extends StatelessWidget {
+  final CourseLessonEntity lesson;
   final VideoEntity video;
-  final bool isDark;
+  final VideoWatchProgress progress;
+  final VoidCallback onPlay;
 
-  const _VideoHero({required this.video, required this.isDark});
-
-  @override
-  State<_VideoHero> createState() => _VideoHeroState();
-}
-
-class _VideoHeroState extends State<_VideoHero>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _pulseCtrl;
-  late Animation<double> _pulseAnim;
-
-  @override
-  void initState() {
-    super.initState();
-    _pulseCtrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1600),
-    )..repeat(reverse: false);
-    _pulseAnim = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _pulseCtrl, curve: Curves.easeOut),
-    );
-  }
-
-  @override
-  void dispose() {
-    _pulseCtrl.dispose();
-    super.dispose();
-  }
+  const _VideoBody({required this.lesson, required this.video, required this.progress, required this.onPlay});
 
   @override
   Widget build(BuildContext context) {
-    final isDark = widget.isDark;
-    final video = widget.video;
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
+    final resumeAt = progress.resumePositionSeconds;
+    final duration = progress.durationSeconds > 0 ? progress.durationSeconds : video.durationSeconds;
+    final requiredPercent = (VideoWatchProgress.completionRatio * 100).round();
+    final watchedPercent = (progress.watchedRatio * 100).floor();
 
-    // Hero gradient colors
-    final heroGrad1 = isDark
-        ? const Color(0xFF0C1520)
-        : const Color(0xFF1E2A6E);
-    final heroGrad2 = isDark
-        ? const Color(0xFF152032)
-        : const Color(0xFF3B4FCC);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // ── Cinematic video card ──────────────────────────────────────────
-        AspectRatio(
-          aspectRatio: 16 / 9,
-          child: Stack(
-            children: [
-              // Background gradient
-              Positioned.fill(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [heroGrad1, heroGrad2],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      _PlayerCard(
+        onPlay: onPlay,
+        resumeAt: resumeAt,
+        duration: duration,
+        position: progress.lastPositionSeconds,
+      ),
+      Padding(
+        padding: const EdgeInsets.all(AppSpace.s16),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          if (resumeAt != null) ...[
+            AppCard(
+              color: t.brandContainer,
+              border: false,
+              child: Row(children: [
+                Icon(Icons.replay_rounded, color: t.brandOnContainer),
+                const SizedBox(width: AppSpace.s12),
+                Expanded(
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text(l10n.dsLastStoppedAt(formatClock(resumeAt)),
+                        style: text.titleSmall?.copyWith(color: t.brandOnContainer)),
+                    Text(l10n.dsResumeHint, style: text.bodySmall?.copyWith(color: t.textSecondary)),
+                  ]),
+                ),
+              ]),
+            ),
+            const SizedBox(height: AppSpace.s16),
+          ],
+          _LessonBadges(lesson: lesson, typeLabel: lessonTypeLabel(l10n, lesson.type), icon: Icons.smart_display_outlined),
+          const SizedBox(height: AppSpace.s8),
+          Text(video.title, style: text.titleLarge),
+          const SizedBox(height: AppSpace.s16),
+          AppCard(
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Icon(progress.isCompleted ? Icons.check_circle_rounded : Icons.check_circle_outline_rounded,
+                    size: 20, color: t.successSolid),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text(progress.isCompleted ? l10n.dsVideoWatchedReady : l10n.dsAutoCompleteTitle,
+                        style: text.titleSmall),
+                    const SizedBox(height: 2),
+                    Text(l10n.dsAutoCompleteBody(requiredPercent),
+                        style: text.bodySmall?.copyWith(color: t.textSecondary)),
+                  ]),
+                ),
+              ]),
+              const SizedBox(height: AppSpace.s12),
+              Row(children: [
+                Text(l10n.dsWatched, style: text.labelMedium?.copyWith(color: t.textSecondary)),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: ProgressLine(
+                    value: progress.watchedRatio,
+                    color: progress.isCompleted ? t.successSolid : t.brandPrimary,
                   ),
                 ),
-              ),
-
-              // Decorative noise / grid lines
-              Positioned.fill(
-                child: CustomPaint(painter: _GridPainter()),
-              ),
-
-              // Thumbnail if available
-              if (video.thumbnailUrl.isNotEmpty)
-                Positioned.fill(
-                  child: Opacity(
-                    opacity: 0.25,
-                    child: Image.network(
-                      video.thumbnailUrl,
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => const SizedBox.shrink(),
-                    ),
-                  ),
-                ),
-
-              // Vignette overlay
-              Positioned.fill(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: RadialGradient(
-                      center: Alignment.center,
-                      radius: 1.0,
-                      colors: [
-                        Colors.transparent,
-                        Colors.black.withValues(alpha: 0.55),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-
-              // Pulsing ring + Play button (centered)
-              Center(
-                child: AnimatedBuilder(
-                  animation: _pulseAnim,
-                  builder: (_, __) {
-                    return Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        // Outer pulse ring
-                        Opacity(
-                          opacity: (1 - _pulseAnim.value).clamp(0.0, 1.0),
-                          child: Transform.scale(
-                            scale: 1.0 + _pulseAnim.value * 0.7,
-                            child: Container(
-                              width: 72,
-                              height: 72,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: Colors.white.withValues(alpha: 0.6),
-                                  width: 2,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        // Inner pulse ring
-                        Opacity(
-                          opacity: ((0.5 - _pulseAnim.value).abs() < 0.5
-                                  ? 1.0 - (_pulseAnim.value * 2 - 1).abs()
-                                  : 0.0)
-                              .clamp(0.0, 1.0),
-                          child: Transform.scale(
-                            scale: 1.0 + _pulseAnim.value * 0.35,
-                            child: Container(
-                              width: 72,
-                              height: 72,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: Colors.white.withValues(alpha: 0.4),
-                                  width: 1.5,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        // Play button circle
-                        Container(
-                          width: 64,
-                          height: 64,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white.withValues(alpha: 0.15),
-                            border: Border.all(
-                                color: Colors.white.withValues(alpha: 0.8),
-                                width: 2),
-                          ),
-                          child: const Icon(
-                            Icons.play_arrow_rounded,
-                            color: Colors.white,
-                            size: 36,
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-
-              // Duration badge (bottom right)
-              Positioned(
-                bottom: 12,
-                right: 14,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 10, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.65),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.15)),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.timer_outlined,
-                          size: 11, color: Colors.white70),
-                      const SizedBox(width: 4),
-                      Text(
-                        video.formattedDuration,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 0.5,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              // Category badge (bottom left)
-              Positioned(
-                bottom: 12,
-                left: 14,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 10, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.55),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.12)),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.smart_display_rounded,
-                          size: 11,
-                          color: Color(0xFF60A5FA)),
-                      const SizedBox(width: 4),
-                      const Text(
-                        'Video dars',
-                        style: TextStyle(
-                          color: Color(0xFFBFDBFE),
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+                const SizedBox(width: 10),
+                Text('$watchedPercent%', style: text.labelMedium?.copyWith(color: t.brandPrimary)),
+              ]),
+            ]),
           ),
-        ),
+          if (video.description.isNotEmpty) ...[
+            const SizedBox(height: AppSpace.s16),
+            Text(video.description, style: text.bodyMedium?.copyWith(color: t.textSecondary)),
+          ],
+        ]),
+      ),
+    ]);
+  }
+}
 
-        // ── Info section ─────────────────────────────────────────────────
-        Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Title
-              Text(
-                video.title,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w800,
-                  height: 1.3,
-                  color: isDark
-                      ? AppColors.textPrimary
-                      : AppColors.textPrimaryLight,
+/// Qorongʻi "pleyer" kartasi: video alohida ekranda ochiladi, bu yerda — oxirgi joy.
+class _PlayerCard extends StatelessWidget {
+  final VoidCallback onPlay;
+  final int? resumeAt;
+  final int duration;
+  final int position;
+
+  const _PlayerCard({required this.onPlay, required this.resumeAt, required this.duration, required this.position});
+
+  static const _bg = Color(0xFF05080F);
+
+  @override
+  Widget build(BuildContext context) {
+    final text = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
+    final white = Colors.white;
+    return AspectRatio(
+      aspectRatio: 16 / 9,
+      child: Material(
+        color: _bg,
+        child: InkWell(
+          onTap: onPlay,
+          child: Padding(
+            padding: const EdgeInsets.all(AppSpace.s12),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              if (resumeAt != null)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: white.withValues(alpha: 0.14),
+                    borderRadius: BorderRadius.circular(AppRadius.full),
+                  ),
+                  child: Row(mainAxisSize: MainAxisSize.min, children: [
+                    Icon(Icons.replay_rounded, size: 14, color: white),
+                    const SizedBox(width: 6),
+                    Text(l10n.dsResumeChip, style: text.labelMedium?.copyWith(color: white)),
+                  ]),
+                ),
+              const Spacer(),
+              Center(
+                child: Container(
+                  width: 64,
+                  height: 64,
+                  decoration: BoxDecoration(color: white.withValues(alpha: 0.18), shape: BoxShape.circle),
+                  child: Icon(Icons.play_arrow_rounded, size: 36, color: white),
                 ),
               ),
-
-              if (video.description.isNotEmpty) ...[
-                const SizedBox(height: 10),
-                Text(
-                  video.description,
-                  style: TextStyle(
-                    fontSize: 14,
-                    height: 1.65,
-                    color: isDark
-                        ? AppColors.textSecondary
-                        : AppColors.textSecondaryLight,
-                  ),
+              const Spacer(),
+              if (duration > 0) ...[
+                Text('${formatClock(position.clamp(0, duration))} / ${formatClock(duration)}',
+                    style: text.labelMedium?.copyWith(color: white)),
+                const SizedBox(height: AppSpace.s8),
+                ProgressLine(
+                  value: position / duration,
+                  height: 4,
+                  color: white,
+                  trackColor: white.withValues(alpha: 0.25),
                 ),
               ],
-
-              const SizedBox(height: 18),
-
-              // Stats row
-              Row(
-                children: [
-                  _StatChip(
-                    icon: Icons.visibility_outlined,
-                    label: '${video.views} ko\'rishlar',
-                    isDark: isDark,
-                  ),
-                  const SizedBox(width: 10),
-                  _StatChip(
-                    icon: Icons.thumb_up_outlined,
-                    label: '${video.likes}',
-                    isDark: isDark,
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 16),
-
-              // Author row
-              if (video.authorName.isNotEmpty)
-                _AuthorRow(name: video.authorName, isDark: isDark),
-            ],
+            ]),
           ),
         ),
-      ],
-    );
-  }
-}
-
-// ─── Grid painter for cinematic texture ──────────────────────────────────────
-
-class _GridPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.04)
-      ..strokeWidth = 0.5;
-
-    const step = 24.0;
-    for (double x = 0; x < size.width; x += step) {
-      canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
-    }
-    for (double y = 0; y < size.height; y += step) {
-      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
-    }
-
-    // Diagonal accent lines
-    final diagPaint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.03)
-      ..strokeWidth = 1;
-    for (double i = -size.height; i < size.width + size.height; i += 60) {
-      canvas.drawLine(
-        Offset(i, 0),
-        Offset(i + size.height, size.height),
-        diagPaint,
-      );
-    }
-  }
-
-  @override
-  bool shouldRepaint(_GridPainter old) => false;
-}
-
-// ─── Stat chip ────────────────────────────────────────────────────────────────
-
-class _StatChip extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool isDark;
-
-  const _StatChip({required this.icon, required this.label, required this.isDark});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: isDark
-            ? AppColors.surfaceElevated
-            : AppColors.surfaceVariantLight,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: isDark ? AppColors.borderDark : AppColors.borderLight,
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon,
-              size: 13,
-              color: isDark
-                  ? AppColors.textSecondary
-                  : AppColors.textSecondaryLight),
-          const SizedBox(width: 5),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              color: isDark
-                  ? AppColors.textSecondary
-                  : AppColors.textSecondaryLight,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
       ),
     );
   }
 }
 
-// ─── Author row ───────────────────────────────────────────────────────────────
-
-class _AuthorRow extends StatelessWidget {
-  final String name;
-  final bool isDark;
-
-  const _AuthorRow({required this.name, required this.isDark});
-
-  @override
-  Widget build(BuildContext context) {
-    // Generate color from name hash
-    final hue = (name.codeUnits.fold(0, (a, b) => a + b) % 360).toDouble();
-    final avatarColor = HSLColor.fromAHSL(1, hue, 0.5, isDark ? 0.4 : 0.55).toColor();
-    final initials = name.isNotEmpty
-        ? name.trim().split(' ').take(2).map((w) => w[0]).join().toUpperCase()
-        : '?';
-
-    return Row(
-      children: [
-        Container(
-          width: 36,
-          height: 36,
-          decoration: BoxDecoration(
-            color: avatarColor,
-            shape: BoxShape.circle,
-          ),
-          child: Center(
-            child: Text(
-              initials,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 13,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              name,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: isDark
-                    ? AppColors.textPrimary
-                    : AppColors.textPrimaryLight,
-              ),
-            ),
-            Text(
-              'Muallif',
-              style: TextStyle(
-                fontSize: 11,
-                color: isDark
-                    ? AppColors.textSecondary
-                    : AppColors.textSecondaryLight,
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-// ─── Article body ─────────────────────────────────────────────────────────────
+// ─── Maqola ───────────────────────────────────────────────────────────────────
 
 class _ArticleBody extends StatelessWidget {
+  final CourseLessonEntity lesson;
   final String title;
   final String content;
-  final bool isDark;
 
-  const _ArticleBody(
-      {required this.title, required this.content, required this.isDark});
+  const _ArticleBody({required this.lesson, required this.title, required this.content});
 
   @override
   Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 24, 20, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Type indicator
-          Row(
-            children: [
-              Container(
-                width: 4,
-                height: 24,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [AppColors.success, AppColors.success.withValues(alpha: 0.4)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Text(
-                'Maqola',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.success,
-                  letterSpacing: 0.5,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 14),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w800,
-              height: 1.3,
-              color: isDark ? AppColors.textPrimary : AppColors.textPrimaryLight,
-            ),
-          ),
-          const SizedBox(height: 20),
-          Container(
-            width: double.infinity,
-            height: 1,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  AppColors.success.withValues(alpha: 0.6),
-                  AppColors.success.withValues(alpha: 0),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-          Text(
-            content,
-            style: TextStyle(
-              fontSize: 15.5,
-              height: 1.8,
-              color: isDark
-                  ? AppColors.textSecondary
-                  : AppColors.textSecondaryLight,
-            ),
-          ),
-        ],
-      ),
+      padding: const EdgeInsets.fromLTRB(AppSpace.s16, AppSpace.s8, AppSpace.s16, AppSpace.s24),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        _LessonBadges(lesson: lesson, typeLabel: l10n.dsLessonTypeArticle, icon: Icons.article_outlined),
+        const SizedBox(height: AppSpace.s12),
+        Text(title, style: text.displayMedium),
+        const SizedBox(height: AppSpace.s16),
+        Divider(color: t.borderDefault),
+        const SizedBox(height: AppSpace.s16),
+        Text(content, style: text.bodyLarge?.copyWith(color: t.textPrimary, height: 1.7)),
+      ]),
     );
   }
 }
 
-// ─── PDF body ─────────────────────────────────────────────────────────────────
+// ─── PDF ──────────────────────────────────────────────────────────────────────
 
 class _PdfBody extends StatelessWidget {
+  final CourseLessonEntity lesson;
   final String title;
   final String description;
   final String? url;
-  final bool isDark;
   final VoidCallback onOpen;
 
   const _PdfBody({
+    required this.lesson,
     required this.title,
     required this.description,
-    this.url,
-    required this.isDark,
+    required this.url,
     required this.onOpen,
   });
 
   @override
   Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
+    final hasUrl = url != null && url!.isNotEmpty;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 24, 20, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // PDF hero
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  AppColors.error.withValues(alpha: isDark ? 0.2 : 0.08),
-                  AppColors.error.withValues(alpha: isDark ? 0.08 : 0.03),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: AppColors.error.withValues(alpha: 0.2),
-              ),
-            ),
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: AppColors.error.withValues(alpha: 0.12),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(Icons.picture_as_pdf_rounded,
-                      color: AppColors.error, size: 36),
-                ),
-                const SizedBox(height: 14),
-                Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w700,
-                    color: isDark
-                        ? AppColors.textPrimary
-                        : AppColors.textPrimaryLight,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          if (description.isNotEmpty) ...[
-            const SizedBox(height: 16),
-            Text(
-              description,
-              style: TextStyle(
-                fontSize: 14,
-                height: 1.65,
-                color: isDark
-                    ? AppColors.textSecondary
-                    : AppColors.textSecondaryLight,
-              ),
-            ),
-          ],
-          const SizedBox(height: 24),
-          if (url != null && url!.isNotEmpty)
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton.icon(
-                style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.error,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                ),
-                onPressed: onOpen,
-                icon: const Icon(Icons.open_in_new_rounded, size: 18),
-                label: const Text('Hujjatni ochish',
-                    style: TextStyle(
-                        fontSize: 15, fontWeight: FontWeight.w600)),
-              ),
-            )
-          else
-            Container(
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: isDark
-                    ? AppColors.surfaceDark
-                    : AppColors.surfaceVariantLight,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: isDark ? AppColors.borderDark : AppColors.borderLight,
-                ),
-              ),
-              child: Row(
-                children: [
-                  const Icon(Icons.info_outline_rounded,
-                      color: AppColors.warning, size: 18),
-                  const SizedBox(width: 10),
-                  Text(
-                    'Fayl havolasi mavjud emas',
-                    style: TextStyle(
-                      color: isDark
-                          ? AppColors.textSecondary
-                          : AppColors.textSecondaryLight,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+      padding: const EdgeInsets.fromLTRB(AppSpace.s16, AppSpace.s8, AppSpace.s16, AppSpace.s24),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        _LessonBadges(lesson: lesson, typeLabel: l10n.dsLessonTypePdf, icon: Icons.picture_as_pdf_outlined),
+        const SizedBox(height: AppSpace.s12),
+        Text(title, style: text.displayMedium),
+        if (description.isNotEmpty) ...[
+          const SizedBox(height: AppSpace.s12),
+          Text(description, style: text.bodyMedium?.copyWith(color: t.textSecondary)),
         ],
-      ),
+        const SizedBox(height: AppSpace.s20),
+        AppCard(
+          onTap: hasUrl ? onOpen : null,
+          child: Row(children: [
+            IconTile(Icons.picture_as_pdf_outlined, background: t.dangerContainer, foreground: t.dangerSolid),
+            const SizedBox(width: AppSpace.s12),
+            Expanded(
+              child: Text(hasUrl ? l10n.dsOpenDocument : l10n.dsNoFileLink,
+                  style: text.titleSmall?.copyWith(color: hasUrl ? t.textPrimary : t.textTertiary)),
+            ),
+            if (hasUrl) Icon(Icons.open_in_new_rounded, color: t.brandPrimary),
+          ]),
+        ),
+      ]),
     );
   }
 }
-
-// ─── Shimmer skeleton ─────────────────────────────────────────────────────────
-
-class _Shimmer extends StatefulWidget {
-  final Widget child;
-  final bool isDark;
-
-  const _Shimmer({required this.child, required this.isDark});
-
-  @override
-  State<_Shimmer> createState() => _ShimmerState();
-}
-
-class _ShimmerState extends State<_Shimmer> with SingleTickerProviderStateMixin {
-  late AnimationController _ctrl;
-  late Animation<double> _anim;
-
-  @override
-  void initState() {
-    super.initState();
-    _ctrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1200),
-    )..repeat();
-    _anim = Tween<double>(begin: -1.5, end: 1.5).animate(
-      CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut),
-    );
-  }
-
-  @override
-  void dispose() {
-    _ctrl.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _anim,
-      builder: (_, child) {
-        return ShaderMask(
-          blendMode: BlendMode.srcATop,
-          shaderCallback: (bounds) {
-            return LinearGradient(
-              begin: Alignment(_anim.value - 0.5, 0),
-              end: Alignment(_anim.value + 0.5, 0),
-              colors: widget.isDark
-                  ? [
-                      const Color(0xFF152032),
-                      const Color(0xFF253545),
-                      const Color(0xFF152032),
-                    ]
-                  : [
-                      const Color(0xFFE9EBF4),
-                      const Color(0xFFF5F6FB),
-                      const Color(0xFFE9EBF4),
-                    ],
-            ).createShader(bounds);
-          },
-          child: child!,
-        );
-      },
-      child: widget.child,
-    );
-  }
-}
-
-class _SkeletonBox extends StatelessWidget {
-  final double height;
-  final bool isDark;
-  final double widthFraction;
-  final double borderRadius;
-  final EdgeInsets margin;
-
-  const _SkeletonBox({
-    required this.height,
-    required this.isDark,
-    this.widthFraction = 1.0,
-    this.borderRadius = 8,
-    this.margin = const EdgeInsets.symmetric(horizontal: 20),
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      margin: margin,
-      width: widthFraction < 1.0
-          ? MediaQuery.of(context).size.width * widthFraction
-          : null,
-      decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF152032) : const Color(0xFFE9EBF4),
-        borderRadius: BorderRadius.circular(borderRadius),
-      ),
-    );
-  }
-}
-
-
-

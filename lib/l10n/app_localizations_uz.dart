@@ -2326,6 +2326,112 @@ class AppLocalizationsUz extends AppLocalizations {
   String dsLessonDoneToast(String title) {
     return '$title bajarildi!';
   }
+
+  @override
+  String get dsContentLoadFailed => 'Kontent yuklanmadi';
+
+  @override
+  String get dsRetry => 'Qayta urinish';
+
+  @override
+  String get dsFinishLesson => 'Darsni yakunlash';
+
+  @override
+  String get dsWatchVideo => 'Videoni koʻrish';
+
+  @override
+  String dsContinueVideo(String time) {
+    return 'Davom ettirish · $time';
+  }
+
+  @override
+  String get dsReadDone => 'Oʻqidim, yakunlash';
+
+  @override
+  String dsLastStoppedAt(String time) {
+    return 'Oxirgi marta $time da toʻxtagansiz';
+  }
+
+  @override
+  String get dsResumeHint => 'Video shu joydan davom ettiriladi';
+
+  @override
+  String get dsVideoWatchedReady => 'Video koʻrildi — darsni yakunlashingiz mumkin';
+
+  @override
+  String get dsAutoCompleteTitle => 'Dars avtomatik yakunlanadi';
+
+  @override
+  String dsAutoCompleteBody(int percent) {
+    return 'Videoning kamida $percent% qismini koʻrsangiz, dars tugallanadi. Oldinga oʻtkazilgan qism hisoblanmaydi, chiqib ketsangiz koʻrilgan joy saqlanadi.';
+  }
+
+  @override
+  String get dsWatched => 'Koʻrildi';
+
+  @override
+  String get dsResumeChip => 'Oxirgi joydan davom etiladi';
+
+  @override
+  String get dsOpenDocument => 'Hujjatni ochish';
+
+  @override
+  String get dsNoFileLink => 'Fayl havolasi mavjud emas';
+
+  @override
+  String get dsQuizTitle => 'Test';
+
+  @override
+  String dsPassThreshold(int percent) {
+    return 'Oʻtish chegarasi: $percent%';
+  }
+
+  @override
+  String get dsQuizResultTitle => 'Test natijasi';
+
+  @override
+  String dsCorrectOfTotal(int correct, int total) {
+    return '$correct / $total toʻgʻri';
+  }
+
+  @override
+  String get dsPassed => 'Oʻtdi';
+
+  @override
+  String get dsNotPassed => 'Oʻtmadi';
+
+  @override
+  String get dsQuizPassedTitle => 'Test topshirildi!';
+
+  @override
+  String get dsQuizFailedTitle => 'Bu safar oʻtmadingiz';
+
+  @override
+  String dsQuizPassedBody(int percent) {
+    return 'Oʻtish chegarasi $percent% edi — natija saqlandi.';
+  }
+
+  @override
+  String dsQuizFailedBody(int percent, int needed) {
+    return 'Oʻtish uchun kamida $percent% kerak — yana $needed ta toʻgʻri javob yetmadi.';
+  }
+
+  @override
+  String get dsNoXpThisAttempt => 'Bu urinish uchun XP berilmaydi';
+
+  @override
+  String get dsNoXpThisAttemptBody => 'Testdan oʻtganingizda XP beriladi va dars yakunlangan hisoblanadi.';
+
+  @override
+  String get dsQuestions => 'Savollar';
+
+  @override
+  String dsCorrectWrong(int correct, int wrong) {
+    return '$correct toʻgʻri · $wrong xato';
+  }
+
+  @override
+  String get dsReviewAnswers => 'Xatolarni koʻrish';
 }
 
 /// The translations for Uzbek, using the Latin script (`uz_Latn`).
@@ -4650,4 +4756,110 @@ class AppLocalizationsUzLatn extends AppLocalizationsUz {
   String dsLessonDoneToast(String title) {
     return '$title bajarildi!';
   }
+
+  @override
+  String get dsContentLoadFailed => 'Kontent yuklanmadi';
+
+  @override
+  String get dsRetry => 'Qayta uriniş';
+
+  @override
+  String get dsFinishLesson => 'Darsni yakunlaş';
+
+  @override
+  String get dsWatchVideo => 'Videoni köriş';
+
+  @override
+  String dsContinueVideo(String time) {
+    return 'Davom ettiriş · $time';
+  }
+
+  @override
+  String get dsReadDone => 'Öqidim, yakunlaş';
+
+  @override
+  String dsLastStoppedAt(String time) {
+    return 'Oxirgi marta $time da töxtagansiz';
+  }
+
+  @override
+  String get dsResumeHint => 'Video şu joydan davom ettiriladi';
+
+  @override
+  String get dsVideoWatchedReady => 'Video körildi — darsni yakunlaşingiz mumkin';
+
+  @override
+  String get dsAutoCompleteTitle => 'Dars avtomatik yakunlanadi';
+
+  @override
+  String dsAutoCompleteBody(int percent) {
+    return 'Videoning kamida $percent% qismini körsangiz, dars tugallanadi. Oldinga ötkazilgan qism hisoblanmaydi, çiqib ketsangiz körilgan joy saqlanadi.';
+  }
+
+  @override
+  String get dsWatched => 'Körildi';
+
+  @override
+  String get dsResumeChip => 'Oxirgi joydan davom etiladi';
+
+  @override
+  String get dsOpenDocument => 'Hujjatni oçiş';
+
+  @override
+  String get dsNoFileLink => 'Fayl havolasi mavjud emas';
+
+  @override
+  String get dsQuizTitle => 'Test';
+
+  @override
+  String dsPassThreshold(int percent) {
+    return 'Ötiş çegarasi: $percent%';
+  }
+
+  @override
+  String get dsQuizResultTitle => 'Test natijasi';
+
+  @override
+  String dsCorrectOfTotal(int correct, int total) {
+    return '$correct / $total töğri';
+  }
+
+  @override
+  String get dsPassed => 'Ötdi';
+
+  @override
+  String get dsNotPassed => 'Ötmadi';
+
+  @override
+  String get dsQuizPassedTitle => 'Test topşirildi!';
+
+  @override
+  String get dsQuizFailedTitle => 'Bu safar ötmadingiz';
+
+  @override
+  String dsQuizPassedBody(int percent) {
+    return 'Ötiş çegarasi $percent% edi — natija saqlandi.';
+  }
+
+  @override
+  String dsQuizFailedBody(int percent, int needed) {
+    return 'Ötiş uçun kamida $percent% kerak — yana $needed ta töğri javob yetmadi.';
+  }
+
+  @override
+  String get dsNoXpThisAttempt => 'Bu uriniş uçun XP berilmaydi';
+
+  @override
+  String get dsNoXpThisAttemptBody => 'Testdan ötganingizda XP beriladi va dars yakunlangan hisoblanadi.';
+
+  @override
+  String get dsQuestions => 'Savollar';
+
+  @override
+  String dsCorrectWrong(int correct, int wrong) {
+    return '$correct töğri · $wrong xato';
+  }
+
+  @override
+  String get dsReviewAnswers => 'Xatolarni köriş';
 }
