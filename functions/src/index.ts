@@ -9,3 +9,4 @@ export { onNewsCreated } from "./triggers/onNewsCreated";
 export { onQuizCreated } from "./triggers/onQuizCreated";
 export { awardXp, updateStreak } from "./callables/gamification";
 export { createTelegramLinkCode } from "./callables/telegram";
+export { sodiqChat } from "./callables/aiChat";

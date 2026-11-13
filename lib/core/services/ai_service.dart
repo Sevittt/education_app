@@ -1,79 +1,42 @@
-import 'package:firebase_ai/firebase_ai.dart';
+import 'dart:convert';
 import 'dart:typed_data';
+
+import 'package:cloud_functions/cloud_functions.dart';
 import 'logger_service.dart';
 
 class AiService {
-  GenerativeModel? _model;
-  ChatSession? _chatSession;
-  bool _initialized = false;
+  final FirebaseFunctions _functions;
+  final List<Map<String, String>> _history = [];
+
+  static const int _maxHistoryTurns = 16;
+
+  AiService({FirebaseFunctions? functions})
+      : _functions =
+            functions ?? FirebaseFunctions.instanceFor(region: 'us-central1');
 
   bool get isAvailable => true;
 
-  Future<void> _initModelIfNeeded() async {
-    if (_initialized && _chatSession != null) return;
-
-    try {
-      _model = FirebaseAI.googleAI().generativeModel(
-        model: 'gemini-2.5-flash',
-        generationConfig: GenerationConfig(
-          temperature: 0.2,
-          topP: 0.8,
-          topK: 40,
-        ),
-        systemInstruction: Content.system(_systemPrompt),
-      );
-
-      _chatSession = _model!.startChat();
-      _initialized = true;
-      LoggerService().log('AiService: initialized (gemini-2.5-flash, RAG-ready)');
-    } catch (e, stack) {
-      LoggerService().recordError(e, stack, reason: 'AiService: init failed');
-      throw Exception('AI modelini ishga tushirishda xatolik yuz berdi.');
-    }
-  }
-
-  static const String _systemPrompt =
-      'Ismingiz Sodiq. Siz Uzbekiston sud xodimlarining raqamli yordamchisisiz.\n\n'
-
-      'ASOSIY SOHA — quyidagi mavzularda to\'liq mutaxassis:\n'
-      '• E-SUD, E-XAT, VKA, 1C, MSSQL, E-IMZO, kiberxavfsizlik\n'
-      '• Sudlov tizimining barcha IT dasturlari\n\n'
-
-      'KENGAYTIRILGAN YORDAM — agar savol yuqoridagi sohalardan tashqarida bo\'lsa:\n'
-      '• Umumiy IT, dasturlash, kompyuter va texnologiya savollari bo\'yicha yordam ber\n'
-      '• Iloji boricha foydali bo\'l, haddan ziyod cheklamadan\n'
-      '• Agar bu ilova orqali hali qo\'llab-quvvatlanmasa: '
-      '"Bu xususiyat tez orada qo\'shilishi rejalashtirilgan" de va '
-      'muqobil manbalar (Google, YouTube, rasmiy hujjatlar) tavsiya et\n\n'
-
-      'CHEKLOVLAR:\n'
-      '• Yuridik maslahat berma\n'
-      '• Tibbiy, moliyaviy va shaxsiy hayotiy maslahatlar berma\n'
-      '• Siyosat, din va nizoli ijtimoiy masalalardan chetlan\n\n'
-
-      'Agar xabarda "--- Kontekst ---" bo\'limi mavjud bo\'lsa:\n'
-      '• O\'sha kontekstdagi ma\'lumotlarga tayan\n'
-      '• Kontekstda javob topilmasa ham umumiy bilimingdan yordam ber\n\n'
-
-      'Suhbat qoidalari:\n'
-      '1. Faqat birinchi xabardagina salomlash\n'
-      '2. O\'zbek tilida (Lotin) gapir\n'
-      '3. Qisqa, to\'g\'ridan-to\'g\'ri javob ber\n'
-      '4. Tabiiy, do\'stona ohangda yoz';
-
-  static String _augment(String userMessage, String? context) {
-    if (context == null || context.trim().isEmpty) return userMessage;
-    return '--- Kontekst ---\n$context\n\n--- Foydalanuvchi savoli ---\n$userMessage';
-  }
-
   Future<String?> generateContent(String prompt, {String? context}) async {
-    await _initModelIfNeeded();
-    if (prompt.trim().isEmpty) return null;
+    final trimmed = prompt.trim();
+    if (trimmed.isEmpty) return null;
 
     try {
-      final response =
-          await _model!.generateContent([Content.text(_augment(prompt, context))]);
-      return response.text;
+      final result = await _functions
+          .httpsCallable(
+            'sodiqChat',
+            options: HttpsCallableOptions(timeout: const Duration(seconds: 60)),
+          )
+          .call<Map<String, dynamic>>({
+        'mode': 'wiki',
+        'message': trimmed,
+        if (context != null && context.trim().isNotEmpty) 'context': context,
+      });
+
+      final text = result.data['text'] as String?;
+      return text?.trim().isEmpty == true ? null : text;
+    } on FirebaseFunctionsException catch (e, stack) {
+      LoggerService().recordError(e, stack, reason: 'AiService: generateContent');
+      throw Exception(mapFunctionsError(e));
     } catch (e, stack) {
       LoggerService().recordError(e, stack, reason: 'AiService: generateContent');
       throw Exception('AI xizmatida xatolik. Internetingizni tekshiring.');
@@ -85,42 +48,102 @@ class AiService {
     Uint8List? imageBytes,
     String? context,
   }) async* {
-    await _initModelIfNeeded();
-    if (message.trim().isEmpty && imageBytes == null) return;
+    final trimmed = message.trim();
+    if (trimmed.isEmpty && imageBytes == null) return;
 
     try {
-      final Content content;
-      if (imageBytes != null) {
-        content = Content.multi([
-          TextPart(_augment(message, context)),
-          InlineDataPart('image/jpeg', imageBytes),
-        ]);
-      } else {
-        content = Content.text(_augment(message, context));
+      final payload = <String, dynamic>{
+        'mode': 'chat',
+        'message': trimmed,
+        'history': List<Map<String, String>>.from(_history),
+      };
+      if (context != null && context.trim().isNotEmpty) {
+        payload['context'] = context;
+      }
+      if (imageBytes != null && imageBytes.isNotEmpty) {
+        payload['imageBase64'] = base64Encode(imageBytes);
+        payload['imageMimeType'] = detectImageMimeType(imageBytes);
       }
 
-      await for (final chunk in _chatSession!.sendMessageStream(content)) {
-        if (chunk.text != null) yield chunk.text!;
+      final result = await _functions
+          .httpsCallable(
+            'sodiqChat',
+            options: HttpsCallableOptions(timeout: const Duration(seconds: 60)),
+          )
+          .call<Map<String, dynamic>>(payload);
+
+      final reply = (result.data['text'] as String?) ?? '';
+      if (reply.isEmpty) {
+        throw Exception('AI javob qaytarmadi. Qaytadan urinib ko\'ring.');
       }
-    } catch (e, stack) {
-      final msg = e.toString();
+
+      final userTurnText =
+          trimmed.isNotEmpty ? trimmed : '[Rasm yuborildi]';
+      _appendTurn('user', userTurnText);
+      _appendTurn('model', reply);
+
+      yield reply;
+    } on FirebaseFunctionsException catch (e, stack) {
       LoggerService().recordError(e, stack, reason: 'AiService: streamChat');
-
-      if (msg.contains('App Check') || msg.contains('token is invalid')) {
-        throw Exception('App Check token yaroqsiz. Firebase Console → App Check bo\'limida '
-            'debug tokeningizni ro\'yxatdan o\'tkazing.');
-      } else if (msg.contains('API key') || msg.contains('PERMISSION_DENIED')) {
-        throw Exception('Firebase AI Logic yoqilmagan. Firebase Console → AI Logic '
-            'bo\'limiga kirib, API ni yoqing.');
-      } else if (msg.contains('not found') || msg.contains('404')) {
-        throw Exception('AI model topilmadi. Firebase loyihangizda Gemini API yoqilganligini tekshiring.');
-      }
+      throw Exception(mapFunctionsError(e));
+    } catch (e, stack) {
+      LoggerService().recordError(e, stack, reason: 'AiService: streamChat');
+      final msg = e.toString().replaceFirst('Exception: ', '');
       throw Exception('AI xizmatida xatolik. Sabab: $msg');
     }
   }
 
+  void _appendTurn(String role, String text) {
+    _history.add({'role': role, 'text': text});
+    if (_history.length > _maxHistoryTurns) {
+      _history.removeRange(0, _history.length - _maxHistoryTurns);
+    }
+  }
+
   void resetSession() {
-    _chatSession = _model?.startChat();
+    _history.clear();
     LoggerService().log('AiService: chat session reset');
+  }
+
+  static String detectImageMimeType(Uint8List bytes) {
+    if (bytes.length >= 4 &&
+        bytes[0] == 0x89 &&
+        bytes[1] == 0x50 &&
+        bytes[2] == 0x4E &&
+        bytes[3] == 0x47) {
+      return 'image/png';
+    }
+    if (bytes.length >= 12 &&
+        bytes[0] == 0x52 &&
+        bytes[1] == 0x49 &&
+        bytes[2] == 0x46 &&
+        bytes[3] == 0x46 &&
+        bytes[8] == 0x57 &&
+        bytes[9] == 0x45 &&
+        bytes[10] == 0x42 &&
+        bytes[11] == 0x50) {
+      return 'image/webp';
+    }
+    return 'image/jpeg';
+  }
+
+  static String mapFunctionsError(FirebaseFunctionsException e) {
+    switch (e.code) {
+      case 'unauthenticated':
+        return 'AI yordamchidan foydalanish uchun tizimga kiring.';
+      case 'resource-exhausted':
+        return 'AI so\'rovlar limiti vaqtincha tugadi. Birozdan so\'ng urinib ko\'ring.';
+      case 'failed-precondition':
+        return e.message ??
+            'Serverdagi Gemini API kaliti sozlanmagan yoki yaroqsiz.';
+      case 'deadline-exceeded':
+      case 'unavailable':
+        return 'AI server bilan bog\'lanib bo\'lmadi. Internetingizni tekshiring.';
+      default:
+        final detail = e.message;
+        return (detail != null && detail.isNotEmpty)
+            ? detail
+            : 'AI xizmatida xatolik yuz berdi (${e.code}).';
+    }
   }
 }

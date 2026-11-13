@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createTelegramLinkCode = exports.updateStreak = exports.awardXp = exports.onQuizCreated = exports.onNewsCreated = exports.onSystemUpdated = exports.onSystemCreated = exports.testCourseReminder = exports.scheduledCourseReminder = exports.dailyStreakReminder = void 0;
+exports.sodiqChat = exports.createTelegramLinkCode = exports.updateStreak = exports.awardXp = exports.onQuizCreated = exports.onNewsCreated = exports.onSystemUpdated = exports.onSystemCreated = exports.testCourseReminder = exports.scheduledCourseReminder = exports.dailyStreakReminder = void 0;
 const admin = __importStar(require("firebase-admin"));
 admin.initializeApp();
 var streakReminder_1 = require("./triggers/streakReminder");
@@ -53,4 +53,6 @@ Object.defineProperty(exports, "awardXp", { enumerable: true, get: function () {
 Object.defineProperty(exports, "updateStreak", { enumerable: true, get: function () { return gamification_1.updateStreak; } });
 var telegram_1 = require("./callables/telegram");
 Object.defineProperty(exports, "createTelegramLinkCode", { enumerable: true, get: function () { return telegram_1.createTelegramLinkCode; } });
+var aiChat_1 = require("./callables/aiChat");
+Object.defineProperty(exports, "sodiqChat", { enumerable: true, get: function () { return aiChat_1.sodiqChat; } });
 //# sourceMappingURL=index.js.map
