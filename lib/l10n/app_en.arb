@@ -3458,5 +3458,153 @@
   "dsReviewAnswers": "Review mistakes",
   "@dsReviewAnswers": {
     "description": "Redesign: dsReviewAnswers"
+  },
+  "dsRoleAdmin": "Administrator",
+  "@dsRoleAdmin": {
+    "description": "Redesign: dsRoleAdmin"
+  },
+  "dsRoleUnknown": "Position not set",
+  "@dsRoleUnknown": {
+    "description": "Redesign: dsRoleUnknown"
+  },
+  "dsCurrentLevel": "CURRENT LEVEL",
+  "@dsCurrentLevel": {
+    "description": "Redesign: dsCurrentLevel"
+  },
+  "dsRequirementsFor": "Requirements for {level}",
+  "@dsRequirementsFor": {
+    "description": "Redesign: dsRequirementsFor",
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "dsReqXp": "Earn {xp} XP",
+  "@dsReqXp": {
+    "description": "Redesign: dsReqXp",
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "dsReqQuizzes": "Pass {count} quizzes",
+  "@dsReqQuizzes": {
+    "description": "Redesign: dsReqQuizzes",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dsReqAced": "Score 100% on {count} quizzes",
+  "@dsReqAced": {
+    "description": "Redesign: dsReqAced",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dsReqStreak": "{count}-day streak",
+  "@dsReqStreak": {
+    "description": "Redesign: dsReqStreak",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dsReqSims": "{count} simulations",
+  "@dsReqSims": {
+    "description": "Redesign: dsReqSims",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dsStatStreak": "Current streak",
+  "@dsStatStreak": {
+    "description": "Redesign: dsStatStreak"
+  },
+  "dsStatCoursesDone": "Courses completed",
+  "@dsStatCoursesDone": {
+    "description": "Redesign: dsStatCoursesDone"
+  },
+  "dsStatCertificates": "Certificates",
+  "@dsStatCertificates": {
+    "description": "Redesign: dsStatCertificates"
+  },
+  "dsStatQuizzesPassed": "Quizzes passed",
+  "@dsStatQuizzesPassed": {
+    "description": "Redesign: dsStatQuizzesPassed"
+  },
+  "dsLeaderboard": "Leaderboard",
+  "@dsLeaderboard": {
+    "description": "Redesign: dsLeaderboard"
+  },
+  "dsLeaderboardLinkSubtitle": "By court, region and nationwide",
+  "@dsLeaderboardLinkSubtitle": {
+    "description": "Redesign: dsLeaderboardLinkSubtitle"
+  },
+  "dsScopeCourt": "Court",
+  "@dsScopeCourt": {
+    "description": "Redesign: dsScopeCourt"
+  },
+  "dsScopeRegion": "Region",
+  "@dsScopeRegion": {
+    "description": "Redesign: dsScopeRegion"
+  },
+  "dsScopeGlobal": "Nationwide",
+  "@dsScopeGlobal": {
+    "description": "Redesign: dsScopeGlobal"
+  },
+  "dsYourRank": "YOUR RANK",
+  "@dsYourRank": {
+    "description": "Redesign: dsYourRank"
+  },
+  "dsRankGap": "{xp} XP to rank {rank}",
+  "@dsRankGap": {
+    "description": "Redesign: dsRankGap",
+    "placeholders": {
+      "rank": {
+        "type": "int"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "dsRankUp": "Up {count}",
+  "@dsRankUp": {
+    "description": "Redesign: dsRankUp",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dsRankDown": "Down {count}",
+  "@dsRankDown": {
+    "description": "Redesign: dsRankDown",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dsYou": "(you)",
+  "@dsYou": {
+    "description": "Redesign: dsYou"
+  },
+  "dsNotRanked": "You're not ranked yet — complete your first lesson",
+  "@dsNotRanked": {
+    "description": "Redesign: dsNotRanked"
+  },
+  "dsLeaderboardNote": "Ranking is based on XP. XP is awarded by the server only when lessons and quizzes are actually completed.",
+  "@dsLeaderboardNote": {
+    "description": "Redesign: dsLeaderboardNote"
   }
 }

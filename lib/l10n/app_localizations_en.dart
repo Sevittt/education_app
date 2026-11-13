@@ -2432,4 +2432,97 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dsReviewAnswers => 'Review mistakes';
+
+  @override
+  String get dsRoleAdmin => 'Administrator';
+
+  @override
+  String get dsRoleUnknown => 'Position not set';
+
+  @override
+  String get dsCurrentLevel => 'CURRENT LEVEL';
+
+  @override
+  String dsRequirementsFor(String level) {
+    return 'Requirements for $level';
+  }
+
+  @override
+  String dsReqXp(int xp) {
+    return 'Earn $xp XP';
+  }
+
+  @override
+  String dsReqQuizzes(int count) {
+    return 'Pass $count quizzes';
+  }
+
+  @override
+  String dsReqAced(int count) {
+    return 'Score 100% on $count quizzes';
+  }
+
+  @override
+  String dsReqStreak(int count) {
+    return '$count-day streak';
+  }
+
+  @override
+  String dsReqSims(int count) {
+    return '$count simulations';
+  }
+
+  @override
+  String get dsStatStreak => 'Current streak';
+
+  @override
+  String get dsStatCoursesDone => 'Courses completed';
+
+  @override
+  String get dsStatCertificates => 'Certificates';
+
+  @override
+  String get dsStatQuizzesPassed => 'Quizzes passed';
+
+  @override
+  String get dsLeaderboard => 'Leaderboard';
+
+  @override
+  String get dsLeaderboardLinkSubtitle => 'By court, region and nationwide';
+
+  @override
+  String get dsScopeCourt => 'Court';
+
+  @override
+  String get dsScopeRegion => 'Region';
+
+  @override
+  String get dsScopeGlobal => 'Nationwide';
+
+  @override
+  String get dsYourRank => 'YOUR RANK';
+
+  @override
+  String dsRankGap(int rank, int xp) {
+    return '$xp XP to rank $rank';
+  }
+
+  @override
+  String dsRankUp(int count) {
+    return 'Up $count';
+  }
+
+  @override
+  String dsRankDown(int count) {
+    return 'Down $count';
+  }
+
+  @override
+  String get dsYou => '(you)';
+
+  @override
+  String get dsNotRanked => 'You\'re not ranked yet — complete your first lesson';
+
+  @override
+  String get dsLeaderboardNote => 'Ranking is based on XP. XP is awarded by the server only when lessons and quizzes are actually completed.';
 }

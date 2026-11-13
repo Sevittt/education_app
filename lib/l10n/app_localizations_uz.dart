@@ -2432,6 +2432,99 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get dsReviewAnswers => 'Xatolarni koʻrish';
+
+  @override
+  String get dsRoleAdmin => 'Administrator';
+
+  @override
+  String get dsRoleUnknown => 'Lavozim belgilanmagan';
+
+  @override
+  String get dsCurrentLevel => 'JORIY DARAJA';
+
+  @override
+  String dsRequirementsFor(String level) {
+    return '$level darajasi talablari';
+  }
+
+  @override
+  String dsReqXp(int xp) {
+    return '$xp XP toʻplash';
+  }
+
+  @override
+  String dsReqQuizzes(int count) {
+    return '$count ta testdan oʻtish';
+  }
+
+  @override
+  String dsReqAced(int count) {
+    return '$count ta testda 100% natija';
+  }
+
+  @override
+  String dsReqStreak(int count) {
+    return '$count kunlik seriya';
+  }
+
+  @override
+  String dsReqSims(int count) {
+    return '$count ta simulyatsiya';
+  }
+
+  @override
+  String get dsStatStreak => 'Joriy seriya';
+
+  @override
+  String get dsStatCoursesDone => 'Tugatilgan kurs';
+
+  @override
+  String get dsStatCertificates => 'Sertifikat';
+
+  @override
+  String get dsStatQuizzesPassed => 'Oʻtilgan test';
+
+  @override
+  String get dsLeaderboard => 'Reyting';
+
+  @override
+  String get dsLeaderboardLinkSubtitle => 'Sud, viloyat va respublika boʻyicha';
+
+  @override
+  String get dsScopeCourt => 'Sud';
+
+  @override
+  String get dsScopeRegion => 'Viloyat';
+
+  @override
+  String get dsScopeGlobal => 'Respublika';
+
+  @override
+  String get dsYourRank => 'SIZNING OʻRNINGIZ';
+
+  @override
+  String dsRankGap(int rank, int xp) {
+    return '$rank-oʻringacha $xp XP';
+  }
+
+  @override
+  String dsRankUp(int count) {
+    return '+$count oʻrin';
+  }
+
+  @override
+  String dsRankDown(int count) {
+    return '−$count oʻrin';
+  }
+
+  @override
+  String get dsYou => '(siz)';
+
+  @override
+  String get dsNotRanked => 'Siz hali reytingda yoʻqsiz — birinchi darsni yakunlang';
+
+  @override
+  String get dsLeaderboardNote => 'Reyting XP asosida hisoblanadi. XP faqat dars va testlar haqiqatan yakunlanganda server tomonidan beriladi.';
 }
 
 /// The translations for Uzbek, using the Latin script (`uz_Latn`).
@@ -4862,4 +4955,97 @@ class AppLocalizationsUzLatn extends AppLocalizationsUz {
 
   @override
   String get dsReviewAnswers => 'Xatolarni köriş';
+
+  @override
+  String get dsRoleAdmin => 'Administrator';
+
+  @override
+  String get dsRoleUnknown => 'Lavozim belgilanmagan';
+
+  @override
+  String get dsCurrentLevel => 'JORIY DARAJA';
+
+  @override
+  String dsRequirementsFor(String level) {
+    return '$level darajasi talablari';
+  }
+
+  @override
+  String dsReqXp(int xp) {
+    return '$xp XP töplaş';
+  }
+
+  @override
+  String dsReqQuizzes(int count) {
+    return '$count ta testdan ötiş';
+  }
+
+  @override
+  String dsReqAced(int count) {
+    return '$count ta testda 100% natija';
+  }
+
+  @override
+  String dsReqStreak(int count) {
+    return '$count kunlik seriya';
+  }
+
+  @override
+  String dsReqSims(int count) {
+    return '$count ta simulyatsiya';
+  }
+
+  @override
+  String get dsStatStreak => 'Joriy seriya';
+
+  @override
+  String get dsStatCoursesDone => 'Tugatilgan kurs';
+
+  @override
+  String get dsStatCertificates => 'Sertifikat';
+
+  @override
+  String get dsStatQuizzesPassed => 'Ötilgan test';
+
+  @override
+  String get dsLeaderboard => 'Reyting';
+
+  @override
+  String get dsLeaderboardLinkSubtitle => 'Sud, viloyat va respublika böyiça';
+
+  @override
+  String get dsScopeCourt => 'Sud';
+
+  @override
+  String get dsScopeRegion => 'Viloyat';
+
+  @override
+  String get dsScopeGlobal => 'Respublika';
+
+  @override
+  String get dsYourRank => 'SIZNING ÖRNINGIZ';
+
+  @override
+  String dsRankGap(int rank, int xp) {
+    return '$rank-öringaça $xp XP';
+  }
+
+  @override
+  String dsRankUp(int count) {
+    return '+$count örin';
+  }
+
+  @override
+  String dsRankDown(int count) {
+    return '−$count örin';
+  }
+
+  @override
+  String get dsYou => '(siz)';
+
+  @override
+  String get dsNotRanked => 'Siz hali reytingda yöqsiz — birinçi darsni yakunlang';
+
+  @override
+  String get dsLeaderboardNote => 'Reyting XP asosida hisoblanadi. XP faqat dars va testlar haqiqatan yakunlanganda server tomonidan beriladi.';
 }

@@ -1,267 +1,365 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../l10n/app_localizations.dart';
-import '../../../auth/domain/entities/app_user.dart';
-import '../../../auth/presentation/providers/auth_notifier.dart';
-import '../../domain/usecases/get_leaderboard.dart';
-import '../../domain/usecases/get_leaderboard_by_region.dart';
-import '../../domain/usecases/get_leaderboard_by_court.dart';
-import '../../../../shared/widgets/user_avatar.dart';
+import 'package:sud_qollanma/core/theme/app_tokens.dart';
+import 'package:sud_qollanma/features/auth/domain/entities/app_user.dart';
+import 'package:sud_qollanma/features/auth/presentation/providers/auth_notifier.dart';
+import 'package:sud_qollanma/features/gamification/domain/usecases/get_leaderboard.dart';
+import 'package:sud_qollanma/features/gamification/domain/usecases/get_leaderboard_by_court.dart';
+import 'package:sud_qollanma/features/gamification/domain/usecases/get_leaderboard_by_region.dart';
+import 'package:sud_qollanma/l10n/app_localizations.dart';
+import 'package:sud_qollanma/shared/widgets/design_system.dart';
+import 'package:sud_qollanma/shared/widgets/user_avatar.dart';
 
-class LeaderboardScreen extends StatelessWidget {
+enum _Scope { court, region, global }
+
+/// Reyting (Figma "09 · Reyting"): sud / viloyat / respublika, mening oʻrnim, top-3.
+class LeaderboardScreen extends StatefulWidget {
   const LeaderboardScreen({super.key});
+
+  @override
+  State<LeaderboardScreen> createState() => _LeaderboardScreenState();
+}
+
+class _LeaderboardScreenState extends State<LeaderboardScreen> {
+  late _Scope _scope;
+  final Map<_Scope, Stream<List<AppUser>>> _streams = {};
+
+  @override
+  void initState() {
+    super.initState();
+    final user = context.read<AuthNotifier>().appUser;
+    _scope = user?.courtId != null
+        ? _Scope.court
+        : user?.regionId != null
+            ? _Scope.region
+            : _Scope.global;
+  }
+
+  /// Oqim bir marta yaratiladi — har qayta chizishda qayta obuna boʻlinmaydi.
+  Stream<List<AppUser>>? _stream(AppUser? user) {
+    if (_streams.containsKey(_scope)) return _streams[_scope];
+    final Stream<List<AppUser>>? s = switch (_scope) {
+      _Scope.court => user?.courtId == null ? null : context.read<GetLeaderboardByCourt>().call(courtId: user!.courtId!),
+      _Scope.region =>
+        user?.regionId == null ? null : context.read<GetLeaderboardByRegion>().call(regionId: user!.regionId!),
+      _Scope.global => context.read<GetLeaderboard>().call(),
+    };
+    if (s != null) _streams[_scope] = s;
+    return s;
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    // Safely access AuthNotifier
-    final authNotifier = context.watch<AuthNotifier>();
-    final currentUserId = authNotifier.appUser?.id;
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final me = context.watch<AuthNotifier>().appUser;
+    final stream = _stream(me);
+    final scopeLabel = switch (_scope) {
+      _Scope.court => me?.courtName,
+      _Scope.region => me?.regionName,
+      _Scope.global => null,
+    };
 
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(l10n.leaderboardTitle),
-          centerTitle: true,
-          bottom: TabBar(
-            labelColor: Colors.white,
-            unselectedLabelColor: Colors.white70,
-            indicatorColor: Colors.white,
-            indicatorWeight: 3,
-            tabs: [
-              Tab(text: l10n.leaderboardTabGlobal),
-              Tab(text: l10n.leaderboardTabRegion),
-              Tab(text: l10n.leaderboardTabCourt),
-            ],
-          ),
-        ),
-        body: TabBarView(
+    return Scaffold(
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(AppSpace.s16, AppSpace.s8, AppSpace.s16, AppSpace.s24),
           children: [
-            _buildLeaderboardTab(
-                context, context.read<GetLeaderboard>().call(), currentUserId),
-            if (authNotifier.appUser?.regionId != null)
-              _buildLeaderboardTab(
-                  context,
-                  context.read<GetLeaderboardByRegion>().call(
-                      regionId: authNotifier.appUser!.regionId!),
-                  currentUserId)
-            else
-              Center(child: Text(l10n.noRegionInfo)),
-            if (authNotifier.appUser?.courtId != null)
-              _buildLeaderboardTab(
-                  context,
-                  context.read<GetLeaderboardByCourt>().call(
-                      courtId: authNotifier.appUser!.courtId!),
-                  currentUserId)
-            else
-              Center(child: Text(l10n.noCourtInfo)),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLeaderboardTab(
-      BuildContext context, Stream<List<AppUser>> stream, String? currentUserId) {
-    final l10n = AppLocalizations.of(context)!;
-    return StreamBuilder<List<AppUser>>(
-      stream: stream,
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Center(
-              child: SelectableText('${l10n.errorPrefix}: ${snapshot.error}'));
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
-        final users = snapshot.data ?? [];
-
-        if (users.isEmpty) {
-          return Center(child: Text(l10n.noResultsFound));
-        }
-
-        final top3 = users.take(3).toList();
-        final others = users.skip(3).toList();
-
-        return CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: _buildPodium(context, top3),
-              ),
-            ),
-            if (others.isNotEmpty)
-              SliverPadding(
-                padding: const EdgeInsets.all(16),
-                sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final user = others[index];
-                      final isCurrentUser = user.id == currentUserId;
-                      final rank = index + 4;
-
-                      return _buildLeaderboardTile(
-                          context, user, rank, isCurrentUser);
-                    },
-                    childCount: others.length,
-                  ),
-                ),
-              ),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _buildPodium(BuildContext context, List<AppUser> top3) {
-    if (top3.isEmpty) return const SizedBox.shrink();
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        if (top3.length > 1) _buildPodiumItem(context, top3[1], 2, 100), // 2nd
-        if (top3.isNotEmpty) _buildPodiumItem(context, top3[0], 1, 130), // 1st
-        if (top3.length > 2) _buildPodiumItem(context, top3[2], 3, 80), // 3rd
-      ],
-    );
-  }
-
-  Widget _buildPodiumItem(
-      BuildContext context, AppUser user, int rank, double height) {
-    final color = rank == 1
-        ? Colors.amber
-        : (rank == 2 ? Colors.grey.shade400 : const Color(0xFFCD7F32));
-    final emoji = rank == 1 ? '🥇' : (rank == 2 ? '🥈' : '🥉');
-
-    return Column(
-      children: [
-        Text(emoji, style: const TextStyle(fontSize: 32)),
-        const SizedBox(height: 8),
-        UserAvatar(
-          profilePictureUrl: user.profilePictureUrl,
-          radius: rank == 1 ? 35 : 28,
-          backgroundColor: color.withAlpha(26),
-        ),
-        const SizedBox(height: 8),
-        SizedBox(
-          width: 70,
-          child: Text(
-            user.name.split(' ')[0],
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-        Text(
-          '${user.xp} XP',
-          style: TextStyle(
-              color: Theme.of(context).primaryColor,
-              fontSize: 11,
-              fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 12),
-        Container(
-          width: 70,
-          height: height,
-          decoration: BoxDecoration(
-            color: color.withAlpha(50),
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '#$rank',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: color.withAlpha(150)),
-              ),
-              _buildRankChangeIndicator(rank, user.previousRank, mini: true),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildLeaderboardTile(
-      BuildContext context, AppUser user, int rank, bool isCurrentUser) {
-    return Card(
-      elevation: isCurrentUser ? 4 : 1,
-      margin: const EdgeInsets.only(bottom: 8),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: isCurrentUser
-            ? BorderSide(color: Theme.of(context).primaryColor, width: 2)
-            : BorderSide.none,
-      ),
-      child: ListTile(
-        leading: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '#$rank',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-                ),
-                _buildRankChangeIndicator(rank, user.previousRank, mini: true),
+            Row(children: [
+              CircleIconButton(Icons.arrow_back_rounded,
+                  tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+                  onPressed: () => Navigator.maybePop(context)),
+              const SizedBox(width: AppSpace.s12),
+              Expanded(child: Text(l10n.dsLeaderboard, style: text.displayMedium)),
+            ]),
+            const SizedBox(height: AppSpace.s20),
+            _Segmented(
+              value: _scope,
+              items: [
+                (_Scope.court, l10n.dsScopeCourt),
+                (_Scope.region, l10n.dsScopeRegion),
+                (_Scope.global, l10n.dsScopeGlobal),
               ],
+              onChanged: (s) => setState(() => _scope = s),
             ),
-            const SizedBox(width: 8),
-            UserAvatar(
-              profilePictureUrl: user.profilePictureUrl,
-              radius: 18,
-            ),
+            if (scopeLabel != null) ...[
+              const SizedBox(height: AppSpace.s12),
+              Text(scopeLabel, style: text.bodySmall?.copyWith(color: t.textSecondary)),
+            ],
+            const SizedBox(height: AppSpace.s20),
+            if (stream == null)
+              _Message(_scope == _Scope.court ? l10n.noCourtInfo : l10n.noRegionInfo)
+            else
+              StreamBuilder<List<AppUser>>(
+                stream: stream,
+                builder: (context, snap) {
+                  if (snap.hasError) return _Message('${l10n.errorPrefix}: ${snap.error}');
+                  if (!snap.hasData) {
+                    return const Padding(padding: EdgeInsets.all(AppSpace.s32), child: Center(child: CircularProgressIndicator()));
+                  }
+                  final users = snap.data!;
+                  if (users.isEmpty) return _Message(l10n.noResultsFound);
+                  return _Board(users: users, meId: me?.id);
+                },
+              ),
+            const SizedBox(height: AppSpace.s20),
+            Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Icon(Icons.info_outline_rounded, size: 16, color: t.textTertiary),
+              const SizedBox(width: AppSpace.s8),
+              Expanded(child: Text(l10n.dsLeaderboardNote, style: text.bodySmall?.copyWith(color: t.textTertiary))),
+            ]),
           ],
-        ),
-        title: Text(user.name,
-            style: const TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: null,
-        trailing: Text(
-          '${user.xp} XP',
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).primaryColor),
         ),
       ),
     );
   }
+}
 
-  Widget _buildRankChangeIndicator(int currentRank, int? previousRank,
-      {bool mini = false}) {
-    if (previousRank == null || previousRank == currentRank) {
-      return const SizedBox.shrink();
-    }
+class _Board extends StatelessWidget {
+  final List<AppUser> users;
+  final String? meId;
 
-    final delta = previousRank - currentRank;
-    final isUp = delta > 0;
-    final color = isUp ? Colors.green : Colors.red;
-    final icon = isUp ? Icons.arrow_drop_up : Icons.arrow_drop_down;
+  const _Board({required this.users, required this.meId});
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, color: color, size: mini ? 14 : 18),
-        Text(
-          '${delta.abs()}',
-          style: TextStyle(
-            color: color,
-            fontSize: mini ? 9 : 10,
-            fontWeight: FontWeight.bold,
-          ),
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
+    final myIndex = users.indexWhere((u) => u.id == meId);
+
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      if (myIndex >= 0) ...[
+        _MyRankCard(users: users, index: myIndex),
+        const SizedBox(height: AppSpace.s20),
+      ] else ...[
+        AppCard(
+          color: t.brandContainer,
+          border: false,
+          child: Text(l10n.dsNotRanked, style: text.bodyMedium?.copyWith(color: t.brandOnContainer)),
+        ),
+        const SizedBox(height: AppSpace.s20),
+      ],
+      _Podium(top: users.take(3).toList()),
+      if (users.length > 3) ...[
+        const SizedBox(height: AppSpace.s16),
+        AppCard(
+          padding: EdgeInsets.zero,
+          child: Column(children: [
+            for (var i = 3; i < users.length; i++)
+              _RankRow(user: users[i], rank: i + 1, isMe: users[i].id == meId, last: i == users.length - 1),
+          ]),
         ),
       ],
+    ]);
+  }
+}
+
+class _MyRankCard extends StatelessWidget {
+  final List<AppUser> users;
+  final int index;
+
+  const _MyRankCard({required this.users, required this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
+    final me = users[index];
+    final rank = index + 1;
+    final gap = index > 0 ? users[index - 1].xp - me.xp : 0;
+    final delta = me.previousRank == null ? 0 : me.previousRank! - rank;
+    final progress = index > 0 && users[index - 1].xp > 0 ? me.xp / users[index - 1].xp : 1.0;
+
+    return AppCard(
+      color: t.heroBg,
+      border: false,
+      radius: AppRadius.xl,
+      padding: const EdgeInsets.all(AppSpace.s20),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(l10n.dsYourRank, style: text.labelSmall?.copyWith(color: t.heroMuted)),
+            Text('#$rank', style: text.headlineLarge?.copyWith(color: t.heroFg)),
+            if (delta != 0)
+              Row(children: [
+                Icon(delta > 0 ? Icons.trending_up_rounded : Icons.trending_down_rounded, size: 14, color: t.goldSolid),
+                const SizedBox(width: 4),
+                Text(delta > 0 ? l10n.dsRankUp(delta) : l10n.dsRankDown(-delta),
+                    style: text.labelMedium?.copyWith(color: t.heroFg)),
+              ]),
+          ]),
+          const Spacer(),
+          Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+            Text(l10n.dsXpValue('${me.xp}'), style: text.titleLarge?.copyWith(color: t.heroFg)),
+            if (index > 0) Text(l10n.dsRankGap(rank - 1, gap), style: text.bodySmall?.copyWith(color: t.heroMuted)),
+          ]),
+        ]),
+        const SizedBox(height: 14),
+        ProgressLine(value: progress, color: t.goldSolid, trackColor: t.heroTrack),
+      ]),
     );
   }
+}
+
+class _Podium extends StatelessWidget {
+  final List<AppUser> top;
+
+  const _Podium({required this.top});
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final order = [if (top.length > 1) (top[1], 2), (top[0], 1), if (top.length > 2) (top[2], 3)];
+    return Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
+      for (final (user, rank) in order)
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6),
+            child: _PodiumColumn(
+              user: user,
+              rank: rank,
+              ring: switch (rank) { 1 => t.goldSolid, 2 => t.borderStrong, _ => t.streakSolid },
+              block: switch (rank) { 1 => t.goldContainer, 2 => t.bgSubtle, _ => t.streakContainer },
+              blockText: switch (rank) { 1 => t.goldInk, 2 => t.textSecondary, _ => t.streakSolid },
+            ),
+          ),
+        ),
+    ]);
+  }
+}
+
+class _PodiumColumn extends StatelessWidget {
+  final AppUser user;
+  final int rank;
+  final Color ring;
+  final Color block;
+  final Color blockText;
+
+  const _PodiumColumn({
+    required this.user,
+    required this.rank,
+    required this.ring,
+    required this.block,
+    required this.blockText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    return Column(children: [
+      Container(
+        padding: const EdgeInsets.all(3),
+        decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: ring, width: 3)),
+        child: UserAvatar(profilePictureUrl: user.profilePictureUrl, radius: rank == 1 ? 28 : 22, backgroundColor: t.brandContainer),
+      ),
+      const SizedBox(height: 6),
+      Text(user.name.split(' ').first, style: text.titleSmall, maxLines: 1, overflow: TextOverflow.ellipsis),
+      Text('${user.xp} XP', style: text.labelMedium?.copyWith(color: t.textSecondary)),
+      const SizedBox(height: 6),
+      Container(
+        height: switch (rank) { 1 => 80.0, 2 => 56.0, _ => 44.0 },
+        alignment: Alignment.center,
+        decoration: BoxDecoration(color: block, borderRadius: BorderRadius.circular(AppRadius.md)),
+        child: Text('$rank', style: text.titleLarge?.copyWith(color: blockText)),
+      ),
+    ]);
+  }
+}
+
+class _RankRow extends StatelessWidget {
+  final AppUser user;
+  final int rank;
+  final bool isMe;
+  final bool last;
+
+  const _RankRow({required this.user, required this.rank, required this.isMe, required this.last});
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context)!;
+    final fg = isMe ? t.brandOnContainer : t.textPrimary;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: AppSpace.s16, vertical: AppSpace.s12),
+      decoration: BoxDecoration(
+        color: isMe ? t.brandContainer : null,
+        border: last ? null : Border(bottom: BorderSide(color: t.borderDefault)),
+      ),
+      child: Row(children: [
+        SizedBox(
+          width: 24,
+          child: Text('$rank', textAlign: TextAlign.center,
+              style: text.titleSmall?.copyWith(color: isMe ? t.brandOnContainer : t.textTertiary)),
+        ),
+        const SizedBox(width: AppSpace.s12),
+        UserAvatar(profilePictureUrl: user.profilePictureUrl, radius: 18, backgroundColor: t.bgSubtle),
+        const SizedBox(width: AppSpace.s12),
+        Expanded(
+          child: Text(isMe ? '${user.name} ${l10n.dsYou}' : user.name,
+              style: text.titleSmall?.copyWith(color: fg), maxLines: 1, overflow: TextOverflow.ellipsis),
+        ),
+        Text('${user.xp} XP', style: text.titleSmall?.copyWith(color: fg)),
+      ]),
+    );
+  }
+}
+
+class _Segmented<T> extends StatelessWidget {
+  final T value;
+  final List<(T, String)> items;
+  final ValueChanged<T> onChanged;
+
+  const _Segmented({required this.value, required this.items, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final text = Theme.of(context).textTheme;
+    return Container(
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(color: t.bgSubtle, borderRadius: BorderRadius.circular(AppRadius.md)),
+      child: Row(children: [
+        for (final (v, label) in items)
+          Expanded(
+            child: GestureDetector(
+              onTap: () => onChanged(v),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 180),
+                height: 36,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: v == value ? t.bgSurface : null,
+                  borderRadius: BorderRadius.circular(AppRadius.sm),
+                ),
+                child: Text(label,
+                    style: v == value
+                        ? text.titleSmall
+                        : text.labelLarge?.copyWith(color: t.textSecondary)),
+              ),
+            ),
+          ),
+      ]),
+    );
+  }
+}
+
+class _Message extends StatelessWidget {
+  final String message;
+
+  const _Message(this.message);
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: AppSpace.s32),
+        child: Center(
+          child: Text(message,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: context.tokens.textSecondary)),
+        ),
+      );
 }

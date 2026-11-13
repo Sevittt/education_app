@@ -2432,4 +2432,97 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get dsReviewAnswers => 'Посмотреть ошибки';
+
+  @override
+  String get dsRoleAdmin => 'Администратор';
+
+  @override
+  String get dsRoleUnknown => 'Должность не указана';
+
+  @override
+  String get dsCurrentLevel => 'ТЕКУЩИЙ УРОВЕНЬ';
+
+  @override
+  String dsRequirementsFor(String level) {
+    return 'Условия уровня «$level»';
+  }
+
+  @override
+  String dsReqXp(int xp) {
+    return 'Набрать $xp XP';
+  }
+
+  @override
+  String dsReqQuizzes(int count) {
+    return 'Пройти тестов: $count';
+  }
+
+  @override
+  String dsReqAced(int count) {
+    return '100% в тестах: $count';
+  }
+
+  @override
+  String dsReqStreak(int count) {
+    return 'Серия $count дн.';
+  }
+
+  @override
+  String dsReqSims(int count) {
+    return 'Симуляций: $count';
+  }
+
+  @override
+  String get dsStatStreak => 'Текущая серия';
+
+  @override
+  String get dsStatCoursesDone => 'Пройдено курсов';
+
+  @override
+  String get dsStatCertificates => 'Сертификаты';
+
+  @override
+  String get dsStatQuizzesPassed => 'Пройдено тестов';
+
+  @override
+  String get dsLeaderboard => 'Рейтинг';
+
+  @override
+  String get dsLeaderboardLinkSubtitle => 'По суду, области и республике';
+
+  @override
+  String get dsScopeCourt => 'Суд';
+
+  @override
+  String get dsScopeRegion => 'Область';
+
+  @override
+  String get dsScopeGlobal => 'Республика';
+
+  @override
+  String get dsYourRank => 'ВАШЕ МЕСТО';
+
+  @override
+  String dsRankGap(int rank, int xp) {
+    return 'До $rank-го места: $xp XP';
+  }
+
+  @override
+  String dsRankUp(int count) {
+    return '+$count мест.';
+  }
+
+  @override
+  String dsRankDown(int count) {
+    return '−$count мест.';
+  }
+
+  @override
+  String get dsYou => '(вы)';
+
+  @override
+  String get dsNotRanked => 'Вас пока нет в рейтинге — завершите первый урок';
+
+  @override
+  String get dsLeaderboardNote => 'Рейтинг считается по XP. XP начисляется сервером только за реально пройденные уроки и тесты.';
 }

@@ -4567,6 +4567,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Review mistakes'**
   String get dsReviewAnswers;
+
+  /// Redesign: dsRoleAdmin
+  ///
+  /// In en, this message translates to:
+  /// **'Administrator'**
+  String get dsRoleAdmin;
+
+  /// Redesign: dsRoleUnknown
+  ///
+  /// In en, this message translates to:
+  /// **'Position not set'**
+  String get dsRoleUnknown;
+
+  /// Redesign: dsCurrentLevel
+  ///
+  /// In en, this message translates to:
+  /// **'CURRENT LEVEL'**
+  String get dsCurrentLevel;
+
+  /// Redesign: dsRequirementsFor
+  ///
+  /// In en, this message translates to:
+  /// **'Requirements for {level}'**
+  String dsRequirementsFor(String level);
+
+  /// Redesign: dsReqXp
+  ///
+  /// In en, this message translates to:
+  /// **'Earn {xp} XP'**
+  String dsReqXp(int xp);
+
+  /// Redesign: dsReqQuizzes
+  ///
+  /// In en, this message translates to:
+  /// **'Pass {count} quizzes'**
+  String dsReqQuizzes(int count);
+
+  /// Redesign: dsReqAced
+  ///
+  /// In en, this message translates to:
+  /// **'Score 100% on {count} quizzes'**
+  String dsReqAced(int count);
+
+  /// Redesign: dsReqStreak
+  ///
+  /// In en, this message translates to:
+  /// **'{count}-day streak'**
+  String dsReqStreak(int count);
+
+  /// Redesign: dsReqSims
+  ///
+  /// In en, this message translates to:
+  /// **'{count} simulations'**
+  String dsReqSims(int count);
+
+  /// Redesign: dsStatStreak
+  ///
+  /// In en, this message translates to:
+  /// **'Current streak'**
+  String get dsStatStreak;
+
+  /// Redesign: dsStatCoursesDone
+  ///
+  /// In en, this message translates to:
+  /// **'Courses completed'**
+  String get dsStatCoursesDone;
+
+  /// Redesign: dsStatCertificates
+  ///
+  /// In en, this message translates to:
+  /// **'Certificates'**
+  String get dsStatCertificates;
+
+  /// Redesign: dsStatQuizzesPassed
+  ///
+  /// In en, this message translates to:
+  /// **'Quizzes passed'**
+  String get dsStatQuizzesPassed;
+
+  /// Redesign: dsLeaderboard
+  ///
+  /// In en, this message translates to:
+  /// **'Leaderboard'**
+  String get dsLeaderboard;
+
+  /// Redesign: dsLeaderboardLinkSubtitle
+  ///
+  /// In en, this message translates to:
+  /// **'By court, region and nationwide'**
+  String get dsLeaderboardLinkSubtitle;
+
+  /// Redesign: dsScopeCourt
+  ///
+  /// In en, this message translates to:
+  /// **'Court'**
+  String get dsScopeCourt;
+
+  /// Redesign: dsScopeRegion
+  ///
+  /// In en, this message translates to:
+  /// **'Region'**
+  String get dsScopeRegion;
+
+  /// Redesign: dsScopeGlobal
+  ///
+  /// In en, this message translates to:
+  /// **'Nationwide'**
+  String get dsScopeGlobal;
+
+  /// Redesign: dsYourRank
+  ///
+  /// In en, this message translates to:
+  /// **'YOUR RANK'**
+  String get dsYourRank;
+
+  /// Redesign: dsRankGap
+  ///
+  /// In en, this message translates to:
+  /// **'{xp} XP to rank {rank}'**
+  String dsRankGap(int rank, int xp);
+
+  /// Redesign: dsRankUp
+  ///
+  /// In en, this message translates to:
+  /// **'Up {count}'**
+  String dsRankUp(int count);
+
+  /// Redesign: dsRankDown
+  ///
+  /// In en, this message translates to:
+  /// **'Down {count}'**
+  String dsRankDown(int count);
+
+  /// Redesign: dsYou
+  ///
+  /// In en, this message translates to:
+  /// **'(you)'**
+  String get dsYou;
+
+  /// Redesign: dsNotRanked
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re not ranked yet — complete your first lesson'**
+  String get dsNotRanked;
+
+  /// Redesign: dsLeaderboardNote
+  ///
+  /// In en, this message translates to:
+  /// **'Ranking is based on XP. XP is awarded by the server only when lessons and quizzes are actually completed.'**
+  String get dsLeaderboardNote;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
