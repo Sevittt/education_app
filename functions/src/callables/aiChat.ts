@@ -7,6 +7,7 @@ import {
   extractGeminiText,
   parseSodiqChatRequest,
 } from "../ai/gemini";
+import { retrieveContext } from "../ai/retrieval";
 
 const geminiApiKey = defineSecret("GEMINI_API_KEY");
 
@@ -35,6 +36,18 @@ export const sodiqChat = onCall(
     if (!apiKey) {
       logger.error("GEMINI_API_KEY secret is empty");
       throw new HttpsError("failed-precondition", "Gemini API key not configured");
+    }
+
+    // Chat rejimida kontekst serverda rag_chunks_v2 dan olinadi.
+    // Natija bo'lmasa (yoki qidiruv xato bersa) mijoz yuborgan kontekst ishlatiladi
+    // — eski ilova versiyalari bilan moslik uchun.
+    if (parsed.mode === "chat" && parsed.message) {
+      try {
+        const serverContext = await retrieveContext(parsed.message, apiKey);
+        if (serverContext) parsed.context = serverContext;
+      } catch (err) {
+        logger.warn("RAG qidiruv xatosi, kontekstsiz davom etiladi", { err: String(err) });
+      }
     }
 
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${SODIQ_MODEL}:generateContent?key=${encodeURIComponent(apiKey)}`;

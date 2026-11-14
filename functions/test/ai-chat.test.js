@@ -66,3 +66,40 @@ test("extractGeminiText javob qismlarini birlashtiradi va bo'sh javobda xato ber
   assert.equal(text, "Salom, yordam beraman.");
   assert.throws(() => extractGeminiText({ candidates: [] }));
 });
+
+// ── RAG qidiruv (rag_chunks_v2) ─────────────────────────────────────────────
+const {
+  RAG_MAX_DISTANCE,
+  buildEmbedRequest,
+  extractEmbedding,
+  formatContext,
+} = require("../lib/ai/retrieval");
+
+test("buildEmbedRequest savol uchun RETRIEVAL_QUERY va 768 o'lcham so'raydi", () => {
+  const req = buildEmbedRequest("E-IMZO ishlamayapti");
+  assert.equal(req.model, "models/gemini-embedding-2");
+  assert.equal(req.taskType, "RETRIEVAL_QUERY");
+  assert.equal(req.outputDimensionality, 768);
+  assert.equal(req.content.parts[0].text, "E-IMZO ishlamayapti");
+  assert.equal(buildEmbedRequest("x".repeat(5000)).content.parts[0].text.length, 2000);
+});
+
+test("extractEmbedding o'lchami noto'g'ri javobni rad etadi", () => {
+  assert.equal(extractEmbedding({ embedding: { values: new Array(768).fill(0.1) } }).length, 768);
+  assert.throws(() => extractEmbedding({ embedding: { values: [0.1, 0.2] } }));
+  assert.throws(() => extractEmbedding({}));
+});
+
+test("formatContext manbani ko'rsatadi, bo'sh bo'laklarni tashlaydi va bot formatiga mos", () => {
+  const text = formatContext([
+    { section: "E-IMZO › Kesh", text: "Keshni tozalang" },
+    { doc_title: "FAQ", text: "javob" },
+    { section: "Bo'sh", text: "" },
+  ]);
+  assert.equal(text, "[Manba: E-IMZO › Kesh]\nKeshni tozalang\n\n---\n\n[Manba: FAQ]\njavob");
+  assert.equal(formatContext([]), "");
+});
+
+test("RAG masofa chegarasi bot bilan bir xil", () => {
+  assert.equal(RAG_MAX_DISTANCE, 0.33);
+});

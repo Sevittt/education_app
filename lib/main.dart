@@ -121,8 +121,6 @@ import 'package:sud_qollanma/core/services/fcm_service.dart';
 
 // Feature: AI Chat
 import 'package:sud_qollanma/core/services/ai_service.dart';
-import 'package:sud_qollanma/core/services/rag_service.dart';
-import 'package:sud_qollanma/core/services/wiki_service.dart';
 import 'package:sud_qollanma/features/ai_chat/presentation/providers/ai_notifier.dart';
 
 // Feature: Courses
@@ -568,9 +566,8 @@ void main() async {
 
         // Feature: AI Chat
         Provider<AiService>(create: (_) => AiService()),
-        Provider<WikiService>(
-          create: (context) => WikiService(context.read<AiService>()),
-        ),
+        // Drift'dagi bilim bo'laklari: dars matni oflayn zaxirasi uchun
+        // (AI chat konteksti endi serverda — sodiqChat → rag_chunks_v2).
         Provider<LocalRagService>(
           create: (_) {
             final service = LocalRagService(DriftDatabaseService.instance.db);
@@ -578,18 +575,8 @@ void main() async {
             return service;
           },
         ),
-        Provider<RagService>(
-          create: (context) => RagService(
-            context.read<SearchRemoteDataSource>(),
-            context.read<WikiService>(),
-            context.read<LocalRagService>(),
-          ),
-        ),
         ChangeNotifierProvider<AiNotifier>(
-          create: (context) => AiNotifier(
-            context.read<AiService>(),
-            context.read<RagService>(),
-          ),
+          create: (context) => AiNotifier(context.read<AiService>()),
         ),
 
         // Feature: Courses

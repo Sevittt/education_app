@@ -38,6 +38,7 @@ const https_1 = require("firebase-functions/v2/https");
 const params_1 = require("firebase-functions/params");
 const logger = __importStar(require("firebase-functions/logger"));
 const gemini_1 = require("../ai/gemini");
+const retrieval_1 = require("../ai/retrieval");
 const geminiApiKey = (0, params_1.defineSecret)("GEMINI_API_KEY");
 /**
  * Sodiq AI yordamchi uchun server-tomon Gemini proksi.
@@ -60,6 +61,19 @@ exports.sodiqChat = (0, https_1.onCall)({
     if (!apiKey) {
         logger.error("GEMINI_API_KEY secret is empty");
         throw new https_1.HttpsError("failed-precondition", "Gemini API key not configured");
+    }
+    // Chat rejimida kontekst serverda rag_chunks_v2 dan olinadi.
+    // Natija bo'lmasa (yoki qidiruv xato bersa) mijoz yuborgan kontekst ishlatiladi
+    // — eski ilova versiyalari bilan moslik uchun.
+    if (parsed.mode === "chat" && parsed.message) {
+        try {
+            const serverContext = await (0, retrieval_1.retrieveContext)(parsed.message, apiKey);
+            if (serverContext)
+                parsed.context = serverContext;
+        }
+        catch (err) {
+            logger.warn("RAG qidiruv xatosi, kontekstsiz davom etiladi", { err: String(err) });
+        }
     }
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${gemini_1.SODIQ_MODEL}:generateContent?key=${encodeURIComponent(apiKey)}`;
     const payload = (0, gemini_1.buildGeminiPayload)(parsed);

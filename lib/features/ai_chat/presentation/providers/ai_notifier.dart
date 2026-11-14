@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sud_qollanma/core/services/ai_service.dart';
-import 'package:sud_qollanma/core/services/rag_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:typed_data';
 
@@ -20,10 +19,9 @@ class ChatMessage {
 
 class AiNotifier extends ChangeNotifier {
   final AiService _aiService;
-  final RagService _ragService;
   final ImagePicker _picker = ImagePicker();
 
-  AiNotifier(this._aiService, this._ragService);
+  AiNotifier(this._aiService);
 
   final List<ChatMessage> _messages = [];
   List<ChatMessage> get messages => List.unmodifiable(_messages);
@@ -71,14 +69,11 @@ class AiNotifier extends ChangeNotifier {
     notifyListeners();
 
     try {
-      // Phase 2: retrieve relevant context before every message
-      final context = await _ragService.retrieveContext(text);
-
+      // Kontekst (RAG) serverda olinadi: sodiqChat → rag_chunks_v2
       _currentStreamingMessage = '';
       notifyListeners();
 
-      await for (final chunk
-          in _aiService.streamChat(text, imageBytes: imageToSend, context: context)) {
+      await for (final chunk in _aiService.streamChat(text, imageBytes: imageToSend)) {
         _currentStreamingMessage = (_currentStreamingMessage ?? '') + chunk;
         notifyListeners();
       }
