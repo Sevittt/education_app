@@ -33,6 +33,7 @@ Sana: 2026-11-13 · Holat: **reja, hali bajarilmagan**
 | Savol | Tavsiya | Sabab |
 |---|---|---|
 | Embedding modeli | **gemini-embedding-2 (Gemini API orqali), 768 o'lcham** — ✅ tasdiqlandi 2026-11-14 | Bot allaqachon ishlatadi; hujjat ham, savol ham serverda arzon va tez vektorga aylanadi. |
+| Inglizcha umumiy IT kitoblari (`knowledge.md`, ~650 bo'lak) | **Kiritiladi** — ✅ tasdiqlandi 2026-11-14 | Umumiy kompyuter savollarida foydali. Agar o'zbekcha savollar natijasini suyultirsa, 2-bosqichdagi eval'da ko'rinadi. |
 | API darajasi | **Pullik (billing yoqilgan) loyiha kaliti** | Bepul darajada yuborilgan ma'lumot Google mahsulotlarini yaxshilashga ishlatilishi mumkin. |
 | Hujjat va savol uchun `task_type` | `RETRIEVAL_DOCUMENT` / `RETRIEVAL_QUERY` | Shu juftlik qidiruv sifatini oshiradi. |
 | Yig'uvchi kod qayerda turadi | **`sudqollanma_bot/rag/`** | Admin SDK, Gemini klienti va `config` shu repoda. Ilova faqat o'qiydi. |
