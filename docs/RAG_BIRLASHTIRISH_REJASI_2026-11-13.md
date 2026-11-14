@@ -1,6 +1,11 @@
 # RAG'ni yagona yig'ish yo'liga o'tkazish rejasi
 
-Sana: 2026-11-13 · Holat: **reja, hali bajarilmagan**
+Sana: 2026-11-13 · Holat (2026-11-14): **1, 3, 4-bosqichlar bajarildi**; 2-bosqich (eval) va 5-bosqich (tozalash) qoldi.
+
+- 1-bosqich: `sudqollanma_bot/rag/` (e47103d, 31de662)
+- 3-bosqich: `rag_chunks_v2` — 1409 bo'lak, vektor indeksi READY
+- 4-bosqich: bot `services/rag_search.py` (ff3c28d, Cloud Run revision 00043); `sodiqChat` server qidiruvi (b-v22 2e74f3a, deploy qilindi). Masofa chegarasi 0.33.
+- Ilovadagi (Dart) o'zgarish web hostingga keyingi deployda chiqadi; server eski versiyalar bilan ham ishlaydi.
 
 ## 1. Hozirgi holat (2026-11-13 da Firestore'da tekshirilgan)
 
