@@ -30,6 +30,29 @@ class LessonViewerScreen extends StatefulWidget {
 }
 
 class _LessonViewerScreenState extends State<LessonViewerScreen> {
+  static const Map<String, List<String>> _lessonChunkSuffixes = {
+    'dars_1_modul_bo_yicha_to_liq_amaliy_qo_llanma_1': ['1', '2'],
+    'dars_1_modul_bo_yicha_to_liq_amaliy_qo_llanma_3': ['3', '4', '5', '6'],
+    'dars_1_modul_bo_yicha_to_liq_amaliy_qo_llanma_5': ['7', '8_1', '8_2', '8_3', '10', '11'],
+    'dars_1_modul_bo_yicha_to_liq_amaliy_qo_llanma_7': [
+      '9_1', '9_2', '9_3', '12', '13', '14',
+      '15_1', '15_2', '15_3', '15_4', '15_5',
+      '16', '17', '18', '19', '20',
+    ],
+    'dars_2_modul_bo_yicha_to_liq_amaliy_qo_llanma_1': ['1', '2', '3', '4', '5'],
+    'dars_2_modul_bo_yicha_to_liq_amaliy_qo_llanma_3': ['6', '7', '8', '9', '10'],
+    'dars_3_modul_bo_yicha_to_liq_amaliy_qo_llanma_1': [
+      '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
+    ],
+    'dars_4_modul_bo_yicha_to_liq_amaliy_qo_llanma_1': [
+      '1', '2', '3', '4', '5', '6', '7', '8', '9', '10_1',
+      '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21',
+    ],
+    'dars_5_modul_bo_yicha_to_liq_amaliy_qo_llanma_1': [
+      '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+    ],
+  };
+
   bool _loading = true;
   String? _error;
   Map<String, dynamic>? _data;
@@ -64,12 +87,16 @@ class _LessonViewerScreenState extends State<LessonViewerScreen> {
 
   Future<Map<String, dynamic>?> _loadOfflineOrRagArticle(String refId) async {
     final basePrefix = refId.replaceFirst(RegExp(r'_\d+$'), '');
+    final suffixes = _lessonChunkSuffixes[refId];
+    final allowedIds = (suffixes != null && basePrefix.isNotEmpty)
+        ? suffixes.map((s) => '${basePrefix}_$s').toSet()
+        : null;
     try {
       final chunks = await DriftDatabaseService.instance.db.getAllRagChunks();
       final exact = chunks.where((c) => c.id == refId).firstOrNull;
-      final related = chunks
-          .where((c) => c.id == refId || (basePrefix.isNotEmpty && c.id.startsWith('${basePrefix}_')))
-          .toList();
+      final related = allowedIds != null
+          ? chunks.where((c) => allowedIds.contains(c.id)).toList()
+          : chunks.where((c) => c.id == refId).toList();
       if (related.isNotEmpty) {
         final combined = related.map((c) {
           final body = c.content.trim();
@@ -83,19 +110,6 @@ class _LessonViewerScreenState extends State<LessonViewerScreen> {
               ? widget.lesson.title
               : (exact?.title ?? related.first.title),
           'content': combined,
-        };
-      }
-    } catch (_) {}
-
-    try {
-      final ragDoc = await FirebaseFirestore.instance.collection('rag_chunks').doc(refId).get();
-      if (ragDoc.exists && ragDoc.data() != null) {
-        final d = ragDoc.data()!;
-        return {
-          'title': widget.lesson.title.isNotEmpty
-              ? widget.lesson.title
-              : (d['title'] as String? ?? ''),
-          'content': d['text'] as String? ?? d['content'] as String? ?? '',
         };
       }
     } catch (_) {}

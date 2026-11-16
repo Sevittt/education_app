@@ -22,10 +22,10 @@ class RagSearchResult {
   });
 }
 
-/// EmbeddingGemma-2 va Drift SQLite asosidagi lokal RAG xizmati.
+/// Drift SQLite asosidagi oflayn dars va kalit so'z qidiruvi xizmati.
 ///
 /// Barcha darslar va sud qo'llanmalari (404 ta bo'lak) lokal SQLite bazasida
-/// saqlanadi va oflayn rejimda yuqori aniqlikdagi qidiruvni ta'minlaydi.
+/// saqlanadi va internet yo'q bo'lganda dars kontentini ko'rsatishga xizmat qiladi.
 class LocalRagService {
   final AppDatabase _db;
   static bool _isSeeding = false;
@@ -53,15 +53,13 @@ class LocalRagService {
 
       final companions = list.map((item) {
         final m = item as Map<String, dynamic>;
-        // Use 256-dim vector for compact mobile storage, or fallback to 768
-        final vec = m['vector_256'] ?? m['vector_768'] ?? [];
         return RagChunksTableCompanion(
           id: Value(m['id'].toString()),
           title: Value(m['title']?.toString() ?? ''),
           module: Value(m['module']?.toString() ?? ''),
           category: Value(m['category']?.toString() ?? ''),
           content: Value(m['content']?.toString() ?? ''),
-          vectorJson: Value(json.encode(vec)),
+          vectorJson: const Value('[]'),
           sourcePath: Value(m['source_path']?.toString()),
           updatedAt: Value(DateTime.now()),
         );

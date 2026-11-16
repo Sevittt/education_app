@@ -10,6 +10,31 @@ from firebase_admin import credentials, firestore
 KEY_PATH = Path(r"d:\dasturlar\sudqollanma_bot\serviceAccountKey.json")
 CHUNKS_PATH = Path(r"d:\dasturlar\b-v22\assets\data\court_knowledge_chunks.json")
 
+# Har bir DARS darsi uchun faqat o'ziga tegishli bo'lak sufikslari
+# (aks holda bir moduldagi barcha darslar bir xil to'liq modul matnini oladi).
+LESSON_CHUNK_SUFFIXES = {
+    "dars_1_modul_bo_yicha_to_liq_amaliy_qo_llanma_1": ("1", "2"),
+    "dars_1_modul_bo_yicha_to_liq_amaliy_qo_llanma_3": ("3", "4", "5", "6"),
+    "dars_1_modul_bo_yicha_to_liq_amaliy_qo_llanma_5": ("7", "8_1", "8_2", "8_3", "10", "11"),
+    "dars_1_modul_bo_yicha_to_liq_amaliy_qo_llanma_7": (
+        "9_1", "9_2", "9_3", "12", "13", "14",
+        "15_1", "15_2", "15_3", "15_4", "15_5",
+        "16", "17", "18", "19", "20",
+    ),
+    "dars_2_modul_bo_yicha_to_liq_amaliy_qo_llanma_1": ("1", "2", "3", "4", "5"),
+    "dars_2_modul_bo_yicha_to_liq_amaliy_qo_llanma_3": ("6", "7", "8", "9", "10"),
+    "dars_3_modul_bo_yicha_to_liq_amaliy_qo_llanma_1": (
+        "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11",
+    ),
+    "dars_4_modul_bo_yicha_to_liq_amaliy_qo_llanma_1": (
+        "1", "2", "3", "4", "5", "6", "7", "8", "9", "10_1",
+        "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21",
+    ),
+    "dars_5_modul_bo_yicha_to_liq_amaliy_qo_llanma_1": (
+        "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+    ),
+}
+
 courses = [
     {
         "id": "course_dars_modul_1",
@@ -290,7 +315,12 @@ def main():
                 if l.get("type") == "article" and l.get("refId"):
                     ref_id = l["refId"]
                     prefix = ref_id.rsplit("_", 1)[0]
-                    related = [ch for ch in chunks if ch.get("id") == ref_id or ch.get("id", "").startswith(prefix + "_")]
+                    suffixes = LESSON_CHUNK_SUFFIXES.get(ref_id)
+                    if suffixes:
+                        allowed_ids = {f"{prefix}_{s}" for s in suffixes}
+                        related = [ch for ch in chunks if ch.get("id") in allowed_ids]
+                    else:
+                        related = [ch for ch in chunks if ch.get("id") == ref_id]
                     if related:
                         parts = []
                         for ch in related:

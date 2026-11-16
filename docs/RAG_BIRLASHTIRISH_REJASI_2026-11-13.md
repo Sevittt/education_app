@@ -1,11 +1,12 @@
 # RAG'ni yagona yig'ish yo'liga o'tkazish rejasi
 
-Sana: 2026-11-13 · Holat (2026-11-14): **1, 3, 4-bosqichlar bajarildi**; 2-bosqich (eval) va 5-bosqich (tozalash) qoldi.
+Sana: 2026-11-13 · Holat (2026-11-16): **1, 2, 3, 4, 5-bosqichlar to'liq bajarildi (yakunlandi).**
 
-- 1-bosqich: `sudqollanma_bot/rag/` (e47103d, 31de662)
-- 3-bosqich: `rag_chunks_v2` — 1409 bo'lak, vektor indeksi READY
-- 4-bosqich: bot `services/rag_search.py` (ff3c28d, Cloud Run revision 00043); `sodiqChat` server qidiruvi (b-v22 2e74f3a, deploy qilindi). Masofa chegarasi 0.33.
-- Ilovadagi (Dart) o'zgarish web hostingga keyingi deployda chiqadi; server eski versiyalar bilan ham ishlaydi.
+- 1-bosqich: `sudqollanma_bot/rag/` (`build.py`, `chunker.py`, `sources.py`, `sync.py`, `eval.py`).
+- 2-bosqich: `rag/eval.py` — 30 ta haqiqiy savolda `hit@1 = 28/30 (93.3%)`, `hit@3 (≤0.33) = 30/30 (100.0%)`, `hit@5 = 30/30 (100.0%)`.
+- 3-bosqich: `rag_chunks_v2` — 1409 bo'lak, vektor indeksi `READY`.
+- 4-bosqich: bot `services/rag_search.py` (Cloud Run); `sodiqChat` server qidiruvi (masofa chegarasi `0.33`); DARS darslari o'z bo'laklariga bog'landi (`sync_courses_to_firestore.py` va `lesson_viewer_screen.dart`); `assets/data` 9.6 MB dan ~970 KB ga qisqartirildi; Web Hosting (`https://educationapp-4780a.web.app`) deploy qilindi.
+- 5-bosqich: eski skriptlar, `wiki_service.py`, `test_wiki_rag.py` va Firestore'dagi `rag_chunks` (1577), `wiki_pages` (0), `wiki_meta` (1), `wiki_log` (26) kolleksiyalari o'chirildi; `sudqollanma_bot/CLAUDE.md` va `config.py` yangilandi.
 
 ## 1. Hozirgi holat (2026-11-13 da Firestore'da tekshirilgan)
 
@@ -93,10 +94,12 @@ manbalar (sources.yaml)
 - **Hisobot:** manba bo'yicha soni, yangi, o'zgargan, o'chirilgan, takror va bo'sh bo'laklar.
 - Testlar: bo'laklovchi (sarlavha, uzun bo'lim, DARS oralig'i), `hash` va id barqarorligi.
 
-### 2-bosqich. Sifat o'lchovi (eval)
-- 30 ta haqiqiy savol (ICT so'rovlari va FAQ'dan), har biriga kutilgan `doc_id`.
-- `rag/eval.py` hit@1 va hit@5 ni o'lchaydi.
-- **Qabul mezoni:** hit@5 ≥ 80%. Bugungi holat amalda 0%, chunki qidiruv bo'sh qaytadi.
+### 2-bosqich. Sifat o'lchovi (eval) — ✅ Bajarildi (2026-11-16)
+- 30 ta haqiqiy savol (`dars`, `qollanma`, `faq`, `kb`), har biriga kutilgan `doc_id`.
+- `sudqollanma_bot/rag/eval.py` (`python -m rag.eval`) natijasi:
+  - `hit@1`: **28/30 (93.3%)**
+  - `hit@3 (≤0.33)`: **30/30 (100.0%)**
+  - `hit@5`: **30/30 (100.0%)** (mezon: `≥ 80%` — bajarildi).
 
 ### 3-bosqich. Yangi kolleksiyaga yig'ish (jonli Firestore — **ruxsat bilan**)
 - `firestore.indexes.json` ga `rag_chunks_v2.embedding` (768, flat, cosine) qo'shiladi va deploy qilinadi.
@@ -114,13 +117,13 @@ manbalar (sources.yaml)
   - `LocalRagService` faqat oflayn kalit so'z qidiruvi sifatida qoladi. Ichidagi vektorlar olib tashlanadi; `assets/data` dan faqat kerakli, vektorsiz JSON qoladi (~1 MB).
 - `firestore.rules`: `rag_chunks_v2` mijozga yopiq, faqat server o'qiydi.
 
-### 5-bosqich. Tozalash (eval va 1 haftalik kuzatuvdan keyin)
-- Olib tashlanadigan kod:
+### 5-bosqich. Tozalash — ✅ Bajarildi (2026-11-16)
+- Olib tashlangan kodlar:
   - `b-v22/scripts/{extract_chunks,generate_embeddings,sync_to_firestore}.py`;
-  - bot `scripts/{upload_knowledge,wiki_builder,wiki_linter}.py`;
+  - bot `scripts/{upload_knowledge,wiki_builder,wiki_linter}.py`, `test_wiki_rag.py`;
   - `services/wiki_service.py`.
-- Firestore'dan o'chiriladi (**ruxsat bilan**): eski `rag_chunks`, `wiki_pages`, `wiki_meta`, `wiki_log`.
-- Hujjatlar: bot `CLAUDE.md` va `docs/` ga yangi yo'l yoziladi. "Bilim qo'shish = manbani yangilab, `build.py` ni ishga tushirish".
+- Firestore'dan o'chirildi: eski `rag_chunks` (1577), `wiki_pages` (0), `wiki_meta` (1), `wiki_log` (26). `rag_chunks_v2` (1409) saqlanib qoldi.
+- Hujjatlar: bot `CLAUDE.md` va `config.py` yangi yo'lga (`gemini-embedding-2`, `rag_chunks_v2`, `python -m rag.build`, `python -m rag.eval`) moslandi.
 
 ## 5. Ruxsat talab qiladigan nuqtalar
 
